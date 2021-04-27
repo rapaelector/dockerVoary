@@ -1,0 +1,63 @@
+{# 
+    Display content header
+    This should be used to display the page content header
+    You need to include this template and provide the following variables
+    - title : the title
+    - links : for breadcrumbs
+
+    The "links" shape should look like this
+    {label: 'Dashboard', href: '#dashboard'},
+    {label: 'Users', routeName: 'home', routeParams: {allowed: true}},
+    {label: 'Admin Users', href: path('home')},
+    {label: 'Home'}
+
+    Usage example :
+    {% include 'layout/content/_content_header.html.twig' with {
+        title: 'Bonhomme Batiment',
+        links: [
+            {label: 'Dashboard', href: '#dashboard'},
+            {label: 'Users', routeName: 'home', routeParams: {allowed: true}},
+            {label: 'Admin Users', href: path('home')},
+            {label: 'Home'}
+        ],
+    } %}
+#}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">{{ title }}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                {% if (links | default([]) | length) > 0 %}
+                    <ol class="breadcrumb float-sm-right">
+                        {% for link in links %}
+                            {% set label = link.label %}
+                            {% if link.trans ?? false %}
+                                {% set label = link.label|trans(
+                                    link.transParams ?? {}, 
+                                    link.transDomain ?? 'messages',
+                                    link.locale ?? null,
+                                ) %}
+                            {% endif %}
+                            
+                            <li class="breadcrumb-item {{ loop.last ? 'active' }}">
+                                {% if loop.last %}
+                                    {{ label }}
+                                {% else %}
+                                    {% set href = '#' %}
+                                    {% if link.routeName ?? false %}
+                                        {% set href = path(link.routeName, link.routeParams|default({})) %}
+                                    {% elseif link.href %}
+                                        {% set href = link.href %}
+                                    {% endif %}
+                                    <a href="{{ href }}">{{ label }}</a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>

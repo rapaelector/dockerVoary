@@ -1,19 +1,98 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bonhomme Batiment{% endblock %}</title>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Main app style -->
+    <!--
+        'app' link entry contains adminLTE styles, including bootstrap, font awesome, overlayScrollbars
+    -->
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body {% block body_attr %}class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed"{% endblock body_attr %}>
+{# <body {% block body_attr %}class="hold-transition sidebar-mini layout-fixed fixed-sidebar-layout"{% endblock body_attr %}> #}
+    {% block body %}
+        <div class="wrapper">
+
+            <!-- Navbar -->
+            {% block navbar %}
+                {% include 'layout/_navbar.html.twig' %}
+            {% endblock navbar %}
+            <!-- /.navbar -->
+
+            <!-- Main Sidebar Container -->
+            {% block sidebar %}
+                {% include 'layout/_main_sidebar.html.twig' %}
+            {% endblock sidebar %}
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                {% block content_header %}
+                    {% include template_content_header with {
+                        title: 'Bonhomme Batiment',
+                        links: [
+                            {label: 'Home'}
+                        ],
+                    } %}
+                {% endblock %}
+                <!-- /.content-header -->
+
+                <!-- Main content -->
+                <div class="content">
+                    <!--
+                        Note : for a proper spacing, block content content
+                        should be wrapped in a .container or .container-fluid like
+                        <div class="container-fluid">
+                            Content goes here
+                        </div>
+                    -->
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+
+            <!-- Control Sidebar -->
+            {% block control_sidebar %}
+                <aside class="control-sidebar control-sidebar-dark">
+                    <!-- Control sidebar content goes here -->
+                    {% block control_sidebar_content %}
+                        <div class="p-3">
+                            <h5>Title</h5>
+                            <p>Sidebar content</p>
+                        </div>
+                    {% endblock %}
+                </aside>
+            {% endblock %}
+            <!-- /.control-sidebar -->
+
+            <!-- Main Footer -->
+            {% block footer %}
+                {% include 'layout/_footer.html.twig' %}
+            {% endblock %}
+
+        </div>
+        <!-- ./wrapper -->
+    {% endblock %}
+
+
+
+    <!-- REQUIRED SCRIPTS -->
+    <!--
+        'app' entry contains required scripts for adminLTE
+        including jQuery (+3), bootstrap (4.6.1), popper (+2)
+    -->
+    {{ encore_entry_script_tags('app') }}
+
+</body>
 </html>

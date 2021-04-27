@@ -1,0 +1,33 @@
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+    <!-- Left navbar links -->
+    {% if includeLeftNavbarLinks ?? false %}
+        {% include 'layout/navbar/_left_navbar_links.html.twig' %}
+    {% endif %}
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        {% if includeSearch ?? false %}
+            {% include 'layout/navbar/_navbar_search.html.twig' %}
+        {% endif %}
+
+        <!-- Messages Dropdown Menu -->
+        {% if includeMessages ?? false %}
+            {% include 'layout/navbar/_navbar_messages.html.twig' %}
+        {% endif %}
+
+        <!-- Notifications Dropdown Menu -->
+        {% if includeNotifications ?? false %}
+            {% include 'layout/navbar/_navbar_notifications.html.twig' %}
+        {% endif %}
+
+        {% if includeFullscreenToggle ?? true %}
+            {% include 'layout/navbar/_fullscreen_toggle.html.twig' %}
+        {% endif %}
+
+        {% if includeControlSidebarToggle ?? false %}
+            {% include 'layout/navbar/_control_sidebar_toggle.html.twig' %}
+        {% endif %}
+    </ul>
+</nav>

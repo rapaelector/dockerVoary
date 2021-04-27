@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block content_header %}
+    {% include template_content_header with {
+        title: 'Homepage',
+        links: [
+            {label: 'Dashboard', routeName: 'home'},
+            {label: 'Home'}
+        ]
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, quo natus, laborum eius minima qui est, aperiam suscipit nihil ratione sit explicabo cupiditate similique corporis rerum. Ratione quas minima eveniet?
+            </div>
+        </div>
+    </div>
+{% endblock %}
