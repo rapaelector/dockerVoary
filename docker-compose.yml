@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+
+  ## DATABASE ##
+  mysql:
+    build: ./DockerFiles/Mysql
+    volumes:
+    - ./DockerFiles/Mysql:/docker-entrypoint-initdb.d
+    # - db:/var/lib/mysql
+    ports:
+    - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command: mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+
+  ## ADMINER ##
+  # adminer database interface (official image)
+  # https://hub.docker.com/_/adminer
+  adminer:
+    depends_on:
+    - mysql
+    image: adminer
+    ports:
+      - ${ADMINER_PORT}:8080
+
+  ## WORKER ##
+  worker:
+    build: ./DockerFiles/Worker
+    ports:
+    - ${SERVER_PORT}:80
+    depends_on:
+    - mysql
+    links:
+    - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: bonhomme_batiment
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+    volumes:
+      - ./var/log:/var/www/var/log
+      - ./var/cache:/var/www/var/cache
+      - .:/var/www:cached

@@ -21,3 +21,8 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> symfony cli and composer
+.php-version
+composer.phar
+###< symfony cli and composer
