@@ -23,6 +23,21 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> symfony cli and composer
+# .php-version file can be used to tell the symfony command what php version to use
 .php-version
+# composer.phar can be used instead of composer command because if you have many 
+# php versions on your system, the php used by the composer command can be
+# different than the php version used by the project (>= PHP8)
 composer.phar
 ###< symfony cli and composer
+
+###> vscode ###
+# settings.json is ignored since settings may differ per user/system, however
+# there is a settins.json.dist file in .vscode folder that can be copied and adapted
+.vscode/settings.json
+###< vscode ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
