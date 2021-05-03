@@ -1,0 +1,6 @@
+{%- macro render_attr(attr, escape_attrs) -%}
+	{% if escape_attrs is not defined %}{% set escape_attrs = [] %}{% endif %}
+	{%- if attr -%}
+		{%- for attrname, attrvalue in attr %} {{- attrname -}}="{{- attrname in escape_attrs ? attrvalue|e : attrvalue -}}"{%- endfor -%}
+	{%- endif -%}
+{%- endmacro -%}

@@ -1,0 +1,7 @@
+label:
+  email: "Adresse mail"
+  password: "Mot de pass"
+  firstName: "Prénom"
+  lastName: "Nom"
+  phone: "Téléphone"
+  job: "Fonction"

@@ -1,0 +1,7 @@
+label:
+  email: "E-mail"
+  password: "Password"
+  firstName: "Firstname"
+  lastName: "Lastname"
+  phone: "Phone"
+  job: "Job"

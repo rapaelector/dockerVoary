@@ -27,5 +27,12 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
+    App\DataTables\DataTableFactory:
+        public: true
+        arguments:
+            $config: '%datatables.config%'
+            $renderer: '@datatables.renderer'
+            $instantiator: '@Omines\DataTablesBundle\DependencyInjection\Instantiator'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

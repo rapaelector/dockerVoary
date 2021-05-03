@@ -1,0 +1,20 @@
+{% trans_default_domain 'user' %}
+
+{% extends 'user/layout.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block content %}
+    <div id="user-table">Chargement...</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# {{ encore_entry_script_tags('user_app') }} #}
+    <script>
+        $(function () {
+            $('#user-table').initDataTables({{ datatable_settings(datatable) }});
+        })
+    </script>
+{% endblock %}
+

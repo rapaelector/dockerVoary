@@ -3,3 +3,4 @@ twig:
     globals:
         template_content_header: 'layout/content/_content_header.html.twig'
         homeRoute: 'home'
+        app_macro: 'shared/macro/_macro.html.twig'
