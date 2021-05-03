@@ -49,7 +49,6 @@ Provide ``DATABASE_URL`` env var whether in ``.env.local`` (don't change the pro
 Run the following command on your system terminal or inside docker container (if you use docker)
 
 ```php bin/console doctrine:database:create ```
-
 ### Update database schema (when there are entity changes)
 
 ```
@@ -63,6 +62,15 @@ We use PHPUnit for testing, before running any tests, please create a test user 
 php8 bin/console app:user:create test@gmail.com Test123 --env=test
 ```
 This user will be used throughout the application.
+
+## Environment Variables
+
+Along with Symfony required env var, these are the env vars used by the app
+
+| name                  | Description                                       | Default        |
+|-----------------------|---------------------------------------------------|----------------|
+|MAILER_FROM            | Used as mailer default sender                     |                |
+|MAILER_TO              | Used as mailer default recipient                  |                |
 
 ## Tips and helps 💡
 
