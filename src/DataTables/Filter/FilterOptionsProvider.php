@@ -18,4 +18,28 @@ class FilterOptionsProvider
         $this->em = $em;
     }
 
+    const OPTIONS = [
+        'email' => [
+            'type' => 'text',
+            'width' => '60px'
+        ],
+        'lastname' => [
+            'type' => 'text',
+            'width' => '60px'
+        ],
+        'firstname' => [
+            'type' => 'text',
+            'width' => '60px'
+        ],
+    ];
+
+    public function getOptions($name)
+    {
+        if (array_key_exists($name, self::OPTIONS)) {
+            return self::OPTIONS[$name];
+        }
+
+        return [];
+    }
+
 }

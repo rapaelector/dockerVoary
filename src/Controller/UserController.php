@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-// use App\DataTables\Column\TextColumn;
-// use App\DataTables\Adapter\ORMAdapter;
+use App\DataTables\Column\TextColumn;
+use App\DataTables\Adapter\ORMAdapter;
 use App\DataTables\Filter\TextFilter;
 use App\DataTables\Filter\ChoiceFilter;
 use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 
-use Omines\DataTablesBundle\Column\TextColumn;
-use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
+// use Omines\DataTablesBundle\Column\TextColumn;
+// use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Omines\DataTablesBundle\DataTableFactory;
@@ -35,14 +35,28 @@ class UserController extends BaseController
      */
     public function index(Request $request, DataTableFactory $dataTableFactory): Response
     {
-        $table =  $dataTableFactory->create()
+        $table =  $this->createDataTable()
             ->add('email', TextColumn::class, [
                 'label' => 'E-mail',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('email')
+                )
             ])
-            // ->add('user_firstName', TextColumn::class, [
-            //     'field' => 'user.firstName',
-            //     'label' => 'prenom',
-            // ])
+            ->add('firstName', TextColumn::class, [
+                'label' => 'Prenom',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('firstname')
+                )
+            ])
+            ->add('lastName', TextColumn::class, [
+                'label' => 'Nom',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
         ;
 
         $table->createAdapter(ORMAdapter::class, [
@@ -56,7 +70,7 @@ class UserController extends BaseController
             }  
         ]);
 
-        // $table->setTemplate('shared/datatables/datatable.html.twig');
+        $table->setTemplate('shared/datatables/datatable.html.twig');
         $table->handleRequest($request);
 
         if ($table->isCallback()) {

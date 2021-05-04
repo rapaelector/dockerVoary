@@ -7,6 +7,7 @@ const $APP_FILTER_CONTAINER = $('.app-filter-container')
 var filtersInitialized = false;
 
 function initColumnFilters (container, dt) {
+    console.info($container);
     var timeId = null;
     var $container = $(container);
     $APP_FILTER_CONTAINER.show();

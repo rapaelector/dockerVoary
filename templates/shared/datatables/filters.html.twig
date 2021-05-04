@@ -1,0 +1,131 @@
+{% from app_macro import render_attr %}
+
+{# <pre>{{ dump(datatable) }}</pre> #}
+{% if datatable is defined %}
+	<table class="table">
+		<thead>
+			<tr>
+				{% for column in datatable.columns %}
+					{% set attr = resolve([column, 'meta', 'label_attr'], {}) %}
+					{% if column.filter %}
+						{% set filter = column.filter %}
+						{% if resolve([column, 'meta', 'abbr'], null) %}
+							{% set attr = attr|merge({
+								'data-toggle': 'tooltip',
+								'title': column.label|trans|raw,
+								'data-container': 'body',
+								'data-column-index': loop.index0,
+								'data-target': '#' ~ column.name ~ '_header'
+							}) %}
+						{% endif %}
+						<th {{ render_attr(attr) }} width="{{ filter.width }}">
+							{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}
+						</th>
+					{% endif %}
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for column in datatable.columns %}
+					{% set attr = resolve([column, 'meta', 'label_attr'], {}) %}
+					{% if column.filter %}
+						{% set filter = column.filter %}
+						
+						{% set fieldType = resolve([filter, 'type'], 'text') %}
+						{% set id = column.name ~ '_filter' %}
+						{% set filter_attr = {
+							'name': column.name,
+							'id': id,
+							'class': 'form-control',
+							'data-column-index': loop.index0,
+						} %}
+						<td>
+							{% if fieldType == constant('TYPE_TEXT', filter) %}
+								{% set filter_attr = filter_attr|merge({
+									'type': 'text'
+								}) %}
+								<input {{ render_attr(filter_attr) }}>
+							{% endif %}
+
+							{% if fieldType == constant('TYPE_CHOICE', filter) %}
+								<select {{ render_attr(filter_attr) }}>
+									<option></option>
+									{% for key, value in resolve([filter, 'choices'], []) %}
+										<option value="{{ key }}">
+											{{ value }}
+										</option>
+									{% endfor %}
+								</select>
+							{% endif %}
+
+							{% if fieldType == constant('TYPE_DATE', filter) %}
+								{% set filter_attr = filter_attr|merge({
+									'type': 'text',
+									'class': 'datepicker form-control',
+									'data-type': 'datepicker'
+								}) %}
+								<input {{ render_attr(filter_attr) }}>
+							{% endif %}
+							
+							{% if fieldType == constant('TYPE_DATERANGE', filter) %}
+								{% set filter_attr = filter_attr|merge({
+									'type': 'text',
+									'class': 'input-sm form-control',
+								}) %}
+								
+								{# {% set start = filter.start|default(null) %} #}
+								{# {% set end = filter.end|default(null) %} #}
+
+								{% if filter.start|default(null) %}
+									{% set filter_attr =  filter_attr|merge({
+										'data-start': filter.start|date('d-m-Y')
+									}) %}
+								{% endif %}
+
+								{% if filter.end|default(null) %}
+									{% set filter_attr =  filter_attr|merge({
+										'data-end': filter.end|date('d-m-Y')
+									}) %}
+								{% endif %}
+
+								<div class="input-daterange input-group">
+									<input {{ render_attr(filter_attr) }}/>
+								</div>
+							{% endif %}
+
+							{% if fieldType == constant('TYPE_RANGE', filter) %}
+								{% set dropdown_id = column.name ~ '_dropdown' %}
+								{% set filter_attr = filter_attr|merge({
+									'type': 'text',
+									'data-toggle': 'dropdown', 
+									'aria-haspopup': 'true',
+									'aria-expanded': 'false',
+									'data-target': '#' ~ dropdown_id,
+								}) %}
+								{% set range_attr = {
+									'class': 'range-slider',
+									'data-range-min': filter.min,
+									'data-range-max': filter.max,
+									'data-target': '#' ~ id,
+									'data-range-step': filter.step,
+									'data-range-decimal': filter.decimal,
+									'data-range-prefix': filter.prefix,
+									'data-range-suffix': filter.suffix
+								} %}
+								<input {{ render_attr(filter_attr) }} >
+								<div class="dropdown range-dropdown" id="{{ dropdown_id }}" data-trigger="#{{ id }}">
+									<ul class="dropdown-menu" aria-labelledby="{{ filter_attr.id }}">
+										<div class="range-container">
+											<div {{ render_attr(range_attr) }}></div>
+										</div>
+									</ul>
+								</div>
+							{% endif %}
+						</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+{% endif %}

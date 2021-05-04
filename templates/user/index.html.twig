@@ -5,16 +5,24 @@
 {% block title %}User index{% endblock %}
 
 {% block content %}
+    <div class="app-filter-container" id="user-table-filters">
+        {% include "shared/datatables/filters.html.twig" with {datatable: datatable} %}
+    </div>
     <div id="user-table">Chargement...</div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {# {{ encore_entry_script_tags('user_app') }} #}
-    <script>
+    {{ encore_entry_script_tags('user_app') }}
+    {# <script>
         $(function () {
             $('#user-table').initDataTables({{ datatable_settings(datatable) }});
         })
-    </script>
+    </script> #}
+    {#
+    #}
+    {% include 'user/user_table_script.js.twig' with {
+        datatable: datatable,
+    } %}
 {% endblock %}
 
