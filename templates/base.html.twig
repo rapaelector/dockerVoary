@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Bonhomme Batiment{% endblock %}</title>
+    <title>{% block title %}{{ 'app_name'|trans }}{% endblock %}</title>
 
     {% include 'layout/header/_favicons.html.twig' %}
 
@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Content Header (Page header) -->
                 {% block content_header %}
                     {% include template_content_header with {
-                        title: 'Bonhomme Batiment',
+                        title: 'app_name'|trans,
                         links: [
                             {label: 'Home'}
                         ],

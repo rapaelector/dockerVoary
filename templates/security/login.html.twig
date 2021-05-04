@@ -1,8 +1,9 @@
+{% trans_default_domain 'users' %}
 {% extends 'layout/form_base.html.twig' %}
 
 {% block title %}{{ parent() }} | Log in!{% endblock %}
 
-{% block form_box_msg %}Please sign in{% endblock %}
+{% block form_box_msg %}{{ 'login.box_msg'|trans }}{% endblock %}
 
 {% block form %}
     <form method="post">
@@ -12,66 +13,52 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                {{ 'login.logged_in_as'|trans({
+                    '%user%': app.user.username,
+                    '%logout_link%': path('app_logout'),
+                })|raw }}
             </div>
         {% endif %}
 
         <div class="input-group mb-3">
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus placeholder="Email" aria-label="Email">
+            <input type="email" value="{{ last_username }}" name="email" class="form-control" required autofocus placeholder="{{ 'login.email_placeholder'|trans }}" aria-label="{{ 'login.email'|trans }}">
             <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
+                <div class="input-group-text py-0">
+                    <span class="material-icons">mail</span>
                 </div>
             </div>
         </div>
 
         <div class="input-group mb-3">
-            <input type="password" name="password" id="inputPassword" class="form-control" required aria-label="Password" placeholder="Password">
+            <input type="password" name="password" class="form-control" required aria-label="{{ 'login.password'|trans }}" placeholder="{{ 'login.password_placeholder'|trans }}">
             <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                <div class="input-group-text py-0">
+                    <span class="material-icons">lock</span>
                 </div>
             </div>
         </div>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <div class="row">
-            <div class="col-8">
-                <div class="icheck-primary">
-                    <input type="checkbox" name="_remember_me" id="remember">
-                    <label for="remember">
-                        Remember Me
-                    </label>
+            <div class="col-12">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="_remember_me" id="remember" class="custom-control-input custom-control-input-app-secondary">
+                    <label class="custom-control-label" for="remember">{{ 'login.remember_me'|trans }}</label>
                 </div>
             </div>
             <!-- /.col -->
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <div class="col-12 text-right">
+                <button type="submit" class="btn btn-app-primary">{{ 'login.sign_in'|trans }}</button>
             </div>
             <!-- /.col -->
         </div>
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
 
     </form>
 {% endblock %}
 
 {% block form_footer %}
-    <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-    </p>
     <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="forgot-password.html">{{ 'links.forgot_password'|trans }}</a>
     </p>
 {% endblock %}
