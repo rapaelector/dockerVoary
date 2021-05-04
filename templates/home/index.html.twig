@@ -13,9 +13,24 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, quo natus, laborum eius minima qui est, aperiam suscipit nihil ratione sit explicabo cupiditate similique corporis rerum. Ratione quas minima eveniet?
-            </div>
+            {% set bgs = ['primary', 'secondary', 'info', 'warning', 'danger', 'indigo', 'blue', 'purple', 'maroon', 'orange', 'lime', 'teal'] %}
+            {% for i in 1..12 %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="info-box bg-{{ bgs[loop.index0] }}">
+                        <span class="info-box-icon"><i class="far fa-flag"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{ bgs[loop.index0] }}</span>
+                            <span class="info-box-number">
+                                <span class="d-sm-none">12 (xs)</span>
+                                <span class="d-none d-sm-inline d-md-none">sm-6</span>
+                                <span class="d-none d-md-inline d-lg-none">md-4</span>
+                                <span class="d-none d-lg-inline d-xl-none">lg-3</span>
+                                <span class="d-none d-xl-inline">lg-2</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

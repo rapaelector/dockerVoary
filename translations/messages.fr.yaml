@@ -1,2 +1,13 @@
+app_name: 'Bonhomme Batiment'
+menu:
+    main_header: 'Menu'
+    home: 'Accueil'
+    users: 'Utilisateurs'
+    roles: 'Gestion des droits'
+    offers_header: 'Devis'
+    offers_menu: 'Gestion des offres'
+    offers: 'Liste des offres'
+    offers_new: 'Créer une offre'
+
 action:
   save: "Enregistrer"

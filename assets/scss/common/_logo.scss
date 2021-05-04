@@ -1,0 +1,4 @@
+.login-page .card .card-header img.logo {
+    width: map-get($widths, loginPageLogo);
+    max-width: 100%;
+}

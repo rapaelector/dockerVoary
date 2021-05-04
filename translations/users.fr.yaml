@@ -1,0 +1,13 @@
+login:
+    box_msg: 'Veuillez vous connecter'
+    logged_in_as: 'Vous êtes déjà connecté en tant que <b>%user%</b>, <a href="%logout_link%">se deconnecter</a>.'
+    logout: 'Se deconnecter'
+    email: 'Email'
+    email_placeholder: 'Email'
+    password: 'Mot de passe'
+    password_placeholder: 'Mot de passe'
+    remember_me: 'Se souvenir de moi'
+    sign_in: 'Se connecter'
+links:
+    forgot_password: "J'ai oublié mon mot de passe"
+

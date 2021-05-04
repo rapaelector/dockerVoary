@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
     <!-- Left navbar links -->
-    {% if includeLeftNavbarLinks ?? false %}
+    {% if includeLeftNavbar ?? true  %}
         {% include 'layout/navbar/_left_navbar_links.html.twig' %}
     {% endif %}
 

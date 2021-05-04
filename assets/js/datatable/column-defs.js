@@ -7,8 +7,15 @@ export default [
      */
     {
         width: '60px',
-        cols: ['user_email'],
+        cols: ['actions'],
         className: 'text-center',
+    },
+    /**
+     * EMAIL FIELD
+     */
+    {
+        width: '260px',
+        cols: ['user_email'],
     },
     /**
      * - NUMBER COLUMNS

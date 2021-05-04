@@ -1,0 +1,81 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block label %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    {%- set translation_domain = item.extra('translation_domain', 'messages') -%}
+    {%- set label = item.label -%}
+    {%- if translation_domain is not same as(false) -%}
+        {%- set label = label|trans(item.extra('translation_params', {}), translation_domain) -%}
+    {%- endif -%}
+    {%- if options.allow_safe_labels and item.extra('safe_label', false) %}{{ label|raw }}{% else %}{{ label }}{% endif -%}
+    {% if item.hasChildren %}
+        <i class="right fas fa-angle-left"></i>
+    {% endif %}
+    {% if item.extra('badge') %}
+        <span {{ knp_menu.attributes({class: 'right badge badge-danger'}|merge(item.extra('badge_attr', {}))) }}>{{ item.extra('badge') }}</span>
+    {% endif %}
+    {% if item.extra('labelPrependHtml') %}{{ item.extra('labelPrependHtml')|raw }}{% endif %}
+{% endblock %}
+
+{%- block linkElement -%}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    {%- set linkClasses = item.linkAttribute('class') is not empty ? item.linkAttribute('class') : '' %}
+    {%- if matcher.isCurrent(item) %}
+        {% set linkClasses = linkClasses ~ ' ' ~ (options.currentClassLink ?? '') %}
+    {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+        {%- set linkClasses = linkClasses ~ ' ' ~ options.ancestorClass %}
+    {% endif %}
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes|merge({class: linkClasses})) }}>
+        <i class="{{ item.extra('icon', 'fa fa-link') }}">{{ item.extra('icon_content', '') }}</i>
+        {% if item.extra('label_wrapper', 'p') %}{% endif %}
+        <{{ item.extra('label_wrapper', 'p') }}>{{- block('label') -}}</{{ item.extra('label_wrapper', 'p') }}>
+        {% if item.extra('prependHtml') %}{{ item.extra('prependHtml')|raw }}{% endif %}
+    </a>
+{%- endblock -%}
+
+{% block item %}
+    {% if item.displayed %}
+    {# building the class of the item #}
+        {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+        {%- if matcher.isCurrent(item) %}
+            {%- set classes = classes|merge([options.currentClass]) %}
+        {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+            {%- set classes = classes|merge([options.ancestorClass]) %}
+            {%- set classes = classes|merge(['menu-open']) %}
+        {%- endif %}
+        {%- if item.actsLikeFirst %}
+            {%- set classes = classes|merge([options.firstClass]) %}
+        {%- endif %}
+        {%- if item.actsLikeLast %}
+            {%- set classes = classes|merge([options.lastClass]) %}
+        {%- endif %}
+
+        {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
+        {% if item.hasChildren and options.depth is not same as(0) %}
+            {% if options.branch_class is not empty and item.displayChildren %}
+                {%- set classes = classes|merge([options.branch_class]) %}
+            {% endif %}
+        {% elseif options.leaf_class is not empty %}
+            {%- set classes = classes|merge([options.leaf_class]) %}
+        {%- endif %}
+
+        {%- set attributes = item.attributes %}
+        {%- if classes is not empty %}
+            {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+        {%- endif %}
+    {# displaying the item #}
+        {% import 'knp_menu.html.twig' as knp_menu %}
+        <li{{ knp_menu.attributes(attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('linkElement') }}
+            {%- else %}
+                {{ block('spanElement') }}
+            {%- endif %}
+    {# render the list of children#}
+            {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+            {%- set childrenClasses = childrenClasses|merge(['menu_level_' ~ item.level]) %}
+            {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+            {{ block('list') }}
+        </li>
+    {% endif %}
+{% endblock %}

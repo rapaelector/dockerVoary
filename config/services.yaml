@@ -36,3 +36,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # sidebar knp menu
+    app.menu.sidebar_menu:
+        class: Knp\Menu\MenuItem
+        factory: ['@App\Menu\SidebarMenuBuilder', createSidebarMenu]
+        tags:
+            - { name: knp_menu.menu, alias: app_sidebar_menu }

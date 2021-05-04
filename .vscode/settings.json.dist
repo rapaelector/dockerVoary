@@ -1,0 +1,5 @@
+{
+    "php.validate.executablePath": "php",
+    "php-cs-fixer.executablePath": "php-cs-fixer",
+    "php-cs-fixer.executablePathWindows": "php-cs-fixer.bat"
+}

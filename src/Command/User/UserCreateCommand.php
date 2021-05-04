@@ -14,6 +14,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * This command is used to create an user
+ * Usage example, the following command will create an user
+ * with user@test.com as email and Test123 as password
+ * 
+ * php bin/console app:user:create user@test.com Test123
+ * 
+ * The output will contains the created user email address
  */
 class UserCreateCommand extends Command
 {
@@ -61,7 +67,7 @@ class UserCreateCommand extends Command
         $this->em->persist($user);
         $this->em->flush();
 
-        $io->success(sprintf('User created successfully'));
+        $io->success(sprintf('User "%s" created successfully', $user->getEmail()));
 
         return Command::SUCCESS;
     }

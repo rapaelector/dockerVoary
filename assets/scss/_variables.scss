@@ -1,1 +1,9 @@
-// $primary: #00FFFF;
+// @import './colors';
+@import './bootstrap_variables';
+
+/**
+ * Map containing different widths that will be used by the app
+ */
+$widths: (
+    loginPageLogo: 256px,
+);

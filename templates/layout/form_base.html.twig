@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Log in{% endblock %}
-{# <!-- icheck bootstrap -->
-<link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> #}
-
 {% block body_attr %}class="hold-transition login-page"{% endblock %}
 
 {% block body %}
     <div class="login-box">
         <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-app-secondary">
             <div class="card-header text-center">
-                <a href="{{ path(homeRoute) }}" class="h1"><b>Bonhomme</b> Batiment</a>
+                {# <a href="{{ path(homeRoute) }}" class="h1"><b>Bonhomme</b> Batiment</a> #}
+                <a href="{{ path(homeRoute) }}" class="h1">
+                    <img src="{{ asset('logo/logo.svg', 'images') }}" alt="logo" class="logo"/>
+                </a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">{% block form_box_msg %}Sign in to start your session{% endblock %}</p>
 
                 {% block form %}
+                    {# the content here is just used as model, you should defined this block when you extend/embed this template #}
                     <form action="../../index3.html" method="post">
                         <div class="input-group mb-3">
                             <input type="email" class="form-control" placeholder="Email">
