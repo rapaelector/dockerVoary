@@ -14,13 +14,6 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('user_app') }}
-    {# <script>
-        $(function () {
-            $('#user-table').initDataTables({{ datatable_settings(datatable) }});
-        })
-    </script> #}
-    {#
-    #}
     {% include 'user/user_table_script.js.twig' with {
         datatable: datatable,
     } %}

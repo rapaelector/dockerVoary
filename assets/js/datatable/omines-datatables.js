@@ -7,8 +7,6 @@
  *
  * @author Niels Keurentjes <niels.keurentjes@omines.com>
  */
-import dataTables from 'datatables.net';
-import 'datatables.net-dt/css/jquery.datatables.css';
 
 (function($) {
     /**
@@ -89,8 +87,8 @@ import 'datatables.net-dt/css/jquery.datatables.css';
                 }
 
                 root.html(data.template);
-                // dt = $('table', root).DataTable(dtOpts);
-                window.dt = $('table[data-table]').DataTable();;
+                var dt = $('table', root).DataTable(dtOpts);
+                // window.dt = $('table[data-table]').DataTable();;
                 // if (config.state !== 'none') {
                 //     dt.on('draw.dt', function(e) {
                 //         var data = $.param(dt.state()).split('&');

@@ -61,7 +61,7 @@ class SidebarMenuBuilder
         ])->setAttributes(['class' => $navItem]);
 
         $menu->addChild('menu.users', [
-            'uri' => '#',
+            'route' => 'user.index',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
                 'icon' => $icon . 'nav-icon material-icons',

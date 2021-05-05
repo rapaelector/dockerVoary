@@ -73,4 +73,9 @@ class DataTable extends \Omines\DataTablesBundle\DataTable
 
         return $response;
     }
+
+    public function getTemplateParams()
+    {
+        return $this->templateParams;
+    }
 }

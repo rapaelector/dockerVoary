@@ -47,7 +47,8 @@ class ORMAdapter extends \Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter
     {
         if ($provider instanceof QueryBuilderProcessorInterface) {
             return new SearchCriteriaProviderDecorator($provider);
-        } elseif (is_callable($provider)) {       
+        } elseif (is_callable($provider)) {
+            dump('is callable');
             return new class($provider) implements QueryBuilderProcessorInterface {
                 private $callable;
 

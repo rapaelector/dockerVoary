@@ -4,7 +4,6 @@ namespace App\DataTables\Controller;
 
 use App\DataTables\DataTableFactory;
 use App\DataTables\DataTable;
-
 trait DataTablesTrait 
 {
     /**

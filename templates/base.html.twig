@@ -17,7 +17,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!--
         'app' link entry contains adminLTE styles, including bootstrap, font awesome, overlayScrollbars
     -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
     {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}{% endblock %}
 </head>
@@ -96,10 +95,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         including jQuery (+3), bootstrap (4.6.1), popper (+2)
     -->
     {{ encore_entry_script_tags('app') }}
-    {# <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> #}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
-    <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
-    {# <script src="{{ asset('js/datatable/omines-datatables.js') }}"></script> #}
     {% block javascripts %}{% endblock %}
 </body>
 </html>

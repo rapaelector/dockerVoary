@@ -1,7 +1,10 @@
 {% trans_default_domain datatable.translationDomain %}
 {% from app_macro import render_attr %}
 
-<table style="table-layout: fixed;" id="{{ datatable.name }}" class="table dataTable no-footer">
+<table 
+    style="table-layout: fixed;" id="{{ datatable.name }}"
+    class="{{ className ?? 'table dataTable no-footer' }}"
+>
     <thead>
     <tr>
         {% for column in datatable.columns %}
