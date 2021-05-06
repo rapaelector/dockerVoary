@@ -1,8 +1,113 @@
 import columnDefs from './column-defs';
 import { initColumnFilters } from './datatable-column-filters';
+import { appConsole } from '../utils';
 
+const initAppDataTables = ({
+    /**
+     * Column names
+     * @var String[]
+     */
+    columnNames=[],
 
-var CellFormatter = function(dtPromise, config) {
+    /**
+     * Datatable table container selector
+     * Example, in the following case :
+     *      <div id="user-table">Chargement...</div>
+     * The selector will be #user-table
+     * @var String
+     */
+    containerSelector,
+
+    /**
+     * Filters container selector
+     * @var String
+     */
+    filtersContainerSelector,
+
+    /**
+     * Datatable options from omines datatable instance
+     * Example twig : {{ datatable_settings(datatable)|raw }}
+     * @var Object
+     */
+    settings,
+
+    /**
+     * The number of columns the table will have
+     * buildDataTableConfig columnsCount argument
+     * @var Number
+     */
+    columnsCount,
+
+    /**
+     * buildDataTableConfig excludedColumns argument
+     * @var String[]
+     */
+    excludedColumns = [],
+
+    /**
+     * Column filters flag, whether to enable it or not
+     * Default value : true (enabled)
+     * @var boolean
+     */
+    enableColumnFilters = true,
+
+    /**
+     * Whether to enable datatable formatter or not
+     * Default value: true
+     * @var boolean
+     */
+    enableFormatter = true,
+
+    /**
+     * Debug flag, if enabled, it will print variables
+     */
+    debug = false,
+}) => {
+    /**
+     * Resolve column defs
+     */
+    const columnDefs = columnDefsResolver(columnNames);
+
+    appConsole('info', debug, 'columnDefs', columnDefs);
+
+    // const dtPromise = $('#user-table').initDataTables(
+    const dtPromise = $(containerSelector).initDataTables(
+        settings,
+        buildDataTableConfig(columnsCount, excludedColumns, {
+            columnDefs: columnDefs,
+        })
+    );
+
+    /**
+     * wait for the dtPromise to be resolved
+     * The resolved value will be a datatable instance
+     */
+    dtPromise.then(dtInstance => {
+        try {
+            // get table id from the datatable instance
+            const tableId = dtInstance.table().node().id;
+            appConsole('info', debug, 'Table id : ' + tableId);
+
+            if (enableFormatter) {
+                appConsole('info', debug, 'Formatting table');
+                // create a formater
+                var formatter = new CellFormatter();
+                // format table
+                formatter.format($('#' + tableId));
+            }
+
+            if (enableColumnFilters) {
+                // init column filters
+                appConsole('info', debug, 'Init column filters')
+                initColumnFilters(filtersContainerSelector, dtInstance);
+            }
+        } catch (error) {
+            console.warn('Datatable init encountered an error ', error);
+        }
+    });
+};
+
+function CellFormatter (dtPromise, config) {
     var _this = this;
 
     var defaultConfig = {
@@ -42,7 +147,7 @@ var CellFormatter = function(dtPromise, config) {
     return _this;
 }
 
-var buildDataTableConfig = function (columnCount, excludedColumns, config) {
+function buildDataTableConfig (columnCount, excludedColumns, config) {
     var columns = buildColumnsFromCount(columnCount, excludedColumns);
     
     config = $.extend(true, {
@@ -62,7 +167,7 @@ var buildDataTableConfig = function (columnCount, excludedColumns, config) {
 
     return config;
 }
-var buildColumnsFromCount = function (columnCount, excludedColumns) {
+function buildColumnsFromCount (columnCount, excludedColumns) {
     return new Array(columnCount).fill(0).map(function (a, i) {
         return i;
     }).filter(function (i) {
@@ -70,7 +175,7 @@ var buildColumnsFromCount = function (columnCount, excludedColumns) {
     });
 };
 
-var buildExportConfig = function (columnCount, excludedColumns, config, exportOptions) {
+function buildExportConfig (columnCount, excludedColumns, config, exportOptions) {
     var columns = buildColumnsFromCount(columnCount, excludedColumns);
 
     config = $.extend(true, {
@@ -116,7 +221,7 @@ var buildExportConfig = function (columnCount, excludedColumns, config, exportOp
     return buildDataTableConfig(columnCount, excludedColumns, config);
 };
 
-var columnDefsResolver = function (columns) {
+function columnDefsResolver (columns) {
     var defs = [];
 
     for (var i in columns) {
@@ -133,7 +238,8 @@ var columnDefsResolver = function (columns) {
 
     return defs;
 }
-var initColvisGroups = function ($table, dt) {
+
+function initColvisGroups ($table, dt) {
     var $dropDownBtn = buildColvisGroupBtn();
     var $dropDownContent = buildColvisGroupContent();
     var stateKey = "DataTables-" + $table.attr('id') +  window.location.pathname + "-user-"+ userId + "-groupVisibility";
@@ -288,6 +394,7 @@ function buildColvisGroupBtn () {
 
     return $btn;
 }
+
 /**
  * Create colvis show/hide button content
  */
@@ -315,4 +422,5 @@ export {
     initColumnFilters,
     initColvisGroups,
     buildExportConfig,
+    initAppDataTables,
 };

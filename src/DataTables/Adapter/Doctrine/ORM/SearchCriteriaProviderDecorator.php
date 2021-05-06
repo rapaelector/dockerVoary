@@ -30,7 +30,7 @@ class SearchCriteriaProviderDecorator implements QueryBuilderProcessorInterface
      * @param DataTableState $state
      */
     private function processSearchColumns(QueryBuilder $queryBuilder, DataTableState $state)
-    {        
+    {
         foreach ($state->getSearchColumns() as $searchInfo) {
             /** @var AbstractColumn $column */
             $column = $searchInfo['column'];

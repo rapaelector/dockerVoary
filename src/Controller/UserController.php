@@ -35,13 +35,18 @@ class UserController extends BaseController
         // $table =  $dataTableFactory->create()
             ->add('email', TextColumn::class, [
                 'label' => 'E-mail',
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('email')
-                )
+                ),
+                'meta' => $this->columnMeta([
+                    'abbr' => 'm',
+                ]),
             ])
             ->add('firstName', TextColumn::class, [
                 'label' => 'Prenom',
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('firstname')
@@ -49,11 +54,35 @@ class UserController extends BaseController
             ])
             ->add('lastName', TextColumn::class, [
                 'label' => 'Nom',
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
+            ->add('phone', TextColumn::class, [
+                'label' => 'Phone',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
+            ->add('job', TextColumn::class, [
+                'label' => 'Job',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
+            // ->add('createdAt', TextColumn::class, [
+            //     'searchable' => true,
+            //     'filter' => $this->filterBuilder->buildFilter(
+            //         TextFilter::class, 
+            //         $this->filterOptionsProvider->getOptions('lastname')
+            //     )
+            // ])
         ;
 
         $table->createAdapter(ORMAdapter::class, [
@@ -67,7 +96,6 @@ class UserController extends BaseController
             }  
         ]);
 
-        $table->setTemplate('shared/datatables/datatable.html.twig', $table->getTemplateParams());
         $table->handleRequest($request);
 
         if ($table->isCallback()) {

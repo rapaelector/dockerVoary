@@ -7,12 +7,15 @@ use Doctrine\ORM\QueryBuilder;
 use Omines\DataTablesBundle\DataTableState;
 use Omines\DataTablesBundle\Adapter\AdapterQuery;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORM\QueryBuilderProcessorInterface;
-use App\DataTables\Adapter\Doctrine\ORM\SearchCriteriaProvider;
+// use App\DataTables\Adapter\Doctrine\ORM\SearchCriteriaProvider;
+use Omines\DataTablesBundle\Adapter\Doctrine\ORM\SearchCriteriaProvider;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORM\AutomaticQueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\DataTables\Adapter\Doctrine\ORM\SearchCriteriaProviderDecorator;
 use Omines\DataTablesBundle\Exception\InvalidConfigurationException;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ORMAdapter extends \Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter
 {
@@ -40,6 +43,38 @@ class ORMAdapter extends \Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter
     }
 
     /**
+     * @param mixed $processor
+     */
+    public function addCriteriaProcessor($processor)
+    {
+        $this->criteriaProcessors[] = $this->normalizeProcessor($processor);
+    }
+
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $providerNormalizer = function (Options $options, $value) {
+            return array_map([$this, 'normalizeProcessor'], (array) $value);
+        };
+
+        $resolver
+            ->setDefaults([
+                'hydrate' => Query::HYDRATE_OBJECT,
+                'query' => [],
+                'criteria' => function (Options $options) {
+                    return [new SearchCriteriaProvider()];
+                },
+            ])
+            ->setRequired('entity')
+            ->setAllowedTypes('entity', ['string'])
+            ->setAllowedTypes('hydrate', 'int')
+            ->setAllowedTypes('query', [QueryBuilderProcessorInterface::class, 'array', 'callable'])
+            ->setAllowedTypes('criteria', [QueryBuilderProcessorInterface::class, 'array', 'callable', 'null'])
+            ->setNormalizer('query', $providerNormalizer)
+            ->setNormalizer('criteria', $providerNormalizer)
+        ;
+    }
+
+    /**
      * @param callable|QueryBuilderProcessorInterface $provider
      * @return QueryBuilderProcessorInterface
      */
@@ -48,7 +83,6 @@ class ORMAdapter extends \Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter
         if ($provider instanceof QueryBuilderProcessorInterface) {
             return new SearchCriteriaProviderDecorator($provider);
         } elseif (is_callable($provider)) {
-            dump('is callable');
             return new class($provider) implements QueryBuilderProcessorInterface {
                 private $callable;
 

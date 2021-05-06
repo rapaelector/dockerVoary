@@ -11,3 +11,12 @@ import './scss/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import './js/adminlte';
+
+import * as DataTable from './js/datatable/app-datatable';
+
+window.App = {
+    /**
+     * App Datatable Functions
+     */
+    DataTable,
+};

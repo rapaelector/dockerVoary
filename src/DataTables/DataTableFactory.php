@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Omines\DataTablesBundle\DependencyInjection\Instantiator;
 
 class DataTableFactory extends \Omines\DataTablesBundle\DataTableFactory
@@ -13,9 +14,14 @@ class DataTableFactory extends \Omines\DataTablesBundle\DataTableFactory
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = [], array $createOptions = [], $prefix = 'app')
     {
         $config = $this->config;
+
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver, $prefix);
+
+        $createOptions = $resolver->resolve($createOptions);
 
         return (new DataTable($this->eventDispatcher, array_merge($config['options'] ?? [], $options), $this->instantiator))
             ->setRenderer($this->renderer)
@@ -23,7 +29,18 @@ class DataTableFactory extends \Omines\DataTablesBundle\DataTableFactory
             ->setPersistState($config['persist_state'] ?? 'fragment')
             ->setTranslationDomain($config['translation_domain'] ?? 'messages')
             ->setLanguageFromCDN($config['language_from_cdn'] ?? true)
-            ->setTemplate($config['template'] ?? DataTable::DEFAULT_TEMPLATE, $config['template_parameters'] ?? [])
+            ->setTemplate($onfig['template'] ?? DataTable::DEFAULT_TEMPLATE, $config['template_parameters'] ?? [])
+            ->setTableId($createOptions['tableId'])
+            ->setTableFiltersId($createOptions['tableFiltersId'])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver, $prefix)
+    {
+        $resolver->setDefaults([
+            'tableId'         => $prefix . '_table',
+            'tableFiltersId'  => $prefix . '_table-filters',
+            'template'        => 'shared/datatables/datatable.html.twig',
+        ]);
     }
 }

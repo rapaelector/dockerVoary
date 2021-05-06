@@ -11,8 +11,19 @@ use Omines\DataTablesBundle\Exception\InvalidStateException;
 
 class DataTable extends \Omines\DataTablesBundle\DataTable
 {
-
     private $instantiator;
+
+    /**
+     * Table container id
+     * @var string
+     */
+    private $tableId;
+
+    /**
+     * Table column filters container id
+     * @var string
+     */
+    private $tableFiltersId;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, array $options = [], Instantiator $instantiator = null)
     {
@@ -77,5 +88,53 @@ class DataTable extends \Omines\DataTablesBundle\DataTable
     public function getTemplateParams()
     {
         return $this->templateParams;
+    }
+
+    /**
+     * Get table container id
+     *
+     * @return  string
+     */ 
+    public function getTableId()
+    {
+        return $this->tableId;
+    }
+
+    /**
+     * Set table container id
+     *
+     * @param  string  $tableId  Table container id
+     *
+     * @return  self
+     */ 
+    public function setTableId(string $tableId)
+    {
+        $this->tableId = $tableId;
+
+        return $this;
+    }
+
+    /**
+     * Get table column filters container id
+     *
+     * @return  string
+     */ 
+    public function getTableFiltersId()
+    {
+        return $this->tableFiltersId;
+    }
+
+    /**
+     * Set table column filters container id
+     *
+     * @param  string  $tableFiltersId  Table column filters container id
+     *
+     * @return  self
+     */ 
+    public function setTableFiltersId(string $tableFiltersId)
+    {
+        $this->tableFiltersId = $tableFiltersId;
+
+        return $this;
     }
 }

@@ -2,20 +2,28 @@
 
 {% extends 'user/layout.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}{{ parent() }} | User List{% endblock %}
 
 {% block content %}
-    <div class="app-filter-container" id="user-table-filters">
-        {% include "shared/datatables/filters.html.twig" with {datatable: datatable} %}
-    </div>
-    <div id="user-table">Chargement...</div>
+    {% include template_datatable_filters with {
+        datatable: datatable
+    } %}
+    <div id="{{ datatable.tableId }}">Chargement...</div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('user_app') }}
-    {% include 'user/user_table_script.js.twig' with {
-        datatable: datatable,
-    } %}
+    <script>
+        $(function () {
+            window.App.DataTable.initAppDataTables({
+                columnNames: ['user_email', 'user_lastName', 'user_firstName'],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                excludedColumns: [0],
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: true,
+            });
+        });
+    </script>
 {% endblock %}
 

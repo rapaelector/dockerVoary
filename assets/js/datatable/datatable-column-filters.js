@@ -1,3 +1,4 @@
+import { appConsole } from '../utils';
 const RANGE_SLIDER_SELECTOR = '.range-slider';
 const RANGE_DROPDOWN_SELECTOR = '.dropdown.range-dropdown';
 const RANGE_DROPDOWN_WIDTH = 240;
@@ -6,8 +7,8 @@ const $APP_FILTER_CONTAINER = $('.app-filter-container')
 
 var filtersInitialized = false;
 
-function initColumnFilters (container, dt) {
-    console.info($container);
+function initColumnFilters (container, dt, debug = false) {
+    appConsole('info', debug, $container);
     var timeId = null;
     var $container = $(container);
     $APP_FILTER_CONTAINER.show();
