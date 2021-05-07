@@ -2,16 +2,27 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\BlameableTrait;
+use App\Entity\Common\SoftDeleteableTrait;
+use App\Entity\Common\TimestampableTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * SoftDeleteable annotation must be used with SoftDeleteableTrait
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * @Gedmo\Loggable
  */
 class User implements UserInterface
 {
+    use BlameableTrait;
+    use SoftDeleteableTrait;
+    use TimestampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

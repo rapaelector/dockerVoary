@@ -19,7 +19,7 @@ class DataTableFactory extends \Omines\DataTablesBundle\DataTableFactory
         $config = $this->config;
 
         $resolver = new OptionsResolver();
-        $this->configureOptions($resolver, $prefix);
+        $this->configureOptions($resolver, $prefix, $config);
 
         $createOptions = $resolver->resolve($createOptions);
 
@@ -27,20 +27,23 @@ class DataTableFactory extends \Omines\DataTablesBundle\DataTableFactory
             ->setRenderer($this->renderer)
             ->setMethod($config['method'] ?? Request::METHOD_POST)
             ->setPersistState($config['persist_state'] ?? 'fragment')
-            ->setTranslationDomain($config['translation_domain'] ?? 'messages')
+            ->setTranslationDomain($createOptions['translation_domain'])
             ->setLanguageFromCDN($config['language_from_cdn'] ?? true)
-            ->setTemplate($onfig['template'] ?? DataTable::DEFAULT_TEMPLATE, $config['template_parameters'] ?? [])
+            ->setTemplate($config['template'] ?? DataTable::DEFAULT_TEMPLATE, $config['template_parameters'] ?? [])
             ->setTableId($createOptions['tableId'])
             ->setTableFiltersId($createOptions['tableFiltersId'])
+            ->setName($createOptions['name'])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver, $prefix)
+    public function configureOptions(OptionsResolver $resolver, $prefix, array $config)
     {
         $resolver->setDefaults([
-            'tableId'         => $prefix . '_table',
-            'tableFiltersId'  => $prefix . '_table-filters',
-            'template'        => 'shared/datatables/datatable.html.twig',
+            'tableId'           => $prefix . '_table',
+            'tableFiltersId'    => $prefix . '_table-filters',
+            'template'          => 'shared/datatables/datatable.html.twig',
+            'name'              => 'dt',
+            'translation_domain' => $config['translation_domain'] ?? 'messages',
         ]);
     }
 }

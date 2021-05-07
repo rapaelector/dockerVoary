@@ -10,4 +10,13 @@ login:
     sign_in: 'Se connecter'
 links:
     forgot_password: "J'ai oublié mon mot de passe"
-
+list:
+    columns:
+        email: 'Email'
+        firstName: 'Nom'
+        lastName: 'Prénom'
+        phone: 'Téléphone'
+        job: 'Fonction'
+        createdAt: 'Créé le'
+        updatedAt: 'Modifié le'
+        deletedAt: 'Supprimé le'

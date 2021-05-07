@@ -132,12 +132,12 @@ abstract class AbstractFilter extends \Omines\DataTablesBundle\Filter\AbstractFi
 
     public function isTypeDateRange(): bool
     {
-        return $tbis->getType() == self::TYPE_DATERANGE;
+        return $this->getType() == self::TYPE_DATERANGE;
     }
 
     public function isTypeRange(): bool
     {
-        return $tbis->getType() == self::TYPE_RANGE;
+        return $this->getType() == self::TYPE_RANGE;
     }
 
     public function getOption($name, $default = null)

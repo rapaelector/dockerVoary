@@ -30,7 +30,7 @@ class SidebarMenuBuilder
 
     public function createSidebarMenu(): ?ItemInterface
     {
-        $menuClassName = 'nav nav-pills nav-sidebar flex-column nav-child-indent';
+        $menuClassName = 'nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat';
         $linkClassName = 'nav-link';
         $navItem = 'nav-item';
         $navItem = 'nav-item';

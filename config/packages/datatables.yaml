@@ -10,7 +10,7 @@ datatables:
 
     template_parameters:
         # Example classes to integrate nicely with Bootstrap 3.x
-        className: 'table table-striped table-bordered table-hover table-sm data-table'
+        className: 'table table-striped table-bordered table-hover table-sm data-table bg-white'
         # If and where to enable the DataTables Filter module
         # One of "thead"; "tfoot"; "both"; null
         # columnFilter: "thead"

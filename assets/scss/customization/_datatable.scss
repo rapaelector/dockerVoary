@@ -1,0 +1,10 @@
+@import './datatable/fixedColumns';
+
+.dataTable .dropdown {
+    & > .btn-icon {
+        // remove button caret
+        &:after {
+            display: none;
+        }
+    }
+}

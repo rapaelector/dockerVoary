@@ -6,7 +6,7 @@ export default [
      * ACTIONS FIELD
      */
     {
-        width: '60px',
+        width: '70px',
         cols: ['actions'],
         className: 'text-center',
     },
@@ -14,9 +14,35 @@ export default [
      * EMAIL FIELD
      */
     {
-        width: '260px',
-        cols: ['user_email'],
+        width: '150px',
+        cols: ['user_email', 'user_firstName', 'user_lastName'],
     },
+
+    /**
+     * Phone fields
+     */
+    {
+        width: '100px',
+        cols: ['user_phone'],
+    },
+
+    /**
+     * Job
+     */
+    {
+        width: '150px',
+        cols: ['user_job'],
+    },
+
+    /**
+     * Date
+     */
+    {
+        width: '75px',
+        cols: ['created_at', 'updated_at', 'deleted_at'],
+        className: 'text-center',
+    },
+
     /**
      * - NUMBER COLUMNS
      * - NUMBER FIELDS

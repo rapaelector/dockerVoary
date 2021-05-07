@@ -50,6 +50,7 @@ export {
 };
 
 function initDateRangepicker() {
+    appConsole('info', true, 'init daterange picker', $('.input-daterange > input').length);
     $('.input-daterange > input').daterangepicker({
         autoclose: true,
         locale: {

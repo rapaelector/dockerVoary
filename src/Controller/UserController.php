@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\DataTables\Column\TextColumn;
+use App\DataTables\Column\DateTimeColumn;
 use App\DataTables\Adapter\ORMAdapter;
 use App\DataTables\DataTable;
 use App\DataTables\DataTableFactory;
@@ -30,22 +31,27 @@ class UserController extends BaseController
     #[Route('/', name: 'user.index')]
     public function index(Request $request, DataTableFactory $dataTableFactory): Response
     {
-        /** @var DataTable */
-        $table =  $this->createDataTable()
+        $createOptions = [
+            'name' => 'list',
+            'translation_domain' => 'users',
+        ];
+
+        /**
+         * @var DataTable
+         * The default column label will be
+         * table_name.columns.columnKey
+         * e.g: list.columns.email
+         */
+        $table =  $dataTableFactory->create([], $createOptions)
         // $table =  $dataTableFactory->create()
             ->add('email', TextColumn::class, [
-                'label' => 'E-mail',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('email')
                 ),
-                'meta' => $this->columnMeta([
-                    'abbr' => 'm',
-                ]),
             ])
             ->add('firstName', TextColumn::class, [
-                'label' => 'Prenom',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
@@ -53,7 +59,6 @@ class UserController extends BaseController
                 )
             ])
             ->add('lastName', TextColumn::class, [
-                'label' => 'Nom',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
@@ -61,7 +66,6 @@ class UserController extends BaseController
                 )
             ])
             ->add('phone', TextColumn::class, [
-                'label' => 'Phone',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
@@ -69,20 +73,29 @@ class UserController extends BaseController
                 )
             ])
             ->add('job', TextColumn::class, [
-                'label' => 'Job',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
-            // ->add('createdAt', TextColumn::class, [
-            //     'searchable' => true,
-            //     'filter' => $this->filterBuilder->buildFilter(
-            //         TextFilter::class, 
-            //         $this->filterOptionsProvider->getOptions('lastname')
-            //     )
-            // ])
+            ->add('createdAt', DateTimeColumn::class, [
+                'searchable' => true,
+                'format' => 'd/m/y',
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class, 
+                    [
+                        'type' => 'daterange',
+                    ]
+                    // $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
+            ->add('id', TextColumn::class, [
+                'label' => 'Actions', 
+                'render' => $this->actionsRenderer('user.index', 'user/_actions.html.twig'),
+                'orderable' => false,
+                'className' => 'py-0 text-center flotte-action',
+            ])
         ;
 
         $table->createAdapter(ORMAdapter::class, [

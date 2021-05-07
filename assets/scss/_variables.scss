@@ -1,3 +1,7 @@
+@function _rem($px-value) {
+	@return $px-value / 16 * 1rem;
+}
+
 // @import './colors';
 @import './bootstrap_variables';
 
@@ -5,5 +9,18 @@
  * Map containing different widths that will be used by the app
  */
 $widths: (
-    loginPageLogo: 256px,
+    loginPageLogo: _rem(256),
+);
+
+/**
+ * Map containing different heights used by the app
+ */
+$heights: (
+    sidebarNavlink: _rem(44),
+    badge: _rem(15.65),
+);
+
+$appSpacings: (
+    sidebarNavlinkIconMr: _rem(12),
+    sidebarNavlinkIconMl: _rem(-4),
 );

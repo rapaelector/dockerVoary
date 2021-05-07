@@ -1,0 +1,12 @@
+.nav-sidebar .nav-item > .nav-link {
+    height: map-get($heights, sidebarNavlink);
+    display: flex;
+    align-items: center;
+    .nav-icon {
+        margin-right: map-get($appSpacings, sidebarNavlinkIconMr);
+        margin-left: map-get($appSpacings, sidebarNavlinkIconMl);
+    }
+    p > .right {
+        top: (map-get($heights, sidebarNavlink) - map-get($heights, badge)) / 2;
+    }
+}
