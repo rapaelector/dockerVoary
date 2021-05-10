@@ -1,0 +1,31 @@
+@mixin datatable_filters () {
+    .app-filters-container {
+        table.table {
+            thead, tbody {
+                tr {
+                    th {
+                        font-size: 12px;
+                        text-align: center;
+                        border: none;
+                    }
+                    th, td {
+                        padding: 0;
+                        input {
+                            padding: 0;
+                            border: none;
+                        }
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        border: 1px solid $table-border-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include datatable_filters;

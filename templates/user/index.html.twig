@@ -4,7 +4,23 @@
 
 {% block title %}{{ parent() }} | User List{% endblock %}
 
+{% block content_header %}
+    {% include 'layout/content/_content_header.html.twig' with {
+        title: 'Bonhomme Batiment',
+        links: [
+            {label: 'Users list', routeName: 'user.index'},
+            {label: 'New user', routeName: 'user.new'},
+            {label: 'Home', routeName: 'home'},
+        ],
+    } %}
+{% endblock %}
+
 {% block content %}
+    <div class="text-right">
+        <a href="{{ path('user.new') }}">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">

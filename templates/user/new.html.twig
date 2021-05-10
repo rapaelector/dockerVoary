@@ -1,9 +1,11 @@
+{% trans_default_domain 'users' %}
+
 {% extends 'user/layout.html.twig' %}
 
 {% block title %}New User{% endblock %}
 
 {% block content %}
-    <h1>Create new User</h1>
+    <h3>{{ 'title.new_user'|trans }}</h3>
 
     {{ include('user/_form.html.twig') }}
 

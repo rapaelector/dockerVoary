@@ -54,7 +54,7 @@ class SidebarMenuBuilder
             'route' => 'home',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'home',
                 'label_wrapper' => 'p',
             ],
@@ -64,7 +64,7 @@ class SidebarMenuBuilder
             'route' => 'user.index',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'people',
                 'label_wrapper' => 'p',
                 'badge' => 'UP',
@@ -76,7 +76,7 @@ class SidebarMenuBuilder
             'uri' => '#',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'security',
                 'label_wrapper' => 'p',
             ],
@@ -93,7 +93,7 @@ class SidebarMenuBuilder
                 'class' => 'nav nav-treeview',
             ],
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'work',
                 'label_wrapper' => 'p',
             ],
@@ -103,7 +103,7 @@ class SidebarMenuBuilder
             'linkAttributes' => ['class' => $linkClassName],
             'uri' => '#',
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'list',
                 'label_wrapper' => 'p',
             ],
@@ -113,7 +113,7 @@ class SidebarMenuBuilder
             'linkAttributes' => ['class' => $linkClassName],
             'uri' => '#',
             'extras' => [
-                'icon' => $icon . 'nav-icon material-icons',
+                'icon' => $icon,
                 'icon_content' => 'add',
                 'label_wrapper' => 'p',
             ],

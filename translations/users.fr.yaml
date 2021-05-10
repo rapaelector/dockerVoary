@@ -8,8 +8,22 @@ login:
     password_placeholder: 'Mot de passe'
     remember_me: 'Se souvenir de moi'
     sign_in: 'Se connecter'
+
+title:
+    new_user: "Création utilisateur"
+
+label:
+    email: "Adresse mail"
+    password: "Mot de pass"
+    firstName: "Prénom"
+    lastName: "Nom"
+    phone: "Téléphone"
+    job: "Fonction"
+
+job: "Fonction"
 links:
     forgot_password: "J'ai oublié mon mot de passe"
+    
 list:
     columns:
         email: 'Email'

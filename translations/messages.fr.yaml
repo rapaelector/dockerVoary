@@ -10,11 +10,18 @@ menu:
     offers_new: 'Créer une offre'
 
 action:
-  save: "Enregistrer"
-  delete: "Supprimer"
+  save: 'Enregistrer'
+  delete: 'Supprimer'
 
 title:
   delete_user: "Supprimer l'utilisateur"
 
 message:
-  delete_user: "Souhaitez-vous supprimer cet utilisateur"
+  delete_user: 'Souhaitez-vous supprimer cet utilisateur'
+
+email:
+  user:
+    creation:
+      user_registration: 'Inscription utilisateur'
+      registration_completed_correctly: 'Compte utilisateur pour Bonhomme Batiment'
+      messages: "Voici vos identifiants d'utilisateur pour Bonhomme Batiment"

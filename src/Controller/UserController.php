@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Controller\BaseController;
 use App\Repository\UserRepository;
+use App\Message\User\UserCreatedMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +22,10 @@ use App\DataTables\Filter\ChoiceFilter;
 use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
-
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[Route('/user')]
 class UserController extends BaseController
@@ -122,7 +124,7 @@ class UserController extends BaseController
     }
 
     #[Route('/new', name: 'user.new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, MessageBusInterface $messagerBus, UserRepository $userRepository): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -130,8 +132,12 @@ class UserController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $userPlainPassword = $user->getPassword();
+            $encodePassword = $encoder->encodePassword($user, $userPlainPassword);
+            $user->setPassword($encodePassword);
             $entityManager->persist($user);
             $entityManager->flush();
+            $messagerBus->dispatch(new UserCreatedMessage($user->getId(), $userPlainPassword));
 
             return $this->redirectToRoute('user.index');
         }
