@@ -37,6 +37,13 @@ class UserEditType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
+            ->add('fax', TextType::class, [
+                'label' => 'label.fax',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'required' => false,
+            ])
             ->add('job', TextType::class, [
                 'label' => 'label.job',
                 'attr' => [

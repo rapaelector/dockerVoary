@@ -15,10 +15,6 @@
     <span class="material-icons">more_vert</span>
   </button>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <a class="dropdown-item" href="#">Something else here</a>
     {{ dd_link_elem('user.edit', {id: id}, {label: 'action.edit', domain: 'messages', icon: 'edit'}) }}
     {% include "user/_delete_form.html.twig" with {
       id: id,

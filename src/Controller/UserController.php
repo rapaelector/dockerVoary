@@ -82,6 +82,12 @@ class UserController extends BaseController
                     $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
+            ->add('fax', TextColumn::class, [
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('fax')
+                )
+            ])
             ->add('createdAt', DateTimeColumn::class, [
                 'searchable' => true,
                 'format' => 'd/m/y',

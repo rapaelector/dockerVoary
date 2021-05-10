@@ -38,17 +38,26 @@ class UserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('fax', TextType::class, [
+                'label' => 'label.fax',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'required' => false,
+            ])
             ->add('phone', TextType::class, [
                 'label' => 'label.phone',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('job', TextType::class, [
                 'label' => 'label.job',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
         ;
     }

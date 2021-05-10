@@ -37,7 +37,11 @@
     <script>
         $(function () {
             window.App.DataTable.initAppDataTables({
-                columnNames: ['user_email', 'user_firstName', 'user_lastName', 'user_phone', 'user_job', 'created_at', 'updated_at', 'deleted_at', 'actions'],
+                columnNames: [
+                    'user_email', 'user_firstName', 'user_lastName', 
+                    'user_phone', 'user_job', 'user_fax', 'created_at',
+                    'updated_at', 'deleted_at', 'actions'
+                ],
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 excludedColumns: [],

@@ -23,7 +23,7 @@ export default [
      */
     {
         width: '100px',
-        cols: ['user_phone'],
+        cols: ['user_phone', 'user_fax'],
     },
 
     /**

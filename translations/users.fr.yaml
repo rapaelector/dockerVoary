@@ -25,6 +25,7 @@ label:
     lastName: 'Nom'
     phone: 'Téléphone'
     job: 'Fonction'
+    fax: 'Fax'
 
 job: 'Fonction'
 links:
@@ -40,3 +41,4 @@ list:
         createdAt: 'Créé le'
         updatedAt: 'Modifié le'
         deletedAt: 'Supprimé le'
+        fax: 'Fax'

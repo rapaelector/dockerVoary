@@ -31,6 +31,10 @@ class FilterOptionsProvider
             'type' => 'text',
             'width' => '60px'
         ],
+        'fax' => [
+            'type' => 'text',
+            'width' => '60px'
+        ],
     ];
 
     public function getOptions($name)

@@ -85,6 +85,11 @@ class User implements UserInterface
      */
     private $job;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fax;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -210,6 +215,18 @@ class User implements UserInterface
     public function setJob(?string $job): self
     {
         $this->job = $job;
+
+        return $this;
+    }
+
+    public function getFax(): ?string
+    {
+        return $this->fax;
+    }
+
+    public function setFax(?string $fax): self
+    {
+        $this->fax = $fax;
 
         return $this;
     }
