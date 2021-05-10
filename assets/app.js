@@ -11,6 +11,7 @@ import './scss/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import './js/adminlte';
+import { initFormConfirmation } from './js/shared/app_confirm';
 
 import * as DataTable from './js/datatable/app-datatable';
 
@@ -20,3 +21,7 @@ window.App = {
      */
     DataTable,
 };
+
+$(function () {
+    initFormConfirmation();
+});

@@ -1,14 +1,5 @@
-{#
-	Required variables :
-	confirm: {
-		title: string,
-		message: string,
-		input?: string,
-	},
-	token: string - can be generated with csrf_token('delete' ~ id) for example
-	deleteAction: string, - like path('delete_route', delete_params)
-#}
 {% if options is not defined %}{% set options = {} %}{% endif %}
+
 <form class="{{ resolve([options, 'attr', 'class'], 'd-inline-block w-100 p-0') }}" method="post"
 	action="{{ deleteAction }}" data-confirm="true" data-confirm-title="{{ confirm.title }}"
 	data-confirm-html="{{ confirm.html }}" {% if confirm.input is defined %} data-confirm-input="{{ confirm.input }}"
@@ -21,7 +12,7 @@
 			class="{{ resolve([options, 'icon_attr', 'class'], 'material-icons') }}">{{ resolve([options, 'icon'], 'delete') }}</span>
 		{% endif %}
 		{% if not resolve([options, 'label'], false) %}
-		{{ resolve([options, 'label'], 'common.action.delete')|trans(resolve([options, 'label_trans_params'], []), resolve([options, 'label_trans_domain'], 'messages'), resolve([options, 'label_trans_locale'], null)) }}
+		{{ resolve([options, 'label'], 'action.delete')|trans(resolve([options, 'label_trans_params'], []), resolve([options, 'label_trans_domain'], 'messages'), resolve([options, 'label_trans_locale'], null)) }}
 		{% endif %}
 	</button>
 </form>

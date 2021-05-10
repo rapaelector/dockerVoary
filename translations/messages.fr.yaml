@@ -11,3 +11,10 @@ menu:
 
 action:
   save: "Enregistrer"
+  delete: "Supprimer"
+
+title:
+  delete_user: "Supprimer l'utilisateur"
+
+message:
+  delete_user: "Souhaitez-vous supprimer cet utilisateur"

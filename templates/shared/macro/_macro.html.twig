@@ -4,21 +4,3 @@
 		{%- for attrname, attrvalue in attr %} {{- attrname -}}="{{- attrname in escape_attrs ? attrvalue|e : attrvalue -}}"{%- endfor -%}
 	{%- endif -%}
 {%- endmacro -%}
-
-{% macro delete_form(form, options) %}
-	{% set form_attr = {class: 'd-inline-block'}|merge(resolve([options, 'attr'], {})) %}
-	{% set button_attr = {
-		'type': 'submit',
-		'class': 'btn btn-tool', 
-		'data-toggle': 'tooltip',
-		'title': 'common.action.delete'|trans({}, 'messages'),
-    }|merge(resolve([options, 'button_attr'], {})) %}
-	{% if is_allowed(resolve([options, 'role'], null)) %}
-		{{ form_start(form, {attr: form_attr}) }}
-			{{ form_widget(form) }}
-			<button {{ _self.render_attr(button_attr) }}>
-				{{ resolve([options, 'content'], '<span class="material-icons">delete</span>')|raw }}
-			</button>
-		{{ form_end(form) }}
-	{% endif %}	
-{% endmacro %}

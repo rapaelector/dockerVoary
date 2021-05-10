@@ -168,7 +168,7 @@ class UserController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'user.delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
