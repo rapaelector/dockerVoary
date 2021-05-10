@@ -1,6 +1,6 @@
 login:
     box_msg: 'Veuillez vous connecter'
-    logged_in_as: 'Vous êtes déjà connecté en tant que <b>%user%</b>, <a href="%logout_link%">se deconnecter</a>.'
+    logged_in_as: 'Vous êtes déjà connecté en tant que <b>%user%</b>, <a href="%logout_link%"">se deconnecter</a>.'
     logout: 'Se deconnecter'
     email: 'Email'
     email_placeholder: 'Email'
@@ -10,17 +10,23 @@ login:
     sign_in: 'Se connecter'
 
 title:
-    new_user: "Création utilisateur"
+    new_user: 'Création utilisateur'
+    edit_user: 'Modification utilisateur'
+    add_user: 'Ajout utilisateur'
+    new_user_breadCrumb: 'Nouvel utilisateur'
+    user_list: 'Gestion utilisateurs'
+    home: 'Acceuil'
 
 label:
-    email: "Adresse mail"
-    password: "Mot de pass"
-    firstName: "Prénom"
-    lastName: "Nom"
-    phone: "Téléphone"
-    job: "Fonction"
+    email: 'Adresse mail'
+    e_mail: 'E-mail'
+    password: 'Mot de passe'
+    firstName: 'Prénom'
+    lastName: 'Nom'
+    phone: 'Téléphone'
+    job: 'Fonction'
 
-job: "Fonction"
+job: 'Fonction'
 links:
     forgot_password: "J'ai oublié mon mot de passe"
     

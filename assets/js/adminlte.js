@@ -19,6 +19,11 @@ require('datatables.net-fixedColumns-bs4');
 import './datatable/omines-datatables';
 
 $(function () {
+    /**
+     * Init bootstrap tooltip
+     */
+    $('[data-toggle="tooltip"]').tooltip();
+
     $('.sidebar').overlayScrollbars({
         overflowBehavior: {
             x: "hidden",

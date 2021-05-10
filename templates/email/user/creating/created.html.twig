@@ -1,4 +1,4 @@
-{% trans_default_domain 'messages' %}
+{% trans_default_domain 'email' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,13 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>With Twig</title>
+    {# <title>With Twig</title> #}
 </head>
 <body>
     <p>{{ 'email.user.creation.messages'|trans }}</p>
     
-    <p>E-mail: {{ resolve([user, 'email'], '-') }}</p>
-    
-    <p>Password: {{ userPlainPassword|default('-') }}</p>
+    <p>
+        {{ 'label.e_mail'|trans({}, 'users') }}: {{ resolve([user, 'email'], '-') }}
+        <br />
+        {{ 'label.password'|trans({}, 'users') }}: {{ userPlainPassword|default('-') }}
+    </p>
+
+    <a href="{{ absolute_url(path('app_login')) }}">{{ 'action.login'|trans({}, 'messages') }}</a>
 </body>
 </html>

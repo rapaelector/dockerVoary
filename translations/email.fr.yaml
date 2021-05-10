@@ -1,0 +1,6 @@
+email:
+  user:
+    creation:
+      user_registration: 'Inscription utilisateur'
+      registration_completed_correctly: 'Compte utilisateur pour Bonhomme Batiment'
+      messages: "Voici vos identifiants d'utilisateur pour Bonhomme Batiment"

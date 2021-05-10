@@ -12,16 +12,14 @@ menu:
 action:
   save: 'Enregistrer'
   delete: 'Supprimer'
+  edit: 'Modifier'
+  update: 'Mettre à jour'
+  generate_password: 'Générer le mot de passe'
+  login: 'Se connecter'
+  cancel: 'Annuler'
 
 title:
   delete_user: "Supprimer l'utilisateur"
 
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'
-
-email:
-  user:
-    creation:
-      user_registration: 'Inscription utilisateur'
-      registration_completed_correctly: 'Compte utilisateur pour Bonhomme Batiment'
-      messages: "Voici vos identifiants d'utilisateur pour Bonhomme Batiment"

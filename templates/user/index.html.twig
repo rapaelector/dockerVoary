@@ -1,23 +1,22 @@
-{% trans_default_domain 'user' %}
+{% trans_default_domain 'users' %}
 
 {% extends 'user/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | User List{% endblock %}
+{% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
 
 {% block content_header %}
     {% include 'layout/content/_content_header.html.twig' with {
-        title: 'Bonhomme Batiment',
+        title: 'menu.users'|trans([], 'messages'),
         links: [
-            {label: 'Users list', routeName: 'user.index'},
-            {label: 'New user', routeName: 'user.new'},
-            {label: 'Home', routeName: 'home'},
+            {label: 'title.home'|trans, routeName: 'home'},
+            {label: 'title.user_list'|trans },
         ],
     } %}
 {% endblock %}
 
 {% block content %}
     <div class="text-right">
-        <a href="{{ path('user.new') }}">
+        <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
             <i class="material-icons">add</i>
         </a>
     </div>
@@ -38,10 +37,23 @@
     <script>
         $(function () {
             window.App.DataTable.initAppDataTables({
-                columnNames: ['__user_email', 'user_firstName', 'user_lastName', 'user_phone', 'user_job', 'created_at', 'actions'],
+                columnNames: ['user_email', 'user_firstName', 'user_lastName', 'user_phone', 'user_job', 'created_at', 'updated_at', 'deleted_at', 'actions'],
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 excludedColumns: [],
+                config: {
+                    dom: `
+                        <'card'
+                            <'card-header'<'row'<'col-sm-6'l><'col-sm-6'f>>>
+                            <'card-body'<'row'<'col-sm-12 mt-table'<''tr>>>>
+                            <'card-footer'<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>>
+                        >
+                    `,
+                    fixedColumns: {
+                        rightColumns: 1,
+                        leftColumns: 0,
+                    },
+                },
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
                 debug: true,

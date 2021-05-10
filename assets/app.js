@@ -12,6 +12,7 @@ import './scss/app.scss';
 import './bootstrap';
 import './js/adminlte';
 import { initFormConfirmation } from './js/shared/app_confirm';
+import { PasswordGenerator } from './js/shared/password_generator';
 
 import * as DataTable from './js/datatable/app-datatable';
 
@@ -20,6 +21,7 @@ window.App = {
      * App Datatable Functions
      */
     DataTable,
+    PasswordGenerator,
 };
 
 $(function () {

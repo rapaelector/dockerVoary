@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\User\UserEditType;
 use App\Controller\BaseController;
 use App\Repository\UserRepository;
 use App\Message\User\UserCreatedMessage;
@@ -92,6 +93,28 @@ class UserController extends BaseController
                     // $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
+            ->add('updatedAt', DateTimeColumn::class, [
+                'searchable' => true,
+                'format' => 'd/m/y',
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class, 
+                    [
+                        'type' => 'daterange',
+                    ]
+                    // $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
+            ->add('deletedAt', DateTimeColumn::class, [
+                'searchable' => true,
+                'format' => 'd/m/y',
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class, 
+                    [
+                        'type' => 'daterange',
+                    ]
+                    // $this->filterOptionsProvider->getOptions('lastname')
+                )
+            ])
             ->add('id', TextColumn::class, [
                 'label' => 'Actions', 
                 'render' => $this->actionsRenderer('user.index', 'user/_actions.html.twig'),
@@ -159,7 +182,7 @@ class UserController extends BaseController
     #[Route('/{id}/edit', name: 'user.edit', methods: ['GET','POST'])]
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

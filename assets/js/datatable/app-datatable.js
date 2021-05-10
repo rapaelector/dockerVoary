@@ -62,6 +62,12 @@ const initAppDataTables = ({
      * Debug flag, if enabled, it will print variables
      */
     debug = false,
+
+    /**
+     * buildDataTableConfig config argument
+     * @var Object
+     */
+    config = {},
 }) => {
     /**
      * Resolve column defs
@@ -70,12 +76,22 @@ const initAppDataTables = ({
 
     appConsole('info', debug, 'columnDefs', columnDefs);
 
+    // build config
+    const buildConfig = buildDataTableConfig(columnsCount, excludedColumns, {
+        columnDefs: columnDefs,
+        ...config,
+    });
+
+    appConsole('info', debug, buildConfig, config);
+
     // const dtPromise = $('#user-table').initDataTables(
     const dtPromise = $(containerSelector).initDataTables(
         settings,
-        buildDataTableConfig(columnsCount, excludedColumns, {
-            columnDefs: columnDefs,
-        })
+        buildConfig
+        // buildDataTableConfig(columnsCount, excludedColumns, {
+        //     columnDefs: columnDefs,
+        //     ...config,
+        // })
     );
 
     /**
@@ -101,6 +117,10 @@ const initAppDataTables = ({
                 appConsole('info', debug, 'Init column filters')
                 initColumnFilters(filtersContainerSelector, dtInstance);
             }
+            setTimeout(function () {
+                dtInstance.draw();
+            }, 100);
+            
         } catch (error) {
             console.warn('Datatable init encountered an error ', error);
         }

@@ -9,6 +9,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -16,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * SoftDeleteable annotation must be used with SoftDeleteableTrait
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @Gedmo\Loggable
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -32,6 +35,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email
      */
     private $email;
 
@@ -43,16 +47,31 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     * )
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     * )
      */
     private $lastName;
 

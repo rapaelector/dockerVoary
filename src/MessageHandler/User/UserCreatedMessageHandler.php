@@ -46,8 +46,8 @@ final class UserCreatedMessageHandler implements MessageHandlerInterface
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject($this->translator->trans('email.user.creation.registration_completed_correctly', [], 'messages'))
-            ->text($this->translator->trans('email.user.creation.registration_completed_correctly', [], 'messages'))
+            ->subject($this->translator->trans('email.user.creation.registration_completed_correctly', [], 'email'))
+            ->text($this->translator->trans('email.user.creation.registration_completed_correctly', [], 'email'))
             ->htmlTemplate('email/user/creating/created.html.twig')
             ->context([
                 'user' => $user,
