@@ -1,0 +1,42 @@
+@mixin datatable_card () {
+    .card {
+        &.app-dt-card {
+            .card-body {
+                /**
+                 * Remove card body padding to have more space for the datatable
+                */
+                padding: 0;
+                .dataTables_scroll {
+                    overflow-x: auto;
+                }
+                table.dataTable {
+                    margin-top: 0 !important;
+                    thead, tbody {
+                        tr {
+                            th, td {
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                    thead {
+                        tr {
+                            th {
+                                border-top: none;
+                            }
+                        }
+                    }
+                    tbody {
+                        tr:first-child {
+                            border-left: 0;
+                        }
+                        tr:last-child {
+                            border-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include datatable_card;

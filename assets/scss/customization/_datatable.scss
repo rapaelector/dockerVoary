@@ -1,5 +1,10 @@
+@import 'datatables.net-bs4/css/dataTables.bootstrap4.css';
+@import 'datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css';
+@import 'datatables.net-fixedcolumns-bs4/css/fixedColumns.bootstrap4.css';
+
 @import './datatable/fixedColumns';
 @import './datatable//datatableFilters';
+@import './datatable/datatableCard';
 
 .dataTable .dropdown {
     & > .btn-icon {
@@ -8,4 +13,9 @@
             display: none;
         }
     }
+}
+.dynamic-nowrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

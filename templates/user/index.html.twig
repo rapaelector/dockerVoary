@@ -15,12 +15,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="text-right">
-        <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
-            <i class="material-icons">add</i>
-        </a>
-    </div>
     <div class="container-fluid">
+        <div class="text-right">
+            <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
         <div class="row">
             <div class="col-12">
                 {% include template_datatable_filters with {
@@ -47,7 +47,7 @@
                 excludedColumns: [],
                 config: {
                     dom: `
-                        <'card'
+                        <'card app-dt-card'
                             <'card-header'<'row'<'col-sm-6'l><'col-sm-6'f>>>
                             <'card-body'<'row'<'col-sm-12 mt-table'<''tr>>>>
                             <'card-footer'<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>>
@@ -57,10 +57,12 @@
                         rightColumns: 1,
                         leftColumns: 0,
                     },
+                    fixedHeader: true,
                 },
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
                 debug: true,
+                enableFormatter: true,
             });
         });
     </script>

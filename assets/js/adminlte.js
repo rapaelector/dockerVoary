@@ -22,7 +22,7 @@ $(function () {
     /**
      * Init bootstrap tooltip
      */
-    $('[data-toggle="tooltip"]').tooltip();
+    $('body').tooltip({selector: '[data-toggle="tooltip"]'});
 
     $('.sidebar').overlayScrollbars({
         overflowBehavior: {

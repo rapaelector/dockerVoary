@@ -148,6 +148,8 @@ function CellFormatter (dtPromise, config) {
         config = _this.buildConfig(config);
 
         $table.on('draw.dt', function () {
+            $('.tooltip[role="tooltip"]').tooltip('hide');
+            
             $(config.dynamicNoWrap).each(function () {
                 var $elem = $(this);
                 var title = $elem.html();

@@ -49,6 +49,7 @@ class UserController extends BaseController
         // $table =  $dataTableFactory->create()
             ->add('email', TextColumn::class, [
                 'searchable' => true,
+                'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('email')
