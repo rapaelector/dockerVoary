@@ -50,99 +50,43 @@ function ResetPassword () {
 	function onTriggerClick(e) {
 		var id = $(this).data('id');
 		console.info(id);
-		initSweetAlert(id);
-		// App.Shared.modalConfirm(_this.options.confirmModal, function () {
-		// 	processing = true;
-		// 	_this.$elems.confirmModal.find('[data-action]').button('loading');
-		// 	$.ajax({
-		// 		type: 'POST',
-		// 		url: App.generate('user.reset_password', {id: id}),
-		// 		dataType: 'json',
-		// 		tryCount: 0,
-		// 		maxTry: 10,
-		// 		success: function (response) {
-		// 			processing = false;
-		// 			var message = response.data.message;
-		// 			$.notify({
-		// 				'message': message,
-		// 				'icon': 'glyphicon glyphicon-ok',
-		// 			}, {
-		// 				type: 'success',
-		// 				offset: {y: 65, x: 20},
-		// 			})
-		// 			_this.$elems.confirmModal.find('[data-action]').button('reset');
-		// 			confirmModal('hide');
-		// 		},
-		// 		error: function (err) {
-		// 			this.tryCount++;
-		// 			if (this.tryCount < this.maxTry) {
-		// 				$.ajax(this);
-		// 			} else {
-		// 				_this.$elems.confirmModal.find('[data-action]').button('reset');
-		// 				processing = false;
-		// 				confirmModal('hide');
-		// 			}
-		// 		}
-		// 	});
-		// }, function () {
-		// 	processing = false;
-		// 	confirmModal('hide');
-		// });
+		initConfirmAlert(id);
 	}
 
-	function initSweetAlert (id) {
-		const swalWithBootstrapButtons = Swal.mixin({
-			customClass: {
-				confirmButton: 'btn btn-success',
-				cancelButton: 'btn btn-danger'
+	function initConfirmAlert (id) {
+		Swal.fire({
+			title: 'Réinitialisation mot de passe',
+			html: `<div>Souhaitez-vous réinitialiser le mot de passe de cet utilisateur</div>`,
+			input: false,
+			inputAttributes: {
+				autocapitalize: 'off'
 			},
-			buttonsStyling: false
-		})
-		
-		swalWithBootstrapButtons.fire({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonText: 'Yes, delete it!',
-			cancelButtonText: 'No, cancel!',
-			reverseButtons: true
+			cancelButtonText: 'Annuler',
+			confirmButtonText: 'Ok',
+			showLoaderOnConfirm: true,
+			preConfirm: () => {
+				return new Promise(function (resolve, reject) {
+					$.ajax({
+						type: 'POST',
+						url: Routing.generate('user.reset_password', {id, id}),
+						dataType: 'json',
+					}).done(function (data) {
+						console.info(data);
+						resolve(data);
+					}).fail(function (jqxhr, status, error) {
+						reject(jqxhr.responseJSON.error);
+					})
+				}).catch(function (error) {
+					Swal.showValidationMessage(error);
+				})
+			},
+			allowOutsideClick: () => !Swal.isLoading()
 		}).then((result) => {
-			console.info('ok confirmed');
 			if (result.isConfirmed) {
-				console.info('ok confirmed 11111111111');
-				$.ajax({
-					type: 'POST',
-					url: Routing.generate('user.reset_password', {id, id}),
-					dataType: 'json',
-					success: function (response) {
-						// processing = false;
-						// var message = response.data.message;
-						// $.notify({
-						// 	'message': message,
-						// 	'icon': 'glyphicon glyphicon-ok',
-						// }, {
-						// 	type: 'success',
-						// 	offset: {y: 65, x: 20},
-						// })
-						// _this.$elems.confirmModal.find('[data-action]').button('reset');
-						// confirmModal('hide');
-						alert('password resetted', response);
-					},
-					error: function (err) {
-						// this.tryCount++;
-						// if (this.tryCount < this.maxTry) {
-						// 	$.ajax(this);
-						// } else {
-						// 	_this.$elems.confirmModal.find('[data-action]').button('reset');
-						// 	processing = false;
-						// 	confirmModal('hide');
-						// }
-						alert('resetted failed');
-					}
-				});
-			} else {
-				
+				Swal.fire({
+					html: `<div>Mot de passe resetter</div>`,
+				})
 			}
 		})
 	}
