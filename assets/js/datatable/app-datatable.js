@@ -65,9 +65,17 @@ const initAppDataTables = ({
 
     /**
      * buildDataTableConfig config argument
-     * @var Object
+     * @var Object config
      */
     config = {},
+
+    /**
+     * column filter config to the initColumnFilters() method
+     * default value empty object
+     * 
+     * @var Object filtersConfig 
+     */
+    filtersConfig = {},
 }) => {
     /**
      * Resolve column defs
@@ -115,7 +123,10 @@ const initAppDataTables = ({
             if (enableColumnFilters) {
                 // init column filters
                 appConsole('info', debug, 'Init column filters')
-                initColumnFilters(filtersContainerSelector, dtInstance);
+                /**
+                 * Initialization of the column filters
+                 */
+                initColumnFilters(filtersContainerSelector, dtInstance, filtersConfig, debug);
             }
             setTimeout(function () {
                 dtInstance.draw();
@@ -183,11 +194,13 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
         clearButton: true,
         fixedColumns: {
             rightColumns: 1,
+            leftColumns: 0,
         },
         // paging:  true,
         buttons: [{
             extend: 'colvis',
             text: "Afficher/masquer les colonnes",
+            className: 'btn btn-outline-app-primary buttons-collection dropdown-toggle buttons-colvis',
             columns: columns,
         }]
     }, config);

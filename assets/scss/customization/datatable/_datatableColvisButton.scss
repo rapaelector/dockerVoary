@@ -1,0 +1,81 @@
+
+.app-dt-card {
+    div.dt-button-collection>:last-child {
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.dt-button-collection {
+    width: 600px !important;
+    box-sizing: border-box;
+    display: block;
+    max-height: 50vh;
+    overflow: auto;
+    border: none;
+    border-radius: 0px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    &:hover, &:focus {
+        text-decoration: none !important;
+        color: $app-primary !important;
+    }
+    .dropdown-menu {
+        position: relative;
+        background: #fff;
+        display: flex !important;
+        flex-wrap: wrap;
+        .dropdown-item {
+            width: 23%;
+            color: #000;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 0.2rem 0.1rem;
+            &, &:hover, &:focus, &:active {
+                box-shadow: none;
+                background: none;
+                border: none;
+            }
+            & > span {
+                background: rgba(0, 0, 0, 0.02);
+                line-height: 36px;
+                padding-bottom: 0px;
+                padding-top: 0px;
+                padding-left: 16px;
+                padding-right: 16px;
+                border-radius: 4px;
+                color: #777;
+                font-weight: bold;
+                width: 100%;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 12px;
+                br {
+                    display: none;
+                }
+                // span {
+                //     padding-right: 4px;
+                //     &:last-child {
+                //         padding-left: 0;
+                //     }
+                // }
+                &:hover {
+                    background: rgba(#000, 0.06);
+                }
+                &:focus {
+                    background: rgba(0, 0, 0, 0.06);
+                }
+            }
+            &.active {
+                span {
+                    color: $app-primary;
+                    background: rgba(#000, 0.06);
+                    // &:focus {
+                    //     background: rgba(#000, 0.06);
+                    // }
+                }
+            }
+        }
+    }
+}

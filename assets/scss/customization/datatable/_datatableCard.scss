@@ -1,6 +1,19 @@
 @mixin datatable_card () {
     .card {
         &.app-dt-card {
+            .card-header {
+                .btn {
+                    &.buttons-colvis {
+                        &.btn-outline-app-primary {
+                            background: none;
+                        }
+                    }
+                }
+                .btn-outline-app-primary:hover {
+                    color: $app-primary;
+                    background: none;
+                }
+            }
             .card-body {
                 /**
                  * Remove card body padding to have more space for the datatable
@@ -15,6 +28,8 @@
                         tr {
                             th, td {
                                 vertical-align: middle;
+                                height: 30px;
+                                max-height: 30px;
                             }
                         }
                     }
@@ -26,6 +41,9 @@
                         }
                     }
                     tbody {
+                        tr {
+                            height: map-get($heights, dtRow) !important;
+                        }
                         tr:first-child {
                             border-left: 0;
                         }
@@ -34,6 +52,9 @@
                         }
                     }
                 }
+            }
+            .card-footer {
+                padding: 0 1rem;
             }
         }
     }

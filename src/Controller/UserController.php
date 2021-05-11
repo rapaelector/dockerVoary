@@ -111,17 +111,6 @@ class UserController extends BaseController
                     // $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
-            ->add('deletedAt', DateTimeColumn::class, [
-                'searchable' => true,
-                'format' => 'd/m/y',
-                'filter' => $this->filterBuilder->buildFilter(
-                    DateRangeFilter::class, 
-                    [
-                        'type' => 'daterange',
-                    ]
-                    // $this->filterOptionsProvider->getOptions('lastname')
-                )
-            ])
             ->add('id', TextColumn::class, [
                 'label' => 'Actions', 
                 'render' => $this->actionsRenderer('user.index', 'user/_actions.html.twig'),

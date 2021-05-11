@@ -3,17 +3,32 @@ const RANGE_SLIDER_SELECTOR = '.range-slider';
 const RANGE_DROPDOWN_SELECTOR = '.dropdown.range-dropdown';
 const RANGE_DROPDOWN_WIDTH = 240;
 const CLEAR_BUTTON_CONTAINER = '.clear-filters';
-const $APP_FILTER_CONTAINER = $('.app-filter-container')
+const $APP_FILTER_CONTAINER = $('.app-filters-container')
 
 var filtersInitialized = false;
 
-function initColumnFilters (container, dt, debug = false) {
+function initColumnFilters (container, dt, options, debug = false) {
     appConsole('info', debug, $container);
     var timeId = null;
     var $container = $(container);
     $APP_FILTER_CONTAINER.show();
+    var defaultOptions = {
+        clearFilters: {
+            // clear filters button container
+            container: 'clear-filters',
+            // clear filters button attributes that will be provided to buildElement()
+            btn: {
+                wrapper: 'button',
+                attr: {
+                    'class': 'clear-filter-button',
+                },
+                content: 'Annuler tous les filtres',
+            },
+        },
+    };
+    var options = $.extend(true, {}, defaultOptions, options);
 
-    $('.app-filter-container table thead tr th').click(function (e) {
+    $('.app-filters-container table thead tr th').click(function (e) {
         var target = $(this).data('target');
         $(target).get('0').scrollIntoView();
         $(target).focus();
@@ -27,9 +42,9 @@ function initColumnFilters (container, dt, debug = false) {
         timeId = filterChangeHandler($filter, dt);
     });
     
-    initFilterDropdown($container);
-    initDateRangepicker();
-    initClearButton(dt);
+    initFilterDropdown($container, options);
+    initDateRangepicker(options);
+    initClearButton(dt, options);
 
     filtersInitialized = true;
 }
@@ -49,7 +64,7 @@ export {
     initColumnFilters
 };
 
-function initDateRangepicker() {
+function initDateRangepicker(options) {
     appConsole('info', true, 'init daterange picker', $('.input-daterange > input').length);
     $('.input-daterange > input').daterangepicker({
         autoclose: true,
@@ -67,19 +82,12 @@ function initDateRangepicker() {
     })
 }
 
-function initClearButton(dt) {
-    var btnDef = {
-        wrapper: 'button',
-        attr: {
-            'class': 'clear-filter-button',
-        },
-        content: 'Annuler tous les filtres',
-    }
+function initClearButton(dt, options) {
+    var btnDef = options.clearFilters.btn;
     var $btn = buildElem(btnDef);
-    $('.clear-filters').empty().append($btn);
+    $(options.clearFilters.container).empty().append($btn);
 
-
-    $btn.click(function (e) {
+    $btn.on('click', function (e) {
         clearAllFilters(dt)
     });
 
