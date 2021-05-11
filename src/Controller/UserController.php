@@ -8,6 +8,9 @@ use App\Form\User\UserEditType;
 use App\Controller\BaseController;
 use App\Repository\UserRepository;
 use App\Message\User\UserCreatedMessage;
+use App\Message\User\UserResetPasswordMessage;
+use App\Utils\PasswordGenerator;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,7 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/user')]
 class UserController extends BaseController
@@ -206,10 +210,15 @@ class UserController extends BaseController
     }
 
     #[Route('/{id}/reset-password', name: 'user.reset_password', methods: ['POST'], options: ['expose'=>true])]
-    public function resetPassword(Request $request, User $user, UserManager $manager)
+    public function resetPassword(Request $request, User $user, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em, MessageBusInterface $messagerBus)
     {
         if ($request->isXmlHttpRequest()) {
-            $manager->resetPassword($user);
+            $userPlainPassword = PasswordGenerator::randomString();
+            $encodedPassword = $encoder->encodePassword($user, $userPlainPassword);
+            $user->setPassword( $encodedPassword);
+            $em->flush();
+            $messagerBus->dispatch(new UserResetPasswordMessage($user->getId(), $userPlainPassword));
+
             return $this->json(['message' => 'data send ok'], 200);
         }
 

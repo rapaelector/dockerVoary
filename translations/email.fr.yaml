@@ -4,3 +4,7 @@ email:
       user_registration: 'Inscription utilisateur'
       registration_completed_correctly: 'Compte utilisateur pour Bonhomme Batiment'
       messages: "Voici vos identifiants d'utilisateur pour Bonhomme Batiment"
+    reset_password:
+      user_reset_password: 'Réinitialisation du mot de passe'
+      reset_password_completed_correctly: 'Réinitialisation du mot de passe efféctuer correctement'
+      messages: 'Voici vos nouveaux identifiant pour Bonhomme Batiment'
