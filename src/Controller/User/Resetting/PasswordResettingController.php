@@ -13,7 +13,7 @@ class PasswordResettingController extends AbstractController
     public function resettingRequest(Request $request, \Symfony\Component\Messenger\MessageBusInterface $bus): Response
     {
         $bus->dispatch(new \App\Message\User\PasswordResetMessage);
-
+        if(true) return 'est';
         return new Response('request sent');
     }
 }

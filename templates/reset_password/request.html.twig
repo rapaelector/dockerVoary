@@ -1,0 +1,26 @@
+{% trans_default_domain 'users' %}
+{% extends 'layout/form_base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{'reset_password.resetYourPass' | trans}}{% endblock %}
+
+{% block form_box_msg %}{{ 'reset_password.box_msg'|trans }}{% endblock %}
+
+
+{% block form %}
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError|trans() }}</div>
+    {% endfor %}
+    {{ form_start(requestForm) }}
+
+        <div class="input-group mb-3">
+            {{ form_widget(requestForm.email) }}
+            <div class="input-group-append">
+                <div class="input-group-text py-0">
+                    <span class="material-icons">mail</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-app-primary col-12">{{'reset_password.sendButton' | trans}}</button>
+    {{ form_end(requestForm) }}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% trans_default_domain 'users' %}
+{% extends 'layout/form_base.html.twig' %}
+
+{% block title %}{{ parent() }} | Reset your password{% endblock %}
+
+{% block form_box_msg %}{{ 'reset_password.box_reset_msg'|trans }}{% endblock %}
+
+
+{% block form %}
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError|trans() }}</div>
+    {% endfor %}
+    {{ form_start(resetForm) }}
+
+        <div class="input-group mb-3">
+            {{ form_widget(resetForm.plainPassword.first) }}
+            <div class="input-group-append">
+                <div class="input-group-text py-0">
+                    <span class="material-icons">lock</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            {{ form_widget(resetForm.plainPassword.second) }}
+            <div class="input-group-append">
+                <div class="input-group-text py-0">
+                    <span class="material-icons">lock</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-app-primary col-12">{{ 'reset_password.resetButton' | trans }}</button>
+    {{ form_end(resetForm) }}
+{% endblock %}
+

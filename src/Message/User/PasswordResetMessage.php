@@ -2,22 +2,38 @@
 
 namespace App\Message\User;
 
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
+
 final class PasswordResetMessage
 {
-    /*
-     * Add whatever properties & methods you need to hold the
-     * data for this message class.
+    
+    /**
+     *  email address of user will receive the message
      */
+    private $email;
+    /**
+     * token of the message
+     */
+    private $resetToken;
 
-//     private $name;
-//
-//     public function __construct(string $name)
-//     {
-//         $this->name = $name;
-//     }
-//
-//    public function getName(): string
-//    {
-//        return $this->name;
-//    }
+    public function __construct(string $email, ResetPasswordToken $resetToken)
+    {
+        $this->email = $email;
+        $this->resetToken = $resetToken;
+    }
+    /**
+     * 
+     */
+   public function getEmail(): string
+   {
+       return $this->email;
+   }
+
+   /**
+    * 
+    */
+   public function getResetToken(): ResetPasswordToken
+   {
+       return $this->resetToken;
+   }
 }

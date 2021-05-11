@@ -7,11 +7,19 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
+use Symfony\Component\Mime\Address;
 
 final class PasswordResetMessageHandler implements MessageHandlerInterface
 {
     /** @var MailerInterface */
     private $mailer;
+
+    /** @var string */
+    private $email;
+
+    /** @var ResetPasswordToken */
+    private $resetToken;
 
     public function __construct(MailerInterface $mailer)
     {
@@ -20,6 +28,8 @@ final class PasswordResetMessageHandler implements MessageHandlerInterface
 
     public function __invoke(PasswordResetMessage $message)
     {
+        $this->email = $message->getEmail();
+        $this->resetToken = $message->getResetToken();
         $this->sendEmail();
     }
 
@@ -29,15 +39,16 @@ final class PasswordResetMessageHandler implements MessageHandlerInterface
     public function sendEmail()
     {
         $email = (new TemplatedEmail())
-            // ->from('hello@example.com')
-            // ->to('you@example.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->htmlTemplate('email/user/resetting/reset.html.twig');
+            ->from(new Address('rapaelec@gmail.com', 'patrick'))
+            ->to($this->email)
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject('Your password reset request')
+            // ->text('Sending emails is fun again!')
+            ->htmlTemplate('reset_password/email.html.twig')
+            ->context([
+                'resetToken' => $this->resetToken,
+            ])
+            ;
 
         $this->mailer->send($email);
     }
