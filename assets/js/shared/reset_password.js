@@ -33,23 +33,10 @@ function ResetPassword () {
 
 	function bindElems() {
 		$('body').on('click', '[data-action="reset-password"]', onTriggerClick);
-		// _this.$elems.triggerBtn.click(onTriggerClick);
-		_this.$elems.confirmModal.on('hide.bs.modal', onConfirmModalHide);
-	}
-
-	function confirmModal(action) {
-		_this.$elems.confirmModal.modal(action);
-	}
-
-	function onConfirmModalHide(e) {
-		if (processing) {
-			return false;
-		}
 	}
 
 	function onTriggerClick(e) {
 		var id = $(this).data('id');
-		console.info(id);
 		initConfirmAlert(id);
 	}
 
