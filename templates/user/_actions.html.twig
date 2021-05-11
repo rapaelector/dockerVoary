@@ -1,4 +1,4 @@
-{% from app_macro import dd_link_elem %}
+{% from app_macro import dd_link_elem, dd_btn_elem %}
 
 <div class="dropdown">
   <button class="btn btn-icon dropdown-toggle"
@@ -16,6 +16,14 @@
   </button>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
     {{ dd_link_elem('user.edit', {id: id}, {label: 'action.edit', domain: 'messages', icon: 'edit'}) }}
+    {{ dd_btn_elem('action.reset_password', {
+        domain: 'messages',
+        icon: 'lock',
+        attr: {
+          'data-action': 'reset-password',
+          'data-id': id,
+        }
+    }) }}
     {% include "user/_delete_form.html.twig" with {
       id: id,
       deleteRoute: 'user.delete'

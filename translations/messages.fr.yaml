@@ -17,6 +17,7 @@ action:
   generate_password: 'Générer le mot de passe'
   login: 'Se connecter'
   cancel: 'Annuler'
+  reset_password: 'Réinitialiser MDP'
 
 title:
   delete_user: "Supprimer l'utilisateur"

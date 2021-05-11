@@ -13,6 +13,7 @@ import './bootstrap';
 import './js/adminlte';
 import { initFormConfirmation } from './js/shared/app_confirm';
 import { PasswordGenerator } from './js/shared/password_generator';
+import { ResetPassword } from './js/shared/reset_password';
 
 import * as DataTable from './js/datatable/app-datatable';
 
@@ -22,6 +23,7 @@ window.App = {
      */
     DataTable,
     PasswordGenerator,
+    ResetPassword,
 };
 
 $(function () {

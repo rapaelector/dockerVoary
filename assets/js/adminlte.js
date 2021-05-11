@@ -18,6 +18,7 @@ require('datatables.net-fixedColumns-bs4');
 
 import './datatable/omines-datatables';
 
+
 $(function () {
     /**
      * Init bootstrap tooltip

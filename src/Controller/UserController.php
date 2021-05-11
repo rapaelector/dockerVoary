@@ -204,4 +204,15 @@ class UserController extends BaseController
 
         return $this->redirectToRoute('user.index');
     }
+
+    #[Route('/{id}/reset-password', name: 'user.reset_password', methods: ['POST'], options: ['expose'=>true])]
+    public function resetPassword(Request $request, User $user, UserManager $manager)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $manager->resetPassword($user);
+            return $this->json(['message' => 'data send ok'], 200);
+        }
+
+        return $this->json(['message' => 'no XMLHttpRequest request'], 400);
+    }
 }
