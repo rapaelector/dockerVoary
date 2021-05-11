@@ -8,6 +8,14 @@ login:
     password_placeholder: 'Mot de passe'
     remember_me: 'Se souvenir de moi'
     sign_in: 'Se connecter'
+reset_password:
+    box_msg: 'Entrez votre email'
+    box_reset_msg: 'Entrez le nouveau mots de pass'
+    resetButton: Enregistrer
+    sendButton: Envoyer un email de reinitialisation
+    resetYourPass: Réinitialiser votre mot de passe
+    constraint:
+        notBlank: Please enter a password
 links:
     forgot_password: "J'ai oublié mon mot de passe"
 

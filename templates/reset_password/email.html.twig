@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Twig</title>
+</head>
+<body>
+    <h1>Reset password</h1>
+    <p>You requestted to reset your password, please follow the link below.</p>
+    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Reset your password</a>
+    <p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+</body>
+</html>
