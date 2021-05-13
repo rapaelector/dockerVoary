@@ -1,0 +1,13 @@
+@mixin dropdown_customization {
+    .dropdown-menu {
+        .dropdown-item {
+            .material-icons {
+                font-size: 20px;
+                margin-right: 8px;
+                opacity: 0.9;
+            }
+        }
+    }
+}
+
+@include dropdown_customization;
