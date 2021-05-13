@@ -198,12 +198,17 @@ class UserController extends BaseController
     }
 
     #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+            if ($request->isXMLHttpRequest()) {
+                return $this->json(['message' => $translator->trans('messages.delete_success', [], 'users')]);
+            } else {
+                $this->addFlash('success', $translator->trans('messages.delete_success', [], 'users'));
+            }
         }
 
         return $this->redirectToRoute('user.index');

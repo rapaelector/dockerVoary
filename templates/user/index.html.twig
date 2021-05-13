@@ -42,15 +42,15 @@
                     'user_phone', 'user_job', 'user_fax', 'created_at',
                     'updated_at', 'actions'
                 ],
+                excludedColumns: [8],
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
-                excludedColumns: [],
                 config: {
                     dom: `
                         <'card app-dt-card'
                             <'card-header'<'row'<'col-sm-3'l><'col-sm-6'<'d-inline-block'B><'clear-filters pl-3 d-inline-block'>CA><'col-sm-3'f>>>
                             <'card-body'<'row'<'col-sm-12 mt-table'<''tr>>>>
-                            <'card-footer'<'row mt-3'<'col-sm-5'i><'col-sm-7'p>>>
+                            <'card-footer'<'row'<'col-sm-5'i><'col-sm-7'p>>>
                         >
                     `,
                 },
@@ -68,7 +68,8 @@
                             }
                         }
                     }
-                }
+                },
+                redrawEvent: 'user.deleted'
             });
 
             var resetPassword = new window.App.ResetPassword();

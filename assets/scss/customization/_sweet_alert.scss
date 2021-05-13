@@ -1,1 +1,23 @@
+// $swal2-icon-size: 2rem;
+$swal2-title-font-size: (20 / 16) * 1rem;
+$swal2-content-font-size: 1rem;
+$swal2-input-font-size: 1rem;
+// $swal2-close-button-font-size: 2.5em !default;
+$swal2-confirm-button-font-size: 1rem;
+$swal2-cancel-button-font-size: 1rem;
+$swal2-toast-padding: 8px;
+
 @import '~sweetalert2/src/sweetalert2.scss';
+// @import '~sweetalert2/src/_toasts.scss';
+
+.swal2-icon {
+	.swal2-icon-content {
+		// font-size: $swal2-icon-size;
+	}
+}
+.swal2-styled {
+	padding: ($app-spacer / 2) $app-spacer;
+}
+// .swal2-container {
+//     height: 50px;
+// }

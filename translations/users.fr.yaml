@@ -50,3 +50,6 @@ list:
         updatedAt: 'Modifié le'
         deletedAt: 'Supprimé le'
         fax: 'Fax'
+
+messages:
+    delete_success: 'Utilisateur supprimé avec succès'

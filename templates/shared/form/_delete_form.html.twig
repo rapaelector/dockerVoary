@@ -1,9 +1,18 @@
+{% from app_macro import render_attr %}
+
 {% if options is not defined %}{% set options = {} %}{% endif %}
 
-<form class="{{ resolve([options, 'attr', 'class'], 'd-inline-block w-100 p-0') }}" method="post"
-	action="{{ deleteAction }}" data-confirm="true" data-confirm-title="{{ confirm.title }}"
-	data-confirm-html="{{ confirm.html }}" {% if confirm.input is defined %} data-confirm-input="{{ confirm.input }}"
-	{% endif %}>
+<form 
+	class="{{ resolve([options, 'attr', 'class'], 'd-inline-block w-100 p-0') }}"
+	method="post"
+	action="{{ deleteAction }}" 
+	data-confirm="true" 
+	data-confirm-title="{{ confirm.title }}"
+	data-confirm-html="{{ confirm.html }}"
+	{% if successEvent is defined %} data-success-event="{{ successEvent }}"{% endif %}
+	{% if ajax is defined %} data-ajax="true"{% endif %}
+	{% if confirm.input is defined %} data-confirm-input="{{ confirm.input }}"{% endif %}
+>
 	<input type="hidden" name="_method" value="DELETE">
 	<input type="hidden" name="_token" value="{{ token }}">
 	<button class="{{ resolve([options, 'button_attr', 'class'], 'dropdown-item') }}">

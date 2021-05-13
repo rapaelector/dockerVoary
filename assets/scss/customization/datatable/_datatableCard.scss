@@ -41,9 +41,6 @@
                         }
                     }
                     tbody {
-                        tr {
-                            height: map-get($heights, dtRow) !important;
-                        }
                         tr:first-child {
                             border-left: 0;
                         }
@@ -52,9 +49,6 @@
                         }
                     }
                 }
-            }
-            .card-footer {
-                padding: 0 1rem;
             }
         }
     }

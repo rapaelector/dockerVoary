@@ -6,3 +6,23 @@
 @import './common/common';
 @import './adminlte';
 @import './sweetalert';
+
+#app-loader.loading-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #0a0a0a73;
+    z-index: 1;
+    display: none;
+    z-index: 1050;
+    .spinner {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+    }
+}

@@ -9,10 +9,47 @@ import $ from 'jquery';
 import Swal from 'sweetalert2/dist/sweetalert2.min.js'
 
 export function initFormConfirmation(options) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     $('body').on('submit', 'form[data-confirm]', function (e) {
         var $form = $(this);
 
         if ($form.attr('aria-confirmed') == "true") {
+            if ($form.data('ajax') && $form.attr('action')) {
+                $('#app-loader').show();
+                $.ajax({
+                    type: $form.attr('method'),
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#app-loader').hide();
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        });
+                        if ($form.data('success-event')) {
+                            $('body').trigger($form.data('success-event'));
+                        }
+                    },
+                    error: function (err) {
+                        console.warn(err);
+                    }
+                });
+
+                return false;
+            }
+
             return true;
         }
 

@@ -76,13 +76,17 @@ const initAppDataTables = ({
      * @var Object filtersConfig 
      */
     filtersConfig = {},
+    /**
+     * If provided, listen this event on 'body' and redraw datatables when the event is fired
+     */
+    redrawEvent,
 }) => {
     /**
      * Resolve column defs
      */
     const columnDefs = columnDefsResolver(columnNames);
 
-    appConsole('info', debug, 'columnDefs', columnDefs);
+    appConsole('info', debug, {columnDefs, excludedColumns});
 
     // build config
     const buildConfig = buildDataTableConfig(columnsCount, excludedColumns, {
@@ -128,6 +132,16 @@ const initAppDataTables = ({
                  */
                 initColumnFilters(filtersContainerSelector, dtInstance, filtersConfig, debug);
             }
+
+            if (redrawEvent) {
+                $('body').on(redrawEvent, function () {
+                    dtInstance.draw();
+                });
+            }
+
+            /**
+             * wait to 100ms and re draw datatable  to fix table scroll issue
+             */
             setTimeout(function () {
                 dtInstance.draw();
             }, 100);
