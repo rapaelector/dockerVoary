@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    {# read and display several types of flash messages #}
+    {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show">
+                {{ message|raw }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span class="material-icons">clear</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-info flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# read and display toast flash message type #}
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 200px; top: 64px; right: 8px; z-index: 1050;">
+        {% for label, messages in app.flashes %}
+            {% if label[:6] is same as('toast-') %}
+                <div class="toast instant-toast" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 0; right: 0; min-width: 240px;">
+                    <div class="toast-header">
+                        {# <img src="..." class="rounded mr-2" alt="..."> #}
+                        <strong class="mr-auto">{{ label[6:]|raw }}</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            {# <span aria-hidden="true">&times;</span> #}
+                            <span class="material-icons md-18">close</span>
+                        </button>
+                    </div>
+                    {% for message in messages %}
+                        <div class="toast-body">{{ message|raw }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>

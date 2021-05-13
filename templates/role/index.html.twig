@@ -1,0 +1,134 @@
+{% trans_default_domain 'roles' %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | {{ 'title.role_manager'|trans }} {% endblock %}
+
+{% block name %}{% endblock %}
+
+{% block content_header %}
+	{% include template_content_header with {
+		title: '<i class="material-icons">security</i>' ~ 'title.role_manager'|trans,
+		links: [
+			{label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+			{label: 'title.role_manager'|trans}
+		],
+	} %}
+{% endblock %}
+
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-3">
+				<div class="card card-outline card-app-primary">
+					<div class="card-header">	
+						<h2 class="card-title">{{ 'role.label.users_title'|trans }} ({{ users|length }})</h2>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body p-0">
+						<div class="bb border-bottom">
+							<input
+								type="text" 
+								id="user_roles_search" 
+								class="form-control border-0" 
+								placeholder="{{ 'action.find'|trans({}, 'messages') }}">
+						</div>
+						<ul class="list-group list-group-flush list-group-app-primary" id="user_roles_users">
+							{% for user in users %}
+								<li
+									class="list-group-item text-nowrap overflow-hidden text-overflow-ellipsis"
+									data-id="{{ user.id }}"
+									data-toggle="tooltip"
+									title="{{ user.username }}"
+									data-name="{{ user.name }}"
+									data-query="{{ user }}"
+									data-roles="{{ user.roles|join('-') }}">
+									<span style="cursor: pointer;">
+										<i class="material-icons">account_circle</i>
+										{{ user.name }}
+									</span>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div><!-- /.col-sm-3 -->
+			<div class="col-sm-9 col-md-9">
+				<div class="card card-outline card-app-primary">
+					<div class="card-header">
+						<h3 class="card-title">
+							{{ 'role.label.roles_title'|trans }}
+							<span class="user-wrapper" style="display:none;">
+								| {{ 'user.label.user'|trans }} :
+								<span class="text-bold text-app-secondary user-roles-active-user"></span>
+							</span>
+						</h3>
+					<!-- /.card-tools -->
+					</div>
+					<!-- /.card-header -->
+					<form method="POST">
+						<div class="card-body p-0">
+							<input type="hidden" name="appbundle_user_id" id="appbundle_user_id" class="form-control">
+							<div class="table-responsive">
+								<table class="table table-hover mb-0" id="user_roles_roles">
+									<thead>
+										<tr>
+											<th></th>
+											{% for action in actions %}
+												<th class="text-nowrap">{{ action|trans }}</th>
+											{% endfor %}
+										</tr>
+									</thead>
+									<tbody>
+										{% for role in roles %}
+											<tr>
+												<th>{{ role.name|trans }}</th>						
+												{% for action in actions %}
+													<td class="text-center">
+														{% if role.actionRole(action) %}
+															{% set checkId = role.role ~ role.actionRole(action).role %}
+															<div class="custom-control custom-checkbox">
+																<input
+																	type="checkbox" 
+																	class="custom-control-input"
+																	name="appbundle_user_roles[]"
+																	parent="{{ role.role }}"
+																	value="{{ role.actionRole(action).role }}"
+																	id="{{ checkId }}"/>
+																<label
+																	class="custom-control-label"
+																	for="{{ checkId }}">
+																</label>
+															</div>
+														{% else %}
+															-
+														{% endif %}
+													</td>
+												{% endfor %}
+											</tr>										
+										{% endfor %}
+									</tbody>
+								</table><!-- table -->
+							</div>
+						</div>
+						<div class="card-footer p-2">
+							<div class="text-center">
+								<button type="submit" class="btn btn-app-secondary btn-lg">{{ 'role.label.save'|trans }}</button>
+							</div>
+						</div>
+					</form><!-- form -->
+					<!-- /.card-body -->
+				</div>
+			</div><!-- /.col-sm-9 -->
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+    {{ encore_entry_script_tags('app_user_role') }}
+{% endblock %}

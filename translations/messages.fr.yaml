@@ -18,9 +18,11 @@ action:
   login: 'Se connecter'
   cancel: 'Annuler'
   reset_password: 'Réinitialiser MDP'
+  find: 'Rechercher'
 
 title:
   delete_user: "Supprimer l'utilisateur"
+  home: 'Acceuil'
 
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'

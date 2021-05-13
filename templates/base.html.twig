@@ -51,6 +51,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Main content -->
                 <div class="content">
+                    <!-- flashbag container -->
+                    {% block flashbags %}
+                        {% include 'layout/_flashbag.html.twig' %}
+                    {% endblock %}
                     <!--
                         Note : for a proper spacing, block content content
                         should be wrapped in a .container or .container-fluid like

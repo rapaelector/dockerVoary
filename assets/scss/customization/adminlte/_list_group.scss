@@ -1,0 +1,16 @@
+.list-group {
+    @each $name, $value in $theme-colors {
+        &.list-group-#{$name} {
+            .list-group-item {
+                padding: _rem(8) _rem(8);
+                &.active {
+                    background: $value;
+                    color: color-yiq($value);
+                }
+                .material-icons {
+                    margin-right: _rem(4);
+                }
+            }
+        }
+    }
+}

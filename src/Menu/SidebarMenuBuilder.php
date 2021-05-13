@@ -73,7 +73,7 @@ class SidebarMenuBuilder
         ])->setAttributes(['class' => $navItem]);
 
         $menu->addChild('menu.roles', [
-            'uri' => '#',
+            'route' => 'roles.management',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
                 'icon' => $icon,

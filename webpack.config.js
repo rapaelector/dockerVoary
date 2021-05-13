@@ -22,6 +22,11 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
+    /**
+     * Entry for role
+     */
+    .addEntry('app_user_role', './assets/js/role/user_roles.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 
