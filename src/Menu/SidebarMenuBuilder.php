@@ -68,8 +68,8 @@ class SidebarMenuBuilder
                     'icon' => $icon,
                     'icon_content' => 'people',
                     'label_wrapper' => 'p',
-                    'badge' => 'UP',
-                    'badge_attr' => ['class' => 'right badge badge-info'],
+                    // 'badge' => 'UP',
+                    // 'badge_attr' => ['class' => 'right badge badge-info'],
                 ],
             ])->setAttributes(['class' => $navItem]);
         }
