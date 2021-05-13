@@ -9,11 +9,15 @@ use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PasswordResetMessageHandler implements MessageHandlerInterface
 {
     /** @var MailerInterface */
     private $mailer;
+
+    /** @var TranslatorInterface */
+    private $translatorInterface;
 
     /** @var string */
     private $email;
@@ -21,9 +25,10 @@ final class PasswordResetMessageHandler implements MessageHandlerInterface
     /** @var ResetPasswordToken */
     private $resetToken;
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(MailerInterface $mailer, TranslatorInterface $translatorInterface)
     {
         $this->mailer = $mailer;
+        $this->translatorInterface = $translatorInterface;
     }
 
     public function __invoke(PasswordResetMessage $message)
@@ -39,11 +44,9 @@ final class PasswordResetMessageHandler implements MessageHandlerInterface
     public function sendEmail()
     {
         $email = (new TemplatedEmail())
-            ->from(new Address('rapaelec@gmail.com', 'patrick'))
             ->to($this->email)
             ->priority(Email::PRIORITY_HIGH)
-            ->subject('Your password reset request')
-            // ->text('Sending emails is fun again!')
+            ->subject($this->translatorInterface->trans('reset_password.email.subject', [], 'users'))
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $this->resetToken,

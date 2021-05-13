@@ -21,6 +21,6 @@
             </div>
         </div>
 
-        <button class="btn btn-app-primary col-12">{{'reset_password.sendButton' | trans}}</button>
+        {{form_widget(requestForm.submit)}}
     {{ form_end(requestForm) }}
 {% endblock %}

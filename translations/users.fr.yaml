@@ -16,6 +16,8 @@ reset_password:
     resetYourPass: Réinitialiser votre mot de passe
     constraint:
         notBlank: Please enter a password
+    email:
+        subject: Réinitialisation de mot de passe
 links:
     forgot_password: "J'ai oublié mon mot de passe"
 
