@@ -19,7 +19,7 @@ class SidebarMenuBuilder
         Security $security,
         Environment $twig,
         RequestStack $requestStack,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
     ) {
         $this->factory = $factory;
         $this->security = $security;
@@ -60,17 +60,19 @@ class SidebarMenuBuilder
             ],
         ])->setAttributes(['class' => $navItem]);
 
-        $menu->addChild('menu.users', [
-            'route' => 'user.index',
-            'linkAttributes' => ['class' => $linkClassName],
-            'extras' => [
-                'icon' => $icon,
-                'icon_content' => 'people',
-                'label_wrapper' => 'p',
-                'badge' => 'UP',
-                'badge_attr' => ['class' => 'right badge badge-info'],
-            ],
-        ])->setAttributes(['class' => $navItem]);
+        if ($this->security->isGranted('ROLE_USER_VIEW')) {
+            $menu->addChild('menu.users', [
+                'route' => 'user.index',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'people',
+                    'label_wrapper' => 'p',
+                    'badge' => 'UP',
+                    'badge_attr' => ['class' => 'right badge badge-info'],
+                ],
+            ])->setAttributes(['class' => $navItem]);
+        }
 
         $menu->addChild('menu.roles', [
             'route' => 'roles.management',

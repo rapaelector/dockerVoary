@@ -16,11 +16,14 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="text-right">
-            <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
-                <i class="material-icons">add</i>
-            </a>
-        </div>
+        {% if is_granted('ROLE_USER_ADD') %}
+            <div class="text-right">
+                <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
+        {% endif %}
+        
         <div class="row">
             <div class="col-12">
                 {% include template_datatable_filters with {

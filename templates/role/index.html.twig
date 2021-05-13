@@ -131,4 +131,7 @@
 {% block javascripts %}
 	{{ parent() }}
     {{ encore_entry_script_tags('app_user_role') }}
+	<script>
+		var roleActiveUserId = {{ userId }};
+	</script>
 {% endblock %}

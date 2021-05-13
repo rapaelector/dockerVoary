@@ -22,6 +22,7 @@ $(function () {
             roles: '[name="appbundle_user_roles[]"]',
             user: "#appbundle_user_id",
             activeUser: '.user-roles-active-user',
+            userId: window.roleActiveUserId,
         };
     
         _this.initElems = function () {
