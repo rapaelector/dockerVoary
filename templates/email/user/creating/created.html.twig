@@ -1,0 +1,15 @@
+{% trans_default_domain 'email' %}
+
+{% extends 'email/user/base_user_mail.html.twig' %}
+
+{% block email_content %}
+    <p>{{ 'email.user.creation.messages'|trans }}</p>
+    
+    <p>
+        {{ 'label.e_mail'|trans({}, 'users') }}: {{ resolve([user, 'email'], '-') }}
+        <br />
+        {{ 'label.password'|trans({}, 'users') }}: {{ userPlainPassword|default('-') }}
+    </p>
+
+    <a href="{{ absolute_url(path('app_login')) }}">{{ 'action.login'|trans({}, 'messages') }}</a>
+{% endblock email_content %}

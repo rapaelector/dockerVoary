@@ -1,0 +1,38 @@
+{%- macro render_attr(attr, escape_attrs) -%}
+	{% if escape_attrs is not defined %}{% set escape_attrs = [] %}{% endif %}
+	{%- if attr -%}
+		{%- for attrname, attrvalue in attr %} {{- attrname -}}="{{- attrname in escape_attrs ? attrvalue|e : attrvalue -}}"{%- endfor -%}
+	{%- endif -%}
+{%- endmacro -%}
+
+{# 
+	# dd_link_elem represent dropdown element link with params
+	# eg : <a class="dropdown-item" href="#">Something else here</a>
+	# params :
+	#	- route: represent the action url
+	#	- params: parameters of the action
+	# 	- options: object contains all usefull option (optional)
+	# 		- role: the user role who can access the link (default true : everybody)
+	#		- icon: the material icon to show before the action (default add(plus icon))
+	#		- label: the action label (default edit)
+	#		- domain: the translation domain (default: messages)
+#}
+{% macro dd_link_elem(route, params, options) %}
+	{% from _self import render_attr %}
+	{% if resolve([options, 'role'], true) %}
+		<a class="dropdown-item" href="{{ path(route, params) }}" {{ render_attr(resolve([options, 'attr'], {})) }}>
+			<i class="material-icons">{{ resolve([options, 'icon'], 'add') }}</i>
+			{{ resolve([options, 'label'], 'action.edit')|trans([], resolve([options, 'domain'], 'messages')) }}
+		</a>
+	{% endif %}
+{% endmacro %}
+
+{% macro dd_btn_elem(content, options) %}
+	{% from _self import render_attr %}
+	{% if resolve([options, 'role'], true) %}
+		<a class="dropdown-item" role="button" {{ render_attr(resolve([options, 'attr'], {})) }}>
+			<i class="material-icons">{{ resolve([options, 'icon'], 'add') }}</i>
+			{{ content|default('action.edit')|trans([], resolve([options, 'domain'], 'messages')) }}
+		</a>
+	{% endif %}
+{% endmacro %}

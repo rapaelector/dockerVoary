@@ -8,3 +8,19 @@ menu:
     offers_menu: 'Gestion des offres'
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
+
+action:
+  save: 'Enregistrer'
+  delete: 'Supprimer'
+  edit: 'Modifier'
+  update: 'Mettre à jour'
+  generate_password: 'Générer le mot de passe'
+  login: 'Se connecter'
+  cancel: 'Annuler'
+  reset_password: 'Réinitialiser MDP'
+
+title:
+  delete_user: "Supprimer l'utilisateur"
+
+message:
+  delete_user: 'Souhaitez-vous supprimer cet utilisateur'

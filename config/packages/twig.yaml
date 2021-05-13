@@ -2,4 +2,9 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         template_content_header: 'layout/content/_content_header.html.twig'
+        template_datatable_filters: 'shared/datatables/filters.html.twig'
         homeRoute: 'home'
+        app_macro: 'shared/macro/_macro.html.twig'
+    form_themes:
+        - 'bootstrap_4_layout.html.twig'
+        - 'shared/form/fields.html.twig'

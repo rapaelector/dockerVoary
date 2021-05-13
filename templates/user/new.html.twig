@@ -1,0 +1,40 @@
+{% trans_default_domain 'users' %}
+
+{% extends 'user/layout.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'title.new_user'|trans }}{% endblock %}
+
+{% block content_header %}
+    {% include template_content_header with {
+        title: 'title.new_user'|trans,
+        links: [
+            {label: 'title.home'|trans, routeName: 'home'},
+            {label: 'title.user_list'|trans, routeName: 'user.index'},
+            {label: 'title.new_user'|trans },
+        ],
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {{ include('user/_form.html.twig') }}
+    </div>
+
+    {# <a href="{{ path('user.index') }}">back to list</a> #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        /**
+        * Init password generate
+        */
+        var generator = new window.App.PasswordGenerator();
+
+        generator.init({
+            container: '#generator', 
+            target: "#{{ form.password.vars.id }}",
+            btn_txt: "{{ 'action.generate_password'|trans({}, 'messages') }}"
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% use "bootstrap_4_layout.html.twig" %}
+
+{% block form_label -%}
+    {{ parent() }}
+    {% block form_label_errors %}{% endblock %}
+{%- endblock form_label %}
+
+{% block form_widget_simple -%}
+    {{- parent() -}}
+    {{- form_errors(form) -}}
+{%- endblock form_widget_simple %}

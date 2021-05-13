@@ -1,0 +1,57 @@
+@mixin datatable_card () {
+    .card {
+        &.app-dt-card {
+            .card-header {
+                .btn {
+                    &.buttons-colvis {
+                        &.btn-outline-app-primary {
+                            background: none;
+                        }
+                    }
+                }
+                .btn-outline-app-primary:hover {
+                    color: $app-primary;
+                    background: none;
+                }
+            }
+            .card-body {
+                /**
+                 * Remove card body padding to have more space for the datatable
+                */
+                padding: 0;
+                .dataTables_scroll {
+                    overflow-x: auto;
+                }
+                table.dataTable {
+                    margin-top: 0 !important;
+                    thead, tbody {
+                        tr {
+                            th, td {
+                                vertical-align: middle;
+                                height: 30px;
+                                max-height: 30px;
+                            }
+                        }
+                    }
+                    thead {
+                        tr {
+                            th {
+                                border-top: none;
+                            }
+                        }
+                    }
+                    tbody {
+                        tr:first-child {
+                            border-left: 0;
+                        }
+                        tr:last-child {
+                            border-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include datatable_card;

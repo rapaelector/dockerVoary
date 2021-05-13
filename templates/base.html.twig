@@ -88,13 +88,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {% endblock %}
 
 
-
+    {% include "shared/loader.html.twig" %}
+    
     <!-- REQUIRED SCRIPTS -->
     <!--
         'app' entry contains required scripts for adminLTE
         including jQuery (+3), bootstrap (4.6.1), popper (+2)
     -->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     {{ encore_entry_script_tags('app') }}
-
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

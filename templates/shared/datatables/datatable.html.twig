@@ -1,0 +1,45 @@
+{% trans_default_domain datatable.translationDomain %}
+{% from app_macro import render_attr %}
+
+<table 
+    style="table-layout: fixed;" 
+    id="{{ datatable.name }}"
+    class="{{ className ?? 'table dataTable no-footer' }}"
+>
+    <thead>
+        <tr>
+            {% for column in datatable.columns %}
+                {% set attr = resolve([column, 'meta', 'label_attr'], {}) %}
+                {% if resolve([column, 'meta', 'abbr'], null) %}
+                    {% set attr = attr|merge({
+                        'data-toggle': 'tooltip',
+                        'title': column.label|trans|raw,
+                        'data-container': 'body',
+                        'id': column.name ~ '_header'
+                    }) %}
+                {% endif %}
+                <th {{ render_attr(attr) }}>
+                    {{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}
+                </th>
+            {% endfor %}
+        </tr>
+        {#% if datatable.option('searching') and datatable.setting('column_filter') in ['both', 'thead'] %}
+            <tr class="datatable-filters">
+                {% for column in datatable.columns %}
+                    <td>{% if column.filter != null %}{% include column.filter.templateHtml %}{% endif %}</td>
+                {% endfor %}
+            </tr>
+        {% endif %#}
+    </thead>
+    {#% if datatable.option('searching') and datatable.setting('column_filter') in ['both', 'tfoot'] %}
+        <tfoot>
+        <tr class="datatable-filters">
+            {% for column in datatable.columns %}
+                <td>{% if column.filter != null %}{% include column.filter.templateHtml %}{% endif %}</td>
+            {% endfor %}
+        </tr>
+        </tfoot>
+    {% endif %#}
+    <tbody>
+    </tbody>
+</table>

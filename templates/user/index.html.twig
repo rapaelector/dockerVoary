@@ -1,0 +1,80 @@
+{% trans_default_domain 'users' %}
+
+{% extends 'user/layout.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
+
+{% block content_header %}
+    {% include 'layout/content/_content_header.html.twig' with {
+        title: 'menu.users'|trans([], 'messages'),
+        links: [
+            {label: 'title.home'|trans, routeName: 'home'},
+            {label: 'title.user_list'|trans },
+        ],
+    } %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="text-right">
+            <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% include template_datatable_filters with {
+                    datatable: datatable
+                } %}
+                <div id="{{ datatable.tableId }}">Chargement...</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            window.App.DataTable.initAppDataTables({
+                columnNames: [
+                    'user_email', 'user_firstName', 'user_lastName', 
+                    'user_phone', 'user_job', 'user_fax', 'created_at',
+                    'updated_at', 'actions'
+                ],
+                excludedColumns: [8],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                config: {
+                    dom: `
+                        <'card app-dt-card'
+                            <'card-header'<'row'<'col-sm-3'l><'col-sm-6'<'d-inline-block'B><'clear-filters pl-3 d-inline-block'>CA><'col-sm-3'f>>>
+                            <'card-body'<'row'<'col-sm-12 mt-table'<''tr>>>>
+                            <'card-footer'<'row'<'col-sm-5'i><'col-sm-7'p>>>
+                        >
+                    `,
+                },
+                columnsCount: {{ datatable.columns|length }},
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: true,
+                enableFormatter: true,
+                filtersConfig: {
+                    clearFilters: {
+                        btn : {
+                            attr: {
+                                'class': 'clear-filter-button d-inline-block btn btn-outline-app-primary',
+                                'id': 'Test-me',
+                                'data-value': 'Test-me-attr',
+                            }
+                        }
+                    }
+                },
+                redrawEvent: 'user.deleted'
+            });
+
+            var resetPassword = new window.App.ResetPassword();
+            resetPassword.init();
+        });
+    </script>
+{% endblock %}
+
