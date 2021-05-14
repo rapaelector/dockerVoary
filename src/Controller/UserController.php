@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\User\ProfilType;
 use App\Form\User\UserEditType;
 use App\Controller\BaseController;
 use App\Repository\UserRepository;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\DataTables\Column\TextColumn;
+use App\DataTables\Column\TwigColumn;
 use App\DataTables\Column\DateTimeColumn;
 use App\DataTables\Adapter\ORMAdapter;
 use App\DataTables\DataTable;
@@ -40,7 +42,7 @@ class UserController extends BaseController
      * @IsGranted("ROLE_USER_VIEW")
      */
     #[Route('/', name: 'user.index')]
-    public function index(Request $request, DataTableFactory $dataTableFactory): Response
+    public function index(Request $request, DataTableFactory $dataTableFactory, TranslatorInterface $translator): Response
     {
         $createOptions = [
             'name' => 'list',
@@ -54,7 +56,12 @@ class UserController extends BaseController
          * e.g: list.columns.email
          */
         $table =  $dataTableFactory->create([], $createOptions)
-        // $table =  $dataTableFactory->create()
+            ->add('profileName', TwigColumn::class, [
+                'label' => $translator->trans('label.profile', [], 'users'),
+                'template' => 'shared/twig-columns/profile_template.html.twig',
+                'searchable' => false,
+                'orderable' => false,
+            ])
             ->add('email', TextColumn::class, [
                 'searchable' => true,
                 'className' => 'dynamic-nowrap',
@@ -193,14 +200,15 @@ class UserController extends BaseController
      * @IsGranted("ROLE_USER_EDIT")
      */
     #[Route('/{id}/edit', name: 'user.edit', methods: ['GET','POST'])]
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', $translator->trans('messages.user_edit_success', [], 'users'));
+            
             return $this->redirectToRoute('user.index');
         }
 
@@ -230,6 +238,9 @@ class UserController extends BaseController
         return $this->redirectToRoute('user.index');
     }
 
+    /**
+     * @IsGranted("ROLE_USER_EDIT")
+     */
     #[Route('/{id}/reset-password', name: 'user.reset_password', methods: ['POST'], options: ['expose'=>true])]
     public function resetPassword(Request $request, User $user, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em, MessageBusInterface $messagerBus)
     {

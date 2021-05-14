@@ -1,0 +1,72 @@
+{% trans_default_domain 'users' %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header">
+                    <div class="widget-user-image">
+                        <img class="img-circle elevation-2" src="{{ user_avatar(user) }}" alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username">{{ resolve([user, 'name'], '-') }}</h3>
+                    <h5 class="widget-user-desc">{{ resolve([user, 'email'], '-') }}</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                {{ 'label.phone'|trans }}
+                                <span class="float-right">{{ resolve([user, 'phone'], '-') }}</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                {{ 'label.fax'|trans }}
+                                <span class="float-right">{{ resolve([user, 'fax'], '-') }}</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                {{ 'label.job'|trans }}
+                                <span class="float-right">{{ resolve([user, 'job'], '-') }}</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                {{ 'label.created_at'|trans }}
+                                <span class="float-right">{{ resolve([user, 'createdAt'], '-')|date('d/m/Y') }}</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                {{ 'label.updated_at'|trans }}
+                                <span class="float-right">{{ resolve([user, 'updatedAt'], '-')|date('d/m/Y') }}</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    {% block footer %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="{{ path('profile.edit') }}">
+                                    <i class="material-icons">edit</i>
+                                    {{ 'action.edit_profil'|trans({}, 'messages') }}
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="#">
+                                    <i class="material-icons">lock</i>
+                                    {{ 'action.change_password'|trans({}, 'messages') }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        </div>
+    </div>
+</div>

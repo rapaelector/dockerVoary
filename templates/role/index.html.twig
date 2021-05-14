@@ -47,7 +47,11 @@
 									data-query="{{ user }}"
 									data-roles="{{ user.roles|join('-') }}">
 									<span style="cursor: pointer;">
-										<i class="material-icons">account_circle</i>
+										<img
+											class="img-circle" 
+											src="{{ user_avatar(user) }}" 
+											alt="User Avatar"
+										>
 										{{ user.name }}
 									</span>
 								</li>

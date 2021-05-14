@@ -1,0 +1,12 @@
+@mixin input_file {
+    .vich-file {
+        .custom-file {
+            .custom-file-input {
+                opacity: 1;
+                margin-top: 4px;
+            }
+        }
+    }
+}
+
+@include input_file;

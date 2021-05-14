@@ -3,29 +3,32 @@
     {{ form_start(form) }}
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.lastName) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.firstName) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.email) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.phone) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.job) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.fax) }}
                 </div>
-                <div class="col-sm-6 form-group">
+                <div class="col-sm-6">
                     {{ form_row(form.password) }}
                 </div>
-                <div class="col-sm-6 form-group">
-                    <div id="generator" class="pt-4"></div>
+                <div class="col-sm-6">
+                    {{ form_row(form.profileFile) }}
+                </div>
+                <div class="col-sm-6">
+                    <div id="generator"></div>
                 </div>   
             </div>
         </div>
@@ -33,9 +36,7 @@
 
         <div class="card-footer text-center">
             <button class="btn btn-app-primary" type="submit">{{ button_label|default('action.save'|trans([], 'messages')) }}</button>
-            <button class="btn btn-warning" type="button">
-                <a href="{{ path('user.index') }}" class="text-white">{{ 'action.cancel'|trans({}, 'messages') }}</a>
-            </button>
+            <a href="{{ path('user.index') }}" class="btn btn-app-secondary">{{ 'action.cancel'|trans({}, 'messages') }}</a>
         </div>
     {{ form_end(form) }}
 </div>

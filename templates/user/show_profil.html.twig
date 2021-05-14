@@ -1,0 +1,16 @@
+{% trans_default_domain 'users' %}
+
+{% extends 'user/layout.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'title.edit_profil'|trans }}{% endblock %}
+
+{% block content_header %}
+    {% include template_content_header with {
+        title: 'title.my_profile'|trans,
+        links: []
+    } %}
+{% endblock %}
+
+{% block content %}
+    {% include 'user/_profile_user.html.twig' with {user: user} %}
+{% endblock %}

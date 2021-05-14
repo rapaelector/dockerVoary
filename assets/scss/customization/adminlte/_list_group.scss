@@ -7,8 +7,11 @@
                     background: $value;
                     color: color-yiq($value);
                 }
-                .material-icons {
-                    margin-right: _rem(4);
+                .img-circle {
+                    margin-right: _rem(8);
+                    width: 24px;
+                    height: 24px;
+                    object-fit: cover;
                 }
             }
         }

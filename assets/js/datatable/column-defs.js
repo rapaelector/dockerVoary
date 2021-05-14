@@ -3,6 +3,14 @@
  */
 export default [
     /**
+     * LOGO, PROFILE IMAGE FIELS
+     */
+    {
+        width: '50px',
+        cols: ['user_profile_image'],
+        className: 'text-center',
+    },
+    /**
      * ACTIONS FIELD
      */
     {

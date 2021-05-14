@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class UserType extends AbstractType
 {
@@ -58,6 +59,14 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'required' => false,
+            ])
+            ->add('profileFile', VichFileType::class, [
+                'label' => 'label.profile_image',
+                'required' => false,
+                'download_uri' => true,
+                'download_label' => false,
+                // 'image_uri' => true,
+                'delete_label' => 'Supprimer',
             ])
         ;
     }

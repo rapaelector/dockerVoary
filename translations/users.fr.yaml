@@ -24,6 +24,9 @@ title:
     new_user_breadCrumb: 'Nouvel utilisateur'
     user_list: 'Gestion utilisateurs'
     home: 'Acceuil'
+    edit_profile: 'Modification profil'
+    show_profile: 'Profil utilisateur'
+    my_profile: 'Profil'
 
 label:
     email: 'Adresse mail'
@@ -34,6 +37,10 @@ label:
     phone: 'Téléphone'
     job: 'Fonction'
     fax: 'Fax'
+    profile_image: 'Photo de Profil'
+    created_at: 'Crée le'
+    updated_at: 'Mis à jour le'
+    profile: 'Photo'
 
 job: 'Fonction'
 links:
@@ -53,3 +60,5 @@ list:
 
 messages:
     delete_success: 'Utilisateur supprimé avec succès'
+    profile_edit_success: 'Profil utilisateur modifier avec succès'
+    user_edit_success: 'Utilisateur modifié avec succès'

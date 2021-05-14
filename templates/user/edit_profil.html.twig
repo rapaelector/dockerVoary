@@ -2,21 +2,21 @@
 
 {% extends 'user/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.edit_user'|trans }}{% endblock %}
+{% block title %}{{ parent() }} | {{ 'title.edit_profile'|trans }}{% endblock %}
 
 {% block content_header %}
     {% include template_content_header with {
-        title: 'title.edit_user'|trans,
+        title: 'title.edit_profile'|trans,
         links: [
             {label: 'title.home'|trans, routeName: 'home'},
             {label: 'title.user_list'|trans, routeName: 'user.index'},
-            {label: 'title.edit_user'|trans },
+            {label: 'title.edit_profil'|trans },
         ],
     } %}
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
-        {{ include('user/_edit_form.html.twig', {'button_label': 'action.update'|trans([], 'messages') }) }}
+        {{ include('user/_edit_profile_form.html.twig', {'button_label': 'action.update'|trans([], 'messages') }) }}
     </div>
 {% endblock %}

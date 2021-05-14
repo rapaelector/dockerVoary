@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class UserEditType extends AbstractType
 {
@@ -49,6 +50,14 @@ class UserEditType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ]
+            ])
+            ->add('profileFile', VichFileType::class, [
+                'label' => 'label.profile_image',
+                'required' => false,
+                'download_uri' => true,
+                'download_label' => false,
+                // 'image_uri' => true,
+                'delete_label' => 'Supprimer',
             ])
         ;
     }

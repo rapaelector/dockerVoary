@@ -27,8 +27,7 @@
         </div>
 
         <div class="card-footer text-center">
-            <button class="btn btn-app-primary">{{ button_label|default('action.save'|trans([], 'messages')) }}</button>
-            <a href="{{ path('user.index') }}" class="btn btn-app-secondary">{{ 'action.cancel'|trans({}, 'messages') }}</a>
+            <button class="btn btn-primary">{{ button_label|default('action.save'|trans([], 'messages')) }}</button>
         </div>
     {{ form_end(form) }}
 </div>

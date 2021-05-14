@@ -30,6 +30,11 @@
                                 vertical-align: middle;
                                 height: 30px;
                                 max-height: 30px;
+                                .img-circle {
+                                    width: 24px;
+                                    height: 24px;
+                                    object-fit: cover;
+                                }
                             }
                         }
                     }

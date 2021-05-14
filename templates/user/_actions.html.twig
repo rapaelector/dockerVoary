@@ -10,6 +10,13 @@
     </button>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
         
+        {% if is_granted('ROLE_USER_VIEW') %}
+            <a class="dropdown-item" href="{{ path('user.show', {id: id}) }}">
+                <i class="material-icons">visibility</i>
+                {{ 'action.show'|trans }}
+            </a>
+        {% endif %}
+        
         {% if is_granted('ROLE_USER_EDIT') %}
             <a class="dropdown-item" href="{{ path('user.edit', {id: id}) }}">
                 <i class="material-icons">edit</i>
