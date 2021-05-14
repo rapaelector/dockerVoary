@@ -5,22 +5,23 @@
 {% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
 
 {% block content_header %}
-    {% include 'layout/content/_content_header.html.twig' with {
-        title: 'menu.users'|trans([], 'messages'),
-        links: [
-            {label: 'title.home'|trans, routeName: 'home'},
-            {label: 'title.user_list'|trans },
-        ],
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: '<i class="material-icons">people</i>' ~ 'menu.users'|trans([], 'messages'),
+        links: [],
     } %}
+        {% block header_links %}
+            {% if is_granted('ROLE_USER_ADD') %}
+                <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans({}, 'users') }}">
+                    <i class="material-icons">add</i>
+                </a>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
-        <div class="text-right">
-            <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans }}">
-                <i class="material-icons">add</i>
-            </a>
-        </div>
+        
         <div class="row">
             <div class="col-12">
                 {% include template_datatable_filters with {

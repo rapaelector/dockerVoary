@@ -22,12 +22,16 @@
             {% include 'layout/navbar/_navbar_notifications.html.twig' %}
         {% endif %}
 
-        {% if includeFullscreenToggle ?? true %}
+        {% if includeFullscreenToggle ?? false %}
             {% include 'layout/navbar/_fullscreen_toggle.html.twig' %}
         {% endif %}
 
         {% if includeControlSidebarToggle ?? false %}
             {% include 'layout/navbar/_control_sidebar_toggle.html.twig' %}
+        {% endif %}
+
+        {% if true %}
+            {% include 'layout/navbar/_current_user.html.twig' %}
         {% endif %}
     </ul>
 </nav>

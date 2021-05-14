@@ -1,0 +1,26 @@
+title:
+    role_manager: 'Gestion des droits'
+
+role:
+    action:
+        add: 'Ajouter'
+        edit: 'Modifier'
+        view: 'Consultation'
+        delete: 'Supprimer'
+        all: 'Tous'
+        submit: 'Soumettre'
+        send: 'Envoyer'
+        archive: 'Archiver'
+        validate: 'Valider'
+        publish: 'Mettre en lign'
+    label:
+        users_title: 'Utilisateurs'
+        roles_title: 'Droits'
+        save: 'Enregistrer'
+    flash:
+        change_success: "Changement de droits effectué — utilisateur : <b>%name% (%username%)</b>"
+        
+user:
+    role: 'Gestion utilisateurs'
+    label:
+        user: 'Utilisateur'

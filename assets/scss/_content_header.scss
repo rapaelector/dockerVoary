@@ -1,0 +1,15 @@
+@mixin content_header {
+    .content-header {
+        h1 {
+            color: $app-primary;
+            .material-icons {
+                font-size: 28px;
+                margin-right: 12px;
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+}
+
+@include content_header;

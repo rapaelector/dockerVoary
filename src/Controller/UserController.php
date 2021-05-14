@@ -31,10 +31,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/user')]
 class UserController extends BaseController
 {
+    /**
+     * @IsGranted("ROLE_USER_VIEW")
+     */
     #[Route('/', name: 'user.index')]
     public function index(Request $request, DataTableFactory $dataTableFactory): Response
     {
@@ -146,6 +150,9 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER_ADD")
+     */
     #[Route('/new', name: 'user.new', methods: ['GET','POST'])]
     public function new(Request $request, UserPasswordEncoderInterface $encoder, MessageBusInterface $messagerBus, UserRepository $userRepository): Response
     {
@@ -171,6 +178,9 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER_VIEW")
+     */
     #[Route('/{id}', name: 'user.show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -179,6 +189,9 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER_EDIT")
+     */
     #[Route('/{id}/edit', name: 'user.edit', methods: ['GET','POST'])]
     public function edit(Request $request, User $user): Response
     {
@@ -197,6 +210,9 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER_DELETE")
+     */
     #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, User $user, TranslatorInterface $translator): Response
     {

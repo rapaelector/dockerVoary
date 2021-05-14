@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\UserTrait;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
@@ -25,6 +26,7 @@ class User implements UserInterface
     use BlameableTrait;
     use SoftDeleteableTrait;
     use TimestampableTrait;
+    use UserTrait;
 
     /**
      * @ORM\Id
