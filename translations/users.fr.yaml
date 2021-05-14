@@ -25,7 +25,8 @@ title:
     user_list: 'Gestion utilisateurs'
     home: 'Acceuil'
     edit_profile: 'Modification profil'
-    show_profile: 'Profil utilisateur'
+    show_profile: 'Detail utilisateur'
+    user_detail: ''
     my_profile: 'Profil'
     change_password: 'Modification mot de passe'
 
@@ -67,4 +68,5 @@ messages:
     delete_success: 'Utilisateur supprimé avec succès'
     profile_edit_success: 'Profil utilisateur modifier avec succès'
     user_edit_success: 'Utilisateur modifié avec succès'
-    password_change_success: 'Votre mot de passe à étè changer avec succès'
+    password_changed_success: 'Votre mot de passe à étè changé avec succès'
+    

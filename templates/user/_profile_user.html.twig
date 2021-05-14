@@ -7,7 +7,7 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header">
                     <div class="widget-user-image">
-                        <img class="img-circle elevation-2" src="{{ user_avatar(user) }}" alt="User Avatar">
+                        <img class="img-circle elevation-1" src="{{ user_avatar(user) }}" alt="User Avatar">
                     </div>
                     <!-- /.widget-user-image -->
                     <h3 class="widget-user-username">{{ resolve([user, 'name'], '-') }}</h3>
@@ -57,7 +57,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#">
+                                <a href="{{ path('profile.change_password') }}">
                                     <i class="material-icons">lock</i>
                                     {{ 'action.change_password'|trans({}, 'messages') }}
                                 </a>

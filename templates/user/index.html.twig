@@ -4,6 +4,8 @@
 
 {% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
 
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
         title: '<i class="material-icons">people</i>' ~ 'menu.users'|trans([], 'messages'),

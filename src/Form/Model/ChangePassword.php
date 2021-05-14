@@ -8,7 +8,7 @@ class ChangePassword
 {
     /**
      * @SecurityAssert\UserPassword(
-     *     message = "Wrong value for your current password"
+     *     message = "Mauvaise valeur pour votre mot de passe actuel"
      * )
      */
     public $oldPassword;
