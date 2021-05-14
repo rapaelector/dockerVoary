@@ -27,6 +27,7 @@ title:
     edit_profile: 'Modification profil'
     show_profile: 'Profil utilisateur'
     my_profile: 'Profil'
+    change_password: 'Modification mot de passe'
 
 label:
     email: 'Adresse mail'
@@ -41,6 +42,10 @@ label:
     created_at: 'Crée le'
     updated_at: 'Mis à jour le'
     profile: 'Photo'
+    old_password: 'Mot de passe actuel'
+    new_password: 'Entrer nouveau mot de passe'
+    repeat_password: 'Confirmer nouveau mot de passe'
+    invalid_message: 'Les champs du mot de passe doivent correspondre.'
 
 job: 'Fonction'
 links:
@@ -62,3 +67,4 @@ messages:
     delete_success: 'Utilisateur supprimé avec succès'
     profile_edit_success: 'Profil utilisateur modifier avec succès'
     user_edit_success: 'Utilisateur modifié avec succès'
+    password_change_success: 'Votre mot de passe à étè changer avec succès'
