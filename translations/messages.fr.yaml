@@ -8,6 +8,7 @@ menu:
     offers_menu: 'Gestion des offres'
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
+    prospect_manager: 'Gestion des prospets'
 
 action:
   save: 'Enregistrer'

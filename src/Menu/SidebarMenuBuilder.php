@@ -83,6 +83,16 @@ class SidebarMenuBuilder
                 'label_wrapper' => 'p',
             ],
         ])->setAttributes(['class' => $navItem]);
+        
+        $menu->addChild('menu.prospect_manager', [
+            'route' => 'client.list',
+            'linkAttributes' => ['class' => $linkClassName],
+            'extras' => [
+                'icon' => $icon,
+                'icon_content' => 'description',
+                'label_wrapper' => 'p',
+            ],
+        ])->setAttributes(['class' => $navItem]);
 
         // add text
         $menu->addChild('menu.offers_header', [])->setAttribute('class', $subTitleClass);
