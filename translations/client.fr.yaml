@@ -8,11 +8,12 @@ title:
   billing_address: 'Adresse de facturation'
   client: 'Prospect'
   add_prospect: 'Ajouter prospect'
+  delete_prospect: 'Suppréssion du prospect'
 
 label:
   name: 'Nom'
   short_name: 'Nom raccourci'
-  client_number: 'Numero client'
+  client_number: 'N°client'
   activity: 'Activité'
   tva_rate: 'TVA'
   siret: 'Siret'
@@ -22,6 +23,9 @@ label:
   actions: 'Action'
   billing_address: 'Adresse de livraison'
   type: 'Type'
+  action: 'Action'
+  postal_code: 'Code postal'
+  country: 'Pays'
 
 activity:
   cement_factory: "Cimenterie"
@@ -46,7 +50,7 @@ activity:
 tva:
   value:
     0: "0 %"
-    8_5: "8.5 %"
+    8: "8.5 %"
     20: "20 %"
     other: "Autre"
 
@@ -72,3 +76,9 @@ payment_period:
 type:
   client: "Client"
   prospect: "Prospect"
+
+messages:
+  delete_success: 'Prospect supprimé avec success'
+  delete_prospect: 'Souhaitez-vous supprimé cette prospect'
+  editing_success: 'Modification du prospect éfféctué avec succèss'
+  creation_success: 'Création du prospect éfféctué avec succèss'

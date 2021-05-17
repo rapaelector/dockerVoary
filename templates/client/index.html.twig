@@ -3,7 +3,9 @@
 {% extends 'client/layout.html.twig' %}
 
 {% block title %}{{ parent() }} | {{ 'title.list'|trans }}{% endblock %}
-        
+
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
         title: 'title.list'|trans,
@@ -18,46 +20,36 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>ShortName</th>
-                <th>ClientNumber</th>
-                <th>Activity</th>
-                <th>TvaRate</th>
-                <th>Siret</th>
-                <th>PaymentMethod</th>
-                <th>Payment</th>
-                <th>IntraCommunityTva</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.name }}</td>
-                <td>{{ client.shortName }}</td>
-                <td>{{ client.clientNumber }}</td>
-                <td>{{ client.activity }}</td>
-                <td>{{ client.tvaRate }}</td>
-                <td>{{ client.siret }}</td>
-                <td>{{ client.paymentMethod }}</td>
-                <td>{{ client.payment }}</td>
-                <td>{{ client.intraCommunityTva }}</td>
-                <td>
-                    <a href="{{ path('client.show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('client.edit', {'id': client.id}) }}">edit</a>
-                    {% include 'client/_delete_form.html.twig' with {client: client, deleteRoute: 'client.delete'} %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                {% include template_datatable_filters with {
+                    datatable: datatable
+                } %}
+                <div id="{{ datatable.tableId }}">Chargement...</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            window.App.DataTable.initAppDataTables({
+                columnNames: [
+                    'client_number', 'client_type', 'client_name', 'client_postal_code', 'client_country',
+                    'client_activity', 'client_created_at', 'actions'
+                ],
+                excludedColumns: [7],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                columnsCount: {{ datatable.columns|length }},
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: true,
+                enableFormatter: true,
+                redrawEvent: 'client.deleted',
+            })
+        });
+    </script>
 {% endblock %}

@@ -10,6 +10,7 @@ export default [
         cols: ['actions'],
         className: 'text-center',
     },
+    
     /**
      * EMAIL FIELD
      */
@@ -52,6 +53,7 @@ export default [
         cols: [],
         className: 'text-right',
     },
+
     /**
      * - VERY SHORT NUMBER OR TEXT COLUMNS
      * - NUMBER FIELDS WITH VERY SHORT DATA
@@ -61,15 +63,17 @@ export default [
         width: '30px',
         cols: [],
     },
+
     /**
      * - DATE COLUMNS
      * - DATE FIELDS
      */
     {
         width: '80px',
-        cols: [],
+        cols: ['client_created_at'],
         className: 'text-center',
     },
+
     /**
      * - SHORT TEXT COLUMNS
      * - LONG TEXT COLUMNS
@@ -77,9 +81,23 @@ export default [
      */
     {
         width: '100px',
-        cols: [],
-        className: 'text-left dynamic-nowrap text-uppercase'
+        cols: [
+            'client_name',
+            'client_short_name',
+            'client_number',
+            'client_activity',
+            'client_tva_rate',
+            'client_siret',
+            'client_payment_method',
+            'client_payment',
+            'client_intra_community_tva',
+            'client_type',
+            'client_postal_code',
+            'client_country',
+        ],
+        className: ''
     },
+
     /**
      * - EXTRA FIELDS
      * - FIELDS WITH VERY LONG CONTENTS

@@ -23,12 +23,15 @@ action:
   edit_profil: 'Modifier profil'
   change_password: 'Changer mot de passe'
   logout: 'Deconnexion'
+  action: 'Action'
 
 title:
   delete_user: "Supprimer l'utilisateur"
   home: 'Acceuil'
   client_manger: 'Gestion des clients'
   
-
+label:
+  created_at: 'Crée le'
+  
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'

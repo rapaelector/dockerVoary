@@ -5,6 +5,7 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Symfony\Component\Intl\Countries;
 
 class AppExtension extends AbstractExtension
 {
@@ -14,6 +15,7 @@ class AppExtension extends AbstractExtension
             // If your filter generates SAFE HTML, you should add a third
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
+            new TwigFilter('country_name', [$this, 'countryCodeToName'])
         ];
     }
 
@@ -28,5 +30,15 @@ class AppExtension extends AbstractExtension
     public function resolve(array $paths = [], $default = "")
     {
         return \App\Utils\Resolver::resolve($paths, $default);
+    }
+
+    /**
+     * Get country code and return country name
+     * 
+     * @var string $countryCode
+     */
+    public function countryCodeToName(?string $countryCode): string
+    {
+        return $countryCode ? Countries::getName($countryCode) : '';
     }
 }

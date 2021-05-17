@@ -35,6 +35,24 @@ class FilterOptionsProvider
             'type' => 'text',
             'width' => '60px'
         ],
+        'client_name' => [
+            'type' => 'text',
+        ],
+        'client_number' => [
+            'type' => 'text',
+        ],
+        'client_type' => [
+            'type' => 'text',
+        ],
+        'client_code_postal' => [
+            'type' => 'text',
+        ],
+        'client_country' => [
+            'type' => 'text',
+        ],
+        'client_activity' => [
+            'type' => 'text',
+        ],
     ];
 
     public function getOptions($name)

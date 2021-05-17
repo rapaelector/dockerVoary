@@ -44,6 +44,7 @@ export function initFormConfirmation(options) {
                     },
                     error: function (err) {
                         console.warn(err);
+                        $('#app-loader').hide();
                     }
                 });
 

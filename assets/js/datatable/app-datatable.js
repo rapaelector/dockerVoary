@@ -72,14 +72,29 @@ const initAppDataTables = ({
     /**
      * column filter config to the initColumnFilters() method
      * default value empty object
+     * this options already have default options in initColumnFilters
+     * default options are:
+     *    clearFilters: {
+     *      // clear filters button container
+     *      container: 'clear-filters',
+     *      // clear filters button attributes that will be provided to buildElement()
+     *      btn: {
+     *          wrapper: 'button',
+     *          attr: {
+     *              'class': 'clear-filter-button d-inline-block btn btn-outline-app-primary',
+     *          },
+     *          content: 'Annuler tous les filtres',
+     *      },
+     * },
      * 
      * @var Object filtersConfig 
      */
     filtersConfig = {},
+
     /**
      * If provided, listen this event on 'body' and redraw datatables when the event is fired
      */
-    redrawEvent,
+    redrawEvent = 'app.deleted',
 }) => {
     /**
      * Resolve column defs
@@ -200,9 +215,11 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
     config = $.extend(true, {
         searching: true,
         dom: `
-            <'row'<'col-sm-6'l><'col-sm-6'f>>
-            <'row'<'col-sm-12 mt-table'<''tr>>>
-            <'row mt-3'<'col-sm-5'i><'col-sm-7'p>>
+            <'card app-dt-card'
+                <'card-header'<'row'<'col-sm-3'l><'col-sm-6'<'d-inline-block'B><'clear-filters pl-3 d-inline-block'>CA><'col-sm-3'f>>>
+                <'card-body'<'row'<'col-sm-12 mt-table'<''tr>>>>
+                <'card-footer'<'row'<'col-sm-5'i><'col-sm-7'p>>>
+            >
         `,
         scrollX: true,
         clearButton: true,

@@ -7,12 +7,12 @@
 
 {% embed 'shared/form/_delete_form.html.twig' with {
     confirm: {
-        title: 'title.delete_prospect'|trans({}, 'messages'),
-        html: 'message.delete_prospect'|trans({}, 'messages'),
+        title: 'title.delete_prospect'|trans({}, 'client'),
+        html: 'messages.delete_prospect'|trans({}, 'client'),
     },
     deleteAction: path(deleteRoute, {'id': id}),
     token: csrf_token('delete' ~ id),
-    ajax: false,
+    ajax: true,
+    successEvent: 'client.deleted',
 } %}
-    {# successEvent: 'user.deleted', #}
 {% endembed %}
