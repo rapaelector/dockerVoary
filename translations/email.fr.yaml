@@ -8,3 +8,6 @@ email:
       user_reset_password: 'Réinitialisation du mot de passe'
       reset_password_completed_correctly: 'Réinitialisation du mot de passe efféctuer correctement'
       messages: 'Voici vos nouveaux identifiant pour Bonhomme Batiment'
+      messageRequest: Vous avez demandé la réinitialisation de votre mot de passe, veuillez suivre le lien ci-dessous.
+      resetYourPassword: réinitialisez votre mot de passe
+      linkWillExpired: Ce lien expirera dans

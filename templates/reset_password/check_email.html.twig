@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'users' %}
+{% extends 'layout/form_base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}{{ parent() }} | Log in!{% endblock %}
 
-{% block body %}
+{% block form_box_msg %}{% endblock %}
+
+{% block form %}
     <p>
-        An email has been sent that contains a link that you can click to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        {{"reset_password.resetSuccess" |trans}} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <p>{{"reset_password.checkEmailSpam"|trans}} <a href="{{ path('app_forgot_password_request') }}">{{"reset_password.tryAgain"|trans}}</a>.</p>
 {% endblock %}
+

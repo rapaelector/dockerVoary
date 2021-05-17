@@ -14,6 +14,9 @@ reset_password:
     resetButton: Enregistrer
     sendButton: Envoyer un email de reinitialisation
     resetYourPass: Réinitialiser votre mot de passe
+    resetSuccess: Un e-mail a été envoyé contenant un lien sur lequel vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien expirera dans 
+    checkEmailSpam: Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou
+    tryAgain: réessayer
     constraint:
         notBlank: Please enter a password
     email:
