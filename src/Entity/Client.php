@@ -6,6 +6,9 @@ use App\Repository\ClientRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
+use App\Entity\Traits\ClientTrait;
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,6 +19,21 @@ class Client
     use BlameableTrait;
     use SoftDeleteableTrait;
     use TimestampableTrait;
+    use ClientTrait;
+
+    const PAYMENT_TYPE_CARD = "payment.type.card";
+    const PAYMENT_TYPE_CASH = "payment.type.cash";
+    const PAYMENT_TYPE_TRANSFER = "payment.type.transfer";
+    const PAYMENT_TYPE_CHECK = "payment.type.check";
+
+    const PAYMENT_PERIOD_45_NET = 'payment_period.net_45';
+    const PAYMENT_PERIOD_30_NET = 'payment_period.net_30';
+    const PAYMENT_PERIOD_30_END = 'payment_period.end_30';
+    const PAYMENT_PERIOD_45_END = 'payment_period.end_45';
+    const PAYMENT_PERIOD_IMMEDIATE_TRANSERT = 'payment_period.immediate_transfert';
+
+    const TYPE_CLIENT = 'client';
+    const TYPE_PROSPECT = 'prospect';
     
     /**
      * @ORM\Id
@@ -26,6 +44,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -41,6 +60,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotNull
      */
     private $activity;
 
@@ -66,8 +86,28 @@ class Client
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * 
+     * Intracommunautaire tva
      */
     private $intraCommunityTva;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     * @Assert\Valid
+     * 
+     * Adresse de livraison
+     */
+    private $billingAddress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    public function __construct()
+    {
+        $this->type = self::TYPE_PROSPECT;
+    }
 
     public function getId(): ?int
     {
@@ -178,6 +218,30 @@ class Client
     public function setIntraCommunityTva(?string $intraCommunityTva): self
     {
         $this->intraCommunityTva = $intraCommunityTva;
+
+        return $this;
+    }
+
+    public function getBillingAddress(): ?Address
+    {
+        return $this->billingAddress;
+    }
+
+    public function setBillingAddress(?Address $billingAddress): self
+    {
+        $this->billingAddress = $billingAddress;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

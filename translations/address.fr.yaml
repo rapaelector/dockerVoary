@@ -1,0 +1,10 @@
+label:
+  name: 'Nom'
+  phone: 'Téléphone'
+  fax: 'Fax'
+  line1: 'Adresse 1'
+  line2: 'Adresse 2'
+  line3: 'Adresse 3'
+  postal_code: 'Code postale'
+  city: 'Ville'
+  country: 'Pays'

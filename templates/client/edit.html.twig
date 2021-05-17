@@ -1,13 +1,24 @@
+{% trans_default_domain 'client' %}
+
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}Edit Client{% endblock %}
+{% block title %}{{ parent() }} | {{ 'title.edit_client'|trans }}{% endblock %}
 
-{% block body %}
-    <h1>Edit Client</h1>
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-    {{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.edit_client'|trans,
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.client_manger'|trans, routeName: 'client.list'},
+            {label: 'title.edit_client'|trans},
+        ],
+    } %}{% endembed %}
+{% endblock %}
 
-    <a href="{{ path('client.list') }}">back to list</a>
-
-    {{ include('client/_delete_form.html.twig') }}
+{% block content %}
+    <div class="container-fluid">
+        {{ include('client/_form.html.twig', {'button_label': 'action.update'|trans({}, 'messages') }) }}
+    </div>
 {% endblock %}

@@ -1,58 +1,69 @@
+{% trans_default_domain 'client' %}
+
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}Client{% endblock %}
+{% block title %}{{ parent() }} | {{ 'title.show_client'|trans }}{% endblock %}
 
-{% block body %}
-    <h1>Client</h1>
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.show_client'|trans,
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.client_manger'|trans, routeName: 'client.list'},
+            {label: 'title.show_client'|trans},
+        ],
+    } %} {% endembed %}
+{% endblock %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ client.name }}</td>
-            </tr>
-            <tr>
-                <th>ShortName</th>
-                <td>{{ client.shortName }}</td>
-            </tr>
-            <tr>
-                <th>ClientNumber</th>
-                <td>{{ client.clientNumber }}</td>
-            </tr>
-            <tr>
-                <th>Activity</th>
-                <td>{{ client.activity }}</td>
-            </tr>
-            <tr>
-                <th>TvaRate</th>
-                <td>{{ client.tvaRate }}</td>
-            </tr>
-            <tr>
-                <th>Siret</th>
-                <td>{{ client.siret }}</td>
-            </tr>
-            <tr>
-                <th>PaymentMethod</th>
-                <td>{{ client.paymentMethod }}</td>
-            </tr>
-            <tr>
-                <th>Payment</th>
-                <td>{{ client.payment }}</td>
-            </tr>
-            <tr>
-                <th>IntraCommunityTva</th>
-                <td>{{ client.intraCommunityTva }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('client.list') }}">back to list</a>
-
-    <a href="{{ path('client.edit', {'id': client.id}) }}">edit</a>
-
-    {{ include('client/_delete_form.html.twig') }}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">    
+                <div class="card card-outline-primary">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>{{ 'label.name'|trans }}</th>
+                                    <td>{{ client.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.short_name'|trans }}</th>
+                                    <td>{{ client.shortName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.client_number'|trans }}</th>
+                                    <td>{{ client.clientNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.activity'|trans }}</th>
+                                    <td>{{ client.activity }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.tva_rate'|trans }}</th>
+                                    <td>{{ client.tvaRate }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.siret'|trans }}</th>
+                                    <td>{{ client.siret }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.payment_method'|trans }}</th>
+                                    <td>{{ client.paymentMethod }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.payment'|trans }}</th>
+                                    <td>{{ client.payment }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'label.intra_community_tva'|trans }}</th>
+                                    <td>{{ client.intraCommunityTva }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

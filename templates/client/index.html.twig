@@ -1,27 +1,23 @@
-{% trans_default_domain 'messages' %}
+{% trans_default_domain 'client' %}
 
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
-
+{% block title %}{{ parent() }} | {{ 'title.list'|trans }}{% endblock %}
+        
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
-        title: '<i class="material-icons">people</i>' ~ 'menu.users'|trans([], 'messages'),
+        title: 'title.list'|trans,
         links: [],
     } %}
         {% block header_links %}
-            {% if is_granted('ROLE_USER_ADD') %}
-                <a href="{{ path('user.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_user'|trans({}, 'users') }}">
-                    <i class="material-icons">add</i>
-                </a>
-            {% endif %}
+            <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
+                <i class="material-icons">add</i>
+            </a>
         {% endblock %}
     {% endembed %}
 {% endblock %}
 
 {% block content %}
-    <h1>Client index</h1>
-
     <table class="table">
         <thead>
             <tr>
@@ -54,6 +50,7 @@
                 <td>
                     <a href="{{ path('client.show', {'id': client.id}) }}">show</a>
                     <a href="{{ path('client.edit', {'id': client.id}) }}">edit</a>
+                    {% include 'client/_delete_form.html.twig' with {client: client, deleteRoute: 'client.delete'} %}
                 </td>
             </tr>
         {% else %}
@@ -63,6 +60,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('client.new') }}">Create new</a>
 {% endblock %}

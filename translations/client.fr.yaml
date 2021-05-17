@@ -1,0 +1,74 @@
+title:
+  client_manger: 'Gestion des prospects'
+  list: 'Liste des Prospects'
+  new_client: 'Création prospect'
+  edit_client: 'Modification prospect'
+  delete_client: 'Suppréssion des prospects'
+  show_client: 'Detail du prospect'
+  billing_address: 'Adresse de facturation'
+  client: 'Prospect'
+  add_prospect: 'Ajouter prospect'
+
+label:
+  name: 'Nom'
+  short_name: 'Nom raccourci'
+  client_number: 'Numero client'
+  activity: 'Activité'
+  tva_rate: 'TVA'
+  siret: 'Siret'
+  payment_method: 'Moyen de paiement'
+  payment: 'Delai de paiement'
+  intra_community_tva: 'TVA intracommunautaire'
+  actions: 'Action'
+  billing_address: 'Adresse de livraison'
+  type: 'Type'
+
+activity:
+  cement_factory: "Cimenterie"
+  candy: "Sucrerie"
+  dehydration: "Déshydratation"
+  covered: "Enrobés"
+  chemistry: "Chimie"
+  sandpit: "Sablière"
+  stationery: "Papeterie"
+  port_industry: "Industrie Portuaire"
+  naval_industry: "Industrie Navale"
+  mining_extraction: "Extractions Minières"
+  food_industry: "Industrie Alimentaire"
+  iron_and_steel_industry: "Sidérurgie"
+  waste: "Déchets"
+  subcontracting: "Sous-traitance"
+  energy: "Energie"
+  constructor: "Constructeur"
+  intermediary_business: "Apporteur d'affaire"
+  others: "Autres"
+
+tva:
+  value:
+    0: "0 %"
+    8_5: "8.5 %"
+    20: "20 %"
+    other: "Autre"
+
+payment:
+    type:
+      card: "Carte bancaire"
+      cash: "Cash"
+      transfer: "Virement bancaire"
+      check: "Chèque"
+      bill_of_exchange: "LCR"
+      
+payment_period:
+  net_45: "45 jours net"
+  net_30: "30 jours net"
+  end_45: "45 jours fin de mois"
+  end_30: "30 jours fin de mois"
+  immediate_transfert: "Virement immédiat"
+  ap_30_end_30: "30 % Acompte – Solde à 30 jours fin de mois"
+  ap_30_end_45: "30 % Acompte – Solde à 45 Jours fin de mois"
+  ap_50_end_30: "50 % Acompte – Solde à 30 jours fin de mois"
+  ap_50_end_45: "50 % Acompte – Solde à  45 Jours fin de mois"
+
+type:
+  client: "Client"
+  prospect: "Prospect"

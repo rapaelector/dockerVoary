@@ -8,7 +8,7 @@ menu:
     offers_menu: 'Gestion des offres'
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
-    prospect_manager: 'Gestion des prospets'
+    prospect_manager: 'Gestion des prospects'
 
 action:
   save: 'Enregistrer'
@@ -27,6 +27,8 @@ action:
 title:
   delete_user: "Supprimer l'utilisateur"
   home: 'Acceuil'
+  client_manger: 'Gestion des clients'
+  
 
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'
