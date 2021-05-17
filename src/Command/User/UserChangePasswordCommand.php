@@ -1,36 +1,41 @@
 <?php
 
-namespace App\Command;
+namespace App\Command\User;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserPromoteCommand extends Command
+class UserChangePasswordCommand extends Command
 {
-    protected static $defaultName = 'app:user:promote';
-    protected static $defaultDescription = 'Add a short description for your command';
+    protected static $defaultName = 'app:user:change-password';
+    protected static $defaultDescription = 'Change user password';
 
     /** @var EntityManagerInterface */
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    /** @var UserPasswordEncoderInterface */
+    private $encoder;
+
+    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct();
         $this->em = $em;
+        $this->encoder = $encoder;
     }
 
     protected function configure()
     {
         $this
             ->setDescription(self::$defaultDescription)
-            ->addArgument('email', InputArgument::REQUIRED, 'Email to bind the role')
-            ->addArgument('role', InputArgument::REQUIRED, 'Role to bind to the user by his mail')
+            ->addArgument('email', InputArgument::REQUIRED, 'User to change the password')
+            ->addArgument('newPassword', InputArgument::REQUIRED, 'New password')
         ;
     }
 
@@ -38,7 +43,7 @@ class UserPromoteCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
-        $role = $input->getArgument('role');
+        $newPassword = $input->getArgument('newPassword');
 
         $user = $this->em->getRepository(User::class)->findOneByEmail($email);
         if (!$user) {
@@ -47,10 +52,11 @@ class UserPromoteCommand extends Command
             return 0;
         }
 
-        $user->addRole($role);
+        $newPasswordEncoded = $this->encoder->encodePassword($user, $newPassword);
+        $user->setPassword($newPasswordEncoded);
         $this->em->flush();
 
-        $io->success('Role ' . $role . ' added to the user ' . $user->getEmail() . ' successfull');
+        $io->success('User password changed successfull');
 
         return Command::SUCCESS;
     }
