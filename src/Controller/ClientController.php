@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use App\Controller\BaseController;
+use App\Services\ClientService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,13 +50,6 @@ class ClientController extends BaseController
                     $this->filterOptionsProvider->getOptions('client_number')
                 ),
             ])
-            ->add('type', TextColumn::class, [
-                'label' => $translator->trans('label.type', [], 'client'),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('client_type')
-                ),
-            ])
             ->add('name', TextColumn::class, [
                 'label' => $translator->trans('label.name', [], 'client'),
                 'filter' => $this->filterBuilder->buildFilter(
@@ -77,16 +71,27 @@ class ClientController extends BaseController
                 'template' => 'shared/twig-columns/_country.html.twig',
                 'className' => 'text-center',
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('client_country')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('client_country'),
+                        ['choices' => $this->filterOptionsProvider->getClientCountries()
+                    ]),
                 ),
             ])
             ->add('activity', TextColumn::class, [
                 'label' => $translator->trans('label.activity', [], 'client'),
+                'render' => function ($value, $context) use ($translator) {
+                    return $value ? $translator->trans($value, [], 'client') : '';
+                },
+                'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('client_activity')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('client_activity'),
+                        ['choices' => $this->filterOptionsProvider->getActivities()]),
                 ),
+                'searchable' => true,
+                'orderable' => true,
             ])
             ->add('createdAt', DateTimeColumn::class, [
                 'label' => $translator->trans('label.created_at', [], 'messages'),
@@ -125,9 +130,11 @@ class ClientController extends BaseController
     }
 
     #[Route('/new', name: 'client.new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TranslatorInterface $translator): Response
+    public function new(Request $request, TranslatorInterface $translator, ClientService $clientService): Response
     {
+        $newClientNumber = $clientService->generateClientNumber();
         $client = new Client();
+        $client->setClientNumber($newClientNumber[Client::TYPE_PROSPECT]);
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 

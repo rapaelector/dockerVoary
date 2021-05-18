@@ -4,24 +4,24 @@ namespace App\Entity\Constants;
 
 class Activities
 {
-	const ACTIVITY_CEMENT_FACTORY = 1;
-	const ACTIVITY_CANDY = 2;
-	const ACTIVITY_DEHYDRATION = 3;
-	const ACTIVITY_COVERED = 4;
-	const ACTIVITY_CHEMISTRY = 5;
-	const ACTIVITY_SANDPIT = 6;
-	const ACTIVITY_STATIONERY = 7;
-	const ACTIVITY_PORT_INDUSTRY = 8;
-	const ACTIVITY_NAVAL_INDUSTRY = 9;
-	const ACTIVITY_MINING_EXTRACTION = 10;
-	const ACTIVITY_FOOD_INDUSTRY = 11;
-	const ACTIVITY_IRON_AND_STEEL_INDUSTRY = 12;
-	const ACTIVITY_WASTE = 13;
-	const ACTIVITY_SUBCONTRACTING = 14;
-	const ACTIVITY_ENERGY = 15;
-	const ACTIVITY_OTHERS = 16;
-	const ACTIVITY_CONSTRUCTOR = 17;
-	const ACTIVITY_INTERMEDIARY_BUSINESS = 18;
+	const ACTIVITY_CEMENT_FACTORY = 'activity.cement_factory';
+	const ACTIVITY_CANDY = 'activity.candy';
+	const ACTIVITY_DEHYDRATION = 'activity.dehydration';
+	const ACTIVITY_COVERED = 'activity.covered';
+	const ACTIVITY_CHEMISTRY = 'activity.chemistry';
+	const ACTIVITY_SANDPIT = 'activity.sandpit';
+	const ACTIVITY_STATIONERY = 'activity.stationery';
+	const ACTIVITY_PORT_INDUSTRY = 'activity.port_industry';
+	const ACTIVITY_NAVAL_INDUSTRY = 'activity.naval_industry';
+	const ACTIVITY_MINING_EXTRACTION = 'activity.mining_extraction';
+	const ACTIVITY_FOOD_INDUSTRY = 'activity.food_industry';
+	const ACTIVITY_IRON_AND_STEEL_INDUSTRY = 'activity.iron_and_steel_industry';
+	const ACTIVITY_WASTE = 'activity.waste';
+	const ACTIVITY_SUBCONTRACTING = 'activity.subcontracting';
+	const ACTIVITY_ENERGY = 'activity.energy';
+	const ACTIVITY_OTHERS = 'activity.others';
+	const ACTIVITY_CONSTRUCTOR = 'activity.constructor';
+	const ACTIVITY_INTERMEDIARY_BUSINESS = 'activity.intermediary_business';
 
 	const ALL_ACTIVITIES = [
 		self::ACTIVITY_CEMENT_FACTORY,

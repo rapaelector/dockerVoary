@@ -35,7 +35,7 @@ trait ClientTrait
     public static function getTvaChoices($associative = false)
     {
         $values = [0, 8.5, 20, -1];
-        $labels = ['tva.value.0', 'tva.value.8', 'tva.value.20', 'tva.value.other'];
+        $labels = ['tva.value.0', 'tva.value.8', 'tva.value.20'];
 
         return $associative ? array_combine($labels, $values) : $values;
     }

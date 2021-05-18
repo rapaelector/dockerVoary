@@ -28,8 +28,6 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
-     * @Assert\NotNull
      */
     private $name;
 

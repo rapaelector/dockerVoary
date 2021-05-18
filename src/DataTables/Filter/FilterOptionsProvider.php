@@ -2,17 +2,17 @@
 
 namespace App\DataTables\Filter;
 
+use App\Entity\Client;
+use App\Entity\Address;
 use App\DataTables\Filter\FilterConstants;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Intl\Countries;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FilterOptionsProvider
 {
 
-    public function __construct(
-        TranslatorInterface $translator,
-        EntityManagerInterface $em
-    )
+    public function __construct(TranslatorInterface $translator, EntityManagerInterface $em)
     {
         $this->translator = $translator;
         $this->em = $em;
@@ -48,10 +48,12 @@ class FilterOptionsProvider
             'type' => 'text',
         ],
         'client_country' => [
-            'type' => 'text',
+            'type' => 'choice',
+            'choices' => [],
         ],
         'client_activity' => [
-            'type' => 'text',
+            'type' => 'choice',
+            'choices' => [],
         ],
     ];
 
@@ -64,4 +66,37 @@ class FilterOptionsProvider
         return [];
     }
 
+    public function getClientCountries()
+    {
+        $countryNames = [];
+        $countries = $this->em->getRepository(Address::class)
+            ->createQueryBuilder('address')
+            ->select('DISTINCT(address.country) country')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        foreach ($countries as $countryCode) {
+            $countryNames[$countryCode['country']] = Countries::getName($countryCode['country']);
+        }
+
+        return $countryNames;
+    }
+
+    public function getActivities()
+    {
+        $filterActivities = [];
+        $activities = $this->em->getRepository(Client::class)
+            ->createQueryBuilder('client')
+            ->select('DISTINCT(client.activity) activity')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        foreach ($activities as $activity) {
+            $filterActivities[$activity['activity']] = $this->translator->trans($activity['activity'], [], 'client');
+        }
+
+        return $filterActivities;
+    }
 }

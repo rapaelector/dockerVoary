@@ -32,10 +32,13 @@ class ClientType extends AbstractType
                 'choices' => Client::getActivityChoices(true),
                 'required' => false,
             ])
-            ->add('tvaRate', ChoiceType::class, [
+            ->add('tvaRate', TextType::class, [
                 'label' => 'label.tva_rate',
                 'required' => false,
-                'choices' => Client::getTvaChoices(true),
+                'attr' => [
+                    'data-choices' => json_encode(Client::getTvaChoices()),
+                    'data-type' => 'select',
+                ]
             ])
             ->add('siret', TextType::class, [
                 'label' => 'label.siret',

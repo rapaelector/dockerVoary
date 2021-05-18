@@ -17,7 +17,7 @@ require('datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')();
 require('datatables.net-fixedColumns-bs4');
 
 import './datatable/omines-datatables';
-
+import { selectBuilder } from './common/form/select_form';
 
 $(function () {
     /**
@@ -57,4 +57,8 @@ $(function () {
         }
     });
 
+    /**
+     * Make input with data-type="select" a select input
+     */
+    $('[data-type="select"]').each(selectBuilder);
 });

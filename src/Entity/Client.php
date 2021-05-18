@@ -60,12 +60,12 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\NotNull
      */
     private $activity;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @Assert\Range(min="0", max="100")
      */
     private $tvaRate;
 

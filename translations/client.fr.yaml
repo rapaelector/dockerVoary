@@ -13,7 +13,7 @@ title:
 label:
   name: 'Nom'
   short_name: 'Nom raccourci'
-  client_number: 'N°client'
+  client_number: 'N° prospect'
   activity: 'Activité'
   tva_rate: 'TVA'
   siret: 'Siret'
@@ -79,6 +79,6 @@ type:
 
 messages:
   delete_success: 'Prospect supprimé avec success'
-  delete_prospect: 'Souhaitez-vous supprimé cette prospect'
+  delete_prospect: 'Souhaitez-vous supprimer ce prospect'
   editing_success: 'Modification du prospect éfféctué avec succèss'
   creation_success: 'Création du prospect éfféctué avec succèss'

@@ -9,3 +9,8 @@
     {{- parent() -}}
     {{- form_errors(form) -}}
 {%- endblock form_widget_simple %}
+
+{%- block choice_widget -%}
+    {{ parent() }}
+    {{- form_errors(form) -}}
+{%- endblock choice_widget -%}

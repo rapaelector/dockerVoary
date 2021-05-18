@@ -3,6 +3,15 @@
  */
 export default [
     /**
+     * 
+     */
+    {
+        width: '40px',
+        cols: ['client_country'],
+        className: '',
+    },
+
+    /**
      * ACTIONS FIELD
      */
     {
@@ -50,8 +59,8 @@ export default [
      */
     {
         width: '80px',
-        cols: [],
-        className: 'text-right',
+        cols: ['client_number'],
+        className: '',
     },
 
     /**
@@ -82,9 +91,7 @@ export default [
     {
         width: '100px',
         cols: [
-            'client_name',
             'client_short_name',
-            'client_number',
             'client_activity',
             'client_tva_rate',
             'client_siret',
@@ -93,7 +100,6 @@ export default [
             'client_intra_community_tva',
             'client_type',
             'client_postal_code',
-            'client_country',
         ],
         className: ''
     },

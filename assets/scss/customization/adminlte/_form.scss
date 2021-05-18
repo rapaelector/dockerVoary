@@ -4,3 +4,7 @@
         width: 50%;
     }
 }
+
+.was-validated select.form-control:invalid, select.form-control.is-invalid {
+    background-image: none;
+}

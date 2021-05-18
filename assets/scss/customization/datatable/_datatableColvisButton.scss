@@ -25,6 +25,8 @@
         background: #fff;
         display: flex !important;
         flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-left: 15px;
         .dropdown-item {
             width: 23%;
             color: #000;
