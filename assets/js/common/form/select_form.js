@@ -26,7 +26,7 @@ function selectBuilder() {
 
     if (!found && currentVal != '') {
         var $option = $('<option value="' + currentVal + '">' + getOptionLabel(currentVal) + '</option>');
-        // $select.find('option:last-child').before($option);
+        $select.find('option:last-child').before($option);
     }
     $select.val(currentVal);
 
