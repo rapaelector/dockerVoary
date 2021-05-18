@@ -3,12 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Client;
+use App\Form\UserType;
 use App\Form\AddressType;
+use App\Form\User\ContactsType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ClientType extends AbstractType
 {
@@ -61,6 +65,13 @@ class ClientType extends AbstractType
             ->add('billingAddress', AddressType::class, [
                 'label' => 'label.billing_address',
                 'required' => false,
+            ])
+            ->add('contacts', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ContactsType::class,
+                'block_name' => 'client_contacts',
+                'allow_add' => true,
+                'allow_delete' => true,
             ])
         ;
     }

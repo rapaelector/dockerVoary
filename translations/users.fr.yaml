@@ -34,6 +34,7 @@ label:
     phone: 'Téléphone'
     job: 'Fonction'
     fax: 'Fax'
+    address_contact: 'Adresse contact'
 
 job: 'Fonction'
 links:

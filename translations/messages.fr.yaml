@@ -24,6 +24,7 @@ action:
   change_password: 'Changer mot de passe'
   logout: 'Deconnexion'
   action: 'Action'
+  view: 'Voir'
 
 title:
   delete_user: "Supprimer l'utilisateur"

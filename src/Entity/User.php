@@ -92,6 +92,11 @@ class User implements UserInterface
      */
     private $fax;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $rowAddress;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -229,6 +234,18 @@ class User implements UserInterface
     public function setFax(?string $fax): self
     {
         $this->fax = $fax;
+
+        return $this;
+    }
+
+    public function getRowAddress(): ?string
+    {
+        return $this->rowAddress;
+    }
+
+    public function setRowAddress(?string $rowAddress): self
+    {
+        $this->rowAddress = $rowAddress;
 
         return $this;
     }

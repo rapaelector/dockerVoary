@@ -3,7 +3,7 @@
     div.dt-button-collection>:last-child {
         display: flex !important;
         flex-wrap: wrap;
-        justify-content: center;
+        // justify-content: center;
     }
 }
 
@@ -56,12 +56,6 @@
                 br {
                     display: none;
                 }
-                // span {
-                //     padding-right: 4px;
-                //     &:last-child {
-                //         padding-left: 0;
-                //     }
-                // }
                 &:hover {
                     background: rgba(#000, 0.06);
                 }
@@ -73,9 +67,6 @@
                 span {
                     color: $app-primary;
                     background: rgba(#000, 0.06);
-                    // &:focus {
-                    //     background: rgba(#000, 0.06);
-                    // }
                 }
             }
         }

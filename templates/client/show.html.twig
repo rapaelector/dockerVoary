@@ -37,7 +37,7 @@
                                 </tr>
                                 <tr>
                                     <th>{{ 'label.activity'|trans }}</th>
-                                    <td>{{ client.activity }}</td>
+                                    <td>{{ client.activity ? client.activity|trans : '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ 'label.tva_rate'|trans }}</th>
@@ -49,11 +49,11 @@
                                 </tr>
                                 <tr>
                                     <th>{{ 'label.payment_method'|trans }}</th>
-                                    <td>{{ client.paymentMethod }}</td>
+                                    <td>{{ client.paymentMethod ? client.paymentMethod|trans : '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ 'label.payment'|trans }}</th>
-                                    <td>{{ client.payment }}</td>
+                                    <td>{{ client.payment ? client.payment|trans : '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ 'label.intra_community_tva'|trans }}</th>

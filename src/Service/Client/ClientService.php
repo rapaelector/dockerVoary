@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Services;
+namespace App\Service\Client;
 
 use App\Entity\Client;
 use App\Repository\ClientRepository;
+use App\Service\Client\ClientServiceInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class ClientService
+class ClientService implements ClientServiceInterface
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -22,10 +23,7 @@ class ClientService
     }
 
     /**
-     * Generate client number
-     * Client number are unique
-     * Create client number then find client by the new client number
-     * If there is a client with the new client number then create another one else return the created client number
+     * {@inheritdoc}
      */
     public function generateClientNumber()
     {
@@ -64,5 +62,26 @@ class ClientService
             Client::TYPE_CLIENT => 'CLI' . ((strlen(''.$maxCLI) < 4) ? '0' : '') . $maxCLI,
             Client::TYPE_PROSPECT => 'PR' . ((strlen(''.$maxPR) < 4) ? '0' : '') . $maxPR
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Client $client)
+    {
+        if ($contacts = $client->getContacts()) {
+            foreach ($contacts as $contact) {
+                $mockPassword = md5($contact->getEmail());
+                $contact->setPassword($mockPassword);
+                $this->em->persist($contact);
+            }
+        }
+
+        if ($client->getId()) {
+            $this->em->flush();
+        } else {
+            $this->em->persist($client);
+            $this->em->flush();
+        }
     }
 }

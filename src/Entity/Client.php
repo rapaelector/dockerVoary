@@ -7,6 +7,8 @@ use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
 use App\Entity\Traits\ClientTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -104,9 +106,15 @@ class Client
      */
     private $type;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, cascade={"persist", "refresh"})
+     */
+    private $contacts;
+
     public function __construct()
     {
         $this->type = self::TYPE_PROSPECT;
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +250,30 @@ class Client
     public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(User $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+        }
+
+        return $this;
+    }
+
+    public function removeContact(User $contact): self
+    {
+        $this->contacts->removeElement($contact);
 
         return $this;
     }

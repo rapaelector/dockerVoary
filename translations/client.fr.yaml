@@ -9,6 +9,7 @@ title:
   client: 'Prospect'
   add_prospect: 'Ajouter prospect'
   delete_prospect: 'Suppréssion du prospect'
+  contacts: 'Contacts'
 
 label:
   name: 'Nom'
@@ -26,6 +27,7 @@ label:
   action: 'Action'
   postal_code: 'Code postal'
   country: 'Pays'
+  contacts: 'Contacts'
 
 activity:
   cement_factory: "Cimenterie"
@@ -78,7 +80,7 @@ type:
   prospect: "Prospect"
 
 messages:
-  delete_success: 'Prospect supprimé avec success'
+  delete_success: 'Prospect supprimé avec succès'
   delete_prospect: 'Souhaitez-vous supprimer ce prospect'
-  editing_success: 'Modification du prospect éfféctué avec succèss'
-  creation_success: 'Création du prospect éfféctué avec succèss'
+  editing_success: 'Modification du prospect effectué avec succès'
+  creation_success: 'Création du prospect effectué avec succès'

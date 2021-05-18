@@ -6,7 +6,8 @@ use App\Entity\Client;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use App\Controller\BaseController;
-use App\Services\ClientService;
+use App\Service\Client\ClientServiceInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,7 +131,7 @@ class ClientController extends BaseController
     }
 
     #[Route('/new', name: 'client.new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TranslatorInterface $translator, ClientService $clientService): Response
+    public function new(Request $request, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
         $newClientNumber = $clientService->generateClientNumber();
         $client = new Client();
@@ -139,9 +140,7 @@ class ClientController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($client);
-            $entityManager->flush();
+            $clientService->update($client);
             $this->addFlash('success', $translator->trans('messages.creation_success', [], 'client'));
 
             return $this->redirectToRoute('client.list');
@@ -162,13 +161,13 @@ class ClientController extends BaseController
     }
 
     #[Route('/{id}/edit', name: 'client.edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Client $client, TranslatorInterface $translator): Response
+    public function edit(Request $request, Client $client, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $clientService->update($client);
             $this->addFlash('success', $translator->trans('messages.editing_success', [], 'client'));
 
             return $this->redirectToRoute('client.list');

@@ -85,6 +85,11 @@
         </div>
     </div>
 
+    <div class="col-sm-12">
+        {{ form_row(form.contacts) }}
+        <div id="add-button-container" class="mt-5"></div>
+    </div>
+
     <div class="text-center py-3">
         <button class="btn btn-app-primary">{{ button_label|default('action.save'|trans({}, 'messages')) }}</button>
     </div>
