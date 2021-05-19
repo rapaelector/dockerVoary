@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserEditType extends AbstractType
 {
@@ -18,13 +19,15 @@ class UserEditType extends AbstractType
                 'label' => 'label.lastName',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('firstName', TextType::class, [
                 'label' => 'label.firstName',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('email', TextType::class, [
                 'label' => 'label.email',
@@ -36,7 +39,8 @@ class UserEditType extends AbstractType
                 'label' => 'label.phone',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('fax', TextType::class, [
                 'label' => 'label.fax',
@@ -49,7 +53,8 @@ class UserEditType extends AbstractType
                 'label' => 'label.job',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('profileFile', VichFileType::class, [
                 'label' => 'label.profile_image',
@@ -58,6 +63,13 @@ class UserEditType extends AbstractType
                 'download_label' => false,
                 // 'image_uri' => true,
                 'delete_label' => 'Supprimer',
+            ])
+            ->add('canLogin', CheckboxType::class, [
+                'label' => 'label.can_login',
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ],
             ])
         ;
     }

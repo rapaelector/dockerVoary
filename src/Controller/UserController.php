@@ -140,6 +140,8 @@ class UserController extends BaseController
                 $builder
                     ->select('user')
                     ->from(User::class, 'user')
+                    ->where('user.type = :type')
+                    ->setParameter('type', User::TYPE_INTERNAL)
                     ->distinct('user')
                 ;
             }  
@@ -158,6 +160,14 @@ class UserController extends BaseController
     }
 
     /**
+     * Dispatch a UserCreatedMessage event when form is submitted and valid
+     * Access is given in the creation or edition user page
+     * Into the event dispatched there are : 
+     *      - send message to the user if the user can access the CRM from a checkbox
+     *      - the contents of the message is the email of the user and a plain password
+     *      - avoid sending the message if the user have not access to the CRM from the same checkbox
+     *      - event location in App\MessageHandler\User\UserCreatedMessageHandler
+     * 
      * @IsGranted("ROLE_USER_ADD")
      */
     #[Route('/new', name: 'user.new', methods: ['GET','POST'])]
@@ -174,7 +184,17 @@ class UserController extends BaseController
             $user->setPassword($encodePassword);
             $entityManager->persist($user);
             $entityManager->flush();
-            $messagerBus->dispatch(new UserCreatedMessage($user->getId(), $userPlainPassword));
+
+            /**
+             * - Only send message (email) for the user if the user have access to the CRM
+             * - access is given in the creation or edition user page
+             */
+            if ($user->getCanLogin()) {
+                /**
+                 * This event send message only till now
+                 */
+                $messagerBus->dispatch(new UserCreatedMessage($user->getId(), $userPlainPassword));
+            }
 
             return $this->redirectToRoute('user.index');
         }

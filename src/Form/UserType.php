@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserType extends AbstractType
 {
@@ -67,6 +68,13 @@ class UserType extends AbstractType
                 'download_label' => false,
                 // 'image_uri' => true,
                 'delete_label' => 'Supprimer',
+            ])
+            ->add('canLogin', CheckboxType::class, [
+                'label' => 'label.can_login',
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ],
             ])
         ;
     }

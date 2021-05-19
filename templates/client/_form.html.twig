@@ -1,4 +1,97 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'title.client'|trans({}, 'client') }}</h3>
+                <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-sm-7">
+                            {{ form_row(form.shortName) }}
+                        </div>
+                        <div class="col-sm-5">
+                            {{ form_row(form.clientNumber) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.activity) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.paymentMethod) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.payment) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.siret) }}
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.tvaRate) }}
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.intraCommunityTva) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'title.billing_address'|trans({}, 'client') }}</h3>
+                <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.billingAddress.name) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.phone) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.fax) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.line1) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.line2) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.line3) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.postalCode) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.city) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.billingAddress.country) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <h3 class="mb-0 text-app-primary">{{ 'title.contacts'|trans({}, 'client') }}</h3>
+        {{ form_row(form.contacts) }}
+        <div id="add-button-container"></div>
+    </div>
+
+    <div class="text-center py-3">
+        <button class="btn btn-app-primary">{{ button_label|default('action.save'|trans({}, 'messages')) }}</button>
+    </div>
 {{ form_end(form) }}

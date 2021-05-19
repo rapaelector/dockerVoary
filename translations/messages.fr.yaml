@@ -8,7 +8,7 @@ menu:
     offers_menu: 'Gestion des offres'
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
-    prospect_manager: 'Gestion des prospets'
+    prospect_manager: 'Gestion des prospects'
 
 action:
   save: 'Enregistrer'
@@ -24,11 +24,19 @@ action:
   edit_profil: 'Modifier profil'
   change_password: 'Changer mot de passe'
   logout: 'Deconnexion'
+  action: 'Action'
+  view: 'Voir'
+  back_to_list: 'Retourner à la liste'
   show_profile: 'Voir profil'
 
 title:
   delete_user: "Supprimer l'utilisateur"
   home: 'Acceuil'
-
+  client_manger: 'Gestion des clients'
+  
+label:
+  created_at: 'Crée le'
+  
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'
+  user_access_denied: 'Vous ne pouvez pas accéder au CRM'

@@ -35,6 +35,34 @@
             #}
         </div>
 
-        {% endblock %}
-    {% endembed %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{  'label.email'|trans }}</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>{{  'label.firstname'|trans }}</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>{{  'label.lastname'|trans }}</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>{{  'label.phone'|trans }}</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>{{  'label.job'|trans }}</th>
+                <td>{{ user.job }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user.index') }}">back to list</a>
+
+    <a href="{{ path('user.edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

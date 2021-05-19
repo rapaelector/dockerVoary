@@ -874,6 +874,27 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@polymer/iron-flex-layout@^3.0.0-pre.18":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-3.0.1.tgz#36f9e1a8eb792d279b2bc75d362628721ad37f0c"
+  integrity sha512-7gB869czArF+HZcPTVSgvA7tXYFze9EKckvM95NB7SqYF+NnsQyhoXgKnpFwGyo95lUjUW9TFDLUwDXnCYFtkw==
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-image@^3.0.0-pre.18":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-image/-/iron-image-3.0.2.tgz#425ee6269634e024dbea726a91a61724ae4402b6"
+  integrity sha512-VyYtnewGozDb5sUeoLR1OvKzlt5WAL6b8Od7fPpio5oYL+9t061/nTV8+ZMrpMgF2WgB0zqM/3K53o3pbK5v8Q==
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/polymer@^3.0.0":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.4.1.tgz#333bef25711f8411bb5624fb3eba8212ef8bee96"
+  integrity sha512-KPWnhDZibtqKrUz7enIPOiO4ZQoJNOuLwqrhV2MXzIt3VVnUVJVG5ORz4Z2sgO+UZ+/UZnPD0jqY+jmw/+a9mQ==
+  dependencies:
+    "@webcomponents/shadycss" "^1.9.1"
+
 "@popperjs/core@^2.9.2":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
@@ -1176,6 +1197,11 @@
   dependencies:
     "@webassemblyjs/ast" "1.11.0"
     "@xtuc/long" "4.2.2"
+
+"@webcomponents/shadycss@^1.9.1":
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.10.2.tgz#40e03cab6dc5e12f199949ba2b79e02f183d1e7b"
+  integrity sha512-9Iseu8bRtecb0klvv+WXZOVZatsRkbaH7M97Z+f+Pt909R4lDfgUODAnra23DOZTpeMTAkVpf4m/FZztN7Ox1A==
 
 "@webpack-cli/configtest@^1.0.2":
   version "1.0.2"
@@ -2361,7 +2387,7 @@ datatables.net-fixedheader-bs4@^3.1.8:
     datatables.net-fixedheader "3.1.8"
     jquery ">=1.7"
 
-datatables.net-fixedheader@3.1.8:
+datatables.net-fixedheader@3.1.8, datatables.net-fixedheader@^3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/datatables.net-fixedheader/-/datatables.net-fixedheader-3.1.8.tgz#e78c41de065429fa92b20b4d3a8ef5536f87b002"
   integrity sha512-MLZgzkU6sGNSqlKuuJC/5/ps4xcmJQZILHqr5bOK/2kBEzCZzH+ZVOjudVRshnxkFn7IOTAOecMQHI6HPHFhag==
@@ -3185,6 +3211,15 @@ flag-icon-css@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/flag-icon-css/-/flag-icon-css-3.5.0.tgz#430747d5cb91e60babf85494de99173c16dc7cf2"
   integrity sha512-pgJnJLrtb0tcDgU1fzGaQXmR8h++nXvILJ+r5SmOXaaL/2pocunQo2a8TAXhjQnBpRLPtZ1KCz/TYpqeNuE2ew==
+
+flag-icon@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/flag-icon/-/flag-icon-2.5.0.tgz#d5d8e8abe262954dc71ea8a55b5df671c564bf7f"
+  integrity sha512-Mit72vPzyhgJ6/KjT0Bzm77Ca4ol4WjpYOzQffqrPERNy+np4j2CCPvWKsmPbM8gL1DjKejnKlDErJ8uzGBLRQ==
+  dependencies:
+    "@polymer/iron-flex-layout" "^3.0.0-pre.18"
+    "@polymer/iron-image" "^3.0.0-pre.18"
+    "@polymer/polymer" "^3.0.0"
 
 flot@^4.2.2:
   version "4.2.2"

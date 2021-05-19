@@ -1,11 +1,26 @@
+{% trans_default_domain 'client' %}
+
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}New Client{% endblock %}
+{% block title %}{{ parent() }} | {{ 'title.new_client'|trans }}{% endblock %}
 
-{% block body %}
-    <h1>Create new Client</h1>
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-    {{ include('client/_form.html.twig') }}
+{% form_theme form.contacts 'shared/form/client_contact_form.html.twig' %}
 
-    <a href="{{ path('client.list') }}">back to list</a>
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.new_client'|trans,
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.client_manger'|trans, routeName: 'client.list'},
+            {label: 'title.new_client'|trans},
+        ],
+    } %}{% endembed %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {{ include('client/_form.html.twig') }}
+    </div>
 {% endblock %}

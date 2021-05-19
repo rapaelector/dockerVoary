@@ -35,6 +35,15 @@
                                     height: 24px;
                                     object-fit: cover;
                                 }
+                                .dropdown {
+                                    display: inline-block;
+                                    [data-toggle="dropdown"] {
+                                        padding: 0px !important;
+                                        .material-icons {
+                                            font-size: 20px;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -46,6 +55,15 @@
                         }
                     }
                     tbody {
+                        tr {
+                            max-height: 30px !important;
+                            height: 30px !important;
+                            td {
+                                line-height: 1;
+                                padding-top: 1px !important;
+                                padding-bottom: 1px !important;
+                            }
+                        }
                         tr:first-child {
                             border-left: 0;
                         }

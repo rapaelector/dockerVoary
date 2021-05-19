@@ -1,3 +1,13 @@
+#client_type {
+    display: flex;
+    .form-check {
+        width: 50%;
+    }
+}
+
+.was-validated select.form-control:invalid, select.form-control.is-invalid {
+    background-image: none;
+}
 @mixin input_file {
     .vich-file {
         .custom-file {
