@@ -3,6 +3,7 @@ title:
   list: 'Liste des Prospects'
   new_client: 'Création prospect'
   edit_client: 'Modification prospect'
+  edit_prospect: 'Modifier ce prospect'
   delete_client: 'Suppréssion des prospects'
   show_client: 'Detail du prospect'
   billing_address: 'Adresse de facturation'
@@ -10,6 +11,8 @@ title:
   add_prospect: 'Ajouter prospect'
   delete_prospect: 'Suppréssion du prospect'
   contacts: 'Contacts'
+  prospect: 'Prospect'
+  address: 'Adresse'
 
 label:
   name: 'Nom'

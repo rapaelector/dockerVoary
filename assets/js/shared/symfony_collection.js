@@ -48,6 +48,7 @@ export function SymfonyCollections(options) {
 		},
 		prototypeAttr: {},
 		protoWrapper: 'div',
+		wrapperAdditionalClass: '',
 		addNav: false,
 		allow_delete: true,
 	};
@@ -70,6 +71,7 @@ export function SymfonyCollections(options) {
 			collection.$elements.addLink.click();
 		} else {
 			collection.$elements.container.children(collection.param.protoWrapper).each(function() {
+				$(this).addClass(collection.param.wrapperAdditionalClass);
 				if (collection.param.allow_delete) {
 					collection.addDeleteLink($(this));
 				}
@@ -83,9 +85,9 @@ export function SymfonyCollections(options) {
     }
 
     collection.bindElements = function () {
-    	collection.$elements.addLink.on('click', function (e) {
-    		e.preventDefault();
-    		collection.addEntry();
+		collection.$elements.addLink.on('click', function (e) {
+			e.preventDefault();
+			collection.addEntry();
 			if (collection.param.add.container) {
 				$(this).appendTo(collection.param.add.container);
 			} else {
@@ -93,20 +95,20 @@ export function SymfonyCollections(options) {
 			}
 
 			return false;
-    	});
+		});
     }
 
     collection.addEntry = function (addOptions) {
-    	collection.$elements.container.trigger('collection.adding');
-    	var defaultPrototype = collection.param.prototype || collection.$elements.container.attr('data-prototype');
-    	addOptions = $.extend(true, {
-    		entryPrototype: defaultPrototype,
-    		method: 'append',
-    		container: collection.$elements.container,
-    		inversed: false,
-    		addNav: true,
-    	}, addOptions);
-    	var prototype = addOptions.entryPrototype;
+		collection.$elements.container.trigger('collection.adding');
+		var defaultPrototype = collection.param.prototype || collection.$elements.container.attr('data-prototype');
+		addOptions = $.extend(true, {
+			entryPrototype: defaultPrototype,
+			method: 'append',
+			container: collection.$elements.container,
+			inversed: false,
+			addNav: true,
+		}, addOptions);
+		var prototype = addOptions.entryPrototype;
 		var $prototype = $(prototype.replace(/__name__label__/g, collection.param.label + (collection.index+1)).replace(/__name__/g, collection.index));
 		collection.addDeleteLink($prototype, addOptions);
 		if (addOptions.inversed)
@@ -123,7 +125,7 @@ export function SymfonyCollections(options) {
     }
 
     collection.addDeleteLink = function ($prototype, options) {
-    	if (!options) options = {addNav: true};
+		if (!options) options = {addNav: true};
 		$prototype.addClass(protoClass);
 		var $deleteLink = collection.buildElement(collection.param.remove);
 

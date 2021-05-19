@@ -1,3 +1,5 @@
+{% trans_default_domain 'users' %}
+
 {% extends 'user/layout.html.twig' %}
 
 {% block title %}User{% endblock %}
@@ -8,35 +10,23 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
+                <th>{{  'label.email'|trans }}</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
+                <th>{{  'label.firstname'|trans }}</th>
                 <td>{{ user.firstName }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
+                <th>{{  'label.lastname'|trans }}</th>
                 <td>{{ user.lastName }}</td>
             </tr>
             <tr>
-                <th>Phone</th>
+                <th>{{  'label.phone'|trans }}</th>
                 <td>{{ user.phone }}</td>
             </tr>
             <tr>
-                <th>Job</th>
+                <th>{{  'label.job'|trans }}</th>
                 <td>{{ user.job }}</td>
             </tr>
         </tbody>

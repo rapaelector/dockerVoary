@@ -160,15 +160,31 @@ class ClientController extends BaseController
         ]);
     }
 
+    /**
+     * Edit client and redirect to the redirectPath if defined else redirect to the list of client
+     * 
+     * @param Request $request
+     * @param Client $client
+     * @param TranslatorInterface $translator
+     * @param ClientServiceInterface $clientService
+     */
     #[Route('/{id}/edit', name: 'client.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Client $client, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-
+        dump($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $clientService->update($client);
             $this->addFlash('success', $translator->trans('messages.editing_success', [], 'client'));
+            /**
+             * Check if redirectPath is defined
+             * Redirection to the path request arguments
+             */
+            if ($redirectPath = $request->query->get('redirectPath')) {
+                return $this->redirectToRoute($redirectPath, ['id' => $client->getid()]);
+            }
 
             return $this->redirectToRoute('client.list');
         }

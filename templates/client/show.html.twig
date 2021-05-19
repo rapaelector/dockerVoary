@@ -4,6 +4,8 @@
 
 {% block title %}{{ parent() }} | {{ 'title.show_client'|trans }}{% endblock %}
 
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
         title: 'title.show_client'|trans,
@@ -12,7 +14,30 @@
             {label: 'title.client_manger'|trans, routeName: 'client.list'},
             {label: 'title.show_client'|trans},
         ],
-    } %} {% endembed %}
+    } %}
+        {% block extra_title %}
+            {% embed 'client/_actions.html.twig' with {
+                id: client.id,
+                showShow: false,
+                redirectPah: 'client.show',
+            } %}
+                {% block dropdown_toggler %}
+                    <button
+                        class="header-btn"
+                        href="#" 
+                        role="button"
+                        id="dropdownMenuButton" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
+                {% endblock %}
+
+                {% block show_action %}{% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block content %}
@@ -20,50 +45,47 @@
         <div class="row">
             <div class="col-sm-6">    
                 <div class="card card-outline-primary">
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th>{{ 'label.name'|trans }}</th>
-                                    <td>{{ client.name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.short_name'|trans }}</th>
-                                    <td>{{ client.shortName }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.client_number'|trans }}</th>
-                                    <td>{{ client.clientNumber }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.activity'|trans }}</th>
-                                    <td>{{ client.activity ? client.activity|trans : '' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.tva_rate'|trans }}</th>
-                                    <td>{{ client.tvaRate }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.siret'|trans }}</th>
-                                    <td>{{ client.siret }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.payment_method'|trans }}</th>
-                                    <td>{{ client.paymentMethod ? client.paymentMethod|trans : '' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.payment'|trans }}</th>
-                                    <td>{{ client.payment ? client.payment|trans : '' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ 'label.intra_community_tva'|trans }}</th>
-                                    <td>{{ client.intraCommunityTva }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.prospect'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'client/show_extension/client.html.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">    
+                <div class="card card-outline-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.address'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'client/show_extension/address.html.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card card-outline-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.contacts'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'client/show_extension/contacts.html.twig' %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            $('#contacts-table').dataTable({
+                dom: `<'container-fluid pt-3'<'row'<'col-sm-6 offset-sm-6'f>>
+                    <'row'<'col-sm-12'tr>>
+                >`
+            })
+        })
+    </script>
 {% endblock %}

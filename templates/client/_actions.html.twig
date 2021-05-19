@@ -1,24 +1,27 @@
 {% trans_default_domain 'messages' %}
 
 <div class="dropdown">
-    <button class="btn btn-icon dropdown-toggle"
-        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
-        aria-expanded="false"
-        data-boundary="window"
-    >
-        <span class="material-icons">more_vert</span>
-    </button>
+    {% block dropdown_toggler %}
+        <button class="btn btn-icon dropdown-toggle"
+            type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+            aria-expanded="false"
+            data-boundary="window"
+        >
+            <span class="material-icons">more_vert</span>
+        </button>
+    {% endblock %}
+
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
-        
-        {% if true %}
+
+        {% if showShow ?? true %}
             <a class="dropdown-item" href="{{ path('client.show', {id: id}) }}">
                 <i class="material-icons">visibility</i>
                 {{ 'action.view'|trans }}
             </a>
         {% endif %}
-        
+
         {% if true %}
-            <a class="dropdown-item" href="{{ path('client.edit', {id: id}) }}">
+            <a class="dropdown-item" href="{{ path('client.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
                 <i class="material-icons">edit</i>
                 {{ 'action.edit'|trans }}
             </a>

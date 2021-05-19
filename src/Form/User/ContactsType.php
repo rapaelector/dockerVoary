@@ -26,7 +26,7 @@ class ContactsType extends AbstractType
                 ]
             ])
             ->add('email', TextType::class, [
-                'label' => 'label.email',
+                'label' => 'label.e_mail',
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -53,7 +53,7 @@ class ContactsType extends AbstractType
                 'required' => false,
             ])
             ->add('rowAddress', TextType::class, [
-                'label' => 'label.address_contact',
+                'label' => 'label.address',
                 'required' => false,
             ])
         ;

@@ -24,17 +24,21 @@ title:
     new_user_breadCrumb: 'Nouvel utilisateur'
     user_list: 'Gestion utilisateurs'
     home: 'Acceuil'
+    contact_empty: 'Contact vide'
 
 label:
     email: 'Adresse mail'
-    e_mail: 'E-mail'
+    e_mail: 'Email'
     password: 'Mot de passe'
     firstName: 'Prénom'
+    first_name: 'Prénom'
     lastName: 'Nom'
+    last_name: 'Nom'
     phone: 'Téléphone'
     job: 'Fonction'
     fax: 'Fax'
     address_contact: 'Adresse contact'
+    address: 'Adresse'
 
 job: 'Fonction'
 links:
@@ -44,12 +48,17 @@ list:
     columns:
         email: 'Email'
         firstName: 'Nom'
+        first_name: 'Nom'
         lastName: 'Prénom'
+        last_name: 'Prénom'
         phone: 'Téléphone'
         job: 'Fonction'
         createdAt: 'Créé le'
+        created_at: 'Créé le'
         updatedAt: 'Modifié le'
+        updated_at: 'Modifié le'
         deletedAt: 'Supprimé le'
+        deleted_at: 'Supprimé le'
         fax: 'Fax'
 
 messages:

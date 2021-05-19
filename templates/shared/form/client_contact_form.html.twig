@@ -1,8 +1,8 @@
 {% block _client_client_contacts_entry_row %}
-    <div>
+    <div class="contact-entry-container">
         <div class="card card card-outline card-app-secondary h-100">
             <div class="card-header">
-                <h3 class="card-title">{{ 'title.contacts'|trans({}, 'client') }}</h3>
+                <div class="card-tools"></div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -24,7 +24,7 @@
                     <div class="col-sm-6">
                         {{ form_row(form.job) }}
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         {{ form_row(form.rowAddress) }}
                     </div>
                 </div>

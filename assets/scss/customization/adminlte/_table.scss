@@ -1,0 +1,15 @@
+@mixin table_app {
+    .table-app-sm {
+        tbody {
+            tr {
+                th, td {
+                    padding: 8px;
+                    border-top: 1px solid #f4f4f4;
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+@include table_app;
