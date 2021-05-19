@@ -32,7 +32,7 @@
         var generator = new window.App.PasswordGenerator();
 
         generator.init({
-            container: '#generator', 
+            container: '#password-generator', 
             target: "#{{ form.password.vars.id }}",
             btn_txt: "{{ 'action.generate_password'|trans({}, 'messages') }}"
         });

@@ -3,20 +3,22 @@
  */
 export default [
     /**
-     * LOGO, PROFILE IMAGE FIELS
-     */
-    {
-        width: '50px',
-        cols: ['user_profile_image'],
-        className: 'text-center',
-    },
-    /**
-     * 
+     * LOGO, VERY LITLE LOGO (eg: flag, brand etc.)
+     * WITH VERY SHORT LABEL
      */
     {
         width: '40px',
         cols: ['client_country'],
         className: '',
+    },
+
+    /**
+     * LOGO, PROFILE IMAGE FIELS
+     */
+    {
+        width: '50px',
+        cols: ['user_profile_image', 'user_can_login'],
+        className: 'text-center',
     },
 
     /**

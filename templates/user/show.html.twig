@@ -18,51 +18,14 @@
 {% block content %}
     {% embed 'user/_profile_user.html.twig' with {user: user} %}
         {% block footer %}
-        <div class="row">
-            <div class="col-sm-6">
-                <a href="{{ path('user.edit', {id: user.id}) }}">
-                    <i class="material-icons">edit</i>
-                    {{ 'action.edit_profil'|trans({}, 'messages') }}
-                </a>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="{{ path('user.edit', {id: user.id}) }}">
+                        <i class="material-icons">edit</i>
+                        {{ 'action.edit_profil'|trans({}, 'messages') }}
+                    </a>
+                </div>
             </div>
-            {#
-            <div class="col-sm-6">
-                <a href="#">
-                    <i class="material-icons">lock</i>
-                    {{ 'action.change_password'|trans({}, 'messages') }}
-                </a>
-            </div>
-            #}
-        </div>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>{{  'label.email'|trans }}</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>{{  'label.firstname'|trans }}</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>{{  'label.lastname'|trans }}</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>{{  'label.phone'|trans }}</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th>{{  'label.job'|trans }}</th>
-                <td>{{ user.job }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('user.index') }}">back to list</a>
-
-    <a href="{{ path('user.edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

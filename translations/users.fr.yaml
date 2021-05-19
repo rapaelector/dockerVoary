@@ -79,6 +79,7 @@ list:
         deletedAt: 'Supprimé le'
         deleted_at: 'Supprimé le'
         fax: 'Fax'
+        canLogin: 'Accès CRM'
 
 messages:
     delete_success: 'Utilisateur supprimé avec succès'

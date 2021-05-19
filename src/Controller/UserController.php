@@ -126,6 +126,9 @@ class UserController extends BaseController
                     // $this->filterOptionsProvider->getOptions('lastname')
                 )
             ])
+            ->add('canLogin', TwigColumn::class, [
+                'template' => 'shared/twig-columns/_can_login.html.twig',
+            ])
             ->add('id', TextColumn::class, [
                 'label' => 'Actions', 
                 'render' => $this->actionsRenderer('user.index', 'user/_actions.html.twig'),

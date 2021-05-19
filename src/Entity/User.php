@@ -106,7 +106,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $rowAddress;
+    private $rawAddress;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -284,14 +284,14 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getRowAddress(): ?string
+    public function getRawAddress(): ?string
     {
-        return $this->rowAddress;
+        return $this->rawAddress;
     }
 
-    public function setRowAddress(?string $rowAddress): self
+    public function setRawAddress(?string $rawAddress): self
     {
-        $this->rowAddress = $rowAddress;
+        $this->rawAddress = $rawAddress;
 
         return $this;
     }

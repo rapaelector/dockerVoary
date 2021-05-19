@@ -4,9 +4,15 @@
         width: 50%;
     }
 }
-
 .was-validated select.form-control:invalid, select.form-control.is-invalid {
     background-image: none;
+}
+.row.align-items-center {
+    .can-login-field {
+        .form-group {
+            margin: 0;
+        }
+    }
 }
 @mixin input_file {
     .vich-file {

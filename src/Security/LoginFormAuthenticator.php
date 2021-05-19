@@ -93,9 +93,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         /**
-         * Check if user can login to the CRM
+         * Check if user can login to the CRM and internal type
+         * Internal type user are a user who can access the crm 
          */
-        if (!$user->getCanLogin()) {
+        if (!$user->getCanLogin() && ($user->getType() != User::TYPE_INTERNAL) ) {
             throw new CustomUserMessageAuthenticationException($this->translator->trans('message.user_access_denied', [], 'messages'));
         }
 
