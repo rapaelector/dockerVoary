@@ -34,7 +34,13 @@
                     </button>
                 {% endblock %}
 
-                {% block show_action %}{% endblock %}
+                {% block actions %}
+                    {{ parent() }}
+                    <a class="dropdown-item" href="{{ path('client.list') }}">
+                        <i class="material-icons">arrow_back</i>
+                        {{ 'action.back_to_list'|trans }}
+                    </a>
+                {% endblock %}
             {% endembed %}
         {% endblock %}
     {% endembed %}

@@ -25,6 +25,7 @@ action:
   logout: 'Deconnexion'
   action: 'Action'
   view: 'Voir'
+  back_to_list: 'Retourner à la liste'
 
 title:
   delete_user: "Supprimer l'utilisateur"
@@ -36,3 +37,4 @@ label:
   
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'
+  user_access_denied: 'Vous ne pouvez pas accéder au CRM'

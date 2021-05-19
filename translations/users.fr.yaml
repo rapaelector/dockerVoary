@@ -39,6 +39,7 @@ label:
     fax: 'Fax'
     address_contact: 'Adresse contact'
     address: 'Adresse'
+    can_login: 'Peut acceder au CRM'
 
 job: 'Fonction'
 links:

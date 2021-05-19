@@ -12,27 +12,27 @@
     {% endblock %}
 
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
+        {% block actions %}
+            {% if showShow ?? true %}
+                <a class="dropdown-item" href="{{ path('client.show', {id: id}) }}">
+                    <i class="material-icons">visibility</i>
+                    {{ 'action.view'|trans }}
+                </a>
+            {% endif %}
 
-        {% if showShow ?? true %}
-            <a class="dropdown-item" href="{{ path('client.show', {id: id}) }}">
-                <i class="material-icons">visibility</i>
-                {{ 'action.view'|trans }}
-            </a>
-        {% endif %}
+            {% if true %}
+                <a class="dropdown-item" href="{{ path('client.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
+                    <i class="material-icons">edit</i>
+                    {{ 'action.edit'|trans }}
+                </a>
+            {% endif %}
 
-        {% if true %}
-            <a class="dropdown-item" href="{{ path('client.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
-                <i class="material-icons">edit</i>
-                {{ 'action.edit'|trans }}
-            </a>
-        {% endif %}
-
-        {% if true %}
-            {% include 'client/_delete_form.html.twig' with {
-                id: id,
-                deleteRoute: 'client.delete'
-            } %}
-        {% endif %}
-        
+            {% if true %}
+                {% include 'client/_delete_form.html.twig' with {
+                    id: id,
+                    deleteRoute: 'client.delete'
+                } %}
+            {% endif %}
+        {% endblock %}
     </div>
 </div>

@@ -140,6 +140,13 @@ class ClientController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * Job:
+             *      - persist the client
+             *      - loop for client contacts (users) and persist them
+             *      - for each client contact, set type to external User::TYPE_EXTERNAL
+             *      - for each client contact, denied access to the CRM by setting the canLogin to false 
+             */
             $clientService->update($client);
             $this->addFlash('success', $translator->trans('messages.creation_success', [], 'client'));
 

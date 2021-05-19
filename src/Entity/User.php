@@ -28,6 +28,9 @@ class User implements UserInterface
     use TimestampableTrait;
     use UserTrait;
 
+    const TYPE_EXTERNAL = 'external';
+    const TYPE_INTERNAL = 'internal';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -96,6 +99,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $rowAddress;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $canLogin;
+    
+    public function __construct()
+    {
+        $this->type = self::TYPE_INTERNAL;
+        $this->canLogin = true;
+    }
 
     public function getId(): ?int
     {
@@ -246,6 +265,30 @@ class User implements UserInterface
     public function setRowAddress(?string $rowAddress): self
     {
         $this->rowAddress = $rowAddress;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCanLogin(): ?bool
+    {
+        return $this->canLogin;
+    }
+
+    public function setCanLogin(?bool $canLogin): self
+    {
+        $this->canLogin = $canLogin;
 
         return $this;
     }

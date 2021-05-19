@@ -2,6 +2,7 @@
 
 namespace App\Service\Client;
 
+use App\Entity\User;
 use App\Entity\Client;
 use App\Repository\ClientRepository;
 use App\Service\Client\ClientServiceInterface;
@@ -66,6 +67,11 @@ class ClientService implements ClientServiceInterface
 
     /**
      * {@inheritdoc}
+     * User created from the client are external type and cant access the CRM
+     * By default in the user constructor:
+     *      - user type is internal
+     *      - can login set to true
+     * Here we denied the access in the CRM for the Client user (contact) 
      */
     public function update(Client $client)
     {
@@ -73,6 +79,13 @@ class ClientService implements ClientServiceInterface
             foreach ($contacts as $contact) {
                 $mockPassword = md5($contact->getEmail());
                 $contact->setPassword($mockPassword);
+
+                /**
+                 * Type of user = external dont shown in the user list
+                 * canLogin = false avoid the access of the crm
+                 */
+                $contact->setType(User::TYPE_EXTERNAL);
+                $contact->setCanLogin(false);
                 $this->em->persist($contact);
             }
         }
