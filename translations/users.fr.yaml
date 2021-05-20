@@ -35,6 +35,7 @@ title:
     user_detail: ''
     my_profile: 'Profil'
     change_password: 'Modification mot de passe'
+    list: 'Liste des utilisateurs'
 
 label:
     email: 'Adresse mail'

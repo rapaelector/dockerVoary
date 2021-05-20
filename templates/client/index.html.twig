@@ -8,27 +8,33 @@
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
-        title: 'title.list'|trans,
+        title: 'title.client_manger'|trans,
         links: [],
-    } %}
-        {% block header_links %}
-            {% if is_granted('ROLE_CLIENT_ADD') %}
-                <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
-                    <i class="material-icons">add</i>
-                </a>
-            {% endif %}
-        {% endblock %}
-    {% endembed %}
+    } %} {% endembed %}
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                {% include template_datatable_filters with {
-                    datatable: datatable
-                } %}
-                <div id="{{ datatable.tableId }}">Chargement...</div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.list'|trans }}</h3>
+                        <div class="card-tools">
+                            {% if is_granted('ROLE_CLIENT_ADD') %}
+                                <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% include template_datatable_filters with {
+                            datatable: datatable
+                        } %}
+                        <div id="{{ datatable.tableId }}">Chargement...</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,177 @@
+$tr-odd-background: rgba(0, 0, 0, 0.05);
+
+@mixin datatable_table () {
+    .app-dt-card {
+        .btn {
+            &.buttons-colvis {
+                &.btn-outline-app-primary {
+                    background: none;
+                }
+            }
+        }
+        .btn-outline-app-primary:hover {
+            color: $app-primary;
+            background: none;
+        }
+        /**
+         * Remove card body padding to have more space for the datatable
+        */
+        padding: 0;
+        .dataTables_scroll {
+            overflow-x: auto;
+        }
+        table.dataTable {
+            margin-top: 0 !important;
+            thead, tbody {
+                tr {
+                    th, td {
+                        vertical-align: middle;
+                        height: 30px;
+                        max-height: 30px;
+                        .img-circle {
+                            width: 24px;
+                            height: 24px;
+                            object-fit: cover;
+                        }
+                        .dropdown {
+                            display: inline-block;
+                            [data-toggle="dropdown"] {
+                                padding: 0px !important;
+                                .material-icons {
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            thead {
+                tr {
+                    th {
+                        border-top: none;
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    max-height: 30px !important;
+                    height: 30px !important;
+                    td {
+                        line-height: 1;
+                        padding-top: 1px !important;
+                        padding-bottom: 1px !important;
+                    }
+                }
+                tr:first-child {
+                    border-left: 0;
+                }
+                tr:last-child {
+                    border-right: 0;
+                }
+            }
+        }
+
+        /**
+         * Here are a style to design the border right and left of dataTable for the table body
+         * ex-change the background of tr even and odd
+        */
+        .dataTables_scroll {
+            .dataTables_scrollHead {
+                .table {
+                    tr {
+                        background: $tr-odd-background;
+                    }
+                }
+            }
+            .dataTables_scrollBody {
+                .table {
+                    border-left: none;
+                }
+                .table-striped {
+                    tbody {
+                        tr:nth-of-type(odd) {
+                            background: #fff;
+                            td:first-child {
+                                border-left: none;
+                            }
+                            td:last-child {
+                                border-right: none;
+                            }
+                        }
+                        tr:nth-of-type(even) {
+                            background: $tr-odd-background;
+                            td:first-child {
+                                border-left: 1px solid rgba(0, 0, 0, 0.12);
+                            }
+                            td:last-child {
+                                border-right: 1px solid rgba(0, 0, 0, 0.12);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /**
+         * Change background of tr by type for the fixed right column
+         * tr of type odd : white background
+         * tr of type even : smoothest grey (gris)
+         * 
+         * For the fixed column header first then for the body (action container) 
+        */
+        // for the fixed column header
+        .DTFC_RightHeadWrapper {
+            .table {
+                thead {
+                    tr {
+                        th.sorting_disabled {
+                            background: $tr-odd-background !important;
+                        }
+                    }
+                }
+            }
+        }
+        /**
+         * For the fixed column body
+        */
+        .DTFC_RightBodyWrapper { // div
+            .table {
+                tbody {
+                    tr {
+                        border: none !important;
+                    }
+                    tr:nth-of-type(odd) {
+                        background: #fff;
+                        td {
+                            border-right: none !important;
+                        }
+                    }
+                    tr:nth-of-type(even) {
+                        background: $tr-odd-background;
+                        td {
+                            border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Change design for the input filter
+     * Change input filter height, border-color, border-color when focused
+     * The app-filters is not in .app-dt-card wrapper
+    */
+    .app-filters-container table.table tbody tr td {
+        border: none;
+        input, select {
+            height: 32px;
+            border: 1px solid #dee2e6;
+            border-radius: 0;
+            padding-left: 4px;
+            &:focus {
+                border: 1px solid $app-primary;
+            }
+        }
+    }
+}
+
+@include datatable_table;

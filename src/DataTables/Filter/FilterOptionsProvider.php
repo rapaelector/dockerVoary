@@ -72,6 +72,7 @@ class FilterOptionsProvider
         $countries = $this->em->getRepository(Address::class)
             ->createQueryBuilder('address')
             ->select('DISTINCT(address.country) country')
+            ->where('address.country IS NOT NULL')
             ->getQuery()
             ->getResult()
         ;
@@ -89,6 +90,7 @@ class FilterOptionsProvider
         $activities = $this->em->getRepository(Client::class)
             ->createQueryBuilder('client')
             ->select('DISTINCT(client.activity) activity')
+            ->where('client.activity IS NOT NULL')
             ->getQuery()
             ->getResult()
         ;
