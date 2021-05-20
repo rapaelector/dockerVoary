@@ -7,6 +7,7 @@ use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use App\Controller\BaseController;
 use App\Service\Client\ClientServiceInterface;
+use App\Security\Voter\ClientVoter;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +27,15 @@ use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * Use voter to check security
+ */
 #[Route('/client')]
 class ClientController extends BaseController
-{
+{   
     #[Route('/', name: 'client.list', methods: ['GET', 'POST'])]
     public function index(
         Request $request, 
@@ -130,6 +136,12 @@ class ClientController extends BaseController
         ]);
     }
 
+    /**
+     * Create new client is not check by voter because there are no client object when creating a new client
+     * Cant send client object to ClientVoter because there are no client object here
+     * 
+     * @IsGranted("ROLE_CLIENT_ADD")
+     */
     #[Route('/new', name: 'client.new', methods: ['GET', 'POST'])]
     public function new(Request $request, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
@@ -159,6 +171,9 @@ class ClientController extends BaseController
         ]);
     }
 
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::VIEW'), client)")
+     */
     #[Route('/{id}', name: 'client.show', methods: ['GET'])]
     public function show(Client $client): Response
     {
@@ -169,6 +184,9 @@ class ClientController extends BaseController
 
     /**
      * Edit client and redirect to the redirectPath if defined else redirect to the list of client
+     * Role checked by voter
+     * 
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), client)")
      * 
      * @param Request $request
      * @param Client $client
@@ -202,6 +220,9 @@ class ClientController extends BaseController
         ]);
     }
 
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), client)")
+     */
     #[Route('/{id}', name: 'client.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, Client $client, TranslatorInterface $translator): Response
     {

@@ -24,3 +24,6 @@ user:
     role: 'Gestion utilisateurs'
     label:
         user: 'Utilisateur'
+
+prospect:
+    role: 'Gestion des prospects'

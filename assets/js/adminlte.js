@@ -14,7 +14,7 @@ require('datatables.net-buttons/js/buttons.html5.js')();  // HTML 5 file export
 require('datatables.net-buttons/js/buttons.flash.js')();  // Flash file export
 require('datatables.net-buttons/js/buttons.print.js')();  // Print view button
 require('datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')();
-require('datatables.net-fixedColumns-bs4');
+require('datatables.net-fixedcolumns-bs4');
 
 import './datatable/omines-datatables';
 import { selectBuilder } from './common/form/select_form';
