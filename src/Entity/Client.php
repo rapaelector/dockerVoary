@@ -107,7 +107,10 @@ class Client
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, cascade={"persist", "refresh"})
+     * If client can be join to many contact then remove the cascade persist
+     * For now client only have relation with contact who have create with the client
+     * 
+     * @ORM\ManyToMany(targetEntity=User::class, cascade={"persist", "refresh", "remove"})
      */
     private $contacts;
 
