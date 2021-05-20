@@ -50,7 +50,7 @@ function ResetPassword () {
 			},
 			showCancelButton: true,
 			cancelButtonText: 'Annuler',
-			confirmButtonText: 'Ok',
+			confirmButtonText: 'OK',
 			showLoaderOnConfirm: true,
 			preConfirm: () => {
 				return new Promise(function (resolve, reject) {

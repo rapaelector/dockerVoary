@@ -8,7 +8,7 @@ title:
   show_client: 'Detail du prospect'
   billing_address: 'Adresse de facturation'
   client: 'Prospect'
-  add_prospect: 'Ajouter prospect'
+  add_prospect: 'Ajouter un prospect'
   delete_prospect: 'Suppréssion du prospect'
   contacts: 'Contacts'
   prospect: 'Prospect'

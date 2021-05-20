@@ -25,7 +25,7 @@ reset_password:
 title:
     new_user: 'Création utilisateur'
     edit_user: 'Modification utilisateur'
-    add_user: 'Ajouter utilisateur'
+    add_user: 'Ajouter un utilisateur'
     new_user_breadCrumb: 'Nouvel utilisateur'
     user_list: 'Gestion utilisateurs'
     home: 'Acceuil'
