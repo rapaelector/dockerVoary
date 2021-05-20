@@ -15,4 +15,5 @@ class Attributes
 	const CREATE = 'create';
 	const SHOW = 'show';
 	const EDIT = 'edit';
+	const DELETE = 'delete';
 }

@@ -1,5 +1,9 @@
 {% trans_default_domain 'messages' %}
 
+{% if context is defined %}
+    {% set user = context %}
+{% endif %}
+
 <div class="dropdown">
     <button class="btn btn-icon dropdown-toggle"
         type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
@@ -10,21 +14,21 @@
     </button>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
         
-        {% if is_granted('ROLE_USER_VIEW') %}
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::VIEW'), user|default(null)) %}
             <a class="dropdown-item" href="{{ path('user.show', {id: id}) }}">
                 <i class="material-icons">visibility</i>
                 {{ 'action.show'|trans }}
             </a>
         {% endif %}
         
-        {% if is_granted('ROLE_USER_EDIT') %}
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), user|default(null)) %}
             <a class="dropdown-item" href="{{ path('user.edit', {id: id}) }}">
                 <i class="material-icons">edit</i>
                 {{ 'action.edit'|trans }}
             </a>
         {% endif %}
 
-        {% if is_granted('ROLE_USER_EDIT') %}
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), user|default(null)) %}
             <a 
                 class="dropdown-item" 
                 href="#"
@@ -36,7 +40,7 @@
             </a>
         {% endif %}
 
-        {% if is_granted('ROLE_USER_DELETE') %}
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), user|default(null)) %}
             {% include "user/_delete_form.html.twig" with {
                 id: id,
                 deleteRoute: 'user.delete'

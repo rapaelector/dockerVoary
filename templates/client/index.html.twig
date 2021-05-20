@@ -12,9 +12,11 @@
         links: [],
     } %}
         {% block header_links %}
-            <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
-                <i class="material-icons">add</i>
-            </a>
+            {% if is_granted('ROLE_CLIENT_ADD') %}
+                <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
+                    <i class="material-icons">add</i>
+                </a>
+            {% endif %}
         {% endblock %}
     {% endembed %}
 {% endblock %}

@@ -34,6 +34,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 #[Route('/user')]
 class UserController extends BaseController
@@ -209,7 +210,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_USER_VIEW")
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::VIEW'), user)")
      */
     #[Route('/{id}', name: 'user.show', methods: ['GET'])]
     public function show(User $user): Response
@@ -220,7 +221,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_USER_EDIT")
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), user)")
      */
     #[Route('/{id}/edit', name: 'user.edit', methods: ['GET','POST'])]
     public function edit(Request $request, User $user, TranslatorInterface $translator): Response
@@ -242,7 +243,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_USER_DELETE")
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), user)")
      */
     #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, User $user, TranslatorInterface $translator): Response
@@ -262,7 +263,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @IsGranted("ROLE_USER_EDIT")
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), user)")
      */
     #[Route('/{id}/reset-password', name: 'user.reset_password', methods: ['POST'], options: ['expose'=>true])]
     public function resetPassword(Request $request, User $user, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em, MessageBusInterface $messagerBus)

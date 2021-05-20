@@ -18,6 +18,7 @@
         {% block extra_title %}
             {% embed 'client/_actions.html.twig' with {
                 id: client.id,
+                client: client,
                 showShow: false,
                 redirectPah: 'client.show',
             } %}

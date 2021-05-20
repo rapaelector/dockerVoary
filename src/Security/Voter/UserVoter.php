@@ -11,6 +11,14 @@ class UserVoter extends Voter
 {
     const ROLE_USER = 'ROLE_USER';
 
+    /** @var Security $security */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function supports($attribute, $subject)
     {
         if (!in_array($attribute, static::getSupportedAttributes())) {
@@ -45,7 +53,23 @@ class UserVoter extends Voter
      */
     public function canView(User $user)
     {
-        return $this->isGranted('ROLE_USER_VIEW');
+        return $this->security->isGranted('ROLE_USER_VIEW');
+    }
+    
+    /**
+     * Check if user have role user view
+     */
+    public function canEdit(User $user)
+    {
+        return $this->security->isGranted('ROLE_USER_EDIT');
+    }
+
+    /**
+     * Check if user have role user view
+     */
+    public function canDelete(User $user)
+    {
+        return $this->security->isGranted('ROLE_USER_DELETE');
     }
 
     public static function getSupportedAttributes()
@@ -55,6 +79,7 @@ class UserVoter extends Voter
             Attributes::CREATE,
             Attributes::SHOW,
             Attributes::EDIT,
+            Attributes::DELETE,
         ];
     }
 }

@@ -72,6 +72,7 @@ class ClientVoter extends Voter
             Attributes::CREATE,
             Attributes::SHOW,
             Attributes::EDIT,
+            Attributes::DELETE,
         ];
     }
 }

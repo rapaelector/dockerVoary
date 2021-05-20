@@ -36,6 +36,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 #[Route('/client')]
 class ClientController extends BaseController
 {   
+    /**
+     * @isGranted("ROLE_CLIENT_VIEW")
+     */
     #[Route('/', name: 'client.list', methods: ['GET', 'POST'])]
     public function index(
         Request $request, 
@@ -198,7 +201,6 @@ class ClientController extends BaseController
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-        dump($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             $clientService->update($client);

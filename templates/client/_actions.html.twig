@@ -1,5 +1,13 @@
 {% trans_default_domain 'messages' %}
 
+{% if context is defined %}
+    {% set client = context %}
+{% elseif context is not defined and client is defined %}
+    {% set client = client %}
+{% else %}
+    {% set client = null %}
+{% endif %}
+
 <div class="dropdown">
     {% block dropdown_toggler %}
         <button class="btn btn-icon dropdown-toggle"
@@ -13,21 +21,21 @@
 
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
         {% block actions %}
-            {% if showShow ?? true %}
+            {% if showShow ?? is_granted('ROLE_CLIENT_VIEW') %}
                 <a class="dropdown-item" href="{{ path('client.show', {id: id}) }}">
                     <i class="material-icons">visibility</i>
                     {{ 'action.view'|trans }}
                 </a>
             {% endif %}
 
-            {% if true %}
+            {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), client) %}
                 <a class="dropdown-item" href="{{ path('client.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
                     <i class="material-icons">edit</i>
                     {{ 'action.edit'|trans }}
                 </a>
             {% endif %}
 
-            {% if true %}
+            {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), client) %}
                 {% include 'client/_delete_form.html.twig' with {
                     id: id,
                     deleteRoute: 'client.delete'
