@@ -2,7 +2,7 @@
 
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.list'|trans }}{% endblock %}
+{% block title %}{{ 'title.list'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card card-outline card-app-primary">
                     <div class="card-header">
                         <h3 class="card-title">{{ 'title.list'|trans }}</h3>
                         <div class="card-tools">
@@ -54,7 +54,7 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: true,
+                debug: false,
                 enableFormatter: true,
                 redrawEvent: 'client.deleted',
             })

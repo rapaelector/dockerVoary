@@ -215,10 +215,10 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
     config = $.extend(true, {
         searching: true,
         dom: `
-            <'app-dt-card'
+            <'app-dt-list'
                 <'row mb-3'<'col-sm-3'l><'col-sm-6'<'d-inline-block'B><'clear-filters pl-3 d-inline-block'>CA><'col-sm-3'f>>
                 <'row'<'col-sm-12 mt-table'<''tr>>>
-                <'row'<'col-sm-5'i><'col-sm-7'p>>
+                <'row mt-3'<'col-sm-5'i><'col-sm-7'p>>
             >
         `,
         scrollX: true,

@@ -2,7 +2,7 @@
 
 {% extends 'user/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.user_list'|trans }}{% endblock %}
+{% block title %}{{ 'title.user_list'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
@@ -15,7 +15,7 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="card">
+        <div class="card card-outline card-app-primary">
             <div class="card-header">
                 <h3 class="card-title">{{ 'title.list'|trans }}</h3>
                 <div class="card-tools">
@@ -47,7 +47,7 @@
             window.App.DataTable.initAppDataTables({
                 columnNames: [
                     'user_profile_image', 'user_email', 'user_firstName', 'user_lastName', 
-                    'user_phone', 'user_job', 'user_fax', 'created_at',
+                    'user_phone', 'user_fax', 'user_job', 'created_at',
                     'updated_at', 'user_can_login', 'actions'
                 ],
                 excludedColumns: [9],
@@ -55,7 +55,7 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: true,
+                debug: false,
                 enableFormatter: true,
                 redrawEvent: 'user.deleted'
             });

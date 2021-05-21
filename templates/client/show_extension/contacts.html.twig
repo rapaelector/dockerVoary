@@ -6,10 +6,11 @@
             <th>{{ 'label.last_name'|trans }}</th>
             <th>{{ 'label.first_name'|trans }}</th>
             <th>{{ 'label.e_mail'|trans }}</th>
-            <th>{{ 'label.fax'|trans }}</th>
             <th>{{ 'label.phone'|trans }}</th>
+            <th>{{ 'label.fax'|trans }}</th>
             <th>{{ 'label.job'|trans }}</th>
             <th>{{ 'label.address'|trans }}</th>
+            <th class="text-center">{{ 'action.action'|trans({}, 'messages') }}</th>
         </tr>
     </thead>
     <tbody>    
@@ -19,10 +20,36 @@
                     <td>{{ resolve([contact, 'lastName'], '') }}</td>
                     <td>{{ resolve([contact, 'firstName'], '') }}</td>
                     <td>{{ resolve([contact, 'email'], '') }}</td>
-                    <td>{{ resolve([contact, 'fax'], '') }}</td>
                     <td>{{ resolve([contact, 'phone'], '') }}</td>
+                    <td>{{ resolve([contact, 'fax'], '') }}</td>
                     <td>{{ resolve([contact, 'job'], '') }}</td>
                     <td>{{ resolve([contact, 'rawAddress'], '') }}</td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-icon dropdown-toggle"
+                                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+                                aria-expanded="false"
+                                data-boundary="window"
+                            >
+                                <span class="material-icons">more_vert</span>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
+                                <a class="dropdown-item" href="{{ path('contact.edit', {
+                                    id: contact.id,
+                                    client: client.id,
+                                }) }}">
+                                    <i class="material-icons">edit</i>
+                                    {{ 'action.edit'|trans({}, 'messages') }}
+                                </a>
+                                
+                                {% include "user/_delete_form.html.twig" with {
+                                    id: contact.id,
+                                    deleteRoute: 'user.delete'
+                                } %}
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
         {% else %}

@@ -74,22 +74,38 @@ class SidebarMenuBuilder
             ])->setAttributes(['class' => $navItem]);
         }
 
-        $menu->addChild('menu.roles', [
-            'route' => 'roles.management',
-            'linkAttributes' => ['class' => $linkClassName],
-            'extras' => [
-                'icon' => $icon,
-                'icon_content' => 'security',
-                'label_wrapper' => 'p',
-            ],
-        ])->setAttributes(['class' => $navItem]);
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('menu.roles', [
+                'route' => 'roles.management',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'security',
+                    'label_wrapper' => 'p',
+                ],
+            ])->setAttributes(['class' => $navItem]);
+        }
         
-        $menu->addChild('menu.prospect_manager', [
-            'route' => 'client.list',
+        $menu->addChild('menu.client_header', [])->setAttribute('class', $subTitleClass);
+
+        if ($this->security->isGranted('ROLE_CLIENT_VIEW')) {
+            $menu->addChild('menu.prospect_management', [
+                'route' => 'client.list',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'inventory',
+                    'label_wrapper' => 'p',
+                ],
+            ])->setAttributes(['class' => $navItem]);
+        }
+        
+        $menu->addChild('menu.project_management', [
+            'route' => 'project.index',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
                 'icon' => $icon,
-                'icon_content' => 'description',
+                'icon_content' => 'engineering',
                 'label_wrapper' => 'p',
             ],
         ])->setAttributes(['class' => $navItem]);

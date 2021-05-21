@@ -3,6 +3,9 @@ $default-em: 16;
 $base-unit: ($default-em / $root-em) * 1rem;
 $app-spacer: ($default-em / $root-em) * 1rem;
 $app-spacer-px: 16px;
+// Reduce the width of the sidebar from 250px to 230px;
+$sidebar-width: 230px;
+
 
 @function _rem($px-value) {
 	@return $px-value / 16 * 1rem;

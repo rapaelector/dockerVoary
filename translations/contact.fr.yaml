@@ -1,0 +1,5 @@
+title:
+  edit_contact: 'Modification contact'
+
+messages:
+  contact_edited_success: 'Contact modifier avec succès'

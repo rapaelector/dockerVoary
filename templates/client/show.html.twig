@@ -2,7 +2,7 @@
 
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.show_client'|trans }}{% endblock %}
+{% block title %} {{ 'title.show_client'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
@@ -18,7 +18,6 @@
         {% block extra_title %}
             {% embed 'client/_actions.html.twig' with {
                 id: client.id,
-                client: client,
                 showShow: false,
                 redirectPah: 'client.show',
             } %}
@@ -75,7 +74,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ 'title.contacts'|trans }}</h3>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body p-0 pb-4">
                         {% include 'client/show_extension/contacts.html.twig' %}
                     </div>
                 </div>
@@ -89,9 +88,10 @@
     <script>
         $(function () {
             $('#contacts-table').dataTable({
-                dom: `<'container-fluid pt-3'<'row'<'col-sm-6 offset-sm-6'f>>
+                dom: `<'app-dt-list'
+                    <'container-fluid pt-3'<'row'<'col-sm-6 offset-sm-6'f>>
                     <'row'<'col-sm-12'tr>>
-                >`
+                >>`
             })
         })
     </script>

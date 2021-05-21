@@ -5,7 +5,7 @@ title:
   edit_client: 'Modification prospect'
   edit_prospect: 'Modifier ce prospect'
   delete_client: 'Suppréssion des prospects'
-  show_client: 'Detail du prospect'
+  show_client: 'Détails du prospect'
   billing_address: 'Adresse de facturation'
   client: 'Prospect'
   add_prospect: 'Ajouter un prospect'

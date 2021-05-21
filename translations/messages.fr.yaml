@@ -8,12 +8,17 @@ menu:
     offers_menu: 'Gestion des offres'
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
-    prospect_manager: 'Gestion des prospects'
+    prospect_management: 'Gestion des prospects'
+    project_management: 'Gestion des projets'
+    client_header: 'Client'
 
 action:
-  save: 'Enregistrer'
+  action: 'Action'
+  back_to_list: 'Retourner à la liste'
   delete: 'Supprimer'
   edit: 'Modifier'
+  edit_user: 'Modifier utilisateur'
+  edit_profil: 'Modifier profil'
   show: 'Voir'
   update: 'Mettre à jour'
   generate_password: 'Générer le mot de passe'
@@ -21,12 +26,10 @@ action:
   cancel: 'Annuler'
   reset_password: 'Réinitialiser MDP'
   find: 'Rechercher'
-  edit_profil: 'Modifier profil'
   change_password: 'Changer mot de passe'
   logout: 'Deconnexion'
-  action: 'Action'
   view: 'Voir'
-  back_to_list: 'Retourner à la liste'
+  save: 'Enregistrer'
   show_profile: 'Voir profil'
 
 title:

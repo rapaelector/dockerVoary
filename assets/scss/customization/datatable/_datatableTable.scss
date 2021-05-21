@@ -1,7 +1,9 @@
-$tr-odd-background: rgba(0, 0, 0, 0.05);
+$tr-even-background: rgba(0, 0, 0, 0.05);
+$tr-odd-background: #fff;
+$table-cell-backgroud: rgba(0, 0, 0, 0.12);
 
 @mixin datatable_table () {
-    .app-dt-card {
+    .app-dt-list {
         .btn {
             &.buttons-colvis {
                 &.btn-outline-app-primary {
@@ -79,7 +81,7 @@ $tr-odd-background: rgba(0, 0, 0, 0.05);
             .dataTables_scrollHead {
                 .table {
                     tr {
-                        background: $tr-odd-background;
+                        background: $tr-even-background;
                     }
                 }
             }
@@ -99,12 +101,12 @@ $tr-odd-background: rgba(0, 0, 0, 0.05);
                             }
                         }
                         tr:nth-of-type(even) {
-                            background: $tr-odd-background;
+                            background: $tr-even-background;
                             td:first-child {
-                                border-left: 1px solid rgba(0, 0, 0, 0.12);
+                                border-left: 1px solid $table-cell-backgroud;
                             }
                             td:last-child {
-                                border-right: 1px solid rgba(0, 0, 0, 0.12);
+                                border-right: 1px solid $table-cell-backgroud;
                             }
                         }
                     }
@@ -124,7 +126,7 @@ $tr-odd-background: rgba(0, 0, 0, 0.05);
                 thead {
                     tr {
                         th.sorting_disabled {
-                            background: $tr-odd-background !important;
+                            background: $tr-even-background !important;
                         }
                     }
                 }
@@ -146,7 +148,7 @@ $tr-odd-background: rgba(0, 0, 0, 0.05);
                         }
                     }
                     tr:nth-of-type(even) {
-                        background: $tr-odd-background;
+                        background: $tr-even-background;
                         td {
                             border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
                         }
@@ -160,18 +162,71 @@ $tr-odd-background: rgba(0, 0, 0, 0.05);
      * Change input filter height, border-color, border-color when focused
      * The app-filters is not in .app-dt-card wrapper
     */
-    .app-filters-container table.table tbody tr td {
-        border: none;
-        input, select {
-            height: 32px;
-            border: 1px solid #dee2e6;
-            border-radius: 0;
-            padding-left: 4px;
-            &:focus {
-                border: 1px solid $app-primary;
+    .app-filters-container table.table tbody tr {
+        td {
+            border: none;
+            input, select {
+                height: 32px;
+                border: 1px solid #dee2e6;
+                border-radius: 0;
+                padding-left: 4px;
+                border-right: none;
+                &:focus {
+                    border: 1px solid $app-primary;
+                }
+            }
+            &:last-child {
+                input {
+                    border-right: 1px solid #dee2e6;
+                }
+            }
+        }
+    }
+    #contacts-table {
+        thead {
+            tr {
+                background: $tr-even-background;
+                th {
+                    border-bottom: none;
+                    border: 1px solid $table-cell-backgroud;
+                    &:not(last-child) {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+        tbody {
+            @include tr_style($tr-odd-background, $tr-even-background);
+            tr:first-child {
+                td {
+                    border-top: none;
+                }
+            }
+            tr:nth-of-type(even) {
+                td {
+                    border: 1px solid $table-cell-backgroud;
+                }
             }
         }
     }
 }
 
-@include datatable_table;
+@mixin tr_style ($oddBackground, $evenBackground) {
+    tr:nth-of-type(odd) {
+        background: $oddBackground;
+        td {
+            border-right: none !important;
+        }
+    }
+    tr:nth-of-type(even) {
+        background: $evenBackground;
+        td {
+            border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+    }
+}
+@mixin datatableTable {
+    @include datatable_table;
+}
+
+@include datatableTable;

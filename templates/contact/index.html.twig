@@ -1,26 +1,26 @@
-{% trans_default_domain 'client' %}
+{% trans_default_domain 'contact' %}
 
 {% extends 'client/layout.html.twig' %}
 
-{% block title %}{{ 'title.new_client'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'title.edit_contact'|trans }} | {{ parent() }}{% endblock %}
 
 {% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-{% form_theme form.contacts 'shared/form/client_contact_form.html.twig' %}
+{# {% form_theme form.contacts 'shared/form/client_contact_form.html.twig' %} #}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
-        title: 'title.new_client'|trans,
+        title: 'title.edit_contact'|trans,
         links: [
             {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
-            {label: 'title.client_manger'|trans, routeName: 'client.list'},
-            {label: 'title.new_client'|trans},
+            {label: 'title.client_manger'|trans({}, 'client'), routeName: 'client.list'},
+            {label: 'title.edit_contact'|trans },
         ],
     } %}{% endembed %}
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
-        {{ include('client/_form.html.twig') }}
+        {{ include('contact/_form.html.twig') }}
     </div>
 {% endblock %}

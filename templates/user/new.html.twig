@@ -2,7 +2,7 @@
 
 {% extends 'user/layout.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'title.new_user'|trans }}{% endblock %}
+{% block title %}{{ 'title.new_user'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content_header %}
     {% include template_content_header with {

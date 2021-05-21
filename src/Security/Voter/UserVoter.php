@@ -66,10 +66,11 @@ class UserVoter extends Voter
 
     /**
      * Check if user have role user view
+     * The current user cant delete him self
      */
-    public function canDelete(User $user)
+    public function canDelete(User $deletedUser, User $user)
     {
-        return $this->security->isGranted('ROLE_USER_DELETE');
+        return $this->security->isGranted('ROLE_USER_DELETE') && ($deletedUser->getId() != $this->security->getUser()->getId());
     }
 
     public static function getSupportedAttributes()

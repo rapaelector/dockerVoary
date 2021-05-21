@@ -8,6 +8,7 @@ login:
     password_placeholder: 'Mot de passe'
     remember_me: 'Se souvenir de moi'
     sign_in: 'Se connecter'
+
 reset_password:
     box_msg: 'Entrez votre email'
     box_reset_msg: 'Entrez le nouveau mots de pass'
@@ -31,7 +32,8 @@ title:
     home: 'Acceuil'
     contact_empty: 'Contact vide'
     edit_profile: 'Modification profil'
-    show_profile: 'Detail utilisateur'
+    show_profile: 'Détails utilisateur'
+    details_profile: 'Details profil'
     user_detail: ''
     my_profile: 'Profil'
     change_password: 'Modification mot de passe'
@@ -50,7 +52,7 @@ label:
     fax: 'Fax'
     address_contact: 'Adresse contact'
     address: 'Adresse'
-    can_login: 'Peut acceder au CRM'
+    can_login: 'Peut accéder au CRM'
     profile_image: 'Photo de Profil'
     created_at: 'Crée le'
     updated_at: 'Mis à jour le'

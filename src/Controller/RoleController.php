@@ -20,6 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\User;
 use App\Security\Role\RoleProvider;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/role")
@@ -28,8 +29,8 @@ class RoleController extends BaseController
 {
     /**
      * @Route("/", name="roles.management")
+     * @isGranted("ROLE_ADMIN")
      */
-    // public function indexAction(Request $request, UserLogoutManager $userLogoutManager)
     public function indexAction(Request $request, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         $parentRoles = RoleProvider::getParentRoles();

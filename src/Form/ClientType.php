@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Client;
 use App\Form\UserType;
 use App\Form\AddressType;
-use App\Form\User\ContactsType;
+use App\Form\User\ContactType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -68,7 +68,7 @@ class ClientType extends AbstractType
             ])
             ->add('contacts', CollectionType::class, [
                 'label' => false,
-                'entry_type' => ContactsType::class,
+                'entry_type' => ContactType::class,
                 'block_name' => 'client_contacts',
                 'allow_add' => true,
                 'allow_delete' => true,

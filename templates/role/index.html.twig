@@ -2,7 +2,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent() }} | {{ 'title.role_manager'|trans }} {% endblock %}
+{% block title %} {{ 'title.role_manager'|trans }} | {{ parent() }}{% endblock %}
 
 {% block name %}{% endblock %}
 
@@ -82,7 +82,7 @@
 										<tr>
 											<th></th>
 											{% for action in actions %}
-												<th class="text-nowrap">{{ action|trans }}</th>
+												<th class="text-nowrap text-center">{{ action|trans }}</th>
 											{% endfor %}
 										</tr>
 									</thead>

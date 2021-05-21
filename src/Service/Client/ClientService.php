@@ -28,8 +28,8 @@ class ClientService implements ClientServiceInterface
      */
     public function generateClientNumber()
     {
-        $cliStart = 967;
-        $prStart = 633;
+        $cliStart = 1;
+        $prStart = 1;
         $repo = $this->em->getRepository(Client::class);
         $allCN = $this->repository->getAllClientNumbers();
         $maxCLI = 0;
@@ -48,21 +48,33 @@ class ClientService implements ClientServiceInterface
             }
         }
 
-        $maxCLI = max([$cliStart, $maxCLI]);
-        $maxPR = max([$prStart, $maxPR]);
+        $maxCLI = (int) max([$cliStart, $maxCLI]);
+        $maxPR = (int) max([$prStart, $maxPR]);
+        dump($maxCLI);
+        dump($maxPR);
 
-        while ($repo->findByClientNumber('CLI' . ((strlen(''.$maxCLI) < 4) ? '0' : '') . $maxCLI)) {
+        while ($repo->findByClientNumber($this->formatCN('CL', $maxCLI))) {
             $maxCLI++;
         }
 
-        while ($repo->findByClientNumber('PR' . ((strlen(''.$maxPR) < 4) ? '0' : '') . $maxPR)) {
+        while ($repo->findByClientNumber($this->formatCN('PR', $maxPR))) {
             $maxPR++;
         }
 
         return [
-            Client::TYPE_CLIENT => 'CLI' . ((strlen(''.$maxCLI) < 4) ? '0' : '') . $maxCLI,
-            Client::TYPE_PROSPECT => 'PR' . ((strlen(''.$maxPR) < 4) ? '0' : '') . $maxPR
+            Client::TYPE_CLIENT => $this->formatCN('CL', $maxCLI),
+            Client::TYPE_PROSPECT => $this->formatCN('PR', $maxPR)
         ];
+    }
+
+    function formatCN($prefix, $cn)
+    {
+        $middle = array_fill(0, max(4 - strlen($cn), 0), 0);
+        if (!empty($middle)) { 
+            $cn = implode('', $middle) . $cn;
+        }
+
+        return $prefix . $cn;
     }
 
     /**

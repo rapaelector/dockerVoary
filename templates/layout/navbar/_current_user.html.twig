@@ -10,7 +10,7 @@
             aria-expanded="false">
             {% if user is not defined %}{% set user = app.user %}{% endif %}
             <img class="img-circle" src="{{ user_avatar(user) }}" alt="User Avatar">
-            {{ app.user.username }}
+            {{ app.user.name }}
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

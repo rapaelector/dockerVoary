@@ -4,6 +4,7 @@
         Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; {{ 'now'|date('Y') }} <a href="#">{{ 'app_name'|trans }}</a>.</strong> 
+    {% set url = url|default('https://www.bonhommebatiment.fr/') %}
+    <strong>Copyright &copy; {{ 'now'|date('Y') }} <a href="{{ absolute_url(url) }}">{{ 'app_name'|trans }}</a>.</strong> 
     All rights reserved.
 </footer>
