@@ -165,6 +165,13 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
                 }
             }
         }
+
+        /**
+         * Customize text filter
+        */
+        .buttons-collection, .clear-filter-button {
+            padding: 3px 6px !important;
+        }
     }
     /**
      * Change design for the input filter
