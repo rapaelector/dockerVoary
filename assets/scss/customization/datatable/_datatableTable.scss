@@ -156,6 +156,15 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
                 }
             }
         }
+
+        .dataTables_paginate.paging_full_numbers {
+            li.paginate_button.page-item {
+                a.page-link {
+                    height: 35px;
+                    padding: 4px 12px;
+                }
+            }
+        }
     }
     /**
      * Change design for the input filter
@@ -211,6 +220,21 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
     }
 }
 
+@mixin datatable_table_xs {
+    @media (max-width: 576px) {
+        .app-dt-list {
+            .dt-buttons.btn-group {
+                justify-content: center;
+            }
+            .table-action {
+                .dataTables_filter, .dataTables_length {
+                    text-align: center;
+                }
+            }
+        }
+    }
+};
+
 @mixin tr_style ($oddBackground, $evenBackground) {
     tr:nth-of-type(odd) {
         background: $oddBackground;
@@ -227,6 +251,7 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
 }
 @mixin datatableTable {
     @include datatable_table;
+    @include datatable_table_xs;
 }
 
 @include datatableTable;

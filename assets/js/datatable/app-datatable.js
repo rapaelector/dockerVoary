@@ -216,7 +216,14 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
         searching: true,
         dom: `
             <'app-dt-list'
-                <'row mb-3'<'col-sm-3'l><'col-sm-6'<'d-inline-block'B><'clear-filters pl-3 d-inline-block'>CA><'col-sm-3'f>>
+                <'row mb-3 w-100 table-action'
+                    <'col-12 col-md-3'l>
+                    <'col-12 col-md-9 col-lg-6 text-center text-md-left'
+                        <'d-block d-sm-inline-block'B>
+                        <'clear-filters pl-sm-3 d-block d-sm-inline-block'>
+                    CA>
+                    <'col-12 col-lg-3 mt-3 mt-lg-0'f>
+                >
                 <'row'<'col-sm-12 mt-table'<''tr>>>
                 <'row mt-3'<'col-sm-5'i><'col-sm-7'p>>
             >

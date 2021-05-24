@@ -10,7 +10,9 @@
                     }
                     th, td {
                         padding: 0;
-                        // border: 1px solid $app-secondary;
+                        span.filter-label {
+                            display: none;
+                        }
                         input, select {
                             padding: 0;
                             border: none;
@@ -29,4 +31,39 @@
     }
 }
 
-@include datatable_filters;
+/**
+ * Filters design for xs viewport
+ * Display the span only if the viewport is xs
+*/
+@mixin datatable_filters_xs {
+    @media (max-width: 576px) {
+        .app-filters-container {
+            table.table {
+                thead {
+                    display: none;
+                }
+                tbody {
+                    tr td {
+                        display: flex;
+                        width: 100%;
+                        padding-bottom: 10px !important;
+                        span.filter-label {
+                            display: inline-block !important;
+                            width: 30%;
+                        }
+                        input, select {
+                            border-right: 1px solid $table-border-color !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin _datatable_filters {
+    @include datatable_filters_xs;
+    @include datatable_filters;
+}
+
+@include _datatable_filters;

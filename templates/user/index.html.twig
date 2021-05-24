@@ -29,9 +29,24 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        {% include template_datatable_filters with {
-                            datatable: datatable
-                        } %}
+                        <div class="text-right filter-collapse-container">
+                            <a
+                                class="btn d-block d-md-none"
+                                data-toggle="collapse"
+                                href="#filters-collapse"
+                                role="button"
+                                aria-expanded="true"
+                                aria-controls="filters-collapse">
+                                <span class="material-icons border rounded-circle elevation-1">
+                                    expand_more
+                                </span>
+                            </a>
+                            <div class="collapse show text-left d-md-block" id="filters-collapse">
+                                {% include template_datatable_filters with {
+                                    datatable: datatable
+                                } %}
+                            </div>
+                        </div>
                         <div id="{{ datatable.tableId }}">Chargement...</div>
                     </div>
                 </div>
@@ -55,9 +70,19 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: false,
+                debug: true,
                 enableFormatter: true,
-                redrawEvent: 'user.deleted'
+                redrawEvent: 'user.deleted',
+                config: {
+                    language: {
+                        paginate: {
+                            first: false,
+                            last: false,
+                            next: '<span class="material-icons">chevron_right</span>',
+                            previous: '<span class="material-icons">chevron_left</span>'
+                        }
+                    }
+                }
             });
 
             var resetPassword = new window.App.ResetPassword();

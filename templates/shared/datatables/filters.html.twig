@@ -50,10 +50,12 @@
 								{% set filter_attr = filter_attr|merge({
 									'type': 'text'
 								}) %}
+								<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
 								<input {{ render_attr(filter_attr) }}>
 							{% endif %}
 
 							{% if fieldType == constant('TYPE_CHOICE', filter) %}
+								<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
 								<select {{ render_attr(filter_attr) }}>
 									<option></option>
 									{% for key, value in resolve([filter, 'choices'], []) %}
@@ -70,6 +72,7 @@
 									'class': 'datepicker form-control',
 									'data-type': 'datepicker'
 								}) %}
+								<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
 								<input {{ render_attr(filter_attr) }}>
 							{% endif %}
 							
@@ -95,6 +98,7 @@
 								{% endif %}
 
 								<div class="input-daterange input-group">
+									<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
 									<input {{ render_attr(filter_attr) }}/>
 								</div>
 							{% endif %}
@@ -118,6 +122,7 @@
 									'data-range-prefix': filter.prefix,
 									'data-range-suffix': filter.suffix
 								} %}
+								<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
 								<input {{ render_attr(filter_attr) }} >
 								<div class="dropdown range-dropdown" id="{{ dropdown_id }}" data-trigger="#{{ id }}">
 									<ul class="dropdown-menu" aria-labelledby="{{ filter_attr.id }}">
