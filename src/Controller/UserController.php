@@ -71,14 +71,14 @@ class UserController extends BaseController
                     $this->filterOptionsProvider->getOptions('email')
                 ),
             ])
-            ->add('firstName', TextColumn::class, [
+            ->add('lastName', TextColumn::class, [
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('firstname')
                 )
             ])
-            ->add('lastName', TextColumn::class, [
+            ->add('firstName', TextColumn::class, [
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 

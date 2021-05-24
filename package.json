@@ -22,6 +22,7 @@
         "@popperjs/core": "^2.9.2",
         "admin-lte": "3.1",
         "bootstrap": "4.6",
+        "bootstrap-select": "^1.13.18",
         "datatables.net-dt": "^1.10.24",
         "datatables.net-fixedcolumns": "^3.3.2",
         "datatables.net-fixedcolumns-bs4": "^3.3.2",
@@ -31,6 +32,7 @@
         "flag-icon": "^2.5.0",
         "icheck-bootstrap": "^3.0.1",
         "jquery": "3.5.1",
-        "overlayscrollbars": "^1.13.1"
+        "overlayscrollbars": "^1.13.1",
+        "select2": "^4.1.0-rc.0"
     }
 }

@@ -4,6 +4,10 @@ import 'overlayscrollbars/js/jquery.overlayScrollbars.js';
 import 'admin-lte/dist/js/adminlte.js';
 import 'daterangepicker';
 import 'daterangepicker/daterangepicker.css';
+import 'select2/dist/js/select2';
+import 'bootstrap-select';
+import 'bootstrap-select/dist/js/bootstrap-select';
+import 'bootstrap-select/dist/js/i18n/defaults-fr_FR.min';
 
 window.$ = $;
 window.jQuery = $;
@@ -61,4 +65,29 @@ $(function () {
      * Make input with data-type="select" a select input
      */
     $('[data-type="select"]').each(selectBuilder);
+
+    /**
+     * Change icon for collapse switcher
+     */
+    $("[data-toggle='collapse']").on('click', function () {
+        console.info('hellow');
+        if ($(this).hasClass('collapsed')) {
+            $('[data-toggle="collapse"] .material-icons').text('expand_less');
+        } else {
+            $('[data-toggle="collapse"] .material-icons').text('expand_more');
+        }
+    });
+
+    /**
+     * Initialization for select2
+     * Every select input who have data-type="select2" should become select2 field
+     */
+    $('select[data-type="select2"]').select2({
+        width: '100%',
+    });
+
+    /**
+     * Initialization for bootstrap-select2
+     */
+    $('.bootstrap-select').selectpicker('refresh');
 });

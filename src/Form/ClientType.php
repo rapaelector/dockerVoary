@@ -35,6 +35,11 @@ class ClientType extends AbstractType
                 'label' => 'label.activity',
                 'choices' => Client::getActivityChoices(true),
                 'required' => false,
+                'attr' => [
+                    'class' => 'bootstrap-select',
+                    'data-live-search' => true,
+                    'data-type' => 'select2'
+                ],
             ])
             ->add('tvaRate', TextType::class, [
                 'label' => 'label.tva_rate',

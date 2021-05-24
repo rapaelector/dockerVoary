@@ -225,6 +225,16 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
         .app-dt-list {
             .dt-buttons.btn-group {
                 justify-content: center;
+                button.btn-collection, .clear-filter-button, .btn-group {
+                    padding: 3px 6px;
+                    max-width: 100%;
+                    width: 100%;
+                }
+                button.btn-collection {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
             }
             .table-action {
                 .dataTables_filter, .dataTables_length {

@@ -50,6 +50,11 @@ class AddressType extends AbstractType
             ->add('country', CountryType::class, [
                 'label' => 'label.country',
                 'required' => false,
+                'attr' => [
+                    'class' => 'bootstrap-select form-control',
+                    'data-live-search' => true,
+                    'data-type' => 'select2'
+                ],
             ])
         ;
     }

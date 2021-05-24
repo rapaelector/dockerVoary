@@ -69,10 +69,10 @@ links:
 list:
     columns:
         email: 'Email'
-        firstName: 'Nom'
-        first_name: 'Nom'
-        lastName: 'Prénom'
-        last_name: 'Prénom'
+        firstName: 'Prénom'
+        first_name: 'Prénom'
+        lastName: 'Nom'
+        last_name: 'Nom'
         phone: 'Téléphone'
         job: 'Fonction'
         createdAt: 'Créé le'
