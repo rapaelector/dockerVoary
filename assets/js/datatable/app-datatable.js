@@ -216,13 +216,13 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
         searching: true,
         dom: `
             <'app-dt-list'
-                <'row mb-3 w-100 table-action'
-                    <'col-12 col-md-3'l>
-                    <'col-12 col-md-6 col-lg-6 text-center text-md-left'
+                <'row m-0 pb-3 pb-md-0 w-100 table-action'
+                    <'col-12 col-sm-6 col-md-3'l>
+                    <'col-12 col-md-6 col-lg-6 text-center text-md-left pb-2 pb-md-0'
                         <'d-block d-sm-inline-block'B>
                         <'clear-filters pl-sm-3 d-block d-sm-inline-block'>
                     CA>
-                    <'col-12 col-md-3 mt-3 mt-md-0 mt-lg-0'f>
+                    <'col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 mt-lg-0'f>
                 >
                 <'row table-responsive'<'col-sm-12 mt-table'<''tr>>>
                 <'row mt-3'<'col-sm-5'i><'col-sm-7'p>>
@@ -238,7 +238,7 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
         buttons: [{
             extend: 'colvis',
             text: "Afficher/masquer les colonnes",
-            className: 'btn btn-outline-app-primary buttons-collection dropdown-toggle buttons-colvis',
+            className: 'btn buttons-collection dropdown-toggle buttons-colvis',
             columns: columns,
         }]
     }, config);

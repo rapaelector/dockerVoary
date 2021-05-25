@@ -120,7 +120,7 @@ export default [
      */
     {
         width: '200px',
-        cols: [],
-        className: 'text-left dynamic-nowrap'
+        cols: ['client_name'],
+        className: 'text-left dynamic-nowrap',
     },
 ];

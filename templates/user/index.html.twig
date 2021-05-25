@@ -26,30 +26,14 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="card-body py-0 pt-md-3 filter-collapse-container">
+                {% include template_datatable_filters with {
+                    datatable: datatable,
+                    filterCollapseId: 'client-filter-collapse',
+                } %}
+            </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="text-right filter-collapse-container">
-                            <a
-                                class="btn d-block d-md-none"
-                                data-toggle="collapse"
-                                href="#filters-collapse"
-                                role="button"
-                                aria-expanded="true"
-                                aria-controls="filters-collapse">
-                                <span class="material-icons border rounded-circle elevation-1">
-                                    expand_more
-                                </span>
-                            </a>
-                            <div class="collapse show text-left d-md-block" id="filters-collapse">
-                                {% include template_datatable_filters with {
-                                    datatable: datatable
-                                } %}
-                            </div>
-                        </div>
-                        <div id="{{ datatable.tableId }}">Chargement...</div>
-                    </div>
-                </div>
+                <div id="{{ datatable.tableId }}">Chargement...</div>
             </div>
         </div>
     </div>

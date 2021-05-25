@@ -55,6 +55,7 @@ class ClientController extends BaseController
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('clientNumber', TextColumn::class, [
                 'label' => $translator->trans('label.client_number', [], 'client'),
+                'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('client_number')
@@ -62,6 +63,7 @@ class ClientController extends BaseController
             ])
             ->add('name', TextColumn::class, [
                 'label' => $translator->trans('label.name', [], 'client'),
+                'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('client_name')
