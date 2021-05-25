@@ -25,13 +25,13 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <h1 class="m-0">
                     {{ title|raw }}
                     {% block extra_title %}{% endblock %}
                 </h1>
             </div><!-- /.col -->
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 {% if (links | default([]) | length) > 0 %}
                     <ol class="breadcrumb float-sm-right">
                         {% for link in links %}

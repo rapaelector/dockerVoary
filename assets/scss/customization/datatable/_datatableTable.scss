@@ -4,6 +4,11 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
 
 @mixin datatable_table () {
     .app-dt-list {
+        /**
+         * Remove card body padding to have more space for the datatable
+        */
+        padding: 0;
+
         .btn {
             &.buttons-colvis {
                 &.btn-outline-app-primary {
@@ -15,10 +20,7 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
             color: $app-primary;
             background: none;
         }
-        /**
-         * Remove card body padding to have more space for the datatable
-        */
-        padding: 0;
+        
         .dataTables_scroll {
             overflow-x: auto;
         }
@@ -157,11 +159,27 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
             }
         }
 
-        .dataTables_paginate.paging_full_numbers {
+        /**
+         * Datatable list footer disegn
+         * Pagination and item info
+        */
+        .dataTables_paginate {
             li.paginate_button.page-item {
                 a.page-link {
                     height: 35px;
-                    padding: 4px 12px;
+                    line-height: 35px;
+                    padding: 0 16px;
+                }
+                &.previous, &.next {
+                    a.page-link {
+                        padding: 4px 12px;
+                    }
+                }
+                &.active {
+                    a.page-link {
+                        background: $app-primary;
+                        border-color: $app-primary;
+                    }
                 }
             }
         }
@@ -171,6 +189,9 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
         */
         .buttons-collection, .clear-filter-button {
             padding: 3px 6px !important;
+            border: 1px solid $border-color;
+            background: #fff !important;
+            color: #000;
         }
     }
     /**
@@ -227,30 +248,87 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
     }
 }
 
-@mixin datatable_table_xs {
-    @media (max-width: 576px) {
-        .app-dt-list {
-            .dt-buttons.btn-group {
-                justify-content: center;
-                button.btn-collection, .clear-filter-button, .btn-group {
-                    padding: 3px 6px;
-                    max-width: 100%;
-                    width: 100%;
-                }
-                button.btn-collection {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-            }
-            .table-action {
-                .dataTables_filter, .dataTables_length {
-                    text-align: center;
-                }
+@include media-breakpoint-only(sm) {
+    .app-dt-list {
+        .table-action {
+            .col-lg-6 {
+                order: -1;
             }
         }
+        .table-action {
+            .dataTables_filter {
+                text-align: right !important;
+            }
+            .dataTables_length {
+                text-align: left !important;
+            }
+        }
+        /**
+        * Datatable list info text-left and remove padding
+        */
+        .dataTables_info {
+            text-align: left !important;
+            padding: 0;
+        }
     }
-};
+    /**
+    * Change justify context to flex-end
+    */
+    div.dataTables_wrapper .app-dt-list div.dataTables_paginate ul.pagination {
+        justify-content: flex-end !important;
+    }
+}
+
+@include media-breakpoint-only(xs) {
+    .app-dt-list {
+        .dt-buttons.btn-group {
+            justify-content: center;
+            padding: 0;
+            .btn-group {
+                padding: 0;
+            }
+        }
+        .buttons-collection, .clear-filter-button, .btn-group {
+            padding: 6px 12px;
+            max-width: 100%;
+            width: 100%;
+        }
+        .buttons-collection {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table-action {
+            .dataTables_filter, .dataTables_length {
+                text-align: center;
+                label {
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    input {
+                        flex: 1 1 0;
+                    }
+                }
+            }
+            .dataTables_length select {
+                margin: 0 8px;
+            }
+        }
+        /**
+        * Datatable list info text-left and remove padding
+        */
+        .dataTables_info {
+            text-align: left !important;
+            padding: 0;
+        }
+    }
+    /**
+    * Change justify context to flex-end
+    */
+    div.dataTables_wrapper .app-dt-list div.dataTables_paginate ul.pagination {
+        justify-content: flex-end !important;
+    }
+}
 
 @mixin tr_style ($oddBackground, $evenBackground) {
     tr:nth-of-type(odd) {
@@ -268,7 +346,6 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
 }
 @mixin datatableTable {
     @include datatable_table;
-    @include datatable_table_xs;
 }
 
 @include datatableTable;

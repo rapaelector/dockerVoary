@@ -38,6 +38,7 @@ title:
     my_profile: 'Profil'
     change_password: 'Modification mot de passe'
     list: 'Liste des utilisateurs'
+    filters: 'Filtres'
 
 label:
     email: 'Adresse mail'

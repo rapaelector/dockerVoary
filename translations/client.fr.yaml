@@ -13,6 +13,7 @@ title:
   contacts: 'Contacts'
   prospect: 'Prospect'
   address: 'Adresse'
+  filters: 'Filtres'
 
 label:
   name: 'Nom'

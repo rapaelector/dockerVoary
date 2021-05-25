@@ -1,74 +1,122 @@
+$items-padding: 4px;
 
-.app-dt-card {
-    div.dt-button-collection>:last-child {
-        display: flex !important;
-        flex-wrap: wrap;
-        // justify-content: center;
+@mixin datatable_button {
+    .app-dt-card {
+        div.dt-button-collection>:last-child {
+            display: flex !important;
+            column-gap: 0px;
+        }
     }
-}
 
-.dt-button-collection {
-    width: 600px !important;
-    box-sizing: border-box;
-    display: block;
-    max-height: 50vh;
-    overflow: auto;
-    border: none;
-    border-radius: 0px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    &:hover, &:focus {
-        text-decoration: none !important;
-        color: $app-primary !important;
+    /**
+     * Foce display to flex due to the bootstrap style
+     * Column-gap cause the space between flex item spacing
+     */
+    .dt-buttons {
+        margin: 0 !important;
+        div.dt-button-collection>:last-child {
+            display: flex !important;
+            column-gap: 0px;
+        }
     }
-    .dropdown-menu {
-        position: relative;
-        background: #fff;
-        display: flex !important;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding-left: 15px;
-        .dropdown-item {
-            width: 23%;
-            color: #000;
+    .dt-button-collection {
+        width: 600px !important;
+        box-sizing: border-box;
+        display: block;
+        max-height: 50vh;
+        overflow: auto;
+        border: none;
+        border-radius: 0px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        &:hover, &:focus {
+            text-decoration: none !important;
+            color: $app-primary !important;
+        }
+        .dropdown-menu {
+            position: relative;
             background: #fff;
-            border: 1px solid #ddd;
-            padding: 0.2rem 0.1rem;
-            &, &:hover, &:focus, &:active {
-                box-shadow: none;
-                background: none;
-                border: none;
-            }
-            & > span {
-                background: rgba(0, 0, 0, 0.02);
-                line-height: 36px;
-                padding-bottom: 0px;
-                padding-top: 0px;
-                padding-left: 16px;
-                padding-right: 16px;
-                border-radius: 4px;
-                color: #777;
-                font-weight: bold;
-                width: 100%;
-                display: block;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 12px;
-                br {
-                    display: none;
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            padding: $items-padding;
+            .dropdown-item {
+                width: 25%;
+                color: #000;
+                background: #fff;
+                border: 1px solid #ddd;
+                padding: 0.2rem 0.1rem;
+                padding-left: $items-padding;
+                padding-right: $items-padding;
+                &, &:hover, &:focus, &:active {
+                    box-shadow: none;
+                    background: none;
+                    border: none;
                 }
-                &:hover {
-                    background: rgba(#000, 0.06);
+                & > span {
+                    background: rgba(0, 0, 0, 0.02);
+                    line-height: 36px;
+                    padding-bottom: 0px;
+                    padding-top: 0px;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    border-radius: 4px;
+                    color: #777;
+                    font-weight: bold;
+                    width: 100%;
+                    display: block;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-size: 12px;
+                    br {
+                        display: none;
+                    }
+                    &:hover {
+                        background: rgba(#000, 0.06);
+                    }
+                    &:focus {
+                        background: rgba(0, 0, 0, 0.06);
+                    }
                 }
-                &:focus {
-                    background: rgba(0, 0, 0, 0.06);
-                }
-            }
-            &.active {
-                span {
-                    color: $app-primary;
-                    background: rgba(#000, 0.06);
+                &.active {
+                    span {
+                        color: $app-primary;
+                        background: rgba(#000, 0.06);
+                    }
                 }
             }
         }
     }
 }
+
+
+@mixin datatable_button_xs {
+    @include media-breakpoint-down(xs) {
+        .dt-buttons {
+            margin: 4px !important;
+        }
+        .dt-button-collection {
+            width: calc(100%) !important;
+        }
+    }
+}
+
+@mixin datatable_button_sm {
+    @include media-breakpoint-down(md) {
+        .dt-button-collection {
+            width: 400px !important;
+            .dropdown-menu {
+                .dropdown-item {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@mixin datatable_button_mix {
+    @include datatable_button;
+    @include datatable_button_sm;
+    @include datatable_button_xs;
+}
+
+@include datatable_button_mix;

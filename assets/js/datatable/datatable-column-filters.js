@@ -20,7 +20,7 @@ function initColumnFilters (container, dt, options, debug = false) {
             btn: {
                 wrapper: 'button',
                 attr: {
-                    'class': 'clear-filter-button d-inline-block btn btn-outline-app-primary',
+                    'class': 'btn clear-filter-button d-inline-block',
                 },
                 content: 'Annuler tous les filtres',
             },

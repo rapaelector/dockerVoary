@@ -67,18 +67,6 @@ $(function () {
     $('[data-type="select"]').each(selectBuilder);
 
     /**
-     * Change icon for collapse switcher
-     */
-    $("[data-toggle='collapse']").on('click', function () {
-        console.info('hellow');
-        if ($(this).hasClass('collapsed')) {
-            $('[data-toggle="collapse"] .material-icons').text('expand_less');
-        } else {
-            $('[data-toggle="collapse"] .material-icons').text('expand_more');
-        }
-    });
-
-    /**
      * Initialization for select2
      * Every select input who have data-type="select2" should become select2 field
      */

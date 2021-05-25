@@ -12,17 +12,17 @@ $(function () {
 			container: '.card-tools',
 		},
 		add: {
-			content: '<span class="material-icons">add</span> Ajouter contact',
+			content: '<span class="material-icons">add</span> <span>Ajouter contact</span>',
 			attr: {
-				class: 'btn btn-sm btn-app-secondary',
+				class: 'btn btn-sm btn-app-secondary d-flex align-items-center',
                 id: 'add-contact'
 			},
 			container: '#add-button-container',
 		},
         prototypeAttr: {
-            class: 'col-sm-6 mt-3'
+            class: 'col-md-6 mt-3'
         },
-		wrapperAdditionalClass: 'col-sm-6 mt-3',
+		wrapperAdditionalClass: 'col-md-6 mt-3',
     };
     try {
 		var clientContactsContainer = '#client_contacts';
