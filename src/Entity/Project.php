@@ -19,136 +19,190 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * Fr: code chantier
      */
     private $siteCode;
 
     /**
      * @ORM\Column(type="boolean")
+     * 
+     * Fr: feuille de route
      */
     private $roadmap;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: maitre d'ouvrage
      */
     private $projectOwner;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: maitre d'oeuvre
      */
     private $projectManager;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: adresse facturation
      */
     private $billingAddres;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: nom de l'interlocuteur
      */
     private $contactName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: email interlocuteur
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: telephone interlocuteur
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: addresse chantier
      */
     private $siteAddress;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: description de l' operation
      */
     private $descriptionOperation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: Dossier vendu par
      */
     private $soldBy;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: rédacteur du devis
      */
     private $quoteWriter;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: norme en 1090
      */
     private $norm1090;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: type de marche
      */
     private $marketType;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: bonhomme est il 
      */
     private $bonhomePercentage;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: validation de fiche DISA
      */
     private $disaSheetValidation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: mode de reglement acompte
      */
     private $paymentChoice;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date", length=255)
+     * 
+     * Fr: date d'acompte doi etre édité le
      */
     private $depositeDateEdit;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: condition négocier avec le client
      */
     private $clientCondition;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: N° du/des devis MDE validé(s)
      */
-    private $validatedMDE;
+    private $quoteValidatedMDE;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: Conditions négociées avec le client
      */
-    private $workDistribution;
+    private $quoteValidatedMDEDate;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: MONTANT GLOBAL DU MARCHE
      */
     private $globalAmount;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: montant des travaux sous-traiter
      */
     private $amountSubcontractedWork;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: montant des traveau propre a bbi
      */
     private $amountBBISpecificWork;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * Fr: type de dossier
      */
     private $caseType;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: planning projet
      */
     private $planningProject;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * Fr: assistant en charge du dossier
      */
     private $recordAssistant;
 
@@ -385,26 +439,26 @@ class Project
         return $this;
     }
 
-    public function getValidatedMDE(): ?string
+    public function getQuoteValidatedMDE(): ?string
     {
-        return $this->validatedMDE;
+        return $this->quoteValidatedMDE;
     }
 
-    public function setValidatedMDE(string $validatedMDE): self
+    public function setQuoteValidatedMDE(string $quoteValidatedMDE): self
     {
-        $this->validatedMDE = $validatedMDE;
+        $this->quoteValidatedMDE = $quoteValidatedMDE;
 
         return $this;
     }
 
-    public function getWorkDistribution(): ?string
+    public function getQuoteValidatedMDEDate(): ?string
     {
-        return $this->workDistribution;
+        return $this->quoteValidatedMDEDate;
     }
 
-    public function setWorkDistribution(string $workDistribution): self
+    public function setQuoteValidatedMDEDate(string $quoteValidatedMDEDate): self
     {
-        $this->workDistribution = $workDistribution;
+        $this->quoteValidatedMDEDate = $quoteValidatedMDEDate;
 
         return $this;
     }
