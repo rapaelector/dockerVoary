@@ -1,20 +1,82 @@
-{% extends 'base.html.twig' %}
+{% extends "pdf_base.html.twig" %}
 
-{% block title %}Hello ProjectController!{% endblock %}
+{% block page_title %}{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% set TOTAL_COL_COUNT = 128 %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% set FIRST_COL_COUNT = 5 %}
+{% set SECOND_COL_COUNT = 3 %}
+{% set FIRD_COL_COUNT =  1 %}
+{% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
+{% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/job/bbat/src/Controller/ProjectController.php'|file_link(0) }}">src/Controller/ProjectController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/job/bbat/templates/project/index.html.twig'|file_link(0) }}">templates/project/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% set FIRST_COL_WIDTH = (FIRST_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+{% set SECOND_COL_WIDTH = (SECOND_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+{% set FIRD_COL_WIDTH = (FIRD_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+{% set FOURTH_COL_WIDTH = (FOURTH_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+{% set FIFTH_COL_WIDTH = (FIFTH_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+
+{% set prospect_rowspan = 10 %}
+{% set empty_row_rowspan = 11 %}
+
+{% block content %}
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td width="{{ FIRST_COL_WIDTH }}%;"></td>
+                    <td width="{{ SECOND_COL_WIDTH }}%;"></td>
+                    <td width="{{ FIRD_COL_WIDTH }}%;"></td>
+                    <td width="{{ FOURTH_COL_WIDTH }}%;"></td>
+                    <td width="{{ FIFTH_COL_WIDTH }}%;"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="3">DOSSIER DE PROSPECTION</td>
+                    <td rowspan="2" class="pdf-td-logo">
+                        <img src="{{ asset('images/logo/bbat_pdf_logo.png') }}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td rowspan="{{ empty_row_rowspan }}"></td>
+                    <td>Date de première demande</td>
+                </tr>
+                <tr>
+                    <td rowspan="{{ prospect_rowspan }}" colspan="2"> lorem ipsum</td>
+                    <td>Contact</td>
+                    <td>Adresse chantier</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Description de l'operation</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Type de marche</td>
+                    <td>marche public</td>
+                </tr>
+                <tr>
+                    <td>type de chiffrage</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Honhomme est-il</td>
+                </tr>
+                <tr>
+                    <td colspan="2">pour la charpente norme en 1090 - 2 classe EXC</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Planning du projet</td>
+                </tr>
+                <tr>
+                    <td>Priorisation du dossier</td>
+                    <td>Reponse pour le</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Charge(e) d'affaire <div>economiste</div></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Nom du dossier sur le serveur</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

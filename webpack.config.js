@@ -33,6 +33,11 @@ Encore
      */
     .addEntry('app_client', './assets/js/client/app.js')
 
+    /**
+     * Entry for pdf page
+     */
+    .addStyleEntry('app_pdf', './assets/scss/pdf/app.scss')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 
