@@ -9,21 +9,34 @@
 {% set FIRD_COL_COUNT =  1 %}
 {% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
 {% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
+{% set PDF_LOGO_COUNT = 17 * 2 %}
 
 {% set FIRST_COL_WIDTH = (FIRST_COL_COUNT * 100) / TOTAL_COL_COUNT %}
 {% set SECOND_COL_WIDTH = (SECOND_COL_COUNT * 100) / TOTAL_COL_COUNT %}
 {% set FIRD_COL_WIDTH = (FIRD_COL_COUNT * 100) / TOTAL_COL_COUNT %}
 {% set FOURTH_COL_WIDTH = (FOURTH_COL_COUNT * 100) / TOTAL_COL_COUNT %}
 {% set FIFTH_COL_WIDTH = (FIFTH_COL_COUNT * 100) / TOTAL_COL_COUNT %}
+{% set PDF_LOGO_WIDTH = (PDF_LOGO_COUNT * 100) / FIFTH_COL_COUNT %}
 
 {% set prospect_rowspan = 10 %}
 {% set empty_row_rowspan = 11 %}
+
+{% set COL_PX_SIZE = 10 %}
+
+{% if previewMode|default(false) %}
+    {% set COL_PX_SIZE = 5 %}
+{% endif %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% include 'project/pdf/style.html.twig' %}
+{% endblock %}
 
 {% block content %}
     <div>
         <table>
             <tbody>
-                <tr>
+                <tr class="table-tr-header">
                     <td width="{{ FIRST_COL_WIDTH }}%;"></td>
                     <td width="{{ SECOND_COL_WIDTH }}%;"></td>
                     <td width="{{ FIRD_COL_WIDTH }}%;"></td>
@@ -32,9 +45,9 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="3">DOSSIER DE PROSPECTION</td>
+                    <td colspan="3" class="folder_prospection">DOSSIER DE PROSPECTION</td>
                     <td rowspan="2" class="pdf-td-logo">
-                        <img src="{{ asset('images/logo/bbat_pdf_logo.png') }}" alt="">
+                        <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="" width="{{ PDF_LOGO_WIDTH }}%">
                     </td>
                 </tr>
                 <tr>
@@ -44,7 +57,7 @@
                 </tr>
                 <tr>
                     <td rowspan="{{ prospect_rowspan }}" colspan="2"> lorem ipsum</td>
-                    <td>Contact</td>
+                    <td class="contact">Contact</td>
                     <td>Adresse chantier</td>
                 </tr>
                 <tr>

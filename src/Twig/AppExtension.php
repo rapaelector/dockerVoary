@@ -22,7 +22,7 @@ class AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('function_name', [$this, 'doSomething']),
+            new TwigFunction('space_value', [$this, 'spaceValue']),
             new TwigFunction('resolve', [$this, 'resolve']),
         ];
     }
@@ -40,5 +40,21 @@ class AppExtension extends AbstractExtension
     public function countryCodeToName(?string $countryCode): string
     {
         return $countryCode ? Countries::getName($countryCode) : '';
+    }
+
+    /**
+     * Return spacing size for pdf template
+     * 
+     * @var number $count
+     * @var number $totalCount
+     * @var number $colPxSize
+     */
+    public function spaceValue($count, $totalCount, $colPxSize)
+    {
+        if (!$count || !$totalCount || !$colPxSize) {
+            return 0;
+        }
+        
+        return (($count * 100) / $totalCount) * $colPxSize;
     }
 }

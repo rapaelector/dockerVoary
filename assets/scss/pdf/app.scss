@@ -5,10 +5,19 @@ $table-td-border-color: #000;
     table {
         width: $table-width;
         border-collapse: collapse;
-        tbody tr td {
-            border: 1px solid $table-td-border-color;
-            &.pdf-td-logo {
-                text-align: center;
+        tbody {
+            tr {
+                td {
+                    border: 1px solid $table-td-border-color;
+                    &.pdf-td-logo {
+                        text-align: center;
+                    }
+                }
+                &.table-tr-header {
+                    td {
+                        border: none;
+                    }
+                }
             }
         }
     }
