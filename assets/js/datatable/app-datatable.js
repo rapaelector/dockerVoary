@@ -224,7 +224,7 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
                     CA>
                     <'col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 mt-lg-0'f>
                 >
-                <'row table-responsive'<'col-sm-12 mt-table'<''tr>>>
+                <'row table-responsive'<'col-sm-12 mt-table pt-2'<''tr>>>
                 <'row mt-3'<'col-sm-5'i><'col-sm-7'p>>
             >
         `,
