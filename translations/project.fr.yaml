@@ -1,0 +1,26 @@
+pdf:
+  title:
+    prospection_folder: 'Dossier de prospection'
+    prospect: 'Prospect'
+
+  label:
+    contact: 'Contact'
+    entreprise: 'Entreprise'
+    name: 'Nom'
+    contact_address: 'Adresse du contact'
+    mail: 'Mail'
+    tel: 'Tél'
+    first_ask_date: 'Date de première demande'
+    construction_site_address: 'Adresse chantier'
+    operation_description: "Description de l'operation"
+    surface: 'Surface'
+    market_type: 'Type de marche'
+    encryption_type: 'Type de chiffrage'
+    label_description: "Description de l'operation"
+    is_bonhomme: 'Bonhomme est-il'
+    project_planning: 'Planning du projet'
+    prioritization_of_the_folder: 'Priorisation du dossier'
+    business_responsible: "Charge(e) d'affaire"
+    economist: 'Economiste'
+    folder_name_in_the_cloud: 'Nom du dossier sur le serveur'
+    response_for_the: 'Reponse pour le'

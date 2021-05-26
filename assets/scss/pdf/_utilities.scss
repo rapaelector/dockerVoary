@@ -1,0 +1,36 @@
+.border-0 {
+    border: none;
+}
+.border-top-0 {
+    border-top: none;
+}
+.border-bottom-0 {
+    border-bottom: none;
+}
+.border-left-0 {
+    border-left: none;
+}
+.border-right-0 {
+    border-right: none;
+}
+.label {
+    font-size: $label;
+}
+.text-weight-bold {
+    font-weight: bold;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+.text-center {
+    text-align: center;
+}
+.text-left {
+    text-align: left;
+}
+.text-underline {
+    text-decoration: underline;
+}
+.text-label {
+    font-size: $label;
+}

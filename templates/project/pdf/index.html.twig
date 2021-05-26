@@ -1,15 +1,29 @@
+{% trans_default_domain 'project' %}
+
 {% extends "pdf_base.html.twig" %}
 
 {% block page_title %}{% endblock %}
 
 {% set TOTAL_COL_COUNT = 128 %}
+{% set COL_PX_SIZE = 10 %}
 
 {% set FIRST_COL_COUNT = 5 %}
 {% set SECOND_COL_COUNT = 3 %}
 {% set FIRD_COL_COUNT =  1 %}
-{% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
-{% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - FIRST_COL_COUNT + SECOND_COL_COUNT) / 2 %}
-{% set PDF_LOGO_COUNT = 17 * 2 %}
+{% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
+{% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
+{% set PDF_LOGO_COUNT = 34 %}
+
+{% if previewMode|default(false) %}
+    {% set COL_PX_SIZE = 5 %}
+{% else %}
+    {% set FIRST_COL_COUNT = 2 %}
+    {% set SECOND_COL_COUNT = 2 %}
+    {% set FIRD_COL_COUNT =  2 %}
+    {% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
+    {% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
+    {% set PDF_LOGO_COUNT = 34 %}   
+{% endif %}
 
 {% set FIRST_COL_WIDTH = (FIRST_COL_COUNT * 100) / TOTAL_COL_COUNT %}
 {% set SECOND_COL_WIDTH = (SECOND_COL_COUNT * 100) / TOTAL_COL_COUNT %}
@@ -20,12 +34,6 @@
 
 {% set prospect_rowspan = 10 %}
 {% set empty_row_rowspan = 11 %}
-
-{% set COL_PX_SIZE = 10 %}
-
-{% if previewMode|default(false) %}
-    {% set COL_PX_SIZE = 5 %}
-{% endif %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -44,50 +52,77 @@
                     <td width="{{ FIFTH_COL_WIDTH }}%;"></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td colspan="3" class="folder_prospection">DOSSIER DE PROSPECTION</td>
-                    <td rowspan="2" class="pdf-td-logo">
+                    <td class="border-0"></td>
+                    <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">{{ 'pdf.title.prospection_folder'|trans }}</td>
+                    <td rowspan="2" class="pdf-td-logo border-0">
                         <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="" width="{{ PDF_LOGO_WIDTH }}%">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"></td>
-                    <td rowspan="{{ empty_row_rowspan }}"></td>
-                    <td>Date de première demande</td>
+                    <td colspan="2" class="border-0"></td>
+                    <td rowspan="{{ empty_row_rowspan }}" class="border-0"></td>
+                    <td class="first-ask-date">{{ 'pdf.label.first_ask_date'|trans }}</td>
                 </tr>
                 <tr>
-                    <td rowspan="{{ prospect_rowspan }}" colspan="2"> lorem ipsum</td>
-                    <td class="contact">Contact</td>
-                    <td>Adresse chantier</td>
+                    <td rowspan="{{ prospect_rowspan }}" colspan="2" class="prospect text-weight-bold text-uppercase">
+                        <div class="prospect-title" style="width: 30px;">
+                            {{ 'pdf.title.prospect'|trans }}
+                        </div>
+                    </td>
+                    <td class="contact" class="td-label">
+                        <div class="label">{{ 'pdf.label.contact'|trans }}</div>
+                    </td>
+                    <td class="td-label">
+                        <div class="label">{{ 'pdf.label.construction_site_address'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Description de l'operation</td>
+                    <td colspan="2" class="td-label">
+                        <div class="label">{{ 'pdf.label.operation_description'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td rowspan="2">Type de marche</td>
-                    <td>marche public</td>
+                    <td rowspan="2" class="td-label">
+                        <div class="label">{{ 'pdf.label.market_type'|trans }}</div>
+                    </td>
+                    <td>Lorem ipsum dolor sit amet</td>
                 </tr>
                 <tr>
-                    <td>type de chiffrage</td>
+                    <td class="encryption-type">
+                        <div class="text-left text-weight-bold">{{ 'pdf.label.encryption_type'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Honhomme est-il</td>
+                    <td colspan="2" class="td-label">
+                        <div class="label">{{ 'pdf.label.is_bonhomme'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">pour la charpente norme en 1090 - 2 classe EXC</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Planning du projet</td>
+                    <td colspan="2" class="project-planning">
+                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.project_planning'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Priorisation du dossier</td>
-                    <td>Reponse pour le</td>
+                    <td class="td-label">
+                        <div class="label">{{ 'pdf.label.prioritization_of_the_folder'|trans }}</div>
+                    </td>
+                    <td class="td-label">
+                        <div class="label">{{ 'pdf.label.response_for_the'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Charge(e) d'affaire <div>economiste</div></td>
+                    <td colspan="2">
+                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.business_responsible'|trans }}:</div>
+                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.economist'|trans }}:</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Nom du dossier sur le serveur</td>
+                    <td colspan="2">
+                        <div class="text-left text-weight-bold text-underline text-label">{{ 'pdf.label.folder_name_in_the_cloud'|trans }}</div>
+                    </td>
                 </tr>
             </tbody>
         </table>

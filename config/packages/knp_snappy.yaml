@@ -2,7 +2,10 @@ knp_snappy:
     pdf:
         enabled:    true
         binary:     '%env(WKHTMLTOPDF_PATH)%'
-        options:    []
+        options:    
+            zoom: '%env(KNP_SNAPPY_PDF_ZOOM)%'
+            disable-smart-shrinking: true
+            margin-bottom: '%env(KNP_SNAPPY_PDF_MARGIN_BOTTOM)%'
     image:
         enabled:    true
         binary:     '%env(WKHTMLTOIMAGE_PATH)%'

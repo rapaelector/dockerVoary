@@ -1,16 +1,27 @@
 $table-width: 100%;
 $table-td-border-color: #000;
 
+@import './text';
+@import './utilities';
+
 @mixin basic_table {
     table {
         width: $table-width;
         border-collapse: collapse;
+        font-family: sans-serif;
         tbody {
             tr {
+                td, th {
+                    padding: 0;
+                }
                 td {
                     border: 1px solid $table-td-border-color;
                     &.pdf-td-logo {
                         text-align: center;
+                        vertical-align: middle;
+                    }
+                    &.td-label {
+                        vertical-align: top;
                     }
                 }
                 &.table-tr-header {
@@ -20,6 +31,30 @@ $table-td-border-color: #000;
                 }
             }
         }
+    }
+    .label {
+        font-size: $label;
+        font-weight: bold;
+        text-decoration: underline;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .folder-prospection {
+        font-size: $main-title;
+    }
+    .prospect {
+        background: rgb(255, 192, 0);
+        .prospect-title {
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            font-size: $title;
+        }
+    }
+    .first-ask-date {
+        font-size: $ask-date;
+    }
+    .encryption-type, .project-planning {
+        font-size: $label;
     }
 }
 
