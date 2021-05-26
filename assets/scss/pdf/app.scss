@@ -1,70 +1,8 @@
-$table-width: 100%;
-$table-td-border-color: #000;
-
 @import './font';
 @import './utilities';
+@import './fonction';
+@import './table';
 
-@mixin basic_table {
-    table {
-        width: $table-width;
-        border-collapse: collapse;
-        font-family: sans-serif;
-        font-size: $default-font-size;
-        letter-spacing: 0.1px;
-        tbody {
-            tr {
-                td, th {
-                    padding: 0;
-                }
-                td {
-                    border: 1px solid $table-td-border-color;
-                    &.pdf-td-logo {
-                        text-align: center;
-                        vertical-align: middle;
-                    }
-                    &.td-label {
-                        vertical-align: top;
-                    }
-                }
-                &.table-tr-header {
-                    td {
-                        border: none;
-                    }
-                }
-            }
-        }
-    }
-    .label {
-        font-size: $label;
-        font-weight: bold;
-        text-decoration: underline;
-        text-transform: uppercase;
-        text-align: center;
-    }
-    .folder-prospection {
-        font-size: $main-title;
-    }
-    .prospect {
-        background: rgb(255, 192, 0);
-        .prospect-title {
-            transform: rotate(-90deg);
-            -webkit-transform: rotate(-90deg);
-            font-size: $title;
-            position: relative;
-            left: 5px;
-            top: 20px;
-        }
-    }
-    .first-ask-date {
-        font-size: $default-font-size;
-        font-weight: 500;
-    }
-    .encryption-type, .project-planning {
-        font-size: $label;
-    }
-    .contact {
-        vertical-align: top;
-    }
+body {
+    font-size: _rem(12);
 }
-
-@include basic_table;

@@ -34,3 +34,19 @@
 .text-label {
     font-size: $label;
 }
+.align-start {
+    vertical-align: top;
+}
+.align-middle {
+    vertical-align: center;
+}
+.align-end {
+    vertical-align: bottom;
+}
+.text-nowrap {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.mb-1 {
+    margin-bottom: 1rem;
+}

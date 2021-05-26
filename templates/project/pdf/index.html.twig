@@ -6,16 +6,18 @@
 
 {% set TOTAL_COL_COUNT = 128 %}
 {% set COL_PX_SIZE = 10 %}
+{% set COL_PX_H_SIZE = 2 %}
 
 {% set FIRST_COL_COUNT = 5 %}
 {% set SECOND_COL_COUNT = 3 %}
-{% set FIRD_COL_COUNT =  1 %}
+{% set FIRD_COL_COUNT =  0.75 %}
 {% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
 {% set FIFTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
 {% set PDF_LOGO_COUNT = 34 %}
 
 {% if previewMode|default(false) %}
     {% set COL_PX_SIZE = 5 %}
+    {% set COL_PX_H_SIZE = 2 %}
 {% else %}
     {% set FIRST_COL_COUNT = 5 %}
     {% set SECOND_COL_COUNT = 2 %}
@@ -73,6 +75,7 @@
                     </td>
                     <td class="contact" class="td-label">
                         <div class="label">{{ 'pdf.label.contact'|trans }}</div>
+                        {% include 'project/pdf/contact.html.twig' %}
                     </td>
                     <td class="td-label">
                         <div class="label">{{ 'pdf.label.construction_site_address'|trans }}</div>
