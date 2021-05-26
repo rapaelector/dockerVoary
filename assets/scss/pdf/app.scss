@@ -1,8 +1,8 @@
+@import './fonction';
 @import './font';
 @import './utilities';
-@import './fonction';
 @import './table';
 
-body {
-    font-size: _rem(12);
+html {
+    font-size: 12px;
 }
