@@ -1,6 +1,7 @@
 
 $table-width: 100%;
 $table-td-border-color: #000;
+$table-td-padding: 10px;
 
 @mixin basic_table {
     table {
@@ -35,7 +36,22 @@ $table-td-border-color: #000;
                 tr {
                     td, th {
                         border: none;
-                        padding: 0 10px;
+                        padding: 0 $table-td-padding;
+                    }
+                }
+            }
+        }
+        &.market-type-table {
+            tbody {
+                tr {
+                    td {
+                        padding: 0;
+                        &:first-child {
+                            padding-left: $table-td-padding;
+                        }
+                        &:last-child {
+                            padding-right: $table-td-padding;
+                        }
                     }
                 }
             }

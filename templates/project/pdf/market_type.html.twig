@@ -1,0 +1,50 @@
+{% trans_default_domain 'project' %}
+
+{% set MARKET_TYPES = [
+    'pdf.label.mark_type_label.work_on_existing',
+    'pdf.label.mark_type_label.tce',
+    'pdf.label.mark_type_label.new_building',
+    'pdf.label.mark_type_label.agricultural_building',
+    'pdf.label.mark_type_label.shade_houses',
+    'pdf.label.mark_type_label.call_for_tenders',
+    'pdf.label.mark_type_label.isothermal_plan',
+    'pdf.label.mark_type_label.simple_supply',
+    'pdf.label.mark_type_label.asbestos_removal',
+] %}
+
+{% set CHECKBOX_INPUT = '<input type="checkbox" />' %}
+
+<table class="table-borderless market-type-table">
+    <tbody>
+        <tr>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.work_on_existing'|trans }}</td>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.tce'|trans }}</td>
+        </tr>
+        <tr>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.new_building'|trans }}</td>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.agricultural_building'|trans }}</td>
+        </tr>
+        <tr>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.shade_houses'|trans }}</td>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.call_for_tenders'|trans }}</td>
+        </tr>
+        <tr>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.isothermal_plan'|trans }}</td>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.simple_supply'|trans }}</td>
+        </tr>
+        <tr>
+            <td>{{ CHECKBOX_INPUT|raw }}</td>
+            <td>{{ 'pdf.label.mark_type_label.asbestos_removal'|trans }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
