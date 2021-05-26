@@ -9,15 +9,25 @@
 {# origin value = {top: 1, bottom: 3, left: 1} #}
 {% set FIRST_ASK_DATE_PT = space_value(2, TOTAL_COL_COUNT, COL_PX_SIZE) %}
 {% set FIRST_ASK_DATE_PB = space_value(6, TOTAL_COL_COUNT, COL_PX_SIZE) %}
-{% set FIRST_ASK_DATE_PL = space_value(2, TOTAL_COL_COUNT, COL_PX_SIZE) %}
+{% set FIRST_ASK_DATE_PL = space_value(1, TOTAL_COL_COUNT, COL_PX_SIZE) %}
 
 <style>
+    @font-face {
+        font-family: 'Century Gothic';
+        src: url({{ absolute_url(asset('fonts/century-gothic/GOTHIC.TTF')) }}) format('truetype');
+    }
+
+    table {
+        font-family: 'Century Gothic';
+    }
+
     .folder-prospection {
         padding-top: {{ PROSPECTION_FOLDER_PT }}px;
         padding-bottom: {{ PROSPECTION_FOLDER_PB }}px;
     }
     .first-ask-date {
         color: red;
+        padding-top: 5px;
         padding-bottom: {{ FIRST_ASK_DATE_PB }}px;
         padding-left: {{ FIRST_ASK_DATE_PL }}px;
     }

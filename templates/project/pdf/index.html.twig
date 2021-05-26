@@ -17,7 +17,7 @@
 {% if previewMode|default(false) %}
     {% set COL_PX_SIZE = 5 %}
 {% else %}
-    {% set FIRST_COL_COUNT = 2 %}
+    {% set FIRST_COL_COUNT = 5 %}
     {% set SECOND_COL_COUNT = 2 %}
     {% set FIRD_COL_COUNT =  2 %}
     {% set FOURTH_COL_COUNT =  (TOTAL_COL_COUNT - (FIRST_COL_COUNT + SECOND_COL_COUNT + FIRD_COL_COUNT)) / 2 %}
@@ -61,7 +61,9 @@
                 <tr>
                     <td colspan="2" class="border-0"></td>
                     <td rowspan="{{ empty_row_rowspan }}" class="border-0"></td>
-                    <td class="first-ask-date">{{ 'pdf.label.first_ask_date'|trans }}</td>
+                    <td class="first-ask-date">
+                        <div>{{ 'pdf.label.first_ask_date'|trans }}</div>
+                    </td>
                 </tr>
                 <tr>
                     <td rowspan="{{ prospect_rowspan }}" colspan="2" class="prospect text-weight-bold text-uppercase">
