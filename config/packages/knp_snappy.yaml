@@ -6,6 +6,7 @@ knp_snappy:
             zoom: '%env(KNP_SNAPPY_PDF_ZOOM)%'
             disable-smart-shrinking: true
             margin-bottom: '%env(KNP_SNAPPY_PDF_MARGIN_BOTTOM)%'
+            encoding: 'utf-8'
     image:
         enabled:    true
         binary:     '%env(WKHTMLTOIMAGE_PATH)%'

@@ -2,8 +2,6 @@
 
 {% extends "pdf_base.html.twig" %}
 
-{% block page_title %}{% endblock %}
-
 {% set TOTAL_COL_COUNT = 128 %}
 {% set COL_PX_SIZE = 10 %}
 {% set COL_PX_H_SIZE = 2 %}
@@ -55,7 +53,11 @@
                 </tr>
                 <tr>
                     <td class="border-0"></td>
-                    <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">{{ 'pdf.title.prospection_folder'|trans }}</td>
+                    <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">
+                        {{ 'pdf.title.prospection_folder'|trans }}
+                        &#10004;
+                        &#10003;
+                    </td>
                     <td rowspan="2" class="pdf-td-logo border-0">
                         <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="" width="{{ PDF_LOGO_WIDTH }}%">
                     </td>
@@ -105,6 +107,7 @@
                 <tr>
                     <td colspan="2" class="td-label">
                         <div class="label">{{ 'pdf.label.is_bonhomme'|trans }}</div>
+                        {% include 'project/pdf/is_bonhomme.html.twig' %}
                     </td>
                 </tr>
                 <tr>

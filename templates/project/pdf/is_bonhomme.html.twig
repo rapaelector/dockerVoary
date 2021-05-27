@@ -1,0 +1,69 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# here, boxs are refered to the word gridline columns   #}
+{# half of the 2 big columns are 30 boxs that mean the two big column have 60 boxs #}
+{# we multiply the value to have more space so instead of using 60, we use 120 (60*2) #}
+
+{# width only #}
+{% set COL_COUNT = 120 %}
+{% set CONTRACT_HOLDER_WIDTH = space_value(31, COL_COUNT) %}
+{# checkbox col count 4 box #}
+{% set CHECKBOX_WIDTH = space_value(8, COL_COUNT) %}
+{# or col count 2 #}
+{% set OR_WIDTH = space_value(4, COL_COUNT) %}
+{# particular renovation = 20 box #}
+{% set PARTICULAR_RENOVATION_WIDTH = space_value(40, COL_COUNT) %}
+{# empty col width is the rest of the col_count - (contract holder width + checkbox col + or col + particular renovation)  #}
+{% set EMPTY_COL_WIDTH = space_value((31 + 8 + 40 + 4), COL_COUNT) %}
+
+{# sub contractor col count 10 #}
+{% set SUB_CONTRACTOR_WIDTH = space_value(10, COL_COUNT) %}
+{# self liquidation col count 11 #}
+{% set SELF_LIQUIDATION = space_value(22, COL_COUNT) %}
+{% set SUB_CONTRACTOR_EMPTY_COL_WIDTH = space_value((20 + 8), COL_COUNT) %}
+
+{# height only #}
+
+<table class="table-borderless is-bonhomme-table">
+    <tr>
+        <td>
+            <table class="table-borderless">
+                <tbody>
+                    <tr>
+                        <td width="{{ CONTRACT_HOLDER_WIDTH }}%;" class="text-uppercase">{{ 'pdf.is_bonhomme_label.contract_holder'|trans }}</td>
+                        <td width="{{ CHECKBOX_WIDTH }}%;">
+                            {{ pdf_checkbox(false) }}
+                            <span class="checbox-label">20%</span>
+                        </td>
+                        <td width="{{ OR_WIDTH }}%;" class="text-lowercase">{{ 'pdf.label.or'|trans }}</td>
+                        <td width="{{ CHECKBOX_WIDTH }}%;">
+                            {{ pdf_checkbox(false) }}
+                            <span class="checbox-label">10%</span>
+                        </td>
+                        <td width="{{ PARTICULAR_RENOVATION_WIDTH }}%;">({{ 'pdf.is_bonhomme_label.particular_renovation_more_than_2_year'|trans }})</td>
+                        <td width="{{ EMPTY_COL_WIDTH }}%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="table-borderless">
+                <tbody>
+                    <tr>
+                        <td width="{{ SUB_CONTRACTOR_WIDTH }}%;" class="text-uppercase">{{ 'pdf.is_bonhomme_label.sub_contractor'|trans }}</td>
+                        <td width="{{ CHECKBOX_WIDTH }}%;">
+                            {{ pdf_checkbox(false) }}
+                            <span class=checbox-label"">0%</span>
+                        </td>
+                        <td width="{{ SELF_LIQUIDATION }}%;" class="text-uppercase">({{ 'pdf.is_bonhomme_label.self_liquidation'|trans }})</td>
+                        <td width="{{ SUB_CONTRACTOR_EMPTY_COL_WIDTH }}%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

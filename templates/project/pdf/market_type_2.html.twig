@@ -16,14 +16,14 @@
     <tbody>
         <tr>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_market'|trans }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.public_market'|trans }}</td>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_market'|trans }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.private_market'|trans }}</td>
         </tr>
         <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(false) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_ao'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(true) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_ao'|trans }}</td>
         </tr>
     </tbody>

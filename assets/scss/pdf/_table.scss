@@ -42,7 +42,7 @@ $table-td-padding: 10px;
                 }
             }
         }
-        &.market-type-table, &.market-type-2-table, &.encryption-type-table {
+        &.market-type-table, &.market-type-2-table, &.encryption-type-table, &.is-bonhomme-table {
             tbody {
                 tr {
                     td {
@@ -61,7 +61,17 @@ $table-td-padding: 10px;
                 }
             }
         }
-
+        &.is-bonhomme-table {
+            table {
+                tbody {
+                    tr {
+                        td {
+                            padding: 0 !important;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -97,6 +107,51 @@ $table-td-padding: 10px;
     }
     .surface {
         font-size: $label;
+    }
+    .checkbox-label {
+        display: inline-block;
+        position: relative;
+        top: -2px;
+        left: 5px;
+    }
+    /**
+     * design for checkbox
+    */
+    .pdf-checkbox {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #777;
+        border-radius: 2px;
+        position: relative;
+        .pdf-checkbox-inner-1, .pdf-checkbox-inner-2 {
+            display: none;
+        }
+        &.checked {
+            background: $checkbox-bg;
+            .pdf-checkbox-inner-1 {
+                display: block;
+                width: 5px;
+                height: 2px;
+                background: $checkbox-color;
+                position: absolute;
+                top: 5px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                left: 1px;
+            }
+            .pdf-checkbox-inner-2 {
+                display: block;
+                width: 9px;
+                height: 2px;
+                background: $checkbox-color;
+                position: absolute;
+                top: 4px;
+                left: 2px;
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+        }
     }
 }
 

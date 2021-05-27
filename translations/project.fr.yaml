@@ -24,6 +24,7 @@ pdf:
     economist: 'Economiste'
     folder_name_in_the_cloud: 'Nom du dossier sur le serveur'
     response_for_the: 'Reponse pour le'
+    or: 'Ou'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'
@@ -42,3 +43,9 @@ pdf:
       budget: 'Budget'
       production: 'Réalisation'
       consultation: 'Consultation'
+
+  is_bonhomme_label:
+    contract_holder: 'Tutulaire du marche'
+    particular_renovation_more_than_2_year: 'Rénovation particulier de + de 2ans'
+    sub_contractor: 'Sous-traitant'
+    self_liquidation: 'Autoliquidation'
