@@ -1,0 +1,45 @@
+{% set title = {
+    users: 'title.users'|trans,
+    prospects: 'title.prospects'|trans,
+    projects: 'title.projects'|trans,
+    offres: 'title.offres'|trans,
+} %}
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.users }}'"
+            data="20"
+            unit=""
+            icon="'people'"
+            icon-background-class="'bg-app-primary'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.prospects }}'"
+            data="100"
+            unit=""
+            icon="'inventory'"
+            icon-background-class="'bg-app-secondary'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.projects }}'"
+            data="100"
+            unit=""
+            icon="'engineering'"
+            icon-background-class="'bg-app-secondary'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.offres }}'"
+            data="100"
+            unit=""
+            icon="'work'"
+            icon-background-class="'bg-app-secondary'"
+        ></app-box-statistics>
+    </div>
+</div>

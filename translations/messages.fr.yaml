@@ -36,6 +36,10 @@ title:
   delete_user: "Supprimer l'utilisateur"
   home: 'Acceuil'
   client_manger: 'Gestion des clients'
+  users: 'Utilisateurs'
+  prospects: 'Prospects'
+  projects: 'Projects'
+  offres: 'Offres'
   
 label:
   created_at: 'Crée le'
