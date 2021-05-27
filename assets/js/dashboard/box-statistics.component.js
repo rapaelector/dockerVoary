@@ -12,5 +12,6 @@ angular.module('dashboardApp').component('appBoxStatistics', {
         unit: '=',
         icon: '=',
         iconBackgroundClass: '=',
+        url: '=',
     }
 });

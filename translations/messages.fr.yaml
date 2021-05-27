@@ -1,7 +1,7 @@
 app_name: 'Bonhomme Batiment'
 menu:
     main_header: 'Menu'
-    home: 'Accueil'
+    home: 'Dashboard'
     users: 'Utilisateurs'
     roles: 'Gestion des droits'
     offers_header: 'Devis'
@@ -34,12 +34,13 @@ action:
 
 title:
   delete_user: "Supprimer l'utilisateur"
-  home: 'Acceuil'
+  home: 'Dashboard'
   client_manger: 'Gestion des clients'
   users: 'Utilisateurs'
   prospects: 'Prospects'
   projects: 'Projects'
   offres: 'Offres'
+  dashboard: 'Dashboard'
   
 label:
   created_at: 'Crée le'

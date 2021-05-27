@@ -7,7 +7,7 @@
 
 {% block content_header %}
     {% include template_content_header with {
-        title: 'Homepage',
+        title: 'title.dashboard'|trans,
         links: [
             {label: 'Dashboard', routeName: 'home'},
             {label: 'Home'}
@@ -30,5 +30,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     {{ encore_entry_script_tags('app_dashboard') }}
 {% endblock %}
