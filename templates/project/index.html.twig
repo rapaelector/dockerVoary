@@ -1,20 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjectController!{% endblock %}
+{% block title %}Project index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Project index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SiteCode</th>
+                <th>Roadmap</th>
+                <th>ProjectOwner</th>
+                <th>ProjectManager</th>
+                <th>BillingAddres</th>
+                <th>ContactName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>SiteAddress</th>
+                <th>DescriptionOperation</th>
+                <th>SoldBy</th>
+                <th>QuoteWriter</th>
+                <th>Norm1090</th>
+                <th>MarketType</th>
+                <th>BonhomePercentage</th>
+                <th>DisaSheetValidation</th>
+                <th>PaymentChoice</th>
+                <th>DepositeDateEdit</th>
+                <th>ClientCondition</th>
+                <th>QuoteValidatedMDE</th>
+                <th>QuoteValidatedMDEDate</th>
+                <th>GlobalAmount</th>
+                <th>AmountSubcontractedWork</th>
+                <th>AmountBBISpecificWork</th>
+                <th>CaseType</th>
+                <th>PlanningProject</th>
+                <th>RecordAssistant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.siteCode }}</td>
+                <td>{{ project.roadmap ? 'Yes' : 'No' }}</td>
+                <td>{{ project.projectOwner }}</td>
+                <td>{{ project.projectManager }}</td>
+                <td>{{ project.billingAddres }}</td>
+                <td>{{ project.contactName }}</td>
+                <td>{{ project.email }}</td>
+                <td>{{ project.phone }}</td>
+                <td>{{ project.siteAddress }}</td>
+                <td>{{ project.descriptionOperation }}</td>
+                <td>{{ project.soldBy }}</td>
+                <td>{{ project.quoteWriter }}</td>
+                <td>{{ project.norm1090 }}</td>
+                <td>{{ project.marketType }}</td>
+                <td>{{ project.bonhomePercentage }}</td>
+                <td>{{ project.disaSheetValidation }}</td>
+                <td>{{ project.paymentChoice }}</td>
+                <td>{{ project.depositeDateEdit ? project.depositeDateEdit|date('Y-m-d') : '' }}</td>
+                <td>{{ project.clientCondition }}</td>
+                <td>{{ project.quoteValidatedMDE }}</td>
+                <td>{{ project.quoteValidatedMDEDate }}</td>
+                <td>{{ project.globalAmount }}</td>
+                <td>{{ project.amountSubcontractedWork }}</td>
+                <td>{{ project.amountBBISpecificWork }}</td>
+                <td>{{ project.caseType }}</td>
+                <td>{{ project.planningProject }}</td>
+                <td>{{ project.recordAssistant }}</td>
+                <td>
+                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
+                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="29">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/job/bbat/src/Controller/ProjectController.php'|file_link(0) }}">src/Controller/ProjectController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/job/bbat/templates/project/index.html.twig'|file_link(0) }}">templates/project/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('project_new') }}">Create new</a>
 {% endblock %}
