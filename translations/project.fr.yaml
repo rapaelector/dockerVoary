@@ -25,7 +25,7 @@ pdf:
     folder_name_in_the_cloud: 'Nom du dossier sur le serveur'
     response_for_the: 'Reponse pour le'
 
-    mark_type_label:
+    market_type_label:
       work_on_existing: 'Travaux sur existant'
       tce: 'T.C.E'
       new_building: 'Bât neuf'
@@ -35,3 +35,10 @@ pdf:
       isothermal_plan: 'Plan isothermes'
       simple_supply: 'Fourniture simple'
       asbestos_removal: 'Désamiantage'
+      public_market: 'Marche public'
+      private_market: 'Marche prive'
+      public_ao: 'A.0 public'
+      private_ao: 'A.O prive'
+      budget: 'Budget'
+      production: 'Réalisation'
+      consultation: 'Consultation'

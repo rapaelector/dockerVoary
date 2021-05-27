@@ -1,0 +1,27 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{% set ENCRYPTION_TYPE_HEIGHT_COUNT = 6 %}
+{% set LABEL_HEIGHT = space_value(1, ENCRYPTION_TYPE_HEIGHT_COUNT, COL_PX_H_SIZE) %}
+
+{# for checkbox and label checkbox #}
+{# market type col count = 30 #}
+{% set MARKET_TYPE_COL_COUNT = 60 %}
+{% set BUDGET_LABEL_WIDTH = space_value(16, MARKET_TYPE_COL_COUNT) %}
+{% set PRODUCTIN_AND_CONSULATION_LABEL_WIDTH = space_value(36, MARKET_TYPE_COL_COUNT) %}
+{% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
+
+<table class="table-borderless encryption-type-table">
+    <tbody>
+        <tr>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ BUDGET_LABEL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="break-word">{{ 'pdf.label.market_type_label.budget'|trans }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ PRODUCTIN_AND_CONSULATION_LABEL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="break-word">
+                {{ 'pdf.label.market_type_label.production'|trans }} /
+                {{ 'pdf.label.market_type_label.consultation'|trans }}
+            </td>
+        </tr>
+    </tbody>
+</table>

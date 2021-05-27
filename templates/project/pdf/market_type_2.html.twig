@@ -1,0 +1,30 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# market type height count = 12 #}
+{% set MARKET_TYPE_HEIGHT = 24 %}
+{# market type 2 height count = 6 #}
+{% set MARKET_TYPE_2_HEIGHT = 12 %}
+{% set LABEL_HEIGHT = space_value(1, MARKET_TYPE_2_HEIGHT, COL_PX_H_SIZE) %}
+{# market type col count = 30 #}
+{% set MARKET_TYPE_2_COL_COUNT = 60 %}
+{% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_2_COL_COUNT)  %}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_2_COL_COUNT - 2) / 2, MARKET_TYPE_2_COL_COUNT) %}
+
+<table class="table-borderless mt-1 market-type-2-table">
+    <tbody>
+        <tr>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_market'|trans }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_market'|trans }}</td>
+        </tr>
+        <tr>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_ao'|trans }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
+            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_ao'|trans }}</td>
+        </tr>
+    </tbody>
+</table>
