@@ -1,0 +1,29 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{% set FOR_THE_FRAME_HEIGHT = 20 %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;">{{ 'pdf.label.for_the_frame'|trans }}</td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-weight-bold text-uppercase">NORME EN 1090 - 2</td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-weight-bold">Classe EXC</td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-weight-bold">
+                <span class="checkbox-label pr-05">1</span>
+                {{ pdf_checkbox(false) }}
+            </td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-weight-bold">
+                <span class="checkbox-label pr-05">2</span>
+                {{ pdf_checkbox(false) }}
+            </td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-weight-bold">
+                <span class="checkbox-label pr-05">3</span>
+                {{ pdf_checkbox(false) }}
+            </td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.not_applicable'|trans }}</td>
+            <td height="{{ FOR_THE_FRAME_HEIGHT }}px;">{{ pdf_checkbox(false) }}</td>
+        </tr>
+    </tbody>
+</table>

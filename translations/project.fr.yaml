@@ -25,6 +25,8 @@ pdf:
     folder_name_in_the_cloud: 'Nom du dossier sur le serveur'
     response_for_the: 'Reponse pour le'
     or: 'Ou'
+    for_the_frame: 'Pour la charpente'
+    not_applicable: 'Sans objet'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'
