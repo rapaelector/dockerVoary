@@ -1,0 +1,16 @@
+{% trans_default_domain 'statistics' %}
+
+<div ng-if="$ctrl.chartData.length > 0">
+	<canvas
+		class="chart-base"
+		chart-type="$ctrl.chartType ? $ctrl.chartType : 'pie'" 
+		chart-data="$ctrl.chartData" 
+		chart-labels="$ctrl.chartLabels"
+		chart-options="options"
+		chart-dataset-override="$ctrl.chartDatasetOverride"
+		chart-colors="chart.colors">
+	</canvas>
+</div>
+<div>
+	<app-statistics-chart-placeholder chart-type="$ctrl.chartType ? $ctrl.chartType : 'pie'"></app-statistics-chart-placeholder>
+</div>

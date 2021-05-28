@@ -1,1 +1,1 @@
-angular.module('dashboardApp', ['sharedModule']);
+angular.module('dashboardApp', ['sharedModule', 'chart.js']);
