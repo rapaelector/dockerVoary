@@ -103,6 +103,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script>
+        var _locale = "{{ app.request.locale }}";
+    </script>
     {{ encore_entry_script_tags('app') }}
     {% block javascripts %}{% endblock %}
 </body>

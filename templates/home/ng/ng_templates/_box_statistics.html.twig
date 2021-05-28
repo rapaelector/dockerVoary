@@ -1,0 +1,16 @@
+<div>
+    <a href="{{ '{{ $ctrl.url }}' }}" class="text-reset">
+        <div class="info-box">
+            <span class="info-box-icon" ng-class="$ctrl.iconBackgroundClass">
+                <i class="nav-icon material-icons">{{ '{{ $ctrl.icon ? $ctrl.icon : "people" }}' }}</i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text">{{ '{{ $ctrl.label }}' }}</span>
+                <span class="info-box-number">
+                    {{ '{{ $ctrl.data }}' }}
+                    <small>{{ '{{ $ctrl.unit }}' }}</small>
+                </span>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,29 @@
+$icon-font-path: '~@neos21/bootstrap3-glyphicons/assets/fonts/';
+
+@import '~@neos21/bootstrap3-glyphicons';
+@import './calendar';
+
+.chart-placeholder-container {
+    position: relative;
+    height: 100%;
+    .chart-placeholder-text {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin-top: -12px;
+        &.gauge-placeholder {
+            bottom: 60%
+        }
+        span {    
+            background: #FFF;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #aaa;
+            font-weight: bold;
+        }
+    }
+}

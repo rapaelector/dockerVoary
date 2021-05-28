@@ -845,6 +845,11 @@
   resolved "https://registry.yarnpkg.com/@lgaitan/pace-progress/-/pace-progress-1.0.7.tgz#c96fbbd9fd4cf528feed34ea0c8f9d8b3e98f0dd"
   integrity sha1-yW+72f1M9Sj+7TTqDI+diz6Y8N0=
 
+"@neos21/bootstrap3-glyphicons@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@neos21/bootstrap3-glyphicons/-/bootstrap3-glyphicons-1.0.7.tgz#b3f62f0dc54b383afcc26d44fcb3bb0ca1bd4de2"
+  integrity sha512-JfvPdx8W2+kVhW+8fj2kIJNS0tesU21hrWF7TBHtYDHpVfcFGU/yn3Eh02sJiNfZABkutP3oU0Ftw8LGF43Jng==
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
@@ -1370,6 +1375,19 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-chart.js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/angular-chart.js/-/angular-chart.js-1.1.1.tgz#49f0e18d081762b6d4c9791e487aff2fbb30f5ae"
+  integrity sha1-SfDhjQgXYrbUyXkeSHr/L7sw9a4=
+  dependencies:
+    angular "1.x"
+    chart.js "2.3.x"
+
+angular@1.8.2, angular@1.x:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.2.tgz#5983bbb5a9fa63e213cb7749199e0d352de3a2f1"
+  integrity sha512-IauMOej2xEe7/7Ennahkbb5qd/HFADiNuLSESz9Q27inmi32zB0lnAsFeLEWcox3Gd1F6YhNd1CP7/9IukJ0Gw==
+
 ansi-colors@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
@@ -1627,6 +1645,14 @@ bootstrap-colorpicker@^3.2.0:
     jquery ">=2.2"
     popper.js ">=1.10"
 
+bootstrap-daterangepicker@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-daterangepicker/-/bootstrap-daterangepicker-3.1.0.tgz#632e6fb2de4b6360c5c0a9d5f6adb9aace051fe8"
+  integrity sha512-oaQZx6ZBDo/dZNyXGVi2rx5GmFXThyQLAxdtIqjtLlYVaQUfQALl5JZMJJZzyDIX7blfy4ppZPAJ10g8Ma4d/g==
+  dependencies:
+    jquery ">=1.10"
+    moment "^2.9.0"
+
 bootstrap-select@^1.13.18:
   version "1.13.18"
   resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.13.18.tgz#4557119d58dc1159189977161c803962220e4dda"
@@ -1651,6 +1677,11 @@ bootstrap@4.6, bootstrap@>=4.0, bootstrap@^4.5.2, bootstrap@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
   integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
+
+bootstrap@^3.3:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
+  integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -1838,6 +1869,14 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chart.js@2.3.x:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.3.0.tgz#40460e48e2c417c05fc3325cd84f7b000dc7d7d6"
+  integrity sha1-QEYOSOLEF8BfwzJc2E97AA3H19Y=
+  dependencies:
+    chartjs-color "^2.0.0"
+    moment "^2.10.6"
+
 chart.js@^2.9.4:
   version "2.9.4"
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.9.4.tgz#0827f9563faffb2dc5c06562f8eb10337d5b9684"
@@ -1846,6 +1885,11 @@ chart.js@^2.9.4:
     chartjs-color "^2.1.0"
     moment "^2.10.2"
 
+chart.js@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.3.0.tgz#c5be3807cf902b19bfe166ef853d786f66a53f8b"
+  integrity sha512-3pO3kL2st1Lzhw+HTGvDwcNYWustHwvApM/v7b2td6CrthyEygbPoXaN/iGZfUpfuovZfJ4dy129RCr39BR1Bg==
+
 chartjs-color-string@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/chartjs-color-string/-/chartjs-color-string-0.6.0.tgz#1df096621c0e70720a64f4135ea171d051402f71"
@@ -1853,7 +1897,7 @@ chartjs-color-string@^0.6.0:
   dependencies:
     color-name "^1.0.0"
 
-chartjs-color@^2.1.0:
+chartjs-color@^2.0.0, chartjs-color@^2.1.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/chartjs-color/-/chartjs-color-2.4.1.tgz#6118bba202fe1ea79dd7f7c0f9da93467296c3b0"
   integrity sha512-haqOg1+Yebys/Ts/9bLo/BqUcONQOdr/hoEr2LLTRl6C5LXctUdHxsCYfvQVg5JIxITrfCNUDr4ntqmQk9+/0w==
@@ -2800,6 +2844,16 @@ envinfo@^7.7.3:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/envinfo/-/envinfo-7.8.1.tgz#06377e3e5f4d379fea7ac592d5ad8927e0c4d475"
   integrity sha512-/o+BXHmB7ocbHEAs6F2EnG0ogybVVUdkRunTT2glZU9XAaGmhqskrvKwqXuDfNjEO0LZKWdejEEpnq8aM0tOaw==
+
+eonasdan-bootstrap-datetimepicker@^4.17.49:
+  version "4.17.49"
+  resolved "https://registry.yarnpkg.com/eonasdan-bootstrap-datetimepicker/-/eonasdan-bootstrap-datetimepicker-4.17.49.tgz#5534ba581c1e7eb988dbf773e2fed8a7f48cc76a"
+  integrity sha512-7KZeDpkj+A6AtPR3XjX8gAnRPUkPSfW0OmMANG1dkUOPMtLSzbyoCjDIdEcfRtQPU5X0D9Gob7wWKn0h4QWy7A==
+  dependencies:
+    bootstrap "^3.3"
+    jquery "^3.5.1"
+    moment "^2.10"
+    moment-timezone "^0.4.0"
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -4326,6 +4380,13 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+moment-timezone@^0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.4.1.tgz#81f598c3ad5e22cdad796b67ecd8d88d0f5baa06"
+  integrity sha1-gfWYw61eIs2teWtn7NjYjQ9bqgY=
+  dependencies:
+    moment ">= 2.6.0"
+
 moment-timezone@^0.5.31:
   version "0.5.33"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
@@ -4333,7 +4394,7 @@ moment-timezone@^0.5.31:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.10.2, moment@^2.29.0, moment@^2.29.1, moment@^2.9.0:
+"moment@>= 2.6.0", "moment@>= 2.9.0", moment@^2.10, moment@^2.10.2, moment@^2.10.6, moment@^2.29.0, moment@^2.29.1, moment@^2.9.0:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==

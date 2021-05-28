@@ -33,6 +33,12 @@ Encore
      */
     .addEntry('app_client', './assets/js/client/app.js')
 
+    /**
+     * Entry for angularJS
+     * - Try to make it global
+     */
+    .addEntry('app_dashboard', './assets/js/dashboard/app.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

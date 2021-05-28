@@ -30,6 +30,18 @@ class ClientRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * Get the numbers of the client
+     */
+    public function countClients()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

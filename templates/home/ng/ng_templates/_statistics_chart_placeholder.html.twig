@@ -1,0 +1,14 @@
+{% trans_default_domain 'statistics' %}
+
+<div class="chart-placeholder-container">
+	<div class="chart-placeholder-text"><span>{{ 'label.empty_data'|trans }}</span></div>
+	<canvas
+		class="chart-base"
+		chart-type="$ctrl.chartType ? $ctrl.chartType : 'pie'"
+		chart-options="options.options"
+		chart-data="options.data"
+		chart-labels="options.labels"
+		chart-dataset-override="options.datasetOverride"
+		chart-colors="options.colors">
+	</canvas>
+</div>
