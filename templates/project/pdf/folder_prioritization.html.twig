@@ -1,0 +1,22 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+{# folder prioritization total height count 6 #}
+{% set FOLDER_PRIORITIZATION_TOTAL_HEIGHT_COUNT = 12 %}
+{# folder prioritization count 12 #}
+{% set FOLDER_PRIORITIZATION_HEIGHT_COUNT = space_value(6, FOLDER_PRIORITIZATION_TOTAL_HEIGHT_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr height="{{ FOLDER_PRIORITIZATION_HEIGHT_COUNT }}px;" class="align-start">
+            <td></td>
+            <td>{{ pdf_checkbox(false) }}</td>
+            <td class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.urgent'|trans }}</td>
+            <td>{{ pdf_checkbox(false) }}</td>
+            <td class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.normal'|trans }}</td>
+            <td>{{ pdf_checkbox(false) }}</td>
+            <td class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.without_continuation'|trans }}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

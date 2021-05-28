@@ -1,0 +1,22 @@
+{# total project planning height total count 5 #}
+{% trans_default_domain 'project' %}
+
+{% set PROJECT_PLANNING_HEIGHT_TOTAL_COUNT = 10 %}
+{# total project planning height count 5 #}
+{% set PROJECT_PLANNING_VALUE_HEIGHT_COUNT = space_value(2, PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
+{% set PROJECT_PLANNING_LABEL_HEIGHT_COUNT = space_value((PROJECT_PLANNING_HEIGHT_TOTAL_COUNT - 6), PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
+
+<table class="table-borderless">
+    <body>
+        <tr height="{{ PROJECT_PLANNING_LABEL_HEIGHT_COUNT }}px;" class="align-start">
+            <td>
+                <div class="text-left text-uppercase text-weight-bold text-underline text-label">
+                    {{ 'pdf.label.project_planning'|trans }}
+                </div>
+            </td>
+        </tr>
+        <tr height="{{ PROJECT_PLANNING_VALUE_HEIGHT_COUNT }}px;">
+            <td></td>
+        </tr>
+    </body>
+</table>

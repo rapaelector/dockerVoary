@@ -55,8 +55,6 @@
                     <td class="border-0"></td>
                     <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">
                         {{ 'pdf.title.prospection_folder'|trans }}
-                        &#10004;
-                        &#10003;
                     </td>
                     <td rowspan="2" class="pdf-td-logo border-0">
                         <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="" width="{{ PDF_LOGO_WIDTH }}%">
@@ -117,12 +115,13 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="project-planning">
-                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.project_planning'|trans }}</div>
+                        {% include 'project/pdf/project_planning.html.twig' %}
                     </td>
                 </tr>
                 <tr>
                     <td class="td-label">
                         <div class="label">{{ 'pdf.label.prioritization_of_the_folder'|trans }}</div>
+                        {% include 'project/pdf/folder_prioritization.html.twig' %}
                     </td>
                     <td class="td-label">
                         <div class="label">{{ 'pdf.label.response_for_the'|trans }}</div>
@@ -130,13 +129,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.business_responsible'|trans }}:</div>
-                        <div class="text-left text-uppercase text-weight-bold text-underline text-label">{{ 'pdf.label.economist'|trans }}:</div>
+                        {% include 'project/pdf/business_reponsable_and_economiste.html.twig' %}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <div class="text-left text-weight-bold text-underline text-label">{{ 'pdf.label.folder_name_in_the_cloud'|trans }}</div>
+                        {% include 'project/pdf/folder_name_in_the_cloud.html.twig' %}
                     </td>
                 </tr>
             </tbody>

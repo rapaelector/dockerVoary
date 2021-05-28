@@ -51,3 +51,8 @@ pdf:
     particular_renovation_more_than_2_year: 'Rénovation particulier de + de 2ans'
     sub_contractor: 'Sous-traitant'
     self_liquidation: 'Autoliquidation'
+
+  folder_prioritization_label:
+    urgent: Urgent
+    normal: Normal
+    without_continuation: Sans suite
