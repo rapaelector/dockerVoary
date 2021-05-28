@@ -15,10 +15,15 @@
 <table class="table-borderless encryption-type-table">
     <tbody>
         <tr>
+            <td class="text-center" colspan="4">
+                <div class="text-left text-weight-bold">{{ 'pdf.label.encryption_type'|trans }}</div>
+            </td>
+        </tr>
+        <tr height="{{ LABEL_HEIGHT }}px;">
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ BUDGET_LABEL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="break-word text-uppercase">{{ 'pdf.label.market_type_label.budget'|trans }}</td>
+            <td width="{{ BUDGET_LABEL_WIDTH }}%;" class="break-word text-uppercase">{{ 'pdf.label.market_type_label.budget'|trans }}</td>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ PRODUCTIN_AND_CONSULATION_LABEL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="break-word">
+            <td width="{{ PRODUCTIN_AND_CONSULATION_LABEL_WIDTH }}%;" class="break-word">
                 {{ 'pdf.label.market_type_label.production'|trans }} /
                 {{ 'pdf.label.market_type_label.consultation'|trans }}
             </td>

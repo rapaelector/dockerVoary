@@ -1,0 +1,13 @@
+$base-font-size: 10;
+
+@function _rem($px-value) {
+	@return $px-value / $base-font-size * 1rem;
+}
+
+$label: _rem(10);
+$default-font-size: _rem(11);
+$title: _rem(16);
+$main-title: _rem(18);
+
+$checkbox-bg:#2196F3;
+$checkbox-color: #fff;

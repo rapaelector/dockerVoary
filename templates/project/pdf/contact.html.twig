@@ -19,11 +19,16 @@
 {# height count = 3 #}
 {% set TEL_HEIGT = space_value(4, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
 {# height count = {total: 5} #}
-{% set CONTACT_ADDRESS_HEIGHT = space_value(9, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
 {% set LABEL_CLASS = 'text-weight-bold text-underline text-left align-start text-nowrap' %}
 
 <table class="table-borderless">
     <tbody>
+        <tr>
+            <td class="text-center" colspan="2">
+                <div class="label">{{ 'pdf.label.contact'|trans }}</div>
+            </td>
+        </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ ENTREPRISE_HEIGT }}px;" class="{{ LABEL_CLASS }}">{{ 'pdf.label.entreprise'|trans }} :</td>
             <td width="{{ VALUE_WIDTH }}%;"></td>

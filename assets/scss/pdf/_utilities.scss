@@ -1,6 +1,3 @@
-$checkbox-bg:#2196F3;
-$checkbox-color: #fff;
-
 .border-0 {
     border: none;
 }
@@ -15,9 +12,6 @@ $checkbox-color: #fff;
 }
 .border-right-0 {
     border-right: none;
-}
-.label {
-    font-size: $label;
 }
 .text-weight-bold {
     font-weight: bold;
@@ -34,10 +28,13 @@ $checkbox-color: #fff;
 .text-left {
     text-align: left;
 }
+.text-right {
+    text-align: right !important;
+}
 .text-underline {
     text-decoration: underline;
 }
-.text-label {
+.text-sm {
     font-size: $label;
 }
 .align-start {
@@ -61,6 +58,9 @@ $checkbox-color: #fff;
 }
 .pr-05 {
     padding-right: 0.5rem;
+}
+.pl-05 {
+    padding-left: 0.5rem;
 }
 .word-word {
     word-break: break-all;
