@@ -1,0 +1,17 @@
+@mixin calendar {
+    #calendar {
+        width: 100%;
+        .bootstrap-datetimepicker-widget, .list-unstyled, .datepicker, .datepicker-days, table.table-condensed {
+            width: 100%;
+        }
+        table.table-condensed {
+            thead {
+                tr {
+                    height: 40px;
+                }
+            }
+        }
+    }
+}
+
+@include calendar;

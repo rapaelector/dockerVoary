@@ -1,6 +1,7 @@
 $icon-font-path: '~@neos21/bootstrap3-glyphicons/assets/fonts/';
 
 @import '~@neos21/bootstrap3-glyphicons';
+@import './calendar';
 
 .chart-placeholder-container {
     position: relative;
