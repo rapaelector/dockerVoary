@@ -4,16 +4,14 @@ angular.module('dashboardApp').controller('DashboardController', ['$scope', 'das
     };
 
     this.$onInit = function () {
-        console.info($);
-
         $('#calendar').datetimepicker({
             format: 'L',
+            locale: window._locale,
             inline: true
         });
 
         dashboardService.getBoxStatisticsData().then(function (response) {
             $scope.data.boxStats = response.data;
-            console.info($scope.data.boxStat);
         })
     };
 }]);
