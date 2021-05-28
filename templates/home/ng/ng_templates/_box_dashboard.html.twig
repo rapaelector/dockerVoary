@@ -1,0 +1,116 @@
+{% trans_default_domain 'dashboard' %}
+
+{% set title = {
+    users: 'title.users'|trans({}, 'messages'),
+    prospects: 'title.prospects'|trans({}, 'messages'),
+    projects: 'title.projects'|trans({}, 'messages'),
+    offres: 'title.offres'|trans({}, 'messages'),
+} %}
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.users }}'"
+            data="data.boxStats.usersCount"
+            icon="'people'"
+            icon-background-class="'bg-app-primary'"
+            url="'{{ path('user.index') }}'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.prospects }}'"
+            data="data.boxStats.prospectsCount"
+            icon="'inventory'"
+            icon-background-class="'bg-app-secondary'"
+            url="'{{ path('client.list') }}'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.projects }}'"
+            data="data.boxStats.projectsCount"
+            icon="'engineering'"
+            icon-background-class="'bg-success'"
+            url="'{{ path('project.index') }}'"
+        ></app-box-statistics>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <app-box-statistics
+            label="'{{ title.offres }}'"
+            data="data.boxStats.offresCount"
+            icon="'work'"
+            icon-background-class="'bg-danger'"
+            url="'#'"
+        ></app-box-statistics>
+    </div>
+</div>
+
+<div class="row align-items-stretch mb-3">
+    <div class="col-sm-6">
+        <div class="card h-100">
+            <div class="card-header border-0">
+
+            <h3 class="card-title d-flex align-items-center">
+                <i class="material-icons mr-2">event</i>
+                <span>{{ 'label.calendar'|trans() }}</span>
+            </h3>
+            <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body pt-0">
+            <!--The calendar -->
+                <div id="calendar" style="width: 100%"></div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    <div class="col-sm-6 mt-2 mt-sm-0">
+        <div class="card h-100">
+            <div class="card-body">
+                <app-statistics-chart
+                    chart-type="'bar'"
+                    chart-labels=""
+                    chart-data="">
+                </app-statistics-chart>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <app-statistics-chart
+                    chart-type="'pie'"
+                    chart-labels=""
+                    chart-data="">
+                </app-statistics-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <app-statistics-chart
+                    chart-type="'pie'"
+                    chart-labels=""
+                    chart-data="">
+                </app-statistics-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <app-statistics-chart
+                    chart-type="'pie'"
+                    chart-labels=""
+                    chart-data="">
+                </app-statistics-chart>
+            </div>
+        </div>
+    </div>
+</div>

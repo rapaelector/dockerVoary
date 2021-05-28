@@ -55,7 +55,7 @@ class SidebarMenuBuilder
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
                 'icon' => $icon,
-                'icon_content' => 'home',
+                'icon_content' => 'dashboard',
                 'label_wrapper' => 'p',
             ],
         ])->setAttributes(['class' => $navItem]);
