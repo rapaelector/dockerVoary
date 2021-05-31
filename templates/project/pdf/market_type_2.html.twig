@@ -10,19 +10,23 @@
 {# market type col count = 30 #}
 {% set MARKET_TYPE_2_COL_COUNT = 60 %}
 {% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_2_COL_COUNT)  %}
-{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_2_COL_COUNT - 2) / 2, MARKET_TYPE_2_COL_COUNT) %}
+{# add empty td; Empty td col count 6#}
+{% set EMPTY_TD_WIDTH = space_value(16, MARKET_TYPE_2_COL_COUNT) %}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_2_COL_COUNT - 18) / 2, MARKET_TYPE_2_COL_COUNT) %}
 
 <table class="table-borderless mt-1 market-type-2-table">
     <tbody>
         <tr>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.public_market'|trans }}</td>
+            <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.private_market'|trans }}</td>
         </tr>
         <tr>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(false) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_ao'|trans }}</td>
+            <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
             <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(true) }}</td>
             <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_ao'|trans }}</td>
         </tr>
