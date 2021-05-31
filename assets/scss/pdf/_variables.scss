@@ -1,13 +1,15 @@
-$base-font-size: 10;
+$base-font-size: 12;
 
 @function _rem($px-value) {
 	@return $px-value / $base-font-size * 1rem;
 }
 
 $label: _rem(10);
+// put default font size to 11px because 11px is the most used font size in the word file
 $default-font-size: _rem(11);
 $title: _rem(16);
-$main-title: _rem(18);
+// true value in word file is 18px
+$main-title: _rem(24);
 
 $checkbox-bg:#2196F3;
 $checkbox-color: #fff;

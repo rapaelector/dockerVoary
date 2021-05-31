@@ -31,8 +31,8 @@
 
 <table class="table-borderless for-the-frame-table">
     <tbody>
-        <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle">
-            <td width="{{ FOR_THE_FRAME_WIDTH }}%;">{{ 'pdf.label.for_the_frame'|trans }}</td>
+        <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle text-weight-bold">
+            <td width="{{ FOR_THE_FRAME_WIDTH }}%;" class="text-normal">{{ 'pdf.label.for_the_frame'|trans }}</td>
             <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td">NORME EN 1090 - 2</td>
             <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">Classe EXC</td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">1</td>
@@ -42,7 +42,7 @@
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">3</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
-            <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase">{{ 'pdf.label.not_applicable'|trans }}</td>
+            <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase text-normal">{{ 'pdf.label.not_applicable'|trans }}</td>
             <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
         </tr>
     </tbody>

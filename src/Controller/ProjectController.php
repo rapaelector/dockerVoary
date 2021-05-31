@@ -31,7 +31,7 @@ class ProjectController extends AbstractController
         if ($request->query->get('preview')) {
             return new Response($template);
         }
-
+        
         return new PdfResponse($knpSnappyPdf->getOutputFromHtml($template, $options));
     }
 }

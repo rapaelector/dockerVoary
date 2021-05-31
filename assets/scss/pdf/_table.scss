@@ -116,6 +116,12 @@ $table-td-padding: 10px;
         top: -2px;
         left: 5px;
     }
+    .checkbox-value {
+        padding-left: 4px;
+    }
+    .market-type-title {
+        padding-bottom: $table-td-padding;
+    }
     .particular-renovation-col {
         padding-left: $table-td-padding !important;
     }

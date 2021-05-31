@@ -6,7 +6,8 @@ html {
     font-size: $base-font-size * 1px;
     text-shadow: none;
     &.preview-mode {
-        font-size: 16px;
+        font-size: 14px;
+        letter-spacing: 0.1px;
         body {
             max-width: 920px;
             margin: 0 auto;
@@ -23,6 +24,9 @@ html {
                 }
                 .norm-td {
                     font-size: 14px;
+                }
+                table {
+                    letter-spacing: 0.1px !important;
                 }
             }
         }
