@@ -12,6 +12,8 @@
 {# surface value = 3 #}
 {% set OPERATION_DESCRIPTION_SURFACE_HEIGHT =  space_value(4, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
 
+{% set operationDescription = resolve([project, 'descriptionOperation'], '') %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -25,7 +27,13 @@
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}" height="{{ OPERATION_DESCRIPTION_SURFACE_HEIGHT }}px;" class="text-uppercase surface">{{ 'pdf.label.surface'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}"></td>
+            <td width="{{ VALUE_WIDTH }}">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ resolve([operationDescription, 'surface'], '') }}
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

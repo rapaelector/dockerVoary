@@ -10,42 +10,31 @@
 {% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
 {% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 2), MARKET_TYPE_COL_COUNT) /  2 %}
 
-<table class="table-borderless market-type-table">
+{% set marketType = resolve([project, 'marketType']) %}
+{% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKE_TYPES_CHOICES') %}
+
+<table class="table-borderless market-type-table mb-1">
     <tbody>
         <tr>
             <td colspan="4" class="text-center">
                 <div class="label market-type-title">{{ 'pdf.label.market_type'|trans }}</div>
             </td>
         </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.work_on_existing'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.tce'|trans }}</td>
-        </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.new_building'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.agricultural_building'|trans }}</td>
-        </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.shade_houses'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.call_for_tenders'|trans }}</td>
-        </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.isothermal_plan'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.simple_supply'|trans }}</td>
-        </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.asbestos_removal'|trans }}</td>
-            <td></td>
-            <td></td>
-        </tr>
+        {% for row in MARKET_TYPE_CHOICES|batch(2) %}
+            <tr>
+                {% for column in row %}
+                    <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                        {% if ngMode %}
+                            <input type="text">
+                        {% else %}    
+                            {{ pdf_checkbox(resolve([marketType, column|u.camel], '')) }}
+                        {% endif %}
+                    </td>
+                    <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">
+                        {{ ('pdf.label.market_type_label.' ~ column)|trans }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </tbody>
 </table>

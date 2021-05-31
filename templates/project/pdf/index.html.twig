@@ -6,6 +6,9 @@
 {% set COL_PX_SIZE = 10 %}
 {% set COL_PX_H_SIZE = 2 %}
 
+{% set ngMode = false %}
+{% if project is not defined %}{% set project = {} %}{% endif %}
+
 {% set FIRST_COL_COUNT = 5 %}
 {% set SECOND_COL_COUNT = 3 %}
 {% set FIRD_COL_COUNT =  0.75 %}
@@ -77,7 +80,7 @@
                         {% include 'project/pdf/contact.html.twig' %}
                     </td>
                     <td class="td-label">
-                        <div class="label">{{ 'pdf.label.construction_site_address'|trans }}</div>
+                        {% include 'project/pdf/construction_site_address.html.twig' %}
                     </td>
                 </tr>
                 <tr>

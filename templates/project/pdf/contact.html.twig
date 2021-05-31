@@ -2,6 +2,7 @@
 {# col count are multiply by 2 #}
 {# colCount = {total: 30, label: 12, value: total - label} #}
 {% set CONTACT_COL_COUNT = 60 %}
+
 {# total height count = 18 #}
 {% set CONTACT_H_COUNT = 32 %}
 {% set LABEL_COUNT = 24 %}
@@ -22,6 +23,8 @@
 {% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
 {% set LABEL_CLASS = 'text-weight-bold text-underline text-left align-start text-nowrap' %}
 
+{% set contact = resolve([project, 'contact']) %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -31,23 +34,53 @@
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ ENTREPRISE_HEIGT }}px;" class="{{ LABEL_CLASS }}">{{ 'pdf.label.entreprise'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ resolve([contact, 'name'], '') }}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ NAME_HEIGT }}px;" class="{{ LABEL_CLASS }}">{{ 'pdf.label.name'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ resolve([contact, 'contactName'], '') }}    
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ CONTACT_ADDRESS_HEIGHT }}px;" class="{{ LABEL_CLASS }}">{{ 'pdf.label.contact_address'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ resolve([contact, 'contactAddress'], '') }}    
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ MAIL_HEIGT }}" class="{{ LABEL_CLASS }}">{{ 'pdf.label.mail'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text" name="" id="">
+                {% else %}
+                    {{ resolve([contact, 'email'], '') }}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}%;" height="{{ TEL_HEIGT }}" class="{{ LABEL_CLASS }}">{{ 'pdf.label.tel'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ resolve([contact, 'phone'], '') }}
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

@@ -33,8 +33,8 @@ pdf:
       tce: 'T.C.E'
       new_building: 'Bât neuf'
       agricultural_building: 'Bât agricole'
-      shade_houses: 'Ombrières'
-      call_for_tenders: "Appel d'offre"
+      shades: 'Ombrières'
+      call_for_tender: "Appel d'offre"
       isothermal_plan: 'Plan isothermes'
       simple_supply: 'Fourniture simple'
       asbestos_removal: 'Désamiantage'
