@@ -13,8 +13,10 @@
 {% set LABEL_WIDTH = space_value(30, COL_COUNT) %}
 {% set  VALUE_WIDTH = space_value((COL_COUNT - 30), COL_COUNT) %}
 
-{% set responsibleOfBusiness = resolve([project], null) %}
-{% set economiste = resolve([project], null) %}
+{# {% set responsibleOfBusiness = resolve([project], null) %} #}
+{% set responsibleOfBusiness = '' %}
+{# {% set economiste = resolve([project], null) %} #}
+{% set economiste = '' %}
 
 <table class="table-borderless">
     <tbody>

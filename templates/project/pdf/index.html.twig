@@ -60,7 +60,7 @@
                         {{ 'pdf.title.prospection_folder'|trans }}
                     </td>
                     <td rowspan="2" class="pdf-td-logo border-0">
-                        <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="" width="{{ PDF_LOGO_WIDTH }}%">
+                        <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="bbat-pdf-logo" width="{{ PDF_LOGO_WIDTH }}%">
                     </td>
                 </tr>
                 <tr>
@@ -116,7 +116,7 @@
                 <tr>
                     <td colspan="2">
                         {# NORME EN 1090... #}
-                        {% include 'project/pdf/for_the_frame.html.twig' %}
+                        {% include 'project/pdf/norme_1090.html.twig' %}
                     </td>
                 </tr>
                 <tr>

@@ -27,7 +27,7 @@
                         {% if ngMode %}
                             <input type="text">
                         {% else %}    
-                            {{ pdf_checkbox(resolve([marketType, column|u.camel], '')) }}
+                            {{ pdf_checkbox() }}
                         {% endif %}
                     </td>
                     <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">

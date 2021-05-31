@@ -12,8 +12,7 @@
 {# surface value = 3 #}
 {% set OPERATION_DESCRIPTION_SURFACE_HEIGHT =  space_value(4, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
 
-{% set operationDescription = resolve([project, 'descriptionOperation'], null) %}
-{% set operationDescriptionSurface = resolve([operationDescription, 'surface'], null) %}
+{% set operationDescriptionSurface = resolve([project, 'descriptionOperation'], null) %}
 
 <table class="table-borderless">
     <tbody>
@@ -32,7 +31,7 @@
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ operationDescriptionSurface }}
+                    <span class="td-value">{{ operationDescriptionSurface }}</span>
                 {% endif %}
             </td>
         </tr>

@@ -2,19 +2,21 @@
 
 {# height count 5 #}
 {% set RESPONSE_H_COUNT = 10 %}
-{% set RESPONSE_HEIGHT = space_value(3, RESPONSE_H_COUNT, COL_PX_H_SIZE) %}
+{% set RESPONSE_HEIGHT = space_value(1.5, RESPONSE_H_COUNT) %}
+{# value height #}
+{% set RESPONSE_VALUE_HEIGHT = space_value(5, RESPONSE_H_COUNT) %}
 
-{% set responseForThe = resolve([project], null) %}
+{% set responseForThe = resolve([project, 'paymentChoice'], null) %}
 
 <table class="table-borderless">
     <tbody>
-        <tr>
-            <td height="{{ RESPONSE_HEIGHT }}px;" class="align-start text-center">
+        <tr height="{{ RESPONSE_HEIGHT }}px;">
+            <td class="align-start text-center">
                 <div class="label">{{ 'pdf.label.response_for_the'|trans }}</div>
             </td>
         </tr>
-        <tr>
-            <td>
+        <tr height="{{ RESPONSE_VALUE_HEIGHT }}px;">
+            <td class="align-start">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}

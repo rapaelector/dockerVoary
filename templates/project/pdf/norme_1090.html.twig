@@ -36,7 +36,9 @@
         <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle text-weight-bold">
             <td width="{{ FOR_THE_FRAME_WIDTH }}%;" class="text-normal">{{ 'pdf.label.for_the_frame'|trans }}</td>
             <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td">NORME EN 1090 - 2</td>
-            <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">Classe EXC</td>
+            <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">
+                {{ normeEn1090 }}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">1</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
