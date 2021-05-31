@@ -146,10 +146,6 @@ class User implements UserInterface, \Serializable
      */
     private $originalName;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="interlocuteur")
-     */
-    private $projects;
 
     public function getId(): ?int
     {
@@ -400,35 +396,5 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->profileName
         ) = unserialize($serialized);
-    }
-
-    /**
-     * @return Collection|Project[]
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
-
-    public function addProjects(Project $projects): self
-    {
-        if (!$this->projects->contains($projects)) {
-            $this->projects[] = $projects;
-            $projects->setInterlocuteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjects(Project $projects): self
-    {
-        if ($this->projects->removeElement($projects)) {
-            // set the owning side to null (unless already changed)
-            if ($projects->getInterlocuteur() === $this) {
-                $projects->setInterlocuteur(null);
-            }
-        }
-
-        return $this;
     }
 }

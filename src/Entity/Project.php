@@ -191,7 +191,7 @@ class Project
     private $recordAssistant;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $interlocuteur;
