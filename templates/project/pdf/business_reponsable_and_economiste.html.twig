@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {# total height count 8 #}
 {% set TOTAL_HEIGHT_COUNT = 16 %}
@@ -13,6 +13,9 @@
 {% set LABEL_WIDTH = space_value(30, COL_COUNT) %}
 {% set  VALUE_WIDTH = space_value((COL_COUNT - 30), COL_COUNT) %}
 
+{% set responsibleOfBusiness = resolve([project], null) %}
+{% set economiste = resolve([project], null) %}
+
 <table class="table-borderless">
     <tbody>
         <tr height="{{ BUSINNESS_RESPONSIBLE_HEIGHT }}" class="align-start">
@@ -21,7 +24,13 @@
                     {{ 'pdf.label.business_responsible'|trans }}:
                 </div>
             </td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ responsibleOfBusiness }}
+                {% endif %}
+            </td>
         </tr>
         <tr height="{{ ECONOMISTE_HEIGHT }}" class="align-start">
             <td width="{{ LABEL_WIDTH }}%;">
@@ -29,7 +38,13 @@
                     {{ 'pdf.label.economist'|trans }}:
                 </div>
             </td>
-            <td width="{{ VALUE_WIDTH }}%;"></td>
+            <td width="{{ VALUE_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ economiste }}    
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

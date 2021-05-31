@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 
@@ -14,21 +14,26 @@
 {% set EMPTY_TD_WIDTH = space_value(16, MARKET_TYPE_2_COL_COUNT) %}
 {% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_2_COL_COUNT - 18) / 2, MARKET_TYPE_2_COL_COUNT) %}
 
+{% set MARKET_TYPE_2_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPE_2_CHOICES') %}
+{% set marketType = resolve([project, 'marketType']) %}
+
 <table class="table-borderless mt-1 market-type-2-table">
     <tbody>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(true) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.public_market'|trans }}</td>
-            <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase">{{ 'pdf.label.market_type_label.private_market'|trans }}</td>
-        </tr>
-        <tr>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.public_ao'|trans }}</td>
-            <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox text-uppercase">{{ pdf_checkbox(true) }}</td>
-            <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;">{{ 'pdf.label.market_type_label.private_ao'|trans }}</td>
-        </tr>
+        {% for row in MARKET_TYPE_2_CHOICES|batch(2) %}
+            <tr>
+                {% for item in row %}    
+                    <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                        {% if ngMode %}
+                            <input type="text">
+                        {% else %}
+                            {{ pdf_checkbox(resolve([marketType], '')) }}
+                        {% endif %}
+                    </td>
+                    <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase word-break">
+                        {{ ('pdf.label.market_type_label.' ~ item)|trans }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </tbody>
 </table>

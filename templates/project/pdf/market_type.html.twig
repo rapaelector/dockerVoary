@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 
@@ -11,7 +11,7 @@
 {% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 2), MARKET_TYPE_COL_COUNT) /  2 %}
 
 {% set marketType = resolve([project, 'marketType']) %}
-{% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKE_TYPES_CHOICES') %}
+{% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPES_CHOICES') %}
 
 <table class="table-borderless market-type-table mb-1">
     <tbody>

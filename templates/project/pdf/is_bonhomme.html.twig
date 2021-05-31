@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 
@@ -28,8 +28,6 @@
 {# self liquidation col count 11 #}
 {% set SELF_LIQUIDATION = space_value(22, COL_COUNT) %}
 {% set SUB_CONTRACTOR_EMPTY_COL_WIDTH = space_value((20 + 8), COL_COUNT) %}
-
-{# height only #}
 
 <table class="table-borderless is-bonhomme-table">
     <tbody>

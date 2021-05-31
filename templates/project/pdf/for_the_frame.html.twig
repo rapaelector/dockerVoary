@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 
@@ -29,6 +29,8 @@
 {# not applicable checkbox width 4 #}
 {% set NOT_APPLICABLE_CHECKBOX_WIDTH = space_value(8, COL_COUNT) %}
 
+{% set normeEn1090 = resolve([project, 'norm1090']) %}
+
 <table class="table-borderless for-the-frame-table">
     <tbody>
         <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle text-weight-bold">
@@ -36,11 +38,29 @@
             <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td">NORME EN 1090 - 2</td>
             <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">Classe EXC</td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">1</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                {% endif %}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">2</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                {% endif %}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">3</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                {% endif %}
+            </td>
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
             <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase text-normal">{{ 'pdf.label.not_applicable'|trans }}</td>
             <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>

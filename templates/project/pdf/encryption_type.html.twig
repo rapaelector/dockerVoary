@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 
@@ -12,6 +12,9 @@
 {% set PRODUCTIN_AND_CONSULATION_LABEL_WIDTH = space_value(36, MARKET_TYPE_COL_COUNT) %}
 {% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
 
+{% set globalAmount = resolve([project, 'globalAmount'], null) %}
+{% set amountSubcontractedWork = resolve([project, 'amountSubcontractedWork'], null) %}
+
 <table class="table-borderless encryption-type-table">
     <tbody>
         <tr>
@@ -20,9 +23,23 @@
             </td>
         </tr>
         <tr height="{{ LABEL_HEIGHT }}px;">
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
-            <td width="{{ BUDGET_LABEL_WIDTH }}%;" class="break-word text-uppercase">{{ 'pdf.label.market_type_label.budget'|trans }}</td>
-            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(globalAmount) }}
+                {% endif %}
+            </td>
+            <td width="{{ BUDGET_LABEL_WIDTH }}%;" class="break-word text-uppercase">
+                {{ 'pdf.label.market_type_label.budget'|trans }}
+            </td>
+            <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(amountSubcontractedWork) }}
+                {% endif %}
+            </td>
             <td width="{{ PRODUCTIN_AND_CONSULATION_LABEL_WIDTH }}%;" class="break-word">
                 {{ 'pdf.label.market_type_label.production'|trans }} /
                 {{ 'pdf.label.market_type_label.consultation'|trans }}
