@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <h1>Project</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ project.id }}</td>
+            </tr>
+            <tr>
+                <th>SiteCode</th>
+                <td>{{ project.siteCode }}</td>
+            </tr>
+            <tr>
+                <th>Roadmap</th>
+                <td>{{ project.roadmap ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ProjectOwner</th>
+                <td>{{ project.projectOwner }}</td>
+            </tr>
+            <tr>
+                <th>ProjectManager</th>
+                <td>{{ project.projectManager }}</td>
+            </tr>
+            <tr>
+                <th>BillingAddres</th>
+                <td>{{ project.billingAddres }}</td>
+            </tr>
+            <tr>
+                <th>ContactName</th>
+                <td>{{ project.contactName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ project.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ project.phone }}</td>
+            </tr>
+            <tr>
+                <th>SiteAddress</th>
+                <td>{{ project.siteAddress }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionOperation</th>
+                <td>{{ project.descriptionOperation }}</td>
+            </tr>
+            <tr>
+                <th>SoldBy</th>
+                <td>{{ project.soldBy }}</td>
+            </tr>
+            <tr>
+                <th>QuoteWriter</th>
+                <td>{{ project.quoteWriter }}</td>
+            </tr>
+            <tr>
+                <th>Norm1090</th>
+                <td>{{ project.norm1090 }}</td>
+            </tr>
+            <tr>
+                <th>MarketType</th>
+                <td>{{ project.marketType }}</td>
+            </tr>
+            <tr>
+                <th>BonhomePercentage</th>
+                <td>{{ project.bonhomePercentage }}</td>
+            </tr>
+            <tr>
+                <th>DisaSheetValidation</th>
+                <td>{{ project.disaSheetValidation }}</td>
+            </tr>
+            <tr>
+                <th>PaymentChoice</th>
+                <td>{{ project.paymentChoice }}</td>
+            </tr>
+            <tr>
+                <th>DepositeDateEdit</th>
+                <td>{{ project.depositeDateEdit ? project.depositeDateEdit|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ClientCondition</th>
+                <td>{{ project.clientCondition }}</td>
+            </tr>
+            <tr>
+                <th>QuoteValidatedMDE</th>
+                <td>{{ project.quoteValidatedMDE }}</td>
+            </tr>
+            <tr>
+                <th>QuoteValidatedMDEDate</th>
+                <td>{{ project.quoteValidatedMDEDate }}</td>
+            </tr>
+            <tr>
+                <th>GlobalAmount</th>
+                <td>{{ project.globalAmount }}</td>
+            </tr>
+            <tr>
+                <th>AmountSubcontractedWork</th>
+                <td>{{ project.amountSubcontractedWork }}</td>
+            </tr>
+            <tr>
+                <th>AmountBBISpecificWork</th>
+                <td>{{ project.amountBBISpecificWork }}</td>
+            </tr>
+            <tr>
+                <th>CaseType</th>
+                <td>{{ project.caseType }}</td>
+            </tr>
+            <tr>
+                <th>PlanningProject</th>
+                <td>{{ project.planningProject }}</td>
+            </tr>
+            <tr>
+                <th>RecordAssistant</th>
+                <td>{{ project.recordAssistant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('project_index') }}">back to list</a>
+
+    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+
+    {{ include('project/_delete_form.html.twig') }}
+{% endblock %}
