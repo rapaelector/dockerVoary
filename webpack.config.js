@@ -40,6 +40,11 @@ Encore
     .addEntry('app_project', './assets/js/project/app.js')
 
     /**
+     * Entry for pdf page
+     */
+    .addStyleEntry('app_pdf', './assets/scss/pdf/app.scss')
+
+    /**
      * Entry for angularJS
      * - Try to make it global
      */

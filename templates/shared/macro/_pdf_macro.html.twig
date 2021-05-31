@@ -1,0 +1,7 @@
+{%- macro pdf_checkbox(checked, additionalStyles, attrs) -%}
+	{% from 'shared/macro/_macro.html.twig' import render_attr %}
+	<div class="pdf-checkbox {% if checked is same as(true) %}checked{% endif %}" style="{{ additionalStyles }}" {{ render_attr(attrs) }}>
+		<div class="pdf-checkbox-inner-1"></div>
+		<div class="pdf-checkbox-inner-2"></div>
+	</div>
+{%- endmacro -%}

@@ -1,0 +1,67 @@
+.border-0 {
+    border: none;
+}
+.border-top-0 {
+    border-top: none;
+}
+.border-bottom-0 {
+    border-bottom: none;
+}
+.border-left-0 {
+    border-left: none;
+}
+.border-right-0 {
+    border-right: none;
+}
+.text-weight-bold {
+    font-weight: bold;
+}
+.text-lowercase {
+    text-transform: lowercase;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+.text-center {
+    text-align: center;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right !important;
+}
+.text-underline {
+    text-decoration: underline;
+}
+.text-sm {
+    font-size: $label;
+}
+.align-start {
+    vertical-align: top;
+}
+.align-middle {
+    vertical-align: center;
+}
+.align-end {
+    vertical-align: bottom;
+}
+.text-nowrap {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.mb-1 {
+    margin-bottom: 1rem;
+}
+.mt-1 {
+    margin-top: 1rem;
+}
+.pr-05 {
+    padding-right: 0.5rem;
+}
+.pl-05 {
+    padding-left: 0.5rem;
+}
+.word-word {
+    word-break: break-all;
+}

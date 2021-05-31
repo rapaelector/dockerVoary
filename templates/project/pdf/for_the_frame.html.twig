@@ -1,0 +1,49 @@
+{% trans_default_domain 'project' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# here, boxs are refered to the word gridline columns   #}
+{# half of the 2 big columns are 30 boxs that mean the two big column have 60 boxs #}
+{# we multiply the value to have more space so instead of using 60, we use 120 (60*2) #}
+{% set COL_COUNT = 120 - 2 %}
+
+{# height count 3 #}
+{# i fixed it to 25px because total is 6 and there are only one tr in the table so its took 100px if we calculate it by its height count #}
+{% set FOR_THE_FRAME_HEIGHT = 25 %}
+
+{# checkbox col count 1 #}
+{% set CHECKBOX_WIDTH = space_value(2, COL_COUNT) %}
+{# checkbox label 1 #}
+{# the checkbox label real value is a little small so instead of multiplying to 2 i multiply it to 3 #}
+{% set CHECKBOX_LABEL_WIDTH = space_value(3, COL_COUNT) %}
+{# for the frame (charpente) width 11 #}
+{% set FOR_THE_FRAME_WIDTH = space_value(22, COL_COUNT) %}
+{# norme width 10 #}
+{% set NORME_WIDTH = space_value(20, COL_COUNT) %}
+{# classe EXC width 7 #}
+{% set CLASSE_EXC_WIDTH = space_value(14, COL_COUNT) %}
+{# empty td col count 8 #}
+{% set EMPTY_TD_WIDTH = space_value(16, COL_COUNT) %}
+{# not applicable (sans objet) col count 7 #}
+{% set NOT_APPLICABLE_WIDTH = space_value(14, COL_COUNT) %}
+{# not applicable checkbox width 4 #}
+{% set NOT_APPLICABLE_CHECKBOX_WIDTH = space_value(8, COL_COUNT) %}
+
+<table class="table-borderless for-the-frame-table">
+    <tbody>
+        <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle">
+            <td width="{{ FOR_THE_FRAME_WIDTH }}%;">{{ 'pdf.label.for_the_frame'|trans }}</td>
+            <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td">NORME EN 1090 - 2</td>
+            <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">Classe EXC</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">1</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">2</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">3</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
+            <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase">{{ 'pdf.label.not_applicable'|trans }}</td>
+            <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+        </tr>
+    </tbody>
+</table>

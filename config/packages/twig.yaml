@@ -5,6 +5,7 @@ twig:
         template_datatable_filters: 'shared/datatables/filters.html.twig'
         homeRoute: 'home'
         app_macro: 'shared/macro/_macro.html.twig'
+        pdf_macro: 'shared/macro/_pdf_macro.html.twig'
     form_themes:
         - 'bootstrap_4_layout.html.twig'
         - 'shared/form/fields.html.twig'
