@@ -101,7 +101,7 @@ class SidebarMenuBuilder
         }
         
         $menu->addChild('menu.project_management', [
-            'route' => 'project.index',
+            'route' => 'project.list',
             'linkAttributes' => ['class' => $linkClassName],
             'extras' => [
                 'icon' => $icon,

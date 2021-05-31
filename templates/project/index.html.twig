@@ -1,87 +1,75 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'client' %}
 
-{% block title %}Project index{% endblock %}
+{% extends 'project/layout.html.twig' %}
+{% block title %}{{ 'title.list'|trans }} | {{ parent() }}{% endblock %}
 
-{% block body %}
-    <h1>Project index</h1>
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>SiteCode</th>
-                <th>Roadmap</th>
-                <th>ProjectOwner</th>
-                <th>ProjectManager</th>
-                <th>BillingAddres</th>
-                <th>ContactName</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>SiteAddress</th>
-                <th>DescriptionOperation</th>
-                <th>SoldBy</th>
-                <th>QuoteWriter</th>
-                <th>Norm1090</th>
-                <th>MarketType</th>
-                <th>BonhomePercentage</th>
-                <th>DisaSheetValidation</th>
-                <th>PaymentChoice</th>
-                <th>DepositeDateEdit</th>
-                <th>ClientCondition</th>
-                <th>QuoteValidatedMDE</th>
-                <th>QuoteValidatedMDEDate</th>
-                <th>GlobalAmount</th>
-                <th>AmountSubcontractedWork</th>
-                <th>AmountBBISpecificWork</th>
-                <th>CaseType</th>
-                <th>PlanningProject</th>
-                <th>RecordAssistant</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.siteCode }}</td>
-                <td>{{ project.roadmap ? 'Yes' : 'No' }}</td>
-                <td>{{ project.projectOwner }}</td>
-                <td>{{ project.projectManager }}</td>
-                <td>{{ project.billingAddres }}</td>
-                <td>{{ project.contactName }}</td>
-                <td>{{ project.email }}</td>
-                <td>{{ project.phone }}</td>
-                <td>{{ project.siteAddress }}</td>
-                <td>{{ project.descriptionOperation }}</td>
-                <td>{{ project.soldBy }}</td>
-                <td>{{ project.quoteWriter }}</td>
-                <td>{{ project.norm1090 }}</td>
-                <td>{{ project.marketType }}</td>
-                <td>{{ project.bonhomePercentage }}</td>
-                <td>{{ project.disaSheetValidation }}</td>
-                <td>{{ project.paymentChoice }}</td>
-                <td>{{ project.depositeDateEdit ? project.depositeDateEdit|date('Y-m-d') : '' }}</td>
-                <td>{{ project.clientCondition }}</td>
-                <td>{{ project.quoteValidatedMDE }}</td>
-                <td>{{ project.quoteValidatedMDEDate }}</td>
-                <td>{{ project.globalAmount }}</td>
-                <td>{{ project.amountSubcontractedWork }}</td>
-                <td>{{ project.amountBBISpecificWork }}</td>
-                <td>{{ project.caseType }}</td>
-                <td>{{ project.planningProject }}</td>
-                <td>{{ project.recordAssistant }}</td>
-                <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="29">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.project_manger'|trans,
+        links: [],
+    } %} {% endembed %}
+{% endblock %}
 
-    <a href="{{ path('project_new') }}">Create new</a>
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-outline card-app-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'project.list'|trans }}</h3>
+                        <div class="card-tools">
+                            {% if is_granted('ROLE_PROJECT_ADD') %}
+                                <a href="{{ path('project.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_project'|trans({}, 'project') }}">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body py-0 pt-md-3 filter-collapse-container">
+                        {% include template_datatable_filters with {
+                            datatable: datatable,
+                            filterCollapseId: 'user-filter-collapse',
+                        } %}
+                    </div>
+                    <div class="card-body pt-0">
+                        <div id="{{ datatable.tableId }}">Chargement...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            window.App.DataTable.initAppDataTables({
+                columnNames: [
+                    'project_siteCode'
+                ],
+                excludedColumns: [],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                columnsCount: {{ datatable.columns|length }},
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: true,
+                enableFormatter: true,
+                redrawEvent: 'project.deleted',
+                config: {
+                    language: {
+                        paginate: {
+                            first: false,
+                            last: false,
+                            next: '<span class="material-icons">chevron_right</span>',
+                            previous: '<span class="material-icons">chevron_left</span>'
+                        }
+                    }
+                }
+            })
+        });
+    </script>
 {% endblock %}

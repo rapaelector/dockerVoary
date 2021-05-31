@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProjectType extends AbstractType
@@ -29,7 +31,10 @@ class ProjectType extends AbstractType
             ->add('bonhomePercentage')
             ->add('disaSheetValidation')
             ->add('paymentChoice')
-            ->add('depositeDateEdit')
+            ->add('depositeDateEdit', DateType::class, [
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ])
             ->add('clientCondition')
             ->add('quoteValidatedMDE')
             ->add('quoteValidatedMDEDate')

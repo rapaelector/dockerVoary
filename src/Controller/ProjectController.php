@@ -10,16 +10,79 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Controller\BaseController;
+
+use App\DataTables\Column\TextColumn;
+use App\DataTables\Column\TwigColumn;
+use App\DataTables\Column\DateTimeColumn;
+use App\DataTables\Adapter\ORMAdapter;
+use App\DataTables\DataTable;
+use App\DataTables\DataTableFactory;
+use App\DataTables\Filter\TextFilter;
+use App\DataTables\Filter\ChoiceFilter;
+use App\DataTables\Filter\DateRangeFilter;
+use App\DataTables\Filter\RangeFilter;
+use App\DataTables\Filter\ChoiceRangeFilter;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 #[Route('/project')]
-class ProjectController extends AbstractController
+class ProjectController extends BaseController
 {
-    #[Route('/', name: 'project.index')]
-    public function index(): Response
+    /**
+     * @isGranted("ROLE_PROJECT_VIEW")
+     */
+    #[Route('/', name: 'project.list', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'project_index', methods: ['GET', 'POST'])]
+    public function index(
+        Request $request, 
+        ProjectRepository $projectRepository, 
+        TranslatorInterface $translator, 
+        DataTableFactory $dataTableFactory
+    ): Response
     {
-        return $this->redirectToRoute('client.list');
+        $createOptions = [
+            'name' => 'list',
+            'translation_domain' => 'project',
+        ];
+
+        $table =  $dataTableFactory->create([], $createOptions)
+            ->add('siteCode', TextColumn::class, [
+                'label' => $translator->trans('label.siteCode', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('project_siteCode')
+                ),
+            ])
+        ;
+
+        $table->createAdapter(ORMAdapter::class, [
+            'entity' => Project::class,
+            'query' => function (QueryBuilder $builder) {
+                $builder
+                    ->select('project')
+                    ->from(Project::class, 'project')
+                    ->distinct('project')
+                ;
+            }  
+        ]);
+        
+        $table->handleRequest($request);
+        if ($table->isCallback()) {
+            return $table->getResponse();
+        }
+
+        return $this->render('project/index.html.twig', [
+            'projects' => $projectRepository->findAll(),
+            'datatable' => $table,
+        ]);
     }
 
-    #[Route('/new', name: 'project_new', methods: ['GET', 'POST'])]
+
+    #[Route('/new', name: 'project.new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $project = new Project();
@@ -40,7 +103,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'project.show', methods: ['GET'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -48,7 +111,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'project.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
         $form = $this->createForm(ProjectType::class, $project);
@@ -66,7 +129,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'project.delete', methods: ['POST'])]
     public function delete(Request $request, Project $project): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {

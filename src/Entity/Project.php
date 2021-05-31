@@ -46,35 +46,22 @@ class Project
     private $projectManager;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=Address::class)
      * 
      * Fr: adresse facturation
      */
     private $billingAddres;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=Client::class, cascade={"persist"})
      * 
-     * Fr: nom de l'interlocuteur
+     * Fr: infos interlocuteur
      */
-    private $contactName;
+    private $interlocuteur;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     * Fr: email interlocuteur
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     * Fr: telephone interlocuteur
-     */
-    private $phone;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
      * 
      * Fr: addresse chantier
      */
@@ -88,14 +75,14 @@ class Project
     private $descriptionOperation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * 
      * Fr: Dossier vendu par
      */
     private $soldBy;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * 
      * Fr: rédacteur du devis
      */
@@ -259,12 +246,12 @@ class Project
         return $this;
     }
 
-    public function getBillingAddres(): ?string
+    public function getBillingAddres(): ?Address
     {
         return $this->billingAddres;
     }
 
-    public function setBillingAddres(string $billingAddres): self
+    public function setBillingAddres(Address $billingAddres): self
     {
         $this->billingAddres = $billingAddres;
 
@@ -295,17 +282,6 @@ class Project
         return $this;
     }
 
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
 
     public function getSiteAddress(): ?string
     {
@@ -331,24 +307,24 @@ class Project
         return $this;
     }
 
-    public function getSoldBy(): ?string
+    public function getSoldBy(): ?User
     {
         return $this->soldBy;
     }
 
-    public function setSoldBy(string $soldBy): self
+    public function setSoldBy(User $soldBy): self
     {
         $this->soldBy = $soldBy;
 
         return $this;
     }
 
-    public function getQuoteWriter(): ?string
+    public function getQuoteWriter(): ?User
     {
         return $this->quoteWriter;
     }
 
-    public function setQuoteWriter(string $quoteWriter): self
+    public function setQuoteWriter(User $quoteWriter): self
     {
         $this->quoteWriter = $quoteWriter;
 
@@ -415,12 +391,12 @@ class Project
         return $this;
     }
 
-    public function getDepositeDateEdit(): ?string
+    public function getDepositeDateEdit(): ?\DateTime
     {
         return $this->depositeDateEdit;
     }
 
-    public function setDepositeDateEdit(string $depositeDateEdit): self
+    public function setDepositeDateEdit(?\DateTime $depositeDateEdit): self
     {
         $this->depositeDateEdit = $depositeDateEdit;
 

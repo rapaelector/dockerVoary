@@ -57,6 +57,7 @@ class Client
      */
     private $shortName;
 
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
      */
@@ -115,6 +116,16 @@ class Client
      * @ORM\ManyToMany(targetEntity=User::class, cascade={"persist", "refresh", "remove"})
      */
     private $contacts;
+
+    /**
+     * @ORM\Column(type="string", length=16, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $email;
 
     public function __construct()
     {
@@ -282,4 +293,29 @@ class Client
 
         return $this;
     }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
 }

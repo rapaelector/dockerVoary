@@ -33,6 +33,12 @@ Encore
      */
     .addEntry('app_client', './assets/js/client/app.js')
 
+    /***
+     * Entry for client
+     * - For client collection type
+     */
+    .addEntry('app_project', './assets/js/project/app.js')
+
     /**
      * Entry for angularJS
      * - Try to make it global

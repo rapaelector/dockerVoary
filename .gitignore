@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+.idea/
 /config/jwt
 .DS_Store
 .env.test
