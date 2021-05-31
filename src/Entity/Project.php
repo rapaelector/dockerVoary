@@ -52,12 +52,9 @@ class Project
      */
     private $billingAddres;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Client::class, cascade={"persist"})
-     * 
-     * Fr: infos interlocuteur
-     */
-    private $interlocuteur;
+
+
+
 
 
     /**
@@ -192,6 +189,12 @@ class Project
      * Fr: assistant en charge du dossier
      */
     private $recordAssistant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $interlocuteur;
 
     public function getId(): ?int
     {
@@ -507,6 +510,18 @@ class Project
     public function setRecordAssistant(string $recordAssistant): self
     {
         $this->recordAssistant = $recordAssistant;
+
+        return $this;
+    }
+
+    public function getInterlocuteur(): ?User
+    {
+        return $this->interlocuteur;
+    }
+
+    public function setInterlocuteur(?User $interlocuteur): self
+    {
+        $this->interlocuteur = $interlocuteur;
 
         return $this;
     }
