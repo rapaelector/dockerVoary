@@ -50,35 +50,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            {{ form_row(form.billingAddress.name) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.phone) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.fax) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.line1) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.line2) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.line3) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.postalCode) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.city) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.billingAddress.country) }}
-                        </div>
-                    </div>
+                    {% include 'address/_form_address.template.twig' with {'form': form.billingAddress} %}
                 </div>
                 <!-- /.card-body -->
             </div>
