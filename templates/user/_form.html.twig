@@ -2,42 +2,7 @@
     <!-- form start -->
     {{ form_start(form) }}
         <div class="card-body">
-            <div class="row">
-                <div class="col-sm-6">
-                    {{ form_row(form.lastName) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.firstName) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.email) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.phone) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.job) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.fax) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.password) }}
-                </div>
-                <div class="col-sm-6">
-                    <div id="password-generator" class="pt-4"></div>
-                </div>
-                <div class="col-12">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            {{ form_row(form.profileFile) }}
-                        </div>
-                        <div class="col-sm-6 can-login-field">
-                            {{ form_row(form.canLogin) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include 'user/_form_view.template.twig' %}
         </div>
         <!-- /.card-body -->
 

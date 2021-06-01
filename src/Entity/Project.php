@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
+
+    const PAYMENT_TYPE_CARD = "payment.type.card";
+    const PAYMENT_TYPE_CASH = "payment.type.cash";
+    const PAYMENT_TYPE_TRANSFER = "payment.type.transfer";
+    const PAYMENT_TYPE_CHECK = "payment.type.check";
+
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -261,30 +268,6 @@ class Project
         return $this;
     }
 
-    public function getContactName(): ?string
-    {
-        return $this->contactName;
-    }
-
-    public function setContactName(string $contactName): self
-    {
-        $this->contactName = $contactName;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
 
     public function getSiteAddress(): ?string
     {
@@ -524,5 +507,15 @@ class Project
         $this->interlocuteur = $interlocuteur;
 
         return $this;
+    }
+
+    public static function getPaymentTypeChoices($associative = false)
+    {
+        $choices = [
+            self::PAYMENT_TYPE_CHECK,
+            self::PAYMENT_TYPE_TRANSFER,
+        ];
+
+        return $associative ? array_combine($choices, $choices) : $choices;
     }
 }

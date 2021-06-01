@@ -38,7 +38,8 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH,ROLE_ADMIN_PROJECT]
+        ROLE_ADMIN_PROJECT: [ROLE_PROJECT_VIEW, ROLE_PROJECT_ADD, ROLE_PROJECT_DELETE]
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
