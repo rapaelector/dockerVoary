@@ -1,0 +1,37 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{% set COL_COUNT = 120 %}
+{# checkbox col count 1 #}
+{% set CHECKBOX_WIDTH = space_value(2, COL_COUNT) %}
+{# checkbox label count is the rest of col_count - checkbox col count #}
+{% set CHECKBOX_LABEL = space_value((120 - 2), COL_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td colspan="2" class="label">{{ 'pdf.label.file_validation_disa_within'|trans }} :</td>
+        </tr>
+        <tr>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox() }}</td>
+            {# Devis MDE signé #}
+            <td width="{{ CHECKBOX_LABEL }}%;" class="p-0">{{ 'pdf.file_validation_disa_label.mde_quote_signed'|trans }}</td>
+        </tr>
+        <tr>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox() }}</td>
+            {# Bon de Commande du Client #}
+            <td width="{{ CHECKBOX_LABEL }}%;" class="p-0">{{ 'pdf.file_validation_disa_label.customer_order_form'|trans }}</td>
+        </tr>
+        <tr>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox() }}</td>
+            {# Lettre d’autorisation de travailler en l’absence #}
+            <td width="{{ CHECKBOX_LABEL }}%;" class="p-0">{{ 'pdf.file_validation_disa_label.letter_of_authorization'|trans }}</td>
+        </tr>
+        <tr>
+            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox() }}</td>
+            {# Contrat de sous-traitance (si Bonhomme est sous-traitant)  #}
+            <td width="{{ CHECKBOX_LABEL }}%;" class="p-0">{{ 'pdf.file_validation_disa_label.subcontractiong_contract'|trans }}</td>
+        </tr>
+    </tbody>
+</table>

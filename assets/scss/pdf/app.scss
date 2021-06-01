@@ -5,6 +5,9 @@
 html {
     font-size: $base-font-size * 1px;
     text-shadow: none;
+    .page-breaker {
+        page-break-after: always;
+    }
     &.preview-mode {
         font-size: 14px;
         letter-spacing: 0.1px;

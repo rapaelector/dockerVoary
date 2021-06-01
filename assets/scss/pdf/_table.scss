@@ -1,8 +1,3 @@
-
-$table-width: 100%;
-$table-td-border-color:#777777;
-$table-td-padding: 6px;
-
 @mixin basic_table {
     table {
         width: $table-width;
@@ -15,7 +10,7 @@ $table-td-padding: 6px;
                     padding: 0;
                 }
                 td {
-                    border: 1px solid $table-td-border-color;
+                    border: $border;
                     &.pdf-td-logo {
                         text-align: center;
                         vertical-align: middle;
@@ -95,9 +90,22 @@ $table-td-padding: 6px;
         font-size: $main-title;
     }
     .prospect {
-        background: rgb(255, 192, 0);
+        background: $prospectBackground;
         word-break: keep-all !important;
         .prospect-title {
+            word-break: keep-all !important;
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            font-size: $title;
+            position: relative;
+            left: 5px;
+            top: 20px;
+        }
+    }
+    .commercial {
+        background: $commercialBackground;
+        word-break: keep-all !important;
+        .commercial-title {
             word-break: keep-all !important;
             transform: rotate(-90deg);
             -webkit-transform: rotate(-90deg);
@@ -136,7 +144,7 @@ $table-td-padding: 6px;
         display: inline-block;
         width: 8px;
         height: 8px;
-        border: 1px solid $table-td-border-color;
+        border: $border;
         position: relative;
         .pdf-checkbox-inner-1, .pdf-checkbox-inner-2 {
             display: none;

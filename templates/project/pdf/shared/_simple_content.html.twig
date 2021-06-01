@@ -1,0 +1,21 @@
+{# height col count 7 #}
+{% set HEIGHT = 14 %}
+{# label height 1.5 #}
+{% set LABEL_HEIGHT = space_value(3, HEIGHT) %}
+{# value height 5.5 #}
+{% set VALUE_HEIGHT = space_value(11, HEIGHT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ LABEL_HEIGHT }}px;">
+                <div class="label">{{ title }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td height="{{ VALUE_HEIGHT }}px;">
+                {{ content }}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -50,8 +50,6 @@ class ClientService implements ClientServiceInterface
 
         $maxCLI = (int) max([$cliStart, $maxCLI]);
         $maxPR = (int) max([$prStart, $maxPR]);
-        dump($maxCLI);
-        dump($maxPR);
 
         while ($repo->findByClientNumber($this->formatCN('CL', $maxCLI))) {
             $maxCLI++;

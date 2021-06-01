@@ -1,0 +1,23 @@
+{% trans_default_domain 'projects' %}
+{# total height real value 4 #}
+{% set HEIGHT = 6 %}
+{# label height 2 #}
+{% set LABEL_HEIGHT = space_value(3, HEIGHT) %}
+{# value height #}
+{% set VALUE_HEIGHT = space_value(3, HEIGHT) %}
+
+{% set labelClass = 'align-start text-center text-weight-bold text-underline' %}
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            {# dossier vendu par #}
+            <td height="{{ LABEL_HEIGHT }}px;" class="{{ labelClass }} border-right">{{ 'pdf.label.folder_sold_by'|trans }}</td>
+            {# rédacteur du dévis #}
+            <td height="{{ LABEL_HEIGHT }}px;" class="{{ labelClass }}">{{ 'pdf.label.quote_writer'|trans }}</td> 
+        </tr>
+        <tr>
+            <td height="{{ VALUE_HEIGHT }}px;" class="border-right"></td>
+            <td height="{{ VALUE_HEIGHT }}px;"></td>
+        </tr>
+    </tbody>
+</table>

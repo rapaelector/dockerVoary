@@ -1,0 +1,44 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# total height 4 #}
+{% set HEIGHT =  6 %}
+{# label value 1.5 #}
+{% set VALUE_HEIGHT = space_value(2, HEIGHT) %}
+{# empty col height count 2.5 #}
+{% set EMPTY_COL_HEIGHT = space_value(4, HEIGHT) %}
+
+{# width  #}
+{# total count col 30 #}
+{% set COL_COUNT = 60 %}
+{# norme 1090 col count 10 #}
+{% set NORME_1090_WIDTH = space_value(20, COL_COUNT) %}
+{# classe_exe col count 6 #}
+{% set CLASSE_EXE_WIDTH = space_value(14, COL_COUNT) %}
+{# checkbock col count 7 #}
+{% set CHECKBOX_WIDTH = space_value(14, COL_COUNT) %}
+{# empty col count #}
+{% set EMPTY_WIDTH = space_value(COL_COUNT - (NORME_1090_WIDTH + CLASSE_EXE_WIDTH + CHECKBOX_WIDTH), COL_COUNT) %}
+
+{% set norm1090Class = 'text-weight-bold text-uppercase norm-td text-underline' %}
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ NORME_1090_WIDTH }}%;" class="{{ norm1090Class }} align-start">NORME EN 1090 - </td>
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ CLASSE_EXE_WIDTH }}%;" class="text-weight-bold align-start">Classe EXE</td>
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ CHECKBOX_WIDTH }}%;" class="align-start">
+                <span>1</span>
+                <span>{{ pdf_checkbox() }}</span>
+                <span>2</span>
+                <span>{{ pdf_checkbox() }}</span>
+                <span>3</span>
+                <span>{{ pdf_checkbox() }}</span>
+            </td>
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ EMPTY_WIDTH }}%;" class="align-start"></td>
+        </tr>
+        <tr>
+            <td colspan="4" height="{{ EMPTY_COL_HEIGHT }}px;"></td>
+        </tr>
+    </tbody>
+</table>

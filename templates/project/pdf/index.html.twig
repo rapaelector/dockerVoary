@@ -45,109 +45,12 @@
 
 {% block content %}
     <div>
-        <table>
-            <tbody>
-                <tr class="table-tr-header">
-                    <td width="{{ FIRST_COL_WIDTH }}%;"></td>
-                    <td width="{{ SECOND_COL_WIDTH }}%;"></td>
-                    <td width="{{ FIRD_COL_WIDTH }}%;"></td>
-                    <td width="{{ FOURTH_COL_WIDTH }}%;"></td>
-                    <td width="{{ FIFTH_COL_WIDTH }}%;"></td>
-                </tr>
-                <tr>
-                    <td class="border-0"></td>
-                    <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">
-                        {{ 'pdf.title.prospection_folder'|trans }}
-                    </td>
-                    <td rowspan="2" class="pdf-td-logo border-0">
-                        <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="bbat-pdf-logo" width="{{ PDF_LOGO_WIDTH }}%">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="border-0"></td>
-                    <td rowspan="{{ empty_row_rowspan }}" class="border-0"></td>
-                    <td class="first-ask-date">
-                        <div>{{ 'pdf.label.first_ask_date'|trans }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="{{ prospect_rowspan }}" colspan="2" class="prospect text-weight-bold text-uppercase" style="word-break: keep-all;">
-                        <div class="prospect-title" style="width: 30px;">
-                            {{ 'pdf.title.prospect'|trans }}
-                        </div>
-                    </td>
-                    <td class="contact" class="td-label">
-                        {# CONTACT #}
-                        {% include 'project/pdf/contact.html.twig' %}
-                    </td>
-                    <td class="td-label">
-                        {# ADRESSE CHANTIER #}
-                        {% include 'project/pdf/construction_site_address.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td-label">
-                        {# DESCRIPTION DE L'OPERATION #}
-                        {% include 'project/pdf/operation_description.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="2" class="td-label">
-                        {# TYPE DE MARCHE #}
-                        {% include 'project/pdf/market_type.html.twig' %}
-                    </td>
-                    <td>
-                        {# TYPE DE MARCHE A DROIT : marche public, marche prive, A.O public, A.O prive #}
-                        {% include 'project/pdf/market_type_2.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="encryption-type align-start">
-                        {# TYPE DE CHIFFRAGE #}
-                        {% include 'project/pdf/encryption_type.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td-label">
-                        {# BONHOMME EST-IL #}
-                        {% include 'project/pdf/is_bonhomme.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        {# NORME EN 1090... #}
-                        {% include 'project/pdf/norme_1090.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="project-planning">
-                        {# PLANNING DU PROJET #}
-                        {% include 'project/pdf/project_planning.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-label">
-                        {# PRIORISATION DU DOSSIER #}
-                        {% include 'project/pdf/folder_prioritization.html.twig' %}
-                    </td>
-                    <td class="td-label">
-                        {# REPONSE POUR LE #}
-                        {% include 'project/pdf/response_for_the.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        {# CHARGE D'AFFAIRE, ECONOMISTE #}
-                        {% include 'project/pdf/business_reponsable_and_economiste.html.twig' %}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        {# NOM DU DOSSIER SUR LE SERVEUR #}
-                        {% include 'project/pdf/folder_name_in_the_cloud.html.twig' %}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        {# DOSSIER DE PROSPECTION #}
+        {% include 'project/pdf/_prospection_folder.html.twig' %}
+    </div>
+    <div class="page-breaker"></div>
+    <div>
+        {# REVUE DE CONTRAT / PAGE DE GARDE DISA #}
+        {% include 'project/pdf/_contract_review.html.twig' %}
     </div>
 {% endblock %}

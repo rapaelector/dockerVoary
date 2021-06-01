@@ -1,0 +1,41 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# header col count  #}
+{# contract review col count 39 #}
+{% set CONTRACT_REVIEW_WIDTH = space_value(78, TOTAL_COL_COUNT) %}
+{# work site code col count 21 #}
+{% set CODE_SITEWORK = space_value(42, TOTAL_COL_COUNT) %}
+{# header height #}
+{# header height col count 8 #}
+{% set TOTAL_HEIGHT = 16 %}
+{% set CONTRACT_REVIEW = space_value(16, TOTAL_HEIGHT) %}
+{# code_sitework count 6 #}
+{% set CODE_SITEWORK_HEIGHT =  space_value(12, TOTAL_HEIGHT) %}
+
+<table>
+    <tbody>
+        <tr>
+            <td width="{{ CONTRACT_REVIEW_WIDTH }}" height="{{ CONTRACT_REVIEW }}px;" class="border-top-0 border-left-0 border-bottom-0">REVUE DE CONTRAT / PAGE DE GARDE DISA</td>
+            <td width="{{ CODE_SITEWORK }}%;" height="{{ CODE_SITEWORK_HEIGHT }}px;" class="border-bottom-0 border-right-0">
+                <table height="100%;" class="table-borderless">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">CODE CHANTIER</td>
+                        </tr>
+                        <tr>
+                            <td>Feuille de route</td>
+                            <td>
+                                <span>{{ pdf_checkbox(true) }}</span>
+                                <span>OUI</span>
+                                <span>{{ pdf_checkbox(true) }}</span>
+                                <span>NON</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
