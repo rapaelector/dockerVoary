@@ -30,6 +30,12 @@ pdf:
     folder_sold_by: 'Dossier vendu par'
     quote_writer: 'Rédacteur du devis'
     file_validation_disa_within: 'Validation de la fiche disa avec'
+    payment_method: 'Mode de réglement'
+    date_of_deposit: "Date à laquelle l'acompte doit être édité ?"
+    deposite: 'Acompte'
+    yes_from: 'Oui de'
+    no: 'No'
+    client_conditions_negotiated: 'Conditions négociées avec le client'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'

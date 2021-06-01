@@ -1,7 +1,7 @@
 {% trans_default_domain 'projects' %}
 
-{% set commercialRowspan = 7 %}
-{% set emptyRowspan = 7 %}
+{% set commercialRowspan = 8 %}
+{% set emptyRowspan = 8 %}
 <table>
     <tbody>
         <tr class="table-tr-header">
@@ -98,6 +98,12 @@
             <td colspan="2">
                 {# validation de la fiche disa avec #}
                 {% include 'project/pdf/contract_review/validation_of_the_file.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {# Mode de regelement #}
+                {% include 'project/pdf/contract_review/payment_choice.html.twig' %}
             </td>
         </tr>
     </tbody>
