@@ -17,10 +17,10 @@
 {# without_continuation (sans suite) col count 6 #}
 {% set WITHOUT_CONTINUATION = space_value(12, PRIORITIZATION_COL_COUNT) %}
 
-{% set folderPrioritization = resolve([project], null) %}
-{% set folderPrioritizationUrgent = resolve([project]) %}
-{% set folderPrioritizationNormal = resolve([project]) %}
-{% set folderPrioritizationWithoutContinuation = resolve([project]) %}
+{% set folderPrioritization = resolve([project, 'caseType'], null) %}
+{% set folderPrioritizationUrgent = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::URGENT') %}
+{% set folderPrioritizationNormal = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::NORMAL') %}
+{% set folderPrioritizationWithoutContinuation = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::WITHOUT_CONTINUATION') %}
 
 <table class="table-borderless prioritization-folder">
     <tbody>

@@ -35,37 +35,43 @@
     <tbody>
         <tr height="{{ FOR_THE_FRAME_HEIGHT }}px;" class="align-middle text-weight-bold">
             <td width="{{ FOR_THE_FRAME_WIDTH }}%;" class="text-normal">{{ 'pdf.label.for_the_frame'|trans }}</td>
-            <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td">NORME EN 1090 - 2</td>
+            <td width="{{ NORME_WIDTH }}%;" class="text-weight-bold text-uppercase norm-td text-underline">NORME EN 1090 - 2</td>
             <td width="{{ CLASSE_EXC_WIDTH }}%;" class="text-weight-bold norm-td">
                 {{ normeEn1090 }}
             </td>
-            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">1</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-center">1</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                    {% set isFirst = normeEn1090 == constant('\\App\\Entity\\Constants\\Project\\Norme1090::NORME_1090_1') ? true : false %}
+                    {{ pdf_checkbox(resolve([isFirst], null)) }}
                 {% endif %}
             </td>
-            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">2</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-center">2</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                    {% set isSecond = normeEn1090 == constant('\\App\\Entity\\Constants\\Project\\Norme1090::NORME_1090_2') ? true : false %}
+                    {{ pdf_checkbox(resolve([isSecond], null)) }}
                 {% endif %}
             </td>
-            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-right">3</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%;" class="text-center">3</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ pdf_checkbox(resolve([normeEn1090], null)) }}
+                    {% set isFird = normeEn1090 == constant('\\App\\Entity\\Constants\\Project\\Norme1090::NORME_1090_3') ? true : false %}
+                    {{ pdf_checkbox(resolve([isFird], null)) }}
                 {% endif %}
             </td>
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
             <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase text-normal">{{ 'pdf.label.not_applicable'|trans }}</td>
-            <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">
+                {% set isNotApplicable = normeEn1090 == constant('\\App\\Entity\\Constants\\Project\\Norme1090::NORME_1090_NOT_APPLICABLE') ? true : false %}
+                {{ pdf_checkbox(isNotApplicable) }}
+            </td>
         </tr>
     </tbody>
 </table>

@@ -10,8 +10,9 @@
 {% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
 {% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 2), MARKET_TYPE_COL_COUNT) /  2 %}
 
-{% set marketType = resolve([project, 'marketType']) %}
+{% set marketType = resolve([project, 'marketType'], null) %}
 {% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPES_CHOICES') %}
+
 
 <table class="table-borderless market-type-table mb-1">
     <tbody>
@@ -26,8 +27,9 @@
                     <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
                         {% if ngMode %}
                             <input type="text">
-                        {% else %}    
-                            {{ pdf_checkbox() }}
+                        {% else %}
+                            {% set isChecked = marketType == column ? true : false %}
+                            {{ pdf_checkbox(isChecked) }}
                         {% endif %}
                     </td>
                     <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">

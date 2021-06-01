@@ -3,8 +3,8 @@
 
 {% set PROJECT_PLANNING_HEIGHT_TOTAL_COUNT = 10 %}
 {# total project planning height count 5 #}
-{% set PROJECT_PLANNING_VALUE_HEIGHT_COUNT = space_value(2, PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
-{% set PROJECT_PLANNING_LABEL_HEIGHT_COUNT = space_value((PROJECT_PLANNING_HEIGHT_TOTAL_COUNT - 6), PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
+{% set PROJECT_PLANNING_LABEL_HEIGHT_COUNT = space_value(2, PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
+{% set PROJECT_PLANNING_VALUE_HEIGHT_COUNT = space_value((PROJECT_PLANNING_HEIGHT_TOTAL_COUNT - 6), PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
 
 {% set planningProject = resolve([project, 'planningProject'], null) %}
 
@@ -17,7 +17,7 @@
                 </div>
             </td>
         </tr>
-        <tr height="{{ PROJECT_PLANNING_VALUE_HEIGHT_COUNT }}px;">
+        <tr height="{{ PROJECT_PLANNING_VALUE_HEIGHT_COUNT }}px;" class="align-start">
             <td>{{ planningProject }}</td>
         </tr>
     </body>
