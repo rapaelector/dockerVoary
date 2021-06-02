@@ -11,12 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Project
 {
 
-    const PAYMENT_TYPE_CARD = "payment.type.card";
-    const PAYMENT_TYPE_CASH = "payment.type.cash";
-    const PAYMENT_TYPE_TRANSFER = "payment.type.transfer";
-    const PAYMENT_TYPE_CHECK = "payment.type.check";
-
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -39,22 +33,22 @@ class Project
     private $roadmap;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * 
      * Fr: maitre d'ouvrage
      */
     private $projectOwner;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * 
+     * @ORM\ManyToOne(targetEntity=User::class)
+     *
      * Fr: maitre d'oeuvre
      */
     private $projectManager;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
-     * 
+     *
      * Fr: adresse facturation
      */
     private $billingAddres;
@@ -95,32 +89,41 @@ class Project
     private $norm1090;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="array")
      * 
      * Fr: type de marche
      */
     private $marketType;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column()
      * 
      * Fr: bonhomme est il 
      */
     private $bonhomePercentage;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      * 
      * Fr: validation de fiche DISA
      */
     private $disaSheetValidation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      * 
      * Fr: mode de reglement acompte
      */
     private $paymentChoice;
+
+
+    /**
+     * @ORM\Column(type="float")
+     *
+     * Fr: mode de reglement pourcentage
+     */
+    private $paymentPercentage;
+
 
     /**
      * @ORM\Column(type="date", length=255)
@@ -165,14 +168,14 @@ class Project
     private $amountSubcontractedWork;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      * 
      * Fr: montant des traveau propre a bbi
      */
     private $amountBBISpecificWork;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="array")
      * 
      * Fr: type de dossier
      */
@@ -186,7 +189,7 @@ class Project
     private $planningProject;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * 
      * Fr: assistant en charge du dossier
      */
@@ -197,6 +200,18 @@ class Project
      * @ORM\JoinColumn(nullable=false)
      */
     private $contact;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * fr : CONDUC. OCBS
+     */
+    private $ocbsDriver;
+
+    /**
+     * fr: CONDUC TCE
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $tceDriver;
 
     public function getId(): ?int
     {
@@ -227,24 +242,24 @@ class Project
         return $this;
     }
 
-    public function getProjectOwner(): ?string
+    public function getProjectOwner(): ?User
     {
         return $this->projectOwner;
     }
 
-    public function setProjectOwner(string $projectOwner): self
+    public function setProjectOwner(User $projectOwner): self
     {
         $this->projectOwner = $projectOwner;
 
         return $this;
     }
 
-    public function getProjectManager(): ?string
+    public function getProjectManager(): ?User
     {
         return $this->projectManager;
     }
 
-    public function setProjectManager(string $projectManager): self
+    public function setProjectManager(User $projectManager): self
     {
         $this->projectManager = $projectManager;
 
@@ -324,48 +339,48 @@ class Project
         return $this;
     }
 
-    public function getMarketType(): ?int
+    public function getMarketType()
     {
         return $this->marketType;
     }
 
-    public function setMarketType(int $marketType): self
+    public function setMarketType($marketType): self
     {
         $this->marketType = $marketType;
 
         return $this;
     }
 
-    public function getBonhomePercentage(): ?int
+    public function getBonhomePercentage(): ?string
     {
         return $this->bonhomePercentage;
     }
 
-    public function setBonhomePercentage(int $bonhomePercentage): self
+    public function setBonhomePercentage(string $bonhomePercentage): self
     {
         $this->bonhomePercentage = $bonhomePercentage;
 
         return $this;
     }
 
-    public function getDisaSheetValidation(): ?string
+    public function getDisaSheetValidation()
     {
         return $this->disaSheetValidation;
     }
 
-    public function setDisaSheetValidation(string $disaSheetValidation): self
+    public function setDisaSheetValidation($disaSheetValidation): self
     {
         $this->disaSheetValidation = $disaSheetValidation;
 
         return $this;
     }
 
-    public function getPaymentChoice(): ?string
+    public function getPaymentChoice()
     {
         return $this->paymentChoice;
     }
 
-    public function setPaymentChoice(string $paymentChoice): self
+    public function setPaymentChoice($paymentChoice): self
     {
         $this->paymentChoice = $paymentChoice;
 
@@ -456,12 +471,12 @@ class Project
         return $this;
     }
 
-    public function getCaseType(): ?int
+    public function getCaseType()
     {
         return $this->caseType;
     }
 
-    public function setCaseType(int $caseType): self
+    public function setCaseType($caseType): self
     {
         $this->caseType = $caseType;
 
@@ -480,14 +495,14 @@ class Project
         return $this;
     }
 
-    public function getRecordAssistant(): ?string
+    public function getRecordAssistant(): ?User
     {
         return $this->recordAssistant;
     }
 
-    public function setRecordAssistant(string $recordAssistant): self
+    public function setRecordAssistant(User $soldBy): self
     {
-        $this->recordAssistant = $recordAssistant;
+        $this->recordAssistant = $soldBy;
 
         return $this;
     }
@@ -504,13 +519,45 @@ class Project
         return $this;
     }
 
-    public static function getPaymentTypeChoices($associative = false)
-    {
-        $choices = [
-            self::PAYMENT_TYPE_CHECK,
-            self::PAYMENT_TYPE_TRANSFER,
-        ];
 
-        return $associative ? array_combine($choices, $choices) : $choices;
+    /**
+     * @return mixed
+     */
+    public function getPaymentPercentage()
+    {
+        return $this->paymentPercentage;
     }
+
+    /**
+     * @param mixed $paymentPercentage
+     */
+    public function setPaymentPercentage($paymentPercentage): void
+    {
+        $this->paymentPercentage = $paymentPercentage;
+    }
+
+    public function getOcbsDriver(): ?User
+    {
+        return $this->ocbsDriver;
+    }
+
+    public function setOcbsDriver(?User $ocbsDriver): self
+    {
+        $this->ocbsDriver = $ocbsDriver;
+
+        return $this;
+    }
+
+    public function getTceDriver(): ?User
+    {
+        return $this->tceDriver;
+    }
+
+    public function setTceDriver(?User $tceDriver): self
+    {
+        $this->tceDriver = $tceDriver;
+
+        return $this;
+    }
+
 }
