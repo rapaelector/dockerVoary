@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,7 @@ use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -90,20 +94,46 @@ class ProjectController extends BaseController
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
+
+        // check if request get interlocuteurSelecs should be deleted or not
+
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($project);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('project_index');
+        if ($form->isSubmitted()) {
+            $contactSelected = $form->get("contactSelect")->getData();
+            // check if value is instance of user then add this into the project entity
+            if ($contactSelected instanceof User) {
+                $project->setContact($contactSelected);
+            }
+            // then check if valid
+            if( $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($project);
+                $contact = $project->getContact();
+                $this->generatePassForContact($contact);
+                $entityManager->flush();
+                return $this->redirectToRoute('project_index');
+            }
         }
 
         return $this->render('project/new.html.twig', [
             'project' => $project,
             'form' => $form->createView(),
         ]);
+    }
+
+    private function generatePassForContact(User &$contact) {
+        if (null === $contact->getId()) {
+            $mockPassword = md5($contact->getEmail());
+            $contact->setPassword($mockPassword);
+            /**
+             * Type of user = external dont shown in the user list
+             * canLogin = false avoid the access of the crm
+             */
+            $contact->setType(User::TYPE_EXTERNAL);
+            $contact->setCanLogin(false);
+        }
     }
 
     #[Route('/{id}', name: 'project.show', methods: ['GET'])]

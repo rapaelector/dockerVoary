@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Project;
+use App\Form\User\ContactType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,22 +32,24 @@ class ProjectType extends AbstractType
                 'required' => false,
                 'choices' => Project::getPaymentTypeChoices(true),
             ])
-            ->add('interlocuteurSelect', EntityType::class, [
+            ->add('contactSelect', EntityType::class, [
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.email', 'ASC');
                 },
+                'placeholder' => 'new Interlocutor',
                 'choice_label' => 'email',
                 'required' => false,
                 'attr' => [
-                    'class' => 'bootstrap-select',
+                    'class' => 'bootstrap-select interlocutor-select',
                     'data-live-search' => true,
                     'data-type' => 'select2'
                 ],
+                'empty_data' => '',
                 'mapped' => false
             ])
-            ->add('interlocuteur', UserType::class)
+            ->add('contact', ContactType::class)
             ->add('billingAddres', AddressType::class)
             ->add('siteAddress', AddressType::class)
             ->add('descriptionOperation', TextareaType::class)

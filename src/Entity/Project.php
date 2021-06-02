@@ -53,16 +53,11 @@ class Project
     private $projectManager;
 
     /**
-     * @ORM\OneToOne(targetEntity=Address::class)
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
      * 
      * Fr: adresse facturation
      */
     private $billingAddres;
-
-
-
-
-
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
@@ -198,10 +193,10 @@ class Project
     private $recordAssistant;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $interlocuteur;
+    private $contact;
 
     public function getId(): ?int
     {
@@ -274,7 +269,7 @@ class Project
         return $this->siteAddress;
     }
 
-    public function setSiteAddress(string $siteAddress): self
+    public function setSiteAddress(Address $siteAddress): self
     {
         $this->siteAddress = $siteAddress;
 
@@ -497,14 +492,14 @@ class Project
         return $this;
     }
 
-    public function getInterlocuteur(): ?User
+    public function getContact(): ?User
     {
-        return $this->interlocuteur;
+        return $this->contact;
     }
 
-    public function setInterlocuteur(?User $interlocuteur): self
+    public function setContact(?User $contact): self
     {
-        $this->interlocuteur = $interlocuteur;
+        $this->contact = $contact;
 
         return $this;
     }

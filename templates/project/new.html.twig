@@ -1,6 +1,10 @@
 {% trans_default_domain 'project' %}
 
 {% extends 'project/layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app_project_new') }}
+{% endblock %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {

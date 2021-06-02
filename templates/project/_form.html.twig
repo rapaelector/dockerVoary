@@ -35,7 +35,7 @@
                             {{ form_row(form.paymentChoice) }}
                         </div>
                         <div class="col-sm-6">
-                            {{ form_row(form.interlocuteurSelect) }}
+                            {{ form_row(form.contactSelect) }}
                         </div>
                         <div class="col-sm-12">
                             {{ form_row(form.descriptionOperation) }}
@@ -45,7 +45,7 @@
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 contact-form-to-check">
             <div class="card card card-outline card-app-secondary h-100">
                 <div class="card-header">
                     <h3 class="card-title">{{ 'title.project.interlocutor'|trans({}, 'project') }}</h3>
@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="card-body">
-                            {% include "user/_form_view.template.twig" with {'form':form.interlocuteur} %}
+                            {% include 'contact/_form.template.twig' with {'form':form.contact} %}
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,6 @@
                     <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header for interlocuteur -->
-                {% set formInterlocutor = form.interlocuteur %}
                 <div class="card-body">
                     <div class="row">
                         <div class="card-body">
@@ -89,7 +88,6 @@
                     <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header for interlocuteur -->
-                {% set formInterlocutor = form.interlocuteur %}
                 <div class="card-body">
                     <div class="row">
                         <div class="card-body">
@@ -164,6 +162,12 @@
             </div>
         </div>
     </div>
+
+
+<div class="card-footer text-center">
+    <button class="btn btn-app-primary" type="submit">{{ button_label|default('action.save'|trans([], 'messages')) }}</button>
+    <a href="{{ path('project.list') }}" class="btn btn-app-secondary">{{ 'action.cancel'|trans({}, 'messages') }}</a>
+</div>
 
 {{ form_end(form) }}
 
