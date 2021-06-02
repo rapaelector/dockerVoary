@@ -2,6 +2,8 @@ pdf:
   title:
     prospection_folder: 'Dossier de prospection'
     prospect: 'Prospect'
+    contract_review_title: 'Revue de contrat / page de garde disa'
+    siteCode: 'Code chantier'
 
   label:
     contact: 'Contact'
@@ -36,6 +38,23 @@ pdf:
     yes_from: 'Oui de'
     no: 'No'
     client_conditions_negotiated: 'Conditions négociées avec le client'
+    work_breakdown: 'Repartition des travaux'
+    num_mde_quote_validate: 'N° du/des devis MDE validé(s)'
+    of: 'De'
+    overal_amount_of_the_contract: 'Montant global du marche'
+    amount_of_subcontracted_work: 'Montant des travaux sous-traités'
+    amount_of_work_specific_to_BBI: 'Montant des travaux propres à BBI'
+    folder_type: 'Type de dossier'
+    planning_project: 'Planning projet'
+    signatures: 'Signatures'
+    signature: 'Signature'
+    commercial_commit: "Le commercial s'engage"
+    legal_and_terms_of_payment: 'Juridique et Condition de règlement'
+    contract_review_by_christophe: 'Revue de contrat par Christophe'
+    assistant_in_charge_of_the_file: 'Assistante en charge du dossier'
+    driver_ocbs: 'Conduct. OCBS'
+    driver_tce: 'Conduct. TCE'
+    roadMap: 'Feuille de route'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'
@@ -74,3 +93,17 @@ pdf:
     customer_order_form: 'Bon de Commande du Client'
     letter_of_authorization: 'Lettre d’autorisation de travailler en l’absence de commande ferme, signée par Christophe '
     subcontractiong_contract: 'Contrat de sous-traitance (si Bonhomme est sous-traitant)   + devis MDE sans TVA'
+  
+  folder_type_label:
+    earthworks: 'Terrassement'
+    frame: 'Charpente'
+    structural_work: 'Gros oeuvre'
+    coverage: 'Couverture'
+    cvc_plumbing: 'CVC plomberie'
+    bardage: 'Cladding'
+    electricity: 'Electricité'
+    locksmith: 'Serrurerie'
+    indoor_lots: 'Lots intérieurs'
+    pan_isothermes: 'Pan. Isothermes'
+    administrative_file: 'Dossier administratif'
+    asbestos_removal: 'Désamiantage'

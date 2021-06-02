@@ -1,0 +1,32 @@
+{% trans_default_domain 'projects' %}
+
+{% set title = title|default('') %}
+{% if subtitle is not defined %}
+    {% set subtitle = subtitle|default('pdf.label.signature'|trans) %}
+{% endif %}
+{% set value = value|default('') %}
+{% set signatureValue = signatureValue|default('') %}
+
+{# total height count 6.5  #}
+{% set TOTAL_HEIGHT_COUNT = 13 %}
+{# title height count 1 #}
+{% set TITLE_HEIGHT_COUNT = space_value(2, TOTAL_HEIGHT_COUNT) %}
+{# subtitle height count 1 #}
+{% set SUBTITLE_HEIGHT_COUNT = space_value(2, TOTAL_HEIGHT_COUNT) %}
+{# signature value height count is the rest of the  #}
+{# it should be 4 but the height of signature value is a little bit big so we add two to have a little height #}
+{% set SIGNATURE_HEIGHT_COUNT = space_value((TOTAL_HEIGHT_COUNT - 9), TOTAL_HEIGHT_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ TITLE_HEIGHT_COUNT }}px;" class="text-weight-bold text-sm">{{ title }} : {{ value }}</td>
+        </tr>
+        <tr>
+            <td height="{{ SUBTITLE_HEIGHT_COUNT }}px;" class="text-sm">{{ subtitle }}</td>
+        </tr>
+        <tr>
+            <td height="{{ SIGNATURE_HEIGHT_COUNT }}px;">{{ signatureValue }}</td>
+        </tr>
+    </tbody>
+</table>

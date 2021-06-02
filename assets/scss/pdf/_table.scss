@@ -3,7 +3,12 @@
         width: $table-width;
         border-collapse: collapse;
         font-family: sans-serif;
-        letter-spacing: 0.1px;      
+        letter-spacing: 0.1px;
+        &.contract-review-table {
+            tbody tr td {
+                font-size: _rem(10);
+            }
+        }
         tbody {
             tr {
                 td, th {
@@ -102,17 +107,39 @@
             top: 20px;
         }
     }
-    .commercial {
-        background: $commercialBackground;
+    .rotating-title {
         word-break: keep-all !important;
-        .commercial-title {
+        &.prospect {
+            background: $prospectBackground;
+        }
+        &.commercial {
+            background: $commercialBackground;
+        }
+        &.signatures {
+            background: $signaturesBackground;
+        }
+        .title-container {
             word-break: keep-all !important;
             transform: rotate(-90deg);
             -webkit-transform: rotate(-90deg);
             font-size: $title;
             position: relative;
-            left: 5px;
-            top: 20px;
+            &.prospect-title {
+                left: 5px;
+                top: 20px;
+            }
+            &.commercial-title {
+                left: 12px;
+                top: 20px;
+                color: #fff;
+                font-weight: bold;
+            }
+            &.signatures-title {
+                font-size: _rem(8);
+                top: 0;
+                left: 0;
+                font-weight: bold;
+            }
         }
     }
     .first-ask-date {

@@ -13,12 +13,17 @@
 {% set marketType = resolve([project, 'marketType'], null) %}
 {% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPES_CHOICES') %}
 
+{% set title = title|default('pdf.label.market_type'|trans) %}
+{% set transPrefix = transPrefix|default('pdf.label.market_type_label') %}
+{% if elements is defined and elements is not empty %}
+    {% set MARKET_TYPE_CHOICES = elements %}
+{% endif %}
 
 <table class="table-borderless market-type-table mb-1">
     <tbody>
         <tr>
             <td colspan="4" class="text-center">
-                <div class="label market-type-title">{{ 'pdf.label.market_type'|trans }}</div>
+                <div class="label market-type-title">{{ title }}</div>
             </td>
         </tr>
         {% for row in MARKET_TYPE_CHOICES|batch(2) %}
@@ -33,7 +38,7 @@
                         {% endif %}
                     </td>
                     <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">
-                        {{ ('pdf.label.market_type_label.' ~ column)|trans }}
+                        {{ (transPrefix ~ '.' ~ column)|trans }}
                     </td>
                 {% endfor %}
             </tr>

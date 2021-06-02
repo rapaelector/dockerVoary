@@ -17,15 +17,19 @@
 <table>
     <tbody>
         <tr>
-            <td width="{{ CONTRACT_REVIEW_WIDTH }}" height="{{ CONTRACT_REVIEW }}px;" class="border-top-0 border-left-0 border-bottom-0">REVUE DE CONTRAT / PAGE DE GARDE DISA</td>
+            <td width="{{ CONTRACT_REVIEW_WIDTH }}" height="{{ CONTRACT_REVIEW }}px;" class="border-top-0 border-left-0 border-bottom-0">
+                <div class="text-weight-bold text-uppercase">{{ 'pdf.title.contract_review_title'|trans }}</div>
+            </td>
             <td width="{{ CODE_SITEWORK }}%;" height="{{ CODE_SITEWORK_HEIGHT }}px;" class="border-bottom-0 border-right-0">
                 <table height="100%;" class="table-borderless">
                     <tbody>
                         <tr>
-                            <td colspan="2">CODE CHANTIER</td>
+                            <td colspan="2">
+                                <div class="text-weight-bold text-danger text-uppercase">{{ 'pdf.title.siteCode'|trans }} :</div>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Feuille de route</td>
+                            <td class="text-weight-bold">{{ 'pdf.label.roadMap'|trans }}</td>
                             <td>
                                 <span>{{ pdf_checkbox(true) }}</span>
                                 <span>OUI</span>

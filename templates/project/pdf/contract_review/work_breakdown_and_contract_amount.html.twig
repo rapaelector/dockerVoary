@@ -1,0 +1,45 @@
+{% trans_default_domain 'projects' %}
+
+{# col count 120 #}
+{% set COL_COUNT = 120 %}
+{# i devide the total column count by 3 so they can have the same width #}
+{% set COL_WIDTH = space_value((120 / 3), COL_COUNT) %}
+
+{# height #}
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td width="{{ COL_WIDTH }}%;" class="border-right">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="p-0 label text-left">{{ 'pdf.label.work_breakdown'|trans }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-0">{{ 'pdf.label.num_mde_quote_validate'|trans }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-0">{{ 'pdf.label.of'|trans }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="{{ COL_WIDTH }}%;" class="border-right p-0">
+                <table class="table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="label text-left border-bottom align-start">{{ 'pdf.label.overal_amount_of_the_contract'|trans }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border-bottom align-start">{{ 'pdf.label.amount_of_subcontracted_work'|trans }}</td>
+                        </tr>
+                        <tr>
+                            <td class="align-start">{{ 'pdf.label.amount_of_work_specific_to_BBI'|trans }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="{{ COL_WIDTH }}%;"></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,5 @@
+{% include 'project/pdf/prospection_folder/market_type.html.twig' with {
+    elements: constant('\\App\\Entity\\Constants\\Project\\FolderType::FOLDER_TYPE_CHOICES'),
+    title: 'pdf.label.folder_type'|trans({}, 'projects'),
+    transPrefix: 'pdf.folder_type_label',
+} %}

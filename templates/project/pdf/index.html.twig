@@ -2,7 +2,10 @@
 
 {% extends "pdf_base.html.twig" %}
 
+{# Total count of the entiry column #}
 {% set TOTAL_COL_COUNT = 128 %}
+{# Total count of the 2 last column 60 #}
+{% set COL_COUNT = 120 %}
 {% set COL_PX_SIZE = 10 %}
 {% set COL_PX_H_SIZE = 2 %}
 
@@ -49,7 +52,7 @@
         {% include 'project/pdf/_prospection_folder.html.twig' %}
     </div>
     <div class="page-breaker"></div>
-    <div>
+    <div style="padding-top: 20px;">
         {# REVUE DE CONTRAT / PAGE DE GARDE DISA #}
         {% include 'project/pdf/_contract_review.html.twig' %}
     </div>

@@ -1,8 +1,14 @@
 {% trans_default_domain 'projects' %}
 
-{% set commercialRowspan = 8 %}
-{% set emptyRowspan = 8 %}
-<table>
+{% set commercialRowspan = 10 %}
+{% set emptyRowspan = 11 %}
+
+{# folder type col count 22 #}
+{% set FOLDER_TYPE_WIDTH = space_value(40, COL_COUNT) %}
+{# planning project col count is the total col_count - folder type col count #}
+{% set PLANNING_PROJECT_WIDTH = space_value((COL_COUNT - 40), COL_COUNT) %}
+
+<table class="contract-review-table">
     <tbody>
         <tr class="table-tr-header">
             <td width="{{ FIRST_COL_WIDTH }}%;"></td>
@@ -24,8 +30,8 @@
         </tr>
         <tr>
             {# commercial (rotating text) #}
-            <td rowspan="{{ commercialRowspan }}" colspan="2" class="commercial">
-                <div class="commercial-title" style="width: 30px;">
+            <td rowspan="{{ commercialRowspan }}" colspan="2" class="rotating-title commercial">
+                <div class="title-container commercial-title" style="width: 30px;">
                     Commercial
                 </div>
             </td>
@@ -104,6 +110,41 @@
             <td colspan="2">
                 {# Mode de regelement #}
                 {% include 'project/pdf/contract_review/payment_choice.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {# Repartition des travaux, Montant global du marche #}
+                {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ FOLDER_TYPE_WIDTH }}%;">
+                {# Type de dossier #}
+                {% include 'project/pdf/contract_review/folder_type.html.twig' %}
+            </td>
+            <td class="align-start" width="{{ PLANNING_PROJECT_WIDTH }}%;">
+                {# Planning projet #}
+                {% include 'project/pdf/contract_review/planning_project.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="rotating-title signatures"><div class="title-container signatures-title">{{ 'pdf.label.signatures'|trans }}</div></td>
+            <td colspan="2">
+                {# signature #}
+                {% include 'project/pdf/contract_review/signature.html.twig' with {
+                    title: 'pdf.label.commercial_commit'|trans,
+                    value: '',
+                    signatureValue: '',
+                } %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="border-0"></td>
+            <td class="border-0"></td>
+            <td colspan="2">
+                {# under the signature table #}
+                {% include 'project/pdf/contract_review/assistant_in_charge_of_the_file.html.twig' %}
             </td>
         </tr>
     </tbody>
