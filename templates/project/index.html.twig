@@ -1,4 +1,4 @@
-{% trans_default_domain 'client' %}
+{% trans_default_domain 'project' %}
 
 {% extends 'project/layout.html.twig' %}
 {% block title %}{{ 'title.list'|trans }} | {{ parent() }}{% endblock %}
@@ -7,7 +7,7 @@
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
-        title: 'title.project_manger'|trans,
+        title: 'title.project_manager'|trans,
         links: [],
     } %} {% endembed %}
 {% endblock %}
@@ -19,7 +19,7 @@
             <div class="col-sm-12">
                 <div class="card card-outline card-app-primary">
                     <div class="card-header">
-                        <h3 class="card-title">{{ 'project.list'|trans }}</h3>
+                        <h3 class="card-title">{{ 'title.project_list'|trans }}</h3>
                         <div class="card-tools">
                             {% if is_granted('ROLE_PROJECT_ADD') %}
                                 <a href="{{ path('project.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_project'|trans({}, 'project') }}">

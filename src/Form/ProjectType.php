@@ -65,10 +65,10 @@ class ProjectType extends AbstractType
             ->add('marketType', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::TYPE_DE_MARCHE, true),
                 'label' => 'columns.marketType',
-                "multiple" => true,
+                "multiple" => false,
                 "expanded" => true,
                 'label_attr' => array(
-                    'class' => 'checkbox-inline'
+                    'class' => 'radio-inline'
                 ),
             ])
             ->add('bonhomePercentage', ChoiceType::class, [
@@ -86,15 +86,14 @@ class ProjectType extends AbstractType
             ])
             ->add('paymentChoice',ChoiceType::class, [
                 'label' => 'columns.paymentChoice',
-                'required' => false,
                 'choices' => [
                     'oui' => true,
                     'non' => false,
                 ],
-                "multiple" => true,
+                "multiple" => false,
                 "expanded" => true,
                 'label_attr' => array(
-                    'class' => 'checkbox-inline'
+                    'class' => 'radio-inline'
                 ),
             ])
             ->add('depositeDateEdit', DateType::class, [
@@ -148,8 +147,9 @@ class ProjectType extends AbstractType
             ->add('quoteValidatedMDE', null, [
                 'label' => 'columns.quoteValidatedMDE'
             ])
-            ->add('quoteValidatedMDEDate', null, [
-                'label' => 'columns.quoteValidatedMDEDate'
+            ->add('quoteValidatedMDEDate', DateType::class, [
+                'label' => 'columns.quoteValidatedMDEDate',
+                'widget' => 'single_text',
             ])
             ->add('globalAmount', null, [
                 'label' => 'columns.globalAmount'

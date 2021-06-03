@@ -1,0 +1,16 @@
+<table class="table table-app-sm">
+    <tbody>
+        <tr>
+            <th>{{ 'columns.globalAmount'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'globalAmount'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.amountSubcontractedWork'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'amountSubcontractedWork'], '')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.amountBBISpecificWork'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'amountBBISpecificWork'], '')  }}</td>
+        </tr>
+    </tbody>
+</table>

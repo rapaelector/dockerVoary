@@ -1,10 +1,20 @@
 title:
-  project_list: List projets
+  project_list: Liste des projets
+  list: Liste des projets
+  project_manager: 'Gestion des projets'
+  bbiInfos: 'Infos Bonhomme Batiment'
+  marcheInfos: 'Informations du marche'
+  workDispatchInfo: 'Répartition des travaux'
+  delete_project: 'Suppréssion du projet'
+  show_project: 'Détails du projet'
+  add_project: Création de projet
   new_project: Création projet
   payment_choice: MODE DE REGLEMENT
   work_dispatching: REPARTITION DES TRAVAUX
   amount: MONTANT
   norm1090: NORME EN 1090 - Classe EXE
+contact:
+  label: Interlocuteur
 columns:
   siteCode: 'Code chantier'
   roadmap: 'Feuille de route'
@@ -24,7 +34,7 @@ columns:
   depositeDateEdit: "Date d'acompte doit être édité le"
   clientCondition: "Condition négocier avec le client"
   quoteValidatedMDE: "N° du/des devis MDE validé(s)"
-  quoteValidatedMDEDate: "Conditions négociées avec le client"
+  quoteValidatedMDEDate: "N° du/des devis MDE validé(s) De"
   globalAmount: "Montant global du marché"
   amountSubcontractedWork: "Montant des travaux sous-traités"
   amountBBISpecificWork: "Montant des travaux propre à BBI"
@@ -137,3 +147,12 @@ pdf:
     urgent: Urgent
     normal: Normal
     without_continuation: Sans suite
+
+label:
+  action: Action
+
+messages:
+  delete_success: 'Project supprimé avec succès'
+  delete_project: 'Souhaitez-vous supprimer ce projet'
+  editing_success: 'Modification du projet effectué avec succès'
+  creation_success: 'Création du projet effectué avec succès'

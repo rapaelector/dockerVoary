@@ -1,13 +1,24 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
 
-{% block title %}Edit Project{% endblock %}
+{% extends 'project/layout.html.twig' %}
 
-{% block body %}
-    <h1>Edit Project</h1>
+{% block title %}{{ 'title.edit_project'|trans }} | {{ parent() }}{% endblock %}
 
-    {{ include('project/_form.html.twig', {'button_label': 'Update'}) }}
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-    <a href="{{ path('project_index') }}">back to list</a>
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.edit_project'|trans,
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.project_manager'|trans, routeName: 'project.list'},
+            {label: 'title.edit_project'|trans},
+        ],
+    } %}{% endembed %}
+{% endblock %}
 
-    {{ include('project/_delete_form.html.twig') }}
+{% block content %}
+    <div class="container-fluid">
+        {{ include('project/_form.html.twig', {'button_label': 'action.update'|trans({}, 'messages') }) }}
+    </div>
 {% endblock %}

@@ -89,7 +89,7 @@ class Project
     private $norm1090;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column()
      * 
      * Fr: type de marche
      */
@@ -110,7 +110,7 @@ class Project
     private $disaSheetValidation;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column()
      * 
      * Fr: mode de reglement acompte
      */
@@ -147,7 +147,7 @@ class Project
     private $quoteValidatedMDE;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      * 
      * Fr: Conditions négociées avec le client
      */
@@ -278,8 +278,7 @@ class Project
         return $this;
     }
 
-
-    public function getSiteAddress(): ?string
+    public function getSiteAddress(): ?Address
     {
         return $this->siteAddress;
     }
@@ -423,12 +422,12 @@ class Project
         return $this;
     }
 
-    public function getQuoteValidatedMDEDate(): ?string
+    public function getQuoteValidatedMDEDate(): ?\DateTime
     {
         return $this->quoteValidatedMDEDate;
     }
 
-    public function setQuoteValidatedMDEDate(string $quoteValidatedMDEDate): self
+    public function setQuoteValidatedMDEDate(\DateTime $quoteValidatedMDEDate): self
     {
         $this->quoteValidatedMDEDate = $quoteValidatedMDEDate;
 

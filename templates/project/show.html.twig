@@ -1,130 +1,137 @@
-{% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
 
-{% block title %}Project{% endblock %}
+{% extends 'project/layout.html.twig' %}
 
-{% block body %}
-    <h1>Project</h1>
+{% block title %} {{ 'title.show_project'|trans }} | {{ parent() }}{% endblock %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>SiteCode</th>
-                <td>{{ project.siteCode }}</td>
-            </tr>
-            <tr>
-                <th>Roadmap</th>
-                <td>{{ project.roadmap ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>ProjectOwner</th>
-                <td>{{ project.projectOwner }}</td>
-            </tr>
-            <tr>
-                <th>ProjectManager</th>
-                <td>{{ project.projectManager }}</td>
-            </tr>
-            <tr>
-                <th>BillingAddres</th>
-                <td>{{ project.billingAddres }}</td>
-            </tr>
-            <tr>
-                <th>ContactName</th>
-                <td>{{ project.contactName }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ project.email }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ project.phone }}</td>
-            </tr>
-            <tr>
-                <th>SiteAddress</th>
-                <td>{{ project.siteAddress }}</td>
-            </tr>
-            <tr>
-                <th>DescriptionOperation</th>
-                <td>{{ project.descriptionOperation }}</td>
-            </tr>
-            <tr>
-                <th>SoldBy</th>
-                <td>{{ project.soldBy }}</td>
-            </tr>
-            <tr>
-                <th>QuoteWriter</th>
-                <td>{{ project.quoteWriter }}</td>
-            </tr>
-            <tr>
-                <th>Norm1090</th>
-                <td>{{ project.norm1090 }}</td>
-            </tr>
-            <tr>
-                <th>MarketType</th>
-                <td>{{ project.marketType }}</td>
-            </tr>
-            <tr>
-                <th>BonhomePercentage</th>
-                <td>{{ project.bonhomePercentage }}</td>
-            </tr>
-            <tr>
-                <th>DisaSheetValidation</th>
-                <td>{{ project.disaSheetValidation }}</td>
-            </tr>
-            <tr>
-                <th>PaymentChoice</th>
-                <td>{{ project.paymentChoice }}</td>
-            </tr>
-            <tr>
-                <th>DepositeDateEdit</th>
-                <td>{{ project.depositeDateEdit ? project.depositeDateEdit|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ClientCondition</th>
-                <td>{{ project.clientCondition }}</td>
-            </tr>
-            <tr>
-                <th>QuoteValidatedMDE</th>
-                <td>{{ project.quoteValidatedMDE }}</td>
-            </tr>
-            <tr>
-                <th>QuoteValidatedMDEDate</th>
-                <td>{{ project.quoteValidatedMDEDate }}</td>
-            </tr>
-            <tr>
-                <th>GlobalAmount</th>
-                <td>{{ project.globalAmount }}</td>
-            </tr>
-            <tr>
-                <th>AmountSubcontractedWork</th>
-                <td>{{ project.amountSubcontractedWork }}</td>
-            </tr>
-            <tr>
-                <th>AmountBBISpecificWork</th>
-                <td>{{ project.amountBBISpecificWork }}</td>
-            </tr>
-            <tr>
-                <th>CaseType</th>
-                <td>{{ project.caseType }}</td>
-            </tr>
-            <tr>
-                <th>PlanningProject</th>
-                <td>{{ project.planningProject }}</td>
-            </tr>
-            <tr>
-                <th>RecordAssistant</th>
-                <td>{{ project.recordAssistant }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
 
-    <a href="{{ path('project_index') }}">back to list</a>
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.show_project'|trans,
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.project_manager'|trans, routeName: 'project.list'},
+            {label: 'title.show_project'|trans},
+        ],
+    } %}
+        {% block extra_title %}
+            {% embed 'project/_actions.html.twig' with {
+                id: project.id,
+                showShow: false,
+                redirectPah: 'project.show',
+            } %}
+                {% block dropdown_toggler %}
+                    <button
+                            class="header-btn"
+                            href="#"
+                            role="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
+                {% endblock %}
 
-    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-
-    {{ include('project/_delete_form.html.twig') }}
+                {% block actions %}
+                    {{ parent() }}
+                    <a class="dropdown-item" href="{{ path('project.list') }}">
+                        <i class="material-icons">arrow_back</i>
+                        {{ 'action.back_to_list'|trans }}
+                    </a>
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.bbiInfos'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/bbiInfos1.html.twig' with {"address" : project.siteAddress} %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'columns.contact'|trans({}, 'project') }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/contact.html.twig' with {"contact" : project.contact} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'columns.billingAddres'|trans({}, 'project') }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/address.html.twig' with {"address" : project.billingAddres} %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'columns.siteAddress'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/address.html.twig' with {"address" : project.siteAddress} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.marcheInfos'|trans({}, 'project') }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/marcheInfos.html.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.workDispatchInfo'|trans }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/workDispatchINfo.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'title.amount'|trans({}, 'project') }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        {% include 'project/show_extension/amount.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <a class="btn btn-app-primary" href="{{ path('project.edit', {id: project.id, redirectPath: redirectPah ?? ''}) }}">
+                {{ button_label|default('action.edit'|trans([], 'messages')) }}
+        </a>
+        <a href="{{ path('project.list') }}" class="btn btn-app-secondary">{{ 'action.back_to_list'|trans({}, 'messages') }}</a>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,40 @@
+<table class="table table-app-sm">
+    <tbody>
+        <tr>
+            <th>{{ 'label.name'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address,'name'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.phone'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'phone'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.fax'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'fax'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.line1'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'line1'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.line2'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'line2'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.line3'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'line3'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.postal_code'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'postalCode'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.city'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'city'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'label.country'|trans({}, 'address') }}</th>
+            <td>{{ resolve([address, 'country'], '') }}</td>
+        </tr>
+    </tbody>
+</table>

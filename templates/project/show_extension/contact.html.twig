@@ -1,0 +1,34 @@
+{% trans_default_domain 'users' %}
+
+<table class="table table-app-sm">
+    <tbody>
+    <tr>
+        <th>{{ 'label.last_name'|trans }}</th>
+        <td>{{ resolve([contact, 'lastName'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.first_name'|trans }}</th>
+        <td>{{ resolve([contact, 'firstName'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.e_mail'|trans }}</th>
+        <td>{{ resolve([contact, 'email'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.phone'|trans }}</th>
+        <td>{{ resolve([contact, 'phone'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.fax'|trans }}</th>
+        <td>{{ resolve([contact, 'fax'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.job'|trans }}</th>
+        <td>{{ resolve([contact, 'job'], '') }}</td>
+    </tr>
+    <tr>
+        <th>{{ 'label.address'|trans }}</th>
+        <td>{{ resolve([contact, 'rawAddress'], '') }}</td>
+    </tr>
+    </tbody>
+</table>
