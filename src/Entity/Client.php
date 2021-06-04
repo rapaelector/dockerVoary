@@ -113,6 +113,7 @@ class Client
      * For now client only have relation with contact who have create with the client
      * 
      * @ORM\ManyToMany(targetEntity=User::class, cascade={"persist", "refresh", "remove"})
+     * @Assert\Valid
      */
     private $contacts;
 

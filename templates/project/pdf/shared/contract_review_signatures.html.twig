@@ -1,11 +1,10 @@
 {% trans_default_domain 'projects' %}
 
 {% set title = title|default('') %}
-{% if subtitle is not defined %}
-    {% set subtitle = subtitle|default('pdf.label.signature'|trans) %}
-{% endif %}
+{% if subtitle is not defined %}{% set subtitle = subtitle|default('pdf.label.signature'|trans) %}{% endif %}
 {% set value = value|default('') %}
 {% set signatureValue = signatureValue|default('') %}
+{% set options = options|default({}) %}
 
 {# total height count 6.5  #}
 {% set TOTAL_HEIGHT_COUNT = 13 %}
@@ -20,13 +19,28 @@
 <table class="table-borderless">
     <tbody>
         <tr>
-            <td height="{{ TITLE_HEIGHT_COUNT }}px;" class="text-weight-bold text-sm">{{ title }} : {{ value }}</td>
+            <td
+                height="{{ TITLE_HEIGHT_COUNT }}px;" 
+                class="text-weight-bold text-sm {{ resolve([options, 'titleClass'], '') }}"
+            >
+                {{ title }} : {{ value }}
+            </td>
         </tr>
         <tr>
-            <td height="{{ SUBTITLE_HEIGHT_COUNT }}px;" class="text-sm">{{ subtitle }}</td>
+            <td 
+                height="{{ SUBTITLE_HEIGHT_COUNT }}px;"
+                class="text-weight-bold {{ resolve([options, 'subtitleClass'], '') }}"
+            >
+                {{ subtitle }}
+            </td>
         </tr>
         <tr>
-            <td height="{{ SIGNATURE_HEIGHT_COUNT }}px;">{{ signatureValue }}</td>
+            <td
+                height="{{ SIGNATURE_HEIGHT_COUNT }}px;"
+                class="{{ resolve([options, 'signatureValueClass'], '') }}"
+            >
+                {{ signatureValue }}
+            </td>
         </tr>
     </tbody>
 </table>

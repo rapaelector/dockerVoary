@@ -61,6 +61,9 @@
 .text-sm {
     font-size: $label;
 }
+.text-xs {
+    font-size: _rem(8);
+}
 .align-start {
     vertical-align: top;
 }

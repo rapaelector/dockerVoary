@@ -23,12 +23,12 @@
 {% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
 {% set LABEL_CLASS = 'text-weight-bold text-underline text-left align-start text-nowrap' %}
 
-{% set contact = resolve([project, 'interlocuteur'], null) %}
+{% set contact = resolve([project, 'contact'], null) %}
 
 {# {% set contactEntreprise = resolve([contact, 'entreprise'], null) %} #}
 {# stephan said that contact entreprise should be the client that i find no relation for project and client so i just put projectOwner for now #}
 {% set contactEntreprise = resolve([project, 'projectOwner'], null) %}
-{% set contactName = resolve([project, 'interlocuteur', 'name'], null) %}
+{% set contactName = resolve([contact, 'name'], null) %}
 {% set contactAddress = resolve([contact, 'rawAddress'], null) %}
 {% set contactEmail = resolve([contact, 'email'], null) %}
 {% set contactPhone = resolve([contact, 'phone'], null) %}

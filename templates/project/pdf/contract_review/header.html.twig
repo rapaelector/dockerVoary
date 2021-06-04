@@ -14,6 +14,8 @@
 {# code_sitework count 6 #}
 {% set CODE_SITEWORK_HEIGHT =  space_value(12, HEADER_HEIGHT_COUNT) %}
 
+{% set siteCode = resolve([project, 'siteCode'], null) %}
+{% set hasRoadMap = resolve([project, 'roadMap'], false) %}
 <table>
     <tbody>
         <tr>
@@ -25,16 +27,28 @@
                     <tbody>
                         <tr>
                             <td colspan="2">
-                                <div class="text-weight-bold text-danger text-uppercase">{{ 'pdf.title.siteCode'|trans }} :</div>
+                                <span class="text-weight-bold text-danger text-uppercase">{{ 'pdf.title.siteCode'|trans }} :</span>
+                                {% if ngMode %}
+                                    <input type="text">
+                                {% else %}
+                                    <span>{{ siteCode }}</span>
+                                {% endif %}
                             </td>
                         </tr>
                         <tr>
                             <td class="text-weight-bold">{{ 'pdf.label.roadMap'|trans }}</td>
                             <td>
-                                <span>{{ pdf_checkbox(true) }}</span>
-                                <span>OUI</span>
-                                <span>{{ pdf_checkbox(true) }}</span>
-                                <span>NON</span>
+                                {% if ngMode %}
+                                    <span><input type="text"></span>
+                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span><input type="text"></span>
+                                    <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
+                                {% else %}
+                                    <span>{{ pdf_checkbox(hasRoadMap) }}</span>
+                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span>{{ pdf_checkbox(not hasRoadMap) }}</span>
+                                    <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
+                                {% endif %}
                             </td>
                         </tr>
                     </tbody>

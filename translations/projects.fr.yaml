@@ -4,6 +4,7 @@ pdf:
     prospect: 'Prospect'
     contract_review_title: 'Revue de contrat / page de garde disa'
     siteCode: 'Code chantier'
+    commercial: 'Commercial'
 
   label:
     contact: 'Contact'
@@ -36,7 +37,8 @@ pdf:
     date_of_deposit: "Date à laquelle l'acompte doit être édité ?"
     deposite: 'Acompte'
     yes_from: 'Oui de'
-    no: 'No'
+    yes: 'Oui'
+    no: 'Non'
     client_conditions_negotiated: 'Conditions négociées avec le client'
     work_breakdown: 'Repartition des travaux'
     num_mde_quote_validate: 'N° du/des devis MDE validé(s)'
@@ -55,6 +57,7 @@ pdf:
     driver_ocbs: 'Conduct. OCBS'
     driver_tce: 'Conduct. TCE'
     roadMap: 'Feuille de route'
+    projectManager: "Maitre d'ouvrage"
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'

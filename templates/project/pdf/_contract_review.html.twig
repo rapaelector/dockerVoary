@@ -32,7 +32,7 @@
             {# commercial (rotating text) #}
             <td rowspan="{{ commercialRowspan }}" colspan="2" class="rotating-title commercial">
                 <div class="title-container commercial-title" style="width: 30px;">
-                    Commercial
+                    {{ 'pdf.title.commercial'|trans }}
                 </div>
             </td>
             <td rowspan="{{ emptyRowspan }}" class="border-0"></td>
@@ -115,7 +115,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="background: red;">
+            <td colspan="2">
                 {# Repartition des travaux, Montant global du marche #}
                 {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' %}
             </td>
