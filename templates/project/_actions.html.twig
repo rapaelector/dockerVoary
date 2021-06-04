@@ -35,6 +35,11 @@
                 </a>
             {% endif %}
 
+            <a class="dropdown-item" href="{{ path('project.pdf', {id: id}) }}" target="_blank">
+                <i class="material-icons">download</i>
+                {{ 'action.download'|trans }}
+            </a>
+
             {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), project) %}
                 {% include 'project/_delete_form.html.twig' with {
                     id: id,
