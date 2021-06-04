@@ -13,13 +13,12 @@
 {% set marketType = resolve([project, 'marketType'], null) %}
 {% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPES_CHOICES') %}
 
-{% set title = title|default('pdf.label.market_type'|trans) %}
-{% set transPrefix = transPrefix|default('pdf.label.market_type_label') %}
-{% if elements is defined and elements is not empty %}
-    {% set MARKET_TYPE_CHOICES = elements %}
-{% endif %}
+{% if title is not defined %}{% set title = 'pdf.label.market_type'|trans %}{% endif %}
+{% if transPrefix is not defined %}{% set transPrefix = 'pdf.label.market_type_label' %}{% endif %}
+{% if elements is defined and elements is not empty %}{% set MARKET_TYPE_CHOICES = elements %}{% endif %}
+{% if tableClass is not defined %}{% set tableClass = 'table-borderless market-type-table mb-1' %}{% endif %}
 
-<table class="table-borderless market-type-table mb-1">
+<table class="{{ tableClass }}">
     <tbody>
         <tr>
             <td colspan="4" class="text-center">

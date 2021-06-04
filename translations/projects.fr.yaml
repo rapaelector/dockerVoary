@@ -73,6 +73,7 @@ pdf:
       budget: 'Budget'
       production: 'Réalisation'
       consultation: 'Consultation'
+      isothermal_panels: 'Panneaux isothermes'
 
   is_bonhomme_label:
     contract_holder: 'Tutulaire du marche'

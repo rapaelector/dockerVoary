@@ -4,11 +4,6 @@
         border-collapse: collapse;
         font-family: sans-serif;
         letter-spacing: 0.1px;
-        &.contract-review-table {
-            tbody tr td {
-                font-size: _rem(10);
-            }
-        }
         tbody {
             tr {
                 td, th {
@@ -36,6 +31,7 @@
             }
         }
         &.table-borderless {
+            border-collapse: collapse;
             tbody {
                 tr {
                     td, th {

@@ -92,7 +92,9 @@
         </tr>
         <tr>
             {# market type #}
-            <td>{% include 'project/pdf/prospection_folder/market_type.html.twig' %}</td>
+            <td>
+                {% include 'project/pdf/contract_review/market_type.html.twig' %}
+            </td>
             {# marke type 2 #}
             <td>{% include 'project/pdf/prospection_folder/market_type_2.html.twig' %}</td>
         </tr>
@@ -113,23 +115,25 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="2" style="background: red;">
                 {# Repartition des travaux, Montant global du marche #}
                 {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' %}
             </td>
         </tr>
         <tr>
-            <td width="{{ FOLDER_TYPE_WIDTH }}%;">
+            <td>
                 {# Type de dossier #}
                 {% include 'project/pdf/contract_review/folder_type.html.twig' %}
             </td>
-            <td class="align-start" width="{{ PLANNING_PROJECT_WIDTH }}%;">
+            <td class="align-start">
                 {# Planning projet #}
                 {% include 'project/pdf/contract_review/planning_project.html.twig' %}
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="rotating-title signatures"><div class="title-container signatures-title">{{ 'pdf.label.signatures'|trans }}</div></td>
+            <td colspan="2" class="rotating-title signatures">
+                <div class="title-container signatures-title">{{ 'pdf.label.signatures'|trans }}</div>
+            </td>
             <td colspan="2">
                 {# signature #}
                 {% include 'project/pdf/contract_review/signature.html.twig' with {

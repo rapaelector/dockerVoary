@@ -1,5 +1,5 @@
 .bordered {
-    border: $border;
+    border: $border !important;
 }
 .border-0 {
     border: none;
@@ -27,6 +27,9 @@
 }
 .border-right {
     border-right: $border !important;
+}
+.border-collapse {
+    border-collapse: collapse !important;
 }
 .text-weight-bold {
     font-weight: bold;
