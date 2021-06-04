@@ -99,16 +99,18 @@ class SidebarMenuBuilder
                 ],
             ])->setAttributes(['class' => $navItem]);
         }
-        
-        $menu->addChild('menu.project_management', [
-            'route' => 'project.list',
-            'linkAttributes' => ['class' => $linkClassName],
-            'extras' => [
-                'icon' => $icon,
-                'icon_content' => 'engineering',
-                'label_wrapper' => 'p',
-            ],
-        ])->setAttributes(['class' => $navItem]);
+
+        if ($this->security->isGranted('ROLE_PROJECT_VIEW')) {
+            $menu->addChild('menu.project_management', [
+                'route' => 'project.list',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'engineering',
+                    'label_wrapper' => 'p',
+                ],
+            ])->setAttributes(['class' => $navItem]);
+        }
 
         // add text
         $menu->addChild('menu.offers_header', [])->setAttribute('class', $subTitleClass);
