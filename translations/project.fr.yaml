@@ -1,6 +1,94 @@
-list:
-    columns:
-        siteCode: 'Code chantier'
+title:
+  project_list: Liste des projets
+  list: Liste des projets
+  project_manager: 'Gestion des projets'
+  bbiInfos: 'Infos Bonhomme Batiment'
+  marcheInfos: 'Informations du marche'
+  workDispatchInfo: 'Répartition des travaux'
+  delete_project: 'Suppréssion du projet'
+  show_project: 'Détails du projet'
+  add_project: Création de projet
+  new_project: Création projet
+  payment_choice: MODE DE REGLEMENT
+  work_dispatching: REPARTITION DES TRAVAUX
+  amount: MONTANT
+  norm1090: NORME EN 1090 - Classe EXE
+contact:
+  label: Interlocuteur
+columns:
+  siteCode: 'Code chantier'
+  roadmap: 'Feuille de route'
+  projectOwner: "Maitre d'ouvrage"
+  projectManager: "Maitre d'oeuvre"
+  billingAddres: "Adresse facturation"
+  siteAddress: "Adresse chantier"
+  descriptionOperation: "Description de l'operation"
+  soldBy: "Dossier vendu par"
+  quoteWriter: "Rédacteur du devis"
+  norm1090: "Classe EXE"
+  marketType: "Type de marche"
+  is_bonhomme: 'Bonhomme est-il'
+  disaSheetValidation: "Validation de fiche DISA"
+  paymentChoice: "Acompte"
+  paymentPercentage: "acompte %"
+  depositeDateEdit: "Date d'acompte doit être édité le"
+  clientCondition: "Condition négocier avec le client"
+  quoteValidatedMDE: "N° du/des devis MDE validé(s)"
+  quoteValidatedMDEDate: "N° du/des devis MDE validé(s) De"
+  globalAmount: "Montant global du marché"
+  amountSubcontractedWork: "Montant des travaux sous-traités"
+  amountBBISpecificWork: "Montant des travaux propre à BBI"
+  caseType: "Type de dossier"
+  planningProject: "Planning projet"
+  recordAssistant: "Assistant en charge du dossier"
+  contact: "Contact"
+  ocbsDriver: "CONDUC OCBS"
+  tceDriver: "CONDUC TCE"
+typeMarket:
+  shadows : "Ombrières"
+  tender : "Appel d’offre"
+  tce : "T.C.E"
+  new_bat : "Bât. Neuf"
+  agricultural_bat : "Bât. Agricole"
+  isotermal_bat : "Panneaux isothermes"
+  public_market : "MARCHE PUBLIC"
+  private_market : "MARCHE PRIVE"
+  ao_public : "A.O PUBLIC"
+  ao_private : "AO PRIVE"
+bonhommePercentage :
+  contract_holder : "TITULAIRE DU MARCHE"
+  20percent : "20%"
+  10percent : "10% (rénovation particulier de + de 2ans)"
+  subcontractor : "SOUS-TRAITANT"
+  0percent : "0% (AUTOLIQUIDATION)"
+disaSheetValidation :
+  signed_quote: "Devis MDE signé"
+  customer_order_form: "Bon de Commande du Client"
+  authorization_letter: "Lettre d’autorisation de travailler en l’absence de commande ferme, signée par Christophe"
+  subcontract: "Contrat de sous-traitance (si Bonhomme est sous-traitant) + devis MDE sans TVA"
+caseType:
+  earthWorks : "Terrassement"
+  bigWork : "Gros œuvre"
+  plumbing : "CVC / plomberie"
+  electricity : "Electricité"
+  indoorLots : "Lots intérieurs"
+  adminFile : "Dossier administratif"
+  frame : "Charpente"
+  blanket : "Couverture"
+  cladding : "Bardage"
+  locksmith : "Serrurerie"
+  isothermes : "Pan. Isothermes"
+  asbestosRemoval : "Désamiantage"
+
+payment:
+  type:
+    card: "Carte bancaire"
+    cash: "Cash"
+    transfer: "Virement bancaire"
+    check: "Chèque"
+    bill_of_exchange: "LCR"
+
+
 pdf:
   title:
     prospection_folder: 'Dossier de prospection'
@@ -59,3 +147,12 @@ pdf:
     urgent: Urgent
     normal: Normal
     without_continuation: Sans suite
+
+label:
+  action: Action
+
+messages:
+  delete_success: 'Project supprimé avec succès'
+  delete_project: 'Souhaitez-vous supprimer ce projet'
+  editing_success: 'Modification du projet effectué avec succès'
+  creation_success: 'Création du projet effectué avec succès'

@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,7 @@ use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -49,12 +53,59 @@ class ProjectController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('siteCode', TextColumn::class, [
-                'label' => $translator->trans('label.siteCode', [], 'project'),
+                'label' => $translator->trans('columns.siteCode', [], 'project'),
                 'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('projectSiteCode')
+                ),
+            ])
+            ->add('user_email', TextColumn::class, [
+                'field' => 'contact.email',
+                'label' => $translator->trans('contact.label', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('contact.email')
+                ),
+            ])
+            ->add('roadmap', TextColumn::class, [
+                'label' => $translator->trans('columns.roadmap', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('projectRoadmap')
+                ),
+            ])
+            ->add('amountSubcontractedWork', TextColumn::class, [
+                'label' => $translator->trans('columns.amountSubcontractedWork', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
                 ),
+            ])
+            ->add('amountBBISpecificWork', TextColumn::class, [
+                'label' => $translator->trans('columns.amountBBISpecificWork', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('project_siteCode')
+                ),
+            ])
+            ->add('globalAmount', TextColumn::class, [
+                'label' => $translator->trans('columns.globalAmount', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('project_siteCode')
+                ),
+            ])
+            ->add('id', TextColumn::class, [
+                'label' => $translator->trans('label.action', [], 'project'),
+                'render' => $this->actionsRenderer('client.list', 'project/_actions.html.twig'),
+                'searchable' => false,
+                'orderable' => false,
             ])
         ;
 
@@ -64,6 +115,7 @@ class ProjectController extends BaseController
                 $builder
                     ->select('project')
                     ->from(Project::class, 'project')
+                    ->leftJoin('project.contact', 'contact')
                     ->distinct('project')
                 ;
             }  
@@ -86,14 +138,27 @@ class ProjectController extends BaseController
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
+
+        // check if request get interlocuteurSelecs should be deleted or not
+
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($project);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('project.list');
+        if ($form->isSubmitted()) {
+            $contactSelected = $form->get("contactSelect")->getData();
+            // check if value is instance of user then add this into the project entity
+            if ($contactSelected instanceof User) {
+                $project->setContact($contactSelected);
+            }
+            // then check if valid
+            if( $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($project);
+                $contact = $project->getContact();
+                $this->generatePassForContact($contact);
+                $entityManager->flush();
+                return $this->redirectToRoute('project_index');
+            }
         }
 
         return $this->render('project/new.html.twig', [
@@ -102,7 +167,20 @@ class ProjectController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/show', name: 'project.show', methods: ['GET'])]
+    private function generatePassForContact(User &$contact) {
+        if (null === $contact->getId()) {
+            $mockPassword = md5($contact->getEmail());
+            $contact->setPassword($mockPassword);
+            /**
+             * Type of user = external dont shown in the user list
+             * canLogin = false avoid the access of the crm
+             */
+            $contact->setType(User::TYPE_EXTERNAL);
+            $contact->setCanLogin(false);
+        }
+    }
+
+    #[Route('/{id}', name: 'project.show', methods: ['GET'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -128,13 +206,18 @@ class ProjectController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'project.delete', methods: ['POST'])]
-    public function delete(Request $request, Project $project): Response
+    #[Route('/{id}', name: 'project.delete', methods: ['POST', 'DELETE'])]
+    public function delete(Request $request, Project $project, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($project);
             $entityManager->flush();
+            if ($request->isXMLHttpRequest()) {
+                return $this->json(['message' => $translator->trans('messages.delete_success', [], 'project')]);
+            } else {
+                $this->addFlash('success', $translator->trans('messages.delete_success', [], 'project'));
+            }
         }
 
         return $this->redirectToRoute('project_index');

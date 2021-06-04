@@ -1,0 +1,36 @@
+<table class="table table-app-sm">
+    <tbody>
+        <tr>
+            <th>{{ 'columns.marketType'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'marketType'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.bonhomePercentage'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'bonhomePercentage'], '') |trans({}, 'project')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.disaSheetValidation'|trans({}, 'project') }}</th>
+            <td>
+                {% for value in resolve([project,'disaSheetValidation'], '') %}
+                    <li>{{ value |trans({}, 'project')  }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.paymentChoice'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'paymentChoice'], '') |trans({}, 'project')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.paymentPercentage'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'paymentPercentage'], '') |trans({}, 'project')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.depositeDateEdit'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'depositeDateEdit'], '') |date('d/m/Y')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.clientCondition'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'clientCondition'], '') |trans({}, 'project')  }}</td>
+        </tr>
+    </tbody>
+</table>

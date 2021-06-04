@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * for vich upload bundle
  */
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -41,16 +42,20 @@ class User implements UserInterface, \Serializable
     const TYPE_EXTERNAL = 'external';
     const TYPE_INTERNAL = 'internal';
 
+    const GROUP_USER_PROJECT= 'project.user';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $email;
 
@@ -77,6 +82,7 @@ class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      * )
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $firstName;
 
@@ -87,26 +93,31 @@ class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      * )
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $phone;
 
     /**
+     * @Groups({self::GROUP_USER_PROJECT})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $job;
 
     /**
+     * @Groups({self::GROUP_USER_PROJECT})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fax;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({self::GROUP_USER_PROJECT})
      */
     private $rawAddress;
 

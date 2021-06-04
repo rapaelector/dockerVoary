@@ -34,10 +34,16 @@ Encore
     .addEntry('app_client', './assets/js/client/app.js')
 
     /***
-     * Entry for client
+     * Entry for project
      * - For client collection type
      */
     .addEntry('app_project', './assets/js/project/app.js')
+
+    /***
+     * Entry for entry for new project
+     * - For client collection type
+     */
+    .addEntry('app_project_new', './assets/js/project/new.js')
 
     /**
      * Entry for pdf page

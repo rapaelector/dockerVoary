@@ -1,0 +1,32 @@
+<table class="table table-app-sm">
+    <tbody>
+        <tr>
+            <th>{{ 'columns.quoteValidatedMDE'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'quoteValidatedMDE'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.quoteValidatedMDEDate'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'quoteValidatedMDEDate'], '') |date('d/m/Y')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.caseType'|trans({}, 'project') }}</th>
+            <td>
+                {% for value in resolve([project,'caseType'], '') %}
+                    <li>{{ value |trans({}, 'project')  }}</li>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.recordAssistant'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'recordAssistant', 'fullNameWithEmail'], '')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.ocbsDriver'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'ocbsDriver', 'fullNameWithEmail'], '')  }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.tceDriver'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'tceDriver', 'fullNameWithEmail'], '') }}</td>
+        </tr>
+    </tbody>
+</table>

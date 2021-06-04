@@ -1,20 +1,22 @@
 {% trans_default_domain 'project' %}
 
 {% extends 'project/layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app_project_new') }}
+{% endblock %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
-        title: 'title.new_client'|trans,
+        title: 'title.new_project'|trans,
         links: [
             {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
-            {label: 'title.client_manger'|trans, routeName: 'client.list'},
-            {label: 'title.new_client'|trans},
+            {label: 'title.project_list'|trans, routeName: 'project.list'},
+            {label: 'title.new_project'|trans},
         ],
     } %}{% endembed %}
 {% endblock %}
 
 {% block content %}
-    <h1>Create new Project</h1>
-
     {{ include('project/_form.html.twig') }}
 {% endblock %}

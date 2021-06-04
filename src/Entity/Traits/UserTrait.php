@@ -44,4 +44,14 @@ trait UserTrait
 
         return $this;
     }
+
+    public function getFullNameWithEmail()
+    {
+        return $this->firstName . ' ' . $this->lastName . ' ('.$this->email.')';
+    }
+
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }

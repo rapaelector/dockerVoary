@@ -13,6 +13,7 @@ use App\Message\User\UserResetPasswordMessage;
 use App\Utils\PasswordGenerator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,6 +31,7 @@ use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +41,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 #[Route('/user')]
 class UserController extends BaseController
 {
+
+    #[Route('/get/{user}', name: 'project.get.json', methods: ['GET'])]
+    public function getJson(User $user, SerializerInterface $serializer): Response
+    {
+        return new JsonResponse($serializer->serialize($user, 'json', ['groups' => 'project.user']));
+    }
+
     /**
      * @IsGranted("ROLE_USER_VIEW")
      */

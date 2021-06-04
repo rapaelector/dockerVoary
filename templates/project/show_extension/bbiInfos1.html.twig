@@ -1,0 +1,36 @@
+<table class="table table-app-sm">
+    <tbody>
+        <tr>
+            <th>{{ 'columns.roadmap'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project,'roadmap'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.siteCode'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'siteCode'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.projectOwner'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'projectOwner', 'fullNameWithEmail'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.projectManager'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'projectManager', 'fullNameWithEmail'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.soldBy'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'soldBy', 'fullNameWithEmail'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.quoteWriter'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'quoteWriter', 'fullNameWithEmail'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'title.norm1090'|trans({}, 'project') }} - {{ 'columns.norm1090'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'norm1090'], '') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'columns.descriptionOperation'|trans({}, 'project') }}</th>
+            <td>{{ resolve([project, 'descriptionOperation'], '') }}</td>
+        </tr>
+    </tbody>
+</table>
