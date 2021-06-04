@@ -10,11 +10,11 @@
         </tr>
         <tr>
             <th>{{ 'columns.projectOwner'|trans({}, 'project') }}</th>
-            <td>{{ resolve([project, 'projectOwner', 'fullNameWithEmail'], '') }}</td>
+            <td>{{ resolve([project, 'projectOwner'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'columns.projectManager'|trans({}, 'project') }}</th>
-            <td>{{ resolve([project, 'projectManager', 'fullNameWithEmail'], '') }}</td>
+            <td>{{ resolve([project, 'projectManager'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'columns.soldBy'|trans({}, 'project') }}</th>

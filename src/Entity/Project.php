@@ -33,14 +33,14 @@ class Project
     private $roadmap;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\Column()
      * 
      * Fr: maitre d'ouvrage
      */
     private $projectOwner;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\Column()
      *
      * Fr: maitre d'oeuvre
      */
@@ -213,6 +213,11 @@ class Project
      */
     private $tceDriver;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class)
+     */
+    private $prospect;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -242,24 +247,24 @@ class Project
         return $this;
     }
 
-    public function getProjectOwner(): ?User
+    public function getProjectOwner(): ?string
     {
         return $this->projectOwner;
     }
 
-    public function setProjectOwner(User $projectOwner): self
+    public function setProjectOwner(string $projectOwner): self
     {
         $this->projectOwner = $projectOwner;
 
         return $this;
     }
 
-    public function getProjectManager(): ?User
+    public function getProjectManager(): ?string
     {
         return $this->projectManager;
     }
 
-    public function setProjectManager(User $projectManager): self
+    public function setProjectManager(string $projectManager): self
     {
         $this->projectManager = $projectManager;
 
@@ -555,6 +560,18 @@ class Project
     public function setTceDriver(?User $tceDriver): self
     {
         $this->tceDriver = $tceDriver;
+
+        return $this;
+    }
+
+    public function getProspect(): ?Client
+    {
+        return $this->prospect;
+    }
+
+    public function setProspect(?Client $prospect): self
+    {
+        $this->prospect = $prospect;
 
         return $this;
     }

@@ -16,6 +16,7 @@ title:
 contact:
   label: Interlocuteur
 columns:
+  prospect: 'Prospect'
   siteCode: 'Code chantier'
   roadmap: 'Feuille de route'
   projectOwner: "Maitre d'ouvrage"
@@ -150,6 +151,7 @@ pdf:
 
 label:
   action: Action
+  prospect: Prospect
 
 messages:
   delete_success: 'Project supprimé avec succès'

@@ -56,6 +56,9 @@ class ProjectType extends AbstractType
                 'empty_data' => '',
                 'mapped' => false
             ])
+            ->add('prospect', null, [
+                'label' => 'columns.prospect'
+            ])
             ->add('projectOwner', null, [
                 'label' => 'columns.projectOwner'
             ])
@@ -86,6 +89,7 @@ class ProjectType extends AbstractType
             ])
             ->add('paymentChoice',ChoiceType::class, [
                 'label' => 'columns.paymentChoice',
+                'required' => true,
                 'choices' => [
                     'oui' => true,
                     'non' => false,
