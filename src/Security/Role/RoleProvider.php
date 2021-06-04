@@ -112,6 +112,7 @@ class RoleProvider
         $roles = [];
         $roles[] = self::getUserRoles();
         $roles[] = self::getClientRoles();
+        $roles[] = self::getProjectRoles();
 
         return $roles;
     }
@@ -129,6 +130,16 @@ class RoleProvider
     public static function getClientRoles()
     {
         return self::buildRoles('prospect.role', 'ROLE_CLIENT', [
+            self::ACTION_VIEW,
+            self::ACTION_ADD,
+            self::ACTION_EDIT,
+            self::ACTION_DELETE,
+        ]);
+    }
+
+    public static function getProjectRoles()
+    {
+        return self::buildRoles('project.role', 'ROLE_PROJECT', [
             self::ACTION_VIEW,
             self::ACTION_ADD,
             self::ACTION_EDIT,

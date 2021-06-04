@@ -60,6 +60,15 @@ class ProjectController extends BaseController
                     $this->filterOptionsProvider->getOptions('projectSiteCode')
                 ),
             ])
+            ->add('prospect', TextColumn::class, [
+                'field' => 'prospect.name',
+                'label' => $translator->trans('label.prospect', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('prospect.name')
+                ),
+            ])
             ->add('user_email', TextColumn::class, [
                 'field' => 'contact.email',
                 'label' => $translator->trans('contact.label', [], 'project'),
@@ -116,6 +125,7 @@ class ProjectController extends BaseController
                     ->select('project')
                     ->from(Project::class, 'project')
                     ->leftJoin('project.contact', 'contact')
+                    ->leftJoin('project.prospect', 'prospect')
                     ->distinct('project')
                 ;
             }  

@@ -27,3 +27,5 @@ user:
 
 prospect:
     role: 'Gestion des prospects'
+project:
+    role: 'Gestion des projets'
