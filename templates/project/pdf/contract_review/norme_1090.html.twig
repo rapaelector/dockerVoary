@@ -25,15 +25,42 @@
 <table class="table-borderless">
     <tbody>
         <tr>
-            <td height="{{ VALUE_HEIGHT }}px;" width="{{ NORME_1090_WIDTH }}%;" class="{{ norm1090Class }} align-start">NORME EN 1090 - </td>
-            <td height="{{ VALUE_HEIGHT }}px;" width="{{ CLASSE_EXE_WIDTH }}%;" class="text-weight-bold align-start">Classe EXE</td>
+            <td
+                height="{{ VALUE_HEIGHT }}px;" 
+                width="{{ NORME_1090_WIDTH }}%;" 
+                class="{{ norm1090Class }} align-start"
+            >
+                {{ 'pdf.label.norme_1090'|trans }}
+            </td>
+            <td
+                height="{{ VALUE_HEIGHT }}px;" 
+                width="{{ CLASSE_EXE_WIDTH }}%;"
+                class="text-weight-bold align-start"
+            >
+                {{ 'pdf.label.class_exe'|trans }}
+            </td>
             <td height="{{ VALUE_HEIGHT }}px;" width="{{ CHECKBOX_WIDTH }}%;" class="align-start">
-                <span>1</span>
-                <span>{{ pdf_checkbox() }}</span>
-                <span>2</span>
-                <span>{{ pdf_checkbox() }}</span>
-                <span>3</span>
-                <span>{{ pdf_checkbox() }}</span>
+                {% if ngMode %}
+                    <span>1</span>
+                    <span>
+                        <input type="text">
+                    </span>
+                    <span>2</span>
+                    <span>
+                        <input type="text">
+                    </span>
+                    <span>3</span>
+                    <span>
+                        <input type="text">
+                    </span>
+                {% else %}
+                    {% for i in 1..3 %}
+                        <span>{{ i }}</span>
+                        <span>
+                            {{ pdf_checkbox(resolve([project, 'norm1090'], null) == i) }}
+                        </span>
+                    {% endfor %}
+                {% endif %}
             </td>
             <td height="{{ VALUE_HEIGHT }}px;" width="{{ EMPTY_WIDTH }}%;" class="align-start"></td>
         </tr>

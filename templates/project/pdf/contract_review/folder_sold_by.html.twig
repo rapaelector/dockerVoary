@@ -8,6 +8,11 @@
 {% set VALUE_HEIGHT = space_value(3, FOLDER_SOLD_BY_HEIGHT_COUNT) %}
 
 {% set labelClass = 'align-start text-center text-weight-bold text-underline' %}
+{# Dossier vendu par #}
+{% set soldBy = resolve([project, 'soldBy'], '') %}
+{# Rédacteur du devis #}
+{% set quoteWriter = resolve([project, 'quoteWriter'], '') %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -17,8 +22,20 @@
             <td height="{{ LABEL_HEIGHT }}px;" class="{{ labelClass }}">{{ 'pdf.label.quote_writer'|trans }}</td> 
         </tr>
         <tr>
-            <td height="{{ VALUE_HEIGHT }}px;" class="border-right"></td>
-            <td height="{{ VALUE_HEIGHT }}px;"></td>
+            <td height="{{ VALUE_HEIGHT }}px;" class="border-right">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ soldBy }}
+                {% endif %}
+            </td>
+            <td height="{{ VALUE_HEIGHT }}px;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ quoteWriter }}
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

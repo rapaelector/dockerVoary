@@ -57,7 +57,11 @@ pdf:
     driver_ocbs: 'Conduct. OCBS'
     driver_tce: 'Conduct. TCE'
     roadMap: 'Feuille de route'
-    projectManager: "Maitre d'ouvrage"
+    project_manager: "Maitre d'ouvrage"
+    site_address: 'Adresse chantier'
+    billing_address: 'Adresse facturation'
+    norme_1090: 'NORME EN 1090 - '
+    class_exe: 'Classe EXE'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'
@@ -77,6 +81,7 @@ pdf:
       production: 'Réalisation'
       consultation: 'Consultation'
       isothermal_panels: 'Panneaux isothermes'
+      isotermal_bat: 'Panneaux isothermes'
 
   is_bonhomme_label:
     contract_holder: 'Tutulaire du marche'

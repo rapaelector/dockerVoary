@@ -13,7 +13,7 @@ class MarketType
     const ISOTHERMAL_PLAN = 'isothermal_plan';  // Plan isotermes
     const SIMPLE_SUPPLY = 'simple_supply'; // Fourniture simple
     const ASBESTOS_REMOVAL = 'asbestos_removal'; // Désamiantage
-    const ISOTHERMAL_PANELS = 'isothermal_panels'; // Panneaux isothermes
+    const ISOTHERMAL_PANELS = 'isotermal_bat'; // Panneaux isothermes
     const PUBLIC_MARKET = 'public_market'; // marche publc
     const PRIVATE_MARKET = 'private_market'; // marche privé
     const PUBLIC_AO = 'public_ao'; // A.O public

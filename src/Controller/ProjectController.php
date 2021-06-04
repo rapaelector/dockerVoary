@@ -197,7 +197,7 @@ class ProjectController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('project.list');
         }
 
         return $this->render('project/edit.html.twig', [

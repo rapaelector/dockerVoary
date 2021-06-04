@@ -15,8 +15,12 @@
             </td>
         </tr>
         <tr>
-            <td height="{{ VALUE_HEIGHT }}px;">
-                {{ content }}
+            <td height="{{ VALUE_HEIGHT }}px;" class="align-start">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ content|raw }}
+                {% endif %}
             </td>
         </tr>
     </tbody>

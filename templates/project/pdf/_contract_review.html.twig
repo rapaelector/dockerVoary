@@ -39,8 +39,8 @@
             <td>
                 {# Maitre d'oeuvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: 'pdf.label.projectManager'|trans,
-                    content: '',
+                    title: 'pdf.label.project_manager'|trans,
+                    content: resolve([project, 'projectOwner'], ''),
                 } %}
             </td>
             <td>
@@ -52,48 +52,64 @@
             <td>
                 {# Maitre d'ouvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: 'pdf.label.projectManager'|trans,
-                    content: '',
+                    title: 'pdf.label.project_manager'|trans,
+                    content: resolve([project, 'projectManager'], ''),
                 } %}
             </td>
             <td>
-                {# Maitre d'ouvre #}
+                {# Adresse chantier #}
+                {% set siteAddress = '' %}
+
+                {% for i in 1..3 %}
+                    {% set siteAddress = '<div>' ~ siteAddress ~ resolve([project, 'siteAddress', 'line' ~ i], '') ~ '</div>' %}
+                {% endfor %}
+
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: "Adresse chantier",
-                    content: '',
+                    title: 'pdf.label.site_address'|trans,
+                    content: siteAddress,
                 } %}
             </td>
         </tr>
         <tr>
             <td>
                 {# Adresse facturation #}
+                {% set billingAddres = '' %}
+
+                {% for i in 1..3 %}
+                    {% set billingAddres = '<div>' ~ billingAddres ~ resolve([project, 'billingAddres', 'line' ~ i], '') ~ '</div>' %}
+                {% endfor %}
+
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: "Adresse facturation",
-                    content: '',
+                    title: 'pdf.label.billing_address'|trans,
+                    content: billingAddres,
                 } %}
             </td>
             <td>
                 {# Description d' l'operation #}
+                {% set descriptionOperation = resolve([project, 'descriptionOperation'], '') %}
+
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: "Description de l'operation",
-                    content: '',
+                    title: 'pdf.label.operation_description'|trans,
+                    content: descriptionOperation,
                 } %}
             </td>
         </tr>
         <tr>
             <td>
-                {# Dossier vendu par #}
+                {# Dossier vendu par, rédacteur du devis #}
                 {% include 'project/pdf/contract_review/folder_sold_by.html.twig' %}
             </td>
             <td>
-                {# Rédateur du devis #}
+                {# Norme en 1090 #}
                 {% include 'project/pdf/contract_review/norme_1090.html.twig' %}
             </td>
         </tr>
         <tr>
             {# market type #}
             <td>
-                {% include 'project/pdf/contract_review/market_type.html.twig' %}
+                {% include 'project/pdf/contract_review/market_type.html.twig' with {
+                    marketTypeValue: resolve([project, 'marketType'], null),
+                } %}
             </td>
             {# marke type 2 #}
             <td>{% include 'project/pdf/prospection_folder/market_type_2.html.twig' %}</td>
