@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {% from pdf_macro import pdf_checkbox %}
 {# folder prioritization total height count 6 #}
@@ -17,6 +17,11 @@
 {# without_continuation (sans suite) col count 6 #}
 {% set WITHOUT_CONTINUATION = space_value(12, PRIORITIZATION_COL_COUNT) %}
 
+{% set folderPrioritization = resolve([project, 'caseType'], null) %}
+{% set folderPrioritizationUrgent = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::URGENT') %}
+{% set folderPrioritizationNormal = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::NORMAL') %}
+{% set folderPrioritizationWithoutContinuation = resolve([project, 'caseType'], null) == constant('\\App\\Entity\\Constants\\Project\\FolderPrioritization::WITHOUT_CONTINUATION') %}
+
 <table class="table-borderless prioritization-folder">
     <tbody>
         <tr>
@@ -24,11 +29,29 @@
         </tr>
         <tr height="{{ FOLDER_PRIORITIZATION_HEIGHT_COUNT }}px;" class="align-start">
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(folderPrioritizationUrgent) }}
+                {% endif %}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.urgent'|trans }}</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(folderPrioritizationNormal) }}
+                {% endif %}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.normal'|trans }}</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ pdf_checkbox(folderPrioritization) }}
+                {% endif %}
+            </td>
             <td width="{{ WITHOUT_CONTINUATION }}%;" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.without_continuation'|trans }}</td>
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
         </tr>

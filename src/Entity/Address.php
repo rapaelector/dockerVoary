@@ -6,6 +6,7 @@ use App\Repository\AddressRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
+use App\Entity\Traits\AddressTrait;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +19,7 @@ class Address
     use BlameableTrait;
     use SoftDeleteableTrait;
     use TimestampableTrait;
+    use AddressTrait;
     
     /**
      * @ORM\Id

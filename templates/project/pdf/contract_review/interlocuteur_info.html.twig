@@ -1,0 +1,32 @@
+{% trans_default_domain 'projects' %}
+
+{# height col count 7 #}
+{% set INTERLOCUTEUR_INFO_HEIGHT_COUNT = 14 %}
+{# interlocutor name col height count 3 #}
+{% set INTERLOCUTOR_NAME_HEIGHT = space_value(6, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+{# mail col height count 2 #}
+{% set MAIL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+{# tel col height count 2 #}
+{% set TEL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+
+{% set labelClass = 'text-weight-bold text-underline' %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ INTERLOCUTOR_NAME_HEIGHT }}px;" class="align-start">
+                <div class="{{ labelClass }}">{{ 'pdf.contract_review_label.interlocutor_name'|trans }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td height="{{ MAIL_HEIGHT }}px;" class="align-start">
+                <div class="{{ labelClass }}">{{ 'pdf.label.mail'|trans }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td height="{{ TEL_HEIGHT }}px;">
+                <div class="{{ labelClass }}">{{ 'pdf.label.tel'|trans }}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

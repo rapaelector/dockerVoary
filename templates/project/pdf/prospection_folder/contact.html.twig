@@ -1,0 +1,94 @@
+{% trans_default_domain 'projects' %}
+{# col count are multiply by 2 #}
+{# colCount = {total: 30, label: 12, value: total - label} #}
+{% set CONTACT_COL_COUNT = 60 %}
+
+{# total height count = 18 #}
+{% set CONTACT_H_COUNT = 32 %}
+{% set LABEL_COUNT = 24 %}
+{% set VALUE_COUNT = CONTACT_COL_COUNT - LABEL_COUNT %}
+
+{% set LABEL_WIDTH = space_value(LABEL_COUNT, CONTACT_COL_COUNT) %}
+{% set VALUE_WIDTH = space_value(VALUE_COUNT, CONTACT_COL_COUNT) %}
+
+{# height count = 2.5 #}
+{% set ENTREPRISE_HEIGT = space_value(5, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{# height count = 3 #}
+{% set NAME_HEIGT = space_value(5, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{# height count = 3 #}
+{% set MAIL_HEIGT = space_value(4, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{# height count = 3 #}
+{% set TEL_HEIGT = space_value(4, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{# height count = {total: 5} #}
+{% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set LABEL_CLASS = 'text-weight-bold text-underline text-left align-start text-nowrap' %}
+
+{% set contact = resolve([project, 'contact'], null) %}
+
+{# {% set contactEntreprise = resolve([contact, 'entreprise'], null) %} #}
+{# stephan said that contact entreprise should be the client that i find no relation for project and client so i just put projectOwner for now #}
+{% set contactEntreprise = resolve([project, 'projectOwner'], null) %}
+{% set contactName = resolve([contact, 'name'], null) %}
+{% set contactAddress = resolve([contact, 'rawAddress'], null) %}
+{% set contactEmail = resolve([contact, 'email'], null) %}
+{% set contactPhone = resolve([contact, 'phone'], null) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td class="text-center" colspan="2">
+                <div class="label">{{ 'pdf.label.contact'|trans }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ LABEL_WIDTH }}%;" height="{{ ENTREPRISE_HEIGT }}px;">
+                <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.entreprise'|trans }} :</span>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ contactEntreprise }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ LABEL_WIDTH }}%;" height="{{ NAME_HEIGT }}px;">
+                <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.name'|trans }} : </span>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ contactName }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ LABEL_WIDTH }}%;" height="{{ CONTACT_ADDRESS_HEIGHT }}px;" class="align-start">
+                <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.contact_address'|trans }} :</span>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ contactAddress }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ LABEL_WIDTH }}%;" height="{{ MAIL_HEIGT }}">
+                <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.mail'|trans }} :</span>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ contactEmail }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td width="{{ LABEL_WIDTH }}%;" height="{{ TEL_HEIGT }}">
+                <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.tel'|trans }} :</span>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ contactPhone }}</span>
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>

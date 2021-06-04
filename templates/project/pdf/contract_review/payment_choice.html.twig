@@ -1,0 +1,102 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# col count 120 #}
+{% set COL_COUNT = 120 %}
+{# payment method col count 24 #}
+{% set PAYMENT_METHOD_WIDTH = space_value(49, COL_COUNT) %}
+{# date of deposite col count is the rest of col count - payment method count #}
+{% set DATE_OF_DEPOSITE_WIDTH = space_value((COL_COUNT - 49), COL_COUNT) %}
+
+{# deposite col count 6 #}
+{% set DEPOSITE_WIDTH = space_value(12, COL_COUNT) %}
+{# yes_from (oui de) col count 10 #}
+{% set YES_FROM_WIDTH = space_value(20, COL_COUNT) %}
+{# no width 4 #}
+{% set NO_WIDTH = space_value(8, COL_COUNT) %}
+{# empty col #}
+{% set EMPTY_COL_WIDTH = space_value(COL_COUNT - (12 + 20 + 8), COL_COUNT) %}
+{# client conditions negotiated col count 16 #}
+{% set CLIENT_CONDITIONS_NEGOTIATED_WIDTH = space_value(40, COL_COUNT) %}
+{% set CLIENT_CONDITIONS_NEGOTIATED_EMPTY_COL_WIDTH = space_value((COL_COUNT - 40), COL_COUNT) %}
+
+{# height only #}
+{# total height count 7 #}
+{% set COL_H_COUNT = 14 %}
+{# payment methd height count col 2 #}
+{% set PAYMENT_METHOD_HEIGHT = space_value(2, COL_H_COUNT) %}
+{% set DATE_OF_DEPOSITE_HEIGHT = space_value(2, COL_H_COUNT) %}
+{# dispose col height count 1 #}
+{% set DISPOSE_COL_HEIGHT = space_value(2, COL_H_COUNT) %}
+{# client conditions negotiated col height count 1 #}
+{% set CLIENT_CONDITIONS_NEGOTIATED_HEIGHT = space_value(2, COL_H_COUNT) %}
+{# client conditions negotiated value height count is the rest of the unused col_h_count #}
+{% set CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH = space_value((COL_H_COUNT - 8), COL_H_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td colspan="4">
+                <table class="table-borderless">
+                    <tbody>
+                        <tr>
+                            <td
+                                width="{{ PAYMENT_METHOD_WIDTH }}%;"
+                                height="{{ PAYMENT_METHOD_HEIGHT }}px;" 
+                                class="label text-left p-0 align-start"
+                            >
+                                {{ 'pdf.label.payment_method'|trans }}
+                            </td>
+                            <td 
+                                width="{{ DATE_OF_DEPOSITE_WIDTH }}%;" 
+                                height="{{ DATE_OF_DEPOSITE_HEIGHT }}px;"
+                                class="align-start"
+                            >
+                                {{ 'pdf.label.date_of_deposit'|trans }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td  width="{{ DEPOSITE_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start">{{ 'pdf.label.deposite'|trans }}</td>
+            <td  width="{{ YES_FROM_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start">
+                <span>{{ pdf_checkbox() }}</span>
+                <span>{{ 'pdf.label.yes_from'|trans }}</span>
+                <span>...........</span>
+            </td>
+            <td  width="{{ NO_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start">
+                <span>{{ pdf_checkbox() }}</span>
+                <span>{{ 'pdf.label.no'|trans }}</span>
+            </td>
+            <td  width="{{ EMPTY_COL_WIDTH }}%" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start"></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table class="table-borderless">
+                    <tr>
+                        <td
+                            width="{{ CLIENT_CONDITIONS_NEGOTIATED_WIDTH }}%;" 
+                            height="{{ CLIENT_CONDITIONS_NEGOTIATED_HEIGHT }}%" class="p-0 align-start"
+                        >
+                            {{ 'pdf.label.client_conditions_negotiated'|trans }} :
+                        </td>
+                        <td 
+                            width="{{ CLIENT_CONDITIONS_NEGOTIATED_EMPTY_COL_WIDTH }}%;" 
+                            height="{{ CLIENT_CONDITIONS_NEGOTIATED_HEIGHT }}%"
+                        ></td>
+                    </tr>
+                    <tr>
+                        <td 
+                            colspan="2" 
+                            height="{{ CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH }}px;"
+                            class="align-start"
+                        ></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

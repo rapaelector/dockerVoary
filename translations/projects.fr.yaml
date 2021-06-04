@@ -1,0 +1,118 @@
+pdf:
+  title:
+    prospection_folder: 'Dossier de prospection'
+    prospect: 'Prospect'
+    contract_review_title: 'Revue de contrat / page de garde disa'
+    siteCode: 'Code chantier'
+    commercial: 'Commercial'
+
+  label:
+    contact: 'Contact'
+    entreprise: 'Entreprise'
+    name: 'Nom'
+    contact_address: 'Adresse du contact'
+    mail: 'Mail'
+    tel: 'Tél'
+    first_ask_date: 'Date de première demande'
+    construction_site_address: 'Adresse chantier'
+    operation_description: "Description de l'operation"
+    surface: 'Surface'
+    market_type: 'Type de marche'
+    encryption_type: 'Type de chiffrage'
+    label_description: "Description de l'operation"
+    is_bonhomme: 'Bonhomme est-il'
+    project_planning: 'Planning du projet'
+    prioritization_of_the_folder: 'Priorisation du dossier'
+    business_responsible: "Charge(e) d'affaire"
+    economist: 'Economiste'
+    folder_name_in_the_cloud: 'Nom du dossier sur le serveur'
+    response_for_the: 'Reponse pour le'
+    or: 'Ou'
+    for_the_frame: 'Pour la charpente'
+    not_applicable: 'Sans objet'
+    folder_sold_by: 'Dossier vendu par'
+    quote_writer: 'Rédacteur du devis'
+    file_validation_disa_within: 'Validation de la fiche disa avec'
+    payment_method: 'Mode de réglement'
+    date_of_deposit: "Date à laquelle l'acompte doit être édité ?"
+    deposite: 'Acompte'
+    yes_from: 'Oui de'
+    yes: 'Oui'
+    no: 'Non'
+    client_conditions_negotiated: 'Conditions négociées avec le client'
+    work_breakdown: 'Repartition des travaux'
+    num_mde_quote_validate: 'N° du/des devis MDE validé(s)'
+    of: 'De'
+    overal_amount_of_the_contract: 'Montant global du marche'
+    amount_of_subcontracted_work: 'Montant des travaux sous-traités'
+    amount_of_work_specific_to_BBI: 'Montant des travaux propres à BBI'
+    folder_type: 'Type de dossier'
+    planning_project: 'Planning projet'
+    signatures: 'Signatures'
+    signature: 'Signature'
+    commercial_commit: "Le commercial s'engage"
+    legal_and_terms_of_payment: 'Juridique et Condition de règlement'
+    contract_review_by_christophe: 'Revue de contrat par Christophe'
+    assistant_in_charge_of_the_file: 'Assistante en charge du dossier'
+    driver_ocbs: 'Conduct. OCBS'
+    driver_tce: 'Conduct. TCE'
+    roadMap: 'Feuille de route'
+    project_manager: "Maitre d'ouvrage"
+    site_address: 'Adresse chantier'
+    billing_address: 'Adresse facturation'
+    norme_1090: 'NORME EN 1090 - '
+    class_exe: 'Classe EXE'
+
+    market_type_label:
+      work_on_existing: 'Travaux sur existant'
+      tce: 'T.C.E'
+      new_building: 'Bât neuf'
+      agricultural_building: 'Bât agricole'
+      shades: 'Ombrières'
+      call_for_tender: "Appel d'offre"
+      isothermal_plan: 'Plan isothermes'
+      simple_supply: 'Fourniture simple'
+      asbestos_removal: 'Désamiantage'
+      public_market: 'Marche public'
+      private_market: 'Marche prive'
+      public_ao: 'A.0 public'
+      private_ao: 'A.O prive'
+      budget: 'Budget'
+      production: 'Réalisation'
+      consultation: 'Consultation'
+      isothermal_panels: 'Panneaux isothermes'
+      isotermal_bat: 'Panneaux isothermes'
+
+  is_bonhomme_label:
+    contract_holder: 'Tutulaire du marche'
+    particular_renovation_more_than_2_year: 'Rénovation particulier de + de 2ans'
+    sub_contractor: 'Sous-traitant'
+    self_liquidation: 'Autoliquidation'
+
+  folder_prioritization_label:
+    urgent: Urgent
+    normal: Normal
+    without_continuation: Sans suite
+  
+  contract_review_label:
+    interlocutor_name: Nom de l'interlocuteur
+  
+  file_validation_disa_label:
+    mde_quote_signed: 'Devis MDE signé'
+    customer_order_form: 'Bon de Commande du Client'
+    letter_of_authorization: 'Lettre d’autorisation de travailler en l’absence de commande ferme, signée par Christophe '
+    subcontractiong_contract: 'Contrat de sous-traitance (si Bonhomme est sous-traitant)   + devis MDE sans TVA'
+  
+  folder_type_label:
+    earthworks: 'Terrassement'
+    frame: 'Charpente'
+    structural_work: 'Gros oeuvre'
+    coverage: 'Couverture'
+    cvc_plumbing: 'CVC plomberie'
+    bardage: 'Cladding'
+    electricity: 'Electricité'
+    locksmith: 'Serrurerie'
+    indoor_lots: 'Lots intérieurs'
+    pan_isothermes: 'Pan. Isothermes'
+    administrative_file: 'Dossier administratif'
+    asbestos_removal: 'Désamiantage'

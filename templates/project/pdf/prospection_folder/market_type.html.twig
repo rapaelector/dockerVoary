@@ -1,0 +1,49 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# market type height count = 12 #}
+{% set MARKET_TYPE_HEIGHT = 24 %}
+{% set LABEL_HEIGHT = space_value(2, MARKET_TYPE_HEIGHT, COL_PX_H_SIZE) %}
+{# market type col count = 30 #}
+{% set MARKET_TYPE_COL_COUNT = 60 %}
+{% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 2), MARKET_TYPE_COL_COUNT) /  2 %}
+
+{% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project::TYPE_DE_MARCHE') %}
+
+{# this could be market type of folder type or other #}
+{% set value = value|default(null) %}
+{% if title is not defined %}{% set title = 'pdf.label.market_type'|trans %}{% endif %}
+{% if transDomain is not defined %}{% set transDomain = 'project' %}{% endif %}
+{% if transPrefix is not defined %}{% set transPrefix = '' %}{% endif %}
+{% if elements is defined and elements is not empty %}{% set MARKET_TYPE_CHOICES = elements %}{% endif %}
+{% if tableClass is not defined %}{% set tableClass = 'table-borderless market-type-table mb-1' %}{% endif %}
+
+<table class="{{ tableClass }}">
+    <tbody>
+        <tr>
+            <td colspan="4" class="text-center">
+                <div class="label market-type-title">{{ title }}</div>
+            </td>
+        </tr>
+        {% for row in MARKET_TYPE_CHOICES|batch(2) %}
+            <tr>
+                {% for key, column in row %}
+                    <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                        {% if ngMode %}
+                            <input type="text">
+                        {% else %}
+                            {% set isChecked = null %}
+                            {% set isChecked = value == ('typeMarket.' ~ column) ? true : false %}
+                            <span>{{ pdf_checkbox(isChecked) }}</span>
+                        {% endif %}
+                    </td>
+                    <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">
+                        {{ (transPrefix ~ column)|trans({}, transDomain) }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

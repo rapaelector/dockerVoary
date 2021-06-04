@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {# folder name height 5 #}
 {% set FOLDER_NAME_HEIGHT = 10 %}
@@ -6,6 +6,9 @@
 {% set FOLDER_NAME_LABEL_HEIGHT = space_value(2, FOLDER_NAME_HEIGHT) %}
 {# folder name value height 3 #}
 {% set FOLDER_NAME_VALUE = space_value(2, FOLDER_NAME_HEIGHT) %}
+
+{# {% set folderNameInTheCloud = resolve([project], null) %} #}
+{% set folderNameInTheCloud = '' %}
 
 <table class="table-borderless">
     <tbody>
@@ -17,7 +20,13 @@
             </td>
         </tr>
         <tr height="{{ FOLDER_NAME_VALUE }}px;">
-            <td>G:\2-BBT\1-AFFAIRES\1-PROSPECT\ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td>
+            <td>
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ folderNameInTheCloud }}
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

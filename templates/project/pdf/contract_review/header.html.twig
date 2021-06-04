@@ -1,0 +1,59 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# header col count  #}
+{# contract review col count 39 #}
+{% set CONTRACT_REVIEW_WIDTH = space_value(78, TOTAL_COL_COUNT) %}
+{# work site code col count 21 #}
+{% set CODE_SITEWORK = space_value(42, TOTAL_COL_COUNT) %}
+{# header height #}
+{# header height col count 8 #}
+{% set HEADER_HEIGHT_COUNT = 16 %}
+{% set CONTRACT_REVIEW = space_value(16, HEADER_HEIGHT_COUNT) %}
+{# code_sitework count 6 #}
+{% set CODE_SITEWORK_HEIGHT =  space_value(12, HEADER_HEIGHT_COUNT) %}
+
+{% set siteCode = resolve([project, 'siteCode'], null) %}
+{% set hasRoadMap = resolve([project, 'roadMap'], false) %}
+<table>
+    <tbody>
+        <tr>
+            <td width="{{ CONTRACT_REVIEW_WIDTH }}" height="{{ CONTRACT_REVIEW }}px;" class="border-top-0 border-left-0 border-bottom-0">
+                <div class="text-weight-bold text-uppercase">{{ 'pdf.title.contract_review_title'|trans }}</div>
+            </td>
+            <td width="{{ CODE_SITEWORK }}%;" height="{{ CODE_SITEWORK_HEIGHT }}px;" class="border-bottom-0 border-right-0">
+                <table height="100%;" class="table-borderless">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <span class="text-weight-bold text-danger text-uppercase">{{ 'pdf.title.siteCode'|trans }} :</span>
+                                {% if ngMode %}
+                                    <input type="text">
+                                {% else %}
+                                    <span>{{ siteCode }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">{{ 'pdf.label.roadMap'|trans }}</td>
+                            <td>
+                                {% if ngMode %}
+                                    <span><input type="text"></span>
+                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span><input type="text"></span>
+                                    <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
+                                {% else %}
+                                    <span>{{ pdf_checkbox(hasRoadMap) }}</span>
+                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span>{{ pdf_checkbox(not hasRoadMap) }}</span>
+                                    <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

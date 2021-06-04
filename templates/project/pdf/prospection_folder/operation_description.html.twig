@@ -1,4 +1,4 @@
-{% trans_default_domain 'project' %}
+{% trans_default_domain 'projects' %}
 
 {# total operation_description_col_count = 56 #}
 {% set OPERATION_DESCRIPTION_COL_COUNT = 56 * 2 %}
@@ -11,6 +11,8 @@
 {% set OPERATION_DESCRIPTION_HEIGHT = space_value(9, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
 {# surface value = 3 #}
 {% set OPERATION_DESCRIPTION_SURFACE_HEIGHT =  space_value(4, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
+
+{% set operationDescriptionSurface = resolve([project, 'descriptionOperation'], null) %}
 
 <table class="table-borderless">
     <tbody>
@@ -25,7 +27,13 @@
         </tr>
         <tr>
             <td width="{{ LABEL_WIDTH }}" height="{{ OPERATION_DESCRIPTION_SURFACE_HEIGHT }}px;" class="text-uppercase surface">{{ 'pdf.label.surface'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}"></td>
+            <td width="{{ VALUE_WIDTH }}">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ operationDescriptionSurface }}</span>
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>

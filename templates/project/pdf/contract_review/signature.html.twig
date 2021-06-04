@@ -1,0 +1,41 @@
+{% trans_default_domain 'projects' %}
+
+{# width of each block #}
+{% set TD_WIDTH = space_value((COL_COUNT / 3), COL_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.commercial_commit'|trans,
+                    value: '',
+                    signatureValue: '',
+                    options: {
+                        subtitleClass: 'text-xs'
+                    }
+                } %}
+            </td>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.legal_and_terms_of_payment'|trans,
+                    value: '',
+                    signatureValue: '',
+                    options: {
+                        subtitleClass: 'text-xs'
+                    }
+                } %}
+            </td>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.contract_review_by_christophe'|trans,
+                    value: '',
+                    signatureValue: '',
+                    options: {
+                        subtitleClass: 'text-xs'
+                    }
+                } %}
+            </td>
+        </tr>
+    </tbody>
+</table>

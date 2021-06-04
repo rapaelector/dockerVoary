@@ -1,0 +1,171 @@
+{% trans_default_domain 'projects' %}
+
+{% set commercialRowspan = 10 %}
+{% set emptyRowspan = 11 %}
+
+{# folder type col count 22 #}
+{% set FOLDER_TYPE_WIDTH = space_value(40, COL_COUNT) %}
+{# planning project col count is the total col_count - folder type col count #}
+{% set PLANNING_PROJECT_WIDTH = space_value((COL_COUNT - 40), COL_COUNT) %}
+
+<table class="contract-review-table">
+    <tbody>
+        <tr class="table-tr-header">
+            <td width="{{ FIRST_COL_WIDTH }}%;"></td>
+            <td width="{{ SECOND_COL_WIDTH }}%;"></td>
+            <td width="{{ FIRD_COL_WIDTH }}%;"></td>
+            <td width="{{ FOURTH_COL_WIDTH }}%;"></td>
+            <td width="{{ FIFTH_COL_WIDTH }}%;"></td>
+        </tr>
+        <tr>
+            <td class="border-top-0 border-left-0 border-right-0"></td>
+            <td colspan="4" class="border-top-0 border-left-0">
+                {#
+                    # Header of the page
+                    # revue de contrat / page de garde disa
+                    # code chantier ...
+                #}
+                {% include 'project/pdf/contract_review/header.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            {# commercial (rotating text) #}
+            <td rowspan="{{ commercialRowspan }}" colspan="2" class="rotating-title commercial">
+                <div class="title-container commercial-title" style="width: 30px;">
+                    {{ 'pdf.title.commercial'|trans }}
+                </div>
+            </td>
+            <td rowspan="{{ emptyRowspan }}" class="border-0"></td>
+            <td>
+                {# Maitre d'oeuvre #}
+                {% include 'project/pdf/shared/_simple_content.html.twig' with {
+                    title: 'pdf.label.project_manager'|trans,
+                    content: resolve([project, 'projectOwner'], ''),
+                } %}
+            </td>
+            <td>
+                {# Nom de l'interlocuteur #}
+                {% include 'project/pdf/contract_review/interlocuteur_info.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {# Maitre d'ouvre #}
+                {% include 'project/pdf/shared/_simple_content.html.twig' with {
+                    title: 'pdf.label.project_manager'|trans,
+                    content: resolve([project, 'projectManager'], ''),
+                } %}
+            </td>
+            <td>
+                {# Adresse chantier #}
+                {% set siteAddress = '' %}
+
+                {% for i in 1..3 %}
+                    {% set siteAddress = '<div>' ~ siteAddress ~ resolve([project, 'siteAddress', 'line' ~ i], '') ~ '</div>' %}
+                {% endfor %}
+
+                {% include 'project/pdf/shared/_simple_content.html.twig' with {
+                    title: 'pdf.label.site_address'|trans,
+                    content: siteAddress,
+                } %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {# Adresse facturation #}
+                {% set billingAddres = '' %}
+
+                {% for i in 1..3 %}
+                    {% set billingAddres = '<div>' ~ billingAddres ~ resolve([project, 'billingAddres', 'line' ~ i], '') ~ '</div>' %}
+                {% endfor %}
+
+                {% include 'project/pdf/shared/_simple_content.html.twig' with {
+                    title: 'pdf.label.billing_address'|trans,
+                    content: billingAddres,
+                } %}
+            </td>
+            <td>
+                {# Description d' l'operation #}
+                {% set descriptionOperation = resolve([project, 'descriptionOperation'], '') %}
+
+                {% include 'project/pdf/shared/_simple_content.html.twig' with {
+                    title: 'pdf.label.operation_description'|trans,
+                    content: descriptionOperation,
+                } %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {# Dossier vendu par, rédacteur du devis #}
+                {% include 'project/pdf/contract_review/folder_sold_by.html.twig' %}
+            </td>
+            <td>
+                {# Norme en 1090 #}
+                {% include 'project/pdf/contract_review/norme_1090.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            {# market type #}
+            <td>
+                {% include 'project/pdf/contract_review/market_type.html.twig' with {
+                    marketTypeValue: resolve([project, 'marketType'], null),
+                } %}
+            </td>
+            {# marke type 2 #}
+            <td>{% include 'project/pdf/prospection_folder/market_type_2.html.twig' %}</td>
+        </tr>
+        <tr>
+            {# bonhomme est-il #}
+            <td colspan="2">{% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' %}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {# validation de la fiche disa avec #}
+                {% include 'project/pdf/contract_review/validation_of_the_file.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {# Mode de regelement #}
+                {% include 'project/pdf/contract_review/payment_choice.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {# Repartition des travaux, Montant global du marche #}
+                {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {# Type de dossier #}
+                {% include 'project/pdf/contract_review/folder_type.html.twig' %}
+            </td>
+            <td class="align-start">
+                {# Planning projet #}
+                {% include 'project/pdf/contract_review/planning_project.html.twig' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="rotating-title signatures">
+                <div class="title-container signatures-title">{{ 'pdf.label.signatures'|trans }}</div>
+            </td>
+            <td colspan="2">
+                {# signature #}
+                {% include 'project/pdf/contract_review/signature.html.twig' with {
+                    title: 'pdf.label.commercial_commit'|trans,
+                    value: '',
+                    signatureValue: '',
+                } %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="border-0"></td>
+            <td class="border-0"></td>
+            <td colspan="2">
+                {# under the signature table #}
+                {% include 'project/pdf/contract_review/assistant_in_charge_of_the_file.html.twig' %}
+            </td>
+        </tr>
+    </tbody>
+</table>

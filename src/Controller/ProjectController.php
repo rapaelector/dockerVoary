@@ -38,11 +38,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 #[Route('/project')]
 class ProjectController extends BaseController
 {
-    /**
-     * @isGranted("ROLE_PROJECT_VIEW")
-     */
     #[Route('/', name: 'project.list', methods: ['GET', 'POST'])]
-    #[Route('/', name: 'project_index', methods: ['GET', 'POST'])]
     public function index(
         Request $request, 
         ProjectRepository $projectRepository, 
@@ -211,7 +207,7 @@ class ProjectController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('project.list');
         }
 
         return $this->render('project/edit.html.twig', [
@@ -237,20 +233,25 @@ class ProjectController extends BaseController
         return $this->redirectToRoute('project_index');
     }
 
-    #[Route('/pdf', name: 'project.pdf')]
-    public function pdf(Request $request, Pdf $knpSnappyPdf)
+    #[Route('/pdf/{id}', name: 'project.pdf')]
+    public function pdf(Request $request, Project $project, Pdf $knpSnappyPdf)
     {
-        $template = $this->renderView('project/pdf/index.html.twig');
+        $previewMode = $request->query->get('preview', false);
+        $template = $this->renderView('project/pdf/index.html.twig', [
+            'project' => $project,
+            'previewMode' => $previewMode,
+        ]);
+        
         $options = [
             'margin-left' => '2mm',
             'margin-right' => '2mm',
             'margin-top' => '0mm',
         ];
 
-        if ($request->query->get('preview')) {
+        if ($previewMode) {
             return new Response($template);
         }
-
+        
         return new PdfResponse($knpSnappyPdf->getOutputFromHtml($template, $options));
     }
 }

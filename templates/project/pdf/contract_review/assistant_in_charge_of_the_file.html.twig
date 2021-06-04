@@ -1,0 +1,44 @@
+{% trans_default_domain 'projects' %}
+
+{# width of each block #}
+{% set TD_WIDTH = space_value((COL_COUNT / 3), COL_COUNT) %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.assistant_in_charge_of_the_file'|trans,
+                    value: '',
+                    signatureValue: '',
+                    subtitle: ' ',
+                    options: {
+                        titleClass: 'text-underline text-uppercase',
+                    }
+                } %}
+            </td>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.driver_ocbs'|trans,
+                    value: '',
+                    signatureValue: '',
+                    subtitle: ' ',
+                    options: {
+                        titleClass: 'text-uppercase',
+                    }
+                } %}
+            </td>
+            <td width="{{ TD_WIDTH }}%;" class="border-right">
+                {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
+                    title: 'pdf.label.driver_tce'|trans,
+                    value: '',
+                    signatureValue: '',
+                    subtitle: ' ',
+                    options: {
+                        titleClass: 'text-uppercase',
+                    }
+                } %}
+            </td>
+        </tr>
+    </tbody>
+</table>

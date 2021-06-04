@@ -1,3 +1,6 @@
+.bordered {
+    border: $border !important;
+}
 .border-0 {
     border: none;
 }
@@ -13,8 +16,26 @@
 .border-right-0 {
     border-right: none;
 }
+.border-top {
+    border-top: $border !important;
+}
+.border-bottom {
+    border-bottom: $border !important;
+}
+.border-left {
+    border-left: $border !important;
+}
+.border-right {
+    border-right: $border !important;
+}
+.border-collapse {
+    border-collapse: collapse !important;
+}
 .text-weight-bold {
     font-weight: bold;
+}
+.text-normal {
+    font-weight: normal;
 }
 .text-lowercase {
     text-transform: lowercase;
@@ -26,16 +47,22 @@
     text-align: center;
 }
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 .text-right {
     text-align: right !important;
+}
+.text-danger {
+    color: red !important;
 }
 .text-underline {
     text-decoration: underline;
 }
 .text-sm {
     font-size: $label;
+}
+.text-xs {
+    font-size: _rem(8);
 }
 .align-start {
     vertical-align: top;
@@ -61,6 +88,9 @@
 }
 .pl-05 {
     padding-left: 0.5rem;
+}
+.p-0 {
+    padding: 0 !important;
 }
 .word-word {
     word-break: break-all;

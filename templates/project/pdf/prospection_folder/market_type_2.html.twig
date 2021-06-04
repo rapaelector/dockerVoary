@@ -1,0 +1,39 @@
+{% trans_default_domain 'projects' %}
+
+{% from pdf_macro import pdf_checkbox %}
+
+{# market type height count = 12 #}
+{% set MARKET_TYPE_HEIGHT = 24 %}
+{# market type 2 height count = 6 #}
+{% set MARKET_TYPE_2_HEIGHT = 12 %}
+{% set LABEL_HEIGHT = space_value(1, MARKET_TYPE_2_HEIGHT, COL_PX_H_SIZE) %}
+{# market type col count = 30 #}
+{% set MARKET_TYPE_2_COL_COUNT = 60 %}
+{% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_2_COL_COUNT)  %}
+{# add empty td; Empty td col count 6#}
+{% set EMPTY_TD_WIDTH = space_value(16, MARKET_TYPE_2_COL_COUNT) %}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_2_COL_COUNT - 18) / 2, MARKET_TYPE_2_COL_COUNT) %}
+
+{% set MARKET_TYPE_2_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPE_2_CHOICES') %}
+{% set marketType = resolve([project, 'marketType']) %}
+
+<table class="table-borderless mt-1 market-type-2-table">
+    <tbody>
+        {% for row in MARKET_TYPE_2_CHOICES|batch(2) %}
+            <tr>
+                {% for item in row %}    
+                    <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
+                        {% if ngMode %}
+                            <input type="text">
+                        {% else %}
+                            {{ pdf_checkbox(resolve([marketType], '')) }}
+                        {% endif %}
+                    </td>
+                    <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="text-uppercase word-break">
+                        {{ ('pdf.label.market_type_label.' ~ item)|trans }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

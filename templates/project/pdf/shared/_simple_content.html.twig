@@ -1,0 +1,27 @@
+{# height col count 7 #}
+{# this height should be 14 (7*2) but its a tittle big so increase it to 18#}
+{% set HEIGHT = 18 %}
+{# label height 1.5 #}
+{% set LABEL_HEIGHT = space_value(3, HEIGHT) %}
+{# value height 5.5 #}
+{% set VALUE_HEIGHT = space_value(11, HEIGHT) %}
+{% set titleClass = titleClass|default('') %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td height="{{ LABEL_HEIGHT }}px;">
+                <div class="label {{ titleClass }}">{{ title }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td height="{{ VALUE_HEIGHT }}px;" class="align-start">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ content|raw }}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>

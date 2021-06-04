@@ -31,6 +31,7 @@ action:
   view: 'Voir'
   save: 'Enregistrer'
   show_profile: 'Voir profil'
+  download: 'Télécharger'
 
 title:
   delete_user: "Supprimer l'utilisateur"

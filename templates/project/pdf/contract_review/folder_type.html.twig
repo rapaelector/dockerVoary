@@ -1,0 +1,7 @@
+{% include 'project/pdf/prospection_folder/market_type.html.twig' with {
+    elements: constant('\\App\\Entity\\Constants\\Project::CASE_TYPES'),
+    title: 'pdf.label.folder_type'|trans({}, 'projects'),
+    transPrefix: '',
+    transDomain: 'project',
+    value: resolve([project, 'caseType'], {})
+} %}

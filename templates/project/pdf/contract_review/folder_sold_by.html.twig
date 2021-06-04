@@ -1,0 +1,41 @@
+{% trans_default_domain 'projects' %}
+{# total height real value 4 #}
+{# should be 6 but a title big #}
+{% set FOLDER_SOLD_BY_HEIGHT_COUNT = 14 %}
+{# label height 2 #}
+{% set LABEL_HEIGHT = space_value(3, FOLDER_SOLD_BY_HEIGHT_COUNT) %}
+{# value height #}
+{% set VALUE_HEIGHT = space_value(3, FOLDER_SOLD_BY_HEIGHT_COUNT) %}
+
+{% set labelClass = 'align-start text-center text-weight-bold text-underline' %}
+{# Dossier vendu par #}
+{% set soldBy = resolve([project, 'soldBy'], '') %}
+{# Rédacteur du devis #}
+{% set quoteWriter = resolve([project, 'quoteWriter'], '') %}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            {# dossier vendu par #}
+            <td height="{{ LABEL_HEIGHT }}px;" class="{{ labelClass }} border-right">{{ 'pdf.label.folder_sold_by'|trans }}</td>
+            {# rédacteur du dévis #}
+            <td height="{{ LABEL_HEIGHT }}px;" class="{{ labelClass }}">{{ 'pdf.label.quote_writer'|trans }}</td> 
+        </tr>
+        <tr>
+            <td height="{{ VALUE_HEIGHT }}px;" class="border-right">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ soldBy }}
+                {% endif %}
+            </td>
+            <td height="{{ VALUE_HEIGHT }}px;">
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    {{ quoteWriter }}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,27 +1,26 @@
-
-$table-width: 100%;
-$table-td-border-color:#777777;
-$table-td-padding: 10px;
-
 @mixin basic_table {
     table {
         width: $table-width;
         border-collapse: collapse;
         font-family: sans-serif;
-        letter-spacing: 0.1px;      
+        letter-spacing: 0.1px;
         tbody {
             tr {
                 td, th {
                     padding: 0;
                 }
                 td {
-                    border: 1px solid $table-td-border-color;
+                    border: $border;
                     &.pdf-td-logo {
                         text-align: center;
                         vertical-align: middle;
                     }
                     &.td-label {
                         vertical-align: top;
+                    }
+                    span.td-value {
+                        font-size: $default-font-size;
+                        letter-spacing: 0.5px;
                     }
                 }
                 &.table-tr-header {
@@ -32,6 +31,7 @@ $table-td-padding: 10px;
             }
         }
         &.table-borderless {
+            border-collapse: collapse;
             tbody {
                 tr {
                     td, th {
@@ -48,7 +48,7 @@ $table-td-padding: 10px;
                 tr {
                     td {
                         padding: 0;
-                        letter-spacing: 1px;
+                        letter-spacing: 0.2px;
                         &.market-type-checkbox {
                             padding-right: 6px;
                         }
@@ -91,7 +91,7 @@ $table-td-padding: 10px;
         font-size: $main-title;
     }
     .prospect {
-        background: rgb(255, 192, 0);
+        background: $prospectBackground;
         word-break: keep-all !important;
         .prospect-title {
             word-break: keep-all !important;
@@ -101,6 +101,41 @@ $table-td-padding: 10px;
             position: relative;
             left: 5px;
             top: 20px;
+        }
+    }
+    .rotating-title {
+        word-break: keep-all !important;
+        &.prospect {
+            background: $prospectBackground;
+        }
+        &.commercial {
+            background: $commercialBackground;
+        }
+        &.signatures {
+            background: $signaturesBackground;
+        }
+        .title-container {
+            word-break: keep-all !important;
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            font-size: $title;
+            position: relative;
+            &.prospect-title {
+                left: 5px;
+                top: 20px;
+            }
+            &.commercial-title {
+                left: 12px;
+                top: 20px;
+                color: #fff;
+                font-weight: bold;
+            }
+            &.signatures-title {
+                font-size: _rem(8);
+                top: 0;
+                left: 0;
+                font-weight: bold;
+            }
         }
     }
     .first-ask-date {
@@ -116,6 +151,12 @@ $table-td-padding: 10px;
         top: -2px;
         left: 5px;
     }
+    .checkbox-value {
+        padding-left: 4px;
+    }
+    .market-type-title {
+        padding-bottom: $table-td-padding;
+    }
     .particular-renovation-col {
         padding-left: $table-td-padding !important;
     }
@@ -126,7 +167,7 @@ $table-td-padding: 10px;
         display: inline-block;
         width: 8px;
         height: 8px;
-        border: 1px solid $table-td-border-color;
+        border: $border;
         position: relative;
         .pdf-checkbox-inner-1, .pdf-checkbox-inner-2 {
             display: none;
