@@ -25,6 +25,7 @@ require('datatables.net-fixedcolumns-bs4');
 
 import './datatable/omines-datatables';
 import { selectBuilder } from './common/form/select_form';
+import './adminlte/fix_sidebar.js';
 
 $(function () {
     /**

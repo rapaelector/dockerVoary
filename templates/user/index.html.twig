@@ -4,7 +4,7 @@
 
 {% block title %}{{ 'title.user_list'|trans }} | {{ parent() }}{% endblock %}
 
-{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
@@ -54,7 +54,7 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: true,
+                debug: false,
                 enableFormatter: true,
                 redrawEvent: 'user.deleted',
                 config: {

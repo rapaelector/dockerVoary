@@ -4,7 +4,7 @@
 
 {% block title %}{{ 'title.edit_client'|trans }} | {{ parent() }}{% endblock %}
 
-{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;"{% endblock %}
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
 
 {% form_theme form.contacts 'shared/form/client_contact_form.html.twig' %}
 
