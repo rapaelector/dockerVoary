@@ -49,6 +49,71 @@ class ClientControllerTest extends WebTestCase
         $this->login($client, 'user_role_client_add@app.locale');
         $crawler = $client->request('GET', '/client/new');
         $this->assertResponseIsSuccessful();
+
+        /**
+         * - Test for adding real data for client
+         */
+        $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
+
+        // - Select the form that contains this button
+        $form = $buttonCrawlerNode->form();
+
+        // - Contacts data
+        $contacts = [
+            "contacts[0]" => [
+                "0" => [
+                    "lastName" => "Monkey D",
+                    "firstName" => "Dragon",
+                    "email" => "dragon@gmail.com",
+                    "fax" => "45678",
+                    "phone" => "56789",
+                    "job" => "RTYUI",
+                    "rawAddress" => "Lorem ipsum",
+                ],
+            ],
+        ];
+
+        $contactsFormattedValues = ['client' => [
+            "contacts" => [
+                [
+                    "lastName" => "Monkey D",
+                    "firstName" => "Dragon",
+                    "email" => "dragon@gmail.com",
+                    "fax" => "45678",
+                    "phone" => "56789",
+                    "job" => "RTYUI",
+                    "rawAddress" => "Lorem ipsum",
+                ],
+            ],
+        ]];
+
+        // submit the Form object with bad credentials
+        $formValues = $this->formatFormNames('client', [
+            "name" => "Rasoanaivo",
+            "shortName" => "Rajo",
+            "clientNumber" => "PR0112",
+            "activity" => "activity.chemistry",
+            "paymentMethod" => "payment.type.check",
+            "payment" => "payment_period.end_45",
+            "siret" => "Test siret",
+            "tvaRate" => "8.5",
+            "intraCommunityTva" => "89",
+            "billingAddress" => [
+                "name" => "Popa",
+                "phone" => "xxx xx xxx xx",
+                "fax" => "67890",
+                "line1" => "Citer",
+                "line2" => "Siniben-drano",
+                "line3" => "Siberi",
+                "postalCode" => "TCE",
+                "city" => "tananarivo",
+                "country" => "MG",
+            ],
+        ]);
+
+        $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
+        
+        // $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Forbidden failed');
     }
 
     public function testShow()
