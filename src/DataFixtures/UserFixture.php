@@ -18,11 +18,18 @@ class UserFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $roles = [
+            // ROLE USER
             'ROLE_USER_VIEW',
             'ROLE_USER_ADD',
             'ROLE_USER_EDIT',
             'ROLE_USER_DELETE',
+            // ROLE CLIENT
+            'ROLE_CLIENT_VIEW',
+            'ROLE_CLIENT_ADD',
+            'ROLE_CLIENT_EDIT',
+            'ROLE_CLIENT_DELETE',
         ];
+
         /**
          * - User for the test
          * - user mail test@gmail.com Test123
