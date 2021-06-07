@@ -178,7 +178,9 @@ class UserController extends BaseController
     public function new(Request $request, UserPasswordEncoderInterface $encoder, MessageBusInterface $messagerBus, UserRepository $userRepository): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'validation_groups' => ['Default', 'user:create'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

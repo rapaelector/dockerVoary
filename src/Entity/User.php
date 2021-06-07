@@ -60,10 +60,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\NotNull
+     * @Assert\NotBlank(groups={"user:create"})
      * @Assert\Length(
-     *      min = 2,
+     *      min = 2, groups={"user:create"}
      * )
      */
     private $password;
@@ -71,7 +70,6 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
-     * @Assert\NotNull
      * @Assert\Length(
      *      min = 2,
      * )
@@ -81,7 +79,6 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
-     * @Assert\NotNull
      * @Assert\Length(
      *      min = 2,
      * )
@@ -197,7 +194,7 @@ class User implements UserInterface, \Serializable
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
