@@ -70,7 +70,7 @@ class UserVoter extends Voter
      */
     public function canDelete(User $deletedUser, User $user)
     {
-        return $this->security->isGranted('ROLE_USER_DELETE') && ($deletedUser->getId() != $this->security->getUser()->getId());
+        return $this->security->isGranted('ROLE_USER_DELETE') && ($deletedUser->getId() != $user->getId());
     }
 
     public static function getSupportedAttributes()
