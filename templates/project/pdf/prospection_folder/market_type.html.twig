@@ -36,7 +36,11 @@
                         {% else %}
                             {% set isChecked = null %}
                             {% set isChecked = value == ('typeMarket.' ~ column) ? true : false %}
-                            <span>{{ pdf_checkbox(isChecked) }}</span>
+                            {% if value is iterable %}
+                                <span>{{ pdf_checkbox(column in value) }}</span>
+                            {% else %}
+                                <span>{{ pdf_checkbox(isChecked) }}</span>
+                            {% endif %}
                         {% endif %}
                     </td>
                     <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">

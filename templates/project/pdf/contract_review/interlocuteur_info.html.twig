@@ -10,22 +10,29 @@
 {% set TEL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
 
 {% set labelClass = 'text-weight-bold text-underline' %}
+{% set contact = resolve([project, 'contact'], null) %}
+{% set contactName = resolve([contact, 'name'], null) %}
+{% set contactEmail = resolve([contact, 'email'], null) %}
+{% set contactTel = resolve([contact, 'phone'], null) %}
 
 <table class="table-borderless">
     <tbody>
         <tr>
             <td height="{{ INTERLOCUTOR_NAME_HEIGHT }}px;" class="align-start">
-                <div class="{{ labelClass }}">{{ 'pdf.contract_review_label.interlocutor_name'|trans }}</div>
+                <span class="{{ labelClass }}">{{ 'pdf.contract_review_label.interlocutor_name'|trans }}:</span>
+                <span>{{ contactName }}</span>
             </td>
         </tr>
         <tr>
             <td height="{{ MAIL_HEIGHT }}px;" class="align-start">
-                <div class="{{ labelClass }}">{{ 'pdf.label.mail'|trans }}</div>
+                <span class="{{ labelClass }}">{{ 'pdf.label.mail'|trans }}:</span>
+                <span>{{ contactEmail }}</span>
             </td>
         </tr>
         <tr>
             <td height="{{ TEL_HEIGHT }}px;">
-                <div class="{{ labelClass }}">{{ 'pdf.label.tel'|trans }}</div>
+                <span class="{{ labelClass }}">{{ 'pdf.label.tel'|trans }}:</span>
+                <span>{{ contactTel }}</span>
             </td>
         </tr>
     </tbody>

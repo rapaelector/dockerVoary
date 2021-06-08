@@ -23,23 +23,33 @@
                 height="{{ TITLE_HEIGHT_COUNT }}px;" 
                 class="text-weight-bold text-sm {{ resolve([options, 'titleClass'], '') }}"
             >
-                {{ title }} : {{ value }}
+                <div>{{ title }} : {{ value }}</div>
             </td>
         </tr>
-        <tr>
-            <td 
-                height="{{ SUBTITLE_HEIGHT_COUNT }}px;"
-                class="text-weight-bold {{ resolve([options, 'subtitleClass'], '') }}"
-            >
-                {{ subtitle }}
-            </td>
-        </tr>
+        {% if resolve([options, 'signatures'], true) %}
+            <tr>
+                <td 
+                    height="{{ SUBTITLE_HEIGHT_COUNT }}px;"
+                    class="text-weight-bold {{ resolve([options, 'subtitleClass'], '') }}"
+                >
+                    {% if ngMode %}
+                        <input type="text">
+                    {% else %}
+                        <span>{{ subtitle }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
         <tr>
             <td
                 height="{{ SIGNATURE_HEIGHT_COUNT }}px;"
                 class="{{ resolve([options, 'signatureValueClass'], '') }}"
             >
-                {{ signatureValue }}
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span>{{ signatureValue }}</span>
+                {% endif %}
             </td>
         </tr>
     </tbody>

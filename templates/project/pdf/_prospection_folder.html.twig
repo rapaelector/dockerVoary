@@ -54,11 +54,15 @@
         <tr>
             <td rowspan="2" class="td-label">
                 {# TYPE DE MARCHE #}
-                {% include 'project/pdf/prospection_folder/market_type.html.twig' %}
+                {% include 'project/pdf/prospection_folder/market_type.html.twig' with {
+                    value: resolve([project, 'marketType'], null),
+                } %}
             </td>
             <td>
                 {# TYPE DE MARCHE A DROIT : marche public, marche prive, A.O public, A.O prive #}
-                {% include 'project/pdf/prospection_folder/market_type_2.html.twig' %}
+                {% include 'project/pdf/prospection_folder/market_type_2.html.twig' with {
+                    value: resolve([project, 'marketType'], null),
+                } %}
             </td>
         </tr>
         <tr>
@@ -70,7 +74,9 @@
         <tr>
             <td colspan="2" class="td-label">
                 {# BONHOMME EST-IL #}
-                {% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' %}
+                {% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' with {
+                    value: resolve([project, 'bonhomePercentage'], null),
+                } %}
             </td>
         </tr>
         <tr>

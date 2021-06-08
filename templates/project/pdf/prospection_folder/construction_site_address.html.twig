@@ -9,6 +9,7 @@
 {% set CONSTRUCTION_SITE_VALUE_H_COUNT = space_value((CONSTRUCTION_SITE_H_COUNT - 3), CONSTRUCTION_SITE_H_COUNT, COL_PX_H_SIZE) %}
 
 {% set siteAddress = resolve([project, 'siteAddress'], null) %}
+{% set siteAddressComputed = resolve([siteAddress, 'line1'], null) ~ ' ' ~ resolve([siteAddress, 'line2']) ~ ' ' ~ resolve([siteAddress, 'line3']) %}
 
 <table class="table-borderless">
     <tbody>
@@ -20,7 +21,7 @@
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    <span class="td-value">{{ siteAddress }}</span>
+                    <span class="td-value">{{ siteAddressComputed }}</span>
                 {% endif %}
             </td>
         </tr>
