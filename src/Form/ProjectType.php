@@ -8,6 +8,7 @@ use App\Form\User\ContactType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +41,7 @@ class ProjectType extends AbstractType
                 'label' => "columns.siteCode"
             ])
             ->add('contactSelect', EntityType::class, [
+                'label' => 'columns.contact',
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
@@ -172,6 +174,40 @@ class ProjectType extends AbstractType
             ])
             ->add('tceDriver', null,[
                 'label' => false
+            ])
+            ->add('encryptiontype', ChoiceType::class, [
+                'label'=>"columns.encryptiontype",
+                "choices" => Constants::getTypeValues(Constants::ENCRYPTION_TYPE, true),
+                "multiple" => false,
+                "expanded" => true,
+                'label_attr' => array(
+                    'class' => 'radio-inline'
+                ),
+            ])
+            ->add('notApplicable', CheckboxType::class, [
+                'label'=>"columns.notApplicable",
+                'required' => false
+            ])
+            ->add('priorizationOfFile', ChoiceType::class, [
+                'label'=>"columns.priorizationOfFile",
+                "choices" => Constants::getTypeValues(Constants::PRIORIZATION_FILE_TYPE, true),
+                "multiple" => false,
+                "expanded" => true,
+                'label_attr' => array(
+                    'class' => 'radio-inline'
+                ),
+            ])
+            ->add('answerForThe', null, [
+                'label'=>"columns.answerForThe"
+            ])
+            ->add('businessCharge', null, [
+                'label'=>"columns.businessCharge"
+            ])
+            ->add('economist', null, [
+                'label'=>"columns.economist"
+            ])
+            ->add('folderNameOnTheServer', null, [
+                'label'=>"columns.folderNameOnTheServer"
             ])
         ;
     }

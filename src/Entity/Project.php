@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
@@ -198,6 +200,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid
      */
     private $contact;
 
@@ -217,6 +220,51 @@ class Project
      * @ORM\ManyToOne(targetEntity=Client::class)
      */
     private $prospect;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * fr: type de chiffrage
+     */
+    private $encryptiontype;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     *
+     * fr: Sans objet
+     */
+    private $notApplicable;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * fr: Priorisation du dossier
+     */
+    private $priorizationOfFile;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * fr: Réponse pour le
+     */
+    private $answerForThe;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * fr: Chargé(e) d'affaire
+     */
+    private $businessCharge;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * fr: Economiste
+     */
+    private $economist;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * fr: Nom du dossier sur le serveur
+     */
+    private $folderNameOnTheServer;
 
     public function getId(): ?int
     {
@@ -572,6 +620,90 @@ class Project
     public function setProspect(?Client $prospect): self
     {
         $this->prospect = $prospect;
+
+        return $this;
+    }
+
+    public function getEncryptiontype(): ?string
+    {
+        return $this->encryptiontype;
+    }
+
+    public function setEncryptiontype(string $encryptiontype): self
+    {
+        $this->encryptiontype = $encryptiontype;
+
+        return $this;
+    }
+
+    public function getNotApplicable(): ?bool
+    {
+        return $this->notApplicable;
+    }
+
+    public function setNotApplicable(?bool $notApplicable): self
+    {
+        $this->notApplicable = $notApplicable;
+
+        return $this;
+    }
+
+    public function getPriorizationOfFile(): ?string
+    {
+        return $this->priorizationOfFile;
+    }
+
+    public function setPriorizationOfFile(string $priorizationOfFile): self
+    {
+        $this->priorizationOfFile = $priorizationOfFile;
+
+        return $this;
+    }
+
+    public function getAnswerForThe(): ?string
+    {
+        return $this->answerForThe;
+    }
+
+    public function setAnswerForThe(?string $answerForThe): self
+    {
+        $this->answerForThe = $answerForThe;
+
+        return $this;
+    }
+
+    public function getBusinessCharge(): ?string
+    {
+        return $this->businessCharge;
+    }
+
+    public function setBusinessCharge(string $businessCharge): self
+    {
+        $this->businessCharge = $businessCharge;
+
+        return $this;
+    }
+
+    public function getEconomist(): ?string
+    {
+        return $this->economist;
+    }
+
+    public function setEconomist(string $economist): self
+    {
+        $this->economist = $economist;
+
+        return $this;
+    }
+
+    public function getFolderNameOnTheServer(): ?string
+    {
+        return $this->folderNameOnTheServer;
+    }
+
+    public function setFolderNameOnTheServer(string $folderNameOnTheServer): self
+    {
+        $this->folderNameOnTheServer = $folderNameOnTheServer;
 
         return $this;
     }
