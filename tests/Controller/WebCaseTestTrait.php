@@ -42,9 +42,7 @@ trait WebCaseTestTrait
     public function submitOverride($client, Form $form, array $values = [], array $extra = [], array $serverParameters = [])
     {
         $form->setValues($values);
-        print_r($form->getPhpValues());
         $formValues =  array_merge_recursive($form->getPhpValues(), $extra);
-        print_r($formValues);
 
         return $client->request($form->getMethod(), $form->getUri(), $formValues, $form->getPhpFiles(), $serverParameters);
     }

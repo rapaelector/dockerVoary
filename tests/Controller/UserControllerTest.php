@@ -65,6 +65,65 @@ class UserControllerTest extends WebTestCase
         $this->login($client, 'user_role_user_add@app.locale');
         $crawler = $client->request('GET', '/user/new');
         $this->assertResponseIsSuccessful();
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
+
+        /**
+         * Test for asserting real user data
+         */
+        $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
+
+        // - Select the form that contains this button
+        $form = $buttonCrawlerNode->form();
+
+        // Use dynamic email
+        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        /**
+         * User data
+         */
+        $user = [
+            "lastName" => "test",
+            "firstName" => "test",
+            "email" => $dynamicMail,
+            "phone" => "xxx xx xxx xx",
+            "job" => "Acteur",
+            "fax" => "89000",
+            "password" => "dbpf4dx2",
+            "canLogin" => "1"
+            // "_token" => "O5EaKz4l4PY47UE-vh2IkNOTyHqVJcbf4AZo78hk0TQ"
+        ];
+        $formValues = $this->formatFormNames('user', $user);
+
+        /**
+         * First submit should work and redirect users list
+         */
+        $this->submitOverride($client, $form, $formValues);
+        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to users list failed');
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
+
+        /**
+         * Empty the password and use the same email to have form invalid
+         */
+        $user['password'] = 'qsdfdsfqs';
+        $formValues = $this->formatFormNames('user', $user);
+        /**
+         * Second submit should not work because password and email validation are not good
+         */
+        $this->submitOverride($client, $form, $formValues);
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Return to the user creation page failed');
+        $this->assertStringContainsString("form-error-message", $client->getResponse()->getContent());
+        
+        /**
+         * Invalid the password to have error
+         */
+        $user['email'] = 'test_' .rand(10000, 99999). '@gmail.com';
+        $user['password'] = '';
+        $formValues = $this->formatFormNames('user', $user);
+        /**
+         * Second submit should not work because password and email validation are not good
+         */
+        $this->submitOverride($client, $form, $formValues);
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Return to the user creation page failed');
+        $this->assertStringContainsString("form-error-message", $client->getResponse()->getContent());
     }
 
     /**
@@ -91,12 +150,39 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
 
         $this->login($client, 'user_role_user_delete@app.locale');
-        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
+        $crawler = $client->request('GET', $this->getUserUrl('/edit', 'user_role_user_edit_1_@app.locale'));
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Forbidden failed');
 
         $this->login($client, 'user_role_user_edit@app.locale');
-        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
+        $crawler = $client->request('GET', $this->getUserUrl('/edit', 'user_role_user_edit_1_@app.locale'));
         $this->assertResponseIsSuccessful();
+
+        /**
+         * Test for user edit form and its validation
+         */
+        $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
+
+        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        $user = [
+            "lastName" => "test",
+            "firstName" => "test",
+            "email" => $dynamicMail,
+            "phone" => "xxx xx xxx xx",
+            "job" => "Acteur",
+            "fax" => "89000",
+            "canLogin" => "1",
+        ];
+
+        // - Select the form that contains this button
+        $form = $buttonCrawlerNode->form();
+        $formValues = $this->formatFormNames('user_edit', $user);
+
+        /**
+         * First submit ok
+         */
+        $this->submitOverride($client, $form, $formValues);
+        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to users list failed');
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
     }
 
     /**
@@ -159,5 +245,26 @@ class UserControllerTest extends WebTestCase
         }
 
         return $userId;
+    }
+
+    public function generateUser()
+    {
+        /**
+         * User data
+         */
+        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        $user = [
+            "lastName" => "test",
+            "firstName" => "test",
+            "email" => $dynamicMail,
+            "phone" => "xxx xx xxx xx",
+            "job" => "Acteur",
+            "fax" => "89000",
+            "password" => "dbpf4dx2",
+            "canLogin" => "1"
+            // "_token" => "O5EaKz4l4PY47UE-vh2IkNOTyHqVJcbf4AZo78hk0TQ"
+        ];
+
+        return $user;
     }
 }

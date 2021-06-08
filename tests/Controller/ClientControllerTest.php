@@ -49,6 +49,8 @@ class ClientControllerTest extends WebTestCase
         $this->login($client, 'user_role_client_add@app.locale');
         $crawler = $client->request('GET', '/client/new');
         $this->assertResponseIsSuccessful();
+        // there should be no error message
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
 
         /**
          * - Test for adding real data for client
@@ -58,62 +60,25 @@ class ClientControllerTest extends WebTestCase
         // - Select the form that contains this button
         $form = $buttonCrawlerNode->form();
 
-        // - Contacts data
-        $contacts = [
-            "contacts[0]" => [
-                "0" => [
-                    "lastName" => "Monkey D",
-                    "firstName" => "Dragon",
-                    "email" => "dragon@gmail.com",
-                    "fax" => "45678",
-                    "phone" => "56789",
-                    "job" => "RTYUI",
-                    "rawAddress" => "Lorem ipsum",
-                ],
-            ],
-        ];
-
-        $contactsFormattedValues = ['client' => [
-            "contacts" => [
-                [
-                    "lastName" => "Monkey D",
-                    "firstName" => "Dragon",
-                    "email" => "dragon@gmail.com",
-                    "fax" => "45678",
-                    "phone" => "56789",
-                    "job" => "RTYUI",
-                    "rawAddress" => "Lorem ipsum",
-                ],
-            ],
-        ]];
+        $dynamicMail = 'mail_' .rand(0, 9999). '@app.locale';
+        $contactsFormattedValues = ['client' => $this->generateClientContact()];
 
         // submit the Form object with bad credentials
-        $formValues = $this->formatFormNames('client', [
-            "name" => "Rasoanaivo",
-            "shortName" => "Rajo",
-            "clientNumber" => "PR0112",
-            "activity" => "activity.chemistry",
-            "paymentMethod" => "payment.type.check",
-            "payment" => "payment_period.end_45",
-            "siret" => "Test siret",
-            "tvaRate" => "8.5",
-            "intraCommunityTva" => "89",
-            "billingAddress" => [
-                "name" => "Popa",
-                "phone" => "xxx xx xxx xx",
-                "fax" => "67890",
-                "line1" => "Citer",
-                "line2" => "Siniben-drano",
-                "line3" => "Siberi",
-                "postalCode" => "TCE",
-                "city" => "tananarivo",
-                "country" => "MG",
-            ],
-        ]);
-
-        $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
+        $formValues = $this->formatFormNames('client', $this->generateClient());
         
-        // $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Forbidden failed');
+        /**
+         * First submit should work and redirect to client list 
+         */
+        $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
+        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to client list failed');
+        
+        /**
+         * Second submit should fail and return to the new client page with invalid fields
+         */
+        $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Redirect to the new client page because there are something wrong');
+        // there should be invalid field with error messages, containing `form-error-message`
+        $this->assertStringContainsString("form-error-message", $client->getResponse()->getContent());
     }
 
     public function testShow()
@@ -142,6 +107,19 @@ class ClientControllerTest extends WebTestCase
         $this->login($client, 'user_role_client_edit@app.locale');
         $crawler = $client->request('GET', $editClientUrl);
         $this->assertResponseIsSuccessful();
+
+        // test for client editing
+        $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
+
+        // - Select the form that contains this button
+        $form = $buttonCrawlerNode->form();
+        $formValues = $this->formatFormNames('client', $this->generateClient());
+        $contactsFormattedValues = $this->generateClientContact();
+
+        // First submit should ok
+        $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
+        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to client list failed');
+
     }
 
     public function testDelete(): void
@@ -182,5 +160,51 @@ class ClientControllerTest extends WebTestCase
         $clientId = $clients[0]->getId();
 
         return $clientId;
+    }
+
+    public function generateClient()
+    {
+        return [
+            "name" => "Rasoanaivo",
+            "shortName" => "Rajo",
+            // Client number is automaticaly generated so no need to give it
+            // "clientNumber" => "PR0112",
+            "activity" => "activity.chemistry",
+            "paymentMethod" => "payment.type.check",
+            "payment" => "payment_period.end_45",
+            "siret" => "Test siret",
+            "tvaRate" => "8.5",
+            "intraCommunityTva" => "89",
+            "billingAddress" => [
+                "name" => "Popa",
+                "phone" => "xxx xx xxx xx",
+                "fax" => "67890",
+                "line1" => "Citer",
+                "line2" => "Siniben-drano",
+                "line3" => "Siberi",
+                "postalCode" => "TCE",
+                "city" => "tananarivo",
+                "country" => "MG",
+            ],
+        ];
+    }
+
+    public function generateClientContact()
+    {
+        $dynamicMail = 'mail_' .rand(0, 9999). '@app.locale';
+
+        return [
+            "contacts" => [
+                [
+                    "lastName" => "Monkey D",
+                    "firstName" => "Dragon",
+                    "email" => $dynamicMail,
+                    "fax" => "45678",
+                    "phone" => "56789",
+                    "job" => "RTYUI",
+                    "rawAddress" => "Lorem ipsum",
+                ],
+            ],
+        ];
     }
 }
