@@ -29,6 +29,9 @@
 {% set SELF_LIQUIDATION = space_value(22, COL_COUNT) %}
 {% set SUB_CONTRACTOR_EMPTY_COL_WIDTH = space_value((20 + 8), COL_COUNT) %}
 
+{% set value = value|default(null) %}
+{% set bonhomePercentage = null %}
+
 <table class="table-borderless is-bonhomme-table">
     <tbody>
         <tr>
@@ -36,10 +39,14 @@
         </tr>
         <tr>
             <td width="{{ CONTRACT_HOLDER_WIDTH }}%;" class="text-uppercase">{{ 'pdf.is_bonhomme_label.contract_holder'|trans }}</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {{ pdf_checkbox(value == constant('\\App\\Entity\\Constants\\Project::TYPE_BONHOMME_20PERCENT')) }}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;"><span class="checkbox-value">20%</span></td>
             <td width="{{ OR_WIDTH }}%;" class="text-lowercase text-center">{{ 'pdf.label.or'|trans }}</td>
-            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+            <td width="{{ CHECKBOX_WIDTH }}%;">
+                {{ pdf_checkbox(value == constant('\\App\\Entity\\Constants\\Project::TYPE_BONHOMME_10PERCENT')) }}
+            </td>
             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;"><span class="checkbox-value">10%</span></td>
             <td width="{{ PARTICULAR_RENOVATION_WIDTH }}%;" class="particular-renovation-col">({{ 'pdf.is_bonhomme_label.particular_renovation_more_than_2_year'|trans }})</td>
         </tr>
@@ -49,7 +56,9 @@
                     <tbody>
                         <tr>
                             <td width="{{ SUB_CONTRACTOR_WIDTH }}%;" class="text-uppercase">{{ 'pdf.is_bonhomme_label.sub_contractor'|trans }}</td>
-                            <td width="{{ CHECKBOX_WIDTH }}%;">{{ pdf_checkbox(false) }}</td>
+                            <td width="{{ CHECKBOX_WIDTH }}%;">
+                                {{ pdf_checkbox(value == constant('\\App\\Entity\\Constants\\Project::TYPE_BONHOMME_0PERCENT')) }}
+                            </td>
                             <td width="{{ CHECKBOX_LABEL_WIDTH }}%;"><span class="checkbox-value">0%</span></td>
                             <td width="{{ SELF_LIQUIDATION }}%;" class="text-uppercase">({{ 'pdf.is_bonhomme_label.self_liquidation'|trans }})</td>
                             <td width="{{ SUB_CONTRACTOR_EMPTY_COL_WIDTH }}%;"></td>

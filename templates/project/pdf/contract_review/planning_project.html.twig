@@ -1,5 +1,5 @@
 {% include 'project/pdf/shared/_simple_content.html.twig' with {
     title: 'pdf.label.planning_project'|trans({}, 'projects'),
-    content: '',
+    content: resolve([project, 'planningProject'], null),
     titleClass: 'text-left align-start',
 } %}

@@ -198,6 +198,9 @@
             }
         }
     }
+    .hide-mock-value {
+        opacity: 0;
+    }
 }
 
 @mixin _table {

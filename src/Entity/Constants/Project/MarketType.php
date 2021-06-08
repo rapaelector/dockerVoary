@@ -16,8 +16,8 @@ class MarketType
     const ISOTHERMAL_PANELS = 'isotermal_bat'; // Panneaux isothermes
     const PUBLIC_MARKET = 'public_market'; // marche publc
     const PRIVATE_MARKET = 'private_market'; // marche privé
-    const PUBLIC_AO = 'public_ao'; // A.O public
-    const PRIVATE_AO = 'private_ao'; // A.O privé
+    const PUBLIC_AO = 'ao_public'; // A.O public
+    const PRIVATE_AO = 'ao_private'; // A.O privé
 
     const MARKET_TYPES_CHOICES = [
         self::WORK_ON_EXISTING => self::WORK_ON_EXISTING,

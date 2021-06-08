@@ -40,11 +40,11 @@
                 {# Maitre d'oeuvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_manager'|trans,
-                    content: resolve([project, 'projectOwner'], ''),
+                    content: resolve([project, 'projectOwner'], null),
                 } %}
             </td>
             <td>
-                {# Nom de l'interlocuteur #}
+                {# Interlocuteur #}
                 {% include 'project/pdf/contract_review/interlocuteur_info.html.twig' %}
             </td>
         </tr>
@@ -53,7 +53,7 @@
                 {# Maitre d'ouvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_manager'|trans,
-                    content: resolve([project, 'projectManager'], ''),
+                    content: resolve([project, 'projectManager'], null),
                 } %}
             </td>
             <td>
@@ -112,21 +112,29 @@
                 } %}
             </td>
             {# marke type 2 #}
-            <td>{% include 'project/pdf/prospection_folder/market_type_2.html.twig' %}</td>
+            <td>
+                {% include 'project/pdf/prospection_folder/market_type_2.html.twig' with {
+                    value: resolve([project, 'marketType'], null)
+                } %}
+            </td>
         </tr>
         <tr>
             {# bonhomme est-il #}
-            <td colspan="2">{% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' %}</td>
+            <td colspan="2">{% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' with {
+                value: resolve([project, 'bonhomePercentage'], null),
+            } %}</td>
         </tr>
         <tr>
             <td colspan="2">
                 {# validation de la fiche disa avec #}
-                {% include 'project/pdf/contract_review/validation_of_the_file.html.twig' %}
+                {% include 'project/pdf/contract_review/validation_of_the_file.html.twig' with {
+                    value: resolve([project, 'disaSheetValidation'], null),
+                } %}
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                {# Mode de regelement #}
+                {# Mode de regelement acompte #}
                 {% include 'project/pdf/contract_review/payment_choice.html.twig' %}
             </td>
         </tr>
@@ -148,15 +156,11 @@
         </tr>
         <tr>
             <td colspan="2" class="rotating-title signatures">
-                <div class="title-container signatures-title">{{ 'pdf.label.signatures'|trans }}</div>
+                <div class="title-container signatures-title text-uppercase">{{ 'pdf.label.signatures'|trans }}</div>
             </td>
             <td colspan="2">
                 {# signature #}
-                {% include 'project/pdf/contract_review/signature.html.twig' with {
-                    title: 'pdf.label.commercial_commit'|trans,
-                    value: '',
-                    signatureValue: '',
-                } %}
+                {% include 'project/pdf/contract_review/signature.html.twig' %}
             </td>
         </tr>
         <tr>

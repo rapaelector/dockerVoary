@@ -1,47 +1,109 @@
 {% trans_default_domain 'projects' %}
 
-<table class="table-borderless">
-    <tbody>
-        <tr>
-            <td  class="p-0 pt-10px pb-10px">
-                <table class="table-borderless " width="100%;">
-                    <tr>
-                        <td class="text-weight-bold text-underline" width="100%;">{{ 'pdf.label.work_breakdown'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-weight-bold text-sm" width="100%;">{{ 'pdf.label.num_mde_quote_validate'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-weight-bold text-sm"  width="100%;">{{ 'pdf.label.of'|trans }}</td>
-                    </tr>
-                </table>
-            </td>
-            <td  class="p-0 pt-10px pb-10px">
-                <table width="100%;">
-                    <tr>
-                        <td class="bordered text-weight-bold text-underline" width="100%;">{{ 'pdf.label.overal_amount_of_the_contract'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="bordered" width="100%;">{{ 'pdf.label.amount_of_subcontracted_work'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="bordered" width="100%;">{{ 'pdf.label.amount_of_work_specific_to_BBI'|trans }}</td>
-                    </tr>
-                </table>
-            </td>
-            <td  class="p-0 pt-10px pb-10px">
-                <table width="100%;">
-                    <tr>
-                        <td class="bordered" width="100%;">{{ 'lorem ipsum dolor'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="bordered" width="100%;">{{ 'lorem ipsum dolor sit'|trans }}</td>
-                    </tr>
-                    <tr>
-                        <td class="bordered"  width="100%;">{{ 'lorem ipsum dolor sit'|trans }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </tbody>
+{% set globalAmount = resolve([project, 'globalAmount'], null) %}
+{% set amountSubcontractedWork = resolve([project, 'amountSubcontractedWork'], null) %}
+{% set amountBBISpecificWork = resolve([project, 'amountBBISpecificWork'], null) %}
+{% set quoteValidatedMDE = resolve([project, 'quoteValidatedMDE'], null) %}
+{% set quoteValidatedMDEDate = resolve([project, 'quoteValidatedMDEDate'], null) %}
+{% set emptyData = 'lorem ipsum dolor' %}
+
+{# width #}
+{% set COL_COUNT = 120 %}
+{% set COLUMN_WIDTH = space_value((COL_COUNT / 3), COL_COUNT) %}
+
+{# height #}
+{# col height count 8 #}
+{% set COL_H_COUNT = 16 %}
+{% set WBCA_COL_PX_H_SIZE = 1 %}
+
+{% set COL_HEIGHT = space_value((COL_H_COUNT / 3), COL_H_COUNT, WBCA_COL_PX_H_SIZE) %}
+{# {% set tdClass = 'p-0 pt-10px pb-10px' %} #}
+{% set tdClass = 'p-0' %}
+{# height #}
+{% set HEIGHT = 65 %}
+
+{% set prefix %}{% endset %}
+
+<table width="100%" class="table-borderless">
+    <tr>
+        <td width="{{ COLUMN_WIDTH }}%" class="{{ tdClass }}">
+            <table>
+                <tr>
+                    {# Repartition des travaux #}
+                    <td class="text-weight-bold text-underline">
+                        {{ prefix|raw }}
+                        {{ 'pdf.label.work_breakdown'|trans }}
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+                <tr>
+                    {# N° du/des devis MDE validé(s) #}
+                    <td>
+                        {{ prefix|raw }}
+                        <span class="text-weight-bold text-sm">{{ 'pdf.label.num_mde_quote_validate'|trans }}</span>
+                        <span class="text-sm">{{ quoteValidatedMDE }}</span>
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+                <tr>
+                    {# de #}
+                    <td>
+                        {{ prefix|raw }}
+                        <span class="text-weight-bold text-sm">{{ 'pdf.label.of'|trans }}</span>
+                        <span class="text-sm">{{ quoteValidatedMDEDate ? quoteValidatedMDEDate|date('d/m/Y') : '' }}</span>
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="{{ tdClass }}">
+            <table>
+                <tr>
+                    <td
+                        width="{{ COLUMN_WIDTH }}%" 
+                        class="border-left text-weight-bold text-underline"
+                    >
+                        {{ prefix|raw }}
+                        {{ 'pdf.label.overal_amount_of_the_contract'|trans }}
+                        {{ prefix|raw }}
+                    </td>
+                    <td 
+                        width="{{ COLUMN_WIDTH }}%" 
+                        class="border-left {{ globalAmount ? '' : 'hide-mock-value' }}"
+                    >
+                        {{ prefix|raw }}
+                        {{ globalAmount|default(emptyData) }}
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+                <tr>
+                    <td 
+                        width="{{ COLUMN_WIDTH }}%" 
+                        class="border-left border-top"
+                    >
+                        {{ prefix|raw }}
+                        {{ 'pdf.label.amount_of_subcontracted_work'|trans }}
+                        {{ prefix|raw }}
+                    </td>
+                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top {{ amountSubcontractedWork ? '' : 'hide-mock-value' }}">
+                        {{ prefix|raw }}
+                        {{ amountSubcontractedWork|default(emptyData) }}
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+                <tr>
+                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top">
+                        {{ prefix|raw }}
+                        {{ 'pdf.label.amount_of_work_specific_to_BBI'|trans }}
+                        {{ prefix|raw }}
+                    </td>
+                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top {{ amountBBISpecificWork ? '' : 'hide-mock-value' }}" >
+                        {{ prefix|raw }}
+                        {{ amountBBISpecificWork|default(emptyData) }}
+                        {{ prefix|raw }}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>

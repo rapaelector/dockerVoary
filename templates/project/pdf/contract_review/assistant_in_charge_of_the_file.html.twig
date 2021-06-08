@@ -3,6 +3,11 @@
 {# width of each block #}
 {% set TD_WIDTH = space_value((COL_COUNT / 3), COL_COUNT) %}
 
+{% set assistantInChargeOfTheFile = resolve([project, 'recordAssistant'], null) %}
+{% set ocbsDriver = resolve([project, 'ocbsDriver'], null) %}
+{% set tceDriver = resolve([project, 'tceDriver'], null) %}
+{% set signatureValueClass = 'align-start text-sm' %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -10,10 +15,12 @@
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.assistant_in_charge_of_the_file'|trans,
                     value: '',
-                    signatureValue: '',
+                    signatureValue: assistantInChargeOfTheFile,
                     subtitle: ' ',
                     options: {
                         titleClass: 'text-underline text-uppercase',
+                        signatureValueClass: signatureValueClass,
+                        signatures: false,
                     }
                 } %}
             </td>
@@ -21,10 +28,12 @@
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.driver_ocbs'|trans,
                     value: '',
-                    signatureValue: '',
+                    signatureValue: ocbsDriver,
                     subtitle: ' ',
                     options: {
                         titleClass: 'text-uppercase',
+                        signatureValueClass: signatureValueClass,
+                        signatures: false,
                     }
                 } %}
             </td>
@@ -32,10 +41,12 @@
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.driver_tce'|trans,
                     value: '',
-                    signatureValue: '',
+                    signatureValue: tceDriver,
                     subtitle: ' ',
                     options: {
                         titleClass: 'text-uppercase',
+                        signatureValueClass: signatureValueClass,
+                        signatures: false,
                     }
                 } %}
             </td>

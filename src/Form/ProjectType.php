@@ -37,7 +37,7 @@ class ProjectType extends AbstractType
                     "expanded" => true
                 ])
             ->add('siteCode', TextType::class, [
-              'label' => "columns.siteCode"
+                'label' => "columns.siteCode"
             ])
             ->add('contactSelect', EntityType::class, [
                 'class' => User::class,

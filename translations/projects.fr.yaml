@@ -77,6 +77,8 @@ pdf:
       private_market: 'Marche prive'
       public_ao: 'A.0 public'
       private_ao: 'A.O prive'
+      ao_public: 'A.0 public'
+      ao_private: 'A.O prive'
       budget: 'Budget'
       production: 'Réalisation'
       consultation: 'Consultation'
