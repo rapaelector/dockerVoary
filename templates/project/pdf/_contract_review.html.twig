@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td class="border-top-0 border-left-0 border-right-0"></td>
-            <td colspan="4" class="border-top-0 border-left-0">
+            <td colspan="4" class="border-top-0 border-left-0 border-bottom-0">
                 {#
                     # Header of the page
                     # revue de contrat / page de garde disa
@@ -40,7 +40,7 @@
                 {# Maitre d'oeuvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_manager'|trans,
-                    content: resolve([project, 'projectOwner'], null),
+                    content: resolve([project, 'projectManager'], null),
                 } %}
             </td>
             <td>
@@ -52,8 +52,8 @@
             <td>
                 {# Maitre d'ouvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
-                    title: 'pdf.label.project_manager'|trans,
-                    content: resolve([project, 'projectManager'], null),
+                    title: 'pdf.label.project_owner'|trans,
+                    content: resolve([project, 'projectOwner'], null),
                 } %}
             </td>
             <td>

@@ -40,6 +40,10 @@ body {
                     .nav-link {
                         padding-left: 0;
                         padding-right: 0;
+                        width: 50px;
+                        .nav-icon {
+                            margin-left: (50px - 25px) / 2;
+                        }
                     }
                 }
             }

@@ -58,6 +58,7 @@ pdf:
     driver_tce: 'Conduct. TCE'
     roadMap: 'Feuille de route'
     project_manager: "Maitre d'ouvrage"
+    project_owner: "Maitre d'oeuvre"
     site_address: 'Adresse chantier'
     billing_address: 'Adresse facturation'
     norme_1090: 'NORME EN 1090 - '
