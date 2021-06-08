@@ -227,7 +227,7 @@ class ClientController extends BaseController
     /**
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), client)")
      */
-    #[Route('/{id}', name: 'client.delete', methods: ['POST', 'DELETE'])]
+    #[Route('/{id}/delete', name: 'client.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, Client $client, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {

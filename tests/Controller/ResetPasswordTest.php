@@ -40,9 +40,7 @@ class ResetPasswordTest extends WebTestCase
 
         $this->assertStringContainsString($checkEmailRedirectString, $client->getResponse()->getContent());
 
-        $session = $container->get('session.storage');
-        $token = $session->get('ResetPasswordToken');
-        dump($session);
+        // $session = $container->get('session.storage');
+        // $token = $session->get('ResetPasswordToken');
     }
-
 }

@@ -253,12 +253,11 @@ class UserController extends BaseController
         ]);
     }
 
-    /**
-     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), user)")
-     */
     #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, User $user, TranslatorInterface $translator): Response
     {
+        $this->denyAccessUnlessGranted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), $user);
+        
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
