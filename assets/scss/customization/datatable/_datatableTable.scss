@@ -8,7 +8,6 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
          * Remove card body padding to have more space for the datatable
         */
         padding: 0;
-
         .btn {
             &.buttons-colvis {
                 &.btn-outline-app-primary {
@@ -20,7 +19,6 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
             color: $app-primary;
             background: none;
         }
-        
         .dataTables_scroll {
             overflow-x: auto;
         }
@@ -30,8 +28,8 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
                 tr {
                     th, td {
                         vertical-align: middle;
-                        height: 30px;
-                        max-height: 30px;
+                        height: 22px;
+                        max-height: 22px;
                         .img-circle {
                             width: 24px;
                             height: 24px;

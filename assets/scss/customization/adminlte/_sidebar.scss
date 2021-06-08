@@ -3,6 +3,9 @@ body {
         height: map-get($heights, sidebarNavlink);
         display: flex;
         align-items: center;
+        .nav-icon.material-icons {
+            font-size: 14px;
+        }
         p > .right {
             top: (map-get($heights, sidebarNavlink) - map-get($heights, badge)) / 2;
         }
@@ -13,6 +16,35 @@ body {
             .nav-icon {
                 margin-right: map-get($appSpacings, sidebarNavlinkIconMr);
                 margin-left: map-get($appSpacings, sidebarNavlinkIconMl);
+            }
+        }
+    }
+
+    @include media-breakpoint-up('lg') {
+        &.sidebar-mini.sidebar-collapse {
+            .main-sidebar {
+                width: 50px;
+                &::before {
+                    width: 50px;
+                }
+                .brand-link.logo-switch {
+                    width: 50px;
+                    img {
+                        width: 25px;
+                        height: auto;
+                        padding-top: 6px;
+                        left: 10px;
+                    }
+                }
+                .nav-item {
+                    .nav-link {
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+                }
+            }
+            .content-wrapper, .main-footer, .main-header {
+                margin-left: _rem(57) !important;
             }
         }
     }
