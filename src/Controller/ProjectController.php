@@ -10,14 +10,13 @@ use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Snappy\Pdf;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 use App\Controller\BaseController;
-
 use App\DataTables\Column\TextColumn;
 use App\DataTables\Column\TwigColumn;
 use App\DataTables\Column\DateTimeColumn;
@@ -248,13 +247,25 @@ class ProjectController extends BaseController
             'margin-left' => '2mm',
             'margin-right' => '2mm',
             'margin-top' => '0mm',
-            'margin-bottom' => '0mm',
+            'margin-bottom' => '10mm',
         ];
-
+        
+        if (!$request->query->get('nofooter')) {
+            $options['footer-html'] = $this->generateUrl('project.pdf_footer', [
+                'id' => $project->getId()
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
         if ($previewMode) {
             return new Response($template);
         }
-        
+
         return new PdfResponse($knpSnappyPdf->getOutputFromHtml($template, $options), $pdfName);
     }
+
+    #[Route('/{id}/pdf-footer', name: 'project.pdf_footer')]
+    public function generateFooter(Project $project)
+    {
+        return $this->render('project/pdf/_pdf_footer.html.twig', ['project' => $project]);
+    }
+
 }
