@@ -1,10 +1,12 @@
 {# total project planning height total count 5 #}
 {% trans_default_domain 'projects' %}
 
-{% set PROJECT_PLANNING_HEIGHT_TOTAL_COUNT = 10 %}
 {# total project planning height count 5 #}
-{% set PROJECT_PLANNING_LABEL_HEIGHT_COUNT = space_value(2, PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
-{% set PROJECT_PLANNING_VALUE_HEIGHT_COUNT = space_value((PROJECT_PLANNING_HEIGHT_TOTAL_COUNT - 6), PROJECT_PLANNING_HEIGHT_TOTAL_COUNT) %}
+{% set PROJECT_PLANNING_HEIGHT_TOTAL_COUNT = 10 %}
+{% set PROJECT_PLANNING_HEIGHT_FIXER = 1.65 %}
+{# title col count 1 #}
+{% set PROJECT_PLANNING_LABEL_HEIGHT_COUNT = space_value(2, PROJECT_PLANNING_HEIGHT_TOTAL_COUNT, PROJECT_PLANNING_HEIGHT_FIXER) %}
+{% set PROJECT_PLANNING_VALUE_HEIGHT_COUNT = space_value((PROJECT_PLANNING_HEIGHT_TOTAL_COUNT - 8), PROJECT_PLANNING_HEIGHT_TOTAL_COUNT, PROJECT_PLANNING_HEIGHT_FIXER) %}
 
 {% set planningProject = resolve([project, 'planningProject'], null) %}
 

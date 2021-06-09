@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Entity\Traits\ProjectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project
 {
+    use ProjectTrait;
 
     /**
      * @ORM\Id

@@ -242,17 +242,19 @@ class ProjectController extends BaseController
             'project' => $project,
             'previewMode' => $previewMode,
         ]);
-        
+        $pdfName = $project->getPdfName();
+
         $options = [
             'margin-left' => '2mm',
             'margin-right' => '2mm',
             'margin-top' => '0mm',
+            'margin-bottom' => '0mm',
         ];
 
         if ($previewMode) {
             return new Response($template);
         }
         
-        return new PdfResponse($knpSnappyPdf->getOutputFromHtml($template, $options));
+        return new PdfResponse($knpSnappyPdf->getOutputFromHtml($template, $options), $pdfName);
     }
 }

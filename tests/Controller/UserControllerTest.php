@@ -235,16 +235,17 @@ class UserControllerTest extends WebTestCase
 
         /** Get userRepository */
         $userRepository = $container->get(UserRepository::class);
+        $users = $userRepository->findAll();
 
         if ($email) {
             $user = $userRepository->findOneByEmail($email);
-            $userId = $user->getid();
+            if (!$user) {
+                return $users[1]->getId();
+            }
+            return $user->getid();
         } else {
-            $users = $userRepository->findAll();
-            $userId = $users[0]->getId();
+            return $users[0]->getId();
         }
-
-        return $userId;
     }
 
     public function generateUser()
