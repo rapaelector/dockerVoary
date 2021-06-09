@@ -49,15 +49,15 @@
                 </div>
                 <div class="card-footer">
                     {% block footer %}
-                        <div class="row">
+                        <div class="row user-detail">
                             <div class="col-sm-6">
-                                <a href="{{ path('profile.edit') }}">
+                                <a href="{{ path('profile.edit') }}" class="action-link">
                                     <i class="material-icons">edit</i>
                                     {{ 'action.edit_profil'|trans({}, 'messages') }}
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ path('profile.change_password') }}">
+                                <a href="{{ path('profile.change_password') }}" class="action-link">
                                     <i class="material-icons">lock</i>
                                     {{ 'action.change_password'|trans({}, 'messages') }}
                                 </a>

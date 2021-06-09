@@ -184,7 +184,13 @@ class UserController extends BaseController
      * @IsGranted("ROLE_USER_ADD")
      */
     #[Route('/new', name: 'user.new', methods: ['GET','POST'])]
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, MessageBusInterface $messagerBus, UserRepository $userRepository): Response
+    public function new(
+        Request $request, 
+        TranslatorInterface $translator, 
+        UserPasswordEncoderInterface $encoder, 
+        MessageBusInterface $messagerBus, 
+        UserRepository $userRepository
+    ): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, [
@@ -210,6 +216,7 @@ class UserController extends BaseController
                  */
                 $messagerBus->dispatch(new UserCreatedMessage($user->getId(), $userPlainPassword));
             }
+            $this->addFlash('success', $translator->trans('messages.user_create_successfull', [], 'users'));
 
             return $this->redirectToRoute('user.index');
         }

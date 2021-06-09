@@ -88,7 +88,7 @@ class ProjectController extends BaseController
             ])
             ->add('amountSubcontractedWork', TextColumn::class, [
                 'label' => $translator->trans('columns.amountSubcontractedWork', [], 'project'),
-                'className' => 'dynamic-nowrap',
+                'className' => 'dynamic-nowrap text-right',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
@@ -96,7 +96,7 @@ class ProjectController extends BaseController
             ])
             ->add('amountBBISpecificWork', TextColumn::class, [
                 'label' => $translator->trans('columns.amountBBISpecificWork', [], 'project'),
-                'className' => 'dynamic-nowrap',
+                'className' => 'dynamic-nowrap text-right',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
@@ -104,7 +104,7 @@ class ProjectController extends BaseController
             ])
             ->add('globalAmount', TextColumn::class, [
                 'label' => $translator->trans('columns.globalAmount', [], 'project'),
-                'className' => 'dynamic-nowrap',
+                'className' => 'dynamic-nowrap text-right',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
@@ -113,6 +113,7 @@ class ProjectController extends BaseController
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action', [], 'project'),
                 'render' => $this->actionsRenderer('client.list', 'project/_actions.html.twig'),
+                'className' => 'text-center',
                 'searchable' => false,
                 'orderable' => false,
             ])

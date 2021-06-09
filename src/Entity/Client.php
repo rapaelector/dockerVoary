@@ -80,6 +80,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Choice(callback="getPaymentTypeChoices")
      */
     private $paymentMethod;
 
@@ -89,7 +90,7 @@ class Client
     private $payment;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * 
      * Intracommunautaire tva
      */

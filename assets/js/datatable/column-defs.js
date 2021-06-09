@@ -1,6 +1,8 @@
 /**
  * COLUMN DEFS
  */
+// 'project_prospect',
+
 export default [
     /**
      * LOGO, VERY LITLE LOGO (eg: flag, brand etc.)
@@ -35,11 +37,16 @@ export default [
      */
     {
         width: '150px',
-        cols: ['user_email', 'user_firstName', 'user_lastName'],
+        cols: [
+            'user_email',
+            'user_firstName',
+            'user_lastName',
+            'project_user_email'
+        ],
     },
 
     /**
-     * Phone fields
+     * PHONE FIELDS
      */
     {
         width: '100px',
@@ -47,7 +54,7 @@ export default [
     },
 
     /**
-     * Job
+     * JOB
      */
     {
         width: '150px',
@@ -55,7 +62,7 @@ export default [
     },
 
     /**
-     * Date
+     * DATE
      */
     {
         width: '75px',
@@ -69,7 +76,12 @@ export default [
      */
     {
         width: '80px',
-        cols: ['client_number'],
+        cols: [
+            'client_number',
+            'project_amount_subcontracted_work',
+            'project_amount_bbi_specific_work',
+            'project_global_amount',
+        ],
         className: '',
     },
 
@@ -110,6 +122,7 @@ export default [
             'client_intra_community_tva',
             'client_type',
             'client_postal_code',
+            'project_roadmap',
         ],
         className: ''
     },
@@ -120,7 +133,7 @@ export default [
      */
     {
         width: '200px',
-        cols: ['client_name'],
+        cols: ['client_name', 'project_prospect'],
         className: 'text-left dynamic-nowrap',
     },
 ];

@@ -18,9 +18,9 @@
 {% block content %}
     {% embed 'user/_profile_user.html.twig' with {user: user} %}
         {% block footer %}
-            <div class="row">
+            <div class="row user-detail">
                 <div class="col-sm-6">
-                    <a href="{{ path('user.edit', {id: user.id}) }}">
+                    <a href="{{ path('user.edit', {id: user.id}) }}" class="action-link">
                         <i class="material-icons">edit</i>
                         {{ 'action.edit_user'|trans({}, 'messages') }}
                     </a>

@@ -84,7 +84,7 @@ type:
   prospect: "Prospect"
 
 messages:
-  delete_success: 'Prospect supprimé avec succès'
+  delete_success: 'Prospect supprimée avec succès'
   delete_prospect: 'Souhaitez-vous supprimer ce prospect'
-  editing_success: 'Modification du prospect effectué avec succès'
-  creation_success: 'Création du prospect effectué avec succès'
+  editing_success: 'Modification du prospect effectuée avec succès'
+  creation_success: 'Création du prospect effectuée avec succès'
