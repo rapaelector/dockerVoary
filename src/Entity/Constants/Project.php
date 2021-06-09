@@ -52,6 +52,15 @@ class Project
     const CASE_TYPE_ISOTHERMES = "caseType.isothermes";
     const CASE_TYPE_ASBESTOS_REMOVAL = "caseType.asbestosRemoval";
 
+    // type de chiffrage
+    const TYPE_ENCRYPTION_BUDGET = "BUDGET";
+    const TYPE_ENCRYPTION_PRODUCTION = "Réalisation / consultation";
+
+    // type de priorisation
+    const TYPE_PRIORIZATION_URGENT = "URGENT";
+    const TYPE_PRIORIZATION_NORMAL = "NORMAL";
+    const TYPE_PRIORIZATION_WITHOUT_CONTINUTATION = "SANS SUITE";
+
     const CASE_TYPES = [
         self::CASE_TYPE_EARTH_WORKS,
         self::CASE_TYPE_BIG_WORK,
@@ -83,6 +92,17 @@ class Project
         self::TYPE_MARCHE_MARCHE_PRIVATE,
         self::TYPE_MARCHE_A_O_PUBLIC,
         self::TYPE_MARCHE_AO_PRIVE,
+    ];
+
+    const ENCRYPTION_TYPE = [
+        self::TYPE_ENCRYPTION_BUDGET,
+        self::TYPE_ENCRYPTION_PRODUCTION,
+    ];
+
+    const PRIORIZATION_FILE_TYPE = [
+        self::TYPE_PRIORIZATION_URGENT,
+        self::TYPE_PRIORIZATION_NORMAL,
+        self::TYPE_PRIORIZATION_WITHOUT_CONTINUTATION,
     ];
 
     const TYPE_BONHOME = [

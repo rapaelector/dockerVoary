@@ -45,6 +45,13 @@ columns:
   contact: "Contact"
   ocbsDriver: "CONDUC OCBS"
   tceDriver: "CONDUC TCE"
+  encryptiontype: "Type de chiffrage"
+  notApplicable: "Sans objet"
+  priorizationOfFile: "Priorisation du dossier"
+  answerForThe: "Réponse pour le"
+  businessCharge: "Chargé(e) d'affaire"
+  economist: "Economiste"
+  folderNameOnTheServer: "Nom du dossier sur le serveur"
 typeMarket:
   shadows : "Ombrières"
   tender : "Appel d’offre"
@@ -152,6 +159,7 @@ pdf:
 label:
   action: Action
   prospect: Prospect
+  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
 
 messages:
   delete_success: 'Project supprimé avec succès'

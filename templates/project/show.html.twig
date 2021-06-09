@@ -125,6 +125,50 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6">
+                <div class="card card-outline-primary h-100">
+                    <div class="card-body p-0">
+                        <table class="table table-app-sm">
+                            <tbody>
+                            <tr>
+                                <th>{{ 'columns.encryptiontype'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'encryptiontype'], '') }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.notApplicable'|trans({}, 'project') }}</th>
+                                <td>
+                                    {% if resolve([project,'notApplicable'], '') %}
+                                            <span class="material-icons">done</span>
+                                        {% else %}
+                                            <span class="material-icons">clear</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.priorizationOfFile'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'priorizationOfFile'], '')  }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.answerForThe'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'answerForThe'], '')  }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.businessCharge'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'businessCharge'], '')  }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.economist'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'economist'], '')  }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'columns.folderNameOnTheServer'|trans({}, 'project') }}</th>
+                                <td>{{ resolve([project,'folderNameOnTheServer'], '')  }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-footer text-center">

@@ -168,7 +168,7 @@ class ProjectController extends BaseController
                 $contact = $project->getContact();
                 $this->generatePassForContact($contact);
                 $entityManager->flush();
-                return $this->redirectToRoute('project_index');
+                return $this->redirectToRoute('project.list');
             }
         }
 
@@ -231,7 +231,7 @@ class ProjectController extends BaseController
             }
         }
 
-        return $this->redirectToRoute('project_index');
+        return $this->redirectToRoute('project.list');
     }
 
     #[Route('/{id}/pdf', name: 'project.pdf')]
