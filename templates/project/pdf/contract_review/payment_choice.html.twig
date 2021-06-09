@@ -22,17 +22,18 @@
 {% set CLIENT_CONDITIONS_NEGOTIATED_EMPTY_COL_WIDTH = space_value((COL_COUNT - 40), COL_COUNT) %}
 
 {# height only #}
+{% set PAYMENT_CHOICE_HEIGHT_FIXER = 0.8 %}
 {# total height count 7 #}
 {% set COL_H_COUNT = 14 %}
 {# payment methd height count col 2 #}
-{% set PAYMENT_METHOD_HEIGHT = space_value(2, COL_H_COUNT) %}
-{% set DATE_OF_DEPOSITE_HEIGHT = space_value(2, COL_H_COUNT) %}
+{% set PAYMENT_METHOD_HEIGHT = space_value(2, COL_H_COUNT, PAYMENT_CHOICE_HEIGHT_FIXER) %}
+{% set DATE_OF_DEPOSITE_HEIGHT = space_value(2, COL_H_COUNT, PAYMENT_CHOICE_HEIGHT_FIXER) %}
 {# dispose col height count 1 #}
-{% set DISPOSE_COL_HEIGHT = space_value(2, COL_H_COUNT) %}
+{% set DISPOSE_COL_HEIGHT = space_value(2, COL_H_COUNT, PAYMENT_CHOICE_HEIGHT_FIXER) %}
 {# client conditions negotiated col height count 1 #}
-{% set CLIENT_CONDITIONS_NEGOTIATED_HEIGHT = space_value(2, COL_H_COUNT) %}
+{% set CLIENT_CONDITIONS_NEGOTIATED_HEIGHT = space_value(2, COL_H_COUNT, PAYMENT_CHOICE_HEIGHT_FIXER) %}
 {# client conditions negotiated value height count is the rest of the unused col_h_count #}
-{% set CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH = space_value((COL_H_COUNT - 8), COL_H_COUNT) %}
+{% set CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH = space_value((COL_H_COUNT - 8), COL_H_COUNT, PAYMENT_CHOICE_HEIGHT_FIXER) %}
 
 {% set paymentChoice = resolve([project, 'paymentChoice'], null) ? true : false %}
 {% set paymentPercentage = resolve([project, 'paymentPercentage'], null) %}

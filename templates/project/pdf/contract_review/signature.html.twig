@@ -5,7 +5,7 @@
 {% set subTitleClass = 'text-sm text-calibri text-italic' %}
 {% set signatureValueClass = 'text-calibri' %}
 
-{% set SIGNATURE_HEIGHT_FIXER = 0.8 %}
+{% set SIGNATURE_HEIGHT_FIXER = 0.7 %}
 {# height col count 6.5 #}
 {% set COL_HEIGHT_COUNT = 13 %}
 {% set COL_HEIGHT = space_value(COL_HEIGHT_COUNT, COL_HEIGHT_COUNT, SIGNATURE_HEIGHT_FIXER) %}
@@ -38,7 +38,7 @@
                     }
                 } %}
             </td>
-            <td height="{{ COL_HEIGHT }}px" width="{{ TD_WIDTH }}%;" class="{{ colClass }}">
+            <td height="{{ COL_HEIGHT }}px" width="{{ TD_WIDTH }}%;">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.contract_review_by_christophe'|trans,
                     value: '',

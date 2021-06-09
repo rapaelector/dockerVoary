@@ -11,16 +11,17 @@
 {% set LABEL_WIDTH = space_value(LABEL_COUNT, CONTACT_COL_COUNT) %}
 {% set VALUE_WIDTH = space_value(VALUE_COUNT, CONTACT_COL_COUNT) %}
 
+{% set CONTACT_HEIGHT_FIXER = 1.9 %}
 {# height count = 2.5 #}
-{% set ENTREPRISE_HEIGT = space_value(5, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set ENTREPRISE_HEIGT = space_value(5, CONTACT_H_COUNT, CONTACT_HEIGHT_FIXER) %}
 {# height count = 3 #}
-{% set NAME_HEIGT = space_value(5, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set NAME_HEIGT = space_value(6, CONTACT_H_COUNT, CONTACT_HEIGHT_FIXER) %}
 {# height count = 3 #}
-{% set MAIL_HEIGT = space_value(4, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set MAIL_HEIGT = space_value(6, CONTACT_H_COUNT, CONTACT_HEIGHT_FIXER) %}
 {# height count = 3 #}
-{% set TEL_HEIGT = space_value(4, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set TEL_HEIGT = space_value(6, CONTACT_H_COUNT, CONTACT_HEIGHT_FIXER) %}
 {# height count = {total: 5} #}
-{% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, COL_PX_H_SIZE) %}
+{% set CONTACT_ADDRESS_HEIGHT = space_value(10, CONTACT_H_COUNT, CONTACT_HEIGHT_FIXER) %}
 {% set LABEL_CLASS = 'text-weight-bold text-underline text-left align-start text-nowrap' %}
 
 {% set contact = resolve([project, 'contact'], null) %}
@@ -41,7 +42,10 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}%;" height="{{ ENTREPRISE_HEIGT }}px;">
+            <td 
+                width="{{ LABEL_WIDTH }}%;"
+                height="{{ ENTREPRISE_HEIGT }}px;"
+            >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.entreprise'|trans }} :</span>
                 {% if ngMode %}
                     <input type="text">
@@ -51,7 +55,10 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}%;" height="{{ NAME_HEIGT }}px;">
+            <td 
+                width="{{ LABEL_WIDTH }}%;"
+                height="{{ NAME_HEIGT }}px;"
+            >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.name'|trans }} : </span>
                 {% if ngMode %}
                     <input type="text">
@@ -61,7 +68,10 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}%;" height="{{ CONTACT_ADDRESS_HEIGHT }}px;" class="align-start">
+            <td 
+                width="{{ LABEL_WIDTH }}%;"
+                height="{{ CONTACT_ADDRESS_HEIGHT }}px;" class="align-start"
+            >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.contact_address'|trans }} :</span>
                 {% if ngMode %}
                     <input type="text">
@@ -71,7 +81,10 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}%;" height="{{ MAIL_HEIGT }}">
+            <td 
+                width="{{ LABEL_WIDTH }}%;"
+                height="{{ MAIL_HEIGT }}"
+            >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.mail'|trans }} :</span>
                 {% if ngMode %}
                     <input type="text">
@@ -81,7 +94,10 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}%;" height="{{ TEL_HEIGT }}">
+            <td 
+                width="{{ LABEL_WIDTH }}%;"
+                height="{{ TEL_HEIGT }}"
+            >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.tel'|trans }} :</span>
                 {% if ngMode %}
                     <input type="text">

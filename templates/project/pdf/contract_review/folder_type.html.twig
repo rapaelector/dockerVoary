@@ -2,6 +2,7 @@
     elements: constant('\\App\\Entity\\Constants\\Project::CASE_TYPES'),
     title: 'pdf.label.folder_type'|trans({}, 'projects'),
     transPrefix: '',
+    marketHeightFixer: 0.8,
     transDomain: 'project',
     value: resolve([project, 'caseType'], {}),
     tableClass: 'table-borderless market-type-table',
