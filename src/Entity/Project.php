@@ -22,7 +22,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * 
+     *
      * Fr: code chantier
      */
     private $siteCode;
@@ -50,6 +50,7 @@ class Project
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
+     * @Assert\Valid
      *
      * Fr: adresse facturation
      */
@@ -57,6 +58,7 @@ class Project
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
+     * @Assert\Valid
      * 
      * Fr: addresse chantier
      */
