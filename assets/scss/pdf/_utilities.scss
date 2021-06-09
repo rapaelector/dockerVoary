@@ -90,10 +90,16 @@
     margin-top: 1rem;
 }
 .pr-05 {
-    padding-right: 0.5rem;
+    padding-right: $spacing / 2;
 }
 .pl-05 {
-    padding-left: 0.5rem;
+    padding-left: $spacing / 2;
+}
+.pt-05 {
+    padding-top: $spacing / 2;
+}
+.pt-1 {
+    padding-top: $spacing;
 }
 .p-0 {
     padding: 0 !important;

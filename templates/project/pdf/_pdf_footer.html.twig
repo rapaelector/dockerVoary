@@ -10,8 +10,8 @@
 
 <div id="footer-pdf">
     {{ '#' ~ 
-        resolve([project, 'id'], null) ~'-'~
-        resolve([project, 'prospect', 'clientNumber'], null) ~ '-'~ 
+        resolve([project, 'id'], null) ~'—'~
+        resolve([project, 'prospect', 'clientNumber'], null) ~ '—'~ 
         (resolve([project, 'createdAt'], null) ? resolve([project, 'createdAt'])|date('d.m.Y') : '')
     }}
 </div>
