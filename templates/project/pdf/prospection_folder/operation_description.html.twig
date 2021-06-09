@@ -6,11 +6,14 @@
 {# value label count = 7 #}
 {% set LABEL_WIDTH = space_value(14, OPERATION_DESCRIPTION_COL_COUNT, COL_PX_SIZE) %}
 {% set VALUE_WIDTH = space_value(OPERATION_DESCRIPTION_COL_COUNT - 14, OPERATION_DESCRIPTION_COL_COUNT, COL_PX_SIZE) %}
+
+{% set OPERATION_DESCRIPTION_HEIGHT_FIXER = 2 %}
 {# total col count operation description = 12 #}
 {% set OPERATION_DESCRIPTION_COUNT = 24 %}
-{% set OPERATION_DESCRIPTION_HEIGHT = space_value(9, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
+{% set OPERATION_DESCRIPTION_HEIGHT = space_value(9, OPERATION_DESCRIPTION_COUNT, OPERATION_DESCRIPTION_HEIGHT_FIXER) %}
 {# surface value = 3 #}
-{% set OPERATION_DESCRIPTION_SURFACE_HEIGHT =  space_value(4, OPERATION_DESCRIPTION_COUNT, COL_PX_H_SIZE) %}
+{% set OPERATION_DESCRIPTION_SURFACE_HEIGHT =  space_value(4, OPERATION_DESCRIPTION_COUNT, OPERATION_DESCRIPTION_HEIGHT_FIXER) %}
+{# padding bottom #}
 
 {% set operationDescriptionSurface = resolve([project, 'descriptionOperation'], null) %}
 
@@ -22,12 +25,20 @@
             </td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}" height="{{ OPERATION_DESCRIPTION_HEIGHT }}px;"></td>
+            <td
+                width="{{ LABEL_WIDTH }}"
+                height="{{ OPERATION_DESCRIPTION_HEIGHT }}px;"></td>
             <td width="{{ VALUE_WIDTH }}"></td>
         </tr>
         <tr>
-            <td width="{{ LABEL_WIDTH }}" height="{{ OPERATION_DESCRIPTION_SURFACE_HEIGHT }}px;" class="text-uppercase surface">{{ 'pdf.label.surface'|trans }} :</td>
-            <td width="{{ VALUE_WIDTH }}">
+            <td
+                width="{{ LABEL_WIDTH }}" 
+                height="{{ OPERATION_DESCRIPTION_SURFACE_HEIGHT }}px;" 
+                class="text-uppercase surface align-start"
+            >
+                {{ 'pdf.label.surface'|trans }}:
+            </td>
+            <td width="{{ VALUE_WIDTH }}" class="align-start">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}

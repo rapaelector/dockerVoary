@@ -64,6 +64,10 @@ typeMarket:
   private_market : "MARCHE PRIVE"
   ao_public : "A.O PUBLIC"
   ao_private : "AO PRIVE"
+  work_on_existing: 'Travaux sur existant'
+  asbestos_removal: 'Désamiantage'
+  isotermal_pan: 'Pan.isothermes'
+
 bonhommePercentage :
   contract_holder : "TITULAIRE DU MARCHE"
   20percent : "20%"

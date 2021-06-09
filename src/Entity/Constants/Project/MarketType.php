@@ -6,11 +6,11 @@ class MarketType
 {
     const WORK_ON_EXISTING = 'work_on_existing'; // Travaux sur existant
     const TCE = 'tce'; // T.C.E
-    const NEW_BUILDING = 'new_building'; // Bât neuf
+    const NEW_BUILDING = 'new_bat'; // Bât neuf
     const AGRICULTURAL_BUILDING = 'agricultural_building'; // Bât agricole
     const SHADES = 'shades'; // Ombrières
     const CALL_FOR_TENDER = 'call_for_tender'; // Appel d'offre
-    const ISOTHERMAL_PLAN = 'isothermal_plan';  // Plan isotermes
+    const ISOTHERMAL_PAN = 'isotermal_pan';  // Pan isotermes
     const SIMPLE_SUPPLY = 'simple_supply'; // Fourniture simple
     const ASBESTOS_REMOVAL = 'asbestos_removal'; // Désamiantage
     const ISOTHERMAL_PANELS = 'isotermal_bat'; // Panneaux isothermes
@@ -26,7 +26,7 @@ class MarketType
         self::AGRICULTURAL_BUILDING => self::AGRICULTURAL_BUILDING,
         self::SHADES => self::SHADES,
         self::CALL_FOR_TENDER => self::CALL_FOR_TENDER,
-        self::ISOTHERMAL_PLAN => self::ISOTHERMAL_PLAN,
+        self::ISOTHERMAL_PAN => self::ISOTHERMAL_PAN,
         self::SIMPLE_SUPPLY => self::SIMPLE_SUPPLY,
         self::ASBESTOS_REMOVAL => self::ASBESTOS_REMOVAL,
     ];

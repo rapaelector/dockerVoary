@@ -5,10 +5,16 @@
 {% set subTitleClass = 'text-sm text-calibri text-italic' %}
 {% set signatureValueClass = 'text-calibri' %}
 
+{% set SIGNATURE_HEIGHT_FIXER = 0.8 %}
+{# height col count 6.5 #}
+{% set COL_HEIGHT_COUNT = 13 %}
+{% set COL_HEIGHT = space_value(COL_HEIGHT_COUNT, COL_HEIGHT_COUNT, SIGNATURE_HEIGHT_FIXER) %}
+{% set colClass = 'border-right align-start' %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
-            <td width="{{ TD_WIDTH }}%;" class="border-right">
+            <td height="{{ COL_HEIGHT }}px" width="{{ TD_WIDTH }}%;" class="{{ colClass }}">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.commercial_commit'|trans,
                     value: '',
@@ -20,7 +26,7 @@
                     }
                 } %}
             </td>
-            <td width="{{ TD_WIDTH }}%;" class="border-right">
+            <td height="{{ COL_HEIGHT }}px" width="{{ TD_WIDTH }}%;" class="{{ colClass }}">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.legal_and_terms_of_payment'|trans,
                     value: '',
@@ -32,7 +38,7 @@
                     }
                 } %}
             </td>
-            <td width="{{ TD_WIDTH }}%;" class="border-right">
+            <td height="{{ COL_HEIGHT }}px" width="{{ TD_WIDTH }}%;" class="{{ colClass }}">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.contract_review_by_christophe'|trans,
                     value: '',

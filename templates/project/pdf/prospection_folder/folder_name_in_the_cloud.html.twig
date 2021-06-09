@@ -1,30 +1,33 @@
 {% trans_default_domain 'projects' %}
 
+{# folder name in the cloud height fixer #}
+{% set FOLDER_NAME_HEIGHT_FIXER = 0.6 %}
+
 {# folder name height 5 #}
 {% set FOLDER_NAME_HEIGHT = 10 %}
 {# folder name label height 2 #}
-{% set FOLDER_NAME_LABEL_HEIGHT = space_value(2, FOLDER_NAME_HEIGHT) %}
+{% set FOLDER_NAME_LABEL_HEIGHT = space_value(4, FOLDER_NAME_HEIGHT, FOLDER_NAME_HEIGHT_FIXER) %}
 {# folder name value height 3 #}
-{% set FOLDER_NAME_VALUE = space_value(2, FOLDER_NAME_HEIGHT) %}
+{% set FOLDER_NAME_VALUE = space_value(6, FOLDER_NAME_HEIGHT, FOLDER_NAME_HEIGHT_FIXER) %}
 
 {# {% set folderNameInTheCloud = resolve([project], null) %} #}
 {% set folderNameInTheCloud = resolve([project, 'folderNameOnTheServer'], null) %}
 
 <table class="table-borderless">
     <tbody>
-        <tr height="{{ FOLDER_NAME_LABEL_HEIGHT }}px;" class="align-start">
+        <tr height="{{ FOLDER_NAME_LABEL_HEIGHT }}px" class="align-start">
             <td>
                 <div class="text-left text-weight-bold text-underline text-label">
                     {{ 'pdf.label.folder_name_in_the_cloud'|trans }}
                 </div>
             </td>
         </tr>
-        <tr height="{{ FOLDER_NAME_VALUE }}px;">
+        <tr height="{{ FOLDER_NAME_VALUE }}px">
             <td>
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ folderNameInTheCloud }}
+                    <span>{{ 'pdf.label.folder_name_in_the_cloud_value_prefix'|trans }}</span> {{ folderNameInTheCloud }}
                 {% endif %}
             </td>
         </tr>

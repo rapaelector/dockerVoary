@@ -11,14 +11,14 @@
 <table class="contract-review-table">
     <tbody>
         <tr class="table-tr-header">
-            <td width="{{ FIRST_COL_WIDTH }}%;"></td>
-            <td width="{{ SECOND_COL_WIDTH }}%;"></td>
-            <td width="{{ FIRD_COL_WIDTH }}%;"></td>
-            <td width="{{ FOURTH_COL_WIDTH }}%;"></td>
-            <td width="{{ FIFTH_COL_WIDTH }}%;"></td>
+            <td class="border-0" width="{{ FIRST_COL_WIDTH }}%;"></td>
+            <td class="border-0" width="{{ SECOND_COL_WIDTH }}%;"></td>
+            <td class="border-0" width="{{ FIRD_COL_WIDTH }}%;"></td>
+            <td class="border-0" width="{{ FOURTH_COL_WIDTH }}%;"></td>
+            <td class="border-0" width="{{ FIFTH_COL_WIDTH }}%;"></td>
         </tr>
         <tr>
-            <td class="border-top-0 border-left-0 border-right-0"></td>
+            <td class="border-top-0 border-left-0 border-right-0 border-bottom-0"></td>
             <td colspan="4" class="border-top-0 border-left-0 border-bottom-0">
                 {#
                     # Header of the page
@@ -35,7 +35,7 @@
                     {{ 'pdf.title.commercial'|trans }}
                 </div>
             </td>
-            <td rowspan="{{ emptyRowspan }}" class="border-0"></td>
+            <td rowspan="{{ emptyRowspan }}" class="border-0 border-top-0"></td>
             <td>
                 {# Maitre d'oeuvre #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
@@ -141,9 +141,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            {% set workBreakdownHeight = 80 %}
+            <td colspan="2" height="{{ workBreakdownHeight }}px">
                 {# Repartition des travaux, Montant global du marche #}
-                {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' %}
+                {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' with { 
+                    workBreakdownHeight: workBreakdownHeight
+                } %}
             </td>
         </tr>
         <tr>

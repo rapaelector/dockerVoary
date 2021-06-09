@@ -63,15 +63,19 @@ pdf:
     billing_address: 'Adresse facturation'
     norme_1090: 'NORME EN 1090 - '
     class_exe: 'Classe EXE'
+    folder_name_in_the_cloud_value_prefix: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
 
     market_type_label:
       work_on_existing: 'Travaux sur existant'
       tce: 'T.C.E'
       new_building: 'Bât neuf'
+      new_bat: 'Bât neuf'
       agricultural_building: 'Bât agricole'
       shades: 'Ombrières'
       call_for_tender: "Appel d'offre"
-      isothermal_plan: 'Plan isothermes'
+      isothermal_pan: 'Pan.isothermes'
+      isotermal_pan: 'Pan.isothermes'
+      isotermal_bat_: 'Pan isothermes'
       simple_supply: 'Fourniture simple'
       asbestos_removal: 'Désamiantage'
       public_market: 'Marche public'

@@ -14,10 +14,13 @@ class Project
     const TYPE_MARCHE_NEW_BAT = 'typeMarket.new_bat';
     const TYPE_MARCHE_AGRICULTURAL_BAT = 'typeMarket.agricultural_bat';
     const TYPE_MARCHE_ISOTERMAL_PANEL = 'typeMarket.isotermal_bat';
+    const TYPE_MARCHE_ISOTERMAL_PAN = 'typeMarket.isotermal_pan';
     const TYPE_MARCHE_MARCHE_PUBLIC = 'typeMarket.public_market';
     const TYPE_MARCHE_MARCHE_PRIVATE = 'typeMarket.private_market';
     const TYPE_MARCHE_A_O_PUBLIC = 'typeMarket.ao_public';
     const TYPE_MARCHE_AO_PRIVE = 'typeMarket.ao_private';
+    const TYPE_MARCHE_ASBESTOS_REMOVAL = 'typeMarket.asbestos_removal'; // Désamiantage
+    const TYPE_MARCHE_WORK_ON_EXISTING = 'typeMarket.work_on_existing'; // Travaux sur existant
 
     // bonhome est il
     const TYPE_BONHOMME_CONTRACT_HOLDER = "bonhommePercentage.contract_holder";
@@ -88,10 +91,13 @@ class Project
         self::TYPE_MARCHE_NEW_BAT,
         self::TYPE_MARCHE_AGRICULTURAL_BAT,
         self::TYPE_MARCHE_ISOTERMAL_PANEL,
+        self::TYPE_MARCHE_ISOTERMAL_PAN,
+        self::TYPE_MARCHE_WORK_ON_EXISTING,
         self::TYPE_MARCHE_MARCHE_PUBLIC,
         self::TYPE_MARCHE_MARCHE_PRIVATE,
         self::TYPE_MARCHE_A_O_PUBLIC,
         self::TYPE_MARCHE_AO_PRIVE,
+        self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 
     const ENCRYPTION_TYPE = [
