@@ -40,7 +40,9 @@
                     {# N° du/des devis MDE validé(s) #}
                     <td>
                         {{ prefix|raw }}
-                        <span class="text-weight-bold text-sm">{{ 'pdf.label.num_mde_quote_validate'|trans }}</span>
+                        <span class="text-weight-bold text-sm text-calibri">
+                            {{ 'pdf.label.num_mde_quote_validate'|trans }}
+                        </span>
                         <span class="text-sm">{{ quoteValidatedMDE }}</span>
                         {{ prefix|raw }}
                     </td>
@@ -49,7 +51,7 @@
                     {# de #}
                     <td>
                         {{ prefix|raw }}
-                        <span class="text-weight-bold text-sm">{{ 'pdf.label.of'|trans }}</span>
+                        <span class="text-weight-bold text-sm text-calibri">{{ 'pdf.label.of'|trans }}</span>
                         <span class="text-sm">{{ quoteValidatedMDEDate ? quoteValidatedMDEDate|date('d/m/Y') : '' }}</span>
                         {{ prefix|raw }}
                     </td>

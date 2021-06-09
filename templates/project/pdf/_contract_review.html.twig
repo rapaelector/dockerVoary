@@ -101,7 +101,9 @@
             </td>
             <td>
                 {# Norme en 1090 #}
-                {% include 'project/pdf/contract_review/norme_1090.html.twig' %}
+                {% include 'project/pdf/contract_review/norme_1090.html.twig' with {
+                    norm1090ClassOverride: 'text-weight-bold text-uppercase norm-td text-underline text-calibri',
+                } %}
             </td>
         </tr>
         <tr>

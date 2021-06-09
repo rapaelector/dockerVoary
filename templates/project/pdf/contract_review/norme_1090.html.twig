@@ -22,6 +22,8 @@
 {% set EMPTY_WIDTH = space_value(COL_COUNT - (NORME_1090_WIDTH + CLASSE_EXE_WIDTH + CHECKBOX_WIDTH), COL_COUNT) %}
 
 {% set norm1090Class = 'text-weight-bold text-uppercase norm-td text-underline' %}
+{% if norm1090ClassOverride is defined %}{% set norm1090Class = norm1090ClassOverride %}{% endif %}
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -35,7 +37,7 @@
             <td
                 height="{{ VALUE_HEIGHT }}px;" 
                 width="{{ CLASSE_EXE_WIDTH }}%;"
-                class="text-weight-bold align-start"
+                class="text-weight-bold align-start text-calibri"
             >
                 {{ 'pdf.label.class_exe'|trans }}
             </td>

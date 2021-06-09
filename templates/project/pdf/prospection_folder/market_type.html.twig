@@ -19,6 +19,7 @@
 {% if transPrefix is not defined %}{% set transPrefix = '' %}{% endif %}
 {% if elements is defined and elements is not empty %}{% set MARKET_TYPE_CHOICES = elements %}{% endif %}
 {% if tableClass is not defined %}{% set tableClass = 'table-borderless market-type-table mb-1' %}{% endif %}
+{% if options is not defined %}{% set options = {} %}{% endif %}
 
 <table class="{{ tableClass }}">
     <tbody>
@@ -43,7 +44,11 @@
                             {% endif %}
                         {% endif %}
                     </td>
-                    <td width="{{ LABEL_COL_WIDTH }}%;" height="{{ LABEL_HEIGHT }}px;" class="word-break">
+                    <td
+                        width="{{ LABEL_COL_WIDTH }}%;"
+                        height="{{ LABEL_HEIGHT }}px;"
+                        class="word-break {{ resolve([options, 'labelClass'], '') }}"
+                    >
                         {{ (transPrefix ~ column)|trans({}, transDomain) }}
                     </td>
                 {% endfor %}

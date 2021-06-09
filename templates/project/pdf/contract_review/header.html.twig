@@ -27,7 +27,7 @@
                     <tbody>
                         <tr>
                             <td colspan="2">
-                                <span class="text-weight-bold text-danger text-uppercase">{{ 'pdf.title.siteCode'|trans }} :</span>
+                                <span class="text-weight-bold text-danger text-uppercase text-calibri">{{ 'pdf.title.siteCode'|trans }} :</span>
                                 {% if ngMode %}
                                     <input type="text">
                                 {% else %}
@@ -36,16 +36,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-weight-bold">{{ 'pdf.label.roadMap'|trans }}</td>
+                            <td class="text-weight-bold text-calibri">{{ 'pdf.label.roadMap'|trans }}</td>
                             <td>
                                 {% if ngMode %}
                                     <span><input type="text"></span>
-                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span class="text-uppercase text-calibri">{{ 'pdf.label.yes'|trans }}</span>
                                     <span><input type="text"></span>
                                     <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
                                 {% else %}
                                     <span>{{ pdf_checkbox(hasRoadMap) }}</span>
-                                    <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>
+                                    <span class="text-uppercase text-calibri">{{ 'pdf.label.yes'|trans }}</span>
                                     <span>{{ pdf_checkbox(not hasRoadMap) }}</span>
                                     <span class="text-uppercase">{{ 'pdf.label.no'|trans }}</span>
                                 {% endif %}
