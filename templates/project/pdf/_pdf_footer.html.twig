@@ -1,1 +1,17 @@
-<p>Lorem ipsum dolor sit</p>
+<style>
+    div#footer-pdf {
+        color: #aaa;
+        font-family: 'Calibri';
+        font-size: 14px;
+        font-weight: 500;
+        padding-left: 20px;
+    }
+</style>
+
+<div id="footer-pdf">
+    {{ '#' ~ 
+        resolve([project, 'id'], null) ~'-'~
+        resolve([project, 'prospect', 'clientNumber'], null) ~ '-'~ 
+        (resolve([project, 'createdAt'], null) ? resolve([project, 'createdAt'])|date('d.m.Y') : '')
+    }}
+</div>

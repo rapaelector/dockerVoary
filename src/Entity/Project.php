@@ -3,15 +3,25 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use App\Entity\Common\BlameableTrait;
+use App\Entity\Common\SoftDeleteableTrait;
+use App\Entity\Common\TimestampableTrait;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\ProjectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * @Gedmo\Loggable
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
 class Project
 {
+    use BlameableTrait;
+    use SoftDeleteableTrait;
+    use TimestampableTrait;
     use ProjectTrait;
 
     /**
