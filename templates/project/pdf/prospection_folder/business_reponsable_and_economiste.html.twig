@@ -13,20 +13,18 @@
 {% set LABEL_WIDTH = space_value(30, COL_COUNT) %}
 {% set  VALUE_WIDTH = space_value((COL_COUNT - 30), COL_COUNT) %}
 
-{# {% set responsibleOfBusiness = resolve([project], null) %} #}
-{% set responsibleOfBusiness = '' %}
-{# {% set economiste = resolve([project], null) %} #}
-{% set economiste = '' %}
+{# charge(e) d'affaire #}
+{% set responsibleOfBusiness = resolve([project, 'businessCharge'], null) %}
+{# economiste #}
+{% set economiste = resolve([project, 'economist'], null) %}
 
 <table class="table-borderless">
     <tbody>
         <tr height="{{ BUSINNESS_RESPONSIBLE_HEIGHT }}" class="align-start">
-            <td width="{{ LABEL_WIDTH }}%;">
-                <div class="text-left text-uppercase text-weight-bold text-underline text-label">
+            <td>
+                <span class="text-left text-uppercase text-weight-bold text-underline text-label">
                     {{ 'pdf.label.business_responsible'|trans }}:
-                </div>
-            </td>
-            <td width="{{ VALUE_WIDTH }}%;">
+                </span>
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
@@ -34,17 +32,15 @@
                 {% endif %}
             </td>
         </tr>
-        <tr height="{{ ECONOMISTE_HEIGHT }}" class="align-start">
-            <td width="{{ LABEL_WIDTH }}%;">
-                <div class="text-left text-uppercase text-weight-bold text-underline text-label">
+        <tr class="align-start">
+            <td>
+                <span class="text-left text-uppercase text-weight-bold text-underline text-label">
                     {{ 'pdf.label.economist'|trans }}:
-                </div>
-            </td>
-            <td width="{{ VALUE_WIDTH }}%;">
+                </span>
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ economiste }}    
+                    <span>{{ economiste }}    </span>
                 {% endif %}
             </td>
         </tr>

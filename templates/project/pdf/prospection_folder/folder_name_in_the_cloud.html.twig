@@ -8,7 +8,7 @@
 {% set FOLDER_NAME_VALUE = space_value(2, FOLDER_NAME_HEIGHT) %}
 
 {# {% set folderNameInTheCloud = resolve([project], null) %} #}
-{% set folderNameInTheCloud = '' %}
+{% set folderNameInTheCloud = resolve([project, 'folderNameOnTheServer'], null) %}
 
 <table class="table-borderless">
     <tbody>

@@ -34,11 +34,11 @@
 {# client conditions negotiated value height count is the rest of the unused col_h_count #}
 {% set CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH = space_value((COL_H_COUNT - 8), COL_H_COUNT) %}
 
-{% set paymentChoice = resolve([project, 'paymentChoice'], null) %}
+{% set paymentChoice = resolve([project, 'paymentChoice'], null) ? true : false %}
 {% set paymentPercentage = resolve([project, 'paymentPercentage'], null) %}
 {% set depositeDateEdit = resolve([project, 'depositeDateEdit'], null) %}
 {% set clientCondition = resolve([project, 'clientCondition'], null) %}
-    
+
 <table class="table-borderless">
     <tbody>
         <tr>
@@ -87,7 +87,7 @@
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    <span>{{ pdf_checkbox( not paymentChoice) }}</span>
+                    <span>{{ pdf_checkbox(not paymentChoice) }}</span>
                 {% endif %}
                 <span class="text-calibri">{{ 'pdf.label.no'|trans }}</span>
             </td>

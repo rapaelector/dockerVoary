@@ -29,7 +29,8 @@
 {# not applicable checkbox width 4 #}
 {% set NOT_APPLICABLE_CHECKBOX_WIDTH = space_value(8, COL_COUNT) %}
 
-{% set normeEn1090 = resolve([project, 'norm1090']) %}
+{% set normeEn1090 = resolve([project, 'norm1090'], null) %}
+{% set isNotApplicable = resolve([project, 'notApplicable'], null) %}
 
 <table class="table-borderless for-the-frame-table">
     <tbody>
@@ -69,7 +70,6 @@
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
             <td width="{{ NOT_APPLICABLE_WIDTH }}%;" class="text-uppercase text-normal">{{ 'pdf.label.not_applicable'|trans }}</td>
             <td width="{{ NOT_APPLICABLE_CHECKBOX_WIDTH }}%;">
-                {% set isNotApplicable = normeEn1090 == constant('\\App\\Entity\\Constants\\Project\\Norme1090::NORME_1090_NOT_APPLICABLE') ? true : false %}
                 {{ pdf_checkbox(isNotApplicable) }}
             </td>
         </tr>
