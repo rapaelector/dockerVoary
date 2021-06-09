@@ -26,22 +26,22 @@
 
 <table class="table-borderless">
     <tbody>
-        <tr>
+        <tr class="align-middle">
             <td
                 height="{{ VALUE_HEIGHT }}px;" 
                 width="{{ NORME_1090_WIDTH }}%;" 
-                class="{{ norm1090Class }} align-start"
+                class="{{ norm1090Class }}"
             >
                 {{ 'pdf.label.norme_1090'|trans }}
             </td>
             <td
                 height="{{ VALUE_HEIGHT }}px;" 
                 width="{{ CLASSE_EXE_WIDTH }}%;"
-                class="text-weight-bold align-start text-calibri"
+                class="text-weight-bold text-calibri"
             >
                 {{ 'pdf.label.class_exe'|trans }}
             </td>
-            <td height="{{ VALUE_HEIGHT }}px;" width="{{ CHECKBOX_WIDTH }}%;" class="align-start">
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <span>1</span>
                     <span>
@@ -64,7 +64,7 @@
                     {% endfor %}
                 {% endif %}
             </td>
-            <td height="{{ VALUE_HEIGHT }}px;" width="{{ EMPTY_WIDTH }}%;" class="align-start"></td>
+            <td height="{{ VALUE_HEIGHT }}px;" width="{{ EMPTY_WIDTH }}%;"></td>
         </tr>
         <tr>
             <td colspan="4" height="{{ EMPTY_COL_HEIGHT }}px;"></td>
