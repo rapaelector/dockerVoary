@@ -8,8 +8,8 @@
 {% set LABEL_HEIGHT = space_value(2, MARKET_TYPE_HEIGHT, marketHeightFixer) %}
 {# market type col count = 30 #}
 {% set MARKET_TYPE_COL_COUNT = 60 %}
-{% set CHECKBOX_COL_WIDTH = space_value(2, MARKET_TYPE_COL_COUNT)  %}
-{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 2), MARKET_TYPE_COL_COUNT) /  2 %}
+{% set CHECKBOX_COL_WIDTH = space_value(4, MARKET_TYPE_COL_COUNT)  %}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 4), MARKET_TYPE_COL_COUNT) /  2 %}
 
 {% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project::TYPE_DE_MARCHE') %}
 

@@ -1,10 +1,13 @@
 {# height col count 7 #}
 {# this height should be 14 (7*2) but its a tittle big so increase it to 18#}
 {% set HEIGHT = 18 %}
+{% set SIMPLE_HEIGHT_FIXER = 1 %}
+{% if simpleHeightFixer is defined %}{% set SIMPLE_HEIGHT_FIXER = simpleHeightFixer %}{% endif %}
+
 {# label height 1.5 #}
-{% set LABEL_HEIGHT = space_value(3, HEIGHT) %}
+{% set LABEL_HEIGHT = space_value(3, HEIGHT, SIMPLE_HEIGHT_FIXER) %}
 {# value height 5.5 #}
-{% set VALUE_HEIGHT = space_value(11, HEIGHT) %}
+{% set VALUE_HEIGHT = space_value(11, HEIGHT, SIMPLE_HEIGHT_FIXER) %}
 {% set titleClass = titleClass|default('') %}
 
 <table class="table-borderless">

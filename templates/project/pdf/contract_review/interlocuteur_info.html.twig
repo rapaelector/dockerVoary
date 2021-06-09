@@ -2,12 +2,13 @@
 
 {# height col count 7 #}
 {% set INTERLOCUTEUR_INFO_HEIGHT_COUNT = 14 %}
+{% set INTERLOCUTEUR_INFO_HEIGHT_FIXER = 0.8 %}
 {# interlocutor name col height count 3 #}
-{% set INTERLOCUTOR_NAME_HEIGHT = space_value(6, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+{% set INTERLOCUTOR_NAME_HEIGHT = space_value(6, INTERLOCUTEUR_INFO_HEIGHT_COUNT, INTERLOCUTEUR_INFO_HEIGHT_FIXER) %}
 {# mail col height count 2 #}
-{% set MAIL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+{% set MAIL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT, INTERLOCUTEUR_INFO_HEIGHT_FIXER) %}
 {# tel col height count 2 #}
-{% set TEL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT) %}
+{% set TEL_HEIGHT = space_value(4, INTERLOCUTEUR_INFO_HEIGHT_COUNT, INTERLOCUTEUR_INFO_HEIGHT_FIXER) %}
 
 {% set labelClass = 'text-weight-bold text-underline' %}
 {% set contact = resolve([project, 'contact'], null) %}

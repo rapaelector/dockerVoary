@@ -4,15 +4,16 @@
 
 {# header col count  #}
 {# contract review col count 39 #}
+{% set HEADER_HEIGHT_FIXER = 0.8 %}
 {% set CONTRACT_REVIEW_WIDTH = space_value(78, TOTAL_COL_COUNT) %}
 {# work site code col count 21 #}
 {% set CODE_SITEWORK = space_value(42, TOTAL_COL_COUNT) %}
 {# header height #}
 {# header height col count 8 #}
 {% set HEADER_HEIGHT_COUNT = 16 %}
-{% set CONTRACT_REVIEW = space_value(16, HEADER_HEIGHT_COUNT) %}
+{% set CONTRACT_REVIEW = space_value(16, HEADER_HEIGHT_COUNT, HEADER_HEIGHT_FIXER) %}
 {# code_sitework count 6 #}
-{% set CODE_SITEWORK_HEIGHT =  space_value(12, HEADER_HEIGHT_COUNT) %}
+{% set CODE_SITEWORK_HEIGHT =  space_value(12, HEADER_HEIGHT_COUNT, HEADER_HEIGHT_FIXER) %}
 
 {% set siteCode = resolve([project, 'siteCode'], null) %}
 {% set hasRoadMap = resolve([project, 'roadMap'], false) %}
