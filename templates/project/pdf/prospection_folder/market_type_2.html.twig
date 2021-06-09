@@ -16,8 +16,9 @@
 
 {% set MARKET_TYPE_2_CHOICES = constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPE_2_CHOICES') %}
 {% set value = value|default(null) %}
+{% if options is not defined %}{% set options = {} %}{% endif %}
 
-<table class="table-borderless mt-1 market-type-2-table">
+<table class="table-borderless market-type-2-table {{ resolve([options, 'tableClass']) }}">
     <tbody>
         {% for row in MARKET_TYPE_2_CHOICES|batch(2) %}
             <tr>

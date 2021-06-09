@@ -25,7 +25,7 @@
     <tbody>
         <tr>
             <td colspan="4" class="text-center">
-                <div class="label market-type-title">{{ title }}</div>
+                <div class="label market-type-title {{ resolve([options, 'titleClass'], '') }}">{{ title }}</div>
             </td>
         </tr>
         {% for row in MARKET_TYPE_CHOICES|batch(2) %}

@@ -56,12 +56,21 @@
                 {# TYPE DE MARCHE #}
                 {% include 'project/pdf/prospection_folder/market_type.html.twig' with {
                     value: resolve([project, 'marketType'], null),
+                    elements: constant('\\App\\Entity\\Constants\\Project\\MarketType::MARKET_TYPES_CHOICES'),
+                    transDomain: 'projects',
+                    transPrefix: 'pdf.label.market_type_label.',
+                    options: {
+                        titleClass: 'pb-10'
+                    }
                 } %}
             </td>
             <td>
                 {# TYPE DE MARCHE A DROIT : marche public, marche prive, A.O public, A.O prive #}
                 {% include 'project/pdf/prospection_folder/market_type_2.html.twig' with {
                     value: resolve([project, 'marketType'], null),
+                    options: {
+                        tableClass: 'mb-1 mt-1',
+                    }
                 } %}
             </td>
         </tr>

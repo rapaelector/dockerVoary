@@ -71,17 +71,17 @@
             </td>
         </tr>
         <tr>
-            <td  width="{{ DEPOSITE_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start text-sm text-calibri">
+            <td  width="{{ DEPOSITE_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start text-uppercase text-sm text-calibri">
                 {{ 'pdf.label.deposite'|trans }}
             </td>
-            <td  width="{{ YES_FROM_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start text-sm text-calibri">
+            <td  width="{{ YES_FROM_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start text-calibri">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
                     <span>{{ pdf_checkbox(paymentChoice) }}</span>
                 {% endif %}
-                <span class="text-calibri">{{ 'pdf.label.yes_from'|trans }}</span>
-                <span class="text-weight-bold text-calibri">{{ paymentPercentage }}%</span>
+                <span class="text-calibri text-uppercase text-sm">{{ 'pdf.label.yes_from'|trans }}</span>
+                <span class="text-weight-bold">{{ paymentPercentage }}%</span>
             </td>
             <td  width="{{ NO_WIDTH }}%;" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start text-sm text-calibri">
                 {% if ngMode %}
@@ -89,7 +89,7 @@
                 {% else %}
                     <span>{{ pdf_checkbox(not paymentChoice) }}</span>
                 {% endif %}
-                <span class="text-calibri">{{ 'pdf.label.no'|trans }}</span>
+                <span class="text-calibri text-uppercase text-sm">{{ 'pdf.label.no'|trans }}</span>
             </td>
             <td  width="{{ EMPTY_COL_WIDTH }}%" height="{{ DISPOSE_COL_HEIGHT }}px;" class="align-start"></td>
         </tr>

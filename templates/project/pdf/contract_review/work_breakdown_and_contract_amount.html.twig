@@ -23,10 +23,11 @@
 {% set HEIGHT = 65 %}
 
 {% set prefix %}{% endset %}
+{% set cellHeight = workBreakdownHeight / 3 %}
 
 <table width="100%" class="table-borderless">
     <tr>
-        <td width="{{ COLUMN_WIDTH }}%" class="{{ tdClass }}">
+        <td width="{{ COLUMN_WIDTH }}%" class="{{ tdClass }} border-right align-start">
             <table>
                 <tr>
                     {# Repartition des travaux #}
@@ -43,7 +44,7 @@
                         <span class="text-weight-bold text-sm text-calibri">
                             {{ 'pdf.label.num_mde_quote_validate'|trans }}
                         </span>
-                        <span class="text-sm">{{ quoteValidatedMDE }}</span>
+                        <span>{{ quoteValidatedMDE }}</span>
                         {{ prefix|raw }}
                     </td>
                 </tr>
@@ -51,27 +52,29 @@
                     {# de #}
                     <td>
                         {{ prefix|raw }}
-                        <span class="text-weight-bold text-sm text-calibri">{{ 'pdf.label.of'|trans }}</span>
-                        <span class="text-sm">{{ quoteValidatedMDEDate ? quoteValidatedMDEDate|date('d/m/Y') : '' }}</span>
+                        <span class="text-weight-bold text-calibri">{{ 'pdf.label.of'|trans }}</span>
+                        <span>{{ quoteValidatedMDEDate ? quoteValidatedMDEDate|date('d/m/Y') : '' }}</span>
                         {{ prefix|raw }}
                     </td>
                 </tr>
             </table>
         </td>
         <td class="{{ tdClass }}">
-            <table>
+            <table height="{{ workBreakdownHeight }}px">
                 <tr>
                     <td
-                        width="{{ COLUMN_WIDTH }}%" 
-                        class="border-left text-weight-bold text-underline"
+                        width="{{ COLUMN_WIDTH }}%"
+                        height="{{ cellHeight }}px"
+                        class="text-weight-bold text-underline border-right"
                     >
                         {{ prefix|raw }}
                         {{ 'pdf.label.overal_amount_of_the_contract'|trans }}
                         {{ prefix|raw }}
                     </td>
                     <td 
-                        width="{{ COLUMN_WIDTH }}%" 
-                        class="border-left {{ globalAmount ? '' : 'hide-mock-value' }}"
+                        width="{{ COLUMN_WIDTH }}%"
+                        height="{{ cellHeight }}px"
+                        class="{{ globalAmount ? '' : 'hide-mock-value' }}"
                     >
                         {{ prefix|raw }}
                         {{ globalAmount|default(emptyData) }}
@@ -81,25 +84,38 @@
                 <tr>
                     <td 
                         width="{{ COLUMN_WIDTH }}%" 
-                        class="border-left border-top"
+                        height="{{ cellHeight }}px"
+                        class="border-top border-right"
                     >
                         {{ prefix|raw }}
                         {{ 'pdf.label.amount_of_subcontracted_work'|trans }}
                         {{ prefix|raw }}
                     </td>
-                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top {{ amountSubcontractedWork ? '' : 'hide-mock-value' }}">
+                    <td
+                        width="{{ COLUMN_WIDTH }}%"
+                        height="{{ cellHeight }}px"
+                        class="border-top {{ amountSubcontractedWork ? '' : 'hide-mock-value' }}"
+                    >
                         {{ prefix|raw }}
                         {{ amountSubcontractedWork|default(emptyData) }}
                         {{ prefix|raw }}
                     </td>
                 </tr>
                 <tr>
-                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top">
+                    <td
+                        width="{{ COLUMN_WIDTH }}%"
+                        height="{{ cellHeight }}px"
+                        class="border-top border-right"
+                    >
                         {{ prefix|raw }}
                         {{ 'pdf.label.amount_of_work_specific_to_BBI'|trans }}
                         {{ prefix|raw }}
                     </td>
-                    <td width="{{ COLUMN_WIDTH }}%" class="border-left border-top {{ amountBBISpecificWork ? '' : 'hide-mock-value' }}" >
+                    <td
+                        width="{{ COLUMN_WIDTH }}%"
+                        height="{{ cellHeight }}px"
+                        class="border-top {{ amountBBISpecificWork ? '' : 'hide-mock-value' }}"
+                    >
                         {{ prefix|raw }}
                         {{ amountBBISpecificWork|default(emptyData) }}
                         {{ prefix|raw }}
