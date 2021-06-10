@@ -11,9 +11,11 @@
         </tr>
         <tr>
             <td class="border-0"></td>
+            {# Dossier de prospection #}
             <td colspan="3" class="folder-prospection border-0 text-weight-bold text-uppercase">
                 {{ 'pdf.title.prospection_folder'|trans }}
             </td>
+            {# Logo du pdf #}
             <td rowspan="2" class="pdf-td-logo border-0">
                 <img src="{{ absolute_url(asset('images/logo/bbat_pdf_logo.png')) }}" alt="bbat-pdf-logo" width="{{ PDF_LOGO_WIDTH }}%">
             </td>
@@ -21,8 +23,10 @@
         <tr>
             <td colspan="2" class="border-0"></td>
             <td rowspan="{{ empty_row_rowspan }}" class="border-0"></td>
-            <td class="first-ask-date text-calibri text-weight-bold align-start">
-                {{ 'pdf.label.first_ask_date'|trans }}
+            {# Date de premiére demande #}
+            <td class="first-ask-date align-start">
+                <span class="text-calibri text-weight-bold text-danger">{{ 'pdf.label.first_ask_date'|trans }} :</span>
+                <span class="text-calibri">{{ resolve([project, 'createdAt'], null) ? resolve([project, 'createdAt'])|date('d/m/Y H:m') }}</span>
             </td>
         </tr>
         <tr>

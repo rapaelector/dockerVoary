@@ -5,8 +5,12 @@ $base-font-size: 12;
 }
 
 // the signature-title may change several time so we put it in another variable
-$text-sm: _rem(9); 
+$text-sm: _rem(9);
+// signature-title
 $signature-title: _rem(13);
+// date de premiere demande
+$fistAskDate: _rem(13);
+
 $label: _rem(10);
 // put default font size to 11px because 11px is the most used font size in the word file
 $default-font-size: _rem(11);
