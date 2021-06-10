@@ -85,7 +85,7 @@ class ProjectType extends AbstractType
             ])
             ->add('disaSheetValidation', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::TYPE_DISA_SHEET, true),
-                'label' => false,
+                'label' => "columns.disaSheetValidation",
                 "multiple" => true,
                 "expanded" => true,
             ])
@@ -117,7 +117,7 @@ class ProjectType extends AbstractType
             ])
             ->add('caseType', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::CASE_TYPES, true),
-                'label' => false,
+                'label' => "columns.caseType",
                 "multiple" => true,
                 "expanded" => true,
                 'label_attr' => array(
@@ -125,20 +125,20 @@ class ProjectType extends AbstractType
                 ),
             ])
             ->add('planningProject', TextareaType::class, [
-                'label' => false
+                'label' => "columns.planningProject"
             ])
             ->add('contact', ContactType::class)
             ->add('billingAddres', AddressType::class)
             ->add('siteAddress', AddressType::class)
             ->add('descriptionOperation', TextareaType::class)
             ->add('soldBy', null, [
-                'label' => false
+                'label' => "columns.soldBy"
             ])
             ->add('quoteWriter', null, [
-                'label' => false
+                'label' => "columns.quoteWriter"
             ])
             ->add('norm1090', ChoiceType::class, [
-                'label' => false,
+                'label' => "columns.norm1090",
                 'choices' => [
                     '1' => 1,
                     '2' => 2,
@@ -167,13 +167,13 @@ class ProjectType extends AbstractType
                 'label' => 'columns.amountBBISpecificWork'
             ])
             ->add('recordAssistant', null,[
-                'label' => false
+                'label' => "columns.recordAssistant"
             ])
             ->add('ocbsDriver', null,[
-                'label' => false
+                'label' => "columns.ocbsDriver"
             ])
             ->add('tceDriver', null,[
-                'label' => false
+                'label' => "columns.tceDriver"
             ])
             ->add('encryptiontype', ChoiceType::class, [
                 'label'=>"columns.encryptiontype",
