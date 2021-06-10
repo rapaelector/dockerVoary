@@ -25,7 +25,7 @@
             <td rowspan="{{ empty_row_rowspan }}" class="border-0"></td>
             {# Date de premiére demande #}
             <td class="first-ask-date align-start">
-                <span class="text-calibri text-weight-bold text-danger">{{ 'pdf.label.first_ask_date'|trans }} :</span>
+                <span class="text-calibri text-weight-600 text-danger">{{ 'pdf.label.first_ask_date'|trans }} :</span>
                 <span class="text-calibri">{{ resolve([project, 'createdAt'], null) ? resolve([project, 'createdAt'])|date('d/m/Y H:m') }}</span>
             </td>
         </tr>

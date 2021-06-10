@@ -9,7 +9,8 @@
 {# market type col count = 30 #}
 {% set MARKET_TYPE_COL_COUNT = 60 %}
 {% set CHECKBOX_COL_WIDTH = space_value(4, MARKET_TYPE_COL_COUNT)  %}
-{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 4), MARKET_TYPE_COL_COUNT) /  2 %}
+{# {% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT - 4), MARKET_TYPE_COL_COUNT) /  2 %} #}
+{% set LABEL_COL_WIDTH = space_value((MARKET_TYPE_COL_COUNT / 2), MARKET_TYPE_COL_COUNT) %}
 
 {% set MARKET_TYPE_CHOICES = constant('\\App\\Entity\\Constants\\Project::TYPE_DE_MARCHE') %}
 
@@ -32,6 +33,7 @@
         {% for row in MARKET_TYPE_CHOICES|batch(2) %}
             <tr>
                 {% for key, column in row %}
+                    {#
                     <td width="{{ CHECKBOX_COL_WIDTH }}%;" class="market-type-checkbox">
                         {% if ngMode %}
                             <input type="text">
@@ -45,12 +47,24 @@
                             {% endif %}
                         {% endif %}
                     </td>
+                    #}
                     <td
                         width="{{ LABEL_COL_WIDTH }}%;"
                         {% if not resolve([options, 'removeLabelHeight'], false) %}height="{{ LABEL_HEIGHT }}px;"{% endif %}
                         class="word-break {{ resolve([options, 'labelClass'], '') }}"
                     >
-                        {{ (transPrefix ~ column)|trans({}, transDomain) }}
+                        {% if ngMode %}
+                            <input type="text">
+                        {% else %}
+                            {% set isChecked = null %}
+                            {% set isChecked = value == ('typeMarket.' ~ column) ? true : false %}
+                            {% if value is iterable %}
+                                <span>{{ pdf_checkbox(column in value) }}</span>
+                            {% else %}
+                                <span>{{ pdf_checkbox(isChecked) }}</span>
+                            {% endif %}
+                        {% endif %}
+                        <span>{{ (transPrefix ~ column)|trans({}, transDomain) }}</span>
                     </td>
                 {% endfor %}
             </tr>
