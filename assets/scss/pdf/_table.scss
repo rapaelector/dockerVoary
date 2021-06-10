@@ -201,6 +201,12 @@
     .hide-mock-value {
         opacity: 0;
     }
+    .site-code-cell {
+        font-size: _rem(14);
+    }
+    .road-map-cell {
+        font-size: _rem(14);
+    }
 }
 
 @mixin _table {

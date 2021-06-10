@@ -27,8 +27,11 @@
                 <table height="100%;" class="table-borderless">
                     <tbody>
                         <tr>
-                            <td colspan="2">
-                                <span class="text-weight-bold text-danger text-uppercase text-calibri text-lg">{{ 'pdf.title.siteCode'|trans }} :</span>
+                            <td colspan="2" class="site-code-cell">
+                                <span
+                                    class="text-weight-bold text-danger text-uppercase text-calibri">
+                                        {{ 'pdf.title.siteCode'|trans }} :
+                                    </span>
                                 {% if ngMode %}
                                     <input type="text">
                                 {% else %}
@@ -37,7 +40,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-weight-bold text-calibri text-md">{{ 'pdf.label.roadMap'|trans }}</td>
+                            <td class="text-weight-bold text-calibri road-map-cell">{{ 'pdf.label.roadMap'|trans }}</td>
                             <td class="text-calibri text-m">
                                 {% if ngMode %}
                                     <span><input type="text"></span>

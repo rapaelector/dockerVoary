@@ -7,6 +7,7 @@
 {% set ocbsDriver = resolve([project, 'ocbsDriver'], null) %}
 {% set tceDriver = resolve([project, 'tceDriver'], null) %}
 {% set signatureValueClass = 'align-start text-sm' %}
+{% set titleClass = 'text-uppercase text-calibri signature-text' %}
 
 <table class="table-borderless">
     <tbody>
@@ -18,7 +19,7 @@
                     signatureValue: assistantInChargeOfTheFile,
                     subtitle: ' ',
                     options: {
-                        titleClass: 'text-underline text-uppercase text-calibri',
+                        titleClass: 'text-underline text-uppercase ' ~ titleClass,
                         signatureValueClass: signatureValueClass,
                         signatures: false,
                     }
@@ -31,7 +32,7 @@
                     signatureValue: ocbsDriver,
                     subtitle: ' ',
                     options: {
-                        titleClass: 'text-uppercase text-calibri',
+                        titleClass: titleClass,
                         signatureValueClass: signatureValueClass,
                         signatures: false,
                     }
@@ -44,7 +45,7 @@
                     signatureValue: tceDriver,
                     subtitle: ' ',
                     options: {
-                        titleClass: 'text-uppercase text-calibri',
+                        titleClass: titleClass,
                         signatureValueClass: signatureValueClass,
                         signatures: false,
                     }

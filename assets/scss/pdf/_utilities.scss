@@ -62,13 +62,16 @@
     font-size: $title;
 }
 .text-md {
-    font-size: _rem(15);
+    font-size: $default-font-size;
 }
 .text-sm {
     font-size: $label;
 }
 .text-xs {
     font-size: _rem(8);
+}
+.signature-text {
+    font-size: $signature-title;
 }
 .text-calibri {
     font-family: 'Calibri';

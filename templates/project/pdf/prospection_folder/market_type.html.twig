@@ -47,7 +47,7 @@
                     </td>
                     <td
                         width="{{ LABEL_COL_WIDTH }}%;"
-                        height="{{ LABEL_HEIGHT }}px;"
+                        {% if not resolve([options, 'removeLabelHeight'], false) %}height="{{ LABEL_HEIGHT }}px;"{% endif %}
                         class="word-break {{ resolve([options, 'labelClass'], '') }}"
                     >
                         {{ (transPrefix ~ column)|trans({}, transDomain) }}
