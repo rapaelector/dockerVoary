@@ -83,13 +83,14 @@
     vertical-align: top;
 }
 .align-middle {
-    vertical-align: center;
+    vertical-align: middle;
 }
 .align-end {
     vertical-align: bottom;
 }
 .text-nowrap {
     overflow: hidden;
+    text-overflow: hidden;
     white-space: nowrap;
 }
 .mb-1 {

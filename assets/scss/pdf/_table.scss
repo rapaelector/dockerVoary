@@ -43,7 +43,8 @@
         }
         &.market-type-table, &.market-type-2-table,
         &.encryption-type-table, &.is-bonhomme-table,
-        &.for-the-frame-table, &.prioritization-folder {
+        &.for-the-frame-table, &.prioritization-folder ,
+        &.folder-type-table {
             tbody {
                 tr {
                     td {
@@ -72,6 +73,15 @@
                         td {
                             padding: 0 !important;
                         }
+                    }
+                }
+            }
+        }
+        &.folder-type-table {
+            tbody {
+                tr td {
+                    div {
+                        text-overflow: hidden;
                     }
                 }
             }
