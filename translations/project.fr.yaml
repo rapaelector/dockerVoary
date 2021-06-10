@@ -27,7 +27,7 @@ columns:
   descriptionOperation: "Description de l'operation"
   soldBy: "Dossier vendu par"
   quoteWriter: "Rédacteur du devis"
-  norm1090: "Classe EXE"
+  norm1090: "Norme en 1090 - Classe EXE"
   marketType: "Type de marche"
   is_bonhomme: 'Bonhomme est-il'
   disaSheetValidation: "Validation de fiche DISA"
