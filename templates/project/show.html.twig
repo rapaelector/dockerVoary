@@ -173,7 +173,7 @@
     </div>
     <div class="card-footer text-center">
         <a class="btn btn-app-primary" href="{{ path('project.edit', {id: project.id, redirectPath: redirectPah ?? ''}) }}">
-                {{ button_label|default('action.edit'|trans([], 'messages')) }}
+            {{ button_label|default('action.edit'|trans([], 'messages')) }}
         </a>
         <a href="{{ path('project.list') }}" class="btn btn-app-secondary">{{ 'action.back_to_list'|trans({}, 'messages') }}</a>
     </div>

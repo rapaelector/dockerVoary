@@ -62,6 +62,9 @@ columns:
   businessCharge: "Chargé(e) d'affaire"
   economist: "Economiste"
   folderNameOnTheServer: "Nom du dossier sur le serveur"
+  yes: 'Oui'
+  no: 'Non'
+  
 typeMarket:
   shadows : "Ombrières"
   tender : "Appel d’offre"

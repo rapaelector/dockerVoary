@@ -2,7 +2,10 @@
     <tbody>
         <tr>
             <th>{{ 'columns.roadmap'|trans({}, 'project') }}</th>
-            <td>{{ resolve([project,'roadmap'], '') }}</td>
+            <td>
+                {% set roadMap = resolve([project, 'roadmap'], null) %}
+                {{ roadMap ? 'columns.yes'|trans({}, 'project') : (roadMap == false or roadMap == 0 ? ''|trans({}, 'project') : '') }}
+            </td>
         </tr>
         <tr>
             <th>{{ 'columns.siteCode'|trans({}, 'project') }}</th>

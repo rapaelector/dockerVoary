@@ -18,7 +18,11 @@
         </tr>
         <tr>
             <th>{{ 'columns.paymentChoice'|trans({}, 'project') }}</th>
-            <td>{{ resolve([project,'paymentChoice'], '') |trans({}, 'project')  }}</td>
+            <td>
+                {% set paymentChoice = resolve([project, 'paymentChoice'], null) %}
+                {{ paymentChoice ? 'columns.yes'|trans({}, 'project') : ((paymentChoice == false or paymentChoice == 0) ? 'columns.no'|trans({}, 'project') : '') }}
+                {# {{ resolve([project,'paymentChoice'], '') |trans({}, 'project')  }} #}
+            </td>
         </tr>
         <tr>
             <th>{{ 'columns.paymentPercentage'|trans({}, 'project') }}</th>

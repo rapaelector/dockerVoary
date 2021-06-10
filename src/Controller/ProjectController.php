@@ -79,7 +79,10 @@ class ProjectController extends BaseController
             ])
             ->add('roadmap', TextColumn::class, [
                 'label' => $translator->trans('columns.roadmap', [], 'project'),
-                'className' => 'dynamic-nowrap',
+                'className' => 'dynamic-nowrap text-center',
+                'render' => function ($value, $row) use ($translator) {
+                    return $value ? $translator->trans('columns.yes', [], 'project') : (($value == false || $value == 0) ? $translator->trans('columns.no', [], 'project') : '');
+                },
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('projectRoadmap')
