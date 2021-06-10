@@ -226,6 +226,10 @@
     .road-map-cell {
         font-size: _rem(14);
     }
+    .date-of-deposit {
+        position: relative;
+        top: 2px;
+    }
 }
 
 @mixin _table {

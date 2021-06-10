@@ -2,7 +2,8 @@
 
 {# width of each block #}
 {% set TD_WIDTH = space_value((COL_COUNT / 3), COL_COUNT) %}
-{% set subTitleClass = 'align-start text-calibri text-italic' %}
+{% set titleClass = 'align-start text-calibri signature-text' %}
+{% set subTitleClass = 'align-start text-calibri text-italic signature-text' %}
 {% set signatureValueClass = 'text-calibri' %}
 
 {% set SIGNATURE_HEIGHT_FIXER = 0.7 %}
@@ -10,7 +11,6 @@
 {% set COL_HEIGHT_COUNT = 13 %}
 {% set COL_HEIGHT = space_value(COL_HEIGHT_COUNT, COL_HEIGHT_COUNT, SIGNATURE_HEIGHT_FIXER) %}
 {% set colClass = 'border-right' %}
-{% set titleClass = 'align-start text-calibri signature-text' %}
 {% set contractReviewSignatureHeightFixer = 1.5 %}
 
 <table class="table-borderless">
