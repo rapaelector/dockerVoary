@@ -77,7 +77,7 @@
                         class="{{ globalAmount ? '' : 'hide-mock-value' }}"
                     >
                         {{ prefix|raw }}
-                        {{ globalAmount|default(emptyData) }}
+                        {{ globalAmount ? globalAmount|number_format(0, ',', ' ') : emptyData }}
                         {{ prefix|raw }}
                     </td>
                 </tr>
@@ -97,7 +97,7 @@
                         class="border-top {{ amountSubcontractedWork ? '' : 'hide-mock-value' }}"
                     >
                         {{ prefix|raw }}
-                        {{ amountSubcontractedWork|default(emptyData) }}
+                        {{ amountSubcontractedWork ? amountSubcontractedWork|number_format(0, ',', ' ') : emptyData }}
                         {{ prefix|raw }}
                     </td>
                 </tr>
@@ -117,7 +117,7 @@
                         class="border-top {{ amountBBISpecificWork ? '' : 'hide-mock-value' }}"
                     >
                         {{ prefix|raw }}
-                        {{ amountBBISpecificWork|default(emptyData) }}
+                        {{ amountBBISpecificWork ? amountBBISpecificWork|number_format(0, ',', ' ') : emptyDate }}
                         {{ prefix|raw }}
                     </td>
                 </tr>
