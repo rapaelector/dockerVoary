@@ -58,6 +58,12 @@
 .text-underline {
     text-decoration: underline;
 }
+.text-lg {
+    font-size: $title;
+}
+.text-md {
+    font-size: _rem(15);
+}
 .text-sm {
     font-size: $label;
 }

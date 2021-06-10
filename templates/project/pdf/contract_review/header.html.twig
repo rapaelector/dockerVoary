@@ -28,17 +28,17 @@
                     <tbody>
                         <tr>
                             <td colspan="2">
-                                <span class="text-weight-bold text-danger text-uppercase text-calibri">{{ 'pdf.title.siteCode'|trans }} :</span>
+                                <span class="text-weight-bold text-danger text-uppercase text-calibri text-lg">{{ 'pdf.title.siteCode'|trans }} :</span>
                                 {% if ngMode %}
                                     <input type="text">
                                 {% else %}
-                                    <span>{{ siteCode }}</span>
+                                    <span class="text-calibri">{{ siteCode }}</span>
                                 {% endif %}
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-weight-bold text-calibri">{{ 'pdf.label.roadMap'|trans }}</td>
-                            <td class="text-calibri">
+                            <td class="text-weight-bold text-calibri text-md">{{ 'pdf.label.roadMap'|trans }}</td>
+                            <td class="text-calibri text-m">
                                 {% if ngMode %}
                                     <span><input type="text"></span>
                                     <span class="text-uppercase">{{ 'pdf.label.yes'|trans }}</span>

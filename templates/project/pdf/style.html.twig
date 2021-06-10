@@ -17,6 +17,25 @@
         src: url({{ absolute_url(asset('fonts/century-gothic/GOTHIC.TTF')) }}) format('truetype');
     }
 
+    @font-face {
+        font-family: 'Century Gothic';
+        src: url({{ absolute_url(asset('fonts/century-gothic/GOTHICB.TTF')) }}) format('truetype');
+        font-weight: 700;
+    }
+    
+    @font-face {
+        font-family: 'Century Gothic';
+        src: url({{ absolute_url(asset('fonts/century-gothic/GOTHICBI.TTF')) }}) format('truetype');
+        font-weight: 700;
+        font-style: italic;
+    }
+    
+    @font-face {
+        font-family: 'Century Gothic';
+        src: url({{ absolute_url(asset('fonts/century-gothic/GOTHICI.TTF')) }}) format('truetype');
+        font-style: italic;
+    }
+
     table {
         font-family: 'Century Gothic';
     }

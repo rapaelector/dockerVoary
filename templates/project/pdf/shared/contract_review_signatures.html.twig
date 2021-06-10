@@ -8,10 +8,12 @@
 
 {# total height count 6.5  #}
 {% set TOTAL_HEIGHT_COUNT = 13 %}
+{% set CONTRACT_REVIEW_SIGNATURE_HEIGHT_FIXER = 1 %}
+{% if contractReviewSignatureHeightFixer is defined %}{% set CONTRACT_REVIEW_SIGNATURE_HEIGHT_FIXER = contractReviewSignatureHeightFixer %}{% endif %}
 {# title height count 1 #}
-{% set TITLE_HEIGHT_COUNT = space_value(2, TOTAL_HEIGHT_COUNT) %}
+{% set TITLE_HEIGHT_COUNT = space_value(1, TOTAL_HEIGHT_COUNT, CONTRACT_REVIEW_SIGNATURE_HEIGHT_FIXER) %}
 {# subtitle height count 1 #}
-{% set SUBTITLE_HEIGHT_COUNT = space_value(2, TOTAL_HEIGHT_COUNT) %}
+{% set SUBTITLE_HEIGHT_COUNT = space_value(2, TOTAL_HEIGHT_COUNT, CONTRACT_REVIEW_SIGNATURE_HEIGHT_FIXER) %}
 {# signature value height count is the rest of the  #}
 {# it should be 4 but the height of signature value is a little bit big so we add two to have a little height #}
 {% set SIGNATURE_HEIGHT_COUNT = space_value((TOTAL_HEIGHT_COUNT - 9), TOTAL_HEIGHT_COUNT) %}
@@ -21,7 +23,7 @@
         <tr>
             <td
                 height="{{ TITLE_HEIGHT_COUNT }}px;" 
-                class="text-weight-bold text-sm {{ resolve([options, 'titleClass'], '') }}"
+                class="text-weight-bold {{ resolve([options, 'titleClass'], '') }}"
             >
                 <div>{{ title }} : {{ value }}</div>
             </td>

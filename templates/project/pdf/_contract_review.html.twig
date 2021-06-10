@@ -31,7 +31,7 @@
         <tr>
             {# commercial (rotating text) #}
             <td rowspan="{{ commercialRowspan }}" colspan="2" class="rotating-title commercial">
-                <div class="title-container commercial-title" style="width: 30px;">
+                <div class="title-container commercial-title text-uppercase" style="width: 30px;">
                     {{ 'pdf.title.commercial'|trans }}
                 </div>
             </td>
@@ -41,7 +41,7 @@
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_manager'|trans,
                     content: resolve([project, 'projectOwner'], null),
-                    simpleHeightFixer: 0.8,
+                    simpleHeightFixer: 0.9,
                 } %}
             </td>
             <td>
@@ -55,7 +55,7 @@
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_owner'|trans,
                     content: resolve([project, 'projectManager'], null),
-                    simpleHeightFixer: 0.8,
+                    simpleHeightFixer: 0.9,
                 } %}
             </td>
             <td>
@@ -69,6 +69,7 @@
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.site_address'|trans,
                     content: siteAddress,
+                    simpleHeightFixer: 0.9,
                 } %}
             </td>
         </tr>
