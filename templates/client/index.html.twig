@@ -22,7 +22,12 @@
                         <h3 class="card-title">{{ 'title.list'|trans }}</h3>
                         <div class="card-tools">
                             {% if is_granted('ROLE_CLIENT_ADD') %}
-                                <a href="{{ path('client.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_prospect'|trans({}, 'client') }}">
+                                <a
+                                    href="{{ path('client.new') }}"
+                                    data-toggle="tooltip" 
+                                    data-placement="bottom" 
+                                    title="{{ 'title.add_prospect'|trans({}, 'client') }}"
+                                >
                                     <i class="material-icons">add</i>
                                 </a>
                             {% endif %}
@@ -57,7 +62,7 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: false,
+                debug: true,
                 enableFormatter: true,
                 redrawEvent: 'client.deleted',
                 config: {

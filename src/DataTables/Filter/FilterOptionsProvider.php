@@ -55,6 +55,9 @@ class FilterOptionsProvider
             'type' => 'choice',
             'choices' => [],
         ],
+        'client_created_at' => [
+            'type' => 'daterange',
+        ]
     ];
 
     public function getOptions($name)

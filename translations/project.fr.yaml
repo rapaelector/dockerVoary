@@ -17,6 +17,9 @@ title:
 contact:
   label: Interlocuteur
 columns:
+  first_ask_date: 'Date de première demande'
+  first_ask_date_abbr: 'Date'
+  created_at: 'Crée le'
   prospect: 'Prospect'
   siteCode: 'Code chantier'
   roadmap: 'Feuille de route'
@@ -38,8 +41,14 @@ columns:
   quoteValidatedMDE: "N° du/des devis MDE validé(s)"
   quoteValidatedMDEDate: "N° du/des devis MDE validé(s) De"
   globalAmount: "Montant global du marché"
+  global_amount: "Montant global du marché"
+  global_amount_abbr: "Montant du marché"
   amountSubcontractedWork: "Montant des travaux sous-traités"
+  amount_subcontracted_work: "Montant des travaux sous-traités"
+  amount_subcontracted_work_abbr: "Montant sous-traités"
   amountBBISpecificWork: "Montant des travaux propre à BBI"
+  amount_bbi_specific_work: "Montant des travaux propre à BBI"
+  amount_bbi_specific_work_abbr: "Montant BBI"
   caseType: "Type de dossier"
   planningProject: "Planning projet"
   recordAssistant: "Assistant en charge du dossier"

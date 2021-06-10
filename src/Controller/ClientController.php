@@ -108,6 +108,13 @@ class ClientController extends BaseController
             ->add('createdAt', DateTimeColumn::class, [
                 'label' => $translator->trans('label.created_at', [], 'messages'),
                 'format' => 'd/m/Y',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class,
+                    [
+                        'type' => 'daterange',
+                    ]
+                ),
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action', [], 'client'),

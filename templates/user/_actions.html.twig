@@ -17,14 +17,14 @@
         {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::VIEW'), user|default(null)) %}
             <a class="dropdown-item" href="{{ path('user.show', {id: id}) }}">
                 <i class="material-icons">visibility</i>
-                {{ 'action.show'|trans }}
+                <span class="dropdown-text">{{ 'action.show'|trans }}</span>
             </a>
         {% endif %}
         
         {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), user|default(null)) %}
             <a class="dropdown-item" href="{{ path('user.edit', {id: id}) }}">
                 <i class="material-icons">edit</i>
-                {{ 'action.edit'|trans }}
+                <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
             </a>
         {% endif %}
 
@@ -36,7 +36,7 @@
                 data-id="{{ id }}"
             >
                 <i class="material-icons">lock</i>
-                {{ 'action.reset_password'|trans }}
+                <span class="dropdown-text">{{ 'action.reset_password'|trans }}</span>
             </a>
         {% endif %}
 

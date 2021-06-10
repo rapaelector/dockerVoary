@@ -86,28 +86,54 @@ class ProjectController extends BaseController
                 ),
             ])
             ->add('amountSubcontractedWork', TextColumn::class, [
-                'label' => $translator->trans('columns.amountSubcontractedWork', [], 'project'),
+                'label' => $translator->trans('columns.amount_subcontracted_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
+                'render' => $this->numberFormatFactory(0, ',', ' '),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
                 ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.amount_subcontracted_work_abbr', [], 'project'),
+                ]),
             ])
             ->add('amountBBISpecificWork', TextColumn::class, [
-                'label' => $translator->trans('columns.amountBBISpecificWork', [], 'project'),
+                'label' => $translator->trans('columns.amount_bbi_specific_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
+                'render' => $this->numberFormatFactory(0, ',', ' '),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
                 ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.amount_bbi_specific_work_abbr', [], 'project'),
+                ]),
             ])
             ->add('globalAmount', TextColumn::class, [
-                'label' => $translator->trans('columns.globalAmount', [], 'project'),
+                'label' => $translator->trans('columns.global_amount', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
+                'render' => $this->numberFormatFactory(0, ',', ' '),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_siteCode')
                 ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.global_amount_abbr', [], 'project'),
+                ]),
+            ])
+            ->add('createdAt', DateTimeColumn::class, [
+                'label' => $translator->trans('columns.first_ask_date', [], 'project'),
+                'format' => 'd/m/Y',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class,
+                    [
+                        'type' => 'daterange',
+                    ]
+                ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.first_ask_date_abbr', [], 'project'),
+                ]),
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action', [], 'project'),

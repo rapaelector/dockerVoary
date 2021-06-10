@@ -24,14 +24,14 @@
             {% if showShow ?? is_granted('ROLE_CLIENT_VIEW') %}
                 <a class="dropdown-item" href="{{ path('client.show', {id: id}) }}">
                     <i class="material-icons">visibility</i>
-                    {{ 'action.view'|trans }}
+                    <span class="dropdown-text">{{ 'action.view'|trans }}</span>
                 </a>
             {% endif %}
 
             {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), client) %}
                 <a class="dropdown-item" href="{{ path('client.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
                     <i class="material-icons">edit</i>
-                    {{ 'action.edit'|trans }}
+                    <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
                 </a>
             {% endif %}
 

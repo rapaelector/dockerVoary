@@ -44,6 +44,24 @@ class BaseController extends AbstractController
         };
     }
 
+    protected function numberFormatFactory($decimals = 0, $decimalpoint = ',', $separator = ' ', $currency = '')
+    {
+        return function ($value, $context) use($decimals, $decimalpoint, $separator, $currency) {
+            return is_numeric($value) ? number_format($value, $decimals, $decimalpoint, $separator) . ' ' . $currency : '';
+        };
+    }
+
+    protected function columnMeta(array $options = [], $uppercase = false)
+    {
+        $labelAttr = [];
+        if ($uppercase) {
+            $labelAttr['style'] = 'text-transform: uppercase;';
+        }
+        return array_merge([
+            'label_attr' => $labelAttr,
+        ], $options);
+    }
+
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
