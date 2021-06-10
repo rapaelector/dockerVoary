@@ -11,12 +11,14 @@ use Knp\Snappy\Pdf;
 
 class ProjectControllerTest extends WebTestCase
 {
+    use WebCaseTestTrait;
+
     public function testPdf()
     {
         $client = static::createClient();
+        $this->login($client, 'test@gmail.com');
         $crawler = $client->request('GET',$this->generateProjectUrl('/pdf', 'preview=true&nofooter=true'));
-        // $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Pdf page can not reached');
-        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Pdf page can not reached');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Pdf page can not reached');
     }
 
     public function getProjectId()
