@@ -240,7 +240,7 @@ class UserControllerTest extends WebTestCase
         if ($email) {
             $user = $userRepository->findOneByEmail($email);
             if (!$user) {
-                return $users[1]->getId();
+                return $users[2]->getId();
             }
             return $user->getid();
         } else {

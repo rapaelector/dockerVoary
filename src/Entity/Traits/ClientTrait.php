@@ -6,6 +6,12 @@ use App\Entity\Constants\Activities;
 
 trait ClientTrait
 {
+    
+    public function __toString(): string
+    {
+        return $this->name ? $this->name : '';
+    }
+
     public static function getActivityChoices($associative = false)
 	{
 		$choices = [

@@ -233,7 +233,7 @@ class ProjectController extends BaseController
         return $this->redirectToRoute('project.list');
     }
 
-    #[Route('/{id}/pdf', name: 'project.pdf')]
+    #[Route('/{id}/pdf', name: 'project.pdf', methods: ['GET'])]
     public function pdf(Request $request, Project $project, Pdf $knpSnappyPdf)
     {
         $previewMode = $request->query->get('preview', false);

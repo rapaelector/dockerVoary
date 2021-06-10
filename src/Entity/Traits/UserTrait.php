@@ -4,7 +4,7 @@ namespace App\Entity\Traits;
 
 trait UserTrait
 {
-    public function getName(): string
+    public function getName(): ?string
     {
         $parts = [];
         if ($this->firstName) {
@@ -19,7 +19,7 @@ trait UserTrait
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ? $this->getName() : '';
     }
 
     public function removeRole(string $role): self
