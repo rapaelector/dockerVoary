@@ -46,17 +46,17 @@
             <td colspan="4">
                 <table class="table-borderless">
                     <tbody>
-                        <tr>
+                        <tr height="{{ PAYMENT_METHOD_HEIGHT }}px;" class="align-middle">
                             <td
                                 width="{{ PAYMENT_METHOD_WIDTH }}%;"
-                                height="{{ PAYMENT_METHOD_HEIGHT }}px;" 
+                                {# height="{{ PAYMENT_METHOD_HEIGHT }}px;"  #}
                                 class="label text-left p-0 align-start"
                             >
                                 {{ 'pdf.label.payment_method'|trans }}
                             </td>
                             <td 
                                 width="{{ DATE_OF_DEPOSITE_WIDTH }}%;" 
-                                height="{{ DATE_OF_DEPOSITE_HEIGHT }}px;"
+                                {# height="{{ DATE_OF_DEPOSITE_HEIGHT }}px;" #}
                                 class="align-start text-calibri pt-1"
                             >
                                 <span>{{ 'pdf.label.date_of_deposit'|trans }} :</span>

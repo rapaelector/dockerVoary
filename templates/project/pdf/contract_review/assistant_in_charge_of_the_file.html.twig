@@ -9,10 +9,10 @@
 {% set signatureValueClass = 'align-start text-sm' %}
 {% set titleClass = 'text-uppercase text-calibri signature-text' %}
 
-<table class="table-borderless">
+<table class="table-borderless assistant-in-charge">
     <tbody>
         <tr>
-            <td width="{{ TD_WIDTH }}%;" class="border-right">
+            <td width="{{ TD_WIDTH }}%;" class="border-right td-col">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.assistant_in_charge_of_the_file'|trans,
                     value: '',
@@ -25,7 +25,7 @@
                     }
                 } %}
             </td>
-            <td width="{{ TD_WIDTH }}%;" class="border-right">
+            <td width="{{ TD_WIDTH }}%;" class="border-right td-col">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.driver_ocbs'|trans,
                     value: '',
@@ -38,7 +38,7 @@
                     }
                 } %}
             </td>
-            <td width="{{ TD_WIDTH }}%;">
+            <td width="{{ TD_WIDTH }}%;" class="td-col">
                 {% include 'project/pdf/shared/contract_review_signatures.html.twig' with {
                     title: 'pdf.label.driver_tce'|trans,
                     value: '',

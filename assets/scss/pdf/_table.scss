@@ -86,6 +86,15 @@
                 }
             }
         }
+        &.assistant-in-charge {
+            tbody {
+                tr td {
+                    &.td-col {
+                        padding-top: 4px;
+                    }
+                }
+            }
+        }
     }
 }
 
