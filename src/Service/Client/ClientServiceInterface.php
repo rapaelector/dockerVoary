@@ -21,4 +21,14 @@ interface ClientServiceInterface
      * @var Client $client
      */
     public function update(Client $client);
+
+    /**
+     * Prepare client before delete it
+     * We dont delete client for real to have good data control
+     * We use softdeleteable in client entity so we prepare
+     * Client cant be deleted if work with other relation
+     * 
+     * @var Client $client
+     */
+    public function preprareClientRemovable(Client $client);
 }

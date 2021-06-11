@@ -35,10 +35,7 @@ class UserService
         ) {
             return false;
         }
-        $newUserEmail = '_' .rand(0, 9999). '_' .$user->getEmail();
-        if ($this->repository->findByEmail($newUserEmail)) {
-            $newUserEmail = '_' .rand(0, 9999). '_' .$user->getEmail();
-        }
+        $newUserEmail = '_' . (new \DateTime())->getTimestamp() . '_' .$user->getEmail();
         $user->setEmail($newUserEmail);
         $this->em->flush();
         

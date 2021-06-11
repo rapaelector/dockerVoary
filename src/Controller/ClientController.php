@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientType;
+use App\Entity\Project;
 use App\Repository\ClientRepository;
 use App\Controller\BaseController;
 use App\Service\Client\ClientServiceInterface;
@@ -235,16 +236,27 @@ class ClientController extends BaseController
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), client)")
      */
     #[Route('/{id}/delete', name: 'client.delete', methods: ['POST', 'DELETE'])]
-    public function delete(Request $request, Client $client, TranslatorInterface $translator): Response
+    public function delete(Request $request, Client $client, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
+            $message = '';
+            $type = '';
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($client);
-            $entityManager->flush();
-            if ($request->isXMLHttpRequest()) {
-                return $this->json(['message' => $translator->trans('messages.delete_success', [], 'client')]);
+
+            if (!$clientService->preprareClientRemovable($client)) {
+                $message = $translator->trans('messages.delete_error', [], 'client');
+                $type = $request->isXMLHttpRequest() ? 'error' : 'danger';
             } else {
-                $this->addFlash('success', $translator->trans('messages.delete_success', [], 'client'));
+                $type = 'success';
+                $message = $translator->trans('messages.delete_success', [], 'client');
+                $entityManager->remove($client);
+                $entityManager->flush();
+            }
+
+            if ($request->isXMLHttpRequest()) {
+                return $this->json(['message' => $message, 'type' => $type]);
+            } else {
+                $this->addFlash($type, $message);
             }
         }
 

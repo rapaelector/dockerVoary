@@ -4,6 +4,7 @@ namespace App\Service\Client;
 
 use App\Entity\User;
 use App\Entity\Client;
+use App\Entity\Project;
 use App\Repository\ClientRepository;
 use App\Service\Client\ClientServiceInterface;
 
@@ -106,5 +107,22 @@ class ClientService implements ClientServiceInterface
             $this->em->persist($client);
             $this->em->flush();
         }
+    }
+
+    /**
+     * Rename client before delete it then we can create client same as the deleted
+     * We dont forget that client = prospect (dont forget it!!)
+     */
+    public function preprareClientRemovable(Client $client): bool
+    {
+        if ($this->em->getRepository(Project::class)->findByProspect($client)) {
+            return false;
+        }
+
+        $newClientNumber = '_' . (new \DateTime())->getTimestamp() . '_' .$client->getClientNumber();
+        $client->setClientNumber($newClientNumber);
+        $this->em->flush();
+
+        return true;
     }
 }

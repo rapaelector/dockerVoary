@@ -21,7 +21,7 @@
 			class="{{ resolve([options, 'icon_attr', 'class'], 'material-icons') }}">{{ resolve([options, 'icon'], 'delete') }}</span>
 		{% endif %}
 		{% if not resolve([options, 'label'], false) %}
-		{{ resolve([options, 'label'], 'action.delete')|trans(resolve([options, 'label_trans_params'], []), resolve([options, 'label_trans_domain'], 'messages'), resolve([options, 'label_trans_locale'], null)) }}
+			<span class="delete-label">{{ resolve([options, 'label'], 'action.delete')|trans(resolve([options, 'label_trans_params'], []), resolve([options, 'label_trans_domain'], 'messages'), resolve([options, 'label_trans_locale'], null)) }}</span>
 		{% endif %}
 	</button>
 </form>

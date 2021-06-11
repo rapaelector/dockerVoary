@@ -88,3 +88,4 @@ messages:
   delete_prospect: 'Souhaitez-vous supprimer ce prospect'
   editing_success: 'Modification du prospect effectuée avec succès'
   creation_success: 'Création du prospect effectuée avec succès'
+  delete_error: "Impossible de supprimer le prospect"

@@ -88,7 +88,7 @@ list:
 messages:
     user_create_successfull: 'Utilisateur crée avec succès'
     delete_success: 'Utilisateur supprimé avec succès'
-    delete_error: "Impossible de supprimé l'utilisateur"
+    delete_error: "Impossible de supprimer l'utilisateur"
     profile_edit_success: 'Profil utilisateur modifié avec succès'
     user_edit_success: 'Utilisateur modifiée avec succès'
     password_changed_success: 'Votre mot de passe à étè changé avec succès'
