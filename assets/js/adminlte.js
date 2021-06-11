@@ -23,12 +23,6 @@ require('datatables.net-buttons/js/buttons.print.js')();  // Print view button
 require('datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')();
 require('datatables.net-fixedcolumns-bs4');
 
-if (window._locale == "fr") {
-    $.extend( true, $.fn.dataTable.defaults, {
-        oLanguage: { "sUrl": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json" },
-    } );
-}
-
 import './datatable/omines-datatables';
 import { selectBuilder } from './common/form/select_form';
 import './adminlte/fix_sidebar.js';

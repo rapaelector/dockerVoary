@@ -168,6 +168,10 @@ $table-cell-backgroud: rgba(0, 0, 0, 0.12);
                     line-height: 35px;
                     padding: 0 16px;
                 }
+                .first, .last {
+                    position: relative;
+                    top: 4px;
+                }
                 &.previous, &.next {
                     a.page-link {
                         padding: 4px 12px;

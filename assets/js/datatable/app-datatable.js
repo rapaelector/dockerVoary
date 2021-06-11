@@ -1,6 +1,8 @@
 import columnDefs from './column-defs';
 import { initColumnFilters } from './datatable-column-filters';
 import { appConsole } from '../utils';
+import frLanguage from './french';
+import enLanguage from './english';
 
 const initAppDataTables = ({
     /**
@@ -240,8 +242,17 @@ function buildDataTableConfig (columnCount, excludedColumns, config) {
             text: "Afficher/masquer les colonnes",
             className: 'btn buttons-collection dropdown-toggle buttons-colvis',
             columns: columns,
-        }]
+        }],
     }, config);
+
+    if (window._locale == "fr") {
+        config.language = frLanguage;
+    }
+
+    if (window._locale == "en") {
+        config.language = enLanguage;
+    }
+
 
     return config;
 }
