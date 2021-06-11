@@ -10,7 +10,7 @@
 	data-confirm-title="{{ confirm.title }}"
 	data-confirm-html="{{ confirm.html }}"
 	{% if successEvent is defined %} data-success-event="{{ successEvent }}"{% endif %}
-	{% if ajax is defined %} data-ajax="true"{% endif %}
+	{% if ajax is defined and ajax %} data-ajax="true"{% endif %}
 	{% if confirm.input is defined %} data-confirm-input="{{ confirm.input }}"{% endif %}
 >
 	<input type="hidden" name="_method" value="DELETE">

@@ -35,7 +35,7 @@ export function initFormConfirmation(options) {
                     success: function (response) {
                         $('#app-loader').hide();
                         Toast.fire({
-                            icon: 'success',
+                            icon: response.type,
                             title: response.message,
                         });
                         if ($form.data('success-event')) {

@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use App\Message\User\UserCreatedMessage;
 use App\Message\User\UserResetPasswordMessage;
 use App\Utils\PasswordGenerator;
+use App\Service\User\UserService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -261,18 +262,38 @@ class UserController extends BaseController
     }
 
     #[Route('/{id}/delete', name: 'user.delete', methods: ['POST', 'DELETE'])]
-    public function delete(Request $request, User $user, TranslatorInterface $translator): Response
+    public function delete(Request $request, User $user, TranslatorInterface $translator, UserService $service): Response
     {
         $this->denyAccessUnlessGranted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), $user);
         
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $type = '';
+            $message = '';
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-            if ($request->isXMLHttpRequest()) {
-                return $this->json(['message' => $translator->trans('messages.delete_success', [], 'users')]);
+
+            /**
+             * We cant delete the user if its use in another server
+             * Throw error message if we try to delete used user 
+             */
+            if (!$service->prepareUserRemovable($user)) {
+                $message = $translator->trans('messages.delete_error', [], 'users');
+                $type = $request->isXMLHttpRequest() ? 'error' : 'danger';
             } else {
-                $this->addFlash('success', $translator->trans('messages.delete_success', [], 'users'));
+                $message = $translator->trans('messages.delete_success', [], 'users');
+                /**
+                 * Edit the user email before soft deleted it
+                 * Softdeletable not delete the data in the base that mark it like delete
+                 */
+                $service->prepareUserRemovable($user);
+                $entityManager->remove($user);
+                $type = 'success';
+                $entityManager->flush();
+            }
+            
+            if ($request->isXMLHttpRequest()) {
+                return $this->json(['message' => $message, 'type' => $type]);
+            } else {
+                $this->addFlash($type, $translator->trans($message, [], 'users'));
             }
         }
 
