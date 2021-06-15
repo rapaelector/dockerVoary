@@ -24,15 +24,16 @@ class ProjectControllerTest extends WebTestCase
 
     public function testIndex()
     {
-        /**
-         * Create login with the test@gmail.com user and have all access
-         * Use for every project test method
-         */
         $client = static::createClient();
-        $this->login($client, 'test@gmail.com');
+        $this->login($client, 'user_role_project_view@app.locale');
         $crawler = $client->request('GET', '/project/');
         // First check if the project list page have no bugs
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant reach project list');
+
+        $this->login($client, 'user_role_project_delete@app.locale');
+        $crawler = $client->request('GET', '/project/');
+        // First check if the project list page have no bugs
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Cant reach project list');
     }
 
     public function testNew()
