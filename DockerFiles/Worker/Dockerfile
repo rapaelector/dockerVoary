@@ -93,6 +93,14 @@ RUN /sbin/ip route|awk '/default/ { print $3; }' >> /etc/php/8.0/fpm/conf.d/20-x
 RUN mkdir /root/.ssh/
 ADD default.conf /etc/nginx/sites-available/default
 
+# install wkhtmltopdf
+RUN wget -nv -O /tmp/wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_arm64.deb
+RUN apt install -y fontconfig
+RUN apt install -y xfonts-75dpi
+RUN apt install -y xfonts-base
+RUN apt --fix-broken -y install
+RUN dpkg -i /tmp/wkhtmltox.deb
+
 EXPOSE 22 443 80
 WORKDIR /var/www/
 
