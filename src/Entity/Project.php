@@ -84,17 +84,17 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
-     * 
-     * Fr: Dossier vendu par
+     *
+     * fr: Chargé(e) d'affaire
      */
-    private $soldBy;
+    private $businessCharge;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * 
      * Fr: rédacteur du devis
      */
-    private $quoteWriter;
+    private $economist;
 
     /**
      * @ORM\Column(type="integer")
@@ -259,18 +259,6 @@ class Project
      */
     private $answerForThe;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * fr: Chargé(e) d'affaire
-     */
-    private $businessCharge;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * fr: Economiste
-     */
-    private $economist;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -368,26 +356,26 @@ class Project
         return $this;
     }
 
-    public function getSoldBy(): ?User
+    public function getBusinessCharge(): ?User
     {
-        return $this->soldBy;
+        return $this->businessCharge;
     }
 
-    public function setSoldBy(User $soldBy): self
+    public function setBusinessCharge(User $businessCharge): self
     {
-        $this->soldBy = $soldBy;
+        $this->businessCharge = $businessCharge;
 
         return $this;
     }
 
-    public function getQuoteWriter(): ?User
+    public function getEconomist(): ?User
     {
-        return $this->quoteWriter;
+        return $this->economist;
     }
 
-    public function setQuoteWriter(User $quoteWriter): self
+    public function setEconomist(User $economist): self
     {
-        $this->quoteWriter = $quoteWriter;
+        $this->economist = $economist;
 
         return $this;
     }
@@ -565,9 +553,9 @@ class Project
         return $this->recordAssistant;
     }
 
-    public function setRecordAssistant(User $soldBy): self
+    public function setRecordAssistant(User $recordAssistant): self
     {
-        $this->recordAssistant = $soldBy;
+        $this->recordAssistant = $recordAssistant;
 
         return $this;
     }
@@ -681,30 +669,6 @@ class Project
     public function setAnswerForThe(?string $answerForThe): self
     {
         $this->answerForThe = $answerForThe;
-
-        return $this;
-    }
-
-    public function getBusinessCharge(): ?string
-    {
-        return $this->businessCharge;
-    }
-
-    public function setBusinessCharge(string $businessCharge): self
-    {
-        $this->businessCharge = $businessCharge;
-
-        return $this;
-    }
-
-    public function getEconomist(): ?string
-    {
-        return $this->economist;
-    }
-
-    public function setEconomist(string $economist): self
-    {
-        $this->economist = $economist;
 
         return $this;
     }

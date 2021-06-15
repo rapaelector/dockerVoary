@@ -9,9 +9,9 @@
 
 {% set labelClass = 'align-start text-center text-weight-bold text-underline' %}
 {# Dossier vendu par #}
-{% set soldBy = resolve([project, 'soldBy'], '') %}
+{% set soldBy = resolve([project, 'businessCharge'], '') %}
 {# Rédacteur du devis #}
-{% set quoteWriter = resolve([project, 'quoteWriter'], '') %}
+{% set quoteWriter = resolve([project, 'economist'], '') %}
 
 <table class="table-borderless">
     <tbody>

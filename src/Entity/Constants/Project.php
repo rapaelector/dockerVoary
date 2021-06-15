@@ -19,6 +19,7 @@ class Project
     const TYPE_MARCHE_MARCHE_PRIVATE = 'typeMarket.private_market';
     const TYPE_MARCHE_A_O_PUBLIC = 'typeMarket.ao_public';
     const TYPE_MARCHE_AO_PRIVE = 'typeMarket.ao_private';
+    const TYPE_MARCHE_SIMPLE_SUPPLY = 'typeMarket.simple_supply'; // Fourniture simple;
     const TYPE_MARCHE_ASBESTOS_REMOVAL = 'typeMarket.asbestos_removal'; // Désamiantage
     const TYPE_MARCHE_WORK_ON_EXISTING = 'typeMarket.work_on_existing'; // Travaux sur existant
 
@@ -97,6 +98,7 @@ class Project
         self::TYPE_MARCHE_MARCHE_PRIVATE,
         self::TYPE_MARCHE_A_O_PUBLIC,
         self::TYPE_MARCHE_AO_PRIVE,
+        self::TYPE_MARCHE_SIMPLE_SUPPLY,
         self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 

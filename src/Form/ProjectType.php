@@ -131,11 +131,8 @@ class ProjectType extends AbstractType
             ->add('billingAddres', AddressType::class)
             ->add('siteAddress', AddressType::class)
             ->add('descriptionOperation', TextareaType::class)
-            ->add('soldBy', null, [
-                'label' => "columns.soldBy"
-            ])
-            ->add('quoteWriter', null, [
-                'label' => "columns.quoteWriter"
+            ->add('economist', null, [
+                'label' => "columns.economist"
             ])
             ->add('norm1090', ChoiceType::class, [
                 'label' => "columns.norm1090",
@@ -202,9 +199,6 @@ class ProjectType extends AbstractType
             ])
             ->add('businessCharge', null, [
                 'label'=>"columns.businessCharge"
-            ])
-            ->add('economist', null, [
-                'label'=>"columns.economist"
             ])
             ->add('folderNameOnTheServer', null, [
                 'label'=>"columns.folderNameOnTheServer"
