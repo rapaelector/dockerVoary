@@ -18,8 +18,6 @@ class ClientControllerTest extends WebTestCase
     public function testIndex(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/client/');
-        
         $loginRedirectMessage = 'Redirecting to /login';
         $crawler = $client->request('GET', '/client/');
         $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Not redirected to login page');

@@ -28,6 +28,11 @@ class UserFixture extends Fixture
             'ROLE_CLIENT_ADD',
             'ROLE_CLIENT_EDIT',
             'ROLE_CLIENT_DELETE',
+            // ROLE PROJECT
+            'ROLE_PROJECT_VIEW',
+            'ROLE_PROJECT_ADD',
+            'ROLE_PROJECT_EDIT',
+            'ROLE_PROJECT_DELETE',
         ];
 
         /**
