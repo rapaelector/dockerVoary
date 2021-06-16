@@ -15,7 +15,6 @@ test:
   script:
     - ls
     # Copy "local" env.test first
-    - cp .env .env
     - cat .env.test >> .env
     - docker-compose up -d
     - docker-compose exec -T worker php bin/console doctrine:database:create --env=test
