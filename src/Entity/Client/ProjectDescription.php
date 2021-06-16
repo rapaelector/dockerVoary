@@ -2,6 +2,7 @@
 
 namespace App\Entity\Client;
 
+use App\Entity\Address;
 use App\Repository\Client\ProjectDescriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +38,16 @@ class ProjectDescription
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $marketType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $department;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     */
+    private $address;
 
     public function getId(): ?int
     {
@@ -75,6 +86,30 @@ class ProjectDescription
     public function setMarketType(?string $marketType): self
     {
         $this->marketType = $marketType;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?string $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

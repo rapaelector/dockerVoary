@@ -66,6 +66,7 @@ columns:
   no: 'Non'
   area: 'Surface'
   project_description: 'Description du projet'
+  department: 'Département'
   
 typeMarket:
   shadows : "Ombrières"

@@ -64,6 +64,8 @@ class Address
     private $postalCode;
 
     /**
+     * Ville
+     * 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;

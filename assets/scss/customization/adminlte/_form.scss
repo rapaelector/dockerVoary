@@ -30,6 +30,9 @@
         text-transform: uppercase;
     }
 }
+.project-address {
+    text-decoration: underline;
+}
 
 @mixin input_file {
     .vich-file {

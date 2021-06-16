@@ -35,11 +35,16 @@ label:
   postal_code: 'Code postal'
   country: 'Pays'
   contacts: 'Contacts'
+  project_address: "Adresse du projet, ou souhait d'implantation"
 
 project_description:
   project_description: 'Description de projet'
   area: 'Surface'
   market_type: 'Type de marche'
+  postal_code: 'Code postal'
+  city: 'Ville'
+  line1: 'Adresse'
+  country: 'Pays'
 
 activity:
   cement_factory: "Cimenterie"

@@ -5,6 +5,7 @@ namespace App\Form\Client;
 use App\Entity\Client\ProjectDescription;
 use App\Entity\Constants\Project as Constants;
 use App\Entity\Constants\Project\MarketType;
+use App\Form\Client\ProjectAddressType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,6 +32,12 @@ class ProjectDescriptionType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
+            ])
+            ->add('department', TextType::class, [
+                'label' => 'columns.department',
+            ])
+            ->add('address', ProjectAddressType::class, [
+                'label' => false,
             ])
         ;
     }
