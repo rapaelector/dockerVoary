@@ -2,9 +2,6 @@
 PHP=`which php`
 
 echo "======= prepare for the test ========"
-composer install
-npm install
-yarn add maildev -g
 yarn encore dev
 chmod 777 -R var/cache
 chmod 777 -R var/log
