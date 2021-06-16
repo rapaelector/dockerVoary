@@ -64,7 +64,7 @@
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: true,
+                debug: false,
                 enableFormatter: true,
                 redrawEvent: 'project.deleted',
             })

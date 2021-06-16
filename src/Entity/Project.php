@@ -204,7 +204,7 @@ class Project
     private $planningProject;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * 
      * Fr: assistant en charge du dossier
      */
@@ -218,19 +218,19 @@ class Project
     private $contact;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * fr : CONDUC. OCBS
      */
     private $ocbsDriver;
 
     /**
      * fr: CONDUC TCE
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      */
     private $tceDriver;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class)
+     * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
      */
     private $prospect;
 

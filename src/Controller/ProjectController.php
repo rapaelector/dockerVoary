@@ -37,6 +37,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 #[Route('/project')]
 class ProjectController extends BaseController
 {
+    /**
+     * @isGranted("ROLE_PROJECT_VIEW")
+     */
     #[Route('/', name: 'project.list', methods: ['GET', 'POST'])]
     public function index(
         Request $request, 
@@ -171,7 +174,9 @@ class ProjectController extends BaseController
         ]);
     }
 
-
+    /**
+     * @isGranted("ROLE_PROJECT_ADD")
+     */
     #[Route('/new', name: 'project.new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -219,7 +224,10 @@ class ProjectController extends BaseController
         }
     }
 
-    #[Route('/{id}', name: 'project.show', methods: ['GET'])]
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::VIEW'), project)")
+     */
+    #[Route('/{id}/show', name: 'project.show', methods: ['GET'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -227,6 +235,9 @@ class ProjectController extends BaseController
         ]);
     }
 
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
     #[Route('/{id}/edit', name: 'project.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
@@ -245,7 +256,10 @@ class ProjectController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'project.delete', methods: ['POST', 'DELETE'])]
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), project)")
+     */
+    #[Route('/{id}/delete', name: 'project.delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, Project $project, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {

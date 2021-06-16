@@ -12,6 +12,7 @@
 /public/images/profile/
 /var/
 /vendor/
+/public/.htaccess
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
