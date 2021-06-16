@@ -64,6 +64,8 @@ columns:
   folderNameOnTheServer: "Nom du dossier sur le serveur"
   yes: 'Oui'
   no: 'Non'
+  area: 'Surface'
+  project_description: 'Description du projet'
   
 typeMarket:
   shadows : "Ombrières"
@@ -79,6 +81,7 @@ typeMarket:
   work_on_existing: 'Travaux sur existant'
   asbestos_removal: 'Désamiantage'
   isotermal_pan: 'Pan.isothermes'
+  simple_supply: 'Fourniture simple'
 
 bonhommePercentage :
   contract_holder : "TITULAIRE DU MARCHE"

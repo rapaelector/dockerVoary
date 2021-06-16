@@ -8,19 +8,20 @@ namespace App\Entity\Constants;
 class Project
 {
     // type marche
-    const TYPE_MARCHE_SHADOWS = 'typeMarket.shadows';
-    const TYPE_MARCHE_TENDER = 'typeMarket.tender';
-    const TYPE_MARCHE_T_C_E = 'typeMarket.tce';
-    const TYPE_MARCHE_NEW_BAT = 'typeMarket.new_bat';
-    const TYPE_MARCHE_AGRICULTURAL_BAT = 'typeMarket.agricultural_bat';
-    const TYPE_MARCHE_ISOTERMAL_PANEL = 'typeMarket.isotermal_bat';
-    const TYPE_MARCHE_ISOTERMAL_PAN = 'typeMarket.isotermal_pan';
-    const TYPE_MARCHE_MARCHE_PUBLIC = 'typeMarket.public_market';
-    const TYPE_MARCHE_MARCHE_PRIVATE = 'typeMarket.private_market';
-    const TYPE_MARCHE_A_O_PUBLIC = 'typeMarket.ao_public';
-    const TYPE_MARCHE_AO_PRIVE = 'typeMarket.ao_private';
+    const TYPE_MARCHE_SHADOWS = 'typeMarket.shadows'; // Ombrières
+    const TYPE_MARCHE_TENDER = 'typeMarket.tender'; // Appel d’offre
+    const TYPE_MARCHE_T_C_E = 'typeMarket.tce'; // T.C.E
+    const TYPE_MARCHE_NEW_BAT = 'typeMarket.new_bat'; // Bât. Neuf
+    const TYPE_MARCHE_AGRICULTURAL_BAT = 'typeMarket.agricultural_bat'; // Bât. Agricole
+    const TYPE_MARCHE_ISOTERMAL_PANEL = 'typeMarket.isotermal_bat'; // Panneaux isothermes
+    const TYPE_MARCHE_ISOTERMAL_PAN = 'typeMarket.isotermal_pan'; // Pan.isothermes
+    const TYPE_MARCHE_MARCHE_PUBLIC = 'typeMarket.public_market'; // Marche public
+    const TYPE_MARCHE_MARCHE_PRIVATE = 'typeMarket.private_market'; // Marche prive
+    const TYPE_MARCHE_A_O_PUBLIC = 'typeMarket.ao_public'; // AO public
+    const TYPE_MARCHE_AO_PRIVE = 'typeMarket.ao_private'; // AO prive
     const TYPE_MARCHE_ASBESTOS_REMOVAL = 'typeMarket.asbestos_removal'; // Désamiantage
     const TYPE_MARCHE_WORK_ON_EXISTING = 'typeMarket.work_on_existing'; // Travaux sur existant
+    const TYPE_MARCHE_SIMPLE_SUPPLY = 'typeMarket.simple_supply'; // Fourniture simple
 
     // bonhome est il
     const TYPE_BONHOMME_CONTRACT_HOLDER = "bonhommePercentage.contract_holder";
@@ -126,6 +127,18 @@ class Project
         self::TYPE_DISA_SHEET_CUSTOMER_ORDER_FORM,
         self::TYPE_DISA_SHEET_AUTHORIZATION_LETTER,
         self::TYPE_DISA_SHEET_SUBCONTRACT,
+    ];
+
+    const FOLDER_PROSPECTION_MARKET_TYPE_CHOICE = [
+        self::TYPE_MARCHE_WORK_ON_EXISTING,
+        self::TYPE_MARCHE_T_C_E,
+        self::TYPE_MARCHE_NEW_BAT,
+        self::TYPE_MARCHE_AGRICULTURAL_BAT,
+        self::TYPE_MARCHE_SHADOWS,
+        self::TYPE_MARCHE_TENDER,
+        self::TYPE_MARCHE_ISOTERMAL_PAN,
+        self::TYPE_MARCHE_SIMPLE_SUPPLY,
+        self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 
     public static function getTypeValues($values, $associative = false)

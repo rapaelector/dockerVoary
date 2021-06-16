@@ -23,7 +23,8 @@ class ContactType extends AbstractType
                 'label' => 'label.firstName',
                 'attr' => [
                     'class' => 'form-control',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('email', TextType::class, [
                 'label' => 'label.e_mail',
@@ -43,7 +44,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'required' => false,
+                'required' => true,
             ])
             ->add('job', TextType::class, [
                 'label' => 'label.job',

@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Form\UserType;
 use App\Form\AddressType;
 use App\Form\User\ContactType;
+use App\Form\Client\ProjectDescriptionType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -82,6 +83,7 @@ class ClientType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
+            ->add('projectDescription', ProjectDescriptionType::class)
         ;
     }
 

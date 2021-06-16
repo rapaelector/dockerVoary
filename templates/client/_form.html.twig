@@ -6,7 +6,7 @@
             <div id="add-button-container"></div>
         </div>
         <div class="col-md-6">
-            <div class="card card card-outline card-app-secondary h-100">
+            <div class="card card-outline card-app-secondary h-100">
                 <div class="card-header">
                     <h3 class="card-title">{{ 'title.business'|trans({}, 'client') }}</h3>
                 <!-- /.card-tools -->
@@ -51,8 +51,18 @@
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="col-md-6 mt-3 mt-md-3">
+        <div class="col-md-6 mt-md-3">
             <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'title.project_description'|trans({}, 'client') }}</h3>
+                </div>
+                <div class="card-body">
+                    {% include 'project_description/_form_project_description.html.twig' with {'form': form.projectDescription} %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-3">
+            <div class="card card-outline card-app-secondary h-100">
                 <div class="card-header">
                     <h3 class="card-title">{{ 'title.business_billing_address'|trans({}, 'client') }}</h3>
                 <!-- /.card-tools -->

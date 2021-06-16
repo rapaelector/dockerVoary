@@ -22,7 +22,7 @@ $(function () {
         prototypeAttr: {
             class: 'col-md-12 mb-3'
         },
-		wrapperAdditionalClass: 'col-md-6 mt-3',
+		wrapperAdditionalClass: 'col-md-12 mb-3',
     };
     try {
 		var clientContactsContainer = '#client_contacts';

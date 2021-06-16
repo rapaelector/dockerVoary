@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Client\ProjectDescription;
 use App\Repository\ClientRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
@@ -120,6 +121,11 @@ class Client
      * @Assert\Valid
      */
     private $contacts;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ProjectDescription::class, cascade={"persist", "remove"})
+     */
+    private $projectDescription;
 
     public function __construct()
     {
@@ -284,6 +290,18 @@ class Client
     public function removeContact(User $contact): self
     {
         $this->contacts->removeElement($contact);
+
+        return $this;
+    }
+
+    public function getProjectDescription(): ?ProjectDescription
+    {
+        return $this->projectDescription;
+    }
+
+    public function setProjectDescription(?ProjectDescription $projectDescription): self
+    {
+        $this->projectDescription = $projectDescription;
 
         return $this;
     }

@@ -14,6 +14,23 @@
         }
     }
 }
+#client_projectDescription_marketType {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    .form-check {
+        width: 50%;
+    }
+}
+.market-type {
+    .form-group .col-form-label {
+        text-align: center;
+        text-decoration: underline;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
 @mixin input_file {
     .vich-file {
         .custom-file {

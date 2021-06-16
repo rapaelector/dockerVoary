@@ -16,6 +16,7 @@ title:
   filters: 'Filtres'
   business: 'Entreprise'
   business_billing_address: "'Adresse d'entreprise"
+  project_description: 'Description du projet'
 
 label:
   name: 'Nom'
@@ -34,6 +35,11 @@ label:
   postal_code: 'Code postal'
   country: 'Pays'
   contacts: 'Contacts'
+
+project_description:
+  project_description: 'Description de projet'
+  area: 'Surface'
+  market_type: 'Type de marche'
 
 activity:
   cement_factory: "Cimenterie"

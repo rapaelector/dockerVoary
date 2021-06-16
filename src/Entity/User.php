@@ -96,6 +96,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank
      * @Groups({self::GROUP_USER_PROJECT})
      */
     private $phone;
