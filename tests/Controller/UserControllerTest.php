@@ -19,19 +19,22 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $loginRedirectMessage = 'Redirecting to /login';
-        $crawler = $client->request('GET', '/user/');
-        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Not redirected to login page');
-        $this->assertStringContainsString($loginRedirectMessage, $client->getResponse()->getContent());
+        // $loginRedirectMessage = 'Redirecting to /login';
+        // // Role access test here everything ok
+        // $this->login($client, 'test@gmail.com');
+        // $crawler = $client->request('GET', '/user/');
+        // $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Not redirected to login page');
+        // $this->assertStringContainsString($loginRedirectMessage, $client->getResponse()->getContent());
 
+        // Role access test ok too
+        $this->login($client, 'user_role_user_view@app.locale');
+        $crawler = $client->request('GET', '/user/');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Forbidden failed');
+
+        // Role access test invalid credential
         $this->login($client, 'user_role_user_edit@app.locale');
         $crawler = $client->request('GET', '/user/');
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Forbidden failed');
-        // $this->assertResponseIsSuccessful();
-
-        $this->login($client, 'user_role_user_view@app.locale');
-        $crawler = $client->request('GET', '/user/');
-        $this->assertResponseIsSuccessful('unable to access page with required permission');
     }
 
     /**
@@ -70,13 +73,15 @@ class UserControllerTest extends WebTestCase
         /**
          * Test for asserting real user data
          */
+        // $this->login($client, 'user_role_user_add@app.locale');
+        // $crawler = $client->request('GET', '/user/new');
         $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
 
         // - Select the form that contains this button
         $form = $buttonCrawlerNode->form();
 
         // Use dynamic email
-        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        $dynamicMail = 'test_' .(new \DateTime())->getTimestamp(). '@gmail.com';
         /**
          * User data
          */
@@ -115,7 +120,7 @@ class UserControllerTest extends WebTestCase
         /**
          * Invalid the password to have error
          */
-        $user['email'] = 'test_' .rand(10000, 99999). '@gmail.com';
+        $user['email'] = 'test_' .(new \DateTime())->getTimestamp(). '@gmail.com';
         $user['password'] = '';
         $formValues = $this->formatFormNames('user', $user);
         /**
@@ -149,20 +154,26 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
+        // Role access test
+        // Here not allowed 
         $this->login($client, 'user_role_user_delete@app.locale');
-        $crawler = $client->request('GET', $this->getUserUrl('/edit', 'user_role_user_edit_1_@app.locale'));
+        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Forbidden failed');
 
+        // Role access test
+        // Here allowed because have good credential
         $this->login($client, 'user_role_user_edit@app.locale');
-        $crawler = $client->request('GET', $this->getUserUrl('/edit', 'user_role_user_edit_1_@app.locale'));
-        $this->assertResponseIsSuccessful();
+        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Forbidden failed');
 
         /**
          * Test for user edit form and its validation
          */
+        $this->login($client, 'user_role_user_edit@app.locale');
+        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
         $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
 
-        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        $dynamicMail = 'test_' .(new \DateTime())->getTimestamp(). '@gmail.com';
         $user = [
             "lastName" => "test",
             "firstName" => "test",
@@ -242,6 +253,7 @@ class UserControllerTest extends WebTestCase
             if (!$user) {
                 return $users[2]->getId();
             }
+
             return $user->getid();
         } else {
             return $users[0]->getId();
@@ -253,7 +265,7 @@ class UserControllerTest extends WebTestCase
         /**
          * User data
          */
-        $dynamicMail = 'test_' .rand(0, 9999). '@gmail.com';
+        $dynamicMail = 'test_' .(new \DateTime())->getTimestamp(). '@gmail.com';
         $user = [
             "lastName" => "test",
             "firstName" => "test",
