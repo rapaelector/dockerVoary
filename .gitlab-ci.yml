@@ -16,6 +16,7 @@ before_script:
 build_image:
   script:
     - cp .env.local.ci .env.local
+    - cp docker-compose-ci.yml docker-compose.yml
     - cat .env.test >> .env
     - docker-compose build
 
