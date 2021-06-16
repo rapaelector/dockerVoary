@@ -30,5 +30,5 @@ test:
     - docker ps
     - docker-compose logs worker
     - docker-compose exec -T worker chmod +x /var/www/deploy/deploy-test.sh
-    - docker-compose exec -T worker php /var/www/vendor/bin/phpunit
+    - docker-compose exec -T worker /var/www/deploy/deploy-test.sh
     - docker-compose stop

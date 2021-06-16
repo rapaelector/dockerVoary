@@ -104,7 +104,6 @@ RUN dpkg -i /tmp/wkhtmltox.deb
 EXPOSE 22 443 80
 RUN ls
 WORKDIR /var/www/
-VOLUME ./ /var/www
 
 RUN ls
 
