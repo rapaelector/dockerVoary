@@ -28,6 +28,7 @@ test:
     #- git pull origin dev --force
     #- ls -al
     #- ls
+    # test runner
     # Copy "local" env.test first
     - cp .env.local.ci .env.local
     - cp .env.test.ci .env.test
