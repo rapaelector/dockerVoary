@@ -20,5 +20,6 @@ test:
     - rm -f docker-compose.yml || true
     - cp docker-compose-ci.yml docker-compose.yml
     - docker-compose up -d
+    - docker ps
     - docker-compose exec -T worker chmod +x /var/www/deploy/deploy-test.sh
     - docker-compose stop
