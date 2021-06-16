@@ -14,10 +14,6 @@ test:
   stage: test
   script:
     - ls
-    - git add . && git reset --hard
-    - rm -f .env || true
-    - git pull origin dev --force
-    - ls -al
     # Copy "local" env.test first
     - cp .env.test .env
     - docker-compose up -d
