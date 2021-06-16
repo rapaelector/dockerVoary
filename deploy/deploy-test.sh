@@ -2,6 +2,7 @@
 PHP=`which php`
 
 composer install
+yarn install
 yarn encore dev
 $PHP bin/console doctrine:database:drop --if-exists --env=test
 $PHP bin/console doctrine:database:create --if-not-exists --env=test
