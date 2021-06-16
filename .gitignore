@@ -11,8 +11,8 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /public/images/profile/
-/var/cache/
-/var/log/
+/var/cache/*
+/var/log/*
 /vendor/
 /public/.htaccess
 ###< symfony/framework-bundle ###
