@@ -96,8 +96,6 @@ class ProjectFixture extends Fixture
             "planningProject" => "Lorem ipsum dolor sit amet",
             "priorizationOfFile" => "NORMAL",
             "answerForThe" => "Idealy henintsoa qdsfffffffffffffffffffffff Idealy henintsoa qdsfffffffffffffffffffffff",
-            "businessCharge" => "Henintsoa",
-            "economist" => "Henintsoa",
             "folderNameOnTheServer" => "Xfds DDc dddff",
             // "recordAssistant" => "47",
             // "ocbsDriver" => "59",

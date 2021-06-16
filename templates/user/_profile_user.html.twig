@@ -36,7 +36,9 @@
                         <li class="nav-item">
                             <span class="nav-link">
                                 {{ 'label.created_at'|trans }}
-                                <span class="float-right">{{ resolve([user, 'createdAt'], '-')|date('d/m/Y') }}</span>
+                                <span class="float-right">
+                                    {{ resolve([user, 'createdAt'], null) ? resolve([user, 'createdAt'])|date('d/m/Y') : '-' }}
+                                </span>
                             </span>
                         </li>
                         <li class="nav-item">

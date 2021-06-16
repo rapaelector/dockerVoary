@@ -98,6 +98,7 @@ class Project
         self::TYPE_MARCHE_MARCHE_PRIVATE,
         self::TYPE_MARCHE_A_O_PUBLIC,
         self::TYPE_MARCHE_AO_PRIVE,
+        self::TYPE_MARCHE_SIMPLE_SUPPLY,
         self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 

@@ -7,9 +7,9 @@ class MarketType
     const WORK_ON_EXISTING = 'work_on_existing'; // Travaux sur existant
     const TCE = 'tce'; // T.C.E
     const NEW_BUILDING = 'new_bat'; // Bât neuf
-    const AGRICULTURAL_BUILDING = 'agricultural_building'; // Bât agricole
+    const AGRICULTURAL_BUILDING = 'agricultural_bat'; // Bât agricole
     const SHADES = 'shades'; // Ombrières
-    const CALL_FOR_TENDER = 'call_for_tender'; // Appel d'offre
+    const CALL_FOR_TENDER = 'tender'; // Appel d'offre
     const ISOTHERMAL_PAN = 'isotermal_pan';  // Pan isotermes
     const SIMPLE_SUPPLY = 'simple_supply'; // Fourniture simple
     const ASBESTOS_REMOVAL = 'asbestos_removal'; // Désamiantage

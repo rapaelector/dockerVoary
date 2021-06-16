@@ -42,7 +42,7 @@ services:
     env_file:
       - .env.local
       - .env.test
-    build: ./DockerFiles/Worker
+    build: ./DockerFiles/WorkerCI
     ports:
     - ${SERVER_PORT}:80
     depends_on:
