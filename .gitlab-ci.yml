@@ -2,6 +2,7 @@ image: tmaier/docker-compose:latest
 
 services:
   - docker:dind
+  - alias:docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
