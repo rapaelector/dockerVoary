@@ -148,7 +148,7 @@ class Project
     private $depositeDateEdit;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      * 
      * Fr: condition négocier avec le client
      */
@@ -452,12 +452,12 @@ class Project
         return $this;
     }
 
-    public function getClientCondition(): ?string
+    public function getClientCondition()
     {
         return $this->clientCondition;
     }
 
-    public function setClientCondition(string $clientCondition): self
+    public function setClientCondition($clientCondition): self
     {
         $this->clientCondition = $clientCondition;
 
