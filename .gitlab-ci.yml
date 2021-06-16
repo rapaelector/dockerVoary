@@ -13,12 +13,6 @@ cache:
 before_script:
   - docker info
   - docker-compose --version
-build_image:
-  script:
-    - cp .env.local.ci .env.local
-    - cp docker-compose-ci.yml docker-compose.yml
-    - cat .env.test >> .env
-    - docker-compose build
 
 stages:
   - test
@@ -36,5 +30,5 @@ test:
     - docker ps
     - docker-compose logs worker
     - docker-compose exec -T worker chmod +x /var/www/deploy/deploy-test.sh
-    - docker-compose exec -T worker php vendor/bin/phpunit
+    - docker-compose exec -T worker php /var/www/vendor/bin/phpunit
     - docker-compose stop
