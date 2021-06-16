@@ -23,6 +23,7 @@ test:
     - ls
     # Copy "local" env.test first
     - cp .env.local.ci .env.local
+    - cp .env.test.ci .env.test
     - cat .env.test >> .env
     - rm -f docker-compose.yml || true
     - cp docker-compose-ci.yml docker-compose.yml
