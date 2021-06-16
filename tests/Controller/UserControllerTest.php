@@ -150,7 +150,7 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
 
         $this->login($client, 'user_role_user_delete@app.locale');
-        $crawler = $client->request('GET', $this->getUserUrl('/edit', 'user_role_user_edit_1_@app.locale'));
+        $crawler = $client->request('GET', $this->getUserUrl('/edit'));
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Forbidden failed');
 
         $this->login($client, 'user_role_user_edit@app.locale');
@@ -242,6 +242,7 @@ class UserControllerTest extends WebTestCase
             if (!$user) {
                 return $users[2]->getId();
             }
+
             return $user->getid();
         } else {
             return $users[0]->getId();
