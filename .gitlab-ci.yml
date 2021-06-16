@@ -24,10 +24,10 @@ test:
   only:
     - dev
   script:
-    #- git add . && git reset --hard
-    #- git pull origin dev --force
-    #- ls -al
-    #- ls
+    - git add . && git reset --hard
+    - git pull origin dev --force
+    - ls -al
+    - ls
     # test runner
     # Copy "local" env.test first
     - cp .env.local.ci .env.local
