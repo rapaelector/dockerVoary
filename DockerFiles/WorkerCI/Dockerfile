@@ -104,5 +104,8 @@ RUN dpkg -i /tmp/wkhtmltox.deb
 EXPOSE 22 443 80
 WORKDIR /var/www/
 
+COPY composer.json composer.lock symfony.lock .env ./
+RUN composer install
+
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["nginx", "-g", "daemon off;"]
