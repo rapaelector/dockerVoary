@@ -1,9 +1,14 @@
 {{ form_start(form) }}
     <div class="row">
         <div class="col-md-6">
+            <h3 class="mb-0 text-app-primary">{{ 'title.contacts'|trans({}, 'client') }}</h3>
+            {{ form_row(form.contacts) }}
+            <div id="add-button-container"></div>
+        </div>
+        <div class="col-md-6">
             <div class="card card card-outline card-app-secondary h-100">
                 <div class="card-header">
-                    <h3 class="card-title">{{ 'title.client'|trans({}, 'client') }}</h3>
+                    <h3 class="card-title">{{ 'title.business'|trans({}, 'client') }}</h3>
                 <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header -->
@@ -22,6 +27,9 @@
                         <div class="col-sm-12">
                             {{ form_row(form.activity) }}
                         </div>
+                        {#
+                            # https://suivi.espai-web.com/tache/4892%20%20data-toggle=
+                            # Dans la PJ (Toute cette partie ne présente pas de grand intérêt à ce stade de la prise de renseignement)
                         <div class="col-sm-6">
                             {{ form_row(form.paymentMethod) }}
                         </div>
@@ -37,15 +45,16 @@
                         <div class="col-sm-12 col-md-6">
                             {{ form_row(form.intraCommunityTva) }}
                         </div>
+                        #}
                     </div>
                 </div>
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="col-md-6 mt-3 mt-md-0">
+        <div class="col-md-6 mt-3 mt-md-3">
             <div class="card card card-outline card-app-secondary h-100">
                 <div class="card-header">
-                    <h3 class="card-title">{{ 'title.billing_address'|trans({}, 'client') }}</h3>
+                    <h3 class="card-title">{{ 'title.business_billing_address'|trans({}, 'client') }}</h3>
                 <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header -->
@@ -55,12 +64,6 @@
                 <!-- /.card-body -->
             </div>
         </div>
-    </div>
-
-    <div class="mt-3">
-        <h3 class="mb-0 text-app-primary">{{ 'title.contacts'|trans({}, 'client') }}</h3>
-        {{ form_row(form.contacts) }}
-        <div id="add-button-container"></div>
     </div>
 
     <div class="text-center py-3">

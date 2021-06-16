@@ -52,10 +52,10 @@ class ContactType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('rawAddress', TextType::class, [
-                'label' => 'label.address',
-                'required' => false,
-            ])
+            // ->add('rawAddress', TextType::class, [
+            //     'label' => 'label.address',
+            //     'required' => false,
+            // ])
         ;
     }
 

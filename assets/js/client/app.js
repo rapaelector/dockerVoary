@@ -20,7 +20,7 @@ $(function () {
 			container: '#add-button-container',
 		},
         prototypeAttr: {
-            class: 'col-md-6 mt-3'
+            class: 'col-md-12 mb-3'
         },
 		wrapperAdditionalClass: 'col-md-6 mt-3',
     };
