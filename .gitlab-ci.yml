@@ -1,0 +1,28 @@
+image: tmaier/docker-compose:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - docker-compose --version
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - cd /var/www
+    - git add . && git reset --hard
+    - rm -f .env || true
+    - git pull origin dev --force
+    - ls -al
+    # Copy "local" env.test first
+    - cp .env.test .env
+    - docker-compose up -d
+    - docker-compose exec -T worker php bin/console doctrine:database:create --env=test
+    - docker-compose exec -T worker php bin/console doctrine:schema:update --force --env=test
+    - docker-compose exec -T worker php bin/console doctrine:fixtures:load --env=test
+    - docker-compose exec -T worker php vendor/bin/phpunit
+    - docker-compose stop
