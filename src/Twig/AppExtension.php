@@ -38,6 +38,6 @@ class AppExtension extends AbstractExtension
      */
     public function countryCodeToName(?string $countryCode): string
     {
-        return $countryCode ? Countries::getName($countryCode) : '';
+        return $countryCode ? (Countries::getName($countryCode) ? Countries::getName($countryCode) : $countryCode) : '';
     }
 }
