@@ -2,10 +2,20 @@ image: tmaier/docker-compose:latest
 
 services:
   - docker:dind
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - public/
+    - vendor/
+  policy: pull-push
 
 before_script:
   - docker info
   - docker-compose --version
+build_image:
+  script:
+    - docker-compose build
 
 stages:
   - test

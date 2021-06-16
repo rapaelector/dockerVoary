@@ -11,3 +11,5 @@ $PHP bin/console assets:install
 chmod 777 -R public/*
 
 
+# test
+$PHP ./vendor/bin/phpunit
