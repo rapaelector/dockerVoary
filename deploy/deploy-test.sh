@@ -2,7 +2,6 @@
 PHP=`which php`
 
 composer install
-yarn install
 npm install
 yarn encore dev
 $PHP bin/console doctrine:database:drop --if-exists --env=test
