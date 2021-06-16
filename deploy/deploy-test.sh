@@ -3,6 +3,7 @@ PHP=`which php`
 
 composer install
 yarn install
+npm install
 yarn encore dev
 $PHP bin/console doctrine:database:drop --if-exists --env=test
 $PHP bin/console doctrine:database:create --if-not-exists --env=test
@@ -16,3 +17,5 @@ chmod 777 -R public/*
 
 # test
 $PHP ./vendor/bin/phpunit
+
+
