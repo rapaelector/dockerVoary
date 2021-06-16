@@ -83,14 +83,14 @@ class Project
     private $descriptionOperation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      *
      * fr: Chargé(e) d'affaire
      */
     private $businessCharge;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * 
      * Fr: rédacteur du devis
      */
