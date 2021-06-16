@@ -104,7 +104,5 @@ RUN dpkg -i /tmp/wkhtmltox.deb
 EXPOSE 22 443 80
 WORKDIR /var/www/
 
-RUN composer install
-
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["nginx", "-g", "daemon off;"]
