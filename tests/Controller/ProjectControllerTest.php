@@ -44,14 +44,14 @@ class ProjectControllerTest extends WebTestCase
         // First check if we reach the project création page
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant reach project new page');
 
-        // Create project with valid data
+        // Create project with valid data then redirect to the project list
         $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
         $form = $buttonCrawlerNode->form();
         $formValues = $this->formatFormNames('project', $this->generateProject());
 
         $this->submitOverride($client, $form, $formValues);
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Faild to insert project data');
-        // $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
+        $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Faild to insert project data');
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
 
         // Create project with invalid data
         $formValues = $this->formatFormNames('project', $this->generateProject(true));
@@ -174,20 +174,24 @@ class ProjectControllerTest extends WebTestCase
         $users = $userRepository->findAll();
         $user = $users[0];
 
+        /**
+         * Commented field here are mostly a relation field
+         * TODO : Increase data structure to be more real, add relation with other entity by relation fields
+         */
         return [
             "roadmap" => $invalidData ? "1" : rand(0, 1),
-            "prospect" => "9",
+            // "prospect" => "9",
             "siteCode" => "TTPC",
             "projectOwner" => "Henintsoa",
             "projectManager" => "Henintsoa",
-            "contactSelect" => "36",
+            // "contactSelect" => "36",
             "businessCharge" => $user->getId(),
             "economist" => $user->getId(),
             "descriptionOperation" => "Lorem ipsum dolor sit amet consectetur",
             "contact" => [
                 "lastName" => $invalidData ? "" : "_henintsoa",
                 "firstName" => "Idealy",
-                "email" => "_idealyHenintsoa@gmail.com",
+                "email" => $invalidData ? "misterData@gmail.com" : 'user_' .(new \DateTime())->getTimestamp(). '@app.locale',
                 "phone" => "",
                 "job" => "",
                 "fax" => "",

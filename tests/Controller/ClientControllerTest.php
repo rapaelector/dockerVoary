@@ -58,7 +58,7 @@ class ClientControllerTest extends WebTestCase
         // - Select the form that contains this button
         $form = $buttonCrawlerNode->form();
 
-        $dynamicMail = 'mail_' .rand(0, 9999). '@app.locale';
+        $dynamicMail = 'mail_' .(new \DateTime())->getTimestamp(). '@app.locale';
         $contactsFormattedValues = ['client' => $this->generateClientContact()];
 
         // submit the Form object with bad credentials
@@ -189,7 +189,7 @@ class ClientControllerTest extends WebTestCase
 
     public function generateClientContact()
     {
-        $dynamicMail = 'mail_' .rand(0, 9999). '@app.locale';
+        $dynamicMail = 'mail_' .(new \DateTime())->getTimestamp(). '@app.locale';
 
         return [
             "contacts" => [
