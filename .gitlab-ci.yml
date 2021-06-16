@@ -17,7 +17,10 @@ test:
     # Copy "local" env.test first
     - cp .env.local.ci .env.local
     - cat .env.test >> .env
+    - rm -f docker-compose.yml || true
+    - cp docker-compose-ci.yml docker-compose.yml
     - docker-compose up -d
+    - docker-compose exec -T worker composer install
     - docker-compose exec -T worker php bin/console doctrine:database:create --env=test
     - docker-compose exec -T worker php bin/console doctrine:schema:update --force --env=test
     - docker-compose exec -T worker php bin/console doctrine:fixtures:load --env=test
