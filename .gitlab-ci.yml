@@ -30,6 +30,8 @@ test:
     - docker-compose up -d
     - docker ps
     - docker-compose logs worker
-    - docker-compose exec -T worker chmod +x /var/www/deploy/deploy-test.sh
-    - docker-compose exec -T worker /var/www/deploy/deploy-test.sh
+    - docker-compose exec -T worker chmod +x /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker chmod +x /var/www/deploy/test.sh
+    - docker-compose exec -T worker /var/www/deploy/test.sh
     - docker-compose stop

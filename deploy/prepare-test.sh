@@ -1,6 +1,7 @@
 #!/bin/bash
 PHP=`which php`
 
+echo "======= prepare for the test ========"
 composer install
 npm install
 yarn add maildev -g
@@ -16,7 +17,6 @@ $PHP bin/console assets:install
 chmod 777 -R public/*
 
 
-# test
-$PHP ./vendor/bin/phpunit
+
 
 
