@@ -16,21 +16,33 @@ class ProjectAddressType extends AbstractType
         $builder
             ->add('line1', TextType::class, [
                 'label' => 'project_description.line1',
+                'attr' => [
+                    'class' => 'project-address-fields',
+                ],
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'project_description.postal_code',
+                'attr' => [
+                    'class' => 'project-address-fields',
+                ],
             ])
             ->add('city', TextType::class, [
                 'label' => 'project_description.city',
+                'attr' => [
+                    'class' => 'project-address-fields',
+                ]
             ])
             ->add('country', CountryType::class, [
                 'label' => 'project_description.country',
                 'required' => false,
                 'attr' => [
-                    'class' => 'bootstrap-select form-control',
+                    'class' => 'bootstrap-select form-control project-address-fields',
                     'data-live-search' => true,
-                    'data-type' => 'select2'
+                    'data-type' => 'select2',
                 ],
+                'preferred_choices' => function ($val, $key) {
+                    return $val == 'FR';
+                },
             ])
         ;
     }

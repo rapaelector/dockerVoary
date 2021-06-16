@@ -20,6 +20,9 @@ class ProjectDescriptionType extends AbstractType
         $builder
             ->add('projectDescription', TextType::class, [
                 'label' => 'columns.project_description',
+                'label_attr' => [
+                    'class' => 'project-description-label',
+                ]
             ])
             ->add('area', TextType::class, [
                 'label' => 'columns.area',
@@ -35,6 +38,12 @@ class ProjectDescriptionType extends AbstractType
             ])
             ->add('department', TextType::class, [
                 'label' => 'columns.department',
+                'attr' => [
+                    'class' => 'project-address-fields department-field',
+                ],
+                'label_attr' => [
+                    'class' => 'font-weight-bold department-label',
+                ]
             ])
             ->add('address', ProjectAddressType::class, [
                 'label' => false,
