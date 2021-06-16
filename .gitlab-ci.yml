@@ -13,7 +13,7 @@ stages:
 test:
   stage: test
   script:
-    - cd /var/www
+    - ls
     - git add . && git reset --hard
     - rm -f .env || true
     - git pull origin dev --force
