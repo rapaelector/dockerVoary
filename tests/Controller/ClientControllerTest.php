@@ -163,27 +163,33 @@ class ClientControllerTest extends WebTestCase
     public function generateClient()
     {
         return [
-            "name" => "Rasoanaivo",
-            "shortName" => "Rajo",
-            // Client number is automaticaly generated so no need to give it
-            // "clientNumber" => "PR0112",
+            "name" => "MCM",
+            "shortName" => "MCM",
+            "clientNumber" => "PR0006",
             "activity" => "activity.chemistry",
-            "paymentMethod" => "payment.type.check",
-            "payment" => "payment_period.end_45",
-            "siret" => "Test siret",
-            "tvaRate" => "8.5",
-            "intraCommunityTva" => "89",
-            "billingAddress" => [
-                "name" => "Popa",
-                "phone" => "xxx xx xxx xx",
-                "fax" => "67890",
-                "line1" => "Citer",
-                "line2" => "Siniben-drano",
-                "line3" => "Siberi",
-                "postalCode" => "TCE",
-                "city" => "tananarivo",
-                "country" => "MG",
+            "projectDescription" => [
+                "projectDescription" => "Test",
+                "area" => "Lorem ipsum dolor",
+                "department" => "Lorem ipsum dolor",
+                "address" => [
+                    "postalCode" => "UI",
+                    "city" => "Paris",
+                    "line1" => "Monthelier",
+                    "country" => "FR",
+                ],
+                "marketType" => "typeMarket.work_on_existing",
             ],
+            "billingAddress" => [
+                "name" => "Lorem ipsum",
+                "phone" => "xxx xx xxx xx",
+                "fax" => "xxx xx xxx",
+                "line1" => "Lorem ipsum",
+                "line2" => "Ipsum dolor",
+                "line3" => "Test ipsum",
+                "postalCode" => "CS",
+                "city" => "Mada",
+                "country" => "FR",
+            ]
         ];
     }
 

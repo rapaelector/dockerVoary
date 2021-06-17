@@ -58,6 +58,23 @@
         }
     }
 }
+@mixin client_page {
+    .client-page {
+        .client-contact-form {
+            #client_contacts {
+                margin: 0;
+            }
+            .card-body.client-contact-card-body {
+                padding: 0;
+                .container-fluid {
+                    // all variables here are from boostrap
+                    padding: $spacer;
+                    border-bottom: 1px solid $border-color; 
+                }
+            }
+        }
+    }
+}
 
 @mixin input_file {
     .vich-file {
@@ -70,4 +87,9 @@
     }
 }
 
-@include input_file;
+@mixin _form {
+    @include client_page;
+    @include input_file;
+}
+
+@include _form;

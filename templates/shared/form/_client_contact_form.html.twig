@@ -1,0 +1,32 @@
+{% block _client_client_contacts_entry_row %}
+    <div class="container-fluid contact-entry-container">
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_row(form.lastName) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.firstName) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.fax) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.phone) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.job) }}
+            </div>
+            {#
+            <div class="col-sm-12">
+                {{ form_row(form.rawAddress) }}
+            </div>
+            #}
+            <div class="col-sm-12">
+                <div class="delete-container"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

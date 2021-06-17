@@ -36,6 +36,8 @@ label:
   country: 'Pays'
   contacts: 'Contacts'
   project_address: "Adresse du projet, ou souhait d'implantation"
+  line1: 'adresse'
+  city: 'Ville'
 
 project_description:
   project_description: 'Description de projet'

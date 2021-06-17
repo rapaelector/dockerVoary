@@ -5,11 +5,18 @@ $(function () {
 		protoWrapper: '.contact-entry-container',
 		label: '',
 		remove: {
-			content: '<span class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Supprimer la contact" data-container="body">clear</span>',
+			content: `<span
+				class="material-icon"
+				data-toggle="tooltip"
+				data-placement="bottom" 
+				title="Supprimer la contact" data-container="body">
+					Supprimer
+				</span>`,
 			attr: {
-				class: 'btn btn-sm btn-tool',
+				class: 'btn btn-sm btn-link',
+				type: 'button'
 			},
-			container: '.card-tools',
+			container: '.delete-container',
 		},
 		add: {
 			content: '<span class="material-icons">add</span> <span>Ajouter contact</span>',
@@ -20,9 +27,9 @@ $(function () {
 			container: '#add-button-container',
 		},
         prototypeAttr: {
-            class: 'col-md-12 mb-3'
+            class: 'container-fluid'
         },
-		wrapperAdditionalClass: 'col-md-12 mb-3',
+		wrapperAdditionalClass: 'container-fluid',
     };
     try {
 		var clientContactsContainer = '#client_contacts';

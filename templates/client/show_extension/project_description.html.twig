@@ -5,7 +5,7 @@
     <tbody>
         {% for key, field in projectDescriptionFields %}
             <tr>
-                <td>{{ ('columns.' ~ field)|trans({}, 'project') }}</td>
+                <td>{{ ('columns.' ~ field|u.snake)|trans({}, 'project') }}</td>
                 <td>{{ resolve([client, 'projectDescription', field], '-')|trans({}, 'project') }}</td>
             </tr>
             {% if field == 'address' %}

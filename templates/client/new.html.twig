@@ -4,9 +4,9 @@
 
 {% block title %}{{ 'title.new_client'|trans }} | {{ parent() }}{% endblock %}
 
-{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover client-page" style="height: auto;"{% endblock %}
 
-{% form_theme form.contacts 'shared/form/client_contact_form.html.twig' %}
+{% form_theme form.contacts 'shared/form/_client_contact_form.html.twig' %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {

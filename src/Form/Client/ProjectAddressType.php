@@ -19,18 +19,27 @@ class ProjectAddressType extends AbstractType
                 'attr' => [
                     'class' => 'project-address-fields',
                 ],
+                'label_attr' => [
+                    'class' => 'text-nowrap',
+                ],
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'project_description.postal_code',
                 'attr' => [
                     'class' => 'project-address-fields',
                 ],
+                'label_attr' => [
+                    'class' => 'text-nowrap',
+                ],
             ])
             ->add('city', TextType::class, [
                 'label' => 'project_description.city',
                 'attr' => [
                     'class' => 'project-address-fields',
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'text-nowrap',
+                ],
             ])
             ->add('country', CountryType::class, [
                 'label' => 'project_description.country',
@@ -43,6 +52,9 @@ class ProjectAddressType extends AbstractType
                 'preferred_choices' => function ($val, $key) {
                     return $val == 'FR';
                 },
+                'label_attr' => [
+                    'class' => 'text-nowrap',
+                ],
             ])
         ;
     }
