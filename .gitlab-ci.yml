@@ -1,13 +1,15 @@
 image: tmaier/docker-compose:latest
 
 services:
-  - docker:dind
+  - name: docker:dind
+    alias: docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
     - public/
     - vendor/
+    - var/
   policy: pull-push
 
 before_script:
@@ -19,16 +21,24 @@ stages:
 
 test:
   stage: test
+  only:
+    - dev
   script:
-    - ls
+    #- git add . && git reset --hard
+    #- git pull origin dev --force
+    #- ls -al
+    #- ls
+    # test runner
     # Copy "local" env.test first
     - cp .env.local.ci .env.local
-    - cat .env.test >> .env
+    - cp .env.test.ci .env.test
+    - cat .env.test.ci >> .env
     - rm -f docker-compose.yml || true
     - cp docker-compose-ci.yml docker-compose.yml
     - docker-compose up -d
     - docker ps
-    - docker-compose logs worker
-    - docker-compose exec -T worker chmod +x /var/www/deploy/deploy-test.sh
-    - docker-compose exec -T worker /var/www/deploy/deploy-test.sh
+    - docker-compose exec -T worker chmod +x /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker chmod +x /var/www/deploy/test.sh
+    - docker-compose exec -T worker /var/www/deploy/test.sh
     - docker-compose stop

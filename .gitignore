@@ -5,12 +5,14 @@
 .DS_Store
 .env.test
 /.env.local
+/.env.test
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /public/images/profile/
-/var/
+/var/cache/*
+/var/log/*
 /vendor/
 /public/.htaccess
 ###< symfony/framework-bundle ###

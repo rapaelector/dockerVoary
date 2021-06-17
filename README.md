@@ -61,6 +61,11 @@ We use PHPUnit for testing, before running any tests, please create a test user 
 ```
 php8 bin/console app:user:create test@gmail.com Test123 --env=test
 ```
+you can execute the bash one command **(run only once)**
+```
+chown +x deploy/test.sh
+deploy/test.sh
+```
 This user will be used throughout the application.
 
 ## Environment Variables
