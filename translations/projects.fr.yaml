@@ -66,6 +66,8 @@ pdf:
     folder_name_in_the_cloud_value_prefix: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
 
     market_type_label:
+      tender: "Appel d'offre"
+      agricultural_bat: 'Bât agricole'
       work_on_existing: 'Travaux sur existant'
       tce: 'T.C.E'
       new_building: 'Bât neuf'
