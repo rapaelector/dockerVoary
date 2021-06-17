@@ -1,10 +1,9 @@
-version: '3.8'
+version: '3.3'
 
 services:
 
   ## DATABASE ##
   mysql:
-    platform: linux/x86_64
     env_file:
       - .env.local
     build: ./DockerFiles/Mysql
