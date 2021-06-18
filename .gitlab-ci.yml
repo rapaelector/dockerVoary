@@ -38,6 +38,7 @@ test:
     - docker-compose up -d
     - docker ps
     - docker-compose exec -T worker composer install
+    - docker-compose exec -T worker yarn install
     - docker-compose exec -T worker chmod +x /var/www/deploy/prepare-test.sh
     - docker-compose exec -T worker /var/www/deploy/prepare-test.sh
     - docker-compose exec -T worker chmod +x /var/www/deploy/test.sh
