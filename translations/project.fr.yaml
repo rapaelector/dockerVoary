@@ -65,8 +65,8 @@ columns:
   yes: 'Oui'
   no: 'Non'
   area: 'Surface'
-  project_description: 'Description du projet*'
-  department: 'Département*'
+  project_description: 'Description du projet'
+  department: 'Département'
   market_type: 'Type de marche'
   
 typeMarket:

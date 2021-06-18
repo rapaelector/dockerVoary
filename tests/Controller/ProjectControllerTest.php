@@ -192,10 +192,9 @@ class ProjectControllerTest extends WebTestCase
                 "lastName" => $invalidData ? "" : "_henintsoa",
                 "firstName" => "Idealy",
                 "email" => $invalidData ? "misterData@gmail.com" : 'user_' .(new \DateTime())->getTimestamp(). '@app.locale',
-                "phone" => "",
+                "phone" => "xxx xx xxx xx",
                 "job" => "",
                 "fax" => "",
-                "rawAddress" => "",
             ],
             "billingAddres" => [
                 "name" => "Livraison",

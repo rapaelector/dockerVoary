@@ -15,7 +15,7 @@ title:
   address: 'Adresse'
   filters: 'Filtres'
   business: 'Entreprise'
-  business_billing_address: "'Adresse d'entreprise"
+  business_billing_address: "Adresse d'entreprise"
   project_description: 'Description du projet'
 
 label:

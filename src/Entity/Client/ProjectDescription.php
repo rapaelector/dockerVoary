@@ -3,14 +3,18 @@
 namespace App\Entity\Client;
 
 use App\Entity\Address;
+use App\Entity\Traits\Client\ProjectDescriptionTrait;
 use App\Repository\Client\ProjectDescriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectDescriptionRepository::class)
  */
 class ProjectDescription
 {
+    use ProjectDescriptionTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -22,6 +26,8 @@ class ProjectDescription
      * Description du projet
      * 
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Type("string")
+     * @Assert\NotBlank
      */
     private $projectDescription;
 
@@ -29,6 +35,7 @@ class ProjectDescription
      * Surface
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
      */
     private $area;
 
@@ -36,16 +43,24 @@ class ProjectDescription
      * Type de marche
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
+     * Assert\Choice(
+     *      callback="checkMarketType",
+     *      groups={"client:edit", "client:create"}
+     * )
      */
     private $marketType;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
+     * @Assert\NotBlank
      */
     private $department;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     * @Assert\Valid
      */
     private $address;
 

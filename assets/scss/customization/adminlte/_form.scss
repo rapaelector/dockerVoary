@@ -34,6 +34,9 @@
     text-decoration: underline;
 }
 .project-description-form {
+    .form-error-message {
+        white-space: nowrap !important;
+    }
     .department-label, .project-description-label {
         color: red;
     }
@@ -58,6 +61,9 @@
         }
     }
 }
+label.required:after {
+    content: "*"
+}
 @mixin client_page {
     .client-page {
         .client-contact-form {
@@ -66,6 +72,9 @@
             }
             .card-body.client-contact-card-body {
                 padding: 0;
+                fieldset.form-group {
+                    margin-bottom: 0;
+                }
                 .container-fluid {
                     // all variables here are from boostrap
                     padding: $spacer;
@@ -75,7 +84,6 @@
         }
     }
 }
-
 @mixin input_file {
     .vich-file {
         .custom-file {

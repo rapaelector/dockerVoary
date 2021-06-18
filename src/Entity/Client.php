@@ -84,7 +84,10 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Choice(callback="getPaymentTypeChoices")
+     * Assert\Choice(
+     *      callback="getPaymentTypeChoices",
+     *      groups={"payment"}
+     *  )
      */
     private $paymentMethod;
 
@@ -124,6 +127,7 @@ class Client
 
     /**
      * @ORM\OneToOne(targetEntity=ProjectDescription::class, cascade={"persist", "remove"})
+     * @Assert\Valid
      */
     private $projectDescription;
 

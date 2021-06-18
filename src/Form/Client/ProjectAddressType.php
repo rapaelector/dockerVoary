@@ -22,6 +22,7 @@ class ProjectAddressType extends AbstractType
                 'label_attr' => [
                     'class' => 'text-nowrap',
                 ],
+                'required' => false,
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'project_description.postal_code',
@@ -31,6 +32,7 @@ class ProjectAddressType extends AbstractType
                 'label_attr' => [
                     'class' => 'text-nowrap',
                 ],
+                'required' => false,
             ])
             ->add('city', TextType::class, [
                 'label' => 'project_description.city',
@@ -40,6 +42,7 @@ class ProjectAddressType extends AbstractType
                 'label_attr' => [
                     'class' => 'text-nowrap',
                 ],
+                'required' => false,
             ])
             ->add('country', CountryType::class, [
                 'label' => 'project_description.country',
@@ -55,6 +58,7 @@ class ProjectAddressType extends AbstractType
                 'label_attr' => [
                     'class' => 'text-nowrap',
                 ],
+                'required' => false,
             ])
         ;
     }

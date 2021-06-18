@@ -53,14 +53,13 @@ class ClientControllerTest extends WebTestCase
         /**
          * - Test for adding real data for client
          */
+        $this->login($client, 'user_role_client_add@app.locale');
+        $crawler = $client->request('GET', '/client/new');
         $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
 
         // - Select the form that contains this button
         $form = $buttonCrawlerNode->form();
-
-        $dynamicMail = 'mail_' .(new \DateTime())->getTimestamp(). '@app.locale';
         $contactsFormattedValues = ['client' => $this->generateClientContact()];
-
         // submit the Form object with bad credentials
         $formValues = $this->formatFormNames('client', $this->generateClient());
         
@@ -69,6 +68,7 @@ class ClientControllerTest extends WebTestCase
          */
         $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
         $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to client list failed');
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
         
         /**
          * Second submit should fail and return to the new client page with invalid fields
@@ -107,6 +107,8 @@ class ClientControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         // test for client editing
+        $this->login($client, 'user_role_client_edit@app.locale');
+        $crawler = $client->request('GET', $editClientUrl);
         $buttonCrawlerNode = $crawler->filter('button[type="submit"]');
 
         // - Select the form that contains this button
@@ -117,6 +119,7 @@ class ClientControllerTest extends WebTestCase
         // First submit should ok
         $this->submitOverride($client, $form, $formValues, $contactsFormattedValues);
         $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Redirection to client list failed');
+        $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
 
     }
 
@@ -163,32 +166,31 @@ class ClientControllerTest extends WebTestCase
     public function generateClient()
     {
         return [
-            "name" => "MCM",
-            "shortName" => "MCM",
-            "clientNumber" => "PR0006",
-            "activity" => "activity.chemistry",
+            "name" => "Lorem",
+            "shortName" => "",
+            "activity" => "",
             "projectDescription" => [
-                "projectDescription" => "Test",
-                "area" => "Lorem ipsum dolor",
-                "department" => "Lorem ipsum dolor",
+                "projectDescription" => "Lorem",
+                "area" => "qsdfqsdf",
+                "department" => "Lorem",
                 "address" => [
-                    "postalCode" => "UI",
-                    "city" => "Paris",
-                    "line1" => "Monthelier",
-                    "country" => "FR",
+                    "postalCode" => "",
+                    "city" => "",
+                    "line1" => "",
+                    // "country" => "",
                 ],
-                "marketType" => "typeMarket.work_on_existing",
+                "marketType" => "typeMarket.shadows",
             ],
             "billingAddress" => [
-                "name" => "Lorem ipsum",
-                "phone" => "xxx xx xxx xx",
-                "fax" => "xxx xx xxx",
-                "line1" => "Lorem ipsum",
-                "line2" => "Ipsum dolor",
-                "line3" => "Test ipsum",
-                "postalCode" => "CS",
-                "city" => "Mada",
-                "country" => "FR",
+                "name" => "",
+                "phone" => "",
+                "fax" => "",
+                "line1" => "",
+                "line2" => "",
+                "line3" => "",
+                "postalCode" => "",
+                "city" => "",
+                // "country" => "",
             ]
         ];
     }
@@ -206,7 +208,6 @@ class ClientControllerTest extends WebTestCase
                     "fax" => "45678",
                     "phone" => "56789",
                     "job" => "RTYUI",
-                    "rawAddress" => "Lorem ipsum",
                 ],
             ],
         ];

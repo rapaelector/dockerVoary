@@ -55,6 +55,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
+     * @Assert\NotBlank
      * @Groups({self::GROUP_USER_PROJECT})
      */
     private $email;
@@ -76,7 +77,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"user:create"})
      * @Assert\Length(
      *      min = 2,
      * )

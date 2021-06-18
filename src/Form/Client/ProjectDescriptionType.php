@@ -22,10 +22,12 @@ class ProjectDescriptionType extends AbstractType
                 'label' => 'columns.project_description',
                 'label_attr' => [
                     'class' => 'project-description-label',
-                ]
+                ],
+                'required' => true,
             ])
             ->add('area', TextType::class, [
                 'label' => 'columns.area',
+                'required' => false,
             ])
             ->add('marketType', ChoiceType::class, [
                 'label' => 'columns.marketType',
@@ -35,6 +37,7 @@ class ProjectDescriptionType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
+                'required' => false,
             ])
             ->add('department', TextType::class, [
                 'label' => 'columns.department',
@@ -43,10 +46,12 @@ class ProjectDescriptionType extends AbstractType
                 ],
                 'label_attr' => [
                     'class' => 'font-weight-bold department-label',
-                ]
+                ],
+                'required' => true,
             ])
             ->add('address', ProjectAddressType::class, [
                 'label' => false,
+                'required' => false,
             ])
         ;
     }

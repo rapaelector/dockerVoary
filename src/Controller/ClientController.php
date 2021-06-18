@@ -161,7 +161,9 @@ class ClientController extends BaseController
         $newClientNumber = $clientService->generateClientNumber();
         $client = new Client();
         $client->setClientNumber($newClientNumber[Client::TYPE_PROSPECT]);
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientType::class, $client, [
+            'validation_groups' => ['Default', 'client:create'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -209,7 +211,9 @@ class ClientController extends BaseController
     #[Route('/{id}/edit', name: 'client.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Client $client, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientType::class, $client, [
+            'validation_groups' => ['Default', 'client:edit'],
+        ]);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
