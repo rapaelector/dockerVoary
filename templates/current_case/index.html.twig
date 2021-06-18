@@ -1,0 +1,30 @@
+{% extends 'current_case/layout.html.twig' %}
+
+{% block content %}
+    <div class="card card-outline-primary">
+        <div class="card-body">
+            <div id="{{ datatable.tableId }}">Chargement...</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            window.App.DataTable.initAppDataTables({
+                columnNames: [
+                    'current_case_folder_name_on_the_server', 'action'
+                ],
+                excludedColumns: [6],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                columnsCount: {{ datatable.columns|length }},
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: false,
+                enableFormatter: true,
+                redrawEvent: 'client.deleted',
+            })
+        });
+    </script>
+{% endblock %}

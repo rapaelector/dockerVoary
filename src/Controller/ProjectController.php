@@ -29,6 +29,7 @@ use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
+
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
