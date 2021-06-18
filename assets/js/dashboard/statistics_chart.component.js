@@ -6,7 +6,6 @@
 */
 
 import $ from 'jquery';
-import Chart from 'chart.js/dist/Chart.min.js';
 
 function StatisticsChartController ($scope, $filter, statisticsService, resolverService) {
     // var ctrl = this;
