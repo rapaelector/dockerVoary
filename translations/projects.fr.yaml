@@ -125,3 +125,7 @@ pdf:
     pan_isothermes: 'Pan. Isothermes'
     administrative_file: 'Dossier administratif'
     asbestos_removal: 'Désamiantage'
+
+columns:
+  folder_name_on_the_server: 'Nom du dossier'
+  contact_name: 'Contact'

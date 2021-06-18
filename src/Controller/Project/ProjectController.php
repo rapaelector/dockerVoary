@@ -41,7 +41,11 @@ class ProjectController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
-                'label' => $translator->trans('columns.folderNameOnTheServer', [], 'project')
+                'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects')
+            ])
+            ->add('contact_name', TextColumn::class, [
+                'field' => 'contact.lastName',
+                'label' => $translator->trans('columns.contact_name', [], 'projects')
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('action.action'),

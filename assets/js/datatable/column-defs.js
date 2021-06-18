@@ -122,6 +122,7 @@ export default [
             'client_intra_community_tva',
             'client_type',
             'client_postal_code',
+            'contact_name',
             'project_roadmap',
         ],
         className: ''
