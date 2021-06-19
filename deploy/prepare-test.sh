@@ -2,8 +2,8 @@
 PHP=`which php`
 
 echo "======= install composer ========"
-rm -Rf vendor
-composer install
+#rm -Rf vendor
+#composer install
 echo "==== install node module ====="
 rm yarn.lock
 rm -Rf node_modules
