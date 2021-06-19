@@ -13,7 +13,7 @@ yarn encore dev
 echo "======= prepare for the test ========"
 chmod 777 -R var/cache
 chmod 777 -R var/log
-node_modules/maildev/bin/maildev --web 1080 --smtp 25 --hide-extensions STARTTLS &
+node_modules/maildev/bin/maildev --web 1999 --smtp 25 --hide-extensions STARTTLS &
 $PHP bin/console doctrine:database:drop --force --if-exists --env=test
 $PHP bin/console doctrine:database:create --if-not-exists --env=test
 $PHP bin/console doctrine:schema:update --force --env=test
