@@ -1,6 +1,12 @@
 #!/bin/bash
 PHP=`which php`
 
+echo "======= install composer ========"
+composer install
+echo "==== install node module ====="
+yarn install
+echo "======compole the js======="
+yarn encore dev
 echo "======= prepare for the test ========"
 chmod 777 -R var/cache
 chmod 777 -R var/log
