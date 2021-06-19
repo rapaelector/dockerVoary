@@ -4,11 +4,15 @@ services:
     alias: docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - public/
+    - vendor/
+    - var/
   policy: pull-push
 
 before_script:
   - docker info
-  - sudo chown -R gitlab-runner:gitlab-runner *
   - docker-compose --version
 
 stages:
