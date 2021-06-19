@@ -4,6 +4,8 @@ PHP=`which php`
 echo "======= install composer ========"
 #composer install
 echo "==== install node module ====="
+rm yarn.lock
+rm -Rf node_modules
 yarn install
 echo "======compole the js======="
 yarn encore dev
