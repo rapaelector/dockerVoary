@@ -4,6 +4,11 @@ services:
     alias: docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - public/
+    - vendor/
+    - var/
   policy: pull-push
 
 before_script:
