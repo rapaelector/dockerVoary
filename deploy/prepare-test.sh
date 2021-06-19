@@ -2,7 +2,7 @@
 PHP=`which php`
 
 echo "======= install composer ========"
-composer install
+#composer install
 echo "==== install node module ====="
 yarn install
 echo "======compole the js======="
