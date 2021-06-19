@@ -8,6 +8,7 @@ cache:
 
 before_script:
   - docker info
+  - apk add --no-cache docker-compose
   - docker-compose --version
 
 stages:
