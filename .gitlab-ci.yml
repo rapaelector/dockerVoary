@@ -8,11 +8,6 @@ cache:
 
 before_script:
   - docker info
-  - apk add curl
-  - apk add docker-compose
-  - docker-compose migrate-to-labels
-  - docker-compose --version
-  - apk add git
   - docker-compose --version
 
 stages:
