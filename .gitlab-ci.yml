@@ -1,7 +1,7 @@
-image: tmaier/docker-compose:latest
+image: docker:19.03.13
 
 services:
-  - name: docker:19-dind
+  - name: docker:19.03.13-dind
     alias: docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
