@@ -8,6 +8,7 @@ cache:
 
 before_script:
   - docker info
+  - sudo chown -R gitlab-runner:gitlab-runner .
   - docker-compose --version
 
 stages:
