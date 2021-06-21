@@ -1,16 +1,17 @@
 image: tmaier/docker-compose:latest
-
 services:
-  - name: docker:dind
+  - name: docker-dind
     alias: docker
 cache:
   key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/
+    - node_modules/
   policy: pull-push
 
 before_script:
   - docker info
   - docker-compose --version
-  - sudo chown -R gitlab-runner:gitlab-runner .
 
 stages:
   - test
@@ -34,9 +35,9 @@ test:
     - docker-compose up -d
     - docker ps
     #- docker-compose exec -T worker composer install
-    - docker-compose exec -T worker yarn
-    #- docker-compose exec -T worker chmod +x /var/www/deploy/prepare-test.sh
-    #- docker-compose exec -T worker /var/www/deploy/prepare-test.sh
-    #- docker-compose exec -T worker chmod +x /var/www/deploy/test.sh
-    #- docker-compose exec -T worker /var/www/deploy/test.sh
+    #- docker-compose exec -T worker yarn
+    - docker-compose exec -T worker chmod +x /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker /var/www/deploy/prepare-test.sh
+    - docker-compose exec -T worker chmod +x /var/www/deploy/test.sh
+    - docker-compose exec -T worker /var/www/deploy/test.sh
     - docker-compose stop
