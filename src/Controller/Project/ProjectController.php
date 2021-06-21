@@ -23,10 +23,14 @@ use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
 use Omines\DataTablesBundle\DataTableState;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/project/case')]
 class ProjectController extends BaseController
 {
+    /**
+     * @isGranted("ROLE_PROJECT_VIEW")
+     */
     #[Route('/', name: 'project.case.list')]
     public function index(
         Request $request,
