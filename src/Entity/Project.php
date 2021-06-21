@@ -6,6 +6,8 @@ use App\Repository\ProjectRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\ProjectTrait;
@@ -280,6 +282,25 @@ class Project
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
     private $productionRate;
+
+    /**
+     * Dernier relaunch
+     * 
+     * @ORM\OneToOne(targetEntity=Relaunch::class, cascade={"persist", "remove"})
+     */
+    private $lastRelaunch;
+
+    /**
+     * Relaunch
+     * 
+     * @ORM\ManyToMany(targetEntity=Relaunch::class)
+     */
+    private $relaunches;
+
+    public function __construct()
+    {
+        $this->relaunches = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -719,6 +740,42 @@ class Project
     public function setProductionRate(?string $productionRate): self
     {
         $this->productionRate = $productionRate;
+
+        return $this;
+    }
+
+    public function getLastRelaunch(): ?Relaunch
+    {
+        return $this->lastRelaunch;
+    }
+
+    public function setLastRelaunch(?Relaunch $lastRelaunch): self
+    {
+        $this->lastRelaunch = $lastRelaunch;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Relaunch[]
+     */
+    public function getRelaunches(): Collection
+    {
+        return $this->relaunches;
+    }
+
+    public function addRelaunch(Relaunch $relaunch): self
+    {
+        if (!$this->relaunches->contains($relaunch)) {
+            $this->relaunches[] = $relaunch;
+        }
+
+        return $this;
+    }
+
+    public function removeRelaunch(Relaunch $relaunch): self
+    {
+        $this->relaunches->removeElement($relaunch);
 
         return $this;
     }

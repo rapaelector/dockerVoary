@@ -139,3 +139,4 @@ columns:
   market_type: 'Type de projet'
   code_postal: 'CP'
   business_charge: 'Chef projet'
+  last_relaunch: 'Derniere relance'

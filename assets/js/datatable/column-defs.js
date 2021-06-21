@@ -82,7 +82,6 @@ export default [
             'project_amount_bbi_specific_work',
             'project_global_amount',
         ],
-        className: '',
     },
 
     /**
@@ -101,7 +100,10 @@ export default [
      */
     {
         width: '80px',
-        cols: ['client_created_at'],
+        cols: [
+            'client_created_at',
+            'last_relaunch',
+        ],
         className: 'text-center',
     },
 

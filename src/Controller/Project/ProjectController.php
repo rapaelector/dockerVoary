@@ -88,6 +88,12 @@ class ProjectController extends BaseController
                     'abbr' => $translator->trans('columns.production_rate', [], 'projects')
                 ], true),
             ])
+            ->add('lastRelaunch', DateTimeColumn::class, [
+                'field' => 'lastRelaunch.createdAt',
+                'label' => $translator->trans('columns.last_relaunch', [], 'projects'),
+                'format' => 'd/m/Y',
+                'meta' => $this->columnMeta([], true),
+            ])
             ->add('planningProject', TextColumn::class, [
                 'label' => $translator->trans('columns.planning_project', [], 'projects'),
                 'meta' => $this->columnMeta([], true)
@@ -122,6 +128,7 @@ class ProjectController extends BaseController
                     ->leftJoin('project.prospect', 'prospect')
                     ->leftJoin('project.businessCharge', 'businessCharge')
                     ->leftJoin('prospect.projectDescription', 'projectDescription')
+                    ->leftJoin('project.lastRelaunch', 'lastRelaunch')
                     ->distinct('project')
                 ;
             }
