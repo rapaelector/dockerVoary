@@ -179,7 +179,7 @@ class ProjectController extends BaseController
      * @isGranted("ROLE_PROJECT_ADD")
      */
     #[Route('/new', name: 'project.new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, TranslatorInterface $translator): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -202,6 +202,8 @@ class ProjectController extends BaseController
                 $contact = $project->getContact();
                 $this->generatePassForContact($contact);
                 $entityManager->flush();
+                $this->addFlash('success', $translator->trans('messages.creation_success', [], 'project'));
+                
                 return $this->redirectToRoute('project.list');
             }
         }

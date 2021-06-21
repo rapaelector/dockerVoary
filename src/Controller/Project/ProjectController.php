@@ -42,15 +42,36 @@ class ProjectController extends BaseController
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
                 'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([], true),
+            ])
+            ->add('businessCharge', TextColumn::class,  [
+                'field' => 'businessCharge.lastName',
+                'label' => $translator->trans('columns.business_charge', [], 'projects'),
+                'meta' => $this->columnMeta([], true),
+            ])
+            ->add('marketType', TextColumn::class, [
+                'label' => $translator->trans('columns.market_type', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'render' => function ($value, $row) use ($translator) {
+                    return $translator->trans($value, [], 'project');
+                },
+                'meta' => $this->columnMeta([], true),
             ])
             ->add('project_description_area', TextColumn::class, [
                 'field' => 'projectDescription.area',
                 'label' => $translator->trans('columns.project_description_area', [], 'projects'),
                 'meta' => $this->columnMeta([], true)
             ])
+            ->add('codePostal', TextColumn::class, [
+                'field' => 'siteAddress.postalCode',
+                'className' => 'dynamic-nowrap',
+                'label' => $translator->trans('columns.code_postal', [], 'projects'),
+                'meta' => $this->columnMeta([], true),
+            ])
+            // LOCALISATION
             ->add('project_site_address', TextColumn::class, [
                 'field' => 'siteAddress.city',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.city', [], 'projects'),
                 'meta' => $this->columnMeta([], true)
             ])
@@ -66,6 +87,10 @@ class ProjectController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.production_rate', [], 'projects')
                 ], true),
+            ])
+            ->add('planningProject', TextColumn::class, [
+                'label' => $translator->trans('columns.planning_project', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
             ])
             ->add('contact_name', TextColumn::class, [
                 'field' => 'contact.lastName',
@@ -95,6 +120,7 @@ class ProjectController extends BaseController
                     ->leftJoin('project.siteAddress', 'siteAddress')
                     ->leftJoin('project.contact', 'contact')
                     ->leftJoin('project.prospect', 'prospect')
+                    ->leftJoin('project.businessCharge', 'businessCharge')
                     ->leftJoin('prospect.projectDescription', 'projectDescription')
                     ->distinct('project')
                 ;

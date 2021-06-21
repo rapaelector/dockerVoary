@@ -135,3 +135,7 @@ columns:
   city: 'Localisation'
   comment: 'Commentaire'
   production_rate: '% Realisation'
+  planning_project: 'Planning travaux'
+  market_type: 'Type de projet'
+  code_postal: 'CP'
+  business_charge: 'Chef projet'

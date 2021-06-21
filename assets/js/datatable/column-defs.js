@@ -81,8 +81,6 @@ export default [
             'project_amount_subcontracted_work',
             'project_amount_bbi_specific_work',
             'project_global_amount',
-            'global_amount',
-            'production_rate',
         ],
         className: '',
     },
@@ -128,10 +126,23 @@ export default [
             'project_roadmap',
             'project_description_area',
             'project_site_address',
+            'global_amount',
+            'business_charge',
+            'code_postal',
         ],
         className: ''
     },
-
+    /**
+     * - MIDDLE TEXT COLUMNS
+     * - SOME NUMBER FIELDS ARE CONSIDERED TO A STRING IF ITS CONTENT IS TOO LONG
+     */
+    {
+        width: '150px',
+        cols: [
+            'market_type',
+            'production_rate',
+        ]
+    },
     /**
      * - EXTRA FIELDS
      * - FIELDS WITH VERY LONG CONTENTS
@@ -143,6 +154,7 @@ export default [
             'project_prospect',
             'comment',
             'current_case_folder_name_on_the_server',
+            'planning_project',
         ],
         className: 'text-left dynamic-nowrap',
     },

@@ -2,6 +2,8 @@
 
 {% extends 'current_case/layout.html.twig' %}
 
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
+
 {% block content %}
     <div class="card card-outline-primary">
         <div class="card-header">
@@ -23,8 +25,9 @@
         $(function() {
             window.App.DataTable.initAppDataTables({
                 columnNames: [
-                    'current_case_folder_name_on_the_server', 'project_description_area',
-                    'project_site_address', 'global_amount', 'production_rate', 'contact_name', 'comment'
+                    'current_case_folder_name_on_the_server', 'business_charge', 'market_type', 'project_description_area',
+                    'code_postal', 'project_site_address', 'global_amount', 'production_rate', 'planning_project',
+                    'contact_name', 'comment'
                 ],
                 excludedColumns: [7], // exclude when exporting excel file
                 containerSelector: '#{{ datatable.tableId }}',
@@ -35,6 +38,7 @@
                 enableFormatter: true,
                 redrawEvent: 'client.deleted',
                 config: {
+                    fixedColumns: false,
                     "initComplete": function (data, row) {
                         var formattedTotal = window.App.Utils.numberFormat(row.extras.total, 0, ',', ' ');
 
