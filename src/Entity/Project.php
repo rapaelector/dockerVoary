@@ -281,7 +281,7 @@ class Project
      * 
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $productionRate;
+    private $archivementPourcentage;
 
     /**
      * Dernier relaunch
@@ -732,14 +732,14 @@ class Project
         return $this;
     }
 
-    public function getProductionRate(): ?string
+    public function getArchivementPourcentage(): ?string
     {
-        return $this->productionRate;
+        return $this->archivementPourcentage;
     }
 
-    public function setProductionRate(?string $productionRate): self
+    public function setArchivementPourcentage(?string $archivementPourcentage): self
     {
-        $this->productionRate = $productionRate;
+        $this->archivementPourcentage = $archivementPourcentage;
 
         return $this;
     }

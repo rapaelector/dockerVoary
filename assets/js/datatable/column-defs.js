@@ -81,6 +81,7 @@ export default [
             'project_amount_subcontracted_work',
             'project_amount_bbi_specific_work',
             'project_global_amount',
+            'archivement_pourcentage',
         ],
     },
 
@@ -142,7 +143,6 @@ export default [
         width: '150px',
         cols: [
             'market_type',
-            'production_rate',
         ]
     },
     /**

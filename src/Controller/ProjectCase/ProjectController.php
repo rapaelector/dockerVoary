@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Project;
+namespace App\Controller\ProjectCase;
 
 use App\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -85,11 +85,16 @@ class ProjectController extends BaseController
                 'className' => 'text-right',
                 'meta' => $this->columnMeta([], true)
             ])
-            ->add('productionRate', TextColumn::class, [
+            // REALISATION
+            ->add('archivementPourcentage', TwigColumn::class, [
                 'label' => $translator->trans('columns.production_rate', [], 'projects'),
-                'className' => 'dynamic-nowrap',
+                'template' => 'project_case/twig_columns/_archivement_pourcentage.html.twig',
+                'className' => 'p-0',
                 'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('columns.production_rate', [], 'projects')
+                    'abbr' => $translator->trans('columns.production_rate', [], 'projects'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap text-uppercase',
+                    ],
                 ], true),
             ])
             ->add('lastRelaunch', DateTimeColumn::class, [
@@ -159,8 +164,7 @@ class ProjectController extends BaseController
             return $table->getResponse();
         }
 
-        return $this->render('current_case/index.html.twig', [
-            // 'projects' => $projectRepository->findAll(),
+        return $this->render('project_case/index.html.twig', [
             'datatable' => $table,
             'meta' => $this->columnMeta([], true)
         ]);
