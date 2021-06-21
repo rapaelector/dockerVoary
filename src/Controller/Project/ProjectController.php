@@ -27,7 +27,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/project/case')]
 class ProjectController extends BaseController
 {
-    #[Route('/', name: 'project.current_case.list')]
+    #[Route('/', name: 'project.case.list')]
     public function index(
         Request $request,
         TranslatorInterface $translator, 

@@ -9,6 +9,7 @@ menu:
     offers: 'Liste des offres'
     offers_new: 'Créer une offre'
     prospect_management: 'Gestion des prospects'
+    project_list: 'Liste des projets'
     project_management: 'Gestion des projets'
     client_header: 'Client'
 
