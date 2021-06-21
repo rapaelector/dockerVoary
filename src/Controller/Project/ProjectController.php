@@ -21,10 +21,10 @@ use App\DataTables\Filter\DateRangeFilter;
 use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
-
+use Omines\DataTablesBundle\DataTableState;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/project/current/case')]
+#[Route('/project/case')]
 class ProjectController extends BaseController
 {
     #[Route('/', name: 'project.current_case.list')]
@@ -41,19 +41,49 @@ class ProjectController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
-                'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects')
+                'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
+            ])
+            ->add('project_description_area', TextColumn::class, [
+                'field' => 'projectDescription.area',
+                'label' => $translator->trans('columns.project_description_area', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
+            ])
+            ->add('project_site_address', TextColumn::class, [
+                'field' => 'siteAddress.city',
+                'label' => $translator->trans('columns.city', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
+            ])
+            ->add('globalAmount', TextColumn::class, [
+                'label' => $translator->trans('columns.global_amount', [], 'projects'),
+                'render' => $this->numberFormatFactory(0, ',', ' '),
+                'className' => 'text-right',
+                'meta' => $this->columnMeta([], true)
+            ])
+            ->add('productionRate', TextColumn::class, [
+                'label' => $translator->trans('columns.production_rate', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.production_rate', [], 'projects')
+                ], true),
             ])
             ->add('contact_name', TextColumn::class, [
                 'field' => 'contact.lastName',
-                'label' => $translator->trans('columns.contact_name', [], 'projects')
+                'label' => $translator->trans('columns.contact_name', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
             ])
-            ->add('id', TextColumn::class, [
-                'label' => $translator->trans('action.action'),
-                'render' => $this->actionsRenderer('client.list', 'current_case/_actions.html.twig'),
-                'className' => 'text-center',
-                'searchable' => false,
-                'orderable' => false
+            ->add('comment', TextColumn::class, [
+                'label' => $translator->trans('columns.comment', [], 'projects'),
+                'meta' => $this->columnMeta([], true)
             ])
+            // ->add('id', TextColumn::class, [
+            //     'label' => $translator->trans('action.action'),
+            //     'render' => $this->actionsRenderer('client.list', 'current_case/_actions.html.twig'),
+            //     'className' => 'text-center',
+            //     'searchable' => false,
+            //     'orderable' => false,
+            //     'meta' => $this->columnMeta([], true)
+            // ])
         ;
 
         $table->createAdapter(ORMAdapter::class, [
@@ -62,21 +92,40 @@ class ProjectController extends BaseController
                 $builder
                     ->select('project')
                     ->from(Project::class, 'project')
+                    ->leftJoin('project.siteAddress', 'siteAddress')
                     ->leftJoin('project.contact', 'contact')
                     ->leftJoin('project.prospect', 'prospect')
+                    ->leftJoin('prospect.projectDescription', 'projectDescription')
                     ->distinct('project')
                 ;
-            }  
+            }
         ]);
         
         $table->handleRequest($request);
         if ($table->isCallback()) {
+            $adapter = $table->getAdapter();
+            $total = 0;
+            if ($adapter instanceof ORMAdapter) {
+                $adapter->setPostPrepareQuery(function (QueryBuilder $_qb, DataTableState $state) use($total, $table) {
+                    $qb = clone $_qb;
+                    $aliases = $qb->getAllAliases();
+
+                    if (in_array('project', $aliases)) {
+                        $qb->select(sprintf('SUM(%s.globalAmount)', 'project'));
+                        $total = $qb->getQuery()->getSingleScalarResult();
+
+                        return ['total' => $total];
+                    }
+                });
+            }
+
             return $table->getResponse();
         }
 
         return $this->render('current_case/index.html.twig', [
             // 'projects' => $projectRepository->findAll(),
             'datatable' => $table,
+            'meta' => $this->columnMeta([], true)
         ]);
     }
 }

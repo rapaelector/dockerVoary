@@ -267,6 +267,20 @@ class Project
      */
     private $folderNameOnTheServer;
 
+    /**
+     * Commentaire
+     * 
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
+     * % Realisation
+     * 
+     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $productionRate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -681,6 +695,30 @@ class Project
     public function setFolderNameOnTheServer(string $folderNameOnTheServer): self
     {
         $this->folderNameOnTheServer = $folderNameOnTheServer;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getProductionRate(): ?string
+    {
+        return $this->productionRate;
+    }
+
+    public function setProductionRate(?string $productionRate): self
+    {
+        $this->productionRate = $productionRate;
 
         return $this;
     }

@@ -127,5 +127,11 @@ pdf:
     asbestos_removal: 'Désamiantage'
 
 columns:
+  total_amount: 'Montant total'
   folder_name_on_the_server: 'Nom du dossier'
   contact_name: 'Contact'
+  project_description_area: 'Surface'
+  global_amount: 'Montant H.T'
+  city: 'Localisation'
+  comment: 'Commentaire'
+  production_rate: '% Realisation'

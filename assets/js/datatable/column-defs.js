@@ -81,6 +81,8 @@ export default [
             'project_amount_subcontracted_work',
             'project_amount_bbi_specific_work',
             'project_global_amount',
+            'global_amount',
+            'production_rate',
         ],
         className: '',
     },
@@ -124,6 +126,8 @@ export default [
             'client_postal_code',
             'contact_name',
             'project_roadmap',
+            'project_description_area',
+            'project_site_address',
         ],
         className: ''
     },
@@ -134,7 +138,12 @@ export default [
      */
     {
         width: '200px',
-        cols: ['client_name', 'project_prospect'],
+        cols: [
+            'client_name',
+            'project_prospect',
+            'comment',
+            'current_case_folder_name_on_the_server',
+        ],
         className: 'text-left dynamic-nowrap',
     },
 ];

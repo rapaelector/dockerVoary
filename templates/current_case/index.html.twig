@@ -1,7 +1,16 @@
+{% trans_default_domain 'projects' %}
+
 {% extends 'current_case/layout.html.twig' %}
 
 {% block content %}
     <div class="card card-outline-primary">
+        <div class="card-header">
+            <div class="card-tools text-uppercase text-muted">
+                <span>{{ 'columns.total_amount'|trans }}</span>
+                <span id="total"></span>
+                <span>€</span>
+            </div>
+        </div>
         <div class="card-body">
             <div id="{{ datatable.tableId }}">Chargement...</div>
         </div>
@@ -14,16 +23,24 @@
         $(function() {
             window.App.DataTable.initAppDataTables({
                 columnNames: [
-                    'current_case_folder_name_on_the_server', 'contact_name', 'action'
+                    'current_case_folder_name_on_the_server', 'project_description_area',
+                    'project_site_address', 'global_amount', 'production_rate', 'contact_name', 'comment'
                 ],
-                excludedColumns: [6],
+                excludedColumns: [7], // exclude when exporting excel file
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: false,
+                debug: true,
                 enableFormatter: true,
                 redrawEvent: 'client.deleted',
+                config: {
+                    "initComplete": function (data, row) {
+                        var formattedTotal = window.App.Utils.numberFormat(row.extras.total, 0, ',', ' ');
+
+                        $('#total').text(formattedTotal);
+                    }
+                }
             })
         });
     </script>

@@ -88,8 +88,8 @@ class ClientController extends BaseController
                     array_merge(
                         $this->filterOptionsProvider->getOptions('client_country'),
                         ['choices' => $this->filterOptionsProvider->getClientCountries()
-                    ]),
-                ),
+                    ])
+                )
             ])
             ->add('activity', TextColumn::class, [
                 'label' => $translator->trans('label.activity', [], 'client'),
@@ -101,7 +101,7 @@ class ClientController extends BaseController
                     ChoiceFilter::class, 
                     array_merge(
                         $this->filterOptionsProvider->getOptions('client_activity'),
-                        ['choices' => $this->filterOptionsProvider->getActivities()]),
+                        ['choices' => $this->filterOptionsProvider->getActivities()])
                 ),
                 'searchable' => true,
                 'orderable' => true,
