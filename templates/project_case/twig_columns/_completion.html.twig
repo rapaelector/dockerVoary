@@ -1,0 +1,12 @@
+<div class="input-group py-0 completion-field">
+    <input
+        type="text" 
+        value="{{ value }}"
+        class="border-0 text-right h-100 w-10 form-control px-1 completion-input"
+        data-id="{{ resolve([row, 'id']) }}" 
+        data-value="{{ value }}"
+    />
+    <div class="spinner-border completion-loader d-none" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

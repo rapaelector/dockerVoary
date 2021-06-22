@@ -21,31 +21,15 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('app_case_list') }}
     <script>
         $(function() {
-            window.App.DataTable.initAppDataTables({
-                columnNames: [
-                    'current_case_folder_name_on_the_server', 'business_charge', 'market_type', 'project_description_area',
-                    'code_postal', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch', 'planning_project',
-                    'contact_name', 'comment'
-                ],
-                excludedColumns: [7], // exclude when exporting excel file
+            window.initProjectCaseList({
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: true,
-                enableFormatter: true,
-                redrawEvent: 'client.deleted',
-                config: {
-                    fixedColumns: false,
-                    "initComplete": function (data, row) {
-                        var formattedTotal = window.App.Utils.numberFormat(row.extras.total, 0, ',', ' ');
-
-                        $('#total').text(formattedTotal);
-                    }
-                }
-            })
+            });
         });
     </script>
 {% endblock %}

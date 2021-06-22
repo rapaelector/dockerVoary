@@ -24,6 +24,7 @@ use Doctrine\ORM\QueryBuilder;
 use Omines\DataTablesBundle\DataTableState;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/project/case')]
 class ProjectController extends BaseController
@@ -86,9 +87,9 @@ class ProjectController extends BaseController
                 'meta' => $this->columnMeta([], true)
             ])
             // REALISATION
-            ->add('archivementPourcentage', TwigColumn::class, [
+            ->add('completion', TwigColumn::class, [
                 'label' => $translator->trans('columns.production_rate', [], 'projects'),
-                'template' => 'project_case/twig_columns/_archivement_pourcentage.html.twig',
+                'template' => 'project_case/twig_columns/_completion.html.twig',
                 'className' => 'p-0',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.production_rate', [], 'projects'),
@@ -168,5 +169,19 @@ class ProjectController extends BaseController
             'datatable' => $table,
             'meta' => $this->columnMeta([], true)
         ]);
+    }
+
+    #[Route('/update/archivement', name: 'project.case.update_archivement', methods: ['POST', 'GET'], options: ['expose' => true])]
+    public function updateArchivement(Request $request, EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $projectId = $request->request->get('id');
+            $archivementValue = $request->request->get('archivementValue');
+            $project = $em->getRepository(Project::class)->find($projectId);
+            $project->setCompletion($archivementValue);
+            $em->flush();
+
+            return $this->json(['type' => 'success', 'message' => $translator->trans('messages.data_saved', [], 'projects')]);
+        }
     }
 }

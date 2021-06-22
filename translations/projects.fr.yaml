@@ -140,3 +140,6 @@ columns:
   code_postal: 'CP'
   business_charge: 'Chef projet'
   last_relaunch: 'Derniere relance'
+
+messages:
+  data_saved: '% Réalisation enregistré avec succès'

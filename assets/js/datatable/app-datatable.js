@@ -167,6 +167,8 @@ const initAppDataTables = ({
             console.warn('Datatable init encountered an error ', error);
         }
     });
+
+    return dtPromise;
 };
 
 function CellFormatter (dtPromise, config) {

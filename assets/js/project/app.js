@@ -1,5 +1,6 @@
 import { SymfonyCollections } from '../shared/symfony_collection';
 
+// this file is for project and project_case 
 $(function () {
     var collectionOptions = {
 		protoWrapper: '.contact-entry-container',

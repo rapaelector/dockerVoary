@@ -94,10 +94,28 @@ label.required:after {
         }
     }
 }
-
+@mixin project_case_form {
+    .completion-field {
+        .completion-loader {
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: $primary;
+        }
+        .completion-input {
+            &:focus {
+                outline: 2px solid rgb(13 110 253 / 25%);
+            }
+        }
+    }
+}
 @mixin _form {
     @include client_page;
     @include input_file;
+    @include project_case_form;
 }
 
 @include _form;

@@ -281,7 +281,7 @@ class Project
      * 
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $archivementPourcentage;
+    private $completion;
 
     /**
      * Dernier relaunch
@@ -732,14 +732,14 @@ class Project
         return $this;
     }
 
-    public function getArchivementPourcentage(): ?string
+    public function getCompletion(): ?string
     {
-        return $this->archivementPourcentage;
+        return $this->completion;
     }
 
-    public function setArchivementPourcentage(?string $archivementPourcentage): self
+    public function setCompletion(?string $completion): self
     {
-        $this->archivementPourcentage = $archivementPourcentage;
+        $this->completion = $completion;
 
         return $this;
     }
