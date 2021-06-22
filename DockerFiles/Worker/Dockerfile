@@ -11,7 +11,7 @@ RUN curl --silent -fsSL https://packages.sury.org/php/apt.gpg | sudo apt-key add
 RUN printf "deb http://deb.debian.org/debian/ $(lsb_release -sc) main\ndeb-src http://deb.debian.org/debian/ $(lsb_release -sc) main\ndeb http://security.debian.org $(lsb_release -sc)/updates main\ndeb-src http://security.debian.org $(lsb_release -sc)/updates main" > /etc/apt/sources.list
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 # RUN curl -fsSL https://deb.nodesource.com/test | bash -
-RUN curl --silent --location https://deb.nodesource.com/setup_10.x  | bash -
+RUN curl --silent --location https://deb.nodesource.com/setup_14.x  | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
