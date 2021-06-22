@@ -98,15 +98,41 @@ class ProjectController extends BaseController
                     ],
                 ], true),
             ])
+            // DERNIERE RELANCE
             ->add('lastRelaunch', DateTimeColumn::class, [
                 'field' => 'lastRelaunch.createdAt',
                 'label' => $translator->trans('columns.last_relaunch', [], 'projects'),
                 'format' => 'd/m/Y',
                 'meta' => $this->columnMeta([], true),
             ])
+            // PC DEPOSIT
+            ->add('pcDeposit', TwigColumn::class, [
+                'label' => $translator->trans('columns.pc_deposit', [], 'projects'),
+                'className' => 'px-0',
+                'template' => 'project_case/twig_columns/_pc_deposite.html.twig',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.pc_deposit', [], 'projects'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap text-uppercase',
+                    ]
+                ], true)
+            ])
+            // ARCHITECT
+            ->add('architect', TwigColumn::class, [
+                'label' => $translator->trans('columns.architect', [], 'projects'),
+                'className' => 'px-0',
+                'template' => 'project_case/twig_columns/_architect.html.twig',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.architect', [], 'projects'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap text-uppercase',
+                    ]
+                ], true),
+            ])
             ->add('planningProject', TextColumn::class, [
                 'label' => $translator->trans('columns.planning_project', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([], true),
             ])
             ->add('contact_name', TextColumn::class, [
                 'field' => 'contact.lastName',
@@ -171,17 +197,42 @@ class ProjectController extends BaseController
         ]);
     }
 
-    #[Route('/update/archivement', name: 'project.case.update_archivement', methods: ['POST', 'GET'], options: ['expose' => true])]
-    public function updateArchivement(Request $request, EntityManagerInterface $em, TranslatorInterface $translator)
+    #[Route('/{id}/update', name: 'project.case.update_project_field', methods: ['POST', 'GET'], options: ['expose' => true])]
+    public function updateArchivement(Request $request, EntityManagerInterface $em, Project $project, TranslatorInterface $translator)
     {
         if ($request->isXmlHttpRequest()) {
-            $projectId = $request->request->get('id');
-            $archivementValue = $request->request->get('archivementValue');
-            $project = $em->getRepository(Project::class)->find($projectId);
-            $project->setCompletion($archivementValue);
+            $message = '';
+            $field = $request->query->get('field');
+            /**
+             * Update one of the following field in Project entity depend on query->get('field')
+             *  - completion
+             *  - pcDeposit
+             *  - architect
+             */
+            if ($field == 'completion') {
+                $completionValue = $request->request->get('completionValue');
+                $project->setCompletion($completionValue);
+                $message = 'messages.completion_saved';
+            } else if ($field == 'pc_deposit') {
+                $pcDepositValue = $request->request->get('pcDepositValue');
+                try {
+                    $project->setPcDeposit($pcDepositValue);
+                    $message = 'messages.pc_deposit_saved';
+                } catch (\Exception $e) {
+                    return $this->json(['type' => 'error', 'message' => $transition->trans('messages.pc_deposit_saving_faild', [], 'projects')]);
+                }
+            } else if ($field == 'architect') {
+                $architectValue = $request->request->get('architectValue');
+                try {
+                    $project->setArchitect($architectValue);
+                    $message = 'messages.architect_saved';
+                } catch (\Exception $e) {
+                    return $this->json(['type' => 'error', 'message' => $transition->trans('messages.architect_saving_failed', [], 'projects')]);
+                }
+            }
             $em->flush();
 
-            return $this->json(['type' => 'success', 'message' => $translator->trans('messages.data_saved', [], 'projects')]);
+            return $this->json(['type' => 'success', 'message' => $translator->trans($message, [], 'projects')]);
         }
     }
 }

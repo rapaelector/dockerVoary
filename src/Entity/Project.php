@@ -297,6 +297,16 @@ class Project
      */
     private $relaunches;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $pcDeposit;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $architect;
+
     public function __construct()
     {
         $this->relaunches = new ArrayCollection();
@@ -776,6 +786,30 @@ class Project
     public function removeRelaunch(Relaunch $relaunch): self
     {
         $this->relaunches->removeElement($relaunch);
+
+        return $this;
+    }
+
+    public function getPcDeposit(): ?bool
+    {
+        return $this->pcDeposit;
+    }
+
+    public function setPcDeposit(?bool $pcDeposit): self
+    {
+        $this->pcDeposit = $pcDeposit;
+
+        return $this;
+    }
+
+    public function getArchitect(): ?bool
+    {
+        return $this->architect;
+    }
+
+    public function setArchitect(?bool $architect): self
+    {
+        $this->architect = $architect;
 
         return $this;
     }

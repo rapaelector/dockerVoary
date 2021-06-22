@@ -56,6 +56,9 @@
                 var dtOpts = $.extend({}, data.options, typeof config.options === 'function' ? {} : config.options, options, persistOptions, {
                     ajax: function (request, drawCallback, settings) {
                         if (data) {
+                            if (options.onAjaxSuccess) {
+                                options.onAjaxSuccess(data);
+                            }
                             data.draw = request.draw;
                             drawCallback(data);
                             data = null;
@@ -76,6 +79,9 @@
                                 method: config.method,
                                 data: request
                             }).done(function(data) {
+                                if (options.onAjaxSuccess) {
+                                    options.onAjaxSuccess(data);
+                                }
                                 drawCallback(data);
                             })
                         }

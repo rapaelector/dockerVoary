@@ -126,6 +126,10 @@ pdf:
     administrative_file: 'Dossier administratif'
     asbestos_removal: 'Désamiantage'
 
+label:
+  yes: 'Oui'
+  no: 'Non'
+
 columns:
   total_amount: 'Montant total'
   folder_name_on_the_server: 'Nom du dossier'
@@ -140,6 +144,11 @@ columns:
   code_postal: 'CP'
   business_charge: 'Chef projet'
   last_relaunch: 'Derniere relance'
+  pc_deposit: 'PC depose'
+  architect: 'Architecte'
 
 messages:
-  data_saved: '% Réalisation enregistré avec succès'
+  completion_saved: '% Réalisation enregistré avec succès'
+  pc_deposit_saved: 'PC depose enregistré avec succès'
+  pc_deposit_saving_faild: "Impossible d'enregistré le PC depose"
+  architect_saved: 'Architect enregistré avec succès'

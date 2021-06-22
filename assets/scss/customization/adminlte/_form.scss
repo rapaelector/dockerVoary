@@ -64,6 +64,29 @@
 label.required:after {
     content: "*"
 }
+/*
+ * For each input, select, textarea in a datatable should have the same height
+ * Td must be 30px height max so reduice its content height if there are overflow
+ * Remove radius border for dt input
+*/
+#app_table {
+    .app-dt-list table.table.table-striped {
+        tbody {
+            tr td {
+                input, select, textarea {
+                    max-height: 27px;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+}
+/**
+ * Only for total in project case
+*/
+#total {
+    font-size: _rem(16);
+}
 @mixin client_page {
     .client-page {
         .client-contact-form {
@@ -95,17 +118,55 @@ label.required:after {
     }
 }
 @mixin project_case_form {
-    .completion-field {
-        .completion-loader {
+    $levels: (
+        0: $red,
+        1: $red,
+        2: $red,
+        3: $red,
+        4: $red,
+        5: $red,
+        6: $orange,
+        7: $orange,
+        8: $orange,
+        9: $orange,
+        10: $orange,
+        11: $yellow,
+        12: $yellow,
+        13: $yellow,
+        14: $yellow,
+        15: $yellow,
+        16: $green,
+        17: $green,
+        18: $green,
+        19: $green,
+        20: $green,
+    );
+
+    @each $name, $value in $levels {
+        .completion-#{$name} {
+            background-color: $value;
+            color: color-yiq($value);
+        }
+    }
+
+    .project-case-field {
+        position: relative;
+        .completion-loader, .pc-deposit-loader, .architect-loader {
             font-size: 12px;
             width: 18px;
             height: 18px;
             position: absolute;
-            top: 5px;
-            left: 5px;
             color: $primary;
+            top: 5px;
+        }
+        .completion-loader {
+            left: 5px;
+        }
+        .pc-deposit-loader, .architect-loader {
+            left: 15px;
         }
         .completion-input {
+            border-radius: 0 !important;
             &:focus {
                 outline: 2px solid rgb(13 110 253 / 25%);
             }

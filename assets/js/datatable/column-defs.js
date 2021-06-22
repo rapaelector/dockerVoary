@@ -19,7 +19,12 @@ export default [
      */
     {
         width: '50px',
-        cols: ['user_profile_image', 'user_can_login'],
+        cols: [
+            'user_profile_image',
+            'user_can_login',
+            'pc_deposit',
+            'architect',
+        ],
         className: 'text-center',
     },
 

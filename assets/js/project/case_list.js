@@ -27,7 +27,7 @@ window.initProjectCaseList = function({
      * 
      * @var String
      */
-    completionInputSelector='.completion-input',
+    completionInputSelector = '.completion-input',
 }) {
     const Toast = Swal.mixin({
         toast: true,
@@ -44,21 +44,21 @@ window.initProjectCaseList = function({
     var dtPromise = window.App.DataTable.initAppDataTables({
         columnNames: [
             'current_case_folder_name_on_the_server', 'business_charge', 'market_type', 'project_description_area',
-            'code_postal', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch', 'planning_project',
-            'contact_name', 'comment'
+            'code_postal', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch',
+            'pc_deposit', 'architect', 'planning_project', 'contact_name', 'comment'
         ],
         excludedColumns: [7], // exclude when exporting excel file
         containerSelector: containerSelector,
         filtersContainerSelector: filtersContainerSelector,
         columnsCount: columnsCount,
         settings: settings,
-        debug: true,
+        debug: false,
         enableFormatter: true,
         redrawEvent: 'project_case.initDt',
         config: {
             fixedColumns: false,
-            "initComplete": function (data, row) {
-                var formattedTotal = window.App.Utils.numberFormat(row.extras.total, 0, ',', ' ');
+            "onAjaxSuccess": function (data) {
+                var formattedTotal = window.App.Utils.numberFormat(data.extras.total, 0, ',', ' ');
 
                 $('#total').text(formattedTotal);
             }
@@ -84,34 +84,109 @@ window.initProjectCaseList = function({
                 var id = $(this).data('id');
                 var $completionLoader = $(this).siblings('.spinner-border.completion-loader');
 
-                if (!isNaN(inputValue)) {
-                    $completionLoader.removeClass('d-none');
-
-                    $.ajax({
-                        type: 'POST',
-                        url: Routing.generate('project.case.update_archivement'),
-                        data: {archivementValue: inputValue, id: id},
-                        dataType: "json",
-                        success: function (data) {
-                            $completionLoader.addClass('d-none');
-                            Toast.fire({
-                                icon: data.type,
-                                title: data.message,
-                            });
-                        },
-                        error: function (error) { 
-                            console.error('lorem ipsum dolor');
-                            $completionLoader.addClass('d-none');
-                            Toast.fire({
-                                icon: error.type,
-                                title: error.message,
-                            });
-                        },
+                if (!isNaN(inputValue) && (dataValue != inputValue)) {
+                    $(this).data('value', inputValue);
+                    updateFieldRequest({
+                        spinnerElem: $completionLoader,
+                        field: 'completion',
+                        data: {completionValue: inputValue, id: id},
+                        dtInstance: dtInstance,
                     })
                 } else {
                     $(this).val(dataValue);
                 }
             });
+
+            $('body').on('change', '.pc-deposit-select', function () {
+                var id = $(this).data('id');
+                var value = parseInt($(this).val());
+                var $pcDeposeLoader = $(this).siblings('.spinner-border.pc-deposit-loader');
+                var currentValue = $(this).data('value');
+
+                if (!isNaN(value) && (value == 1 || value == 0) && (currentValue != value)) {
+                    $(this).data('value', value);
+                    updateFieldRequest({
+                        spinnerElem: $pcDeposeLoader,
+                        field: 'pc_deposit',
+                        data: {pcDepositValue: value, id: id},
+                        dtInstance: dtInstance,
+                    })
+                }
+            })
+
+            $('body').on('change', '.architect-select', function () {
+                var id = $(this).data('id');
+                var value = parseInt($(this).val());
+                var $architectLoader = $(this).siblings('.spinner-border.architect-loader');
+                var currentValue = $(this).data('value');
+
+                if (!isNaN(value) && (value == 1 || value == 0) && (currentValue != value)) {
+                // if (!isNaN(value) && (value == 1 || value == 0)) {
+                    $(this).data('value', value);
+                    updateFieldRequest({
+                        spinnerElem: $architectLoader,
+                        field: 'architect',
+                        data: {architectValue: value, id: id},
+                        dtInstance: dtInstance,
+                    })
+                }
+            })
         })
     });
+
+    function updateFieldRequest({
+        /**
+         * spinner element
+         * 
+         * @var String
+         */
+        spinnerElem,
+
+        /**
+         * field to update
+         * 
+         * @var String
+         */
+        field,
+
+        /**
+         * data to send
+         * 
+         * @var Object
+         */
+        data,
+
+        /**
+         * dtInstance
+         * 
+         * @var Object
+         */
+        dtInstance,
+    })
+    {
+        var $spinner = spinnerElem;
+        $spinner.removeClass('d-none');
+
+        $.ajax({
+            type: 'POST',
+            url: Routing.generate('project.case.update_project_field', {field: field, id: data.id}),
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                $spinner.addClass('d-none');
+                dtInstance.draw();
+                Toast.fire({
+                    icon: data.type,
+                    title: data.message,
+                });
+            },
+            error: function (error) { 
+                $spinner.addClass('d-none');
+                Toast.fire({
+                    icon: error.type,
+                    title: error.message,
+                });
+            },
+        })
+    }
 };
