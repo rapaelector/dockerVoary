@@ -130,7 +130,7 @@ class ProjectController extends BaseController
                 'className' => 'text-right',
                 'meta' => $this->columnMeta([
                     'label_attr' => [
-                        'class' => 'text-left',
+                        'class' => 'text-left text-uppercase',
                     ]
                 ], true)
             ])

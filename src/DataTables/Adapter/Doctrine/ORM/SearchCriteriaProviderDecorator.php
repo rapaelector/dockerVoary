@@ -36,7 +36,7 @@ class SearchCriteriaProviderDecorator implements QueryBuilderProcessorInterface
             $column = $searchInfo['column'];
             $search = $searchInfo['search']; 
             
-            if (!empty($search) && null !== ($filter = $column->getFilter())) {
+            if (!is_null($search) && $search != '' && null !== ($filter = $column->getFilter())) {
                 if ($res = $filter->buildSearchQuery($column, $search)) {
                     $queryBuilder->andWhere($res['expr']);
                     foreach ($res['parameters'] as $key => $parameter) {
