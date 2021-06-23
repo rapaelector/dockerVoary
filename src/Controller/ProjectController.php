@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Entity\User;
+use App\Form\EconomistFormType;
+use App\Form\ProjectBusinessChargeType;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -49,6 +52,12 @@ class ProjectController extends BaseController
         DataTableFactory $dataTableFactory
     ): Response
     {
+
+        // create fake project to catch the businessCharge
+        $project = new Project();
+        $businessChargeForm = $this->createForm(ProjectBusinessChargeType::class, $project, array('csrf_protection' => false));
+        $economistForm = $this->createForm(EconomistFormType::class, $project, array('csrf_protection' => false));
+
         $createOptions = [
             'name' => 'list',
             'translation_domain' => 'project',
@@ -71,6 +80,28 @@ class ProjectController extends BaseController
                     TextFilter::class,
                     $this->filterOptionsProvider->getOptions('prospect.name')
                 ),
+            ])
+            ->add('business_charge', TwigColumn::class, [
+                'label' => $translator->trans('columns.businessCharge', [], 'project'),
+                'template' => 'project/twig_columns/_business_charge.html.twig',
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.businessCharge', [], 'project'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap',
+                    ],
+                ], true),
+            ])
+            ->add('economist', TwigColumn::class, [
+                'label' => $translator->trans('columns.economist', [], 'project'),
+                'template' => 'project/twig_columns/_economist.html.twig',
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.economist', [], 'project'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap',
+                    ],
+                ], true),
             ])
             ->add('user_email', TextColumn::class, [
                 'field' => 'contact.email',
@@ -159,6 +190,8 @@ class ProjectController extends BaseController
                     ->from(Project::class, 'project')
                     ->leftJoin('project.contact', 'contact')
                     ->leftJoin('project.prospect', 'prospect')
+                    ->leftJoin('project.businessCharge', 'businessCharge')
+                    ->leftJoin('project.economist', 'economist')
                     ->distinct('project')
                 ;
             }  
@@ -172,6 +205,8 @@ class ProjectController extends BaseController
         return $this->render('project/index.html.twig', [
             'projects' => $projectRepository->findAll(),
             'datatable' => $table,
+            'businessChargeForm' => $businessChargeForm->createView(),
+            'economistForm' => $economistForm->createView()
         ]);
     }
 
@@ -257,6 +292,89 @@ class ProjectController extends BaseController
             'project' => $project,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
+    #[Route('/business-charge/{id}', name: 'project.edit.business.charge', methods: ['POST'], options: ['expose' => true])]
+    public function editBusinessCharge(Request $request, Project $project, TranslatorInterface $translator): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $tmpProject = new Project();
+            $form = $this->createForm(ProjectBusinessChargeType::class, $tmpProject, ['csrf_protection' => false]);
+            $form->handleRequest($request);
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $project->setBusinessCharge($tmpProject->getBusinessCharge());
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($tmpProject);
+                $em->persist($project);
+                $this->getDoctrine()->getManager()->flush();
+
+                return new JsonResponse([
+                    'type' => 'success',
+                    'message' => $translator->trans('business_charge.success', [], 'projects')
+                ], Response::HTTP_OK);
+            }
+
+            return new JsonResponse([
+                'type' => 'error',
+                'message' => $translator->trans('business_charge.error', [], 'projects')
+            ], Response::HTTP_SERVICE_UNAVAILABLE);
+        }
+    }
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
+    #[Route('/economist/{id}', name: 'project.edit.economist', methods: ['POST'], options: ['expose' => true])]
+    public function editEconomist(Request $request, Project $project, TranslatorInterface $translator): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $tmpProject =new Project();
+            $form = $this->createForm(EconomistFormType::class, $tmpProject, ['csrf_protection' => false]);
+            $form->handleRequest($request);
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $project->setEconomist($tmpProject->getEconomist());
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($tmpProject);
+                $em->persist($project);
+                $this->getDoctrine()->getManager()->flush();
+
+                return new JsonResponse([
+                    'type' => 'success',
+                    'message' => $translator->trans('economist.success', [], 'projects')
+                ], Response::HTTP_OK);
+            }
+
+            return new JsonResponse([
+                'type' => 'error',
+                'message' => $translator->trans('economist.error', [], 'projects')
+            ], Response::HTTP_SERVICE_UNAVAILABLE);
+
+        }
+    }
+
+    /**
+     * List all errors of a given bound form.
+     *
+     * @param Form $form
+     *
+     * @return array
+     */
+    protected function getFormErrors(FormInterface $form)
+    {
+        $errors = array();
+
+        // Global
+        foreach ($form->getErrors(true, true) as $error) {
+            $errors[$form->getName()][] = $error->getMessage();
+        }
+
+        return $errors;
     }
 
     /**

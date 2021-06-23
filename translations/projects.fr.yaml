@@ -147,6 +147,13 @@ columns:
   pc_deposit: 'PC depose'
   architect: 'Architecte'
 
+business_charge:
+  success: Chargé(e) d'affaire mise à jour avec success
+  error:  Chargé(e) d'affaire n'a pas été mise à jours
+economist:
+  success: Economiste mise à jour avec success
+  error:  Economiste n'a pas été mise à jours
+
 messages:
   completion_saved: '% Réalisation enregistré avec succès'
   pc_deposit_saved: 'PC depose enregistré avec succès'
