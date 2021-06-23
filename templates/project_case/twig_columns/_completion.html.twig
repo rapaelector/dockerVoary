@@ -1,5 +1,5 @@
 {% set bgColor = '' %}
-{% set completionLevel = (value / 5)|round(0, 'ceil') %}
+{% set completionLevel = value ? (value / 5)|round(0, 'ceil') : '-' %}
 {% set bgColor = 'completion-' ~ completionLevel %}
 
 <div class="input-group py-0 project-case-field">

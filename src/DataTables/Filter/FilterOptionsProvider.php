@@ -4,6 +4,8 @@ namespace App\DataTables\Filter;
 
 use App\Entity\Client;
 use App\Entity\Address;
+use App\Entity\Project;
+use App\Entity\Constants\Project as ProjectConstants;
 use App\DataTables\Filter\FilterConstants;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Intl\Countries;
@@ -57,7 +59,38 @@ class FilterOptionsProvider
         ],
         'client_created_at' => [
             'type' => 'daterange',
-        ]
+        ],
+        'folder_name_on_the_server' => [
+            'type' => 'text',
+        ],
+        'project_description_area' => [
+            'type' => 'text',
+        ],
+        'postal_code' => [
+            'type' => 'text',
+        ],
+        'contact_name' => [
+            'type' => 'text',
+        ],
+        'project_site_address' => [
+            'type' => 'text',
+        ],
+        'business_project_charge' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'project_market_type' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'pc_deposit' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'architect' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
     ];
 
     public function getOptions($name)
@@ -103,5 +136,32 @@ class FilterOptionsProvider
         }
 
         return $filterActivities;
+    }
+
+    public function getProjectBusinnessCharge()
+    {
+        $businessChargeProject = $this->em->getRepository(Project::class)
+            ->createQueryBuilder('project')
+            ->select('DISTINCT(businessCharge.lastName) businessChargeName')
+            ->leftJoin('project.businessCharge', 'businessCharge')
+            ->where('businessCharge.lastName IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+        $businessChargeProject = array_column($businessChargeProject, 'businessChargeName');
+
+        return array_combine($businessChargeProject, $businessChargeProject);
+    }
+
+    public function getProjectMarketType()
+    {
+        $marketTypeChoices = [];
+        $marketTypes = ProjectConstants::getTypeValues(ProjectConstants::TYPE_DE_MARCHE, true);
+
+        foreach ($marketTypes as $key => $marketType) {
+            $marketTypeChoices[$key] = $this->translator->trans($marketType, [], 'project');
+        }
+
+        return $marketTypeChoices;
     }
 }

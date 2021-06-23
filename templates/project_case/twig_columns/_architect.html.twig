@@ -2,8 +2,9 @@
 
 <div class="project-case-field">
     <select class="form-control border-0 architect-select p-0" data-id="{{ resolve([row, 'id']) }}" data-value="{{ value }}">
+        <option {{ value is null ? 'selected' : '' }}></option>
         <option value="1" {{ value ? 'selected' : '' }}>{{ 'label.yes'|trans }}</option>
-        <option value="0" {{ (value == false or value == 0) ? 'selected' : '' }}>{{ 'label.no'|trans }}</option>
+        <option value="0" {{ ((not value) and (value is not null)) ? 'selected' : '' }}>{{ 'label.no'|trans }}</option>
     </select>
     <div class="spinner-border architect-loader d-none" role="status">
         <span class="sr-only">Loading...</span>

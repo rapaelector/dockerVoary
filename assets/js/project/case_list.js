@@ -44,8 +44,8 @@ window.initProjectCaseList = function({
     var dtPromise = window.App.DataTable.initAppDataTables({
         columnNames: [
             'current_case_folder_name_on_the_server', 'business_charge', 'market_type', 'project_description_area',
-            'code_postal', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch',
-            'pc_deposit', 'architect', 'planning_project', 'contact_name', 'comment'
+            'postal_code', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch',
+            'pc_deposit', 'architect', 'work_schedule', 'contact_name', 'comment'
         ],
         excludedColumns: [7], // exclude when exporting excel file
         containerSelector: containerSelector,
@@ -131,6 +131,23 @@ window.initProjectCaseList = function({
                     })
                 }
             })
+
+            $('body').on('click', '.save-project-comment', function () {
+                var $commentField = $(this).siblings('.form-control.comment-field');
+                var $commentLoader = $(this).siblings('.spinner-border.comment-loader');
+                var id = $commentField.data('id');
+                var value = $.trim($commentField.val());
+                var currentValue = $.trim($commentField.data('value'));
+
+                if (currentValue != value) {
+                    updateFieldRequest({
+                        spinnerElem: $commentLoader,
+                        field: 'comment',
+                        data: {commentValue: value, id: id},
+                        dtInstance: dtInstance,
+                    })
+                }
+            })
         })
     });
 
@@ -179,6 +196,7 @@ window.initProjectCaseList = function({
                     icon: data.type,
                     title: data.message,
                 });
+                $('.modal-backdrop').remove();
             },
             error: function (error) { 
                 $spinner.addClass('d-none');
@@ -186,6 +204,7 @@ window.initProjectCaseList = function({
                     icon: error.type,
                     title: error.message,
                 });
+                $('.modal-backdrop').remove();
             },
         })
     }

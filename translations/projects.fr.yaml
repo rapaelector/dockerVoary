@@ -126,6 +126,10 @@ pdf:
     administrative_file: 'Dossier administratif'
     asbestos_removal: 'Désamiantage'
 
+title:
+  edit_comment: 'Modification du commentaire'
+  strategic_affairs: 'Affaires stratégiques'
+
 label:
   yes: 'Oui'
   no: 'Non'
@@ -152,3 +156,4 @@ messages:
   pc_deposit_saved: 'PC depose enregistré avec succès'
   pc_deposit_saving_faild: "Impossible d'enregistré le PC depose"
   architect_saved: 'Architect enregistré avec succès'
+  comment_saved: 'Commentaire enregistré avec succès'

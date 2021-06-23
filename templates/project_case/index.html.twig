@@ -4,14 +4,28 @@
 
 {% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
 
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'menu.project_management'|trans([], 'messages'),
+        links: [],
+    } %}{% endembed %}
+{% endblock %}
+
 {% block content %}
     <div class="card card-outline-primary">
         <div class="card-header">
+            <h3 class="card-title">{{ 'title.strategic_affairs'|trans({}, 'projects')  }}</h3>
             <div class="card-tools text-uppercase text-muted">
                 <span>{{ 'columns.total_amount'|trans }}: </span>
                 <span id="total"></span>
                 <span>€</span>
             </div>
+        </div>
+        <div class="card-body py-0 pt-md-3 filter-collapse-container">
+            {% include template_datatable_filters with {
+                datatable: datatable,
+                filterCollapseId: 'project-case-filter-collapse',
+            } %}
         </div>
         <div class="card-body">
             <div id="{{ datatable.tableId }}">Chargement...</div>
