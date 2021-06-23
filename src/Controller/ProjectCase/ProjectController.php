@@ -128,7 +128,11 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.global_amount', [], 'projects'),
                 'render' => $this->numberFormatFactory(0, ',', '.'),
                 'className' => 'text-right',
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([
+                    'label_attr' => [
+                        'class' => 'text-left',
+                    ]
+                ], true)
             ])
             // REALISATION
             ->add('completion', TwigColumn::class, [

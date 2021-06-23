@@ -91,6 +91,18 @@ class FilterOptionsProvider
             'type' => 'choice',
             'choices' => [],
         ],
+        'site_code' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'user_email' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'roadmap' => [
+            'type' => 'choice',
+            'choices' => [],
+        ]
     ];
 
     public function getOptions($name)
@@ -163,5 +175,46 @@ class FilterOptionsProvider
         }
 
         return $marketTypeChoices;
+    }
+
+    public function getProjectSiteCode()
+    {
+        $siteCodes = $this->em->getRepository(Project::class)
+            ->createQueryBuilder('project')
+            ->select('DISTINCT(project.siteCode) siteCode')
+            ->getQuery()
+            ->getResult()
+        ;
+        $siteCodes = array_column($siteCodes, 'siteCode');
+
+        return array_combine($siteCodes, $siteCodes);
+    }
+
+    public function getProjectProspect()
+    {
+        $projectProspect = $this->em->getRepository(Project::class)
+            ->createQueryBuilder('project')
+            ->select('DISTINCT(prospect.name) prospectName')
+            ->leftJoin('project.prospect', 'prospect')
+            ->getQuery()
+            ->getResult()
+        ;
+        $projectProspect = array_column($projectProspect, 'prospectName');
+
+        return array_combine($projectProspect, $projectProspect);
+    }
+
+    public function getProjectInterlocutor()
+    {
+        $projectInterlocutors = $this->em->getRepository(Project::class)
+            ->createQueryBuilder('project')
+            ->select('DISTINCT(contact.email) contactEmail')
+            ->leftJoin('project.contact', 'contact')
+            ->getQuery()
+            ->getResult()
+        ;
+        $projectInterlocutors = array_column($projectInterlocutors, 'contactEmail');
+
+        return array_combine($projectInterlocutors, $projectInterlocutors);
     }
 }

@@ -197,6 +197,9 @@ window.initProjectCaseList = function({
                     title: data.message,
                 });
                 $('.modal-backdrop').remove();
+                if ($('body').hasClass('modal-open')) {
+                    $('body').removeClass('modal-open');
+                }
             },
             error: function (error) { 
                 $spinner.addClass('d-none');

@@ -138,7 +138,9 @@ export default [
             'business_charge',
             'current_case_folder_name_on_the_server',
             'market_type',
+            'project_market_type',
             'work_schedule',
+            'project_siteCode',
             'comment',
         ],
         className: ''
