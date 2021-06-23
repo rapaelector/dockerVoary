@@ -1,12 +1,18 @@
 {% trans_default_domain 'projects' %}
 
-<div class="project-case-field">
-    <select class="form-control border-0 pc-deposit-select p-0" data-id="{{ resolve([row, 'id']) }}" data-value="{{ value }}">
-        <option {{ (value is null) ? 'selected' : '' }}></option>
-        <option value="1" {{ value ? 'selected' : '' }}>{{ 'label.yes'|trans }}</option>
-        <option value="0" {{ ((not value) and (value is not null)) ? 'selected' : '' }}>{{ 'label.no'|trans }}</option>
-    </select>
-    <div class="spinner-border pc-deposit-loader d-none" role="status">
-        <span class="sr-only">Loading...</span>
+{% if is_granted(constant("App\\Security\\Voter\\Attributes::EDIT"), resolve([row], null)) %}
+    <div class="project-case-field">
+        <select class="form-control border-0 pc-deposit-select p-0" data-id="{{ resolve([row, 'id']) }}" data-value="{{ value }}">
+            <option {{ (value is null) ? 'selected' : '' }}></option>
+            <option value="1" {{ value ? 'selected' : '' }}>{{ 'label.yes'|trans }}</option>
+            <option value="0" {{ ((not value) and (value is not null)) ? 'selected' : '' }}>{{ 'label.no'|trans }}</option>
+        </select>
+        <div class="spinner-border pc-deposit-loader d-none" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
-</div>
+{% else %}
+    <div class="d-flex justify-content-center align-items-center">
+        {{ value ? 'label.yes'|trans : ((not value and value is not null) ? 'label.no'|trans : '') }}
+    </div>
+{% endif %}

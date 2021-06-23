@@ -2,15 +2,19 @@
 {% set completionLevel = value ? (value / 5)|round(0, 'ceil') : '-' %}
 {% set bgColor = 'completion-' ~ completionLevel %}
 
-<div class="input-group py-0 project-case-field">
-    <input
-        type="text" 
-        value="{{ value }}"
-        class="border-0 text-right h-100 w-10 form-control completion-input {{ bgColor }}"
-        data-id="{{ resolve([row, 'id']) }}" 
-        data-value="{{ value }}"
-    />
-    <div class="spinner-border completion-loader d-none" role="status">
-        <span class="sr-only">Loading...</span>
+{% if is_granted(constant("App\\Security\\Voter\\Attributes::EDIT"), resolve([row], null)) %}
+    <div class="input-group py-0 project-case-field">
+        <input
+            type="text" 
+            value="{{ value }}"
+            class="border-0 text-right h-100 w-10 form-control completion-input {{ bgColor }}"
+            data-id="{{ resolve([row, 'id']) }}" 
+            data-value="{{ value }}"
+        />
+        <div class="spinner-border completion-loader d-none" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
-</div>
+{% else %}
+    <div class="{{ bgColor }} h-100 d-flex justify-content-end align-items-center">{{ value|number_format(2, ',', ',') }}%</div>
+{% endif %}

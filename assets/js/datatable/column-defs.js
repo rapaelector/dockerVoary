@@ -44,7 +44,6 @@ export default [
         width: '65px',
         cols: [
             'project_global_amount',
-            'last_relaunch',
         ],
     },
     /**
@@ -52,7 +51,12 @@ export default [
      */
     {
         width: '75px',
-        cols: ['created_at', 'updated_at', 'deleted_at'],
+        cols: [
+            'created_at', 
+            'updated_at', 
+            'deleted_at',
+            'last_relaunch',
+        ],
         className: 'text-center',
     },
 

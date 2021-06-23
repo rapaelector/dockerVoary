@@ -49,7 +49,9 @@ class ProjectController extends BaseController
             ->add('folderNameOnTheServer', TextColumn::class, [
                 'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects'),
                 'className' => 'dynamic-nowrap',
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.folder_name_on_the_server_raw', [], 'projects'),
+                ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('type_text')
@@ -81,14 +83,18 @@ class ProjectController extends BaseController
                         ['choices' => $this->filterOptionsProvider->getProjectMarketType()]
                     )
                 ),
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.market_type_raw', [], 'projects'),
+                ], true),
                 'searchable' => true,
             ])
             ->add('project_description_area', TextColumn::class, [
                 'field' => 'projectDescription.area',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.project_description_area', [], 'projects'),
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.project_description_area', [], 'projects'),
+                ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('project_description_area')
@@ -98,7 +104,9 @@ class ProjectController extends BaseController
                 'field' => 'siteAddress.postalCode',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.code_postal', [], 'projects'),
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.code_postal_abbr', [], 'projects'),
+                ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
                     $this->filterOptionsProvider->getOptions('postal_code')
@@ -118,7 +126,7 @@ class ProjectController extends BaseController
             // MONTANT H.T
             ->add('globalAmount', TextColumn::class, [
                 'label' => $translator->trans('columns.global_amount', [], 'projects'),
-                'render' => $this->numberFormatFactory(0, ',', ' '),
+                'render' => $this->numberFormatFactory(0, ',', '.'),
                 'className' => 'text-right',
                 'meta' => $this->columnMeta([], true)
             ])
@@ -139,7 +147,9 @@ class ProjectController extends BaseController
                 'field' => 'lastRelaunch.createdAt',
                 'label' => $translator->trans('columns.last_relaunch', [], 'projects'),
                 'format' => 'd/m/Y',
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.last_relaunch_raw', [], 'projects'),
+                ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     DateRangeFilter::class,
                     ['type' => 'daterange',]
@@ -194,7 +204,9 @@ class ProjectController extends BaseController
             ->add('planningProject', TextColumn::class, [
                 'label' => $translator->trans('columns.planning_project', [], 'projects'),
                 'className' => 'dynamic-nowrap',
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' =>  $translator->trans('columns.planning_project_raw', [], 'projects'),
+                ], true),
             ])
             ->add('contact_name', TextColumn::class, [
                 'field' => 'contact.lastName',
