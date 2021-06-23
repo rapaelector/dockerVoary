@@ -113,7 +113,13 @@ export default [
         cols: ['user_phone', 'user_fax'],
     },
 
-
+    /**
+     * - VERY SHORT TEXT
+     */
+    {
+        width: '50px',
+        cols: ['project_siteCode']
+    },
     /**
      * - SHORT TEXT COLUMNS
      * - LONG TEXT COLUMNS
@@ -140,7 +146,6 @@ export default [
             'market_type',
             'project_market_type',
             'work_schedule',
-            'project_siteCode',
             'comment',
         ],
         className: ''

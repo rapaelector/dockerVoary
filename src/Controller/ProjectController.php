@@ -66,6 +66,9 @@ class ProjectController extends BaseController
                     ])
                 ),
                 'searchable' => true,
+                'meta' => [
+                    'abbr' => $translator->trans('columns.siteCode_raw', [], 'project'),
+                ]
             ])
             ->add('marketType', TextColumn::class, [
                 'label' => $translator->trans('columns.market_type', [], 'projects'),
@@ -133,10 +136,10 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.amount_subcontracted_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.amount_subcontracted_work_abbr', [], 'project'),
                 ]),
@@ -145,10 +148,10 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.amount_bbi_specific_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.amount_bbi_specific_work_abbr', [], 'project'),
                 ]),
@@ -157,10 +160,10 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.global_amount', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.global_amount_abbr', [], 'project'),
                 ]),

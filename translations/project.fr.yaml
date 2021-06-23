@@ -22,6 +22,7 @@ columns:
   created_at: 'Crée le'
   prospect: 'Prospect'
   siteCode: 'Code chantier'
+  siteCode_raw: 'Code <br/>chantier'
   roadmap: 'Feuille de route'
   projectOwner: "Maitre d'ouvrage"
   projectManager: "Maitre d'oeuvre"
