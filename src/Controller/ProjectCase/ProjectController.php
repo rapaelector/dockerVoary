@@ -3,6 +3,7 @@
 namespace App\Controller\ProjectCase;
 
 use App\Entity\Project;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,12 +48,27 @@ class ProjectController extends BaseController
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
                 'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects'),
-                'meta' => $this->columnMeta([], true),
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.folder_name_on_the_server_raw', [], 'projects'),
+                ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('type_text')
+                ),
             ])
             ->add('businessCharge', TextColumn::class,  [
                 'field' => 'businessCharge.lastName',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.business_charge', [], 'projects'),
                 'meta' => $this->columnMeta([], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('business_project_charge'),
+                        ['choices' => $this->filterOptionsProvider->getProjectBusinnessCharge()
+                    ])
+                )
             ])
             ->add('marketType', TextColumn::class, [
                 'label' => $translator->trans('columns.market_type', [], 'projects'),
@@ -60,31 +76,63 @@ class ProjectController extends BaseController
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans($value, [], 'project');
                 },
-                'meta' => $this->columnMeta([], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('project_market_type'),
+                        ['choices' => $this->filterOptionsProvider->getProjectMarketType()]
+                    )
+                ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.market_type_raw', [], 'projects'),
+                ], true),
+                'searchable' => true,
             ])
             ->add('project_description_area', TextColumn::class, [
                 'field' => 'projectDescription.area',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.project_description_area', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.project_description_area', [], 'projects'),
+                ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('project_description_area')
+                ),
             ])
             ->add('codePostal', TextColumn::class, [
                 'field' => 'siteAddress.postalCode',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.code_postal', [], 'projects'),
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.code_postal_abbr', [], 'projects'),
+                ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('postal_code')
+                ),
             ])
             // LOCALISATION
             ->add('project_site_address', TextColumn::class, [
                 'field' => 'siteAddress.city',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.city', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('project_site_address')
+                ),
             ])
+            // MONTANT H.T
             ->add('globalAmount', TextColumn::class, [
                 'label' => $translator->trans('columns.global_amount', [], 'projects'),
-                'render' => $this->numberFormatFactory(0, ',', ' '),
+                'render' => $this->numberFormatFactory(0, ',', '.'),
                 'className' => 'text-right',
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([
+                    'label_attr' => [
+                        'class' => 'text-left text-uppercase',
+                    ]
+                ], true)
             ])
             // REALISATION
             ->add('completion', TwigColumn::class, [
@@ -103,25 +151,53 @@ class ProjectController extends BaseController
                 'field' => 'lastRelaunch.createdAt',
                 'label' => $translator->trans('columns.last_relaunch', [], 'projects'),
                 'format' => 'd/m/Y',
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.last_relaunch_raw', [], 'projects'),
+                ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    DateRangeFilter::class,
+                    ['type' => 'daterange',]
+                ),
             ])
             // PC DEPOSIT
             ->add('pcDeposit', TwigColumn::class, [
                 'label' => $translator->trans('columns.pc_deposit', [], 'projects'),
                 'className' => 'px-0',
                 'template' => 'project_case/twig_columns/_pc_deposite.html.twig',
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('pc_deposit'),
+                        ['choices' => [
+                            true => $translator->trans('label.yes', [], 'projects'),
+                            false => $translator->trans('label.no', [], 'projects'),
+                        ]]
+                    )
+                ),
+                'searchable' => true,
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.pc_deposit', [], 'projects'),
                     'label_attr' => [
                         'class' => 'dynamic-nowrap text-uppercase',
                     ]
-                ], true)
+                ], true),
             ])
             // ARCHITECT
             ->add('architect', TwigColumn::class, [
                 'label' => $translator->trans('columns.architect', [], 'projects'),
                 'className' => 'px-0',
                 'template' => 'project_case/twig_columns/_architect.html.twig',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('architect'),
+                        ['choices' => [
+                            true => $translator->trans('label.yes', [], 'projects'),
+                            false => $translator->trans('label.no', [], 'projects'),
+                        ]]
+                    )
+                ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.architect', [], 'projects'),
                     'label_attr' => [
@@ -132,16 +208,25 @@ class ProjectController extends BaseController
             ->add('planningProject', TextColumn::class, [
                 'label' => $translator->trans('columns.planning_project', [], 'projects'),
                 'className' => 'dynamic-nowrap',
-                'meta' => $this->columnMeta([], true),
+                'meta' => $this->columnMeta([
+                    'abbr' =>  $translator->trans('columns.planning_project_raw', [], 'projects'),
+                ], true),
             ])
             ->add('contact_name', TextColumn::class, [
                 'field' => 'contact.lastName',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.contact_name', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'meta' => $this->columnMeta([], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    TextFilter::class, 
+                    $this->filterOptionsProvider->getOptions('contact_name')
+                ),
             ])
-            ->add('comment', TextColumn::class, [
+            // COMMENTAIRE
+            ->add('comment', TwigColumn::class, [
                 'label' => $translator->trans('columns.comment', [], 'projects'),
-                'meta' => $this->columnMeta([], true)
+                'template' => 'project_case/twig_columns/_comment.html.twig',
+                'meta' => $this->columnMeta([], true),
             ])
             // ->add('id', TextColumn::class, [
             //     'label' => $translator->trans('action.action'),
@@ -197,42 +282,77 @@ class ProjectController extends BaseController
         ]);
     }
 
+    /**
+     * Update one of the following field in Project entity depend on query->get('field')
+     *  - completion
+     *  - pcDeposit
+     *  - architect
+     * - comment
+     */
     #[Route('/{id}/update', name: 'project.case.update_project_field', methods: ['POST', 'GET'], options: ['expose' => true])]
     public function updateArchivement(Request $request, EntityManagerInterface $em, Project $project, TranslatorInterface $translator)
     {
         if ($request->isXmlHttpRequest()) {
-            $message = '';
             $field = $request->query->get('field');
+            
             /**
-             * Update one of the following field in Project entity depend on query->get('field')
+             * Check which of the following field should be updated depend on query->get('field')
              *  - completion
              *  - pcDeposit
              *  - architect
+             *  - comment
+             * Update project
+             * 
              */
-            if ($field == 'completion') {
-                $completionValue = $request->request->get('completionValue');
-                $project->setCompletion($completionValue);
-                $message = 'messages.completion_saved';
-            } else if ($field == 'pc_deposit') {
-                $pcDepositValue = $request->request->get('pcDepositValue');
-                try {
-                    $project->setPcDeposit($pcDepositValue);
-                    $message = 'messages.pc_deposit_saved';
-                } catch (\Exception $e) {
-                    return $this->json(['type' => 'error', 'message' => $transition->trans('messages.pc_deposit_saving_faild', [], 'projects')]);
-                }
-            } else if ($field == 'architect') {
-                $architectValue = $request->request->get('architectValue');
-                try {
-                    $project->setArchitect($architectValue);
-                    $message = 'messages.architect_saved';
-                } catch (\Exception $e) {
-                    return $this->json(['type' => 'error', 'message' => $transition->trans('messages.architect_saving_failed', [], 'projects')]);
-                }
-            }
+            $message = $this->updateSpecificField($project, $request, $field);
             $em->flush();
 
             return $this->json(['type' => 'success', 'message' => $translator->trans($message, [], 'projects')]);
         }
+    }
+
+    /**
+     * Update project specific field
+     * Field should be one of the following
+     *     - ['completion', 'pcDeposit', 'architect', 'comment']
+     * 
+     * @var Project $project
+     * @var Request $request
+     * @var String $field
+     * 
+     * Return custom message depend on the updated field
+     * @return String $message
+     */
+    private function updateSpecificField(Project $project, Request $request, $field)
+    {
+        $message = '';
+
+        if ($field == 'completion') {
+            $completionValue = $request->request->get('completionValue');
+            $project->setCompletion($completionValue);
+            $message = 'messages.completion_saved';
+        } else if ($field == 'pc_deposit') {
+            $pcDepositValue = $request->request->get('pcDepositValue');
+            try {
+                $project->setPcDeposit($pcDepositValue);
+                $message = 'messages.pc_deposit_saved';
+            } catch (\Exception $e) {
+                return $this->json(['type' => 'error', 'message' => $transition->trans('messages.pc_deposit_saving_faild', [], 'projects')]);
+            }
+        } else if ($field == 'architect') {
+            $architectValue = $request->request->get('architectValue');
+            try {
+                $project->setArchitect($architectValue);
+                $message = 'messages.architect_saved';
+            } catch (\Exception $e) {
+                return $this->json(['type' => 'error', 'message' => $transition->trans('messages.architect_saving_failed', [], 'projects')]);
+            }
+        } else if ($field == 'comment') {
+            $commentValue = $request->request->get('commentValue');
+            $project->setComment($commentValue);
+            $message = 'messages.comment_saved';
+        }
+
+        return $message;
     }
 }

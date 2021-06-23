@@ -33,6 +33,11 @@ $(function () {
      */
     $('body').tooltip({selector: '[data-toggle="tooltip"]'});
 
+    $('body').popover({
+        selector: '[data-toggle="popover"]',
+        trigger: 'hover',
+    });
+
     $('.sidebar').overlayScrollbars({
         overflowBehavior: {
             x: "hidden",

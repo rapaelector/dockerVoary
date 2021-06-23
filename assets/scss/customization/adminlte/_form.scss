@@ -73,7 +73,7 @@ label.required:after {
     .app-dt-list table.table.table-striped {
         tbody {
             tr td {
-                input, select, textarea {
+                input, select {
                     max-height: 27px;
                     border-radius: 0;
                 }
@@ -151,7 +151,7 @@ label.required:after {
 
     .project-case-field {
         position: relative;
-        .completion-loader, .pc-deposit-loader, .architect-loader {
+        .completion-loader, .pc-deposit-loader, .architect-loader, .comment-loader {
             font-size: 12px;
             width: 18px;
             height: 18px;
@@ -164,6 +164,10 @@ label.required:after {
         }
         .pc-deposit-loader, .architect-loader {
             left: 15px;
+        }
+        .comment-loader {
+            top: 30%;
+            left: 45%;
         }
         .completion-input {
             border-radius: 0 !important;

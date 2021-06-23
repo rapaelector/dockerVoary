@@ -68,18 +68,47 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.siteCode', [], 'project'),
                 'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('projectSiteCode')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('site_code'),
+                        ['choices' => $this->filterOptionsProvider->getProjectSiteCode()
+                    ])
                 ),
+                'searchable' => true,
+                'meta' => [
+                    'abbr' => $translator->trans('columns.siteCode_raw', [], 'project'),
+                ]
+            ])
+            ->add('marketType', TextColumn::class, [
+                'label' => $translator->trans('columns.market_type', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'render' => function ($value, $row) use ($translator) {
+                    return $translator->trans($value, [], 'project');
+                },
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('project_market_type'),
+                        ['choices' => $this->filterOptionsProvider->getProjectMarketType()]
+                    )
+                ),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.market_type_raw', [], 'projects'),
+                ], false),
+                'searchable' => true,
             ])
             ->add('prospect', TextColumn::class, [
                 'field' => 'prospect.name',
                 'label' => $translator->trans('label.prospect', [], 'project'),
                 'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('prospect.name')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('prospect'),
+                        ['choices' => $this->filterOptionsProvider->getProjectProspect()]
+                    )
                 ),
+                'searchable' => true,
             ])
             ->add('business_charge', TwigColumn::class, [
                 'label' => $translator->trans('columns.businessCharge', [], 'project'),
@@ -108,9 +137,13 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('contact.label', [], 'project'),
                 'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('contact.email')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('user_email'),
+                        ['choices' => $this->filterOptionsProvider->getProjectInterlocutor()]
+                    )
                 ),
+                'searchable' => true,
             ])
             ->add('roadmap', TextColumn::class, [
                 'label' => $translator->trans('columns.roadmap', [], 'project'),
@@ -119,18 +152,25 @@ class ProjectController extends BaseController
                     return $value ? $translator->trans('columns.yes', [], 'project') : (($value == false || $value == 0) ? $translator->trans('columns.no', [], 'project') : '');
                 },
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('projectRoadmap')
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('roadmap'),
+                        ['choices' => [
+                            true => $translator->trans('label.yes', [], 'projects'),
+                            false => $translator->trans('label.no', [], 'projects'),
+                        ]]
+                    )
                 ),
+                'searchable' => true,
             ])
             ->add('amountSubcontractedWork', TextColumn::class, [
                 'label' => $translator->trans('columns.amount_subcontracted_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.amount_subcontracted_work_abbr', [], 'project'),
                 ]),
@@ -139,10 +179,10 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.amount_bbi_specific_work', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.amount_bbi_specific_work_abbr', [], 'project'),
                 ]),
@@ -151,10 +191,10 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.global_amount', [], 'project'),
                 'className' => 'dynamic-nowrap text-right',
                 'render' => $this->numberFormatFactory(0, ',', ' '),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class,
-                    $this->filterOptionsProvider->getOptions('project_siteCode')
-                ),
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     TextFilter::class,
+                //     $this->filterOptionsProvider->getOptions('project_siteCode')
+                // ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.global_amount_abbr', [], 'project'),
                 ]),

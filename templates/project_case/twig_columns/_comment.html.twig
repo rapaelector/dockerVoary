@@ -1,0 +1,47 @@
+<div class="project-case-field">
+    <div
+        data-toggle="modal"
+        data-target="#exemple-{{ resolve([row, 'id']) }}"
+        type="button"
+    >
+        <button
+            type="button" 
+            class="btn p-0 w-100 text-nowrap text-truncate"
+            data-container="body" 
+            data-toggle="popover"
+            data-placement="top" 
+            data-trigger="hover"
+            data-html="true"
+            data-content="{{ value|nl2br }}"
+        />
+            {{ value }}
+        </button>
+    </div>
+
+    <div class="modal fade" id="exemple-{{ resolve([row, 'id']) }}" aria-labelledby="exemple" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ 'title.edit_comment'|trans({}, 'projects') }}</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea
+                        class="form-control comment-field" 
+                        data-value="{{ value }}"
+                        data-id="{{ resolve([row, 'id']) }}"
+                        rows="6"
+                    />{{ value }}</textarea>
+                    <button class="btn btn-sm btn-app-primary mt-2 save-project-comment" type="button">
+                        {{ 'action.save'|trans({}, 'messages') }}
+                    </button>
+                    <button class="btn btn-sm btn-app-secondary mt-2 comment-modal-canceler" type="button" data-dismiss="modal">
+                        {{ 'action.cancel'|trans({}, 'messages') }}
+                    </button>
+                    <div class="spinner-border comment-loader d-none" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

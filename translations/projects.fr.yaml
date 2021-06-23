@@ -126,6 +126,10 @@ pdf:
     administrative_file: 'Dossier administratif'
     asbestos_removal: 'Désamiantage'
 
+title:
+  edit_comment: 'Modification du commentaire'
+  strategic_affairs: 'Affaires stratégiques'
+
 label:
   yes: 'Oui'
   no: 'Non'
@@ -133,18 +137,28 @@ label:
 columns:
   total_amount: 'Montant total'
   folder_name_on_the_server: 'Nom du dossier'
+  folder_name_on_the_server_raw: 'Nom du <br/>dossier'
   contact_name: 'Contact'
   project_description_area: 'Surface'
   global_amount: 'Montant H.T'
+  global_amount_raw: 'Montant <br/>H.T'
   city: 'Localisation'
   comment: 'Commentaire'
   production_rate: '% Realisation'
   planning_project: 'Planning travaux'
+  planning_project_raw: 'Planning<br/>travaux'
   market_type: 'Type de projet'
-  code_postal: 'CP'
+  market_type_raw: 'Type de<br/>projet'
+  code_postal: 'Code postale'
+  code_postal_abbr: 'CP'
+  code_postal_raw: 'Code <br/>postale'
   business_charge: 'Chef projet'
+  business_charge_raw: 'Chef <br/>projet'
   last_relaunch: 'Derniere relance'
+  last_relaunch_raw: 'Derniere <br/>relance'
+  last_relaunch_abbr: 'Derniere'
   pc_deposit: 'PC depose'
+  pc_deposit_raw: 'PC <br/>depose'
   architect: 'Architecte'
 
 business_charge:
@@ -159,3 +173,4 @@ messages:
   pc_deposit_saved: 'PC depose enregistré avec succès'
   pc_deposit_saving_faild: "Impossible d'enregistré le PC depose"
   architect_saved: 'Architect enregistré avec succès'
+  comment_saved: 'Commentaire enregistré avec succès'

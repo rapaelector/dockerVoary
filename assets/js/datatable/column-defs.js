@@ -36,58 +36,28 @@ export default [
         cols: ['actions'],
         className: 'text-center',
     },
-    
+
     /**
-     * EMAIL FIELD
+     * SHORT DATE FIELD
      */
     {
-        width: '150px',
+        width: '65px',
         cols: [
-            'user_email',
-            'user_firstName',
-            'user_lastName',
-            'project_user_email'
+            'project_global_amount',
         ],
     },
-
-    /**
-     * PHONE FIELDS
-     */
-    {
-        width: '100px',
-        cols: ['user_phone', 'user_fax'],
-    },
-
-    /**
-     * JOB
-     */
-    {
-        width: '150px',
-        cols: ['user_job'],
-    },
-
     /**
      * DATE
      */
     {
         width: '75px',
-        cols: ['created_at', 'updated_at', 'deleted_at'],
-        className: 'text-center',
-    },
-
-    /**
-     * - NUMBER COLUMNS
-     * - NUMBER FIELDS
-     */
-    {
-        width: '80px',
         cols: [
-            'client_number',
-            'project_amount_subcontracted_work',
-            'project_amount_bbi_specific_work',
-            'project_global_amount',
-            'archivement_pourcentage',
+            'created_at', 
+            'updated_at', 
+            'deleted_at',
+            'last_relaunch',
         ],
+        className: 'text-center',
     },
 
     /**
@@ -101,6 +71,29 @@ export default [
     },
 
     /**
+     * - MIDDLE NUMBER
+     */
+    {
+        width: '60px',
+        cols: [
+            'global_amount',]
+        ,
+    },
+    /**
+     * - NUMBER COLUMNS
+     * - NUMBER FIELDS
+     */
+    {
+        width: '80px',
+        cols: [
+            'client_number',
+            'project_amount_subcontracted_work',
+            'project_amount_bbi_specific_work',
+            'archivement_pourcentage',
+        ],
+    },
+
+    /**
      * - DATE COLUMNS
      * - DATE FIELDS
      */
@@ -108,11 +101,25 @@ export default [
         width: '80px',
         cols: [
             'client_created_at',
-            'last_relaunch',
         ],
         className: 'text-center',
     },
 
+    /**
+     * PHONE FIELDS
+     */
+    {
+        width: '100px',
+        cols: ['user_phone', 'user_fax'],
+    },
+
+    /**
+     * - VERY SHORT TEXT
+     */
+    {
+        width: '50px',
+        cols: ['project_siteCode']
+    },
     /**
      * - SHORT TEXT COLUMNS
      * - LONG TEXT COLUMNS
@@ -134,9 +141,12 @@ export default [
             'project_roadmap',
             'project_description_area',
             'project_site_address',
-            'global_amount',
             'business_charge',
-            'code_postal',
+            'current_case_folder_name_on_the_server',
+            'market_type',
+            'project_market_type',
+            'work_schedule',
+            'comment',
         ],
         className: ''
     },
@@ -147,7 +157,11 @@ export default [
     {
         width: '150px',
         cols: [
-            'market_type',
+            'user_job',
+            'user_email',
+            'user_firstName',
+            'user_lastName',
+            'project_user_email',
         ]
     },
     /**
@@ -159,10 +173,7 @@ export default [
         cols: [
             'client_name',
             'project_prospect',
-            'comment',
-            'current_case_folder_name_on_the_server',
-            'planning_project',
         ],
-        className: 'text-left dynamic-nowrap',
+        className: 'text-left',
     },
 ];

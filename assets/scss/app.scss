@@ -10,6 +10,17 @@
 @import 'select2/src/scss/core.scss';
 @import 'bootstrap-select/sass/bootstrap-select.scss';
 
+.app-filters-container {
+    table.table {
+        thead {
+            tr th {
+                br {
+                    display: none;
+                }
+            }
+        }
+    }
+}
 #app-loader.loading-overlay {
     position: fixed;
     top: 0;
