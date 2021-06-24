@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProjectDescriptionType extends AbstractType
@@ -18,8 +19,11 @@ class ProjectDescriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('projectDescription', TextType::class, [
+            ->add('projectDescription', TextareaType::class, [
                 'label' => 'columns.project_description',
+                'attr' => [
+                    'rows' => 3,
+                ],
                 'label_attr' => [
                     'class' => 'project-description-label',
                 ],

@@ -1,40 +1,42 @@
+{% set tdClass = 'text-break' %}
+
 <table class="table table-app-sm table-striped">
     <tbody>
         <tr>
             <th>{{ 'label.name'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'name'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'name'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.phone'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'phone'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'phone'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.fax'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'fax'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'fax'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.line1'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'line1'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'line1'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.line2'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'line2'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'line2'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.line3'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'line3'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'line3'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.postal_code'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'postalCode'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'postalCode'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.city'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'city'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'city'], '') }}</td>
         </tr>
         <tr>
             <th>{{ 'label.country'|trans({}, 'address') }}</th>
-            <td>{{ resolve([client, 'billingAddress', 'country'], '') }}</td>
+            <td class="{{ tdClass }}">{{ resolve([client, 'billingAddress', 'country'], '') }}</td>
         </tr>
     </tbody>
 </table>

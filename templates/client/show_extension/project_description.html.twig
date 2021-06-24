@@ -1,5 +1,6 @@
 {% set projectDescriptionFields = ['projectDescription', 'area', 'department', 'marketType', 'address'] %}
 {% set addressFields = ['postalCode', 'city', 'line1', 'country'] %}
+{% set tdClass = 'text-break' %}
 
 <table class="table table-app-sm table-striped">
     <tbody>
@@ -7,7 +8,10 @@
             {% if field != 'address' %}
                 <tr>
                     <th>{{ ('columns.' ~ field|u.snake)|trans({}, 'project') }}</th>
-                    <td>{{ resolve([client, 'projectDescription', field], '-')|trans({}, 'project') }}</td>
+                    <td class="{{ tdClass }}">
+                        {% set fieldValue = resolve([client, 'projectDescription', field], '-')|trans({}, 'project') %}
+                        {{ field == 'projectDescription' ? fieldValue|nl2br : fieldValue }}
+                    </td>
                 </tr>
             {% endif %}
             {% if field == 'address' %}
@@ -15,12 +19,12 @@
                     <tr>
                         <th>{{ ('label.' ~ addressField|u.snake )|trans({}, 'client') }}</th>
                         {% if addressField == 'country' %}
-                            <td>
+                            <td class="{{ tdClass }}">
                                 {% set cityCode = resolve([client, 'projectDescription', field, addressField], null) %}
                                 {{  cityCode ? cityCode|country_name : '-'  }}
                             </td>
                         {% else %}
-                            <td>
+                            <td class="{{ tdClass }}">
                                 {{ resolve([client, 'projectDescription', field, addressField], '') }}
                             </td>
                         {% endif %}

@@ -1,42 +1,43 @@
 {% trans_default_domain 'client' %}
+{% set tdClass = 'text-break' %}
 
 <table class="table table-app-sm table-striped">
     <tbody>
         <tr>
             <th>{{ 'label.name'|trans }}</th>
-            <td>{{ client.name }}</td>
+            <td class="{{ tdClass }}">{{ client.name }}</td>
         </tr>
         <tr>
             <th>{{ 'label.short_name'|trans }}</th>
-            <td>{{ client.shortName }}</td>
+            <td class="{{ tdClass }}">{{ client.shortName }}</td>
         </tr>
         <tr>
             <th>{{ 'label.client_number'|trans }}</th>
-            <td>{{ client.clientNumber }}</td>
+            <td class="{{ tdClass }}">{{ client.clientNumber }}</td>
         </tr>
         <tr>
             <th>{{ 'label.activity'|trans }}</th>
-            <td>{{ client.activity ? client.activity|trans : '' }}</td>
+            <td class="{{ tdClass }}">{{ client.activity ? client.activity|trans : '' }}</td>
         </tr>
         <tr>
             <th>{{ 'label.tva_rate'|trans }}</th>
-            <td>{{ client.tvaRate }}</td>
+            <td class="{{ tdClass }}">{{ client.tvaRate }}</td>
         </tr>
         <tr>
             <th>{{ 'label.siret'|trans }}</th>
-            <td>{{ client.siret }}</td>
+            <td class="{{ tdClass }}">{{ client.siret }}</td>
         </tr>
         <tr>
             <th>{{ 'label.payment_method'|trans }}</th>
-            <td>{{ client.paymentMethod ? client.paymentMethod|trans : '' }}</td>
+            <td class="{{ tdClass }}">{{ client.paymentMethod ? client.paymentMethod|trans : '' }}</td>
         </tr>
         <tr>
             <th>{{ 'label.payment'|trans }}</th>
-            <td>{{ client.payment ? client.payment|trans : '' }}</td>
+            <td class="{{ tdClass }}">{{ client.payment ? client.payment|trans : '' }}</td>
         </tr>
         <tr>
             <th>{{ 'label.intra_community_tva'|trans }}</th>
-            <td>{{ client.intraCommunityTva }}</td>
+            <td class="{{ tdClass }}">{{ client.intraCommunityTva }}</td>
         </tr>
     </tbody>
 </table>
