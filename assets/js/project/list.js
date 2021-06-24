@@ -43,7 +43,8 @@ completionInputSelector = '.completion-input',
 
     var dtPromise = window.App.DataTable.initAppDataTables({
         columnNames: [
-            'project_siteCode',
+            'project_site_code',
+            'project_market_type',
             'project_prospect',
             'project_business_charge',
             'project_economiste',

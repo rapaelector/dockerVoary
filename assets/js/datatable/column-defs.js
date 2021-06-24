@@ -118,7 +118,9 @@ export default [
      */
     {
         width: '50px',
-        cols: ['project_siteCode']
+        cols: [
+            'project_site_code',
+        ]
     },
     /**
      * - SHORT TEXT COLUMNS
@@ -161,8 +163,8 @@ export default [
         cols: [
             'user_job',
             'user_email',
-            'user_firstName',
-            'user_lastName',
+            'user_first_name',
+            'user_last_name',
             'project_user_email',
         ]
     },
