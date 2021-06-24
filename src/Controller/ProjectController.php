@@ -207,6 +207,9 @@ class ProjectController extends BaseController
                     DateRangeFilter::class,
                     [
                         'type' => 'daterange',
+                        'attr' => [
+                            'data-ranges' => 'weeks',
+                        ],
                     ]
                 ),
                 'meta' => $this->columnMeta([

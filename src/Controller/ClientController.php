@@ -114,8 +114,11 @@ class ClientController extends BaseController
                     DateRangeFilter::class,
                     [
                         'type' => 'daterange',
+                        'attr' => [
+                            'data-ranges' => 'weeks',
+                        ],
                     ]
-                ),
+                )
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action', [], 'client'),
