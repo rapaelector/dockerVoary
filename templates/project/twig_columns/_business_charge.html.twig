@@ -3,7 +3,7 @@
 
 <div class="input-group py-0 project-case-field business-charge-change"  data-id="{{ row.id }}" data-id-business-charge="{{ resolve([businessCharge, 'id']) }}">
     {% if businessCharge %}
-            {{ businessCharge.lastName }}
+            {{ businessCharge.fullNameWithEmail }}
         {% else %}
             '--'
         {% endif %}

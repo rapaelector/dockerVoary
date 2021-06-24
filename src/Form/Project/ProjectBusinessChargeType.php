@@ -33,7 +33,7 @@ class ProjectBusinessChargeType extends AbstractType
                         ->orderBy('u.email', 'ASC');
                 },
                 'placeholder' => '',
-                'choice_label' => 'lastName',
+                'choice_label' => 'fullNameWithEmail',
                 'required' => false,
                 'attr' => [
                     'class' => 'bootstrap-select interlocutor-select',
