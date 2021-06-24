@@ -37,7 +37,7 @@ class ProjectDescriptionType extends AbstractType
                 'label' => 'columns.marketType',
                 'choices' => Constants::getTypeValues(Constants::FOLDER_PROSPECTION_MARKET_TYPE_CHOICE, true),
                 'label_attr' => [
-                    'class' => '',
+                    'class' => 'radio-custom',
                 ],
                 'multiple' => false,
                 'expanded' => true,

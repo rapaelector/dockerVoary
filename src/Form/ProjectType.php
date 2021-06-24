@@ -31,9 +31,9 @@ class ProjectType extends AbstractType
                         'oui' => true,
                         'non' => false,
                     ],
-                    'label_attr' => array(
-                        'class' => 'radio-inline'
-                    ),
+                    'label_attr' => [
+                        'class' => 'radio-custom radio-inline',
+                    ],
                     "multiple" => false,
                     "expanded" => true
                 ])
@@ -72,9 +72,9 @@ class ProjectType extends AbstractType
                 'label' => 'columns.marketType',
                 "multiple" => false,
                 "expanded" => true,
-                'label_attr' => array(
-                    'class' => 'radio-inline'
-                ),
+                'label_attr' => [
+                    'class' => 'radio-custom radio-inline'
+                ],
             ])
             ->add('bonhomePercentage', ChoiceType::class, [
                 "choices" => Constants::getTypeBonhomme(true),
@@ -86,11 +86,17 @@ class ProjectType extends AbstractType
             ->add('disaSheetValidation', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::TYPE_DISA_SHEET, true),
                 'label' => "columns.disaSheetValidation",
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ],
                 "multiple" => true,
                 "expanded" => true,
             ])
             ->add('paymentChoice',ChoiceType::class, [
                 'label' => 'columns.paymentChoice',
+                'label_attr' => [
+                    'class' => 'radio-custom radio-inline'
+                ],
                 'required' => true,
                 'choices' => [
                     'oui' => true,
@@ -98,9 +104,6 @@ class ProjectType extends AbstractType
                 ],
                 "multiple" => false,
                 "expanded" => true,
-                'label_attr' => array(
-                    'class' => 'radio-inline'
-                ),
             ])
             ->add('depositeDateEdit', DateType::class, [
                 // renders it as a single text box
@@ -121,7 +124,7 @@ class ProjectType extends AbstractType
                 "multiple" => true,
                 "expanded" => true,
                 'label_attr' => array(
-                    'class' => 'checkbox-inline'
+                    'class' => 'checkbox-custom checkbox-inline'
                 ),
             ])
             ->add('planningProject', TextareaType::class, [
@@ -141,9 +144,9 @@ class ProjectType extends AbstractType
                     '2' => 2,
                     '3' => 3,
                 ],
-                'label_attr' => array(
-                    'class' => 'radio-inline'
-                ),
+                'label_attr' => [
+                    'class' => 'radio-custom radio-inline'
+                ],
                 "multiple" => false,
                 "expanded" => true
             ])
@@ -177,22 +180,25 @@ class ProjectType extends AbstractType
                 "choices" => Constants::getTypeValues(Constants::ENCRYPTION_TYPE, true),
                 "multiple" => false,
                 "expanded" => true,
-                'label_attr' => array(
-                    'class' => 'radio-inline'
-                ),
+                'label_attr' => [
+                    'class' => 'radio-custom radio-inline'
+                ]
             ])
             ->add('notApplicable', CheckboxType::class, [
                 'label'=>"columns.notApplicable",
-                'required' => false
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ]
             ])
             ->add('priorizationOfFile', ChoiceType::class, [
                 'label'=>"columns.priorizationOfFile",
                 "choices" => Constants::getTypeValues(Constants::PRIORIZATION_FILE_TYPE, true),
                 "multiple" => false,
                 "expanded" => true,
-                'label_attr' => array(
-                    'class' => 'radio-inline'
-                ),
+                'label_attr' => [
+                    'class' => 'radio-custom radio-inline'
+                ],
             ])
             ->add('answerForThe', null, [
                 'label'=>"columns.answerForThe"
