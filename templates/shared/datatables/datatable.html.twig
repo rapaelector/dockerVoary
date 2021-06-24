@@ -15,7 +15,8 @@
                         'data-toggle': 'tooltip',
                         'title': column.label|trans|raw,
                         'data-container': 'body',
-                        'id': column.name ~ '_header'
+                        'data-html': 'true',
+                        'id': column.name ~ '_header',
                     }) %}
                 {% endif %}
                 <th {{ render_attr(attr) }}>

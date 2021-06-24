@@ -43,9 +43,20 @@ window.initProjectCaseList = function({
 
     var dtPromise = window.App.DataTable.initAppDataTables({
         columnNames: [
-            'current_case_folder_name_on_the_server', 'business_charge', 'market_type', 'project_description_area',
-            'postal_code', 'project_site_address', 'global_amount', 'archivement_pourcentage', 'last_relaunch',
-            'pc_deposit', 'architect', 'work_schedule', 'contact_name', 'comment'
+            'current_case_folder_name_on_the_server',
+            'business_charge', 
+            'market_type', 
+            'project_description_area',
+            'project_postal_code', 
+            'project_site_address', 
+            'global_amount', 
+            'completion', 
+            'last_relaunch',
+            'pc_deposit', 
+            'architect', 
+            'work_schedule', 
+            'contact_name', 
+            'comment'
         ],
         excludedColumns: [7], // exclude when exporting excel file
         containerSelector: containerSelector,

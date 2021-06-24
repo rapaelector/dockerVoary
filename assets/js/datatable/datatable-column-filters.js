@@ -73,10 +73,12 @@ function initDateRangepicker(options) {
     
     $('.input-daterange > input').each(function () {
         var $input = $(this);
+        var customeRangeLabel = (window._locale == 'fr' ? 'Date personnalisé' : 'Custom range');
         var options = {
             autoclose: true,
             locale: {
                 format: 'DD/MM/YYYY',
+                customRangeLabel: customeRangeLabel,
             },
             autoUpdateInput: false,
             autoApply: true,
@@ -88,6 +90,7 @@ function initDateRangepicker(options) {
                 autoclose: true,
                 locale: {
                     format: 'DD/MM/YYYY',
+                    customRangeLabel: customeRangeLabel,
                 },
                 autoUpdateInput: false,
                 autoApply: true,

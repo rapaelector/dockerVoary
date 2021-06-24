@@ -47,7 +47,7 @@ class ProjectController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
-                'label' => $translator->trans('columns.folder_name_on_the_server', [], 'projects'),
+                'label' => $translator->trans('columns.folder_name_on_the_server_tooltip', [], 'projects'),
                 'className' => 'dynamic-nowrap',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.folder_name_on_the_server_raw', [], 'projects'),
@@ -63,7 +63,7 @@ class ProjectController extends BaseController
             ->add('businessCharge', TextColumn::class,  [
                 'field' => 'businessCharge.lastName',
                 'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.resposible_business', [], 'projects'),
+                'label' => $translator->trans('columns.resposible_business_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.resposible_business_raw', [], 'projects'),
                 ], true),
@@ -76,7 +76,7 @@ class ProjectController extends BaseController
                 )
             ])
             ->add('marketType', TextColumn::class, [
-                'label' => $translator->trans('columns.market_type', [], 'projects'),
+                'label' => $translator->trans('columns.market_type_tooltip', [], 'projects'),
                 'className' => 'dynamic-nowrap',
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans($value, [], 'project');
@@ -96,7 +96,7 @@ class ProjectController extends BaseController
             ->add('project_description_area', TextColumn::class, [
                 'field' => 'projectDescription.area',
                 'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.project_description_area', [], 'projects'),
+                'label' => $translator->trans('columns.project_description_area_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.project_description_area', [], 'projects'),
                 ], true),
@@ -108,9 +108,9 @@ class ProjectController extends BaseController
             ->add('codePostal', TextColumn::class, [
                 'field' => 'siteAddress.postalCode',
                 'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.code_postal', [], 'projects'),
+                'label' => $translator->trans('columns.code_postal_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('columns.code_postal_abbr', [], 'projects'),
+                    'abbr' => $translator->trans('columns.code_postal_raw', [], 'projects'),
                 ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
@@ -141,11 +141,11 @@ class ProjectController extends BaseController
             ])
             // REALISATION
             ->add('completion', TwigColumn::class, [
-                'label' => $translator->trans('columns.production_rate', [], 'projects'),
+                'label' => $translator->trans('columns.completion_tooltip', [], 'projects'),
                 'template' => 'project_case/twig_columns/_completion.html.twig',
                 'className' => 'p-0',
                 'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('columns.production_rate', [], 'projects'),
+                    'abbr' => $translator->trans('columns.completion_raw', [], 'projects'),
                     'label_attr' => [
                         'class' => 'dynamic-nowrap text-uppercase',
                     ],
@@ -154,7 +154,7 @@ class ProjectController extends BaseController
             // DERNIERE RELANCE
             ->add('lastRelaunch', DateTimeColumn::class, [
                 'field' => 'lastRelaunch.createdAt',
-                'label' => $translator->trans('columns.last_relaunch', [], 'projects'),
+                'label' => $translator->trans('columns.last_relaunch_tooltip', [], 'projects'),
                 'format' => 'd/m/Y',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.last_relaunch_raw', [], 'projects'),
@@ -166,30 +166,35 @@ class ProjectController extends BaseController
             ])
             // PC DEPOSIT
             ->add('pcDeposit', TwigColumn::class, [
-                'label' => $translator->trans('columns.pc_deposit', [], 'projects'),
+                'label' => $translator->trans('columns.pc_deposit_tooltip', [], 'projects'),
                 'className' => 'px-0',
                 'template' => 'project_case/twig_columns/_pc_deposite.html.twig',
                 'filter' => $this->filterBuilder->buildFilter(
                     ChoiceFilter::class, 
                     array_merge(
                         $this->filterOptionsProvider->getOptions('pc_deposit'),
-                        ['choices' => [
-                            true => $translator->trans('label.yes', [], 'projects'),
-                            false => $translator->trans('label.no', [], 'projects'),
-                        ]]
+                        [
+                            'choices' => [
+                                true => $translator->trans('label.yes', [], 'projects'),
+                                false => $translator->trans('label.no', [], 'projects'),
+                            ],
+                            'attr' => [
+                                'class' => 'w-100',
+                            ],
+                        ]
                     )
                 ),
                 'searchable' => true,
                 'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('columns.pc_deposit', [], 'projects'),
+                    'abbr' => $translator->trans('columns.pc_deposit_raw', [], 'projects'),
                     'label_attr' => [
-                        'class' => 'dynamic-nowrap text-uppercase',
+                        'class' => 'dynamic-nowrap text-uppercase text-left',
                     ]
                 ], true),
             ])
             // ARCHITECT
             ->add('architect', TwigColumn::class, [
-                'label' => $translator->trans('columns.architect', [], 'projects'),
+                'label' => $translator->trans('columns.architect_tooltip', [], 'projects'),
                 'className' => 'px-0',
                 'template' => 'project_case/twig_columns/_architect.html.twig',
                 'searchable' => true,
@@ -197,10 +202,15 @@ class ProjectController extends BaseController
                     ChoiceFilter::class, 
                     array_merge(
                         $this->filterOptionsProvider->getOptions('architect'),
-                        ['choices' => [
-                            true => $translator->trans('label.yes', [], 'projects'),
-                            false => $translator->trans('label.no', [], 'projects'),
-                        ]]
+                        [
+                            'choices' => [
+                                true => $translator->trans('label.yes', [], 'projects'),
+                                false => $translator->trans('label.no', [], 'projects'),
+                            ],
+                            'attr' => [
+                                'class' => 'w-100',
+                            ],
+                        ]
                     )
                 ),
                 'meta' => $this->columnMeta([

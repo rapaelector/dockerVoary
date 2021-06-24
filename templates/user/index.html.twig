@@ -45,9 +45,17 @@
         $(function () {
             window.App.DataTable.initAppDataTables({
                 columnNames: [
-                    'user_profile_image', 'user_email', 'user_firstName', 'user_lastName', 
-                    'user_phone', 'user_fax', 'user_job', 'created_at',
-                    'updated_at', 'user_can_login', 'actions'
+                    'user_profile_image',
+                    'user_email',
+                    'user_firstName',
+                    'user_lastName', 
+                    'user_phone',
+                    'user_fax',
+                    'user_job',
+                    'created_at',
+                    'updated_at',
+                    'user_can_login',
+                    'actions'
                 ],
                 excludedColumns: [9],
                 containerSelector: '#{{ datatable.tableId }}',

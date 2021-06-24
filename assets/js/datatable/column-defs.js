@@ -25,7 +25,7 @@ export default [
             'pc_deposit',
             'architect',
         ],
-        className: 'text-center',
+        className: '',
     },
 
     /**
@@ -76,8 +76,8 @@ export default [
     {
         width: '60px',
         cols: [
-            'global_amount',]
-        ,
+            'global_amount',
+        ],
     },
     /**
      * - NUMBER COLUMNS
@@ -89,7 +89,7 @@ export default [
             'client_number',
             'project_amount_subcontracted_work',
             'project_amount_bbi_specific_work',
-            'archivement_pourcentage',
+            'completion',
         ],
     },
 
@@ -120,6 +120,7 @@ export default [
         width: '50px',
         cols: [
             'project_site_code',
+            'project_postal_code',
         ]
     },
     /**
@@ -130,6 +131,8 @@ export default [
     {
         width: '100px',
         cols: [
+            'user_firstName',
+            'user_lastName',
             'client_short_name',
             'client_activity',
             'client_tva_rate',
