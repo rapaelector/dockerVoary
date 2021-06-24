@@ -70,20 +70,25 @@ completionInputSelector = '.completion-input',
         let modal = $('#businessChargeModal');
         let modalEconomist = $('#economistModal');
         let idProject = null;
+        let idPreset = null;
         $table.on('draw.dt', function () {
             $('body').on('click', '.business-charge-change', (e) => {
                 e.preventDefault()
                 var values = $(e.target); // Button that triggered the modal
                 idProject = values.data('id');
+                idPreset = values.data('id-business-charge');
                 modal.modal('show');
                 $('form.form-change-business-charge').attr('data-id', idProject)
+                $("#project_business_charge_businessCharge").val(idPreset).trigger('change')
             })
             $('body').on('click', '.economist-change', (e) => {
                 e.preventDefault()
                 var values = $(e.target); // Button that triggered the modal
                 idProject = values.data('id');
+                idPreset = values.data('id-economist');
                 modalEconomist.modal('show');
                 $('form.form-economist').attr('data-id', idProject)
+                $("#economist_form_economist").val(idPreset).trigger('change')
             })
         })
         // then save the business charge
@@ -103,12 +108,14 @@ completionInputSelector = '.completion-input',
                         icon: data.type,
                         title: data.message,
                     });
+                    $("#project_business_charge_businessCharge").val(null).trigger('change')
                 },
                 error: function (error) {
                     Toast.fire({
                         icon: error.type,
                         title: error.message,
                     });
+                    $("#project_business_charge_businessCharge").val(null).trigger('change')
                 },
             });
             return false;
@@ -129,12 +136,14 @@ completionInputSelector = '.completion-input',
                         icon: data.type,
                         title: data.message,
                     });
+                    $("#economist_form_economist").val(null).trigger('change')
                 },
                 error: function (error) {
                     Toast.fire({
                         icon: error.type,
                         title: error.message,
                     });
+                    $("#economist_form_economist").val(null).trigger('change')
                 },
             });
             return false;

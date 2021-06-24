@@ -15,6 +15,7 @@
 /var/log/*
 /vendor/
 /public/.htaccess
+/web/js/fos_js_routes.js
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

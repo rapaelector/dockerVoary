@@ -1,10 +1,10 @@
 {% set economist = row.economist %}
 {% set id = row.id %}
 
-<div class="input-group py-0 project-case-field economist-change"  data-id="{{ row.id }}">
+<div class="input-group py-0 project-case-field economist-change"  data-id="{{ row.id }}" data-id-economist="{{ resolve([economist, 'id']) }}">
     {% if economist %}
             {{ economist.lastName }}
         {% else %}
-            ''
+            '--'
         {% endif %}
 </div>
