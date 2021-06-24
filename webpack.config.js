@@ -43,6 +43,10 @@ Encore
      * Entry for project case but in the same folder of project
      */
     .addEntry('app_case_list', './assets/js/project/case_list.js')
+    /**
+     * Entry for project case in list project
+     */
+    .addEntry('app_project_list', './assets/js/project/list.js')
     /***
      * Entry for entry for new project
      * - For client collection type

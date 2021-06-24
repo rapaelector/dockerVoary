@@ -37,6 +37,40 @@
                     <div class="card-body pt-0">
                         <div id="{{ datatable.tableId }}">Chargement...</div>
                     </div>
+                    <div class="modal-part">
+                        <!-- Modal -->
+                        <div class="modal fade" id="businessChargeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(businessChargeForm, {'attr': {'class':'form-change-business-charge'}}) }}
+                                        {{ form_row(businessChargeForm.businessCharge) }}
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary business-charge-change-save">Save</button>
+                                        </div>
+                                        {{ form_end(businessChargeForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-part">
+                        <!-- Modal for economist -->
+                        <div class="modal fade" id="economistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(economistForm, {'attr': {'class':'form-change-economist'}}) }}
+                                        {{ form_row(economistForm.economist) }}
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary business-economist-save">Save</button>
+                                        </div>
+                                        {{ form_end(economistForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,30 +79,16 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('app_project_list') }}
     <script>
-        $(function () {
-            window.App.DataTable.initAppDataTables({
-                columnNames: [
-                    'project_siteCode',
-                    'project_market_type',
-                    'project_prospect',
-                    'project_user_email',
-                    'project_roadmap',
-                    'project_amount_subcontracted_work',
-                    'project_amount_bbi_specific_work',
-                    'project_global_amount',
-                    'created_at',
-                    'actions',
-                ],
-                excludedColumns: [],
+        $(function() {
+            window.initProjectList({
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: false,
-                enableFormatter: true,
-                redrawEvent: 'project.deleted',
-            })
+            });
         });
     </script>
+
 {% endblock %}
