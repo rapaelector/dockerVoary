@@ -15,10 +15,15 @@
 <table class="table-borderless">
     <tbody>
         <tr>
-            <td height="{{ TITLE_COL_COUNT }}px;" class="align-start text-center"><div class="label">{{ 'pdf.label.construction_site_address'|trans }}</div></td>
+            <td
+                height="{{ TITLE_COL_COUNT }}px;" 
+                class="align-start text-center"
+            >
+                <div class="label">{{ 'pdf.label.construction_site_address'|trans }}</div>
+            </td>
         </tr>
         <tr>
-            <td height="{{ CONSTRUCTION_SITE_VALUE_H_COUNT }}px;" class="align-start">
+            <td height="{{ CONSTRUCTION_SITE_VALUE_H_COUNT }}px;" class="align-start break-word">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}

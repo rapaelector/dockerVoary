@@ -47,13 +47,14 @@
 {% endblock %}
 
 {% block content %}
+    {# DOSSIER DE PROSPECTION #}
     <div>
-        {# DOSSIER DE PROSPECTION #}
         {% include 'project/pdf/_prospection_folder.html.twig' %}
     </div>
+    {# PAGE BREAKER #}
     <div class="page-breaker"></div>
-    <div style="padding-top: 20px;">
-        {# REVUE DE CONTRAT / PAGE DE GARDE DISA #}
+    {# REVUE DE CONTRAT / PAGE DE GARDE DISA #}
+    <div>
         {% include 'project/pdf/_contract_review.html.twig' %}
     </div>
 {% endblock %}

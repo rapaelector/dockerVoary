@@ -6,7 +6,7 @@
 {# value height #}
 {% set RESPONSE_VALUE_HEIGHT = space_value(5, RESPONSE_H_COUNT) %}
 
-{% set responseForThe = resolve([project, 'answerForThe'], null) %}
+{% set responseForThe = resolve([project, 'answerForThe'], '') %}
 
 <table class="table-borderless">
     <tbody>
@@ -16,11 +16,11 @@
             </td>
         </tr>
         <tr height="{{ RESPONSE_VALUE_HEIGHT }}px;">
-            <td class="align-start">
+            <td class="align-start break-word">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    {{ responseForThe }}
+                    {{ responseForThe|nl2br }}
                 {% endif %}
             </td>
         </tr>

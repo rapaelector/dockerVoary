@@ -17,6 +17,7 @@
 {# padding bottom #}
 
 {% set operationDescriptionSurface = resolve([project, 'descriptionOperation'], null) %}
+{% set surface = resolve([project, 'prospect', 'projectDescription', 'area'], null) %}
 
 <table class="table-borderless">
     <tbody>
@@ -26,16 +27,24 @@
             </td>
         </tr>
         <tr>
-            <td
-                width="{{ LABEL_WIDTH }}"
-                height="{{ OPERATION_DESCRIPTION_HEIGHT }}px;"></td>
-            <td width="{{ VALUE_WIDTH }}"></td>
+            <td 
+                width="{{ LABEL_WIDTH }}" 
+                height="{{ OPERATION_DESCRIPTION_HEIGHT }}px;" 
+                colspan="2"
+                class="break-word"
+            >
+                {% if ngMode %}
+                    <input type="text">
+                {% else %}
+                    <span class="td-value">{{ operationDescriptionSurface|nl2br }}</span>
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <td
                 width="{{ LABEL_WIDTH }}" 
                 height="{{ OPERATION_DESCRIPTION_SURFACE_HEIGHT }}px;" 
-                class="text-uppercase surface"
+                class="text-uppercase surface break-word"
             >
                 {{ 'pdf.label.surface'|trans }}:
             </td>
@@ -43,7 +52,7 @@
                 {% if ngMode %}
                     <input type="text">
                 {% else %}
-                    <span class="td-value">{{ operationDescriptionSurface }}</span>
+                    <span class="td-value">{{ surface|nl2br }}</span>
                 {% endif %}
             </td>
         </tr>

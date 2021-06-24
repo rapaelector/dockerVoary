@@ -29,7 +29,7 @@
             </td>
         </tr>
         <tr>
-            {# commercial (rotating text) #}
+            {# COMMERCIAL (ROTATING TEXT) #}
             <td rowspan="{{ commercialRowspan }}" colspan="2" class="rotating-title commercial">
                 <div class="title-container commercial-title text-uppercase" style="width: 30px;">
                     {{ 'pdf.title.commercial'|trans }}
@@ -37,7 +37,7 @@
             </td>
             <td rowspan="{{ emptyRowspan }}" class="border-0 border-top-0"></td>
             <td>
-                {# Maitre d'ouvrage #}
+                {# MAITRE D'OUVRAGE #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_manager'|trans,
                     content: resolve([project, 'projectOwner'], null),
@@ -45,13 +45,13 @@
                 } %}
             </td>
             <td>
-                {# Interlocuteur #}
+                {# INTERLOCUTEUR #}
                 {% include 'project/pdf/contract_review/interlocuteur_info.html.twig' %}
             </td>
         </tr>
         <tr>
             <td>
-                {# Maitre d'oeuvre #}
+                {# MAITRE D'OEUVRE #}
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.project_owner'|trans,
                     content: resolve([project, 'projectManager'], null),
@@ -59,7 +59,7 @@
                 } %}
             </td>
             <td>
-                {# Adresse chantier #}
+                {# ADRESSE CHANTIER #}
                 {% set siteAddress = '' %}
 
                 {% for i in 1..3 %}
@@ -75,7 +75,7 @@
         </tr>
         <tr>
             <td>
-                {# Adresse facturation #}
+                {# ADRESSE FACTURATION #}
                 {% set billingAddres = '' %}
 
                 {% for i in 1..3 %}
@@ -88,35 +88,35 @@
                 } %}
             </td>
             <td>
-                {# Description d' l'operation #}
+                {# DESCRIPTION D' L'OPERATION #}
                 {% set descriptionOperation = resolve([project, 'descriptionOperation'], '') %}
 
                 {% include 'project/pdf/shared/_simple_content.html.twig' with {
                     title: 'pdf.label.operation_description'|trans,
-                    content: descriptionOperation,
+                    content: descriptionOperation|nl2br,
                 } %}
             </td>
         </tr>
         <tr>
             <td>
-                {# Dossier vendu par, rédacteur du devis #}
+                {# DOSSIER VENDU PAR, RÉDACTEUR DU DEVIS #}
                 {% include 'project/pdf/contract_review/folder_sold_by.html.twig' %}
             </td>
             <td>
-                {# Norme en 1090 #}
+                {# NORME EN 1090 #}
                 {% include 'project/pdf/contract_review/norme_1090.html.twig' with {
                     norm1090ClassOverride: 'text-weight-bold text-uppercase norm-td text-underline text-calibri',
                 } %}
             </td>
         </tr>
         <tr>
-            {# market type #}
+            {# MARKET TYPE #}
             <td>
                 {% include 'project/pdf/contract_review/market_type.html.twig' with {
                     marketTypeValue: resolve([project, 'marketType'], null),
                 } %}
             </td>
-            {# marke type 2 #}
+            {# MARKE TYPE 2 #}
             <td>
                 {% include 'project/pdf/prospection_folder/market_type_2.html.twig' with {
                     value: resolve([project, 'marketType'], null)
@@ -124,14 +124,14 @@
             </td>
         </tr>
         <tr>
-            {# bonhomme est-il #}
+            {# BONHOMME EST-IL #}
             <td colspan="2">{% include 'project/pdf/prospection_folder/is_bonhomme.html.twig' with {
                 value: resolve([project, 'bonhomePercentage'], null),
             } %}</td>
         </tr>
         <tr>
             <td colspan="2">
-                {# validation de la fiche disa avec #}
+                {# VALIDATION DE LA FICHE DISA AVEC #}
                 {% include 'project/pdf/contract_review/validation_of_the_file.html.twig' with {
                     value: resolve([project, 'disaSheetValidation'], null),
                 } %}
@@ -139,14 +139,14 @@
         </tr>
         <tr>
             <td colspan="2">
-                {# Mode de regelement acompte #}
+                {# MODE DE REGELEMENT ACOMPTE #}
                 {% include 'project/pdf/contract_review/payment_choice.html.twig' %}
             </td>
         </tr>
         <tr>
             {% set workBreakdownHeight = 78 %}
             <td colspan="2" height="{{ workBreakdownHeight }}px">
-                {# Repartition des travaux, Montant global du marche #}
+                {# REPARTITION DES TRAVAUX, MONTANT GLOBAL DU MARCHE #}
                 {% include 'project/pdf/contract_review/work_breakdown_and_contract_amount.html.twig' with { 
                     workBreakdownHeight: workBreakdownHeight
                 } %}
@@ -154,11 +154,11 @@
         </tr>
         <tr>
             <td>
-                {# Type de dossier #}
+                {# TYPE DE DOSSIER #}
                 {% include 'project/pdf/contract_review/folder_type.html.twig' %}
             </td>
             <td class="align-start">
-                {# Planning projet #}
+                {# PLANNING PROJET #}
                 {% include 'project/pdf/contract_review/planning_project.html.twig' %}
             </td>
         </tr>
@@ -167,7 +167,7 @@
                 <div class="title-container signatures-title text-uppercase">{{ 'pdf.label.signatures'|trans }}</div>
             </td>
             <td colspan="2">
-                {# signature #}
+                {# SIGNATURE #}
                 {% include 'project/pdf/contract_review/signature.html.twig' %}
             </td>
         </tr>
@@ -175,7 +175,7 @@
             <td colspan="2" class="border-0"></td>
             <td class="border-0"></td>
             <td colspan="2">
-                {# under the signature table #}
+                {# UNDER THE SIGNATURE TABLE #}
                 {% include 'project/pdf/contract_review/assistant_in_charge_of_the_file.html.twig' %}
             </td>
         </tr>

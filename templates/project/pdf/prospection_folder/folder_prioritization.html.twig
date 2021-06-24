@@ -35,7 +35,7 @@
                     {{ pdf_checkbox(folderPrioritizationUrgent) }}
                 {% endif %}
             </td>
-            <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.urgent'|trans }}</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase break-word">{{ 'pdf.folder_prioritization_label.urgent'|trans }}</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <input type="text">
@@ -43,7 +43,7 @@
                     {{ pdf_checkbox(folderPrioritizationNormal) }}
                 {% endif %}
             </td>
-            <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.normal'|trans }}</td>
+            <td width="{{ CHECKBOX_LABEL_WIDTH }}%" class="text-uppercase break-word">{{ 'pdf.folder_prioritization_label.normal'|trans }}</td>
             <td width="{{ CHECKBOX_WIDTH }}%;">
                 {% if ngMode %}
                     <input type="text">
@@ -51,7 +51,7 @@
                     {{ pdf_checkbox(folderPrioritizationWithoutContinuation) }}
                 {% endif %}
             </td>
-            <td width="{{ WITHOUT_CONTINUATION }}%;" class="text-uppercase word-word">{{ 'pdf.folder_prioritization_label.without_continuation'|trans }}</td>
+            <td width="{{ WITHOUT_CONTINUATION }}%;" class="text-uppercase break-word">{{ 'pdf.folder_prioritization_label.without_continuation'|trans }}</td>
             <td width="{{ EMPTY_TD_WIDTH }}%;"></td>
         </tr>
     </tbody>

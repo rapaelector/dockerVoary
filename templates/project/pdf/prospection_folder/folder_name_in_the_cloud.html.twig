@@ -16,14 +16,14 @@
 <table class="table-borderless">
     <tbody>
         <tr height="{{ FOLDER_NAME_LABEL_HEIGHT }}px" class="align-start">
-            <td>
+            <td class="break-word">
                 <div class="text-left text-weight-bold text-underline text-label">
                     {{ 'pdf.label.folder_name_in_the_cloud'|trans }}
                 </div>
             </td>
         </tr>
         <tr height="{{ FOLDER_NAME_VALUE }}px">
-            <td>
+            <td class="break-word">
                 {% if ngMode %}
                     <input type="text">
                 {% else %}

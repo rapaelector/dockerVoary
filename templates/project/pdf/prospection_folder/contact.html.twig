@@ -45,6 +45,7 @@
             <td 
                 width="{{ LABEL_WIDTH }}%;"
                 height="{{ ENTREPRISE_HEIGT }}px;"
+                class="break-word"
             >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.entreprise'|trans }} :</span>
                 {% if ngMode %}
@@ -58,6 +59,7 @@
             <td 
                 width="{{ LABEL_WIDTH }}%;"
                 height="{{ NAME_HEIGT }}px;"
+                class="break-word"
             >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.name'|trans }} :</span>
                 {% if ngMode %}
@@ -70,7 +72,8 @@
         <tr>
             <td 
                 width="{{ LABEL_WIDTH }}%;"
-                height="{{ CONTACT_ADDRESS_HEIGHT }}px;" class="align-start"
+                height="{{ CONTACT_ADDRESS_HEIGHT }}px;"
+                class="align-start break-word"
             >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.contact_address'|trans }} :</span>
                 {% if ngMode %}
@@ -84,6 +87,7 @@
             <td 
                 width="{{ LABEL_WIDTH }}%;"
                 height="{{ MAIL_HEIGT }}"
+                class="break-word"
             >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.mail'|trans }} :</span>
                 {% if ngMode %}
@@ -97,6 +101,7 @@
             <td 
                 width="{{ LABEL_WIDTH }}%;"
                 height="{{ TEL_HEIGT }}"
+                class="break-word"
             >
                 <span class="{{ LABEL_CLASS }}">{{ 'pdf.label.tel'|trans }} :</span>
                 {% if ngMode %}

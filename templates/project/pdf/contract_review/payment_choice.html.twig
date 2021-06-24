@@ -116,12 +116,12 @@
                         <td 
                             colspan="2" 
                             height="{{ CLIENT_CONDITIONS_NEGOTIATED_VALUE_WIDTH }}px;"
-                            class="align-start p-0 text-calibri"
+                            class="align-start p-0 text-calibri break-word"
                         >
                             {% if ngMode %}
                                 <input type="text">
                             {% else %}
-                                <span>{{ clientCondition }}</span>
+                                <span>{{ clientCondition|nl2br }}</span>
                             {% endif %}
                         </td>
                     </tr>
