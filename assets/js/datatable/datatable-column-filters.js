@@ -1,4 +1,8 @@
 import { appConsole } from '../utils';
+import * as moment from 'moment';
+moment.locale('fr');
+window.moment = moment;
+
 const RANGE_SLIDER_SELECTOR = '.range-slider';
 const RANGE_DROPDOWN_SELECTOR = '.dropdown.range-dropdown';
 const RANGE_DROPDOWN_WIDTH = 240;
@@ -66,20 +70,71 @@ export {
 
 function initDateRangepicker(options) {
     appConsole('info', true, 'init daterange picker', $('.input-daterange > input').length);
-    $('.input-daterange > input').daterangepicker({
-        autoclose: true,
-        locale: {
-            format: 'DD/MM/YYYY',
-        },
-        autoUpdateInput: false,
-        autoApply: true,
-        singleDatePicker: false
+    
+    $('.input-daterange > input').each(function () {
+        var $input = $(this);
+        var customeRangeLabel = (window._locale == 'fr' ? 'Date personnalisé' : 'Custom range');
+        var options = {
+            autoclose: true,
+            locale: {
+                format: 'DD/MM/YYYY',
+                customRangeLabel: customeRangeLabel,
+            },
+            autoUpdateInput: false,
+            autoApply: true,
+            singleDatePicker: false,
+        };
+
+        if ($input.data('ranges') == 'weeks') {
+            options = {
+                autoclose: true,
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    customRangeLabel: customeRangeLabel,
+                },
+                autoUpdateInput: false,
+                autoApply: true,
+                singleDatePicker: false,
+                ranges: getWeekRange(),
+            };
+        }
+        $input.daterangepicker(options)
+
     });
+    // $('.input-daterange > input').daterangepicker({
+    //     autoclose: true,
+    //     locale: {
+    //         format: 'DD/MM/YYYY',
+    //     },
+    //     autoUpdateInput: false,
+    //     autoApply: true,
+    //     singleDatePicker: false,
+    //     ranges: getWeekRange(),
+    // });
 
     $('.input-daterange > input').on('apply.daterangepicker', function (ev, picker) {
         $(this).val([picker.startDate.format('DD/MM/YYYY'), picker.endDate.format('DD/MM/YYYY')].join(' - '));
         $(this).trigger('change');
     })
+}
+
+function getWeekRange() {
+    var res = {};
+
+    function weeksInYear(year) {
+        return Math.max(
+            moment(new Date(year, 11, 31)).isoWeek()
+            , moment(new Date(year, 11, 31-7)).isoWeek()
+        );
+    }
+    var data = new Array(weeksInYear(new Date().getFullYear())).fill([]).map((v, i) => {
+        var start = moment().day('Monday').week(i + 1).startOf('week');
+        var end = moment().day('Monday').week(i + 1).endOf('week');
+        return {key: [`Semaine ${i + 1}`], value: [start, end]};
+    });
+    data.forEach((item) => res[item.key] = item.value);
+
+    return res;
 }
 
 function initClearButton(dt, options) {

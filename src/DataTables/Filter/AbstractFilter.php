@@ -73,10 +73,23 @@ abstract class AbstractFilter extends \Omines\DataTablesBundle\Filter\AbstractFi
             'operator' => Comparison::EQ,
             'type' => 'text',
             'width' => '100px',
+            /**
+             * This option allow to add additional field to the filter search
+             *      e.g:
+             *          - filter for some field and add additional field to the search
+             *              - field to search "prospect.name" and add "prospect.postalCode" field in the search of "prospect.name"
+             *              - SQL : SELECT prospect.name FORM prospect WHERE name LIKE '%value%' OR postalCode LIKE '%value%'
+             */
             'additionalFields' => [],
             'searchFormatter' => function ($search) {
                 return $search;
-            }
+            },
+            /**
+             * Attribute for the input filter
+             * Any html attribute can be send here
+             *      e.g: ['class' => 'some class', 'data-something' => 'data-value', etc.]
+             */
+            'attr' => [],
         ]);
 
         return $this;

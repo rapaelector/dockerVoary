@@ -69,6 +69,7 @@ class UserController extends BaseController
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('profileName', TwigColumn::class, [
                 'label' => $translator->trans('label.profile', [], 'users'),
+                'className' => 'text-center',
                 'template' => 'shared/twig-columns/profile_template.html.twig',
                 'searchable' => false,
                 'orderable' => false,

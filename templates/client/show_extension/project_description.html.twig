@@ -1,17 +1,19 @@
 {% set projectDescriptionFields = ['projectDescription', 'area', 'department', 'marketType', 'address'] %}
 {% set addressFields = ['postalCode', 'city', 'line1', 'country'] %}
 
-<table class="table table-app-sm">
+<table class="table table-app-sm table-striped">
     <tbody>
         {% for key, field in projectDescriptionFields %}
-            <tr>
-                <td>{{ ('columns.' ~ field|u.snake)|trans({}, 'project') }}</td>
-                <td>{{ resolve([client, 'projectDescription', field], '-')|trans({}, 'project') }}</td>
-            </tr>
+            {% if field != 'address' %}
+                <tr>
+                    <th>{{ ('columns.' ~ field|u.snake)|trans({}, 'project') }}</th>
+                    <td>{{ resolve([client, 'projectDescription', field], '-')|trans({}, 'project') }}</td>
+                </tr>
+            {% endif %}
             {% if field == 'address' %}
                 {% for addressField in addressFields %}
                     <tr>
-                        <td>{{ ('label.' ~ addressField|u.snake )|trans({}, 'client') }}</td>
+                        <th>{{ ('label.' ~ addressField|u.snake )|trans({}, 'client') }}</th>
                         {% if addressField == 'country' %}
                             <td>
                                 {% set cityCode = resolve([client, 'projectDescription', field, addressField], null) %}

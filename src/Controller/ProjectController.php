@@ -71,8 +71,8 @@ class ProjectController extends BaseController
                     ChoiceFilter::class, 
                     array_merge(
                         $this->filterOptionsProvider->getOptions('site_code'),
-                        ['choices' => $this->filterOptionsProvider->getProjectSiteCode()
-                    ])
+                        ['choices' => $this->filterOptionsProvider->getProjectSiteCode()]
+                    )
                 ),
                 'searchable' => true,
                 'meta' => [
@@ -207,6 +207,9 @@ class ProjectController extends BaseController
                     DateRangeFilter::class,
                     [
                         'type' => 'daterange',
+                        'attr' => [
+                            'data-ranges' => 'weeks',
+                        ],
                     ]
                 ),
                 'meta' => $this->columnMeta([

@@ -102,7 +102,7 @@ class FilterOptionsProvider
         'roadmap' => [
             'type' => 'choice',
             'choices' => [],
-        ]
+        ],
     ];
 
     public function getOptions($name)

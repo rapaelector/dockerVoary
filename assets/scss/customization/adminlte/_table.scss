@@ -11,5 +11,22 @@
         }
     }
 }
+@mixin client_show_page {
+    .client-show-page {
+        table.table {
+            &.table-striped {
+                tbody tr {
+                    th, td {
+                        border-color: $border-color;
+                    }
+                }
+            }
+        }
+    }
+}
+@mixin _table {
+    @include table_app;
+    @include client_show_page;
+}
 
-@include table_app;
+@include _table;
