@@ -45,6 +45,8 @@ completionInputSelector = '.completion-input',
         columnNames: [
             'project_siteCode',
             'project_prospect',
+            'project_business_charge',
+            'project_economiste',
             'project_user_email',
             'project_roadmap',
             'project_amount_subcontracted_work',

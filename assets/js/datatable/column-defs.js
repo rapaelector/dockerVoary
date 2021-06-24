@@ -147,6 +147,8 @@ export default [
             'project_market_type',
             'work_schedule',
             'comment',
+            'project_business_charge',
+            'project_economiste',
         ],
         className: ''
     },
