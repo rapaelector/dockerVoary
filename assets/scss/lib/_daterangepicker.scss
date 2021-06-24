@@ -1,0 +1,21 @@
+@mixin daterange_filter {
+    @media (min-width: 730px) {
+        .daterangepicker.show-calendar .ranges, .daterangepicker .ranges {
+            max-height: 227px;
+            overflow: auto;
+            ul {
+                li:last-child {
+                    position: sticky;
+                    bottom: 0;
+                    background: $white;
+                    color: #000;
+                }
+            }
+        }
+    }
+}
+@mixin _daterangepicker {
+    @include daterange_filter;
+}
+
+@include _daterangepicker;

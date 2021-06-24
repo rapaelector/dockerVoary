@@ -11,5 +11,8 @@
         }
     }
 }
+@mixin _table {
+    @include table_app;
+}
 
-@include table_app;
+@include _table;
