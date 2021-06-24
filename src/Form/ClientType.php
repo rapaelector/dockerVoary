@@ -31,6 +31,9 @@ class ClientType extends AbstractType
             ->add('clientNumber', TextType::class, [
                 'label' => 'label.client_number',
                 'required' => false,
+                'attr' => [
+                    'disabled' => 'disabled',
+                ],
             ])
             ->add('activity', ChoiceType::class, [
                 'label' => 'label.activity',

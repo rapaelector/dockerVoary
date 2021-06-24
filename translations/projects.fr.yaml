@@ -154,6 +154,8 @@ columns:
   code_postal_raw: 'Code <br/>postale'
   business_charge: 'Chef projet'
   business_charge_raw: 'Chef <br/>projet'
+  resposible_business: "Chargé d'affaire"
+  resposible_business_raw: "Chargé <br/>d'affaire"
   last_relaunch: 'Derniere relance'
   last_relaunch_raw: 'Derniere <br/>relance'
   last_relaunch_abbr: 'Derniere'

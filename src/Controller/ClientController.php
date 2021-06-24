@@ -160,13 +160,19 @@ class ClientController extends BaseController
     {
         $newClientNumber = $clientService->generateClientNumber();
         $client = new Client();
-        $client->setClientNumber($newClientNumber[Client::TYPE_PROSPECT]);
+        $clientNumber = $newClientNumber[Client::TYPE_PROSPECT];
+        $client->setClientNumber($clientNumber);
         $form = $this->createForm(ClientType::class, $client, [
             'validation_groups' => ['Default', 'client:create'],
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            /**
+             * Le numero de prospect est automatisé mais ne doit pas être modifiable ou que par un utlisateur superadmin (skype)
+             */
+            $client->setClientNumber($clientNumber);
             /**
              * Job:
              *      - persist the client
@@ -211,12 +217,18 @@ class ClientController extends BaseController
     #[Route('/{id}/edit', name: 'client.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Client $client, TranslatorInterface $translator, ClientServiceInterface $clientService): Response
     {
+        $clientNumber = $client->getClientNumber();
         $form = $this->createForm(ClientType::class, $client, [
             'validation_groups' => ['Default', 'client:edit'],
         ]);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /**
+             * Le numero de prospect est automatisé mais ne doit pas être modifiable ou que par un utlisateur superadmin (skype)
+             */
+            $client->setClientNumber($clientNumber);
             $clientService->update($client);
             $this->addFlash('success', $translator->trans('messages.editing_success', [], 'client'));
             /**

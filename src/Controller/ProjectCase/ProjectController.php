@@ -57,11 +57,16 @@ class ProjectController extends BaseController
                     $this->filterOptionsProvider->getOptions('type_text')
                 ),
             ])
+            /**
+             * Change d'chef project en chargé d'affaire (Skype)
+             */
             ->add('businessCharge', TextColumn::class,  [
                 'field' => 'businessCharge.lastName',
                 'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.business_charge', [], 'projects'),
-                'meta' => $this->columnMeta([], true),
+                'label' => $translator->trans('columns.resposible_business', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.resposible_business_raw', [], 'projects'),
+                ], true),
                 'filter' => $this->filterBuilder->buildFilter(
                     ChoiceFilter::class, 
                     array_merge(
