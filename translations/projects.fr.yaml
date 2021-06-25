@@ -2,6 +2,7 @@ pdf:
   title:
     prospection_folder: 'Dossier de prospection'
     prospect: 'Prospect'
+    project: 'Projet'
     contract_review_title: 'Revue de contrat / page de garde disa'
     siteCode: 'Code chantier'
     commercial: 'Commercial'

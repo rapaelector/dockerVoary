@@ -25,21 +25,21 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('roadmap', ChoiceType::class, [
-            //         "label" => 'columns.roadmap',
-            //         'choices' => [
-            //             'oui' => true,
-            //             'non' => false,
-            //         ],
-            //         'label_attr' => [
-            //             'class' => 'radio-custom radio-inline',
-            //         ],
-            //         "multiple" => false,
-            //         "expanded" => true
-            //     ])
-            // ->add('siteCode', TextType::class, [
-            //     'label' => "columns.siteCode"
-            // ])
+            ->add('roadmap', ChoiceType::class, [
+                    "label" => 'columns.roadmap',
+                    'choices' => [
+                        'oui' => true,
+                        'non' => false,
+                    ],
+                    'label_attr' => [
+                        'class' => 'radio-custom radio-inline',
+                    ],
+                    "multiple" => false,
+                    "expanded" => true
+                ])
+            ->add('siteCode', TextType::class, [
+                'label' => "columns.siteCode"
+            ])
             ->add('contactSelect', EntityType::class, [
                 'label' => 'columns.contact',
                 'class' => User::class,
@@ -61,12 +61,12 @@ class ProjectType extends AbstractType
             ->add('prospect', null, [
                 'label' => 'columns.prospect'
             ])
-            // ->add('projectOwner', null, [
-            //     'label' => 'columns.projectOwner'
-            // ])
-            // ->add('projectManager', null, [
-            //     'label' => 'columns.projectManager'
-            // ])
+            ->add('projectOwner', null, [
+                'label' => 'columns.projectOwner'
+            ])
+            ->add('projectManager', null, [
+                'label' => 'columns.projectManager'
+            ])
             ->add('marketType', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::TYPE_DE_MARCHE, true),
                 'label' => 'columns.marketType',
