@@ -33,14 +33,6 @@
 .project-address {
     text-decoration: underline;
 }
-#client_projectDescription_marketType, #project_marketType, #project_caseType {
-    display: flex;
-    flex-wrap: wrap;
-    .custom-control.custom-radio, .custom-control.custom-checkbox {
-        width: 50%;
-        margin: 0;
-    }
-}
 .project-description-form {
     .form-error-message {
         white-space: nowrap !important;
@@ -97,6 +89,20 @@ label.required:after, .form-group .col-form-label:after {
 */
 #total {
     font-size: _rem(16);
+}
+@mixin form_flex {
+    #client_projectDescription_marketType, 
+    #project_marketType, 
+    #project_caseType, 
+    #project_edit_marketType,
+    #project_edit_caseType {
+        display: flex;
+        flex-wrap: wrap;
+        .custom-control.custom-radio, .custom-control.custom-checkbox {
+            width: 50%;
+            margin: 0;
+        }
+    }
 }
 @mixin client_page {
     .client-page {
@@ -214,6 +220,7 @@ label.required:after, .form-group .col-form-label:after {
     @include client_page;
     @include input_file;
     @include project_case_form;
+    @include form_flex;
 }
 
 @include _form;

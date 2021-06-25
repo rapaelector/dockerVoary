@@ -1,0 +1,238 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                {# PROJECT #}
+                <div class="col-md-12">
+                    <div class="card card card-outline card-app-secondary h-100">
+                        <div class="card-body">
+                            {% include 'project/_project_form.html.twig' %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                {# CONTACT #}
+                <div class="col-md-12 contact-form-to-check mt-3">
+                    <div class="card card card-outline card-app-secondary h-100">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ 'columns.contact'|trans({}, 'project') }}</h3>
+                        <!-- /.card-tools -->
+                        </div>
+                        <!-- /.card-header for interlocuteur -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="card-body">
+                                    {% include 'contact/_form.template.twig' with {'form':form.contact} %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                {# ADRESSE CHANTIER #}
+                <div class="col-md-12 mt-3">
+                    <div class="card card card-outline card-app-secondary h-100">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ 'columns.siteAddress'|trans({}, 'project') }}</h3>
+                            <!-- /.card-tools -->
+                        </div>
+                        <!-- /.card-header for interlocuteur -->
+                        <div class="card-body">
+                            {% include 'address/_form_address.template.twig' with {'form': form.siteAddress} %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                {# ADRESSE FACTURATION #}
+                <div class="col-md-12 mt-3">
+                    <div class="card card card-outline card-app-secondary h-100">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ 'columns.billingAddres'|trans({}, 'project') }}</h3>
+                            <!-- /.card-tools -->
+                        </div>
+                        <!-- /.card-header for interlocuteur -->
+                        <div class="card-body">
+                            {% include 'address/_form_address.template.twig' with {'form': form.billingAddres} %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12"></div>
+                <div class="col-sm-12"></div>
+                <div class="col-sm-12"></div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card card-outline">
+                                <div class="card-body">
+                                    {{ form_row(form.marketType) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card card-outline">
+                                <div class="card-body">
+                                    autre chose
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    {{ form_row(form.norm1090) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 row">
+        {# TYPE DE MARCHE #}
+        <div class="col-md-6">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header text-center">
+                    <h3 class="card-title col-md-12 text-center">{{ 'columns.marketType'|trans({}, 'project') }}</h3>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header for interlocuteur -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12"></div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.encryptiontype) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.bonhomePercentage) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.norm1090) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.notApplicable) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        {# MONTANT #}
+        <div class="col-md-6">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'title.amount'|trans({}, 'project') }}</h3>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header for interlocuteur -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.globalAmount) }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.amountSubcontractedWork) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.amountBBISpecificWork) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.disaSheetValidation) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 row">
+        {# MODE DE REGLEMENT #}
+        <div class="col-md-12">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-header text-center">
+                    <h3 class="card-title col-md-12 text-center">{{ 'title.payment_choice'|trans({}, 'project') }}</h3>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header for interlocuteur -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            {{ form_row(form.paymentChoice) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_row(form.paymentPercentage) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.depositeDateEdit) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_row(form.clientCondition) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 row">
+        {# OTHER FIELDS #}
+        <div class="col-md-12">
+            <div class="card card card-outline card-app-secondary h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.quoteValidatedMDE) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.quoteValidatedMDEDate) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.caseType) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.planningProject) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.priorizationOfFile) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.answerForThe) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label for="basic-url">{{ form_label(form.folderNameOnTheServer) }}</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">{{'label.serverFolder'|trans({}, 'project') }}</span>
+                                </div>
+                                {{ form_widget(form.folderNameOnTheServer) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.recordAssistant) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.ocbsDriver) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.tceDriver) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer text-center">
+        <button class="btn btn-app-primary" type="submit">{{ button_label|default('action.save'|trans([], 'messages')) }}</button>
+        <a href="{{ path('project.list') }}" class="btn btn-app-secondary">{{ 'action.cancel'|trans({}, 'messages') }}</a>
+    </div>
+{{ form_end(form) }}
+

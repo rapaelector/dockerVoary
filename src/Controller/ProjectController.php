@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\EconomistFormType;
 use App\Form\ProjectBusinessChargeType;
 use App\Form\ProjectType;
+use App\Form\ProjectEditType;
 use App\Repository\ProjectRepository;
 use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -322,7 +323,7 @@ class ProjectController extends BaseController
     #[Route('/{id}/edit', name: 'project.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(ProjectEditType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
