@@ -1,10 +1,52 @@
 {{ form_start(form) }}
     <div class="container-fluid">
         <div class="row">
+            {# PROJECT #}
             <div class="col-sm-6">
                 {% include 'project/new_form/_project_form.html.twig' %}
             </div>
-            <div class="col-sm-6"></div>
+            {# CONTACT #}
+            <div class="col-sm-6">
+                <div class="card card card-outline card-app-secondary h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ 'columns.contact'|trans({}, 'project') }}</h3>
+                    <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header for interlocuteur -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="card-body">
+                                {% include 'contact/_form.template.twig' with {'form':form.contact} %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            {# TYPE DE DOSSIER #}
+            <div class="col-sm-6 w-100">
+                <div class="card card-outline card-app-secondary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">{{ form_row(form.caseType) }}</div>
+                            <div class="col-sm-12">{{ form_row(form.priorizationOfFile) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# PLANNING PROJET, REPONSE POUR LE #}
+            <div class="col-sm-6 w-100">
+                <div class="card card-outline card-app-secondary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">{{ form_row(form.planningProject) }}</div>
+                            <div class="col-sm-12">{{ form_row(form.answerForThe) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-footer text-center">

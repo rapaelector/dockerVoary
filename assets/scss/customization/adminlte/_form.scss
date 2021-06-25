@@ -129,6 +129,18 @@ label.required:after, .form-group .col-form-label:after {
     }
 }
 @mixin project_case_form {
+    /*
+     * 1 = 5%
+     *  2 = 10
+     * ....
+     * - https://suivi.espai-web.com/tache/4905
+     * - PJ page 7
+     * rules:
+     *  - < 30% => red (Rouge)
+     *  - > 30% - < 50% => orange(Orange)
+     *  - > 50% - < 70% => yellow(Jaune)
+     *  - > 70% => green
+     */
     $levels: (
         0: $red,
         1: $red,
@@ -144,8 +156,8 @@ label.required:after, .form-group .col-form-label:after {
         11: $yellow,
         12: $yellow,
         13: $yellow,
-        14: $yellow,
-        15: $yellow,
+        14: $green,
+        15: $green,
         16: $green,
         17: $green,
         18: $green,

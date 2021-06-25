@@ -40,15 +40,22 @@ class ProjectType extends AbstractType
             // ->add('siteCode', TextType::class, [
             //     'label' => "columns.siteCode"
             // ])
+            ->add('name', TextType::class, [
+                'label' => 'columns.project_name',
+                'required' => false,
+            ])
+            ->add('prospect', null, [
+                'label' => 'columns.prospect'
+            ])
             ->add('contactSelect', EntityType::class, [
                 'label' => 'columns.contact',
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->orderBy('u.email', 'ASC');
+                        ->orderBy('u.lastName, u.firstName', 'ASC');
                 },
                 'placeholder' => 'Nouveau Contact',
-                'choice_label' => 'email',
+                // 'choice_label' => 'lastName',
                 'required' => false,
                 'attr' => [
                     'class' => 'bootstrap-select interlocutor-select',
@@ -58,66 +65,14 @@ class ProjectType extends AbstractType
                 'empty_data' => '',
                 'mapped' => false
             ])
-            ->add('prospect', null, [
-                'label' => 'columns.prospect'
+            ->add('businessCharge', null, [
+                'label'=>"columns.businessCharge"
             ])
-            // ->add('projectOwner', null, [
-            //     'label' => 'columns.projectOwner'
-            // ])
-            // ->add('projectManager', null, [
-            //     'label' => 'columns.projectManager'
-            // ])
-            ->add('marketType', ChoiceType::class, [
-                "choices" => Constants::getTypeValues(Constants::TYPE_DE_MARCHE, true),
-                'label' => 'columns.marketType',
-                "multiple" => false,
-                "expanded" => true,
-                'label_attr' => [
-                    'class' => 'radio-custom radio-inline'
-                ],
+            ->add('economist', null, [
+                'label' => "columns.economist"
             ])
-            ->add('bonhomePercentage', ChoiceType::class, [
-                "choices" => Constants::getTypeBonhomme(true),
-                'label' => 'columns.is_bonhomme',
-                "multiple" => false,
-                "expanded" => false,
-
-            ])
-            ->add('disaSheetValidation', ChoiceType::class, [
-                "choices" => Constants::getTypeValues(Constants::TYPE_DISA_SHEET, true),
-                'label' => "columns.disaSheetValidation",
-                'label_attr' => [
-                    'class' => 'checkbox-custom',
-                ],
-                "multiple" => true,
-                "expanded" => true,
-            ])
-            ->add('paymentChoice',ChoiceType::class, [
-                'label' => 'columns.paymentChoice',
-                'label_attr' => [
-                    'class' => 'radio-custom radio-inline'
-                ],
-                'required' => true,
-                'choices' => [
-                    'oui' => true,
-                    'non' => false,
-                ],
-                "multiple" => false,
-                "expanded" => true,
-            ])
-            ->add('depositeDateEdit', DateType::class, [
-                // renders it as a single text box
-                'widget' => 'single_text',
-            ])
-            ->add('paymentPercentage', NumberType::class, [
-                'label' => 'columns.paymentPercentage',
-                'attr' => [
-                    'placeholder' => '%'
-                ]
-            ])
-            ->add('clientCondition', TextareaType::class, [
-                'label' => 'columns.clientCondition'
-            ])
+            ->add('descriptionOperation', TextareaType::class)
+            ->add('contact', ContactType::class)
             ->add('caseType', ChoiceType::class, [
                 "choices" => Constants::getTypeValues(Constants::CASE_TYPES, true),
                 'label' => "columns.caseType",
@@ -127,72 +82,8 @@ class ProjectType extends AbstractType
                     'class' => 'checkbox-custom checkbox-inline'
                 ),
             ])
-            ->add('planningProject', TextareaType::class, [
-                'label' => "columns.planningProject"
-            ])
-            ->add('contact', ContactType::class)
-            ->add('billingAddres', AddressType::class)
-            ->add('siteAddress', AddressType::class)
-            ->add('descriptionOperation', TextareaType::class)
-            ->add('economist', null, [
-                'label' => "columns.economist"
-            ])
-            ->add('norm1090', ChoiceType::class, [
-                'label' => "columns.norm1090",
-                'choices' => [
-                    '1' => 1,
-                    '2' => 2,
-                    '3' => 3,
-                ],
-                'label_attr' => [
-                    'class' => 'radio-custom radio-inline'
-                ],
-                "multiple" => false,
-                "expanded" => true
-            ])
-            ->add('quoteValidatedMDE', null, [
-                'label' => 'columns.quoteValidatedMDE'
-            ])
-            ->add('quoteValidatedMDEDate', DateType::class, [
-                'label' => 'columns.quoteValidatedMDEDate',
-                'widget' => 'single_text',
-            ])
-            ->add('globalAmount', null, [
-                'label' => 'columns.globalAmount'
-            ])
-            ->add('amountSubcontractedWork', null, [
-                'label' => 'columns.amountSubcontractedWork'
-            ])
-            ->add('amountBBISpecificWork', null, [
-                'label' => 'columns.amountBBISpecificWork'
-            ])
-            ->add('recordAssistant', null,[
-                'label' => "columns.recordAssistant"
-            ])
-            ->add('ocbsDriver', null,[
-                'label' => "columns.ocbsDriver"
-            ])
-            ->add('tceDriver', null,[
-                'label' => "columns.tceDriver"
-            ])
-            ->add('encryptiontype', ChoiceType::class, [
-                'label'=>"columns.encryptiontype",
-                "choices" => Constants::getTypeValues(Constants::ENCRYPTION_TYPE, true),
-                "multiple" => false,
-                "expanded" => true,
-                'label_attr' => [
-                    'class' => 'radio-custom radio-inline'
-                ]
-            ])
-            ->add('notApplicable', CheckboxType::class, [
-                'label'=>"columns.notApplicable",
-                'required' => false,
-                'label_attr' => [
-                    'class' => 'checkbox-custom',
-                ]
-            ])
             ->add('priorizationOfFile', ChoiceType::class, [
-                'label'=>"columns.priorizationOfFile",
+                'label'=> "columns.priorizationOfFile",
                 "choices" => Constants::getTypeValues(Constants::PRIORIZATION_FILE_TYPE, true),
                 "multiple" => false,
                 "expanded" => true,
@@ -200,15 +91,130 @@ class ProjectType extends AbstractType
                     'class' => 'radio-custom radio-inline'
                 ],
             ])
+            ->add('planningProject', TextareaType::class, [
+                'label' => 'columns.planningProject',
+                'required' => false,
+            ])
             ->add('answerForThe', null, [
-                'label'=>"columns.answerForThe"
+                'label'=>"columns.answerForThe",
+                'required' => false,
             ])
-            ->add('businessCharge', null, [
-                'label'=>"columns.businessCharge"
-            ])
-            ->add('folderNameOnTheServer', null, [
-                'label'=>"columns.folderNameOnTheServer"
-            ])
+            // ->add('projectOwner', null, [
+            //     'label' => 'columns.projectOwner'
+            // ])
+            // ->add('projectManager', null, [
+            //     'label' => 'columns.projectManager'
+            // ])
+            // ->add('marketType', ChoiceType::class, [
+            //     "choices" => Constants::getTypeValues(Constants::TYPE_DE_MARCHE, true),
+            //     'label' => 'columns.marketType',
+            //     "multiple" => false,
+            //     "expanded" => true,
+            //     'label_attr' => [
+            //         'class' => 'radio-custom radio-inline'
+            //     ],
+            // ])
+            // ->add('bonhomePercentage', ChoiceType::class, [
+            //     "choices" => Constants::getTypeBonhomme(true),
+            //     'label' => 'columns.is_bonhomme',
+            //     "multiple" => false,
+            //     "expanded" => false,
+
+            // ])
+            // ->add('disaSheetValidation', ChoiceType::class, [
+            //     "choices" => Constants::getTypeValues(Constants::TYPE_DISA_SHEET, true),
+            //     'label' => "columns.disaSheetValidation",
+            //     'label_attr' => [
+            //         'class' => 'checkbox-custom',
+            //     ],
+            //     "multiple" => true,
+            //     "expanded" => true,
+            // ])
+            // ->add('paymentChoice',ChoiceType::class, [
+            //     'label' => 'columns.paymentChoice',
+            //     'label_attr' => [
+            //         'class' => 'radio-custom radio-inline'
+            //     ],
+            //     'required' => true,
+            //     'choices' => [
+            //         'oui' => true,
+            //         'non' => false,
+            //     ],
+            //     "multiple" => false,
+            //     "expanded" => true,
+            // ])
+            // ->add('depositeDateEdit', DateType::class, [
+            //     // renders it as a single text box
+            //     'widget' => 'single_text',
+            // ])
+            // ->add('paymentPercentage', NumberType::class, [
+            //     'label' => 'columns.paymentPercentage',
+            //     'attr' => [
+            //         'placeholder' => '%'
+            //     ]
+            // ])
+            // ->add('clientCondition', TextareaType::class, [
+            //     'label' => 'columns.clientCondition'
+            // ])
+            // ->add('billingAddres', AddressType::class)
+            // ->add('siteAddress', AddressType::class)
+            // ->add('norm1090', ChoiceType::class, [
+            //     'label' => "columns.norm1090",
+            //     'choices' => [
+            //         '1' => 1,
+            //         '2' => 2,
+            //         '3' => 3,
+            //     ],
+            //     'label_attr' => [
+            //         'class' => 'radio-custom radio-inline'
+            //     ],
+            //     "multiple" => false,
+            //     "expanded" => true
+            // ])
+            // ->add('quoteValidatedMDE', null, [
+            //     'label' => 'columns.quoteValidatedMDE'
+            // ])
+            // ->add('quoteValidatedMDEDate', DateType::class, [
+            //     'label' => 'columns.quoteValidatedMDEDate',
+            //     'widget' => 'single_text',
+            // ])
+            // ->add('globalAmount', null, [
+            //     'label' => 'columns.globalAmount'
+            // ])
+            // ->add('amountSubcontractedWork', null, [
+            //     'label' => 'columns.amountSubcontractedWork'
+            // ])
+            // ->add('amountBBISpecificWork', null, [
+            //     'label' => 'columns.amountBBISpecificWork'
+            // ])
+            // ->add('recordAssistant', null,[
+            //     'label' => "columns.recordAssistant"
+            // ])
+            // ->add('ocbsDriver', null,[
+            //     'label' => "columns.ocbsDriver"
+            // ])
+            // ->add('tceDriver', null,[
+            //     'label' => "columns.tceDriver"
+            // ])
+            // ->add('encryptiontype', ChoiceType::class, [
+            //     'label'=>"columns.encryptiontype",
+            //     "choices" => Constants::getTypeValues(Constants::ENCRYPTION_TYPE, true),
+            //     "multiple" => false,
+            //     "expanded" => true,
+            //     'label_attr' => [
+            //         'class' => 'radio-custom radio-inline'
+            //     ]
+            // ])
+            // ->add('notApplicable', CheckboxType::class, [
+            //     'label'=>"columns.notApplicable",
+            //     'required' => false,
+            //     'label_attr' => [
+            //         'class' => 'checkbox-custom',
+            //     ]
+            // ])
+            // ->add('folderNameOnTheServer', null, [
+            //     'label'=>"columns.folderNameOnTheServer"
+            // ])
         ;
     }
 

@@ -41,21 +41,23 @@ class Project
     private $siteCode;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * 
      * Fr: feuille de route
      */
     private $roadmap;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
+     * @Assert\NotBlank
      * 
      * Fr: maitre d'ouvrage
      */
     private $projectOwner;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
+     * @Assert\NotBlank
      *
      * Fr: maitre d'oeuvre
      */
@@ -79,6 +81,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * 
      * Fr: description de l' operation
      */
@@ -86,48 +89,50 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     *
+     * @Assert\NotBlank
+     * 
      * fr: Chargé(e) d'affaire
      */
     private $businessCharge;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Assert\NotBlank
      * 
      * Fr: rédacteur du devis
      */
     private $economist;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * Fr: norme en 1090
      */
     private $norm1090;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
      */
     private $marketType;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * Fr: bonhomme est il 
      */
     private $bonhomePercentage;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
      * 
      * Fr: validation de fiche DISA
      */
     private $disaSheetValidation;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      * 
      * Fr: mode de reglement acompte
      */
@@ -135,7 +140,7 @@ class Project
 
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      *
      * Fr: mode de reglement pourcentage
      */
@@ -143,63 +148,64 @@ class Project
 
 
     /**
-     * @ORM\Column(type="date", length=255)
+     * @ORM\Column(type="date", length=255, nullable=true)
      * 
      * Fr: date d'acompte doi etre édité le
      */
     private $depositeDateEdit;
 
     /**
-     * @ORM\Column(type="text", length=255)
+     * @ORM\Column(type="text", length=255, nullable=true)
      * 
      * Fr: condition négocier avec le client
      */
     private $clientCondition;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * Fr: N° du/des devis MDE validé(s)
      */
     private $quoteValidatedMDE;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      * 
      * Fr: Conditions négociées avec le client
      */
     private $quoteValidatedMDEDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * Fr: MONTANT GLOBAL DU MARCHE
      */
     private $globalAmount;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * Fr: montant des travaux sous-traiter
      */
     private $amountSubcontractedWork;
 
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="integer", length=255, nullable=true)
      * 
      * Fr: montant des traveau propre a bbi
      */
     private $amountBBISpecificWork;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
+     * @Assert\NotBlank
      * 
      * Fr: type de dossier
      */
     private $caseType;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * Fr: planning projet
      */
@@ -214,7 +220,7 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Assert\Valid
      */
     private $contact;
@@ -237,7 +243,7 @@ class Project
     private $prospect;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * fr: type de chiffrage
      */
     private $encryptiontype;
@@ -250,7 +256,9 @@ class Project
     private $notApplicable;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     * 
      * fr: Priorisation du dossier
      */
     private $priorizationOfFile;
@@ -263,7 +271,7 @@ class Project
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * fr: Nom du dossier sur le serveur
      */
@@ -272,7 +280,7 @@ class Project
     /**
      * Commentaire
      * 
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true, nullable=true)
      */
     private $comment;
 
@@ -306,6 +314,12 @@ class Project
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $architect;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     */
+    private $name;
 
     public function __construct()
     {
@@ -810,6 +824,18 @@ class Project
     public function setArchitect(?bool $architect): self
     {
         $this->architect = $architect;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

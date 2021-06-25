@@ -1,5 +1,5 @@
 {% set bgColor = '' %}
-{% set completionLevel = value ? (value / 5)|round(0, 'ceil') : '-' %}
+{% set completionLevel = value ? ((value / 5) > 10 ? (value / 5)|round(0, 'ceil') : (value / 5)|round(0, 'floor')) :  '' %}
 {% set bgColor = 'completion-' ~ completionLevel %}
 
 {% if is_granted(constant("App\\Security\\Voter\\Attributes::EDIT"), resolve([row], null)) %}

@@ -69,6 +69,7 @@ columns:
   project_description: 'Description du projet'
   department: 'Département'
   market_type: 'Type de marche'
+  project_name: 'Nom du projet'
   
 typeMarket:
   shadows : "Ombrières"
