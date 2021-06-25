@@ -36,7 +36,7 @@
 #client_projectDescription_marketType, #project_marketType, #project_caseType {
     display: flex;
     flex-wrap: wrap;
-    .custom-control.custom-radio {
+    .custom-control.custom-radio, .custom-control.custom-checkbox {
         width: 50%;
         margin: 0;
     }
