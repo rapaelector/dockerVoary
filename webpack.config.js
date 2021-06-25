@@ -64,6 +64,12 @@ Encore
      */
     .addEntry('app_dashboard', './assets/js/dashboard/app.js')
 
+    /**
+     * Entry for project_ng
+     * Project make by angular
+     */
+    .addEntry('ng_project', './assets/js/ngProject/app.js')
+    
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

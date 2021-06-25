@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
+    style="height: auto;"
+    ng-app="projectApp"
+    ng-controller="ProjectController"
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% include 'project/ng/templates/index.html.twig' %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-project-information></app-project-information>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('ng_project') }}
+{% endblock %}

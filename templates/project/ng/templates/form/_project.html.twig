@@ -1,0 +1,75 @@
+<div class="card card card-outline card-app-secondary h-100">
+    <div class="card-body">
+        <div class="row">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group"><label for="project_name">Nom du projet</label>
+                            <input type="text" ng-model="project.name" name="project[name]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="" for="project_prospect">Prospect</label>
+                            <select ng-model="project.prospect" name="project[prospect]" class="form-control">
+                                <option value=""></option>
+                                <option value="8">Uzumaki</option>
+                                <option value="9">Uchiwa</option>
+                                <option value="23">Lorem</option>
+                                <option value="24">Test</option>
+                                <option value="25">MCM</option>
+                                <option value="26">qsdfqsdfqsdf</option>
+                                <option value="27">Lorem</option>
+                                <option value="28">qsdfsdqf</option>
+                                <option value="29">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ut</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="" for="project_contactSelect">Contact</label>
+                            <select ng-model="project.prospect" name="project[prospect]" class="form-control">
+                                <option value=""></option>
+                                <option value="8">Uzumaki</option>
+                                <option value="9">Uchiwa</option>
+                                <option value="23">Lorem</option>
+                                <option value="24">Test</option>
+                                <option value="25">MCM</option>
+                                <option value="26">qsdfqsdfqsdf</option>
+                                <option value="27">Lorem</option>
+                                <option value="28">qsdfsdqf</option>
+                                <option value="29">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ut</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="required" for="project_businessCharge">Chargé(e) d'affaire</label>
+                            <select ng-model="project.businessCharge" name="project[businessCharge]" class="form-control">
+                                <option value="2">projectRole test</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group"><label class="required" for="project_economist">Economiste</label>
+                            <select ng-model="project.economist" name="project[economist]" class="form-control">
+                                <option value="2">projectRole test</option>
+                                <option value="8">musk elun</option>
+                                <option value="27">Check my work please Ok I ask stephan now</option>
+                                <option value="30">pool dead</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="project_descriptionOperation" class="required">Description operation</label>
+                            <textarea 
+                                ng-model="project.description_operation" 
+                                name="project[descriptionOperation]" 
+                                required="required"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
