@@ -1,2 +1,5 @@
-angular.module('projectApp', ['sharedModule', 'ngMaterial']);
-// angular.module('projectApp', ['sharedModule']);
+angular.module('projectApp', [
+    'sharedModule',
+    'ngMaterial',
+    'ngMessages',
+]);

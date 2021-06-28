@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\ProjectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
@@ -30,6 +31,7 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"data-project"})
      */
     private $id;
 
@@ -37,6 +39,7 @@ class Project
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * Fr: code chantier
+     * @Groups({"data-project"})
      */
     private $siteCode;
 
@@ -44,6 +47,7 @@ class Project
      * @ORM\Column(type="boolean", nullable=true)
      * 
      * Fr: feuille de route
+     * @Groups({"data-project"})
      */
     private $roadmap;
 
@@ -52,6 +56,7 @@ class Project
      * @Assert\NotBlank
      * 
      * Fr: maitre d'ouvrage
+     * @Groups({"data-project"})
      */
     private $projectOwner;
 
@@ -60,6 +65,7 @@ class Project
      * @Assert\NotBlank
      *
      * Fr: maitre d'oeuvre
+     * @Groups({"data-project"})
      */
     private $projectManager;
 
@@ -68,6 +74,7 @@ class Project
      * @Assert\Valid
      *
      * Fr: adresse facturation
+     * @Groups({"data-project"})
      */
     private $billingAddres;
 
@@ -76,6 +83,7 @@ class Project
      * @Assert\Valid
      * 
      * Fr: addresse chantier
+     * @Groups({"data-project"})
      */
     private $siteAddress;
 
@@ -84,6 +92,7 @@ class Project
      * @Assert\NotBlank
      * 
      * Fr: description de l' operation
+     * @Groups({"data-project"})
      */
     private $descriptionOperation;
 
@@ -92,6 +101,7 @@ class Project
      * @Assert\NotBlank
      * 
      * fr: Chargé(e) d'affaire
+     * @Groups({"data-project"})
      */
     private $businessCharge;
 
@@ -100,6 +110,7 @@ class Project
      * @Assert\NotBlank
      * 
      * Fr: rédacteur du devis
+     * @Groups({"data-project"})
      */
     private $economist;
 
@@ -107,6 +118,7 @@ class Project
      * @ORM\Column(type="integer", nullable=true)
      * 
      * Fr: norme en 1090
+     * @Groups({"data-project"})
      */
     private $norm1090;
 
@@ -114,6 +126,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
+     * @Groups({"data-project"})
      */
     private $marketType;
 
@@ -121,6 +134,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: bonhomme est il 
+     * @Groups({"data-project"})
      */
     private $bonhomePercentage;
 
@@ -128,6 +142,7 @@ class Project
      * @ORM\Column(type="array", nullable=true)
      * 
      * Fr: validation de fiche DISA
+     * @Groups({"data-project"})
      */
     private $disaSheetValidation;
 
@@ -135,6 +150,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: mode de reglement acompte
+     * @Groups({"data-project"})
      */
     private $paymentChoice;
 
@@ -143,6 +159,7 @@ class Project
      * @ORM\Column(type="float", nullable=true)
      *
      * Fr: mode de reglement pourcentage
+     * @Groups({"data-project"})
      */
     private $paymentPercentage;
 
@@ -151,70 +168,80 @@ class Project
      * @ORM\Column(type="date", length=255, nullable=true)
      * 
      * Fr: date d'acompte doi etre édité le
+     * @Groups({"data-project"})
      */
     private $depositeDateEdit;
 
     /**
-     * @ORM\Column(type="text", length=255, nullable=true)
-     * 
      * Fr: condition négocier avec le client
+     * 
+     * @ORM\Column(type="text", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $clientCondition;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * 
      * Fr: N° du/des devis MDE validé(s)
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $quoteValidatedMDE;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     * 
      * Fr: Conditions négociées avec le client
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups({"data-project"})
      */
     private $quoteValidatedMDEDate;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * 
      * Fr: MONTANT GLOBAL DU MARCHE
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"data-project"})
      */
     private $globalAmount;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * 
      * Fr: montant des travaux sous-traiter
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"data-project"})
      */
     private $amountSubcontractedWork;
 
     /**
-     * @ORM\Column(type="integer", length=255, nullable=true)
-     * 
      * Fr: montant des traveau propre a bbi
+     * 
+     * @ORM\Column(type="integer", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $amountBBISpecificWork;
 
     /**
      * @ORM\Column(type="array", nullable=true)
-     * @Assert\NotBlank
-     * 
      * Fr: type de dossier
+     * 
+     * @Assert\NotBlank
+     * @Groups({"data-project"})
      */
     private $caseType;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * 
      * Fr: planning projet
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $planningProject;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     * 
      * Fr: assistant en charge du dossier
+     * 
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Groups({"data-project"})
      */
     private $recordAssistant;
 
@@ -222,58 +249,70 @@ class Project
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      * @Assert\Valid
+     * @Groups({"data-project"})
      */
     private $contact;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * fr : CONDUC. OCBS
+     * 
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Groups({"data-project"})
      */
     private $ocbsDriver;
 
     /**
      * fr: CONDUC TCE
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Groups({"data-project"})
      */
     private $tceDriver;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
+     * @Groups({"data-project"})
      */
     private $prospect;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      * fr: type de chiffrage
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $encryptiontype;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     *
      * fr: Sans objet
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"data-project"})
      */
     private $notApplicable;
 
     /**
+     * fr: Priorisation du dossier
+     * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
-     * 
-     * fr: Priorisation du dossier
+     * @Groups({"data-project"})
      */
     private $priorizationOfFile;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * fr: Réponse pour le
+     * @Groups({"data-project"})
      */
     private $answerForThe;
 
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
      * fr: Nom du dossier sur le serveur
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $folderNameOnTheServer;
 
@@ -281,6 +320,7 @@ class Project
      * Commentaire
      * 
      * @ORM\Column(type="text", nullable=true, nullable=true)
+     * @Groups({"data-project"})
      */
     private $comment;
 
@@ -288,6 +328,7 @@ class Project
      * % Realisation
      * 
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @Groups({"data-project"})
      */
     private $completion;
 
@@ -295,6 +336,7 @@ class Project
      * Dernier relaunch
      * 
      * @ORM\OneToOne(targetEntity=Relaunch::class, cascade={"persist", "remove"})
+     * @Groups({"data-project"})
      */
     private $lastRelaunch;
 
@@ -302,22 +344,26 @@ class Project
      * Relaunch
      * 
      * @ORM\ManyToMany(targetEntity=Relaunch::class)
+     * @Groups({"data-project"})
      */
     private $relaunches;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"data-project"})
      */
     private $pcDeposit;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"data-project"})
      */
     private $architect;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
+     * @Groups({"data-project"})
      */
     private $name;
 

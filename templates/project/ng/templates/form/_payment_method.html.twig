@@ -9,14 +9,27 @@
 			<div class="col-sm-3">
 				<fieldset class="form-group">
 					<legend class="col-form-label required">Acompte</legend>
-					<div ng-model="project.paymentChoice">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" ng-model="project.paymentChoice_0" name="project_edit[paymentChoice]" required="required" class="custom-control-input" value="1" checked="checked">
-							<label class="custom-control-label required" for="project_edit_paymentChoice_0">oui</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" ng-model="project.paymentChoice_1" name="project_edit[paymentChoice]" required="required" class="custom-control-input" value="0">
-							<label class="custom-control-label required" for="project_edit_paymentChoice_1">non</label>
+					<div class="project-paymentChoice">
+						<div class="row">
+							<div class="col-sm-6">
+								<input
+									type="radio" 
+									ng-model="project.paymentChoice"
+									value="1"
+									id="paymentChoice_0"
+								>
+								<label for="paymentChoice_0">oui</label>
+							</div>
+							<div class="col-sm-6">
+								<input
+									type="radio"
+									ng-model="project.paymentChoice"
+									name="paymentChoice"
+									value="0"
+									id="paymentChoice_1"
+								>
+								<label for="paymentChoice_1">non</label>
+							</div>
 						</div>
 					</div>
 				</fieldset>

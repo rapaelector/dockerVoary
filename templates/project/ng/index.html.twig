@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('ng_project') }}
+{% endblock %}
+
 {% block body_attr %}
     class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
     style="height: auto;"
@@ -19,10 +24,21 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+        {# USER ID #}
+        var PROJECT_ID = "{{ resolve([project, 'id'], null) }}";
+
         {# TYPE DE DOSSIER #}
         var CASE_TYPES = [];
         {% for type in constant('\\App\\Entity\\Constants\\Project::CASE_TYPES') %}
             CASE_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+
+        var PRIORIZATION_FILE_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::PRIORIZATION_FILE_TYPE') %}
+            PRIORIZATION_FILE_TYPES.push({
                 label: '{{ type|trans({}, "project") }}',
                 value: '{{ type }}'
             })

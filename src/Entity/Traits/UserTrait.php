@@ -4,6 +4,9 @@ namespace App\Entity\Traits;
 
 trait UserTrait
 {
+    /**
+     * @Groups({"data-autocomplete", "data-project"})
+     */
     public function getName(): ?string
     {
         $parts = [];

@@ -48,7 +48,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({self::GROUP_USER_PROJECT})
+     * @Groups({self::GROUP_USER_PROJECT, "data-autocomplete", "data-project"})
      */
     private $id;
 

@@ -33,7 +33,7 @@
 					<div class="form-group">
 						<label for="project_edit_planningProject" class="required">Planning projet</label>
 						<textarea ng-model="project.planningProject" name="project_edit[planningProject]" required="required" class="form-control">Lorem ipsum dolor sit amet
-														lorem ipsum dolor sit amet</textarea>
+								lorem ipsum dolor sit amet</textarea>
 					</div>
 				</div>
 			</div>
@@ -41,20 +41,17 @@
 				<div class="col-sm-6">
 					<fieldset class="form-group">
 						<legend class="col-form-label required">Priorisation du dossier</legend>
-						<div ng-model="project.priorizationOfFile">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" ng-model="project.priorizationOfFile_0" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="URGENT">
-								<label class="custom-control-label required" for="project_edit_priorizationOfFile_0">URGENT</label>
+							<div class="custom-contro custom-radio custom-control-inline" ng-repeat="item in priorizationFileTypes">
+								<input
+									type="radio" 
+									ng-model="project.priorizationOfFile" 
+									class="custom-control-inpu" 
+									value="{{ '{{ item.value }}' }}"
+								>
+								<label class="custom-control-labe required" for="project_edit_priorizationOfFile_0">
+									{{ '{{ item.label }}' }}
+								</label>
 							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" ng-model="project.priorizationOfFile_1" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="NORMAL" checked="checked">
-								<label class="custom-control-label required" for="project_edit_priorizationOfFile_1">NORMAL</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" ng-model="project.priorizationOfFile_2" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="SANS SUITE">
-								<label class="custom-control-label required" for="project_edit_priorizationOfFile_2">SANS SUITE</label>
-							</div>
-						</div>
 					</fieldset>
 				</div>
 				<div class="col-sm-6">
