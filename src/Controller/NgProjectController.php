@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Intl\Countries;
 
 #[Route('/project/ng')]
 class NgProjectController extends BaseController
@@ -18,10 +19,6 @@ class NgProjectController extends BaseController
     #[Route('/{id}/edit', name: 'project.ng.index')]
     public function index(Request $request, Project $project)
     {
-        if ($request->isXMLHttpRequest()) {
-            
-        }
-
         return $this->render('project/ng/index.html.twig', [
             'project' => $project,
         ]);
@@ -42,10 +39,17 @@ class NgProjectController extends BaseController
             'json',
             ['groups' => 'data-autocomplete']
         );
+        $countries = Countries::getNames();
+        $icountries = array_flip($countries);
 
         return $this->json([
             'clients' => $clientsFormatted,
             'users' => $usersFormatted,
+            'economists' => $usersFormatted,
+            'businessCharge' => $usersFormatted,
+            'countries' => array_values(array_map(function ($countryName) use($icountries) {
+                return ['name' => $countryName, 'countryCode' => $icountries[$countryName]];
+            }, $countries)),
         ]);
     }
 

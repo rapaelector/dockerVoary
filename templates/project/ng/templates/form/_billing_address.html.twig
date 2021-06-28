@@ -51,90 +51,33 @@
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_city">Ville</label>
-					<input type="text" ng-model="project.billingAddresCity" name="project_edit[billingAddres][city]" class="form-control">
+					<input type="text" ng-model="project.billingAddres.city" name="project_edit[billingAddres][city]" class="form-control">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label class="" for="project_edit_billingAddres_country">Pays</label>
-					<div class="dropdown bootstrap-select form-control select2-hidden-accessible dropup">
-						<select ng-model="project.billingAddresCountry" name="project_edit[billingAddres][country]" class="bootstrap-select form-control select2-hidden-accessible" data-live-search="data-live-search" data-type="select2" data-select2-id="select2-data-project_edit_billingAddres_country" tabindex="-1" aria-hidden="true">
-							<option value=""></option>
-							<option value="AF">Afghanistan</option>
-							<option value="ZA">Afrique du Sud</option>
-						</select>
-						<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-3" aria-haspopup="listbox" aria-expanded="false" data-ng-model="project.billingAddresCountry" title="Madagascar">
-							<div class="filter-option">
-								<div class="filter-option-inner">
-									<div class="filter-option-inner-inner">Madagascar</div>
-								</div>
-							</div>
-						</button>
-						<div class="dropdown-menu " style="max-height: 711px; overflow: hidden; min-height: 174px;">
-							<div class="bs-searchbox"><input type="search" class="form-control" autocomplete="off" role="combobox" aria-label="Search" aria-controls="bs-select-3" aria-autocomplete="list" aria-activedescendant="bs-select-3-138">
-                        </div>
-							<div class="inner show" role="listbox" id="bs-select-3" tabindex="-1" style="max-height: 650px; overflow-y: auto; min-height: 113px;">
-								<ul class="dropdown-menu inner show" role="presentation" style="margin-top: 0px; margin-bottom: 0px;">
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-0" tabindex="0">
-											<span class="text"></span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-1" tabindex="0">
-											<span class="text">Afghanistan</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-2" tabindex="0">
-											<span class="text">Afrique du Sud</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-3" tabindex="0">
-											<span class="text">Albanie</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-4" tabindex="0">
-											<span class="text">Algérie</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-5" tabindex="0">
-											<span class="text">Allemagne</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-6" tabindex="0">
-											<span class="text">Andorre</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-7" tabindex="0">
-											<span class="text">Angola</span>
-										</a>
-									</li>
-									<li>
-										<a role="option" class="dropdown-item" id="bs-select-3-8" tabindex="0">
-											<span class="text">Anguilla</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-5-0dfm" style="width: 100%;">
-						<span class="selection">
-							<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-project_edit_billingAddres_country-container" aria-controls="select2-project_edit_billingAddres_country-container">
-								<span class="select2-selection__rendered" id="select2-project_edit_billingAddres_country-container" role="textbox" aria-readonly="true" title="Madagascar">Madagascar</span>
-								<span class="select2-selection__arrow" role="presentation">
-									<b role="presentation"></b>
-								</span>
-							</span>
-						</span>
-						<span class="dropdown-wrapper" aria-hidden="true"></span>
-					</span>
+					<label class="" for="project_edit_siteAddress_country">Pays</label>
+					<md-select
+						ng-model="project.billingAddres.country"
+						md-on-close="searchTerm.countries = ''"
+						data-md-container-class="selectHeader"
+						md-on-open="helpers.getCountries"
+						ng-change="helpers.handleCountriesChanged()"
+					>
+						<md-select-header class="select-header-search">
+							<input ng-model="searchTerm.countries"
+								placeholder="Rechercher" 
+								type="search"
+								ng-keydown="$event.stopPropagation()"
+								class="demo-header-searchbox md-text"
+							>
+						</md-select-header>
+						<md-option
+							ng-value="country.countryCode" 
+							ng-repeat="country in data.autoComplete.countries|filter:searchTerm.countries">
+							{{ '{{ country.name }}' }}
+						</md-option>
+					</md-select>
 				</div>
 			</div>
 		</div>

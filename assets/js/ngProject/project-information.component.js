@@ -9,6 +9,9 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
     $scope.searchTerm = {
         users: '',
         clients: '',
+        economists: '',
+        businessCharge: '',
+        countries: '',
     };
 
     this.$onInit = function() {
@@ -23,7 +26,9 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         ProjectService.getFormAutoCompleteData().then((response) => {
             $scope.data.autoComplete.clients = JSON.parse(response.data.clients);
             $scope.data.autoComplete.users = JSON.parse(response.data.users);
-            console.info($scope.data.autoComplete);
+            $scope.data.autoComplete.economists = JSON.parse(response.data.economists);
+            $scope.data.autoComplete.businessCharge = JSON.parse(response.data.businessCharge);
+            $scope.data.autoComplete.countries = response.data.countries;
             console.info(response);
         }, error => {
             console.info(error);
@@ -48,7 +53,38 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
             console.info(error);
         })
     };
-    $scope.helpers.handleUserChanged = function() {
+    $scope.helpers.handleClientChanged = function() {
+        console.info('hello');
+    };
+    $scope.helpers.getEconomists = function() {
+        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+            return JSON.parse(response.data.economists);
+        }, error => {
+            console.info(error);
+        })
+    };
+    $scope.helpers.handleEconomistsChanged = function() {
+        console.info('hello');
+    };
+    $scope.helpers.getBusinessCharge = function() {
+        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+            return JSON.parse(response.data.economists);
+        }, error => {
+            console.info(error);
+        })
+    };
+    $scope.helpers.handleBusinessChargeChanged = function() {
+        console.info('hello');
+    };
+    $scope.helpers.getCountries = function() {
+        $scope.data.countries = ProjectService.getFormAutocompleteData().then((response) => {
+            return response.data.countries;
+        }, error => {
+            console.info(error);
+        });
+        console.info($scope.data.countries);
+    };
+    $scope.helpers.handleCountriesChanged = function() {
         console.info('hello');
     };
 

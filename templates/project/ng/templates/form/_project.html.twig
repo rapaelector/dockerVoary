@@ -1,119 +1,187 @@
 <div class="card card card-outline card-app-secondary h-100">
-	<div class="card-body">
-		<div class="row">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-sm-6">
-						<fieldset class="form-group">
-							<legend class="col-form-label required">Feuille de route</legend>
-							<div class="row">
-								<div class="col-sm-6">
-									<input type="radio" ng-model="project.roadMap" value="'1'">
-									<label for="roadmap_0">oui</label>
-								</div>
-								<div class="col-sm-6">
-									<input type="radio" ng-model="project.roadMap" name="roadMap" value="'0'">
-									<label for="roadmap_1">non</label>
-								</div>
-							</div>
-						</fieldset>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="" for="project_edit_prospect">Prospect</label>
-							<md-select
-								ng-model="project.contact"
-								md-on-close="searchTerm.client = ''"
-								data-md-container-class="selectHeader"
-								md-on-open="helpers.getClient"
-								ng-change="helpers.handleClientChanged()"
-							>
-								<md-select-header class="select-header-search">
-									<input ng-model="searchTerm.client"
-										placeholder="Rechercher" 
-										type="search"
-										ng-keydown="$event.stopPropagation()"
-										class="demo-header-searchbox md-text"
-									>
-								</md-select-header>
-								<md-option
-									ng-value="client.id" 
-									ng-repeat="client in data.autoComplete.clients|filter:searchTerm.client">
-									{{ '{{ client.name }}' }}
-								</md-option>
-							</md-select>
-						</div>
-					</div>
-					<div class="w-100"></div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="project_edit_siteCode" class="required">Code chantier</label>
-							<input type="text" ng-model="project.siteCode" name="project_edit[siteCode]" required="required" class="form-control" value="TTP"></div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="project_edit_projectOwner" class="required">Maitre d'ouvrage</label>
-							<input type="text" ng-model="project.projectOwner" name="project_edit[projectOwner]" required="required" class="form-control" value="Lorem ipsum ouvrage"></div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="project_edit_projectManager" class="required">Maitre d'oeuvre</label>
-							<input type="text" ng-model="project.projectManager" name="project_edit[projectManager]" required="required" class="form-control" value="Test"></div>
-					</div>
-					{# CONTACT #}
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="" for="project_edit_contactSelect">Contact</label>
-							<md-select
-								ng-model="project.contact"
-								md-on-close="searchTerm.organizations = ''"
-								data-md-container-class="selectHeader"
-								md-on-open="helpers.getUsers"
-								ng-change="helpers.handleUserChanged()"
-							>
-								<md-select-header class="select-header-search">
-									<input ng-model="searchTerm.users"
-										placeholder="Rechercher" 
-										type="search"
-										ng-keydown="$event.stopPropagation()"
-										class="demo-header-searchbox md-text"
-									>
-								</md-select-header>
-								<md-option
-									ng-value="user.id" 
-									ng-repeat="user in data.autoComplete.users|filter:searchTerm.users">
-									{{ '{{ user.name }}' }}
-								</md-option>
-							</md-select>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="required" for="project_edit_businessCharge">Chargé(e) d'affaire</label>
-							<select ng-model="project.businessCharge" name="project_edit[businessCharge]" class="form-control">
-								<option value="2">projectRole test</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="required" for="project_edit_economist">Economiste</label>
-							<select ng-model="project.economist" name="project_edit[economist]" class="form-control">
-								<option value="98">TEST Lorem ips</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label for="project_edit_descriptionOperation" class="required">Description operation</label>
-							<textarea ng-model="project.descriptionOperation" name="project_edit[descriptionOperation]" required="required" class="form-control">Lorem ipsum
+    <div class="card-body">
+        <div class="row">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <fieldset class="form-group">
+                            <legend class="col-form-label required">Feuille de route</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="radio" ng-model="project.roadMap" value="'1'">
+                                    <label for="roadmap_0">oui</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="radio" ng-model="project.roadMap" name="roadMap" value="'0'">
+                                    <label for="roadmap_1">non</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {# 
+                            <label class="" for="project_edit_prospect">Prospect</label>
+                            <md-select
+                                ng-model="project.prospect"
+                                md-on-close="searchTerm.client = ''"
+                                data-md-container-class="selectHeader"
+                                md-on-open="helpers.getClient()"
+                                ng-change="helpers.handleClientChanged()"
+                            >
+                                <md-select-header class="select-header-search">
+                                    <input ng-model="searchTerm.client"
+                                        placeholder="Rechercher" 
+                                        type="search"
+                                        ng-keydown="$event.stopPropagation()"
+                                        class="demo-header-searchbox md-text"
+                                    >
+                                </md-select-header>
+                                <md-option
+                                    ng-value="client.id" 
+                                    ng-repeat="client in data.autoComplete.clients|filter:searchTerm.client">
+                                    {{ '{{ client.name }}' }}
+                                </md-option>
+                            </md-select>
+                            #}
+                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                                label: 'columns.prospect'|trans({}, 'project'),
+                                ngModel: 'project.prospect',
+                                searchTerm: 'searchTerm.client',
+                                mdOnOpen: 'helpers.getClient()',
+                                ngChangeHandler: 'helpers.handleClientChanged()',
+                            } %}
+                        </div>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="project_edit_siteCode" class="required">Code chantier</label>
+                            <input type="text" ng-model="project.siteCode" name="project_edit[siteCode]" required="required" class="form-control" value="TTP"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="project_edit_projectOwner" class="required">Maitre d'ouvrage</label>
+                            <input type="text" ng-model="project.projectOwner" name="project_edit[projectOwner]" required="required" class="form-control" value="Lorem ipsum ouvrage"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="project_edit_projectManager" class="required">Maitre d'oeuvre</label>
+                            <input type="text" ng-model="project.projectManager" name="project_edit[projectManager]" required="required" class="form-control" value="Test"></div>
+                    </div>
+                    {# CONTACT #}
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {#
+                            <label class="" for="project_edit_contactSelect">Contact</label>
+                            <md-select
+                                ng-model="project.contact"
+                                md-on-close="searchTerm.contact = ''"
+                                data-md-container-class="selectHeader"
+                                md-on-open="helpers.getUsers"
+                                ng-change="helpers.handleUserChanged()"
+                            >
+                                <md-select-header class="select-header-search">
+                                    <input ng-model="searchTerm.users"
+                                        placeholder="Rechercher" 
+                                        type="search"
+                                        ng-keydown="$event.stopPropagation()"
+                                        class="demo-header-searchbox md-text"
+                                    >
+                                </md-select-header>
+                                <md-option
+                                    ng-value="user.id" 
+                                    ng-repeat="user in data.autoComplete.users|filter:searchTerm.users">
+                                    {{ '{{ user.name }}' }}
+                                </md-option>
+                            </md-select>
+                            #}
+                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                                label: 'columns.contact'|trans({}, 'project'),
+                                ngModel: 'project.contact',
+                                searchTerm: 'searchTerm.contact',
+                                mdOnOpen: 'helpers.getUsers()',
+                                ngChangeHandler: 'helpers.handleUserChanged()',
+                            } %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {# 
+                            <label class="required" for="project_edit_businessCharge">Chargé(e) d'affaire</label>
+                            <md-select
+                                ng-model="project.businessCharge"
+                                md-on-close="searchTerm.businessCharge = ''"
+                                data-md-container-class="selectHeader"
+                                md-on-open="helpers.getBusinessCharge"
+                                ng-change="helpers.handleBusinessCharge()"
+                            >
+                                <md-select-header class="select-header-search">
+                                    <input ng-model="searchTerm.businessCharge"
+                                        placeholder="Rechercher" 
+                                        type="search"
+                                        ng-keydown="$event.stopPropagation()"
+                                        class="demo-header-searchbox md-text"
+                                    >
+                                </md-select-header>
+                                <md-option
+                                    ng-value="user.id" 
+                                    ng-repeat="user in data.autoComplete.businessCharge|filter:searchTerm.businessCharge">
+                                    {{ '{{ user.name }}' }}
+                                </md-option>
+                            </md-select>
+                            #}
+                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                                label: 'columns.businessCharge'|trans({}, 'project'),
+                                ngModel: 'project.businessCharge',
+                                searchTerm: 'searchTerm.businessCharge',
+                                mdOnOpen: 'helpers.getBusinessCharge()',
+                                ngChangeHandler: 'helpers.handleBusinessCharge()',
+                            } %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="required" for="project_edit_economist">Economiste</label>
+                            {#
+                            <select ng-model="project.economist" name="project_edit[economist]" class="form-control">
+                                <option value="98">TEST Lorem ips</option>
+                            </select>
+                            #}
+                            <md-select
+                                ng-model="project.economist"
+                                md-on-close="searchTerm.economists = ''"
+                                data-md-container-class="selectHeader"
+                                md-on-open="helpers.getEconomist"
+                                ng-change="helpers.handleEconomistChanged()"
+                            >
+                                <md-select-header class="select-header-search">
+                                    <input ng-model="searchTerm.economist"
+                                        placeholder="Rechercher" 
+                                        type="search"
+                                        ng-keydown="$event.stopPropagation()"
+                                        class="demo-header-searchbox md-text"
+                                    >
+                                </md-select-header>
+                                <md-option
+                                    ng-value="user.id" 
+                                    ng-repeat="user in data.autoComplete.economists|filter:searchTerm.economists">
+                                    {{ '{{ user.name }}' }}
+                                </md-option>
+                            </md-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="project_edit_descriptionOperation" class="required">Description operation</label>
+                            <textarea ng-model="project.descriptionOperation" name="project_edit[descriptionOperation]" required="required" class="form-control">Lorem ipsum
                                 dolor sit amet
                                 consectetur</textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
 </div>

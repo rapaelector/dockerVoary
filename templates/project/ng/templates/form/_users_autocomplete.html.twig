@@ -1,0 +1,22 @@
+<label class="" for="project_edit_prospect">{{ label }}</label>
+<md-select
+    ng-model="{{ ngModel }}"
+    md-on-close="{{ searchTerm }} = ''"
+    data-md-container-class="selectHeader"
+    md-on-open="{{ mdOnOpen }}"
+    ng-change="{{ ngChangeHandler }}"
+>
+    <md-select-header class="select-header-search">
+        <input ng-model="{{ searchTerm }}"
+            placeholder="Rechercher" 
+            type="search"
+            ng-keydown="$event.stopPropagation()"
+            class="demo-header-searchbox md-text"
+        >
+    </md-select-header>
+    <md-option
+        ng-value="client.id" 
+        ng-repeat="client in data.autoComplete.clients|filter:{{ searchTerm }}">
+        {{ '{{ client.name }}' }}
+    </md-option>
+</md-select>
