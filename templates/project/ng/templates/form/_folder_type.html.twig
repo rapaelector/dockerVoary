@@ -6,51 +6,51 @@
 					<legend class="col-form-label required">Type de dossier</legend>
 					<div id="project_caseType">
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_0" name="project[caseType][]" class="custom-control-input" value="caseType.earthWorks">
+							<input type="checkbox" ng-model="project.caseType_0" name="project[caseType][]" class="custom-control-input" value="caseType.earthWorks">
 							<label class="custom-control-label" for="project_caseType_0">Terrassement</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_1" name="project[caseType][]" class="custom-control-input" value="caseType.bigWork">
+							<input type="checkbox" ng-model="project.caseType_1" name="project[caseType][]" class="custom-control-input" value="caseType.bigWork">
 							<label class="custom-control-label" for="project_caseType_1">Gros œuvre</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_2" name="project[caseType][]" class="custom-control-input" value="caseType.plumbing">
+							<input type="checkbox" ng-model="project.caseType_2" name="project[caseType][]" class="custom-control-input" value="caseType.plumbing">
 							<label class="custom-control-label" for="project_caseType_2">CVC / plomberie</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_3" name="project[caseType][]" class="custom-control-input" value="caseType.electricity">
+							<input type="checkbox" ng-model="project.caseType_3" name="project[caseType][]" class="custom-control-input" value="caseType.electricity">
 							<label class="custom-control-label" for="project_caseType_3">Electricité</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_4" name="project[caseType][]" class="custom-control-input" value="caseType.indoorLots">
+							<input type="checkbox" ng-model="project.caseType_4" name="project[caseType][]" class="custom-control-input" value="caseType.indoorLots">
 							<label class="custom-control-label" for="project_caseType_4">Lots intérieurs</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_5" name="project[caseType][]" class="custom-control-input" value="caseType.adminFile">
+							<input type="checkbox" ng-model="project.caseType_5" name="project[caseType][]" class="custom-control-input" value="caseType.adminFile">
 							<label class="custom-control-label" for="project_caseType_5">Dossier administratif</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_6" name="project[caseType][]" class="custom-control-input" value="caseType.frame">
+							<input type="checkbox" ng-model="project.caseType_6" name="project[caseType][]" class="custom-control-input" value="caseType.frame">
 							<label class="custom-control-label" for="project_caseType_6">Charpente</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_7" name="project[caseType][]" class="custom-control-input" value="caseType.blanket">
+							<input type="checkbox" ng-model="project.caseType_7" name="project[caseType][]" class="custom-control-input" value="caseType.blanket">
 							<label class="custom-control-label" for="project_caseType_7">Couverture</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_8" name="project[caseType][]" class="custom-control-input" value="caseType.cladding">
+							<input type="checkbox" ng-model="project.caseType_8" name="project[caseType][]" class="custom-control-input" value="caseType.cladding">
 							<label class="custom-control-label" for="project_caseType_8">Bardage</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_9" name="project[caseType][]" class="custom-control-input" value="caseType.locksmith">
+							<input type="checkbox" ng-model="project.caseType_9" name="project[caseType][]" class="custom-control-input" value="caseType.locksmith">
 							<label class="custom-control-label" for="project_caseType_9">Serrurerie</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_10" name="project[caseType][]" class="custom-control-input" value="caseType.isothermes">
+							<input type="checkbox" ng-model="project.caseType_10" name="project[caseType][]" class="custom-control-input" value="caseType.isothermes">
 							<label class="custom-control-label" for="project_caseType_10">Pan. Isothermes</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="project_caseType_11" name="project[caseType][]" class="custom-control-input" value="caseType.asbestosRemoval">
+							<input type="checkbox" ng-model="project.caseType_11" name="project[caseType][]" class="custom-control-input" value="caseType.asbestosRemoval">
 							<label class="custom-control-label" for="project_caseType_11">Désamiantage</label>
 						</div>
 					</div>
@@ -59,17 +59,17 @@
 			<div class="col-sm-12">
 				<fieldset class="form-group">
 					<legend class="col-form-label required">Priorisation du dossier</legend>
-					<div id="project_priorizationOfFile">
+					<div ng-model="project.priorizationOfFile">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="project_priorizationOfFile_0" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="URGENT">
+							<input type="radio" ng-model="project.priorizationOfFile_0" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="URGENT">
 							<label class="custom-control-label required" for="project_priorizationOfFile_0">URGENT</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="project_priorizationOfFile_1" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="NORMAL">
+							<input type="radio" ng-model="project.priorizationOfFile_1" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="NORMAL">
 							<label class="custom-control-label required" for="project_priorizationOfFile_1">NORMAL</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="project_priorizationOfFile_2" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="SANS SUITE">
+							<input type="radio" ng-model="project.priorizationOfFile_2" name="project[priorizationOfFile]" required="required" class="custom-control-input" value="SANS SUITE">
 							<label class="custom-control-label required" for="project_priorizationOfFile_2">SANS SUITE</label>
 						</div>
 					</div>

@@ -65,6 +65,7 @@ class Project
     const TYPE_PRIORIZATION_NORMAL = "NORMAL";
     const TYPE_PRIORIZATION_WITHOUT_CONTINUTATION = "SANS SUITE";
 
+    // case type choice
     const CASE_TYPES = [
         self::CASE_TYPE_EARTH_WORKS,
         self::CASE_TYPE_BIG_WORK,

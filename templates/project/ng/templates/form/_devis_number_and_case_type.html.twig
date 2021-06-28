@@ -1,0 +1,150 @@
+<div class="col-md-12">
+	<div class="card card card-outline card-app-secondary h-100">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="project_edit_quoteValidatedMDE">N° du/des devis MDE validé(s)</label>
+						<input type="text" ng-model="project.quoteValidatedMDE" name="project_edit[quoteValidatedMDE]" maxlength="255" class="form-control" value="12">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="project_edit_quoteValidatedMDEDate" class="required">N° du/des devis MDE validé(s) De</label>
+						<input type="date" ng-model="project.quoteValidatedMDEDate" name="project_edit[quoteValidatedMDEDate]" required="required" class="form-control" value="2021-06-25">
+					</div>
+				</div>
+				<div class="col-sm-6" id="project_caseType">
+					{# TYPE DE DOSSIE  #}
+					{# TODO: make custom-checkbox work #}
+					<fieldset class="form-group">
+						<legend class="col-form-label required">Type de dossier</legend>
+						<div class="custom-control custom-checkbox custom-control-inline" ng-repeat="item in caseTypes">
+							<input 
+								type="checkbox" 
+								class="custom-control-inpu" 
+								ng-click="toggle(item)"
+							>
+							<label class="custom-control-labe">{{ '{{ item.label }}' }}</label>
+						</div>
+					</fieldset>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="project_edit_planningProject" class="required">Planning projet</label>
+						<textarea ng-model="project.planningProject" name="project_edit[planningProject]" required="required" class="form-control">Lorem ipsum dolor sit amet
+														lorem ipsum dolor sit amet</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<fieldset class="form-group">
+						<legend class="col-form-label required">Priorisation du dossier</legend>
+						<div ng-model="project.priorizationOfFile">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" ng-model="project.priorizationOfFile_0" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="URGENT">
+								<label class="custom-control-label required" for="project_edit_priorizationOfFile_0">URGENT</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" ng-model="project.priorizationOfFile_1" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="NORMAL" checked="checked">
+								<label class="custom-control-label required" for="project_edit_priorizationOfFile_1">NORMAL</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" ng-model="project.priorizationOfFile_2" name="project_edit[priorizationOfFile]" required="required" class="custom-control-input" value="SANS SUITE">
+								<label class="custom-control-label required" for="project_edit_priorizationOfFile_2">SANS SUITE</label>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="project_edit_answerForThe">Réponse pour le</label>
+						<textarea ng-model="project.answerForThe" name="project_edit[answerForThe]" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-group mb-3">
+					<label for="basic-url">
+						<label for="project_edit_folderNameOnTheServer">Nom du dossier sur le serveur</label>
+					</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">G:\2-BBT\1-AFFAIRES\1-PROSPECT\</span>
+						</div>
+						<input type="text" ng-model="project.folderNameOnTheServer" name="project_edit[folderNameOnTheServer]" maxlength="255" class="form-control" value="Xfds DDc dddff">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="" for="project_edit_recordAssistant">Assistant en charge du dossier</label>
+						<select ng-model="project.recordAssistant" name="project_edit[recordAssistant]" class="form-control">
+							<option value=""></option>
+							<option value="2">projectRole test</option>
+							<option value="8">musk elun</option>
+							<option value="27">Check my work please Ok I ask stephan now</option>
+							<option value="30">pool dead</option>
+							<option value="31">spider spiderman</option>
+							<option value="32">stark iron-man</option>
+							<option value="33">Fax TestFax</option>
+							<option value="36">idealy henintsoa + suplement de text pour le text de word break ou word-wrap je ne sais pas Andrianirina</option>
+							<option value="38">Steve Jobs</option>
+							<option value="39">Bill Gates</option>
+							<option value="40">D luffy Monkey</option>
+							<option value="41">Zoro Roronoa</option>
+							<option value="42">Zoro Roronoa</option>
+							<option value="43">Exception Exception</option>
+							<option value="44">Orange Karotte</option>
+							<option value="45">Maizy Potatoes</option>
+							<option value="46">tast-you tast-me</option>
+							<option value="47">you you-me</option>
+							<option value="48">Test-me Tast-me</option>
+							<option value="55">Andria Idealy henintsoa</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="" for="project_edit_ocbsDriver">CONDUC OCBS</label>
+						<select ng-model="project.ocbsDriver" name="project_edit[ocbsDriver]" class="form-control">
+							<option value=""></option>
+							<option value="2">projectRole test</option>
+							<option value="8">musk elun</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="" for="project_edit_tceDriver">CONDUC TCE</label>
+						<select ng-model="project.tceDriver" name="project_edit[tceDriver]" class="form-control">
+							<option value=""></option>
+							<option value="2">projectRole test</option>
+							<option value="8">musk elun</option>
+							<option value="27">Check my work please Ok I ask stephan now</option>
+							<option value="30">pool dead</option>
+							<option value="31">spider spiderman</option>
+							<option value="32">stark iron-man</option>
+							<option value="33">Fax TestFax</option>
+							<option value="36">idealy henintsoa + suplement de text pour le text de word break ou word-wrap je ne sais pas Andrianirina</option>
+							<option value="38">Steve Jobs</option>
+							<option value="39">Bill Gates</option>
+							<option value="40">D luffy Monkey</option>
+							<option value="41">Zoro Roronoa</option>
+							<option value="42">Zoro Roronoa</option>
+							<option value="43">Exception Exception</option>
+							<option value="44">Orange Karotte</option>
+							<option value="45">Maizy Potatoes</option>
+							<option value="46">tast-you tast-me</option>
+							<option value="47" selected="selected">you you-me</option>
+							<option value="48">Test-me Tast-me</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.card-body -->
+	</div>
+</div>

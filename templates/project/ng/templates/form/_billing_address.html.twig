@@ -1,0 +1,309 @@
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-header">
+		<h3 class="card-title">Adresse facturation</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_name">Nom</label>
+					<input type="text" ng-model="project.billingAddresName" name="project_edit[billingAddres][name]" class="form-control" value="Madagascar">
+                </div>
+            </div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_phone">Téléphone</label>
+					<input type="text" ng-model="project.billingAddresPhone" name="project_edit[billingAddres][phone]" class="form-control" value="XXXXX XXXX">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_fax">Fax</label>
+					<input type="text" ng-model="project.billingAddresFax" name="project_edit[billingAddres][fax]" class="form-control" value="5678">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line1">Adresse 1</label>
+					<input type="text" ng-model="project.billingAddresLine1" name="project_edit[billingAddres][line1]" class="form-control" value="Antananarivo">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line2">Adresse 2</label>
+					<input type="text" ng-model="project.billingAddresLine2" name="project_edit[billingAddres][line2]" class="form-control" value="Antsimondrano">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line3">Adresse 3</label>
+					<input type="text" ng-model="project.billingAddresLine3" name="project_edit[billingAddres][line3]" class="form-control" value="Itaosy">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_postalCode">Code postale</label>
+					<input type="text" ng-model="project.billingAddresPostal.code" name="project_edit[billingAddres][postalCode]" class="form-control" value="102">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_city">Ville</label>
+					<input type="text" ng-model="project.billingAddresCity" name="project_edit[billingAddres][city]" class="form-control">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="" for="project_edit_billingAddres_country">Pays</label>
+					<div class="dropdown bootstrap-select form-control select2-hidden-accessible dropup">
+						<select ng-model="project.billingAddresCountry" name="project_edit[billingAddres][country]" class="bootstrap-select form-control select2-hidden-accessible" data-live-search="data-live-search" data-type="select2" data-select2-id="select2-data-project_edit_billingAddres_country" tabindex="-1" aria-hidden="true">
+							<option value=""></option>
+							<option value="AF">Afghanistan</option>
+							<option value="ZA">Afrique du Sud</option>
+							<option value="AL">Albanie</option>
+							<option value="DZ">Algérie</option>
+							<option value="DE">Allemagne</option>
+							<option value="AD">Andorre</option>
+							<option value="AO">Angola</option>
+							<option value="AI">Anguilla</option>
+							<option value="AQ">Antarctique</option>
+							<option value="AG">Antigua-et-Barbuda</option>
+							<option value="SA">Arabie saoudite</option>
+							<option value="AR">Argentine</option>
+							<option value="AM">Arménie</option>
+							<option value="AW">Aruba</option>
+							<option value="AU">Australie</option>
+							<option value="AT">Autriche</option>
+							<option value="AZ">Azerbaïdjan</option>
+							<option value="BS">Bahamas</option>
+							<option value="BH">Bahreïn</option>
+							<option value="BD">Bangladesh</option>
+							<option value="BB">Barbade</option>
+							<option value="BE">Belgique</option>
+							<option value="BZ">Belize</option>
+							<option value="BJ">Bénin</option>
+							<option value="BM">Bermudes</option>
+							<option value="BT">Bhoutan</option>
+							<option value="BY">Biélorussie</option>
+							<option value="BO">Bolivie</option>
+							<option value="BA">Bosnie-Herzégovine</option>
+							<option value="BW">Botswana</option>
+							<option value="BR">Brésil</option>
+							<option value="BN">Brunei</option>
+							<option value="BG">Bulgarie</option>
+							<option value="BF">Burkina Faso</option>
+							<option value="BI">Burundi</option>
+							<option value="KH">Cambodge</option>
+							<option value="CM">Cameroun</option>
+							<option value="CA">Canada</option>
+							<option value="CV">Cap-Vert</option>
+							<option value="CL">Chili</option>
+							<option value="CN">Chine</option>
+							<option value="CY">Chypre</option>
+							<option value="CO">Colombie</option>
+							<option value="KM">Comores</option>
+							<option value="CG">Congo-Brazzaville</option>
+							<option value="CD">Congo-Kinshasa</option>
+							<option value="KP">Corée du Nord</option>
+							<option value="KR">Corée du Sud</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CI">Côte d’Ivoire</option>
+							<option value="HR">Croatie</option>
+							<option value="CU">Cuba</option>
+							<option value="CW">Curaçao</option>
+							<option value="DK">Danemark</option>
+							<option value="DJ">Djibouti</option>
+							<option value="DM">Dominique</option>
+							<option value="EG">Égypte</option>
+							<option value="AE">Émirats arabes unis</option>
+							<option value="EC">Équateur</option>
+							<option value="ER">Érythrée</option>
+							<option value="ES">Espagne</option>
+							<option value="EE">Estonie</option>
+							<option value="SZ">Eswatini</option>
+							<option value="VA">État de la Cité du Vatican</option>
+							<option value="US">États-Unis</option>
+							<option value="ET">Éthiopie</option>
+							<option value="FJ">Fidji</option>
+							<option value="FI">Finlande</option>
+							<option value="FR">France</option>
+							<option value="GA">Gabon</option>
+							<option value="GM">Gambie</option>
+							<option value="GE">Géorgie</option>
+							<option value="GS">Géorgie du Sud-et-les Îles Sandwich du Sud</option>
+							<option value="GH">Ghana</option>
+							<option value="GI">Gibraltar</option>
+							<option value="GR">Grèce</option>
+							<option value="GD">Grenade</option>
+							<option value="GL">Groenland</option>
+							<option value="GP">Guadeloupe</option>
+							<option value="GU">Guam</option>
+							<option value="GT">Guatemala</option>
+							<option value="GG">Guernesey</option>
+							<option value="GN">Guinée</option>
+							<option value="GQ">Guinée équatoriale</option>
+							<option value="GW">Guinée-Bissau</option>
+							<option value="GY">Guyana</option>
+							<option value="GF">Guyane française</option>
+							<option value="HT">Haïti</option>
+							<option value="HN">Honduras</option>
+							<option value="HU">Hongrie</option>
+							<option value="BV">Île Bouvet</option>
+							<option value="CX">Île Christmas</option>
+							<option value="IM">Île de Man</option>
+							<option value="NF">Île Norfolk</option>
+							<option value="AX">Îles Åland</option>
+							<option value="KY">Îles Caïmans</option>
+							<option value="CC">Îles Cocos</option>
+							<option value="CK">Îles Cook</option>
+							<option value="FO">Îles Féroé</option>
+							<option value="HM">Îles Heard-et-MacDonald</option>
+							<option value="FK">Îles Malouines</option>
+							<option value="MP">Îles Mariannes du Nord</option>
+							<option value="MH">Îles Marshall</option>
+							<option value="UM">Îles mineures éloignées des États-Unis</option>
+							<option value="PN">Îles Pitcairn</option>
+							<option value="SB">Îles Salomon</option>
+							<option value="TC">Îles Turques-et-Caïques</option>
+							<option value="VG">Îles Vierges britanniques</option>
+							<option value="VI">Îles Vierges des États-Unis</option>
+							<option value="IN">Inde</option>
+							<option value="ID">Indonésie</option>
+							<option value="IQ">Irak</option>
+							<option value="IR">Iran</option>
+							<option value="IE">Irlande</option>
+							<option value="IS">Islande</option>
+							<option value="IL">Israël</option>
+							<option value="IT">Italie</option>
+							<option value="JM">Jamaïque</option>
+							<option value="JP">Japon</option>
+							<option value="JE">Jersey</option>
+							<option value="JO">Jordanie</option>
+							<option value="KZ">Kazakhstan</option>
+							<option value="KE">Kenya</option>
+							<option value="KG">Kirghizstan</option>
+							<option value="KI">Kiribati</option>
+							<option value="KW">Koweït</option>
+							<option value="RE">La Réunion</option>
+							<option value="LA">Laos</option>
+							<option value="LS">Lesotho</option>
+							<option value="LV">Lettonie</option>
+							<option value="LB">Liban</option>
+							<option value="LR">Liberia</option>
+							<option value="LY">Libye</option>
+							<option value="LI">Liechtenstein</option>
+							<option value="LT">Lituanie</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MK">Macédoine du Nord</option>
+							<option value="MG" selected="selected" data-select2-id="select2-data-6-amg3">Madagascar</option>
+							<option value="MY">Malaisie</option>
+							<option value="MW">Malawi</option>
+							<option value="MV">Maldives</option>
+							<option value="ML">Mali</option>
+							<option value="MT">Malte</option>
+							<option value="MA">Maroc</option>
+							<option value="MQ">Martinique</option>
+							<option value="MU">Maurice</option>
+							<option value="MR">Mauritanie</option>
+							<option value="YT">Mayotte</option>
+							<option value="MX">Mexique</option>
+							<option value="FM">Micronésie</option>
+							<option value="MD">Moldavie</option>
+							<option value="MC">Monaco</option>
+							<option value="MN">Mongolie</option>
+							<option value="ME">Monténégro</option>
+							<option value="MS">Montserrat</option>
+							<option value="MZ">Mozambique</option>
+							<option value="MM">Myanmar (Birmanie)</option>
+							<option value="NA">Namibie</option>
+							<option value="NR">Nauru</option>
+							<option value="NP">Népal</option>
+							<option value="NI">Nicaragua</option>
+							<option value="NE">Niger</option>
+							<option value="NG">Nigeria</option>
+							<option value="NU">Niue</option>
+							<option value="NO">Norvège</option>
+							<option value="NC">Nouvelle-Calédonie</option>
+							<option value="NZ">Nouvelle-Zélande</option>
+							<option value="OM">Oman</option>
+						</select>
+						<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-3" aria-haspopup="listbox" aria-expanded="false" data-ng-model="project.billingAddresCountry" title="Madagascar">
+							<div class="filter-option">
+								<div class="filter-option-inner">
+									<div class="filter-option-inner-inner">Madagascar</div>
+								</div>
+							</div>
+						</button>
+						<div class="dropdown-menu " style="max-height: 711px; overflow: hidden; min-height: 174px;">
+							<div class="bs-searchbox"><input type="search" class="form-control" autocomplete="off" role="combobox" aria-label="Search" aria-controls="bs-select-3" aria-autocomplete="list" aria-activedescendant="bs-select-3-138">
+                        </div>
+							<div class="inner show" role="listbox" id="bs-select-3" tabindex="-1" style="max-height: 650px; overflow-y: auto; min-height: 113px;">
+								<ul class="dropdown-menu inner show" role="presentation" style="margin-top: 0px; margin-bottom: 0px;">
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-0" tabindex="0">
+											<span class="text"></span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-1" tabindex="0">
+											<span class="text">Afghanistan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-2" tabindex="0">
+											<span class="text">Afrique du Sud</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-3" tabindex="0">
+											<span class="text">Albanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-4" tabindex="0">
+											<span class="text">Algérie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-5" tabindex="0">
+											<span class="text">Allemagne</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-6" tabindex="0">
+											<span class="text">Andorre</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-7" tabindex="0">
+											<span class="text">Angola</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-3-8" tabindex="0">
+											<span class="text">Anguilla</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-5-0dfm" style="width: 100%;">
+						<span class="selection">
+							<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-project_edit_billingAddres_country-container" aria-controls="select2-project_edit_billingAddres_country-container">
+								<span class="select2-selection__rendered" id="select2-project_edit_billingAddres_country-container" role="textbox" aria-readonly="true" title="Madagascar">Madagascar</span>
+								<span class="select2-selection__arrow" role="presentation">
+									<b role="presentation"></b>
+								</span>
+							</span>
+						</span>
+						<span class="dropdown-wrapper" aria-hidden="true"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>

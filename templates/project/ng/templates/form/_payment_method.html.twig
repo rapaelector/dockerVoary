@@ -1,0 +1,45 @@
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-header text-center">
+		<h3 class="card-title col-md-12 text-center">MODE DE REGLEMENT</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<fieldset class="form-group">
+					<legend class="col-form-label required">Acompte</legend>
+					<div ng-model="project.paymentChoice">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" ng-model="project.paymentChoice_0" name="project_edit[paymentChoice]" required="required" class="custom-control-input" value="1" checked="checked">
+							<label class="custom-control-label required" for="project_edit_paymentChoice_0">oui</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" ng-model="project.paymentChoice_1" name="project_edit[paymentChoice]" required="required" class="custom-control-input" value="0">
+							<label class="custom-control-label required" for="project_edit_paymentChoice_1">non</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="project_edit_paymentPercentage" class="required">acompte %</label>
+					<input type="text" ng-model="project.paymentPercentage" name="project_edit[paymentPercentage]" required="required" placeholder="%" class="form-control" value="12"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_depositeDateEdit" class="required">Deposite date edit</label>
+					<input type="date" ng-model="project.depositeDateEdit" name="project_edit[depositeDateEdit]" required="required" class="form-control" value="2021-06-17"></div>
+			</div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="project_edit_clientCondition" class="required">Condition négocier avec le client</label>
+					<textarea ng-model="project.clientCondition" name="project_edit[clientCondition]" required="required" class="form-control">Lorem ipsum dolor sit, amet consectetur
+						adipisicing elit. Fugiat minima amet nihil 
+						quas saepe rerum assumenda totam modi</textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>

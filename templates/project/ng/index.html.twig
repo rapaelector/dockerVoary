@@ -11,17 +11,22 @@
     <div class="container-fluid">
         {% include 'project/ng/templates/index.html.twig' %}
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <app-project-information></app-project-information>
-                </div>
-                <div class="col-sm-6"></div>
-            </div>
+            <app-project-information></app-project-information>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        {# TYPE DE DOSSIER #}
+        var CASE_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::CASE_TYPES') %}
+            CASE_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+    </script>
     {{ encore_entry_script_tags('ng_project') }}
 {% endblock %}

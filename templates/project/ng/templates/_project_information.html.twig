@@ -1,21 +1,43 @@
 <form>
     <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    {# PROJET #}
+                    {% include 'project/ng/templates/form/_project.html.twig' %}
+                </div>
+                <div class="col-sm-12 mt-3">
+                    {# CONTACT #}
+                    {% include 'project/ng/templates/form/_contact.html.twig' %}
+                </div>
+                <div class="col-sm-12 mt-3">
+                    {# ADRESSE CHANTIER #}
+                    {% include 'project/ng/templates/form/_site_address.html.twig' %}
+                </div>
+                <div class="col-sm-12 mt-3">
+                    {# ADRESSE FACTURATION #}
+                    {% include 'project/ng/templates/form/_billing_address.html.twig' %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mt-3">
+                    {# TYPE DE DOSSIER #}
+                    {# {% include 'project/ng/templates/form/_folder_type.html.twig' %} #}
+                </div>
+                <div class="col-sm-12 mt-3">
+                    {# PLANNING DU PROJET #}
+                    {# {% include 'project/ng/templates/form/_project_planning.html.twig' %} #}
+                </div>
+            </div>
+        </div>
         <div class="col-sm-12">
-            {% include 'project/ng/templates/form/_project.html.twig' %}
+            {% include 'project/ng/templates/form/_payment_method.html.twig' %}
         </div>
         <div class="col-sm-12 mt-3">
-            {% include 'project/ng/templates/form/_contact.html.twig' %}
+            {% include 'project/ng/templates/form/_devis_number_and_case_type.html.twig' %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12 mt-3">
-            {% include 'project/ng/templates/form/_folder_type.html.twig' %}
-        </div>
-        <div class="col-sm-12 mt-3">
-            {% include 'project/ng/templates/form/_project_planning.html.twig' %}
-        </div>
-    </div>
-    <div class="card-footer text-center">
+    <div class="text-center">
         <button
             class="btn btn-app-primary"
             type="submit"

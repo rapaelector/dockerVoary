@@ -1,0 +1,1586 @@
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-header">
+		<h3 class="card-title">Adresse chantier</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_name">Nom</label>
+					<input type="text" ng-model="project.siteAddress_name" name="project_edit[siteAddress][name]" class="form-control" value="Test adresse chantier"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_phone">Téléphone</label>
+					<input type="text" ng-model="project.siteAddress_phone" name="project_edit[siteAddress][phone]" class="form-control" value="899 00 789"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_fax">Fax</label>
+					<input type="text" ng-model="project.siteAddress_fax" name="project_edit[siteAddress][fax]" class="form-control" value="787 78 608"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_line1">Adresse 1</label>
+					<input type="text" ng-model="project.siteAddress_line1" name="project_edit[siteAddress][line1]" class="form-control" value="Antananarivo"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_line2">Adresse 2</label>
+					<input type="text" ng-model="project.siteAddress_line2" name="project_edit[siteAddress][line2]" class="form-control" value="Antsimondrano"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_line3">Adresse 3</label>
+					<input type="text" ng-model="project.siteAddress_line3" name="project_edit[siteAddress][line3]" class="form-control" value="Itaosy"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_postalCode">Code postale</label>
+					<input type="text" ng-model="project.siteAddress_postalCode" name="project_edit[siteAddress][postalCode]" class="form-control"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_siteAddress_city">Ville</label>
+					<input type="text" ng-model="project.siteAddress_city" name="project_edit[siteAddress][city]" class="form-control" value="Centre afrique"></div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="" for="project_edit_siteAddress_country">Pays</label>
+					<div class="dropdown bootstrap-select form-control select2-hidden-accessible dropup">
+						<select ng-model="project.siteAddress_country" name="project_edit[siteAddress][country]" class="bootstrap-select form-control select2-hidden-accessible" data-live-search="data-live-search" data-type="select2" data-select2-id="select2-data-project_edit_siteAddress_country" tabindex="-1" aria-hidden="true">
+							<option value=""></option>
+							<option value="AF">Afghanistan</option>
+							<option value="ZA" selected="selected" data-select2-id="select2-data-4-1qg0">Afrique du Sud</option>
+							<option value="AL">Albanie</option>
+							<option value="DZ">Algérie</option>
+							<option value="DE">Allemagne</option>
+							<option value="AD">Andorre</option>
+							<option value="AO">Angola</option>
+							<option value="AI">Anguilla</option>
+							<option value="AQ">Antarctique</option>
+							<option value="AG">Antigua-et-Barbuda</option>
+							<option value="SA">Arabie saoudite</option>
+							<option value="AR">Argentine</option>
+							<option value="AM">Arménie</option>
+							<option value="AW">Aruba</option>
+							<option value="AU">Australie</option>
+							<option value="AT">Autriche</option>
+							<option value="AZ">Azerbaïdjan</option>
+							<option value="BS">Bahamas</option>
+							<option value="BH">Bahreïn</option>
+							<option value="BD">Bangladesh</option>
+							<option value="BB">Barbade</option>
+							<option value="BE">Belgique</option>
+							<option value="BZ">Belize</option>
+							<option value="BJ">Bénin</option>
+							<option value="BM">Bermudes</option>
+							<option value="BT">Bhoutan</option>
+							<option value="BY">Biélorussie</option>
+							<option value="BO">Bolivie</option>
+							<option value="BA">Bosnie-Herzégovine</option>
+							<option value="BW">Botswana</option>
+							<option value="BR">Brésil</option>
+							<option value="BN">Brunei</option>
+							<option value="BG">Bulgarie</option>
+							<option value="BF">Burkina Faso</option>
+							<option value="BI">Burundi</option>
+							<option value="KH">Cambodge</option>
+							<option value="CM">Cameroun</option>
+							<option value="CA">Canada</option>
+							<option value="CV">Cap-Vert</option>
+							<option value="CL">Chili</option>
+							<option value="CN">Chine</option>
+							<option value="CY">Chypre</option>
+							<option value="CO">Colombie</option>
+							<option value="KM">Comores</option>
+							<option value="CG">Congo-Brazzaville</option>
+							<option value="CD">Congo-Kinshasa</option>
+							<option value="KP">Corée du Nord</option>
+							<option value="KR">Corée du Sud</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CI">Côte d’Ivoire</option>
+							<option value="HR">Croatie</option>
+							<option value="CU">Cuba</option>
+							<option value="CW">Curaçao</option>
+							<option value="DK">Danemark</option>
+							<option value="DJ">Djibouti</option>
+							<option value="DM">Dominique</option>
+							<option value="EG">Égypte</option>
+							<option value="AE">Émirats arabes unis</option>
+							<option value="EC">Équateur</option>
+							<option value="ER">Érythrée</option>
+							<option value="ES">Espagne</option>
+							<option value="EE">Estonie</option>
+							<option value="SZ">Eswatini</option>
+							<option value="VA">État de la Cité du Vatican</option>
+							<option value="US">États-Unis</option>
+							<option value="ET">Éthiopie</option>
+							<option value="FJ">Fidji</option>
+							<option value="FI">Finlande</option>
+							<option value="FR">France</option>
+							<option value="GA">Gabon</option>
+							<option value="GM">Gambie</option>
+							<option value="GE">Géorgie</option>
+							<option value="GS">Géorgie du Sud-et-les Îles Sandwich du Sud</option>
+							<option value="GH">Ghana</option>
+							<option value="GI">Gibraltar</option>
+							<option value="GR">Grèce</option>
+							<option value="GD">Grenade</option>
+							<option value="GL">Groenland</option>
+							<option value="GP">Guadeloupe</option>
+							<option value="GU">Guam</option>
+							<option value="GT">Guatemala</option>
+							<option value="GG">Guernesey</option>
+							<option value="GN">Guinée</option>
+							<option value="GQ">Guinée équatoriale</option>
+							<option value="GW">Guinée-Bissau</option>
+							<option value="GY">Guyana</option>
+							<option value="GF">Guyane française</option>
+							<option value="HT">Haïti</option>
+							<option value="HN">Honduras</option>
+							<option value="HU">Hongrie</option>
+							<option value="BV">Île Bouvet</option>
+							<option value="CX">Île Christmas</option>
+							<option value="IM">Île de Man</option>
+							<option value="NF">Île Norfolk</option>
+							<option value="AX">Îles Åland</option>
+							<option value="KY">Îles Caïmans</option>
+							<option value="CC">Îles Cocos</option>
+							<option value="CK">Îles Cook</option>
+							<option value="FO">Îles Féroé</option>
+							<option value="HM">Îles Heard-et-MacDonald</option>
+							<option value="FK">Îles Malouines</option>
+							<option value="MP">Îles Mariannes du Nord</option>
+							<option value="MH">Îles Marshall</option>
+							<option value="UM">Îles mineures éloignées des États-Unis</option>
+							<option value="PN">Îles Pitcairn</option>
+							<option value="SB">Îles Salomon</option>
+							<option value="TC">Îles Turques-et-Caïques</option>
+							<option value="VG">Îles Vierges britanniques</option>
+							<option value="VI">Îles Vierges des États-Unis</option>
+							<option value="IN">Inde</option>
+							<option value="ID">Indonésie</option>
+							<option value="IQ">Irak</option>
+							<option value="IR">Iran</option>
+							<option value="IE">Irlande</option>
+							<option value="IS">Islande</option>
+							<option value="IL">Israël</option>
+							<option value="IT">Italie</option>
+							<option value="JM">Jamaïque</option>
+							<option value="JP">Japon</option>
+							<option value="JE">Jersey</option>
+							<option value="JO">Jordanie</option>
+							<option value="KZ">Kazakhstan</option>
+							<option value="KE">Kenya</option>
+							<option value="KG">Kirghizstan</option>
+							<option value="KI">Kiribati</option>
+							<option value="KW">Koweït</option>
+							<option value="RE">La Réunion</option>
+							<option value="LA">Laos</option>
+							<option value="LS">Lesotho</option>
+							<option value="LV">Lettonie</option>
+							<option value="LB">Liban</option>
+							<option value="LR">Liberia</option>
+							<option value="LY">Libye</option>
+							<option value="LI">Liechtenstein</option>
+							<option value="LT">Lituanie</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MK">Macédoine du Nord</option>
+							<option value="MG">Madagascar</option>
+							<option value="MY">Malaisie</option>
+							<option value="MW">Malawi</option>
+							<option value="MV">Maldives</option>
+							<option value="ML">Mali</option>
+							<option value="MT">Malte</option>
+							<option value="MA">Maroc</option>
+							<option value="MQ">Martinique</option>
+							<option value="MU">Maurice</option>
+							<option value="MR">Mauritanie</option>
+							<option value="YT">Mayotte</option>
+							<option value="MX">Mexique</option>
+							<option value="FM">Micronésie</option>
+							<option value="MD">Moldavie</option>
+							<option value="MC">Monaco</option>
+							<option value="MN">Mongolie</option>
+							<option value="ME">Monténégro</option>
+							<option value="MS">Montserrat</option>
+							<option value="MZ">Mozambique</option>
+							<option value="MM">Myanmar (Birmanie)</option>
+							<option value="NA">Namibie</option>
+							<option value="NR">Nauru</option>
+							<option value="NP">Népal</option>
+							<option value="NI">Nicaragua</option>
+							<option value="NE">Niger</option>
+							<option value="NG">Nigeria</option>
+							<option value="NU">Niue</option>
+							<option value="NO">Norvège</option>
+							<option value="NC">Nouvelle-Calédonie</option>
+							<option value="NZ">Nouvelle-Zélande</option>
+							<option value="OM">Oman</option>
+							<option value="UG">Ouganda</option>
+							<option value="UZ">Ouzbékistan</option>
+							<option value="PK">Pakistan</option>
+							<option value="PW">Palaos</option>
+							<option value="PA">Panama</option>
+							<option value="PG">Papouasie-Nouvelle-Guinée</option>
+							<option value="PY">Paraguay</option>
+							<option value="NL">Pays-Bas</option>
+							<option value="BQ">Pays-Bas caribéens</option>
+							<option value="PE">Pérou</option>
+							<option value="PH">Philippines</option>
+							<option value="PL">Pologne</option>
+							<option value="PF">Polynésie française</option>
+							<option value="PR">Porto Rico</option>
+							<option value="PT">Portugal</option>
+							<option value="QA">Qatar</option>
+							<option value="HK">R.A.S. chinoise de Hong Kong</option>
+							<option value="MO">R.A.S. chinoise de Macao</option>
+							<option value="CF">République centrafricaine</option>
+							<option value="DO">République dominicaine</option>
+							<option value="RO">Roumanie</option>
+							<option value="GB">Royaume-Uni</option>
+							<option value="RU">Russie</option>
+							<option value="RW">Rwanda</option>
+							<option value="EH">Sahara occidental</option>
+							<option value="BL">Saint-Barthélemy</option>
+							<option value="KN">Saint-Christophe-et-Niévès</option>
+							<option value="SM">Saint-Marin</option>
+							<option value="MF">Saint-Martin</option>
+							<option value="SX">Saint-Martin (partie néerlandaise)</option>
+							<option value="PM">Saint-Pierre-et-Miquelon</option>
+							<option value="VC">Saint-Vincent-et-les Grenadines</option>
+							<option value="SH">Sainte-Hélène</option>
+							<option value="LC">Sainte-Lucie</option>
+							<option value="SV">Salvador</option>
+							<option value="WS">Samoa</option>
+							<option value="AS">Samoa américaines</option>
+							<option value="ST">Sao Tomé-et-Principe</option>
+							<option value="SN">Sénégal</option>
+							<option value="RS">Serbie</option>
+							<option value="SC">Seychelles</option>
+							<option value="SL">Sierra Leone</option>
+							<option value="SG">Singapour</option>
+							<option value="SK">Slovaquie</option>
+							<option value="SI">Slovénie</option>
+							<option value="SO">Somalie</option>
+							<option value="SD">Soudan</option>
+							<option value="SS">Soudan du Sud</option>
+							<option value="LK">Sri Lanka</option>
+							<option value="SE">Suède</option>
+							<option value="CH">Suisse</option>
+							<option value="SR">Suriname</option>
+							<option value="SJ">Svalbard et Jan Mayen</option>
+							<option value="SY">Syrie</option>
+							<option value="TJ">Tadjikistan</option>
+							<option value="TW">Taïwan</option>
+							<option value="TZ">Tanzanie</option>
+							<option value="TD">Tchad</option>
+							<option value="CZ">Tchéquie</option>
+							<option value="TF">Terres australes françaises</option>
+							<option value="IO">Territoire britannique de l’océan Indien</option>
+							<option value="PS">Territoires palestiniens</option>
+							<option value="TH">Thaïlande</option>
+							<option value="TL">Timor oriental</option>
+							<option value="TG">Togo</option>
+							<option value="TK">Tokelau</option>
+							<option value="TO">Tonga</option>
+							<option value="TT">Trinité-et-Tobago</option>
+							<option value="TN">Tunisie</option>
+							<option value="TM">Turkménistan</option>
+							<option value="TR">Turquie</option>
+							<option value="TV">Tuvalu</option>
+							<option value="UA">Ukraine</option>
+							<option value="UY">Uruguay</option>
+							<option value="VU">Vanuatu</option>
+							<option value="VE">Venezuela</option>
+							<option value="VN">Viêt Nam</option>
+							<option value="WF">Wallis-et-Futuna</option>
+							<option value="YE">Yémen</option>
+							<option value="ZM">Zambie</option>
+							<option value="ZW">Zimbabwe</option>
+						</select>
+						<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-2" aria-haspopup="listbox" aria-expanded="false" data-ng-model="project.siteAddress_country" title="Afrique du Sud">
+							<div class="filter-option">
+								<div class="filter-option-inner">
+									<div class="filter-option-inner-inner">Afrique du Sud</div>
+								</div>
+							</div>
+						</button>
+						<div class="dropdown-menu " style="max-height: 490px; overflow: hidden; min-height: 174px;">
+							<div class="bs-searchbox"><input type="search" class="form-control" autocomplete="off" role="combobox" aria-label="Search" aria-controls="bs-select-2" aria-autocomplete="list" aria-activedescendant="bs-select-2-2"></div>
+							<div class="inner show" role="listbox" id="bs-select-2" tabindex="-1" style="max-height: 429px; overflow-y: auto; min-height: 113px;">
+								<ul class="dropdown-menu inner show" role="presentation" style="margin-top: 0px; margin-bottom: 0px;">
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-0" tabindex="0">
+											<span class="text"></span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-1" tabindex="0">
+											<span class="text">Afghanistan</span>
+										</a>
+									</li>
+									<li class="selected active">
+										<a role="option" class="dropdown-item active selected" id="bs-select-2-2" tabindex="0" aria-setsize="250" aria-posinset="3" aria-selected="true">
+											<span class="text">Afrique du Sud</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-3" tabindex="0">
+											<span class="text">Albanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-4" tabindex="0">
+											<span class="text">Algérie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-5" tabindex="0">
+											<span class="text">Allemagne</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-6" tabindex="0">
+											<span class="text">Andorre</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-7" tabindex="0">
+											<span class="text">Angola</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-8" tabindex="0">
+											<span class="text">Anguilla</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-9" tabindex="0">
+											<span class="text">Antarctique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-10" tabindex="0">
+											<span class="text">Antigua-et-Barbuda</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-11" tabindex="0">
+											<span class="text">Arabie saoudite</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-12" tabindex="0">
+											<span class="text">Argentine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-13" tabindex="0">
+											<span class="text">Arménie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-14" tabindex="0">
+											<span class="text">Aruba</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-15" tabindex="0">
+											<span class="text">Australie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-16" tabindex="0">
+											<span class="text">Autriche</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-17" tabindex="0">
+											<span class="text">Azerbaïdjan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-18" tabindex="0">
+											<span class="text">Bahamas</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-19" tabindex="0">
+											<span class="text">Bahreïn</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-20" tabindex="0">
+											<span class="text">Bangladesh</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-21" tabindex="0">
+											<span class="text">Barbade</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-22" tabindex="0">
+											<span class="text">Belgique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-23" tabindex="0">
+											<span class="text">Belize</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-24" tabindex="0">
+											<span class="text">Bénin</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-25" tabindex="0">
+											<span class="text">Bermudes</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-26" tabindex="0">
+											<span class="text">Bhoutan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-27" tabindex="0">
+											<span class="text">Biélorussie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-28" tabindex="0">
+											<span class="text">Bolivie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-29" tabindex="0">
+											<span class="text">Bosnie-Herzégovine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-30" tabindex="0">
+											<span class="text">Botswana</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-31" tabindex="0">
+											<span class="text">Brésil</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-32" tabindex="0">
+											<span class="text">Brunei</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-33" tabindex="0">
+											<span class="text">Bulgarie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-34" tabindex="0">
+											<span class="text">Burkina Faso</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-35" tabindex="0">
+											<span class="text">Burundi</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-36" tabindex="0">
+											<span class="text">Cambodge</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-37" tabindex="0">
+											<span class="text">Cameroun</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-38" tabindex="0">
+											<span class="text">Canada</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-39" tabindex="0">
+											<span class="text">Cap-Vert</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-40" tabindex="0">
+											<span class="text">Chili</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-41" tabindex="0">
+											<span class="text">Chine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-42" tabindex="0">
+											<span class="text">Chypre</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-43" tabindex="0">
+											<span class="text">Colombie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-44" tabindex="0">
+											<span class="text">Comores</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-45" tabindex="0">
+											<span class="text">Congo-Brazzaville</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-46" tabindex="0">
+											<span class="text">Congo-Kinshasa</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-47" tabindex="0">
+											<span class="text">Corée du Nord</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-48" tabindex="0">
+											<span class="text">Corée du Sud</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-49" tabindex="0">
+											<span class="text">Costa Rica</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-50" tabindex="0">
+											<span class="text">Côte d’Ivoire</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-51" tabindex="0">
+											<span class="text">Croatie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-52" tabindex="0">
+											<span class="text">Cuba</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-53" tabindex="0">
+											<span class="text">Curaçao</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-54" tabindex="0">
+											<span class="text">Danemark</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-55" tabindex="0">
+											<span class="text">Djibouti</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-56" tabindex="0">
+											<span class="text">Dominique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-57" tabindex="0">
+											<span class="text">Égypte</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-58" tabindex="0">
+											<span class="text">Émirats arabes unis</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-59" tabindex="0">
+											<span class="text">Équateur</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-60" tabindex="0">
+											<span class="text">Érythrée</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-61" tabindex="0">
+											<span class="text">Espagne</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-62" tabindex="0">
+											<span class="text">Estonie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-63" tabindex="0">
+											<span class="text">Eswatini</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-64" tabindex="0">
+											<span class="text">État de la Cité du Vatican</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-65" tabindex="0">
+											<span class="text">États-Unis</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-66" tabindex="0">
+											<span class="text">Éthiopie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-67" tabindex="0">
+											<span class="text">Fidji</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-68" tabindex="0">
+											<span class="text">Finlande</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-69" tabindex="0">
+											<span class="text">France</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-70" tabindex="0">
+											<span class="text">Gabon</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-71" tabindex="0">
+											<span class="text">Gambie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-72" tabindex="0">
+											<span class="text">Géorgie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-73" tabindex="0">
+											<span class="text">Géorgie du Sud-et-les Îles Sandwich du Sud</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-74" tabindex="0">
+											<span class="text">Ghana</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-75" tabindex="0">
+											<span class="text">Gibraltar</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-76" tabindex="0">
+											<span class="text">Grèce</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-77" tabindex="0">
+											<span class="text">Grenade</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-78" tabindex="0">
+											<span class="text">Groenland</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-79" tabindex="0">
+											<span class="text">Guadeloupe</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-80" tabindex="0">
+											<span class="text">Guam</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-81" tabindex="0">
+											<span class="text">Guatemala</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-82" tabindex="0">
+											<span class="text">Guernesey</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-83" tabindex="0">
+											<span class="text">Guinée</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-84" tabindex="0">
+											<span class="text">Guinée équatoriale</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-85" tabindex="0">
+											<span class="text">Guinée-Bissau</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-86" tabindex="0">
+											<span class="text">Guyana</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-87" tabindex="0">
+											<span class="text">Guyane française</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-88" tabindex="0">
+											<span class="text">Haïti</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-89" tabindex="0">
+											<span class="text">Honduras</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-90" tabindex="0">
+											<span class="text">Hongrie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-91" tabindex="0">
+											<span class="text">Île Bouvet</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-92" tabindex="0">
+											<span class="text">Île Christmas</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-93" tabindex="0">
+											<span class="text">Île de Man</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-94" tabindex="0">
+											<span class="text">Île Norfolk</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-95" tabindex="0">
+											<span class="text">Îles Åland</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-96" tabindex="0">
+											<span class="text">Îles Caïmans</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-97" tabindex="0">
+											<span class="text">Îles Cocos</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-98" tabindex="0">
+											<span class="text">Îles Cook</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-99" tabindex="0">
+											<span class="text">Îles Féroé</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-100" tabindex="0">
+											<span class="text">Îles Heard-et-MacDonald</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-101" tabindex="0">
+											<span class="text">Îles Malouines</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-102" tabindex="0">
+											<span class="text">Îles Mariannes du Nord</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-103" tabindex="0">
+											<span class="text">Îles Marshall</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-104" tabindex="0">
+											<span class="text">Îles mineures éloignées des États-Unis</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-105" tabindex="0">
+											<span class="text">Îles Pitcairn</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-106" tabindex="0">
+											<span class="text">Îles Salomon</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-107" tabindex="0">
+											<span class="text">Îles Turques-et-Caïques</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-108" tabindex="0">
+											<span class="text">Îles Vierges britanniques</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-109" tabindex="0">
+											<span class="text">Îles Vierges des États-Unis</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-110" tabindex="0">
+											<span class="text">Inde</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-111" tabindex="0">
+											<span class="text">Indonésie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-112" tabindex="0">
+											<span class="text">Irak</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-113" tabindex="0">
+											<span class="text">Iran</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-114" tabindex="0">
+											<span class="text">Irlande</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-115" tabindex="0">
+											<span class="text">Islande</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-116" tabindex="0">
+											<span class="text">Israël</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-117" tabindex="0">
+											<span class="text">Italie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-118" tabindex="0">
+											<span class="text">Jamaïque</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-119" tabindex="0">
+											<span class="text">Japon</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-120" tabindex="0">
+											<span class="text">Jersey</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-121" tabindex="0">
+											<span class="text">Jordanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-122" tabindex="0">
+											<span class="text">Kazakhstan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-123" tabindex="0">
+											<span class="text">Kenya</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-124" tabindex="0">
+											<span class="text">Kirghizstan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-125" tabindex="0">
+											<span class="text">Kiribati</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-126" tabindex="0">
+											<span class="text">Koweït</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-127" tabindex="0">
+											<span class="text">La Réunion</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-128" tabindex="0">
+											<span class="text">Laos</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-129" tabindex="0">
+											<span class="text">Lesotho</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-130" tabindex="0">
+											<span class="text">Lettonie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-131" tabindex="0">
+											<span class="text">Liban</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-132" tabindex="0">
+											<span class="text">Liberia</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-133" tabindex="0">
+											<span class="text">Libye</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-134" tabindex="0">
+											<span class="text">Liechtenstein</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-135" tabindex="0">
+											<span class="text">Lituanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-136" tabindex="0">
+											<span class="text">Luxembourg</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-137" tabindex="0">
+											<span class="text">Macédoine du Nord</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-138" tabindex="0">
+											<span class="text">Madagascar</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-139" tabindex="0">
+											<span class="text">Malaisie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-140" tabindex="0">
+											<span class="text">Malawi</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-141" tabindex="0">
+											<span class="text">Maldives</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-142" tabindex="0">
+											<span class="text">Mali</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-143" tabindex="0">
+											<span class="text">Malte</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-144" tabindex="0">
+											<span class="text">Maroc</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-145" tabindex="0">
+											<span class="text">Martinique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-146" tabindex="0">
+											<span class="text">Maurice</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-147" tabindex="0">
+											<span class="text">Mauritanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-148" tabindex="0">
+											<span class="text">Mayotte</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-149" tabindex="0">
+											<span class="text">Mexique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-150" tabindex="0">
+											<span class="text">Micronésie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-151" tabindex="0">
+											<span class="text">Moldavie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-152" tabindex="0">
+											<span class="text">Monaco</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-153" tabindex="0">
+											<span class="text">Mongolie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-154" tabindex="0">
+											<span class="text">Monténégro</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-155" tabindex="0">
+											<span class="text">Montserrat</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-156" tabindex="0">
+											<span class="text">Mozambique</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-157" tabindex="0">
+											<span class="text">Myanmar (Birmanie)</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-158" tabindex="0">
+											<span class="text">Namibie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-159" tabindex="0">
+											<span class="text">Nauru</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-160" tabindex="0">
+											<span class="text">Népal</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-161" tabindex="0">
+											<span class="text">Nicaragua</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-162" tabindex="0">
+											<span class="text">Niger</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-163" tabindex="0">
+											<span class="text">Nigeria</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-164" tabindex="0">
+											<span class="text">Niue</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-165" tabindex="0">
+											<span class="text">Norvège</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-166" tabindex="0">
+											<span class="text">Nouvelle-Calédonie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-167" tabindex="0">
+											<span class="text">Nouvelle-Zélande</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-168" tabindex="0">
+											<span class="text">Oman</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-169" tabindex="0">
+											<span class="text">Ouganda</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-170" tabindex="0">
+											<span class="text">Ouzbékistan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-171" tabindex="0">
+											<span class="text">Pakistan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-172" tabindex="0">
+											<span class="text">Palaos</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-173" tabindex="0">
+											<span class="text">Panama</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-174" tabindex="0">
+											<span class="text">Papouasie-Nouvelle-Guinée</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-175" tabindex="0">
+											<span class="text">Paraguay</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-176" tabindex="0">
+											<span class="text">Pays-Bas</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-177" tabindex="0">
+											<span class="text">Pays-Bas caribéens</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-178" tabindex="0">
+											<span class="text">Pérou</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-179" tabindex="0">
+											<span class="text">Philippines</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-180" tabindex="0">
+											<span class="text">Pologne</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-181" tabindex="0">
+											<span class="text">Polynésie française</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-182" tabindex="0">
+											<span class="text">Porto Rico</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-183" tabindex="0">
+											<span class="text">Portugal</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-184" tabindex="0">
+											<span class="text">Qatar</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-185" tabindex="0">
+											<span class="text">R.A.S. chinoise de Hong Kong</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-186" tabindex="0">
+											<span class="text">R.A.S. chinoise de Macao</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-187" tabindex="0">
+											<span class="text">République centrafricaine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-188" tabindex="0">
+											<span class="text">République dominicaine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-189" tabindex="0">
+											<span class="text">Roumanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-190" tabindex="0">
+											<span class="text">Royaume-Uni</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-191" tabindex="0">
+											<span class="text">Russie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-192" tabindex="0">
+											<span class="text">Rwanda</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-193" tabindex="0">
+											<span class="text">Sahara occidental</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-194" tabindex="0">
+											<span class="text">Saint-Barthélemy</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-195" tabindex="0">
+											<span class="text">Saint-Christophe-et-Niévès</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-196" tabindex="0">
+											<span class="text">Saint-Marin</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-197" tabindex="0">
+											<span class="text">Saint-Martin</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-198" tabindex="0">
+											<span class="text">Saint-Martin (partie néerlandaise)</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-199" tabindex="0">
+											<span class="text">Saint-Pierre-et-Miquelon</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-200" tabindex="0">
+											<span class="text">Saint-Vincent-et-les Grenadines</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-201" tabindex="0">
+											<span class="text">Sainte-Hélène</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-202" tabindex="0">
+											<span class="text">Sainte-Lucie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-203" tabindex="0">
+											<span class="text">Salvador</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-204" tabindex="0">
+											<span class="text">Samoa</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-205" tabindex="0">
+											<span class="text">Samoa américaines</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-206" tabindex="0">
+											<span class="text">Sao Tomé-et-Principe</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-207" tabindex="0">
+											<span class="text">Sénégal</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-208" tabindex="0">
+											<span class="text">Serbie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-209" tabindex="0">
+											<span class="text">Seychelles</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-210" tabindex="0">
+											<span class="text">Sierra Leone</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-211" tabindex="0">
+											<span class="text">Singapour</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-212" tabindex="0">
+											<span class="text">Slovaquie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-213" tabindex="0">
+											<span class="text">Slovénie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-214" tabindex="0">
+											<span class="text">Somalie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-215" tabindex="0">
+											<span class="text">Soudan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-216" tabindex="0">
+											<span class="text">Soudan du Sud</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-217" tabindex="0">
+											<span class="text">Sri Lanka</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-218" tabindex="0">
+											<span class="text">Suède</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-219" tabindex="0">
+											<span class="text">Suisse</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-220" tabindex="0">
+											<span class="text">Suriname</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-221" tabindex="0">
+											<span class="text">Svalbard et Jan Mayen</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-222" tabindex="0">
+											<span class="text">Syrie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-223" tabindex="0">
+											<span class="text">Tadjikistan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-224" tabindex="0">
+											<span class="text">Taïwan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-225" tabindex="0">
+											<span class="text">Tanzanie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-226" tabindex="0">
+											<span class="text">Tchad</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-227" tabindex="0">
+											<span class="text">Tchéquie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-228" tabindex="0">
+											<span class="text">Terres australes françaises</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-229" tabindex="0">
+											<span class="text">Territoire britannique de l’océan Indien</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-230" tabindex="0">
+											<span class="text">Territoires palestiniens</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-231" tabindex="0">
+											<span class="text">Thaïlande</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-232" tabindex="0">
+											<span class="text">Timor oriental</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-233" tabindex="0">
+											<span class="text">Togo</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-234" tabindex="0">
+											<span class="text">Tokelau</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-235" tabindex="0">
+											<span class="text">Tonga</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-236" tabindex="0">
+											<span class="text">Trinité-et-Tobago</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-237" tabindex="0">
+											<span class="text">Tunisie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-238" tabindex="0">
+											<span class="text">Turkménistan</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-239" tabindex="0">
+											<span class="text">Turquie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-240" tabindex="0">
+											<span class="text">Tuvalu</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-241" tabindex="0">
+											<span class="text">Ukraine</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-242" tabindex="0">
+											<span class="text">Uruguay</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-243" tabindex="0">
+											<span class="text">Vanuatu</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-244" tabindex="0">
+											<span class="text">Venezuela</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-245" tabindex="0">
+											<span class="text">Viêt Nam</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-246" tabindex="0">
+											<span class="text">Wallis-et-Futuna</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-247" tabindex="0">
+											<span class="text">Yémen</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-248" tabindex="0">
+											<span class="text">Zambie</span>
+										</a>
+									</li>
+									<li>
+										<a role="option" class="dropdown-item" id="bs-select-2-249" tabindex="0">
+											<span class="text">Zimbabwe</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-3-uepl" style="width: 100%;">
+						<span class="selection">
+							<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-project_edit_siteAddress_country-container" aria-controls="select2-project_edit_siteAddress_country-container">
+								<span class="select2-selection__rendered" id="select2-project_edit_siteAddress_country-container" role="textbox" aria-readonly="true" title="Afrique du Sud">Afrique du Sud</span>
+								<span class="select2-selection__arrow" role="presentation">
+									<b role="presentation"></b>
+								</span>
+							</span>
+						</span>
+						<span class="dropdown-wrapper" aria-hidden="true"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>
