@@ -4,19 +4,19 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <fieldset class="form-group">
-                            <legend class="col-form-label required">Feuille de route</legend>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <input type="radio" ng-model="project.roadmap" value="1">
-                                    <label for="roadmap_0">oui</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="radio" ng-model="project.roadmap" name="roadmap" value="0">
-                                    <label for="roadmap_1">non</label>
-                                </div>
+                        <label class="col-form-label required">Feuille de route</label>
+                        <md-radio-group 
+                            ng-model="project.roadmap" 
+                            aria-labelledby="roadmap"
+                            class="d-flex"
+                        >
+                            <div class="mr-4">
+                                <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
                             </div>
-                        </fieldset>
+                            <div>
+                                <md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
+                            </div>
+                        </md-radio-group>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">

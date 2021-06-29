@@ -362,10 +362,18 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
      * @Groups({"data-project"})
      */
     private $name;
+
+    /**
+     * la valeur de cette champs est l'un des valeurs suivant
+     * - PUBLIC_MARKET, PRIVATE_MARKET, AO_private, AO_PUBLIC
+     * - un marché batiment neuf peut ^tre un ao public ou un marché priveé
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $scope;
 
     public function __construct()
     {
@@ -882,6 +890,18 @@ class Project
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getScope(): ?string
+    {
+        return $this->scope;
+    }
+
+    public function setScope(?string $scope): self
+    {
+        $this->scope = $scope;
 
         return $this;
     }

@@ -56,16 +56,16 @@ class Project
     const CASE_TYPE_ISOTHERMES = "caseType.isothermes";
     const CASE_TYPE_ASBESTOS_REMOVAL = "caseType.asbestosRemoval";
 
-    // type de chiffrage
+    // TYPE DE CHIFFRAGE
     const TYPE_ENCRYPTION_BUDGET = "BUDGET";
     const TYPE_ENCRYPTION_PRODUCTION = "Réalisation / consultation";
 
-    // type de priorisation
+    // TYPE DE PRIORISATION
     const TYPE_PRIORIZATION_URGENT = "URGENT";
     const TYPE_PRIORIZATION_NORMAL = "NORMAL";
     const TYPE_PRIORIZATION_WITHOUT_CONTINUTATION = "SANS SUITE";
 
-    // case type choice
+    // CASE TYPE CHOICE
     const CASE_TYPES = [
         self::CASE_TYPE_EARTH_WORKS,
         self::CASE_TYPE_BIG_WORK,

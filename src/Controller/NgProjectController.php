@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
+use App\Form\Project\NgProjectType;
 
 use App\Controller\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,16 +30,21 @@ class NgProjectController extends BaseController
     )
     {
         if ($request->getMethod() == 'POST') {
-            $form = $this->createForm(ProjectEditType::class, $project, ['csrf_protection' => false]);
-            dump($request->getContent());
+            $form = $this->createForm(NgProjectType::class, $project, [
+                'csrf_protection' => false,
+                'allow_extra_fields' => true,
+            ]);
             $form->submit(json_decode($request->getContent(), true));
-
+            
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
-                return $this->json(['success' => $translator->trans('messages.editing_success', [], 'project')]);
+                return $this->json([
+                    'success' => $translator->trans('messages.editing_success', [], 'project'),
+                    'project' => $serializer->normalize($project, 'json', ['groups' => 'data-project']),
+                ]);
             }
 
-            return $this->json(['error' => $translator->trans('messages.editing_failed', [], 'project')]);
+            return $this->json(['error' => $translator->trans('messages.editing_failed', [], 'project')], 400);
         }
 
         return $this->render('project/ng/index.html.twig', [
@@ -46,7 +53,12 @@ class NgProjectController extends BaseController
     }
 
     #[Route('/autocomplete/data', name: 'project.ng.form_autocomplete_data', options: ['expose' => true])]
-    public function getFormAutocompleteData(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
+    public function getFormAutocompleteData(
+        Request $request, 
+        EntityManagerInterface $em, 
+        SerializerInterface $serializer, 
+        TranslatorInterface $translator
+    )
     {
         $clients = $em->getRepository(Client::class)->findAll();
         $clientsFormatted = $serializer->serialize(
@@ -71,13 +83,16 @@ class NgProjectController extends BaseController
             'countries' => array_values(array_map(function ($countryName) use($icountries) {
                 return ['name' => $countryName, 'countryCode' => $icountries[$countryName]];
             }, $countries)),
+            'caseTypes' => array_map(function ($caseType) use ($translator) {
+                return ['value' => $caseType, 'label' => $translator->trans($caseType, [], 'project')];
+            }, ProjectConstants::CASE_TYPES),
         ]);
     }
 
     #[Route('/{id}', name: 'project.ng.get_project', options: ['expose' => true])]
     public function getProject(Project $project, SerializerInterface $serializer)
     {
-        $projectFormatted = $serializer->serialize(
+        $projectFormatted = $serializer->normalize(
             $project,
             'json',
             ['groups' => 'data-project']

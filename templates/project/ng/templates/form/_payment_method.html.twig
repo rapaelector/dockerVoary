@@ -7,47 +7,36 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-3">
-				<fieldset class="form-group">
-					<legend class="col-form-label required">Acompte</legend>
-					<div class="project-paymentChoice">
-						<div class="row">
-							<div class="col-sm-6">
-								<input
-									type="radio" 
-									ng-model="project.paymentChoice"
-									value="1"
-									id="paymentChoice_0"
-								>
-								<label for="paymentChoice_0">oui</label>
-							</div>
-							<div class="col-sm-6">
-								<input
-									type="radio"
-									ng-model="project.paymentChoice"
-									name="paymentChoice"
-									value="0"
-									id="paymentChoice_1"
-								>
-								<label for="paymentChoice_1">non</label>
-							</div>
-						</div>
+				<label class="col-form-label required">Acompte</label>
+				<md-radio-group 
+					ng-model="project.paymentChoice" 
+					aria-labelledby="paymentChoice"
+					class="d-flex"
+				>
+					<div class="mr-4">
+						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
 					</div>
-				</fieldset>
+					<div>
+						<md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
+					</div>
+				</md-radio-group>
 			</div>
 			<div class="col-sm-3">
 				<div class="form-group">
 					<label for="project_edit_paymentPercentage" class="required">acompte %</label>
-					<input type="text" ng-model="project.paymentPercentage" name="project_edit[paymentPercentage]" required="required" placeholder="%" class="form-control" value="12"></div>
+					<input type="text" ng-model="project.paymentPercentage" required="required" placeholder="%" class="form-control" value="12"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_depositeDateEdit" class="required">Deposite date edit</label>
-					<input type="date" ng-model="project.depositeDateEdit" name="project_edit[depositeDateEdit]" required="required" class="form-control" value="2021-06-17"></div>
+					<input
+						type="date" 
+						ng-model="project.depositeDateEdit" required="required" class="form-control"></div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="project_edit_clientCondition" class="required">Condition négocier avec le client</label>
-					<textarea ng-model="project.clientCondition" name="project_edit[clientCondition]" required="required" class="form-control">Lorem ipsum dolor sit, amet consectetur
+					<textarea ng-model="project.clientCondition" required="required" class="form-control">Lorem ipsum dolor sit, amet consectetur
 						adipisicing elit. Fugiat minima amet nihil 
 						quas saepe rerum assumenda totam modi</textarea>
 				</div>

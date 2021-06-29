@@ -18,15 +18,7 @@
 					{# TYPE DE DOSSIE  #}
 					{# TODO: make custom-checkbox work #}
 					<fieldset class="form-group">
-						<legend class="col-form-label required">Type de dossier</legend>
-						<div class="custom-control custom-checkbox custom-control-inline" ng-repeat="item in caseTypes">
-							<input 
-								type="checkbox" 
-								class="custom-control-inpu" 
-								ng-click="toggle(item)"
-							>
-							<label class="custom-control-labe">{{ '{{ item.label }}' }}</label>
-						</div>
+						{% include 'project/ng/templates/form/_folder_type.html.twig' %}
 					</fieldset>
 				</div>
 				<div class="col-sm-6">
@@ -39,20 +31,19 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
-					<fieldset class="form-group">
-						<legend class="col-form-label required">Priorisation du dossier</legend>
-							<div class="custom-contro custom-radio custom-control-inline" ng-repeat="item in priorizationFileTypes">
-								<input
-									type="radio" 
-									ng-model="project.priorizationOfFile" 
-									class="custom-control-inpu" 
-									value="{{ '{{ item.value }}' }}"
-								>
-								<label class="custom-control-labe required" for="project_edit_priorizationOfFile_0">
-									{{ '{{ item.label }}' }}
-								</label>
-							</div>
-					</fieldset>
+                    <label class="col-form-label required">Priorisation du dossier</label>
+                    <md-radio-group
+                        ng-model="project.priorizationOfFile"
+                        aria-labelledby="priorizationOfFile"
+                        class="d-flex"
+                    >
+                        <div class="mr-4">
+                            <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
+                        </div>
+                        <div>
+                            <md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
+                        </div>
+                    </md-radio-group>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
