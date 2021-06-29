@@ -9,56 +9,56 @@
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_name">Nom</label>
-					<input type="text" ng-model="project.billingAddresName" name="project_edit[billingAddres][name]" class="form-control" value="Madagascar">
+					<input type="text" ng-model="project.billingAddress.name" name="project_edit[billingAddres][name]" class="form-control" value="Madagascar">
                 </div>
             </div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_phone">Téléphone</label>
-					<input type="text" ng-model="project.billingAddresPhone" name="project_edit[billingAddres][phone]" class="form-control" value="XXXXX XXXX">
+					<input type="text" ng-model="project.billingAddress.phone" name="project_edit[billingAddres][phone]" class="form-control" value="XXXXX XXXX">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_fax">Fax</label>
-					<input type="text" ng-model="project.billingAddresFax" name="project_edit[billingAddres][fax]" class="form-control" value="5678">
+					<input type="text" ng-model="project.billingAddress.fax" name="project_edit[billingAddres][fax]" class="form-control" value="5678">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_line1">Adresse 1</label>
-					<input type="text" ng-model="project.billingAddresLine1" name="project_edit[billingAddres][line1]" class="form-control" value="Antananarivo">
+					<input type="text" ng-model="project.billingAddress.line1" name="project_edit[billingAddres][line1]" class="form-control" value="Antananarivo">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_line2">Adresse 2</label>
-					<input type="text" ng-model="project.billingAddresLine2" name="project_edit[billingAddres][line2]" class="form-control" value="Antsimondrano">
+					<input type="text" ng-model="project.billingAddress.line2" name="project_edit[billingAddres][line2]" class="form-control" value="Antsimondrano">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_line3">Adresse 3</label>
-					<input type="text" ng-model="project.billingAddresLine3" name="project_edit[billingAddres][line3]" class="form-control" value="Itaosy">
+					<input type="text" ng-model="project.billingAddress.line3" name="project_edit[billingAddres][line3]" class="form-control" value="Itaosy">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_postalCode">Code postale</label>
-					<input type="text" ng-model="project.billingAddresPostal.code" name="project_edit[billingAddres][postalCode]" class="form-control" value="102">
+					<input type="text" ng-model="project.billingAddress.postalCode" name="project_edit[billingAddres][postalCode]" class="form-control" value="102">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label for="project_edit_billingAddres_city">Ville</label>
-					<input type="text" ng-model="project.billingAddres.city" name="project_edit[billingAddres][city]" class="form-control">
+					<input type="text" ng-model="project.billingAddress.city" name="project_edit[billingAddres][city]" class="form-control">
                 </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
 					<label class="" for="project_edit_siteAddress_country">Pays</label>
 					<md-select
-						ng-model="project.billingAddres.country"
+						ng-model="project.billingAddress.country"
 						md-on-close="searchTerm.countries = ''"
 						data-md-container-class="selectHeader"
 						md-on-open="helpers.getCountries"

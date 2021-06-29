@@ -24,8 +24,23 @@
     max-height: 240px;
 }
 
+md-select:focus {
+    .md-select-value {
+        border: none !important;
+    }
+}
+
 md-select-menu._md.md-overflow {
     max-width: 250px;
+}
+
+.md-select-value {
+    position: relative;
+    top: -5px;
+    border: none;
+    &:focus {
+        border: none;
+    }
 }
 
 md-select {

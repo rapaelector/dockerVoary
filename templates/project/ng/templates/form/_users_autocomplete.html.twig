@@ -15,8 +15,8 @@
         >
     </md-select-header>
     <md-option
-        ng-value="client.id" 
-        ng-repeat="client in data.autoComplete.clients|filter:{{ searchTerm }}">
-        {{ '{{ client.name }}' }}
+        ng-value="item.id" 
+        ng-repeat="item in data.autoComplete.clients|filter:{{ searchTerm }}">
+        {{ '{{ item.name }}' }}
     </md-option>
 </md-select>

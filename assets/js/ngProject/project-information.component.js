@@ -12,6 +12,9 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         economists: '',
         businessCharge: '',
         countries: '',
+        recordAssistant: '',
+        ocbsDriver: '',
+        tceDriver: '',
     };
 
     this.$onInit = function() {
@@ -37,7 +40,7 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
 
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
-        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+        $scope.data.users = ProjectService.getFormAutoCompleteData().then((response) => {
             return JSON.parse(response.data.users);
         }, error => {
             console.info(error);
@@ -47,7 +50,7 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         console.info('hello');
     };
     $scope.helpers.getClents = function() {
-        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+        $scope.data.users = ProjectService.getFormAutoCompleteData().then((response) => {
             return JSON.parse(response.data.clients);
         }, error => {
             console.info(error);
@@ -57,7 +60,7 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         console.info('hello');
     };
     $scope.helpers.getEconomists = function() {
-        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+        $scope.data.users = ProjectService.getFormAutoCompleteData().then((response) => {
             return JSON.parse(response.data.economists);
         }, error => {
             console.info(error);
@@ -67,7 +70,7 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         console.info('hello');
     };
     $scope.helpers.getBusinessCharge = function() {
-        $scope.data.users = ProjectService.getFormAutocompleteData().then((response) => {
+        $scope.data.users = ProjectService.getFormAutoCompleteData().then((response) => {
             return JSON.parse(response.data.economists);
         }, error => {
             console.info(error);
@@ -77,15 +80,44 @@ function ProjectInformationController($scope, ProjectService, CASE_TYPES, PRIORI
         console.info('hello');
     };
     $scope.helpers.getCountries = function() {
-        $scope.data.countries = ProjectService.getFormAutocompleteData().then((response) => {
+        $scope.data.countries = ProjectService.getFormAutoCompleteData().then((response) => {
             return response.data.countries;
         }, error => {
             console.info(error);
         });
-        console.info($scope.data.countries);
     };
     $scope.helpers.handleCountriesChanged = function() {
         console.info('hello');
+    };
+    $scope.helpers.getRecordAssistant = function() {
+        $scope.data.countries = ProjectService.getFormAutoCompleteData().then((response) => {
+            return response.data.users;
+        }, error => {
+            console.info(error);
+        });
+    };
+    $scope.helpers.handleRecordAssistantChanged = function() {
+        console.info('hello handleRecordAssistantChanged');
+    };
+    $scope.helpers.getOcbsDriver = function() {
+        $scope.data.countries = ProjectService.getFormAutoCompleteData().then((response) => {
+            return response.data.users;
+        }, error => {
+            console.info(error);
+        });
+    };
+    $scope.helpers.handleOcbsDriverChanged = function() {
+        console.info('hello handleOcbsDriverChanged');
+    };
+    $scope.helpers.getTceDriver = function() {
+        $scope.data.countries = ProjectService.getFormAutoCompleteData().then((response) => {
+            return response.data.users;
+        }, error => {
+            console.info(error);
+        });
+    };
+    $scope.helpers.handleTceDriverChanged = function() {
+        console.info('hello handleTceDriverChanged');
     };
 
     $scope.toggle = function(item) {

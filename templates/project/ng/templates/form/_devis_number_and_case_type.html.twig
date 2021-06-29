@@ -77,67 +77,56 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
+						{# 
 						<label class="" for="project_edit_recordAssistant">Assistant en charge du dossier</label>
 						<select ng-model="project.recordAssistant" name="project_edit[recordAssistant]" class="form-control">
 							<option value=""></option>
-							<option value="2">projectRole test</option>
-							<option value="8">musk elun</option>
-							<option value="27">Check my work please Ok I ask stephan now</option>
-							<option value="30">pool dead</option>
-							<option value="31">spider spiderman</option>
-							<option value="32">stark iron-man</option>
-							<option value="33">Fax TestFax</option>
-							<option value="36">idealy henintsoa + suplement de text pour le text de word break ou word-wrap je ne sais pas Andrianirina</option>
-							<option value="38">Steve Jobs</option>
-							<option value="39">Bill Gates</option>
-							<option value="40">D luffy Monkey</option>
-							<option value="41">Zoro Roronoa</option>
-							<option value="42">Zoro Roronoa</option>
-							<option value="43">Exception Exception</option>
-							<option value="44">Orange Karotte</option>
-							<option value="45">Maizy Potatoes</option>
-							<option value="46">tast-you tast-me</option>
-							<option value="47">you you-me</option>
-							<option value="48">Test-me Tast-me</option>
-							<option value="55">Andria Idealy henintsoa</option>
 						</select>
+						#}
+						{% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+							label: 'columns.recordAssistant'|trans({}, 'project'),
+							ngModel: 'project.recordAssistant',
+							searchTerm: 'searchTerm.recordAssistant',
+							mdOnOpen: 'helpers.getRecordAssistant()',
+							ngChangeHandler: 'helpers.handleRecordAssistantChanged()',
+						} %}
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
+						{# 
 						<label class="" for="project_edit_ocbsDriver">CONDUC OCBS</label>
 						<select ng-model="project.ocbsDriver" name="project_edit[ocbsDriver]" class="form-control">
 							<option value=""></option>
 							<option value="2">projectRole test</option>
 							<option value="8">musk elun</option>
 						</select>
+						#}
+						{% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+							label: 'columns.ocbsDriver'|trans({}, 'project'),
+							ngModel: 'project.ocbsDriver',
+							searchTerm: 'searchTerm.ocbsDriver',
+							mdOnOpen: 'helpers.getOcbsDriver()',
+							ngChangeHandler: 'helpers.handleOcbsDriverChanged()',
+						} %}
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
+						{# 
 						<label class="" for="project_edit_tceDriver">CONDUC TCE</label>
 						<select ng-model="project.tceDriver" name="project_edit[tceDriver]" class="form-control">
 							<option value=""></option>
 							<option value="2">projectRole test</option>
-							<option value="8">musk elun</option>
-							<option value="27">Check my work please Ok I ask stephan now</option>
-							<option value="30">pool dead</option>
-							<option value="31">spider spiderman</option>
-							<option value="32">stark iron-man</option>
-							<option value="33">Fax TestFax</option>
-							<option value="36">idealy henintsoa + suplement de text pour le text de word break ou word-wrap je ne sais pas Andrianirina</option>
-							<option value="38">Steve Jobs</option>
-							<option value="39">Bill Gates</option>
-							<option value="40">D luffy Monkey</option>
-							<option value="41">Zoro Roronoa</option>
-							<option value="42">Zoro Roronoa</option>
-							<option value="43">Exception Exception</option>
-							<option value="44">Orange Karotte</option>
-							<option value="45">Maizy Potatoes</option>
-							<option value="46">tast-you tast-me</option>
-							<option value="47" selected="selected">you you-me</option>
-							<option value="48">Test-me Tast-me</option>
 						</select>
+						#}
+						{% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+							label: 'columns.economist'|trans({}, 'project'),
+							ngModel: 'project.tceDriver',
+							searchTerm: 'searchTerm.tceDriver',
+							mdOnOpen: 'helpers.getTceDriver()',
+							ngChangeHandler: 'helpers.handleTceDriverChanged()',
+						} %}
 					</div>
 				</div>
 			</div>
