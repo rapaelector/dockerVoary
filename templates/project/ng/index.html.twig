@@ -43,6 +43,32 @@
                 value: '{{ type }}'
             })
         {% endfor %}
+
+        var MARKET_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::FIRST_MARKET_TYPES') %}
+            MARKET_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+        
+        var SECOND_MARKET_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::SECOND_MARKET_TYPES') %}
+            SECOND_MARKET_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+
+        var TYPE_BONHOME = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::BONHOME_TYPE_CHOICES') %}
+            TYPE_BONHOME.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}',
+            })
+        {% endfor %}
+
+        console.info(TYPE_BONHOME);
     </script>
     {{ encore_entry_script_tags('ng_project') }}
 {% endblock %}

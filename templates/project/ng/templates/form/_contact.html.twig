@@ -1,4 +1,4 @@
-<div class="card card card-outline card-app-secondary h-100">
+<div class="card card card-outline card-app-secondary h-100" ng-if="data.newContact">
 	<div class="card-header">
 		<h3 class="card-title">Contact</h3>
 		<!-- /.card-tools -->
@@ -10,33 +10,39 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="project_contact_lastName" class="required">Nom</label>
-							<input type="text" ng-model="project.contact.lastName" name="project[contact][lastName]" required="required" class="form-control form-control"></div>
+							<label for="project_contact_lastName">Nom</label>
+							<input type="text" ng-model="project.contact.lastName" class="form-control">
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project_contact_firstName">Prénom</label>
-							<input type="text" ng-model="project.contact.firstName" name="project[contact][firstName]" class="form-control form-control"></div>
+							<input type="text" ng-model="project.contact.firstName" class="form-control">
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="project_contact_email" class="required">Email</label>
-							<input type="text" ng-model="project.contact.email" name="project[contact][email]" required="required" class="form-control form-control"></div>
+							<label for="project_contact_email">Email</label>
+							<input type="text" ng-model="project.contact.email" class="form-control">
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="project_contact_phone" class="required">Téléphone</label>
-							<input type="text" ng-model="project.contact.phone" name="project[contact][phone]" required="required" class="form-control form-control"></div>
+							<label for="project_contact_phone">Téléphone</label>
+							<input type="text" ng-model="project.contact.phone" class="form-control">
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project_contact_job">Fonction</label>
-							<input type="text" ng-model="project.contact.job" name="project[contact][job]" class="form-control form-control"></div>
+							<input type="text" ng-model="project.contact.job" class="form-control">
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project_contact_fax">Fax</label>
-							<input type="text" ng-model="project.contact.fax" name="project[contact][fax]" class="form-control form-control"></div>
+							<input type="text" ng-model="project.contact.fax" class="form-control">
+						</div>
 					</div>
 				</div>
 			</div>

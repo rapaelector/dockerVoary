@@ -86,6 +86,7 @@ class Project
         self::PAYMENT_TYPE_TRANSFER,
     ];
 
+    // TYPE DE MARCHE
     const TYPE_DE_MARCHE = [
         self::TYPE_MARCHE_SHADOWS,
         self::TYPE_MARCHE_TENDER,
@@ -103,6 +104,46 @@ class Project
         self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 
+    /**
+     * TYPE DE MARCHE
+     * USE IN EDIT FORM ONLY FOR NOW
+     * ============== BEGIN ==================
+     */
+    CONST FIRST_MARKET_TYPES = [
+        self::TYPE_MARCHE_SHADOWS,
+        self::TYPE_MARCHE_TENDER,
+        self::TYPE_MARCHE_T_C_E,
+        self::TYPE_MARCHE_NEW_BAT,
+        self::TYPE_MARCHE_AGRICULTURAL_BAT,
+        self::TYPE_MARCHE_ISOTERMAL_PANEL,
+        self::TYPE_MARCHE_ISOTERMAL_PAN,
+        self::TYPE_MARCHE_WORK_ON_EXISTING,
+        self::TYPE_MARCHE_SIMPLE_SUPPLY,
+        self::TYPE_MARCHE_ASBESTOS_REMOVAL,
+    ];
+
+    /**
+     * Const :
+     *  - TYPE DE MARCHE PUBLIC
+     *  - TYPE DE MARCHE PRIVE
+     *  - TYPE AO PUBLIC
+     *  - TYPE AO PRIVE
+     */
+    const SECOND_MARKET_TYPES = [
+        self::TYPE_MARCHE_MARCHE_PUBLIC,
+        self::TYPE_MARCHE_MARCHE_PRIVATE,
+        self::TYPE_MARCHE_A_O_PUBLIC,
+        self::TYPE_MARCHE_AO_PRIVE,
+    ];
+    // ============== END ==================
+
+    // USED ONLY IN PROJECT EDIT PAGE
+    const BONHOME_TYPE_CHOICES = [
+        self::TYPE_BONHOMME_20PERCENT => self::TYPE_BONHOMME_20PERCENT,
+        self::TYPE_BONHOMME_10PERCENT => self::TYPE_BONHOMME_10PERCENT,
+        self::TYPE_BONHOMME_0PERCENT => self::TYPE_BONHOMME_0PERCENT,
+    ];
+
     const ENCRYPTION_TYPE = [
         self::TYPE_ENCRYPTION_BUDGET,
         self::TYPE_ENCRYPTION_PRODUCTION,
@@ -114,6 +155,7 @@ class Project
         self::TYPE_PRIORIZATION_WITHOUT_CONTINUTATION,
     ];
 
+    
     const TYPE_BONHOME = [
         self::TYPE_BONHOMME_CONTRACT_HOLDER => [
             self::TYPE_BONHOMME_20PERCENT => self::TYPE_BONHOMME_20PERCENT,

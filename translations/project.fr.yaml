@@ -184,9 +184,11 @@ label:
   action: Action
   prospect: Prospect
   serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
+  add_new_contact: 'Ajouter nouveau'
 
 messages:
   delete_success: 'Project supprimé avec succès'
   delete_project: 'Souhaitez-vous supprimer ce projet'
   editing_success: 'Modification du projet effectué avec succès'
+  editing_failed: 'la modification du projet à echoué'
   creation_success: 'Création du projet effectué avec succès'

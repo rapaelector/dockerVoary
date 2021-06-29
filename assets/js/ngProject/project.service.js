@@ -1,4 +1,4 @@
-angular.module('projectApp').factory('ProjectService', ProjectService);
+angular.module('projectApp').factory('projectService', ProjectService);
 
 ProjectService.$inject = ['$http', 'fosJsRouting'];
 
@@ -11,6 +11,12 @@ function ProjectService($http, fosJsRouting) {
 
     _this.getFormAutoCompleteData = function() {
         return $http.get(fosJsRouting.generate('project.ng.form_autocomplete_data'));
+    };
+
+    _this.saveProject = function(projectId, formData) {
+        console.info({ projectId, formData });
+
+        return $http.post(fosJsRouting.generate('project.ng.project_edit', { id: projectId }), formData);
     };
 
     return _this;

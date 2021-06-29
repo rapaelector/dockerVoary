@@ -1,10 +1,16 @@
-<label class="" for="project_edit_prospect">{{ label }}</label>
+{% set data = dataAutoComplete|default('data.autoComplete.users') %}
+
+{% if label is defined %}
+    <label for="project_edit_prospect">{{ label }}</label>
+{% endif %}
+
 <md-select
     ng-model="{{ ngModel }}"
     md-on-close="{{ searchTerm }} = ''"
     data-md-container-class="selectHeader"
     md-on-open="{{ mdOnOpen }}"
     ng-change="{{ ngChangeHandler }}"
+    ng-disabled="{{ disabled|default(false) }}"
 >
     <md-select-header class="select-header-search">
         <input ng-model="{{ searchTerm }}"
@@ -16,7 +22,7 @@
     </md-select-header>
     <md-option
         ng-value="item.id" 
-        ng-repeat="item in data.autoComplete.clients|filter:{{ searchTerm }}">
+        ng-repeat="item in {{ data }}|filter:{{ searchTerm }}">
         {{ '{{ item.name }}' }}
     </md-option>
 </md-select>

@@ -5,20 +5,41 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Project;
+use App\Form\ProjectEditType;
 
 use App\Controller\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Countries;
 
 #[Route('/project/ng')]
 class NgProjectController extends BaseController
 {
-    #[Route('/{id}/edit', name: 'project.ng.index')]
-    public function index(Request $request, Project $project)
+    #[Route('/{id}/edit', name: 'project.ng.project_edit', methods: ['POST', 'GET'], options: ['expose' => true])]
+    public function index(
+        Request $request, 
+        Project $project, 
+        SerializerInterface $serializer, 
+        EntityManagerInterface $em, 
+        TranslatorInterface $translator
+    )
     {
+        if ($request->getMethod() == 'POST') {
+            $form = $this->createForm(ProjectEditType::class, $project, ['csrf_protection' => false]);
+            dump($request->getContent());
+            $form->submit(json_decode($request->getContent(), true));
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+                return $this->json(['success' => $translator->trans('messages.editing_success', [], 'project')]);
+            }
+
+            return $this->json(['error' => $translator->trans('messages.editing_failed', [], 'project')]);
+        }
+
         return $this->render('project/ng/index.html.twig', [
             'project' => $project,
         ]);

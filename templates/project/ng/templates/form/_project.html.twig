@@ -8,11 +8,11 @@
                             <legend class="col-form-label required">Feuille de route</legend>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="radio" ng-model="project.roadMap" value="'1'">
+                                    <input type="radio" ng-model="project.roadmap" value="1">
                                     <label for="roadmap_0">oui</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="radio" ng-model="project.roadMap" name="roadMap" value="'0'">
+                                    <input type="radio" ng-model="project.roadmap" name="roadmap" value="0">
                                     <label for="roadmap_1">non</label>
                                 </div>
                             </div>
@@ -22,6 +22,7 @@
                         <div class="form-group">
                             {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
                                 label: 'columns.prospect'|trans({}, 'project'),
+                                dataAutoComplete: 'data.autoComplete.clients',
                                 ngModel: 'project.prospect',
                                 searchTerm: 'searchTerm.client',
                                 mdOnOpen: 'helpers.getClient()',
@@ -33,26 +34,41 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="project_edit_siteCode" class="required">Code chantier</label>
-                            <input type="text" ng-model="project.siteCode" name="project_edit[siteCode]" required="required" class="form-control" value="TTP"></div>
+                            <input type="text" ng-model="project.siteCode" required="required" class="form-control" value="TTP"></div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="project_edit_projectOwner" class="required">Maitre d'ouvrage</label>
-                            <input type="text" ng-model="project.projectOwner" name="project_edit[projectOwner]" required="required" class="form-control" value="Lorem ipsum ouvrage"></div>
+                            <input type="text" ng-model="project.projectOwner" required="required" class="form-control" value="Lorem ipsum ouvrage"></div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="project_edit_projectManager" class="required">Maitre d'oeuvre</label>
-                            <input type="text" ng-model="project.projectManager" name="project_edit[projectManager]" required="required" class="form-control" value="Test"></div>
+                            <input
+                                type="text" 
+                                ng-model="project.projectManager"
+                                required="required" 
+                                class="form-control" 
+                                value="Test"
+                            >
+                        </div>
                     </div>
                     {# CONTACT #}
                     <div class="col-sm-6">
                         <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="mb-0">{{  'columns.contact'|trans({}, 'project') }}</label>
+                                <div class="contact-checkbox-container">
+                                    <md-checkbox ng-model="data.newContact" aria-label="Checkbox 1">
+                                        {{ 'label.add_new_contact'|trans({}, 'project') }}
+                                    </md-checkbox>
+                                </div>
+                            </div>
                             {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
-                                label: 'columns.contact'|trans({}, 'project'),
                                 ngModel: 'project.contact',
                                 searchTerm: 'searchTerm.contact',
                                 mdOnOpen: 'helpers.getUsers()',
+                                disabled: 'data.newContact',
                                 ngChangeHandler: 'helpers.handleUserChanged()',
                             } %}
                         </div>

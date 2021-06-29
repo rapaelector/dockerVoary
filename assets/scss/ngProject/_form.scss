@@ -48,7 +48,23 @@ md-select {
     border-radius: $border-radius;
     padding: $input-padding-y $input-padding-x;
     height: $input-height;
+    &[disabled="disabled"] {
+        background: $input-disabled-bg;
+        opacity: 1;
+    }
     .md-select-value {
         border-bottom: none;
+    }
+}
+
+.contact-checkbox-container {
+    md-checkbox.md-auto-horizontal-margin {
+        min-height: auto;
+        .md-container {
+            margin-top: 11px;
+        }
+        .md-label {
+            margin-top: 0;
+        }
     }
 }
