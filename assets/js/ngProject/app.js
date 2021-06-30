@@ -14,3 +14,4 @@ import './project.service';
 import './../angular/shared/shared.module';
 import './project.controller';
 import './project-information.component';
+import './project-piloting.component';

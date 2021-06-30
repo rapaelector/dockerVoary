@@ -54,5 +54,8 @@ function ProjectService($http, fosJsRouting) {
         return res;
     };
 
+    _this.getExchangeHistory = function(projectId) {
+        return $http.get(fosJsRouting.generate('project.ng.get_exchange_history', { id: projectId }))
+    }
     return _this;
 };

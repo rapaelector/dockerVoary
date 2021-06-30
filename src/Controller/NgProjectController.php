@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Countries;
 
-#[Route('/project/ng')]
+#[Route('/project')]
 class NgProjectController extends BaseController
 {
     #[Route('/{id}/edit', name: 'project.ng.project_edit', methods: ['POST', 'GET'], options: ['expose' => true])]
@@ -104,5 +104,33 @@ class NgProjectController extends BaseController
         );
 
         return $this->json(['project' => $projectFormatted]);
+    }
+
+    #[Route('/{id}/exchange/history', name: '', options: ['expose' => true])]
+    public function getExchangeHistory(Project $project, SerializerInterface $serializer)
+    {
+        $mockData = [
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'lorem ipsum dolor sit amet',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Idealy henintsoa',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Henintsoa andrianirina',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Test test',
+                'color' => '#000',
+            ],
+        ]
+        return $this->json(['data' => ])
     }
 }

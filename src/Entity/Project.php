@@ -403,6 +403,7 @@ class Project
      * - un marché batiment neuf peut ^tre un ao public ou un marché priveé
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $scope;
 
