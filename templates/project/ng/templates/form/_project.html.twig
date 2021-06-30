@@ -6,17 +6,17 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="col-form-label ">Feuille de route</label>
+                        <label class="col-form-label ">{{ 'columns.roadmap'|trans }}</label>
                         <md-radio-group 
                             ng-model="project.roadmap" 
                             aria-labelledby="roadmap"
                             class="d-flex"
                         >
                             <div class="mr-4">
-                                <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
+                                <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
                             </div>
                             <div>
-                                <md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
+                                <md-radio-button value="0">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
                             </div>
                         </md-radio-group>
                         {% include 'project/ng/templates/form/_errors.html.twig' with {
@@ -38,7 +38,7 @@
                     <div class="w-100"></div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_siteCode" class="">Code chantier</label>
+                            <label for="project_edit_siteCode">{{ 'columns.siteCode'|trans }}</label>
                             <input
                                 type="text" 
                                 ng-model="project.siteCode" 
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_projectOwner" class="">Maitre d'ouvrage</label>
+                            <label for="project_edit_projectOwner">{{ 'columns.projectOwner'|trans }}</label>
                             <input
                                 type="text" 
                                 ng-model="project.projectOwner" 
@@ -68,7 +68,9 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_projectManager" class="">Maitre d'oeuvre</label>
+                            <label for="project_edit_projectManager">
+                                {{ 'columns.projectManager'|trans }}
+                            </label>
                             <input
                                 type="text" 
                                 ng-model="project.projectManager"
@@ -142,7 +144,9 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="project_edit_descriptionOperation" class="">Description operation</label>
+                            <label for="project_edit_descriptionOperation">
+                                {{ 'columns.descriptionOperation'|trans }}
+                            </label>
                             <textarea 
                                 ng-model="project.descriptionOperation" 
                                 ="" 

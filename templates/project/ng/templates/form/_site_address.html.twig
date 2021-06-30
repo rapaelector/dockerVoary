@@ -1,6 +1,6 @@
 <div class="card card card-outline card-app-secondary h-100">
 	<div class="card-header">
-		<h3 class="card-title">Adresse chantier</h3>
+		<h3 class="card-title">{{ 'columns.siteAddress'|trans({}, 'project') }}</h3>
 		<!-- /.card-tools -->
 	</div>
 	<!-- /.card-header for interlocuteur -->
@@ -8,47 +8,47 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_name">Nom</label>
+					<label for="project_edit_siteAddress_name">{{ 'label.name'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.name" class="form-control" value="Test adresse chantier"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_phone">Téléphone</label>
+					<label for="project_edit_siteAddress_phone">{{ 'label.phone'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.phone" class="form-control" value="899 00 789"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_fax">Fax</label>
+					<label for="project_edit_siteAddress_fax">{{ 'label.fax'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.fax" class="form-control" value="787 78 608"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_line1">Adresse 1</label>
+					<label for="project_edit_siteAddress_line1">{{ 'label.line1'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.line1" class="form-control" value="Antananarivo"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_line2">Adresse 2</label>
+					<label for="project_edit_siteAddress_line2">{{ 'label.line2'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.line2" class="form-control" value="Antsimondrano"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_line3">Adresse 3</label>
+					<label for="project_edit_siteAddress_line3">{{ 'label.line3'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.line3" class="form-control" value="Itaosy"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_postalCode">Code postale</label>
+					<label for="project_edit_siteAddress_postalCode">{{ 'label.postal_code'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.postalCode" class="form-control"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_siteAddress_city">Ville</label>
+					<label for="project_edit_siteAddress_city">{{ 'label.city'|trans({}, 'address') }}</label>
 					<input type="text" ng-model="project.siteAddress.city" class="form-control" value="Centre afrique"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label class="" for="project_edit_siteAddress_country">Pays</label>
+					<label class="" for="project_edit_siteAddress_country">{{ 'label.country'|trans({}, 'address') }}</label>
 					<md-select
 						ng-model="project.siteAddress.country"
 						md-on-close="searchTerm.countries = ''"

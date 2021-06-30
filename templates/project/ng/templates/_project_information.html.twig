@@ -35,24 +35,25 @@
             </div>
         </div>
         <div class="col-sm-12">
+            {# MODE DE REGLEMENT #}
             {% include 'project/ng/templates/form/_payment_method.html.twig' %}
         </div>
-        <div class="col-sm-12 mt-3">
+        <div class="col-sm-12 mt-4">
+            {# N° DU/DES DEVIS MDE VALIDES #}
             {% include 'project/ng/templates/form/_devis_number_and_case_type.html.twig' %}
         </div>
     </div>
-    <div class="text-center mb-3">
+    <div class="text-center pt-4 pb-3">
         <button
             class="btn btn-app-primary"
             type="submit"
             ng-click="fns.submit()"
         >
-            Enregistrer
+            {{ 'action.save'|trans({}, 'messages') }}
         </button>
-        <a href="#" class="btn btn-app-secondary">Annuler</a>
+        <a href="#" class="btn btn-app-secondary" type="button">{{ 'action.cancel'|trans({}, 'messages') }}</a>
     </div>
 </form>
 <div class="ng-project-loader" ng-if="onLoading">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
-{# <pre>{{ '{{ project|json }}' }}</pre> #}

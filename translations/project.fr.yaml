@@ -14,8 +14,17 @@ title:
   work_dispatching: REPARTITION DES TRAVAUX
   amount: MONTANT
   norm1090: NORME EN 1090 - Classe EXE
+  
 contact:
   label: Interlocuteur
+  name: 'Nom'
+  first_name: 'Prénom'
+  email: 'Email'
+  telephone: 'Téléphone'
+  job: 'Fonction'
+  fax: 'Fax'
+
+
 columns:
   first_ask_date: 'Date de première demande'
   first_ask_date_abbr: 'Date'
@@ -27,6 +36,7 @@ columns:
   projectOwner: "Maitre d'ouvrage"
   projectManager: "Maitre d'oeuvre"
   billingAddres: "Adresse facturation"
+  billingAddress: "Adresse facturation"
   siteAddress: "Adresse chantier"
   descriptionOperation: "Description de l'operation"
   soldBy: "Dossier vendu par"
@@ -40,7 +50,7 @@ columns:
   depositeDateEdit: "Date d'acompte doit être édité le"
   clientCondition: "Condition négocier avec le client"
   quoteValidatedMDE: "N° du/des devis MDE validé(s)"
-  quoteValidatedMDEDate: "N° du/des devis MDE validé(s) De"
+  quoteValidatedMDEDate: "Date de devis MDE validé(s) De"
   globalAmount: "Montant global du marché"
   global_amount: "Montant global du marché"
   global_amount_abbr: "Montant du marché"
