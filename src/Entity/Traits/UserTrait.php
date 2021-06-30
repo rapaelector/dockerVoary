@@ -5,7 +5,7 @@ namespace App\Entity\Traits;
 trait UserTrait
 {
     /**
-     * @Groups({"data-autocomplete", "data-project"})
+     * @Groups({"project-form-data", "data-project"})
      */
     public function getName(): ?string
     {

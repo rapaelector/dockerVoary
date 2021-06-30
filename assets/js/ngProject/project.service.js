@@ -10,11 +10,10 @@ function ProjectService($http, fosJsRouting) {
     };
 
     _this.getFormAutoCompleteData = function() {
-        return $http.get(fosJsRouting.generate('project.ng.form_autocomplete_data'));
+        return $http.get(fosJsRouting.generate('project.ng.form_data'));
     };
 
     _this.saveProject = function(projectId, formData) {
-        console.info({ projectId, formData });
         const addresses = ['billingAddres', 'siteAddress'];
         for (const i in addresses) {
             if (formData[addresses[i]] && formData[addresses[i]].id) {

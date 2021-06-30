@@ -57,26 +57,30 @@ class NgProjectController extends BaseController
         ]);
     }
 
-    #[Route('/autocomplete/data', name: 'project.ng.form_autocomplete_data', options: ['expose' => true])]
-    public function getFormAutocompleteData(
+    #[Route('/get/data', name: 'project.ng.form_data', options: ['expose' => true])]
+    public function getFormData(
         Request $request, 
         EntityManagerInterface $em, 
         SerializerInterface $serializer, 
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        \App\Service\User\UserService $userService
     )
     {
         $clients = $em->getRepository(Client::class)->findAll();
-        $clientsFormatted = $serializer->serialize(
+        $clientsFormatted = $serializer->normalize(
             $clients,
             'json',
-            ['groups' => 'data-autocomplete']
+            ['groups' => 'project-form-data']
         );
         $users = $em->getRepository(User::class)->findAll();
-        $usersFormatted = $serializer->serialize(
+        $usersFormatted = $serializer->normalize(
             $users,
             'json',
-            ['groups' => 'data-autocomplete']
+            ['groups' => 'project-form-data']
         );
+        foreach ($users as $i => $user) {
+            $usersFormatted[$i]['avatar'] = $userService->getUserAvatar($user);
+        }
         $countries = Countries::getNames();
         $icountries = array_flip($countries);
 

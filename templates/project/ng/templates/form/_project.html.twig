@@ -1,6 +1,9 @@
 {% trans_default_domain 'project' %}
 
 <div class="card card card-outline card-app-secondary h-100">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'title.project_information'|trans({}, 'project') }}</h3>
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="card-body">
@@ -25,13 +28,14 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                            {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
                                 label: 'columns.prospect'|trans({}, 'project'),
                                 dataAutoComplete: 'data.clients',
                                 ngModel: 'project.prospect',
                                 searchTerm: 'searchTerm.client',
                                 mdOnOpen: 'helpers.getClient()',
                                 ngChangeHandler: 'helpers.handleClientChanged()',
+                                isProspect: true,
                             } %}
                         </div>
                     </div>
@@ -102,7 +106,7 @@
                                     errorPath: 'data.errors.newContact',
                                 } %}
                             </div>
-                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                            {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
                                 ngModel: 'project.contact',
                                 searchTerm: 'searchTerm.contact',
                                 mdOnOpen: 'helpers.getUsers()',
@@ -116,7 +120,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                            {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
                                 label: 'columns.businessCharge'|trans({}, 'project'),
                                 ngModel: 'project.businessCharge',
                                 searchTerm: 'searchTerm.businessCharge',
@@ -130,7 +134,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
+                            {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
                                 label: 'columns.economist'|trans({}, 'project'),
                                 ngModel: 'project.economist',
                                 searchTerm: 'searchTerm.economists',

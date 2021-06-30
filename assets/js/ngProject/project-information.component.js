@@ -46,13 +46,13 @@ function ProjectInformationController(
             console.info(error);
         })
         projectService.getFormAutoCompleteData().then((response) => {
-            $scope.data.clients = JSON.parse(response.data.clients);
-            $scope.data.users = JSON.parse(response.data.users);
-            $scope.data.economists = JSON.parse(response.data.economists);
-            $scope.data.businessCharge = JSON.parse(response.data.businessCharge);
+            $scope.data.clients = response.data.clients;
+            $scope.data.users = response.data.users;
+            $scope.data.economists = response.data.economists;
+            $scope.data.businessCharge = response.data.businessCharge;
             $scope.data.countries = response.data.countries;
-            $scope.onLoading = false;
             $scope.data.caseTypes = response.data.caseTypes;
+            $scope.onLoading = false;
         }, error => {
             console.info(error);
             $scope.onLoading = false;
@@ -76,7 +76,7 @@ function ProjectInformationController(
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
         $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
-            return JSON.parse(response.data.users);
+            return response.data.users;
         }, error => {
             console.info(error);
         })
@@ -85,7 +85,7 @@ function ProjectInformationController(
 
     $scope.helpers.getClents = function() {
         $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
-            return JSON.parse(response.data.clients);
+            return response.data.clients;
         }, error => {
             console.info(error);
         })
@@ -94,7 +94,7 @@ function ProjectInformationController(
 
     $scope.helpers.getEconomists = function() {
         $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
-            return JSON.parse(response.data.economists);
+            return response.data.economists;
         }, error => {
             console.info(error);
         })
@@ -103,7 +103,7 @@ function ProjectInformationController(
 
     $scope.helpers.getBusinessCharge = function() {
         $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
-            return JSON.parse(response.data.economists);
+            return response.data.economists;
         }, error => {
             console.info(error);
         })
@@ -168,7 +168,6 @@ function ProjectInformationController(
         } else {
             $scope.project.caseType.push(item.value);
         }
-        console.info($scope.project.caseType);
     };
 
     $scope.fns = {};

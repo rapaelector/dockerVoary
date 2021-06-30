@@ -48,14 +48,14 @@ class Client
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-autocomplete", "data-project"})
+     * @Groups({"project-form-data", "data-project"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
-     * @Groups({"data-autocomplete", "data-project"})
+     * @Groups({"project-form-data", "data-project"})
      */
     private $name;
 
@@ -66,6 +66,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @Groups({"project-form-data"})
      */
     private $clientNumber;
 

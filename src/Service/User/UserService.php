@@ -6,7 +6,10 @@ use App\Entity\User;
 use App\Entity\Client;
 use App\Entity\Project;
 use App\Repository\UserRepository;
+use App\Utils\Resolver;
 
+use Symfony\Component\Asset\Packages;
+use Vich\UploaderBundle\Storage\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserService
@@ -17,10 +20,12 @@ class UserService
     /** @var EntityManagerInterface $em */
     private $em;
 
-    public function __construct(UserRepository $repository, EntityManagerInterface $em)
+    public function __construct(UserRepository $repository, EntityManagerInterface $em, Packages $packages, StorageInterface $storage)
     {
         $this->repository = $repository;
         $this->em = $em;
+        $this->packages = $packages;
+        $this->storage = $storage;
     }
 
     public function prepareUserRemovable(User $user)
@@ -40,5 +45,25 @@ class UserService
         $this->em->flush();
         
         return true;
+    }
+
+    public function getUserAvatar(?User $user = null): string
+    {
+        return $this->getUserPhoto($user, 'profileName', 'profileFile', 'user.png', 'images');
+    }
+
+    public function getUserPhoto(?User $user = null, $prop, $uploadableField, $defaultValue, $packageName = 'images'): string
+    {
+        if ($user) {
+            if (Resolver::resolve([$user, $prop], null)) {
+                return $this->storage->resolveUri($user, $uploadableField, User::class);
+            }
+        } else if ($user = $this->security->getUser()) {
+            if (Resolver::resolve([$user, $prop], null)) {
+                return $this->storage->resolveUri($user, $uploadableField, User::class);
+            }
+        }
+
+        return $this->packages->getUrl($defaultValue, $packageName);
     }
 }

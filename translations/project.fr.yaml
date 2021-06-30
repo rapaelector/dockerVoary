@@ -14,6 +14,7 @@ title:
   work_dispatching: REPARTITION DES TRAVAUX
   amount: MONTANT
   norm1090: NORME EN 1090 - Classe EXE
+  project_information: 'Information du projet'
   
 contact:
   label: Interlocuteur
