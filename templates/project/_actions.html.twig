@@ -40,6 +40,13 @@
                 <span class="dropdown-text">{{ 'action.download'|trans }}</span>
             </a>
 
+            {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project) %}
+                {% include 'project/_reminder_form.html.twig' with {
+                    id: id,
+                    deleteRoute: 'project.delete'
+                } %}
+            {% endif %}
+
             {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), project) %}
                 {% include 'project/_delete_form.html.twig' with {
                     id: id,

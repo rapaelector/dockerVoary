@@ -1,0 +1,27 @@
+{% from app_macro import render_attr %}
+
+{% if options is not defined %}{% set options = {} %}{% endif %}
+
+<form 
+	class="{{ resolve([options, 'attr', 'class'], 'd-inline-block w-100 p-0') }}"
+	method="post"
+	action="{{ reminderAction }}"
+	data-confirm="true" 
+	data-confirm-title="{{ confirm.title }}"
+	data-confirm-html="{{ confirm.html }}"
+	{% if successEvent is defined %} data-success-event="{{ successEvent }}"{% endif %}
+	{% if ajax is defined and ajax %} data-ajax="true"{% endif %}
+	{% if confirm.input is defined %} data-confirm-input="{{ confirm.input }}"{% endif %}
+>
+	<input type="hidden" name="_method" value="PUT">
+	<input type="hidden" name="_token" value="{{ token }}">
+	<button class="{{ resolve([options, 'button_attr', 'class'], 'dropdown-item') }}">
+		{% if resolve([options, 'show_icon'], true) %}
+		<span
+			class="{{ resolve([options, 'icon_attr', 'class'], 'material-icons') }}">{{ resolve([options, 'icon'], 'email') }}</span>
+		{% endif %}
+		{% if not resolve([options, 'label'], false) %}
+			<span class="reminder-label">{{ resolve([options, 'label'], 'action.reminder')|trans(resolve([options, 'label_trans_params'], []), resolve([options, 'label_trans_domain'], 'projects'), resolve([options, 'label_trans_locale'], null)) }}</span>
+		{% endif %}
+	</button>
+</form>

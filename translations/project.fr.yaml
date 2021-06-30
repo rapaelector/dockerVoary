@@ -189,3 +189,5 @@ messages:
   delete_project: 'Souhaitez-vous supprimer ce projet'
   editing_success: 'Modification du projet effectué avec succès'
   creation_success: 'Création du projet effectué avec succès'
+action:
+  reminder: 'Rappel'
