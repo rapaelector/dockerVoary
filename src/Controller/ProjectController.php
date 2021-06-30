@@ -458,14 +458,23 @@ class ProjectController extends BaseController
         if ($this->isCsrfTokenValid('reminder'.$project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             // send relaunch message
-            $bus->dispatch(new \App\Message\Project\Reminder($project->getContact()->getEmail(), $project->getSiteCode()));
-            // then add new relaunch
-            $projectManager->addRelaunch($project);
-            if ($request->isXMLHttpRequest()) {
-                return $this->json(['message' => $translator->trans('messages.reminder_success', [], 'projects')]);
+            if ($project->getContact()) {
+                $bus->dispatch(new \App\Message\Project\Reminder($project->getContact()->getEmail(), $project->getSiteCode()));
+                // then add new relaunch
+                $projectManager->addRelaunch($project);
+                if ($request->isXMLHttpRequest()) {
+                    return $this->json(['message' => $translator->trans('messages.reminder_success', [], 'projects')]);
+                } else {
+                    $this->addFlash('success', $translator->trans('messages.reminder_success', [], 'projects'));
+                }
             } else {
-                $this->addFlash('success', $translator->trans('messages.reminder_success', [], 'projects'));
+                if ($request->isXMLHttpRequest()) {
+                    return $this->json(['message' => $translator->trans('messages.reminder_error', [], 'projects')]);
+                } else {
+                    $this->addFlash('error', $translator->trans('messages.reminder_error', [], 'projects'));
+                }
             }
+
         }
 
         return $this->redirectToRoute('project.list');

@@ -189,6 +189,7 @@ messages:
   architect_saved: 'Architect enregistré avec succès'
   comment_saved: 'Commentaire enregistré avec succès'
   reminder_success: 'Rappel envoyer avec succès'
+  reminder_error: 'Votre demande de rappel a échouer'
 action:
   reminder: 'Rappel'
 reminder:
