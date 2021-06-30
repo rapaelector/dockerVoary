@@ -23,6 +23,7 @@ function ProjectInformationController(
         users: '',
         clients: '',
         economists: '',
+        contact: '',
         businessCharge: '',
         countries: '',
         recordAssistant: '',

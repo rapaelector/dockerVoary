@@ -50,7 +50,6 @@ function ProjectService($http, fosJsRouting) {
                 }
             }
         }
-        console.info(res);
 
         return res;
     };

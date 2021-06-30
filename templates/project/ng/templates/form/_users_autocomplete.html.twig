@@ -8,7 +8,6 @@
     ng-model="{{ ngModel }}"
     md-on-close="{{ searchTerm }} = ''"
     data-md-container-class="selectHeader"
-    md-on-open="{{ mdOnOpen }}"
     ng-change="{{ ngChangeHandler }}"
     ng-disabled="{{ disabled|default(false) }}"
 >
@@ -22,7 +21,8 @@
     </md-select-header>
     <md-option
         ng-value="item.id" 
-        ng-repeat="item in {{ data }}|filter:{{ searchTerm }}">
+        ng-repeat="item in {{ data }}|filter:{{ searchTerm }}"
+    >
         {{ '{{ item.name }}' }}
     </md-option>
 </md-select>
