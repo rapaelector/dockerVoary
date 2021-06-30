@@ -1,10 +1,12 @@
+{% trans_default_domain 'project' %}
+
 <div class="card card card-outline card-app-secondary h-100">
     <div class="card-body">
         <div class="row">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="col-form-label required">Feuille de route</label>
+                        <label class="col-form-label ">Feuille de route</label>
                         <md-radio-group 
                             ng-model="project.roadmap" 
                             aria-labelledby="roadmap"
@@ -17,12 +19,15 @@
                                 <md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
                             </div>
                         </md-radio-group>
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.roadmap',
+                        } %}
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
                                 label: 'columns.prospect'|trans({}, 'project'),
-                                dataAutoComplete: 'data.autoComplete.clients',
+                                dataAutoComplete: 'data.clients',
                                 ngModel: 'project.prospect',
                                 searchTerm: 'searchTerm.client',
                                 mdOnOpen: 'helpers.getClient()',
@@ -33,24 +38,48 @@
                     <div class="w-100"></div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_siteCode" class="required">Code chantier</label>
-                            <input type="text" ng-model="project.siteCode" required="required" class="form-control" value="TTP"></div>
+                            <label for="project_edit_siteCode" class="">Code chantier</label>
+                            <input
+                                type="text" 
+                                ng-model="project.siteCode" 
+                                ="" 
+                                class="form-control"
+                                ng-class="(data.errors.siteCode && data.errors.siteCode.length > 0) ? 'border-danger' : ''"
+                            >
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.siteCode',
+                            } %}
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_projectOwner" class="required">Maitre d'ouvrage</label>
-                            <input type="text" ng-model="project.projectOwner" required="required" class="form-control" value="Lorem ipsum ouvrage"></div>
+                            <label for="project_edit_projectOwner" class="">Maitre d'ouvrage</label>
+                            <input
+                                type="text" 
+                                ng-model="project.projectOwner" 
+                                ="" 
+                                class="form-control"
+                                ng-class="(data.errors.projectOwner && data.errors.projectOwner.length > 0) ? 'border-danger' : ''"
+                            >
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.projectOwner',
+                            } %}
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="project_edit_projectManager" class="required">Maitre d'oeuvre</label>
+                            <label for="project_edit_projectManager" class="">Maitre d'oeuvre</label>
                             <input
                                 type="text" 
                                 ng-model="project.projectManager"
-                                required="required" 
+                                ="" 
                                 class="form-control" 
                                 value="Test"
+                                ng-class="(data.errors.projectManager && data.errors.projectManager.length > 0) ? 'border-danger' : ''"
                             >
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.projectManager',
+                            } %}
                         </div>
                     </div>
                     {# CONTACT #}
@@ -59,10 +88,17 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <label class="mb-0">{{  'columns.contact'|trans({}, 'project') }}</label>
                                 <div class="contact-checkbox-container">
-                                    <md-checkbox ng-model="data.newContact" aria-label="Checkbox 1">
+                                    <md-checkbox 
+                                        ng-model="data.newContact" 
+                                        aria-label="Checkbox 1"
+                                        ng-class="(data.errors.newContact && data.errors.newContact.length > 0) ? 'border-danger' : ''"
+                                    >
                                         {{ 'label.add_new_contact'|trans({}, 'project') }}
                                     </md-checkbox>
                                 </div>
+                                {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                    errorPath: 'data.errors.newContact',
+                                } %}
                             </div>
                             {% include 'project/ng/templates/form/_users_autocomplete.html.twig' with {
                                 ngModel: 'project.contact',
@@ -70,6 +106,9 @@
                                 mdOnOpen: 'helpers.getUsers()',
                                 disabled: 'data.newContact',
                                 ngChangeHandler: 'helpers.handleUserChanged()',
+                            } %}
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.contact',
                             } %}
                         </div>
                     </div>
@@ -82,6 +121,9 @@
                                 mdOnOpen: 'helpers.getBusinessCharge()',
                                 ngChangeHandler: 'helpers.handleBusinessCharge()',
                             } %}
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.businessCharge',
+                            } %}
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -93,15 +135,22 @@
                                 mdOnOpen: 'helpers.getEconomist()',
                                 ngChangeHandler: 'helpers.handleEconomistChanged()',
                             } %}
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.economist',
+                            } %}
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="project_edit_descriptionOperation" class="required">Description operation</label>
+                            <label for="project_edit_descriptionOperation" class="">Description operation</label>
                             <textarea 
                                 ng-model="project.descriptionOperation" 
-                                required="required" 
-                                class="form-control"></textarea>
+                                ="" 
+                                class="form-control"
+                            ></textarea>
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.descriptionOperation',
+                            } %}
                         </div>
                     </div>
                 </div>

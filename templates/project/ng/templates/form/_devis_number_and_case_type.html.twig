@@ -5,13 +5,31 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="project_edit_quoteValidatedMDE">N° du/des devis MDE validé(s)</label>
-						<input type="text" ng-model="project.quoteValidatedMDE" name="project_edit[quoteValidatedMDE]" maxlength="255" class="form-control" value="12">
+						<input 
+							type="text" 
+							ng-model="project.quoteValidatedMDE" 
+							maxlength="255" 
+							class="form-control"
+							ng-class="(data.errors.quoteValidatedMDE && data.errors.quoteValidatedMDE.length > 0) ? 'border-danger' : ''"
+						>
+						{% include 'project/ng/templates/form/_errors.html.twig' with {
+							errorPath: 'data.errors.quoteValidatedMDE',
+						} %}
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label for="project_edit_quoteValidatedMDEDate" class="required">N° du/des devis MDE validé(s) De</label>
-						<input type="date" ng-model="project.quoteValidatedMDEDate" name="project_edit[quoteValidatedMDEDate]" required="required" class="form-control" value="2021-06-25">
+						<label for="project_edit_quoteValidatedMDEDate" class="">Date devis MDE validé(s) De</label>
+						<input
+							type="date" 
+							ng-model="project.quoteValidatedMDEDate" 
+							="" 
+							class="form-control"
+							ng-class="(data.errors.quoteValidatedMDEDate && data.errors.quoteValidatedMDEDate.length > 0) ? 'border-danger' : ''"
+						>
+						{% include 'project/ng/templates/form/_errors.html.twig' with {
+							errorPath: 'data.errors.quoteValidatedMDEDate',
+						} %}
 					</div>
 				</div>
 				<div class="col-sm-6" id="project_caseType">
@@ -23,15 +41,22 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label for="project_edit_planningProject" class="required">Planning projet</label>
-						<textarea ng-model="project.planningProject" name="project_edit[planningProject]" required="required" class="form-control">Lorem ipsum dolor sit amet
-								lorem ipsum dolor sit amet</textarea>
+						<label for="project_edit_planningProject" class="">Planning projet</label>
+						<textarea
+							ng-model="project.planningProject" 
+							=""
+							class="form-control"
+							ng-class="data.errors.planningProject.length > 0 ? 'border-danger' : ''"
+						></textarea>
+						{% include 'project/ng/templates/form/_errors.html.twig' with {
+							errorPath: 'data.errors.planningProject',
+						} %}
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
-                    <label class="col-form-label required">Priorisation du dossier</label>
+                    <label class="col-form-label ">Priorisation du dossier</label>
                     <md-radio-group
                         ng-model="project.priorizationOfFile"
                         aria-labelledby="priorizationOfFile"
@@ -48,7 +73,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="project_edit_answerForThe">Réponse pour le</label>
-						<textarea ng-model="project.answerForThe" name="project_edit[answerForThe]" class="form-control"></textarea>
+						<textarea ng-model="project.answerForThe" class="form-control"></textarea>
 					</div>
 				</div>
 			</div>
@@ -61,7 +86,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">G:\2-BBT\1-AFFAIRES\1-PROSPECT\</span>
 						</div>
-						<input type="text" ng-model="project.folderNameOnTheServer" name="project_edit[folderNameOnTheServer]" maxlength="255" class="form-control" value="Xfds DDc dddff">
+						<input type="text" ng-model="project.folderNameOnTheServer" maxlength="255" class="form-control" value="Xfds DDc dddff">
 					</div>
 				</div>
 			</div>
@@ -70,7 +95,7 @@
 					<div class="form-group">
 						{# 
 						<label class="" for="project_edit_recordAssistant">Assistant en charge du dossier</label>
-						<select ng-model="project.recordAssistant" name="project_edit[recordAssistant]" class="form-control">
+						<select ng-model="project.recordAssistant" class="form-control">
 							<option value=""></option>
 						</select>
 						#}
@@ -87,7 +112,7 @@
 					<div class="form-group">
 						{# 
 						<label class="" for="project_edit_ocbsDriver">CONDUC OCBS</label>
-						<select ng-model="project.ocbsDriver" name="project_edit[ocbsDriver]" class="form-control">
+						<select ng-model="project.ocbsDriver" class="form-control">
 							<option value=""></option>
 							<option value="2">projectRole test</option>
 							<option value="8">musk elun</option>
@@ -106,7 +131,7 @@
 					<div class="form-group">
 						{# 
 						<label class="" for="project_edit_tceDriver">CONDUC TCE</label>
-						<select ng-model="project.tceDriver" name="project_edit[tceDriver]" class="form-control">
+						<select ng-model="project.tceDriver" class="form-control">
 							<option value=""></option>
 							<option value="2">projectRole test</option>
 						</select>

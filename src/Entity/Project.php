@@ -36,33 +36,43 @@ class Project
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
      * Fr: code chantier
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"data-project"})
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      */
     private $siteCode;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * 
      * Fr: feuille de route
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $roadmap;
 
     /**
-     * @ORM\Column(nullable=true)
-     * @Assert\NotBlank
-     * 
      * Fr: maitre d'ouvrage
+     * 
+     * @ORM\Column(nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $projectOwner;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      *
      * Fr: maitre d'oeuvre
      * @Groups({"data-project"})
@@ -70,54 +80,67 @@ class Project
     private $projectManager;
 
     /**
-     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
-     * @Assert\Valid
-     *
      * Fr: adresse facturation
+     *
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
+     * @Assert\Valid(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $billingAddres;
 
     /**
-     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
-     * @Assert\Valid
-     * 
      * Fr: addresse chantier
+     * 
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist"})
+     * @Assert\Valid(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $siteAddress;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * 
      * Fr: description de l' operation
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $descriptionOperation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     * @Assert\NotBlank
-     * 
      * fr: Chargé(e) d'affaire
+     * 
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $businessCharge;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-     * @Assert\NotBlank
-     * 
      * Fr: rédacteur du devis
+     * 
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $economist;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * 
      * Fr: norme en 1090
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $norm1090;
@@ -131,43 +154,42 @@ class Project
     private $marketType;
 
     /**
-     * @ORM\Column(nullable=true)
-     * 
      * Fr: bonhomme est il 
+     * 
+     * @ORM\Column(nullable=true)
      * @Groups({"data-project"})
      */
     private $bonhomePercentage;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
-     * 
      * Fr: validation de fiche DISA
+     * 
+     * @ORM\Column(type="array", nullable=true)
      * @Groups({"data-project"})
      */
     private $disaSheetValidation;
 
     /**
-     * @ORM\Column(nullable=true)
-     * 
      * Fr: mode de reglement acompte
+     * 
+     * @ORM\Column(nullable=true)
      * @Groups({"data-project"})
      */
     private $paymentChoice;
 
-
     /**
-     * @ORM\Column(type="float", nullable=true)
-     *
      * Fr: mode de reglement pourcentage
+     * 
+     * @ORM\Column(type="float", nullable=true)
      * @Groups({"data-project"})
      */
     private $paymentPercentage;
 
-
     /**
-     * @ORM\Column(type="date", length=255, nullable=true)
-     * 
      * Fr: date d'acompte doi etre édité le
+     * 
+     * @ORM\Column(type="date", length=255, nullable=true)
+     * Assert\Date
      * @Groups({"data-project"})
      */
     private $depositeDateEdit;
@@ -192,6 +214,7 @@ class Project
      * Fr: Conditions négociées avec le client
      * 
      * @ORM\Column(type="date", nullable=true)
+     * Assert\Date
      * @Groups({"data-project"})
      */
     private $quoteValidatedMDEDate;
@@ -221,10 +244,12 @@ class Project
     private $amountBBISpecificWork;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
      * Fr: type de dossier
      * 
-     * @Assert\NotBlank
+     * @ORM\Column(type="array", nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $caseType;
@@ -233,6 +258,9 @@ class Project
      * Fr: planning projet
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $planningProject;
@@ -301,8 +329,10 @@ class Project
     private $priorizationOfFile;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
      * fr: Réponse pour le
+     * 
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
      * @Groups({"data-project"})
      */
     private $answerForThe;
@@ -312,6 +342,7 @@ class Project
      * fr: Nom du dossier sur le serveur
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      * @Groups({"data-project"})
      */
     private $folderNameOnTheServer;
@@ -402,7 +433,7 @@ class Project
         return $this->roadmap;
     }
 
-    public function setRoadmap(bool $roadmap): self
+    public function setRoadmap(?bool $roadmap): self
     {
         $this->roadmap = $roadmap;
 
@@ -414,7 +445,7 @@ class Project
         return $this->projectOwner;
     }
 
-    public function setProjectOwner(string $projectOwner): self
+    public function setProjectOwner(?string $projectOwner): self
     {
         $this->projectOwner = $projectOwner;
 
@@ -426,7 +457,7 @@ class Project
         return $this->projectManager;
     }
 
-    public function setProjectManager(string $projectManager): self
+    public function setProjectManager(?string $projectManager): self
     {
         $this->projectManager = $projectManager;
 
@@ -462,7 +493,7 @@ class Project
         return $this->descriptionOperation;
     }
 
-    public function setDescriptionOperation(string $descriptionOperation): self
+    public function setDescriptionOperation(?string $descriptionOperation): self
     {
         $this->descriptionOperation = $descriptionOperation;
 
@@ -498,7 +529,7 @@ class Project
         return $this->norm1090;
     }
 
-    public function setNorm1090(int $norm1090): self
+    public function setNorm1090(?int $norm1090): self
     {
         $this->norm1090 = $norm1090;
 
@@ -522,7 +553,7 @@ class Project
         return $this->bonhomePercentage;
     }
 
-    public function setBonhomePercentage(string $bonhomePercentage): self
+    public function setBonhomePercentage(?string $bonhomePercentage): self
     {
         $this->bonhomePercentage = $bonhomePercentage;
 
@@ -582,7 +613,7 @@ class Project
         return $this->quoteValidatedMDE;
     }
 
-    public function setQuoteValidatedMDE(string $quoteValidatedMDE): self
+    public function setQuoteValidatedMDE(?string $quoteValidatedMDE): self
     {
         $this->quoteValidatedMDE = $quoteValidatedMDE;
 
@@ -594,7 +625,7 @@ class Project
         return $this->quoteValidatedMDEDate;
     }
 
-    public function setQuoteValidatedMDEDate(\DateTime $quoteValidatedMDEDate): self
+    public function setQuoteValidatedMDEDate(?\DateTime $quoteValidatedMDEDate): self
     {
         $this->quoteValidatedMDEDate = $quoteValidatedMDEDate;
 
@@ -606,7 +637,7 @@ class Project
         return $this->globalAmount;
     }
 
-    public function setGlobalAmount(int $globalAmount): self
+    public function setGlobalAmount(?int $globalAmount): self
     {
         $this->globalAmount = $globalAmount;
 
@@ -618,7 +649,7 @@ class Project
         return $this->amountSubcontractedWork;
     }
 
-    public function setAmountSubcontractedWork(int $amountSubcontractedWork): self
+    public function setAmountSubcontractedWork(?int $amountSubcontractedWork): self
     {
         $this->amountSubcontractedWork = $amountSubcontractedWork;
 
@@ -630,7 +661,7 @@ class Project
         return $this->amountBBISpecificWork;
     }
 
-    public function setAmountBBISpecificWork(string $amountBBISpecificWork): self
+    public function setAmountBBISpecificWork(?string $amountBBISpecificWork): self
     {
         $this->amountBBISpecificWork = $amountBBISpecificWork;
 
@@ -654,7 +685,7 @@ class Project
         return $this->planningProject;
     }
 
-    public function setPlanningProject(string $planningProject): self
+    public function setPlanningProject(?string $planningProject): self
     {
         $this->planningProject = $planningProject;
 
@@ -743,7 +774,7 @@ class Project
         return $this->encryptiontype;
     }
 
-    public function setEncryptiontype(string $encryptiontype): self
+    public function setEncryptiontype(?string $encryptiontype): self
     {
         $this->encryptiontype = $encryptiontype;
 
@@ -767,7 +798,7 @@ class Project
         return $this->priorizationOfFile;
     }
 
-    public function setPriorizationOfFile(string $priorizationOfFile): self
+    public function setPriorizationOfFile(?string $priorizationOfFile): self
     {
         $this->priorizationOfFile = $priorizationOfFile;
 
@@ -791,7 +822,7 @@ class Project
         return $this->folderNameOnTheServer;
     }
 
-    public function setFolderNameOnTheServer(string $folderNameOnTheServer): self
+    public function setFolderNameOnTheServer(?string $folderNameOnTheServer): self
     {
         $this->folderNameOnTheServer = $folderNameOnTheServer;
 

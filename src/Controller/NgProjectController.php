@@ -8,6 +8,7 @@ use App\Entity\Project;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
 use App\Form\Project\NgProjectType;
+use App\Service\Form\FormService;
 
 use App\Controller\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +27,8 @@ class NgProjectController extends BaseController
         Project $project, 
         SerializerInterface $serializer, 
         EntityManagerInterface $em, 
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        FormService $formService
     )
     {
         if ($request->getMethod() == 'POST') {
@@ -39,12 +41,15 @@ class NgProjectController extends BaseController
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
                 return $this->json([
-                    'success' => $translator->trans('messages.editing_success', [], 'project'),
-                    'project' => $serializer->normalize($project, 'json', ['groups' => 'data-project']),
+                    'message' => $translator->trans('messages.editing_success', [], 'project'),
+                    'data' => ['project' => $serializer->normalize($project, 'json', ['groups' => 'data-project'])],
                 ]);
             }
 
-            return $this->json(['error' => $translator->trans('messages.editing_failed', [], 'project')], 400);
+            return $this->json([
+                'message' => $translator->trans('messages.editing_failed', [], 'project'),
+                'errors' => $formService->getErrorsFromForm($form),
+            ], 400);
         }
 
         return $this->render('project/ng/index.html.twig', [

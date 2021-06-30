@@ -1,5 +1,6 @@
 function ProjectInformationController(
     $scope,
+    $mdToast,
     projectService,
     CASE_TYPES,
     PRIORIZATION_FILE_TYPES,
@@ -8,14 +9,15 @@ function ProjectInformationController(
     TYPE_BONHOME,
     PROJECT_ID
 ) {
+    $scope.onLoading = true;
     $scope.project = {
         caseType: [],
     };
     $scope.data = {
-        autoComplete: {},
         caseType: [],
         project: null,
         users: [],
+        errors: null,
     };
     $scope.searchTerm = {
         users: '',
@@ -29,6 +31,7 @@ function ProjectInformationController(
     };
 
     this.$onInit = function() {
+        $scope.onLoading = true;
         $scope.caseTypes = CASE_TYPES;
         $scope.priorizationFileTypes = PRIORIZATION_FILE_TYPES;
         $scope.marketTypes = MARKET_TYPES;
@@ -42,15 +45,17 @@ function ProjectInformationController(
             console.info(error);
         })
         projectService.getFormAutoCompleteData().then((response) => {
-            $scope.data.autoComplete.clients = JSON.parse(response.data.clients);
-            $scope.data.autoComplete.users = JSON.parse(response.data.users);
-            $scope.data.autoComplete.economists = JSON.parse(response.data.economists);
-            $scope.data.autoComplete.businessCharge = JSON.parse(response.data.businessCharge);
-            $scope.data.autoComplete.countries = response.data.countries;
-            $scope.data.autoComplete.caseTypes = response.data.caseTypes;
+            $scope.data.clients = JSON.parse(response.data.clients);
+            $scope.data.users = JSON.parse(response.data.users);
+            $scope.data.economists = JSON.parse(response.data.economists);
+            $scope.data.businessCharge = JSON.parse(response.data.businessCharge);
+            $scope.data.countries = response.data.countries;
+            $scope.onLoading = false;
+            $scope.data.caseTypes = response.data.caseTypes;
         }, error => {
             console.info(error);
-        })
+            $scope.onLoading = false;
+        });
     };
 
     $scope.$watch('data.newContact', function() {
@@ -63,11 +68,9 @@ function ProjectInformationController(
         };
     });
 
-    $scope.$watch('project', function() {
-        console.info($scope.project);
-    }, true);
+    $scope.$watch('project', function() {}, true);
 
-    $scope.$watch('data.autoComplete.caseTypes', function() {}, true);
+    $scope.$watch('data.caseTypes', function() {}, true);
 
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
@@ -139,7 +142,24 @@ function ProjectInformationController(
         });
     };
     $scope.helpers.handleTceDriverChanged = function() {};
-
+    $scope.helpers.showSimpleToast = function(message, options) {
+        if (options == null || options == undefined) {
+            var options = {
+                toastClass: 'toast-success',
+            };
+        }
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(message)
+            .position('top right')
+            .hideDelay(5000)
+            .toastClass(options.toastClass)
+        ).then(function() {
+            console.info('Toast dismissed');
+        }).catch(function() {
+            console.info('failed to laod md toast');
+        });
+    };
     $scope.toggle = function(item) {
         var idx = $scope.project.caseType.indexOf(item.value);
         if (idx > -1) {
@@ -152,16 +172,23 @@ function ProjectInformationController(
 
     $scope.fns = {};
     $scope.fns.submit = function() {
+        $scope.onLoading = true;
+        $scope.data.errors = {};
         projectService.saveProject(PROJECT_ID, $scope.project).then((response) => {
             console.info(response);
+            $scope.onLoading = false;
+            $scope.helpers.showSimpleToast(response.data.message);
         }, error => {
-            console.info(error);
+            $scope.onLoading = false;
+            $scope.data.errors = error.data.errors;
+            $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
         })
     };
 };
 
 ProjectInformationController.$inject = [
     '$scope',
+    '$mdToast',
     'projectService',
     'CASE_TYPES',
     'PRIORIZATION_FILE_TYPES',

@@ -261,7 +261,9 @@ class ProjectController extends BaseController
     public function new(Request $request, TranslatorInterface $translator): Response
     {
         $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(ProjectType::class, $project, [
+            'validation_groups' => ['Default', 'project:create'],
+        ]);
 
         // check if request get interlocuteurSelecs should be deleted or not
 

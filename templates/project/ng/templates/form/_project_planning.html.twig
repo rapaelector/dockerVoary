@@ -4,13 +4,16 @@
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="project_planningProject">Planning projet</label>
-					<textarea ng-model="project.planningProject" name="project[planningProject]" class="form-control"></textarea>
+					<textarea ng-model="project.planningProject" class="form-control"></textarea>
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="project_answerForThe">Réponse pour le</label>
-					<textarea ng-model="project.answerForThe" name="project[answerForThe]" class="form-control"></textarea>
+					<textarea ng-model="project.answerForThe" class="form-control"></textarea>
+					{% include 'project/ng/templates/form/_errors.html.twig' with {
+						errorPath: 'data.errors.answerForThe',
+					} %}
 				</div>
 			</div>
 		</div>

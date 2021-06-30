@@ -7,7 +7,7 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-3">
-				<label class="col-form-label required">Acompte</label>
+				<label class="col-form-label ">Acompte</label>
 				<md-radio-group 
 					ng-model="project.paymentChoice" 
 					aria-labelledby="paymentChoice"
@@ -23,20 +23,20 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="form-group">
-					<label for="project_edit_paymentPercentage" class="required">acompte %</label>
-					<input type="text" ng-model="project.paymentPercentage" required="required" placeholder="%" class="form-control" value="12"></div>
+					<label for="project_edit_paymentPercentage" class="">acompte %</label>
+					<input type="text" ng-model="project.paymentPercentage" ="" placeholder="%" class="form-control" value="12"></div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label for="project_edit_depositeDateEdit" class="required">Deposite date edit</label>
+					<label for="project_edit_depositeDateEdit" class="">Deposite date edit</label>
 					<input
 						type="date" 
-						ng-model="project.depositeDateEdit" required="required" class="form-control"></div>
+						ng-model="project.depositeDateEdit" ="" class="form-control"></div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="project_edit_clientCondition" class="required">Condition négocier avec le client</label>
-					<textarea ng-model="project.clientCondition" required="required" class="form-control">Lorem ipsum dolor sit, amet consectetur
+					<label for="project_edit_clientCondition" class="">Condition négocier avec le client</label>
+					<textarea ng-model="project.clientCondition" ="" class="form-control">Lorem ipsum dolor sit, amet consectetur
 						adipisicing elit. Fugiat minima amet nihil 
 						quas saepe rerum assumenda totam modi</textarea>
 				</div>

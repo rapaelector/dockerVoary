@@ -35,25 +35,13 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-12 mt-3">
-                    {# TYPE DE DOSSIER #}
-                    {# {% include 'project/ng/templates/form/_folder_type.html.twig' %} #}
-                </div>
-                <div class="col-sm-12 mt-3">
-                    {# PLANNING DU PROJET #}
-                    {# {% include 'project/ng/templates/form/_project_planning.html.twig' %} #}
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12">
             {% include 'project/ng/templates/form/_payment_method.html.twig' %}
         </div>
         <div class="col-sm-12 mt-3">
             {% include 'project/ng/templates/form/_devis_number_and_case_type.html.twig' %}
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center mb-3">
         <button
             class="btn btn-app-primary"
             type="submit"
@@ -64,4 +52,7 @@
         <a href="#" class="btn btn-app-secondary">Annuler</a>
     </div>
 </form>
+<div class="ng-project-loader" ng-if="onLoading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
 {# <pre>{{ '{{ project|json }}' }}</pre> #}
