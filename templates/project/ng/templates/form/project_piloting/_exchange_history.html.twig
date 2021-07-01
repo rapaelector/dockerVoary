@@ -1,61 +1,16 @@
 {% trans_default_domain 'project' %}
 
 <div class="card card-outline card-app-secondary">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'label.exchange_history'|trans }}</h3>
+    </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-sm-12 d-flex flex-nowrap align-items-center">
-                <span class="font-weight-bold text-nowrap mr-2">{{ 'label.last_relaunch'|trans }} :</span>
-                <md-datepicker 
-                    ng-model="project.lastRelaunch"
-                    md-placeholder="Enter date"
-                    input-aria-describedby="datepicker-description"
-                    input-aria-labelledby="datepicker-header"
-                    class="mr-2"
-                ></md-datepicker>
-            </div>
-            <div class="col-sm-12 d-flex align-items-center">
-                <span class="font-weight-bold mr-2 text-nowrap">{{ 'label.next_step'|trans }} :</span>
-                <md-datepicker 
-                    ng-model="project.nexStep"
-                    md-placeholder="Enter date"
-                    input-aria-describedby="datepicker-description"
-                    input-aria-labelledby="datepicker-header "
-                    class="mr-2"
-                ></md-datepicker>
-                <md-input-container class="m-0">
-                    <label>Description</label>
-                    <input ng-model="project.nexStepDescription">
-                </md-input-container>
-            </div>
-            <div class="col-sm-12 d-flex align-items-center">
-                <span class="font-weight-bold mr-2 text-nowrap">{{ 'label.project_confidence_percentage'|trans }} :</span>
-                <md-input-container class="m-0">
-                    <input 
-                        ng-model="project.projectConfidencePercentage"
-                        ng-pattern="/^\d{1,3}$/"
-                    >
-                    <div ng-messages="project.projectConfidencePercentage.$error">
-                        <div ng-message="pattern">{{ 'label.enter_a_valid_percentage'|trans }}</div>
-                    </div>
-                </md-input-container>
-                <span>%</span>
-            </div>
-            <div class="col-sm-12 mt-4 d-flex align-items-center">
-                <span class="mr-2 text-nowrap">{{ 'label.archi'|trans }} :</span>
-                <md-radio-group ng-model="project.archi" aria-labelledby="favoriteFruit" class="d-flex mr-3">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <md-radio-button value="1" class="mb-0">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
-                        </div>
-                        <div class="col-sm-6">
-                            <md-radio-button  value="0" class="mb-0">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
-                        </div>
-                    </div>
-                </md-radio-group>
-                <md-input-container class="m-0" ng-if="project.archi == 1">
-                    <label>{{ 'label.who'|trans }}</label>
-                    <input ng-model="project.archiDescription">
-                </md-input-container>
+        <div ng-repeat="item in mockData.exchangeHirtory">
+            <div class="row">
+                <div class="col-sm-4">
+                    {{ '{{ item.date|date }}' }}
+                </div>
+                <div class="col-sm-8">{{ '{{ item.description }}' }}</div>
             </div>
         </div>
     </div>

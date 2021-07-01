@@ -1,15 +1,20 @@
 {% set data = dataAutoComplete|default('data.users') %}
 {% if isProspect is not defined %}{% set isProspect = false %}{% endif %}
+{% if checkboxClass is not defined %}{% set checkboxClass = '' %}{% endif %}
+{% if placeholder is not defined %}{% set placeholder = '' %}{% endif %}
+
 {% if label is defined %}
     <label>{{ label }}</label>
 {% endif %}
 
 <md-select
+    class="{{ checkboxClass }}"
     ng-model="{{ ngModel }}"
     md-on-close="{{ searchTerm }} = ''"
     data-md-container-class="selectHeader"
     ng-change="{{ ngChangeHandler }}"
     ng-disabled="{{ disabled|default(false) }}"
+    placeholder="{{ placeholder }}"
 >
     <md-select-header class="select-header-search">
         <input ng-model="{{ searchTerm }}"

@@ -149,8 +149,9 @@ class NgProjectController extends BaseController
                 'description' => 'Test test',
                 'color' => '#000',
             ],
-        ]
-        return $this->json(['data' => ])
+        ];
+
+        return $this->json(['data' => $mockData]);
     }
 
     /**

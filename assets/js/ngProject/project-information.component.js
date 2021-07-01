@@ -50,7 +50,7 @@ function ProjectInformationController(
         }, error => {
             console.info(error);
         })
-        projectService.getFormAutoCompleteData().then((response) => {
+        projectService.getFormData().then((response) => {
             $scope.data.clients = response.data.clients;
             $scope.data.users = response.data.users;
             $scope.data.economists = response.data.economists;
@@ -82,7 +82,7 @@ function ProjectInformationController(
 
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
-        $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.users = projectService.getFormData().then((response) => {
             return response.data.users;
         }, error => {
             console.info(error);
@@ -91,7 +91,7 @@ function ProjectInformationController(
     $scope.helpers.handleUserChanged = function() {};
 
     $scope.helpers.getClents = function() {
-        $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.users = projectService.getFormData().then((response) => {
             return response.data.clients;
         }, error => {
             console.info(error);
@@ -100,7 +100,7 @@ function ProjectInformationController(
     $scope.helpers.handleClientChanged = function() {};
 
     $scope.helpers.getEconomists = function() {
-        $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.users = projectService.getFormData().then((response) => {
             return response.data.economists;
         }, error => {
             console.info(error);
@@ -109,7 +109,7 @@ function ProjectInformationController(
     $scope.helpers.handleEconomistsChanged = function() {};
 
     $scope.helpers.getBusinessCharge = function() {
-        $scope.data.users = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.users = projectService.getFormData().then((response) => {
             return response.data.economists;
         }, error => {
             console.info(error);
@@ -118,7 +118,7 @@ function ProjectInformationController(
     $scope.helpers.handleBusinessChargeChanged = function() {};
 
     $scope.helpers.getCountries = function() {
-        $scope.data.countries = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.countries = projectService.getFormData().then((response) => {
             return response.data.countries;
         }, error => {
             console.info(error);
@@ -126,7 +126,7 @@ function ProjectInformationController(
     };
     $scope.helpers.handleCountriesChanged = function() {};
     $scope.helpers.getRecordAssistant = function() {
-        $scope.data.countries = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.countries = projectService.getFormData().then((response) => {
             return response.data.users;
         }, error => {
             console.info(error);
@@ -134,7 +134,7 @@ function ProjectInformationController(
     };
     $scope.helpers.handleRecordAssistantChanged = function() {};
     $scope.helpers.getOcbsDriver = function() {
-        $scope.data.countries = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.countries = projectService.getFormData().then((response) => {
             return response.data.users;
         }, error => {
             console.info(error);
@@ -143,7 +143,7 @@ function ProjectInformationController(
     $scope.helpers.handleOcbsDriverChanged = function() {};
 
     $scope.helpers.getTceDriver = function() {
-        $scope.data.countries = projectService.getFormAutoCompleteData().then((response) => {
+        $scope.data.countries = projectService.getFormData().then((response) => {
             return response.data.users;
         }, error => {
             console.info(error);

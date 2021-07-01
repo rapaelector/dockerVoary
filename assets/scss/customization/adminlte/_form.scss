@@ -4,9 +4,12 @@
         width: 50%;
     }
 }
-.was-validated select.form-control:invalid, select.form-control.is-invalid {
+
+.was-validated select.form-control:invalid,
+select.form-control.is-invalid {
     background-image: none;
 }
+
 .row.align-items-center {
     .can-login-field {
         .form-group {
@@ -14,6 +17,7 @@
         }
     }
 }
+
 #client_projectDescription_marketType {
     display: flex;
     width: 100%;
@@ -22,6 +26,7 @@
         width: 50%;
     }
 }
+
 .market-type {
     .form-group .col-form-label {
         text-align: center;
@@ -30,17 +35,21 @@
         text-transform: uppercase;
     }
 }
+
 .project-address {
     text-decoration: underline;
 }
+
 .project-description-form {
     .form-error-message {
         white-space: nowrap !important;
     }
-    .department-label, .project-description-label {
+    .department-label,
+    .project-description-label {
         color: red;
     }
-    .form-control.project-address-fields, .select2-container--default .select2-selection--single {
+    .form-control.project-address-fields,
+    .select2-container--default .select2-selection--single {
         padding-right: 0;
         padding-left: 0;
         border: none;
@@ -61,22 +70,28 @@
         }
     }
 }
-label.required:after, .form-group .col-form-label:after {
+
+label.required:after {
     content: "*"
 }
+
 .custom-control .custom-control-label:after {
     content: "";
 }
+
+
 /*
  * For each input, select, textarea in a datatable should have the same height
  * Td must be 30px height max so reduice its content height if there are overflow
  * Remove radius border for dt input
 */
+
 #app_table {
     .app-dt-list table.table.table-striped {
         tbody {
             tr td {
-                input, select {
+                input,
+                select {
                     max-height: 27px;
                     border-radius: 0;
                 }
@@ -84,26 +99,32 @@ label.required:after, .form-group .col-form-label:after {
         }
     }
 }
+
+
 /**
  * Only for total in project case
 */
+
 #total {
     font-size: _rem(16);
 }
+
 @mixin form_flex {
-    #client_projectDescription_marketType, 
-    #project_marketType, 
-    #project_caseType, 
+    #client_projectDescription_marketType,
+    #project_marketType,
+    #project_caseType,
     #project_edit_marketType,
     #project_edit_caseType {
         display: flex;
         flex-wrap: wrap;
-        .custom-control.custom-radio, .custom-control.custom-checkbox {
+        .custom-control.custom-radio,
+        .custom-control.custom-checkbox {
             width: 50%;
             margin: 0;
         }
     }
 }
+
 @mixin client_page {
     .client-page {
         .client-contact-form {
@@ -118,12 +139,13 @@ label.required:after, .form-group .col-form-label:after {
                 .container-fluid {
                     // all variables here are from boostrap
                     padding: $spacer;
-                    border-bottom: 1px solid $border-color; 
+                    border-bottom: 1px solid $border-color;
                 }
             }
         }
     }
 }
+
 @mixin input_file {
     .vich-file {
         .custom-file {
@@ -134,6 +156,7 @@ label.required:after, .form-group .col-form-label:after {
         }
     }
 }
+
 @mixin project_case_form {
     /*
      * 1 = 5%
@@ -147,50 +170,28 @@ label.required:after, .form-group .col-form-label:after {
      *  - > 50% - < 70% => yellow(Jaune)
      *  - > 70% => green
      */
-    $levels: (
-        0: $red,
-        1: $red,
-        2: $red,
-        3: $red,
-        4: $red,
-        5: $red,
-        6: $orange,
-        7: $orange,
-        8: $orange,
-        9: $orange,
-        10: $orange,
-        11: $yellow,
-        12: $yellow,
-        13: $yellow,
-        14: $green,
-        15: $green,
-        16: $green,
-        17: $green,
-        18: $green,
-        19: $green,
-        20: $green,
-    );
-
-    @each $name, $value in $levels {
+    $levels: ( 0: $red, 1: $red, 2: $red, 3: $red, 4: $red, 5: $red, 6: $orange, 7: $orange, 8: $orange, 9: $orange, 10: $orange, 11: $yellow, 12: $yellow, 13: $yellow, 14: $green, 15: $green, 16: $green, 17: $green, 18: $green, 19: $green, 20: $green, );
+    @each $name,
+    $value in $levels {
         .completion-#{$name} {
             background-color: $value;
             color: color-yiq($value);
         }
     }
-
-    .business-charge-change{
-        width:100%;
-        height:100%;
+    .business-charge-change {
+        width: 100%;
+        height: 100%;
     }
-
-    .economist-change{
-        width:100%;
-        height:100%;
+    .economist-change {
+        width: 100%;
+        height: 100%;
     }
-
     .project-case-field {
         position: relative;
-        .completion-loader, .pc-deposit-loader, .architect-loader, .comment-loader {
+        .completion-loader,
+        .pc-deposit-loader,
+        .architect-loader,
+        .comment-loader {
             font-size: 12px;
             width: 18px;
             height: 18px;
@@ -201,7 +202,8 @@ label.required:after, .form-group .col-form-label:after {
         .completion-loader {
             left: 5px;
         }
-        .pc-deposit-loader, .architect-loader {
+        .pc-deposit-loader,
+        .architect-loader {
             left: 15px;
         }
         .comment-loader {
@@ -216,6 +218,7 @@ label.required:after, .form-group .col-form-label:after {
         }
     }
 }
+
 @mixin _form {
     @include client_page;
     @include input_file;

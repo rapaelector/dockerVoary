@@ -1,12 +1,112 @@
+{% trans_default_domain 'project' %}
+
 <div class="card card-outline card-app-secondary">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'title.project_piloting'|trans({}, 'project') }}</h3>
+    </div>
     <div class="card-body">
-        <div ng-repeat="item in mockData.exchangeHirtory">
-            <div class="row">
-                <div class="col-sm-4">
-                    {{ '{{ item.date|date }}' }}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group row">
+					<label class="col-sm-3 col-form-label">{{ 'label.last_relaunch'|trans }} :</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="date" 
+                            ng-model="exchangeHistory.lastRelaunch" 
+                            class="form-control" 
+                            aria-invalid="false"
+                        >
+                    </div>
+				</div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group row">
+					<label class="col-sm-3 col-form-label">{{ 'label.next_step'|trans }} :</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="date" 
+                            ng-model="exchangeHistory.date" 
+                            class="form-control"
+                        >
+                    </div>
+				</div>
+                <div class="form-group row">
+                    <label class="col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <textarea 
+                            ng-model="exchangeHistory.description"
+                            class="form-control"
+                            rows="1"
+                            placeholder="{{ 'label.description'|trans }}"
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="col-sm-8">{{ '{{ item.description }}' }}</div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">
+                        {{ 'label.project_confidence_percentage'|trans }}
+                    </label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                ng-model="exchangeHistory.projectConfidencePercentage" 
+                                class="form-control" 
+                            >
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-4">
+                <div class="row align-items-center no-gutters">
+                    <div class="col-sm-5 d-flex flex-items-center">
+                        <label class="mr-2 text-nowrap">{{ 'label.archi'|trans }} :</label>
+                        <md-radio-group ng-model="exchangeHistory.archi" aria-labelledby="favoriteFruit" class="d-flex mr-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <md-radio-button value="1" class="mb-0 md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <md-radio-button  value="0" class="mb-0 md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
+                                </div>
+                            </div>
+                        </md-radio-group>
+                    </div>
+                    <div class="col-sm-7">
+                        <div ng-if="exchangeHistory.archi == '1'" class="form-group row w-100 mb-0 no-gutters">
+                            <label class="col-sm-2 col-form-label">{{ 'label.who'|trans }}</label>
+                            <div class="col-sm-10">
+                                {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+                                    ngModel: 'exchangeHistory.user',
+                                    data: 'data.users',
+                                    searchTerm: 'searchTerm.users',
+                                    mdOnOpen: 'helpers.getUsers()',
+                                    disabled: 'data.newContact',
+                                    ngChangeHandler: 'helpers.handleUserChanged()',
+                                    checkboxClass: 'w-100',
+                                    placeholder: 'label.choose_archi'|trans({}, 'project')
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="card-footer">
+        <div class="text-center">
+            <button
+                type="submit" 
+                class="btn btn-sm btn-app-primary" 
+                ng-click="fns.saveProjectPiloting()"
+            >
+                {{ 'action.save'|trans({}, 'messages') }}
+            </button>
+        </div>
+    </div>
 </div>
+<pre>{{ '{{ exchangeHistory|json }}' }}</pre>

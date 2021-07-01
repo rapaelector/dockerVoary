@@ -9,7 +9,7 @@ function ProjectService($http, fosJsRouting) {
         return $http.get(fosJsRouting.generate('project.ng.get_project', { id: projectId }))
     };
 
-    _this.getFormAutoCompleteData = function() {
+    _this.getFormData = function() {
         return $http.get(fosJsRouting.generate('project.ng.form_data'));
     };
 
@@ -53,8 +53,9 @@ function ProjectService($http, fosJsRouting) {
         return res;
     };
 
-    _this.getExchangeHistory = function(projectId) {
-        return $http.get(fosJsRouting.generate('project.ng.get_exchange_history', { id: projectId }))
-    }
+    // _this.getExchangeHistory = function(projectId) {
+    //     return $http.get(fosJsRouting.generate('project.ng.get_exchange_history', { id: projectId }))
+    // }
+
     return _this;
 };

@@ -18,14 +18,27 @@ title:
   new_contact: 'Création contact'
   edit_client: 'Modification du projet'
   client_manger: 'Gestion des projets'
+  project_piloting: 'Pilotage du projet'
 
 label:
   action: Action
+  # prospect: Prospect
+  # serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
+  # add_new_contact: 'Ajouter contact'
+  validation_of_the_file_disa: 'Validation de la fiche disa avec'
+  new_contact: 'Créer un contact'
   prospect: Prospect
   serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
   add_new_contact: 'Ajouter contact'
-  new_contact: 'Créer un contact'
-  validation_of_the_file_disa: 'Validation de la fiche disa avec'
+  last_relaunch: 'Dernière relance'
+  next_step: 'Prochaine étage'
+  project_confidence_percentage: '% de confiance dans le projet'
+  archi: 'Archi'
+  who: 'Qui'
+  choose_archi:  'Sélectionner archi'
+  enter_a_valid_percentage: 'Entrez un(e) pourcentage valid'
+  description: 'Description'
+  exchange_history: 'Historique des échanges'
 
 contact:
   label: Interlocuteur
@@ -202,18 +215,6 @@ pdf:
     urgent: Urgent
     normal: Normal
     without_continuation: Sans suite
-
-label:
-  action: Action
-  prospect: Prospect
-  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
-  add_new_contact: 'Ajouter contact'
-  last_relaunch: 'Dernière relance'
-  next_step: 'Prochaine étage'
-  project_confidence_percentage: '% de confiance dans le projet'
-  archi: 'Archi oui/non'
-  who: 'Qui'
-  enter_a_valid_percentage: 'Entrez un(e) pourcentage valid'
 
 messages:
   delete_success: 'Project supprimé avec succès'
