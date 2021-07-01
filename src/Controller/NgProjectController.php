@@ -93,6 +93,9 @@ class NgProjectController extends BaseController
         $disaSheetsValidation = array_map(function ($disaFile) use ($translator) {
             return ['value' => $disaFile, 'label' => $translator->trans($disaFile, [], 'project')];
         }, ProjectConstants::TYPE_DISA_SHEET);
+        $priorizationOfFileFormatted = array_map(function ($elem) use ($translator) {
+            return ['value' => $elem, 'label' => $translator->trans($elem, [], 'project')];
+        }, ProjectConstants::PRIORIZATION_FILE_TYPE);
 
         return $this->json([
             'clients' => $clientsFormatted,
@@ -106,6 +109,7 @@ class NgProjectController extends BaseController
                 return ['value' => $caseType, 'label' => $translator->trans($caseType, [], 'project')];
             }, ProjectConstants::CASE_TYPES),
             'disaSheetsValidation' => $disaSheetsValidation,
+            'priorizationOfFileFormatted' => $priorizationOfFileFormatted,
         ]);
     }
 
@@ -122,7 +126,7 @@ class NgProjectController extends BaseController
     }
 
     /**
-     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project), or @isGranted('ROLE_PROJECT_VIEW')")
+     * @Security("is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW')")
      */
     #[Route('/create/contact', name: 'project.ng.create_contact', options: ['expose' => true])]
     public function createContact(

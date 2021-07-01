@@ -207,10 +207,10 @@ messages:
   delete_success: 'Project supprimé avec succès'
   delete_project: 'Souhaitez-vous supprimer ce projet'
   editing_success: 'Modification du projet effectuée avec succès'
-  editing_failed: 'la modification du projet à echoué'
+  editing_failed: 'La modification du projet a echoué'
   creation_success: 'Création du projet effectué avec succès'
-  contact_create_success: 'Contact creé avec succès'
-  contact_creation_failed: 'La création du contact à echoué'
+  contact_create_success: 'Contact créé avec succès'
+  contact_creation_failed: 'La création du contact a echoué'
 
 action:
   reminder: 'Rappel'

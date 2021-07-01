@@ -71,12 +71,18 @@
 					aria-labelledby="priorizationOfFile"
 					class="d-flex"
 				>
-					<div class="mr-4">
-						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
+					<div class="mr-4" ng-repeat="item in data.priorizationOfFileFormatted">
+						<md-radio-button 
+							ng-value="item.value" 
+							class="md-primary">
+							{{ '{{ item.label }}' }}
+						</md-radio-button>
 					</div>
+					{# 
 					<div>
 						<md-radio-button value="0" class="md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
 					</div>
+					#}
 				</md-radio-group>
 			</div>
 		</div>

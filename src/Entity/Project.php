@@ -116,6 +116,7 @@ class Project
      * fr: Chargé(e) d'affaire
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -127,6 +128,7 @@ class Project
      * Fr: rédacteur du devis
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -269,6 +271,7 @@ class Project
      * Fr: assistant en charge du dossier
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
     private $recordAssistant;
@@ -285,6 +288,7 @@ class Project
      * fr : CONDUC. OCBS
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
     private $ocbsDriver;
@@ -293,12 +297,14 @@ class Project
      * fr: CONDUC TCE
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
     private $tceDriver;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
     private $prospect;
@@ -323,7 +329,9 @@ class Project
      * fr: Priorisation du dossier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $priorizationOfFile;
@@ -332,7 +340,9 @@ class Project
      * fr: Réponse pour le
      * 
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *  groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $answerForThe;
@@ -507,7 +517,7 @@ class Project
         return $this->businessCharge;
     }
 
-    public function setBusinessCharge(User $businessCharge): self
+    public function setBusinessCharge(?User $businessCharge): self
     {
         $this->businessCharge = $businessCharge;
 
@@ -519,7 +529,7 @@ class Project
         return $this->economist;
     }
 
-    public function setEconomist(User $economist): self
+    public function setEconomist(?User $economist): self
     {
         $this->economist = $economist;
 
@@ -699,7 +709,7 @@ class Project
         return $this->recordAssistant;
     }
 
-    public function setRecordAssistant(User $recordAssistant): self
+    public function setRecordAssistant(?User $recordAssistant): self
     {
         $this->recordAssistant = $recordAssistant;
 

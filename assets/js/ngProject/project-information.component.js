@@ -58,6 +58,7 @@ function ProjectInformationController(
             $scope.data.countries = response.data.countries;
             $scope.data.caseTypes = response.data.caseTypes;
             $scope.data.disaSheetsValidation = response.data.disaSheetsValidation;
+            $scope.data.priorizationOfFileFormatted = response.data.priorizationOfFileFormatted;
             $scope.onLoading = false;
         }, error => {
             console.info(error);
