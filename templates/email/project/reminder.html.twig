@@ -1,0 +1,9 @@
+{% trans_default_domain 'email' %}
+
+{% extends 'email/user/base_user_mail.html.twig' %}
+
+{% block email_content %}
+    <p>
+        {{'reminder.email.body'|trans({'projectSiteCode':projectSiteCode}, 'projects') |nl2br}}
+    </p>
+{% endblock email_content %}

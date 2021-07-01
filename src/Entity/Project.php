@@ -301,7 +301,7 @@ class Project
     /**
      * Relaunch
      * 
-     * @ORM\ManyToMany(targetEntity=Relaunch::class)
+     * @ORM\ManyToMany(targetEntity=Relaunch::class, cascade={"persist"})
      */
     private $relaunches;
 

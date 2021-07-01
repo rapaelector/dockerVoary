@@ -3,17 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Relaunch;
 use App\Entity\User;
 use App\Form\EconomistFormType;
 use App\Form\ProjectBusinessChargeType;
 use App\Form\ProjectType;
 use App\Form\ProjectEditType;
+use App\Manager\ProjectManager;
 use App\Repository\ProjectRepository;
 use App\Service\Client\ClientServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -436,6 +439,43 @@ class ProjectController extends BaseController
             } else {
                 $this->addFlash('success', $translator->trans('messages.delete_success', [], 'project'));
             }
+        }
+
+        return $this->redirectToRoute('project.list');
+    }
+
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
+    #[Route('/{id}/reminder', name: 'project.reminder', methods: ['POST', 'PUT'])]
+    public function reminder(
+        Request $request,
+        Project $project,
+        TranslatorInterface $translator,
+        MessageBusInterface $bus,
+        ProjectManager $projectManager
+    ): Response
+    {
+        if ($this->isCsrfTokenValid('reminder'.$project->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            // send relaunch message
+            if ($project->getContact()) {
+                $bus->dispatch(new \App\Message\Project\Reminder($project->getContact()->getEmail(), $project->getSiteCode()));
+                // then add new relaunch
+                $projectManager->addRelaunch($project);
+                if ($request->isXMLHttpRequest()) {
+                    return $this->json(['message' => $translator->trans('messages.reminder_success', [], 'projects')]);
+                } else {
+                    $this->addFlash('success', $translator->trans('messages.reminder_success', [], 'projects'));
+                }
+            } else {
+                if ($request->isXMLHttpRequest()) {
+                    return $this->json(['message' => $translator->trans('messages.reminder_error', [], 'projects')]);
+                } else {
+                    $this->addFlash('error', $translator->trans('messages.reminder_error', [], 'projects'));
+                }
+            }
+
         }
 
         return $this->redirectToRoute('project.list');

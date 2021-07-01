@@ -130,6 +130,7 @@ pdf:
 title:
   edit_comment: 'Modification du commentaire'
   strategic_affairs: 'Affaires stratégiques'
+  reminder_project: 'Rappel'
 
 label:
   yes: 'Oui'
@@ -184,6 +185,21 @@ economist:
 messages:
   completion_saved: '% Réalisation enregistré avec succès'
   pc_deposit_saved: 'PC depose enregistré avec succès'
+  reminder_project: 'Voulez vous envoyer un rappel au prospect ?'
   pc_deposit_saving_faild: "Impossible d'enregistré le PC depose"
   architect_saved: 'Architect enregistré avec succès'
   comment_saved: 'Commentaire enregistré avec succès'
+  reminder_success: 'Rappel envoyer avec succès'
+  reminder_error: 'Votre demande de rappel a échouer'
+action:
+  reminder: 'Rappel'
+reminder:
+  email:
+    subject: Bonhome Batiment Rappel
+    body: |
+          Madame, Monsieur
+
+          Concernant votre projet à ( projectSiteCode ) nous nous permettons de vous relancer pour avoir
+          quelques nouvelles sur laa date possible de début des travaux,
+
+          Cordialement

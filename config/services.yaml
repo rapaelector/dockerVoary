@@ -33,6 +33,10 @@ services:
             $config: '%datatables.config%'
             $renderer: '@datatables.renderer'
             $instantiator: '@Omines\DataTablesBundle\DependencyInjection\Instantiator'
+    App\Manager\ProjectManager:
+        public: true
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
