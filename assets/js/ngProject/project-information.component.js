@@ -190,7 +190,6 @@ function ProjectInformationController(
         $scope.onLoading = true;
         $scope.data.errors = {};
         projectService.saveProject(PROJECT_ID, $scope.project).then((response) => {
-            console.info(response);
             $scope.onLoading = false;
             $scope.helpers.showSimpleToast(response.data.message);
         }, error => {

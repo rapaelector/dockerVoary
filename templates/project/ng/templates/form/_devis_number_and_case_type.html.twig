@@ -1,6 +1,6 @@
 {% trans_default_domain 'project' %}
 
-<div class="card card card-outline card-app-secondary h-100 mt-2">
+<div class="card card card-outline card-app-secondary h-100">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-6">
@@ -124,7 +124,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					{% include 'project/ng/templates/form/_md_select_template.html.twig' with {
-						label: 'columns.economist'|trans({}, 'project'),
+						label: 'columns.tceDriver'|trans({}, 'project'),
 						ngModel: 'project.tceDriver',
 						searchTerm: 'searchTerm.tceDriver',
 						mdOnOpen: 'helpers.getTceDriver()',
