@@ -4,6 +4,9 @@ namespace App\Entity\Traits;
 
 trait UserTrait
 {
+    /**
+     * @Groups({"project-form-data", "data-project"})
+     */
     public function getName(): ?string
     {
         $parts = [];

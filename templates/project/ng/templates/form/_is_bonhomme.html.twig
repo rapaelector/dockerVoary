@@ -1,0 +1,17 @@
+<div class="card card-outline card-app-secondary">
+    <div class="card-body">
+        <div class="form-group">
+            <label class="" for="project_edit_bonhomePercentage">Bonhomme est-il</label>
+            <md-select
+                ng-model="project.bonhomePercentage"
+                data-md-container-class="selectHeader"
+            >
+                <md-option
+                    ng-value="item.value" 
+                    ng-repeat="item in typeBonhome">
+                    {{ '{{ item.label }}' }}
+                </md-option>
+            </md-select>
+        </div>
+    </div>
+</div>

@@ -46,6 +46,8 @@ title:
   
 label:
   created_at: 'Crée le'
+  yes: 'Oui'
+  no: 'Non'
   
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'

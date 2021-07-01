@@ -1,0 +1,54 @@
+{% trans_default_domain 'project' %}
+
+<div class="card card card-outline card-app-secondary h-100" ng-if="data.newContact">
+	<div class="card-header">
+		<h3 class="card-title">{{ 'columns.contact'|trans }}</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_lastName">{{ 'contact.name'|trans }}</label>
+							<input type="text" ng-model="project.contact.lastName" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_firstName">{{ 'contact.first_name'|trans }}</label>
+							<input type="text" ng-model="project.contact.firstName" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_email">{{ 'contact.email'|trans }}</label>
+							<input type="text" ng-model="project.contact.email" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_phone">{{ 'contact.telephone'|trans }}</label>
+							<input type="text" ng-model="project.contact.phone" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_job">{{ 'contact.job'|trans }}</label>
+							<input type="text" ng-model="project.contact.job" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="project_contact_fax">{{ 'contact.fax'|trans }}</label>
+							<input type="text" ng-model="project.contact.fax" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>

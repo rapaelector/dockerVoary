@@ -29,7 +29,7 @@
             {% endif %}
 
             {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project) %}
-                <a class="dropdown-item" href="{{ path('project.edit', {id: id, redirectPath: redirectPah ?? ''}) }}">
+                <a class="dropdown-item" href="{{ path('project.ng.project_follow_up', {id: id, redirectPath: redirectPah ?? ''}) }}">
                     <i class="material-icons">edit</i>
                     <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
                 </a>

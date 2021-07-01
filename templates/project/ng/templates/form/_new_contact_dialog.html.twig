@@ -1,0 +1,121 @@
+{% trans_default_domain 'project' %}
+
+<md-dialog aria-label="Event Dialog" id="contact-form-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools text-white">
+            <h3 class="card-title">{{ 'title.new_contact'|trans }}</h3>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="card card card-outline card-app-secondary h-100">
+            <!-- /.card-header for interlocuteur -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_lastName">{{ 'contact.name'|trans }}</label>
+                                    <input
+                                        type="text" 
+                                        ng-model="newContact.lastName" 
+                                        class="form-control"
+                                        ng-class="data.errors.lastName ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.lastName',
+                                    } %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_firstName">{{ 'contact.first_name'|trans }}</label>
+                                    <input 
+                                        type="text" 
+                                        ng-model="newContact.firstName" 
+                                        class="form-control"
+                                        ng-class="data.errors.firstName ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.firstName',
+                                    } %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_email">{{ 'contact.email'|trans }}</label>
+                                    <input 
+                                        type="text" 
+                                        ng-model="newContact.email" 
+                                        class="form-control"
+                                        ng-class="data.errors.email ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.email',
+                                    } %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_phone">{{ 'contact.telephone'|trans }}</label>
+                                    <input 
+                                        type="text" 
+                                        ng-model="newContact.phone" 
+                                        class="form-control"
+                                        ng-class="data.errors.phone ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.phone',
+                                    } %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_job">{{ 'contact.job'|trans }}</label>
+                                    <input
+                                        type="text" 
+                                        ng-model="newContact.job" 
+                                        class="form-control"
+                                        ng-class="data.errors.job ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.job',
+                                    } %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="project_contact_fax">{{ 'contact.fax'|trans }}</label>
+                                    <input 
+                                        type="text" 
+                                        ng-model="newContact.fax" 
+                                        class="form-control"
+                                        ng-class="data.errors.fax ? 'border-danger' : ''"
+                                    >
+                                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                        errorPath: 'data.errors.fax',
+                                    } %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </md-dialog-content>
+
+    
+	<md-dialog-actions layout="row">
+        <md-button ng-click="fns.cancelContactCreation()" aria-label="cancel">
+			{{ 'action.cancel'|trans({}, 'messages') }}
+		</md-button>
+		<md-button ng-click="fns.saveContact()" aria-label="save">
+			{{ 'action.save'|trans({}, 'messages') }}
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>
+<div class="ng-project-loader" ng-if="onLoading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>

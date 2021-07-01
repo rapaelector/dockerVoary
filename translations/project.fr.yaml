@@ -2,7 +2,7 @@ title:
   edit_project: 'Modifier ce projet'
   project_list: Liste des projets
   list: Liste des projets
-  project_manager: 'Gestion des projets'
+  project_manager: 'Gestion de projet'
   bbiInfos: 'Infos Bonhomme Batiment'
   marcheInfos: 'Informations du marche'
   workDispatchInfo: 'Répartition des travaux'
@@ -14,8 +14,29 @@ title:
   work_dispatching: REPARTITION DES TRAVAUX
   amount: MONTANT
   norm1090: NORME EN 1090 - Classe EXE
+  project_information: 'Information du projet'
+  new_contact: 'Création contact'
+  edit_client: 'Modification du projet'
+  client_manger: 'Gestion des projets'
+
+label:
+  action: Action
+  prospect: Prospect
+  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
+  add_new_contact: 'Ajouter contact'
+  new_contact: 'Créer un contact'
+  validation_of_the_file_disa: 'Validation de la fiche disa avec'
+
 contact:
   label: Interlocuteur
+  name: 'Nom'
+  first_name: 'Prénom'
+  email: 'Email'
+  telephone: 'Téléphone'
+  job: 'Fonction'
+  fax: 'Fax'
+
+
 columns:
   first_ask_date: 'Date de première demande'
   first_ask_date_abbr: 'Date'
@@ -27,6 +48,7 @@ columns:
   projectOwner: "Maitre d'ouvrage"
   projectManager: "Maitre d'oeuvre"
   billingAddres: "Adresse facturation"
+  billingAddress: "Adresse facturation"
   siteAddress: "Adresse chantier"
   descriptionOperation: "Description de l'operation"
   soldBy: "Dossier vendu par"
@@ -40,7 +62,7 @@ columns:
   depositeDateEdit: "Date d'acompte doit être édité le"
   clientCondition: "Condition négocier avec le client"
   quoteValidatedMDE: "N° du/des devis MDE validé(s)"
-  quoteValidatedMDEDate: "N° du/des devis MDE validé(s) De"
+  quoteValidatedMDEDate: "Date de devis MDE validé(s) De"
   globalAmount: "Montant global du marché"
   global_amount: "Montant global du marché"
   global_amount_abbr: "Montant du marché"
@@ -93,6 +115,7 @@ bonhommePercentage :
   10percent : "10% (rénovation particulier de + de 2ans)"
   subcontractor : "SOUS-TRAITANT"
   0percent : "0% (AUTOLIQUIDATION)"
+
 disaSheetValidation :
   signed_quote: "Devis MDE signé"
   customer_order_form: "Bon de Commande du Client"
@@ -180,15 +203,14 @@ pdf:
     normal: Normal
     without_continuation: Sans suite
 
-label:
-  action: Action
-  prospect: Prospect
-  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
-
 messages:
   delete_success: 'Project supprimé avec succès'
   delete_project: 'Souhaitez-vous supprimer ce projet'
-  editing_success: 'Modification du projet effectué avec succès'
+  editing_success: 'Modification du projet effectuée avec succès'
+  editing_failed: 'la modification du projet à echoué'
   creation_success: 'Création du projet effectué avec succès'
+  contact_create_success: 'Contact creé avec succès'
+  contact_creation_failed: 'La création du contact à echoué'
+
 action:
   reminder: 'Rappel'

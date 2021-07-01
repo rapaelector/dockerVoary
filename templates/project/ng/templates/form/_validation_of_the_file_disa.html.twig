@@ -1,0 +1,15 @@
+<div class="mb-3 border p-2">
+    <h5 class="text-uppercase font-weight-bold text-center">{{ 'label.validation_of_the_file_disa'|trans({}, 'project') }} : </h5>
+    <div
+        class="demo-select-all-checkboxes"
+        ng-repeat="disaSheet in data.disaSheetsValidation"
+    >
+        <md-checkbox
+            class="md-primary"
+            ng-click="toggleDisaFiles(disaSheet)"
+            ng-checked="project.disaSheetValidation ? project.disaSheetValidation.indexOf(disaSheet.value) > -1 : false"
+        >
+            {{ '{{ disaSheet.label }}' }}
+        </md-checkbox>
+    </div>
+</div>

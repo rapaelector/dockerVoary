@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
@@ -47,12 +48,14 @@ class Client
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"project-form-data", "data-project"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
+     * @Groups({"project-form-data", "data-project"})
      */
     private $name;
 
@@ -63,6 +66,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @Groups({"project-form-data"})
      */
     private $clientNumber;
 

@@ -1,0 +1,56 @@
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-header text-center">
+		<h3 class="card-title col-md-12 text-center">{{ 'title.payment_choice'|trans({}, 'project') }}</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<label class="col-form-label ">{{ 'columns.paymentChoice'|trans({}, 'project') }}</label>
+				<md-radio-group 
+					ng-model="project.paymentChoice" 
+					aria-labelledby="paymentChoice"
+					class="d-flex"
+				>
+					<div class="mr-4">
+						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
+					</div>
+					<div>
+						<md-radio-button value="0" class="md-primary">{{ 'label.no'|trans }}</md-radio-button>
+					</div>
+				</md-radio-group>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="project_edit_paymentPercentage">{{ 'columns.paymentPercentage'|trans({}, 'project') }}</label>
+					<input 
+						type="text" 
+						ng-model="project.paymentPercentage" 
+						placeholder="%" 
+						class="form-control"
+					>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_depositeDateEdit">{{ 'columns.depositeDateEdit'|trans({}, 'project') }}</label>
+					<input
+						type="date" 
+						ng-model="project.depositeDateEdit" class="form-control"
+					>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="project_edit_clientCondition">{{ 'columns.clientCondition'|trans({}, 'project') }}</label>
+					<textarea 
+						ng-model="project.clientCondition" class="form-control"
+					>
+					</textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>

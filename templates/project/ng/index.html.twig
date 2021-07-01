@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('ng_project') }}
+{% endblock %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
+    style="height: auto;"
+    ng-app="projectApp"
+    ng-controller="ProjectController"
+{% endblock %}
+
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.project_manager'|trans({}, 'project'),
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.client_manger'|trans({}, 'project'), routeName: 'client.list'},
+            {label: 'title.edit_client'|trans({}, 'project') },
+        ],
+    } %} {% endembed %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% include 'project/ng/templates/index.html.twig' %}
+        <app-project-information></app-project-information>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {# USER ID #}
+        var PROJECT_ID = "{{ resolve([project, 'id'], null) }}";
+
+        {# TYPE DE DOSSIER #}
+        var CASE_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::CASE_TYPES') %}
+            CASE_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+
+        var PRIORIZATION_FILE_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::PRIORIZATION_FILE_TYPE') %}
+            PRIORIZATION_FILE_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+
+        var MARKET_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::FIRST_MARKET_TYPES') %}
+            MARKET_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+        
+        var SECOND_MARKET_TYPES = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::SECOND_MARKET_TYPES') %}
+            SECOND_MARKET_TYPES.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}'
+            })
+        {% endfor %}
+
+        var TYPE_BONHOME = [];
+        {% for type in constant('\\App\\Entity\\Constants\\Project::BONHOME_TYPE_CHOICES') %}
+            TYPE_BONHOME.push({
+                label: '{{ type|trans({}, "project") }}',
+                value: '{{ type }}',
+            })
+        {% endfor %}
+    </script>
+    {{ encore_entry_script_tags('ng_project') }}
+{% endblock %}

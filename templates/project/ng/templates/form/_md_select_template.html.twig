@@ -1,0 +1,42 @@
+{% set data = dataAutoComplete|default('data.users') %}
+{% if isProspect is not defined %}{% set isProspect = false %}{% endif %}
+{% if label is defined %}
+    <label>{{ label }}</label>
+{% endif %}
+
+<md-select
+    ng-model="{{ ngModel }}"
+    md-on-close="{{ searchTerm }} = ''"
+    data-md-container-class="selectHeader"
+    ng-change="{{ ngChangeHandler }}"
+    ng-disabled="{{ disabled|default(false) }}"
+>
+    <md-select-header class="select-header-search">
+        <input ng-model="{{ searchTerm }}"
+            type="search"
+            placeholder="Rechercher"
+            ng-keydown="$event.stopPropagation()"
+            class="demo-header-searchbox md-text"
+        >
+    </md-select-header>
+    <md-optgroup label="user">
+        <md-option ng-value="item.id" ng-repeat="item in {{ data }}|filter:{{ searchTerm }}">
+            <div class="media">
+                {% if isProspect %}
+                    <div class="media-body">
+                        <div class="media-heading font-weight-bold">{{ '{{ item.name }}' }}</div>
+                        <div class="media-body-content">{{ '{{ item.clientNumber }}' }}</div>
+                    </div>
+                {% else %}    
+                    <div class="media-left">
+                        <img class="media-object" src="{{ '{{item.avatar}}' }}">
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading font-weight-bold">{{ '{{ item.name }}' }}</div>
+                        <div class="media-body-content">{{ '{{ item.email }}' }}</div>
+                    </div>
+                {% endif %}
+            </div>
+        </md-option>
+    </md-optgroup>
+</md-select>

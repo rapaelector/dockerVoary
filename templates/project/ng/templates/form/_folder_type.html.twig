@@ -1,0 +1,15 @@
+<label class="col-form-label ">Type de dossier</label>
+<div class="d-flex flex-wrap">
+	<div
+		class="demo-select-all-checkboxes w-50"
+		ng-repeat="caseType in data.caseTypes"
+	>
+		<md-checkbox
+			class="md-primary"
+			ng-click="toggle(caseType)"
+			ng-checked="project.caseType ? project.caseType.indexOf(caseType.value) > -1 : false"
+		>
+			{{ '{{ caseType.label }}' }}
+		</md-checkbox>
+	</div>
+</div>

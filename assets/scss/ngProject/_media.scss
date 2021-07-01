@@ -1,0 +1,27 @@
+md-optgroup md-option {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.md-select-value {
+    .media {
+        align-items: center;
+        .media-body {
+            .media-body-content {
+                display: none;
+            }
+        }
+    }
+}
+
+.media {
+    .media-left {
+        img.media-object {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+    }
+}

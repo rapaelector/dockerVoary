@@ -1,0 +1,138 @@
+{% trans_default_domain 'project' %}
+
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_quoteValidatedMDE">{{ 'columns.quoteValidatedMDE'|trans }}</label>
+					<input 
+						type="text" 
+						ng-model="project.quoteValidatedMDE" 
+						maxlength="255" 
+						class="form-control"
+						ng-class="(data.errors.quoteValidatedMDE && data.errors.quoteValidatedMDE.length > 0) ? 'border-danger' : ''"
+					>
+					{% include 'project/ng/templates/form/_errors.html.twig' with {
+						errorPath: 'data.errors.quoteValidatedMDE',
+					} %}
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_quoteValidatedMDEDate">{{ 'columns.quoteValidatedMDEDate'|trans }}</label>
+					<input
+						type="date" 
+						ng-model="project.quoteValidatedMDEDate" 
+						="" 
+						class="form-control"
+						ng-class="(data.errors.quoteValidatedMDEDate && data.errors.quoteValidatedMDEDate.length > 0) ? 'border-danger' : ''"
+					>
+					{% include 'project/ng/templates/form/_errors.html.twig' with {
+						errorPath: 'data.errors.quoteValidatedMDEDate',
+					} %}
+				</div>
+			</div>
+			<div class="col-sm-6" id="project_caseType">
+				{# TYPE DE DOSSIE  #}
+				{# TODO: make custom-checkbox work #}
+				<fieldset class="form-group">
+					{% include 'project/ng/templates/form/_folder_type.html.twig' %}
+				</fieldset>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_planningProject">{{ 'columns.planningProject'|trans }}</label>
+					<textarea
+						ng-model="project.planningProject" 
+						=""
+						class="form-control"
+						ng-class="data.errors.planningProject.length > 0 ? 'border-danger' : ''"
+					></textarea>
+					{% include 'project/ng/templates/form/_errors.html.twig' with {
+						errorPath: 'data.errors.planningProject',
+					} %}
+				</div>
+				{# REPONSE POUR LE #}
+				<div class="col-sm-">
+					<div class="form-group">
+						<label for="project_edit_answerForThe">{{ 'columns.answerForThe'|trans }}</label>
+						<textarea ng-model="project.answerForThe" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			{# PRIORIZATION DU DOSSIER #}
+			<div class="col-sm-6">
+				<label class="col-form-label ">{{ 'columns.priorizationOfFile'|trans }}</label>
+				<md-radio-group
+					ng-model="project.priorizationOfFile"
+					aria-labelledby="priorizationOfFile"
+					class="d-flex"
+				>
+					<div class="mr-4">
+						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
+					</div>
+					<div>
+						<md-radio-button value="0" class="md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
+					</div>
+				</md-radio-group>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-group mb-3">
+				<label for="basic-url">
+					<label for="project_edit_folderNameOnTheServer">{{ 'columns.folderNameOnTheServer'|trans }}</label>
+				</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">G:\2-BBT\1-AFFAIRES\1-PROSPECT\</span>
+					</div>
+					<input type="text" ng-model="project.folderNameOnTheServer" maxlength="255" class="form-control" value="Xfds DDc dddff">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				{% include 'project/ng/templates/form/_validation_of_the_file_disa.html.twig' %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					{% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+						label: 'columns.recordAssistant'|trans({}, 'project'),
+						ngModel: 'project.recordAssistant',
+						searchTerm: 'searchTerm.recordAssistant',
+						mdOnOpen: 'helpers.getRecordAssistant()',
+						ngChangeHandler: 'helpers.handleRecordAssistantChanged()',
+					} %}
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					{% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+						label: 'columns.ocbsDriver'|trans({}, 'project'),
+						ngModel: 'project.ocbsDriver',
+						searchTerm: 'searchTerm.ocbsDriver',
+						mdOnOpen: 'helpers.getOcbsDriver()',
+						ngChangeHandler: 'helpers.handleOcbsDriverChanged()',
+					} %}
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					{% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+						label: 'columns.tceDriver'|trans({}, 'project'),
+						ngModel: 'project.tceDriver',
+						searchTerm: 'searchTerm.tceDriver',
+						mdOnOpen: 'helpers.getTceDriver()',
+						ngChangeHandler: 'helpers.handleTceDriverChanged()',
+					} %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>

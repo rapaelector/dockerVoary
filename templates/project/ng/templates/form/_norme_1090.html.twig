@@ -1,0 +1,35 @@
+{% set radioButtonClass = 'md-primary mb-0 mr-3' %}
+
+<div class="card card-outline card-app-secondary">
+    <div class="card-body">
+        <label for="">{{ 'columns.norm1090'|trans({}, 'project') }}</label>
+        <md-radio-group ng-model="project.norm1090">
+            <div class="row">
+                <div class="col-sm-2">
+                    <md-radio-button
+                        value="1"
+                        class="{{ radioButtonClass }}"
+                    >
+                        1
+                    </md-radio-button>
+                </div>
+                <div class="col-sm-2">
+                    <md-radio-button
+                        ng-value="2"
+                        class="{{ radioButtonClass }}"
+                    >
+                        2
+                    </md-radio-button>
+                </div>
+                <div class="col-sm-2">
+                    <md-radio-button
+                        ng-value="3"
+                        class="{{ radioButtonClass }}"
+                    >
+                        3
+                    </md-radio-button>
+                </div>
+            </div>
+        </md-radio-group>
+    </div>
+</div>

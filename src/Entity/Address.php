@@ -10,6 +10,7 @@ use App\Entity\Traits\AddressTrait;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AddressRepository::class)
@@ -25,48 +26,56 @@ class Address
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"data-project"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $fax;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $line1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $line2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $line3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $postalCode;
 
@@ -75,12 +84,14 @@ class Address
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"data-project"})
      */
     private $country;
 

@@ -1,0 +1,87 @@
+<div class="card card card-outline card-app-secondary h-100">
+	<div class="card-header">
+		<h3 class="card-title">{{ 'columns.billingAddress'|trans({}, 'project') }}</h3>
+		<!-- /.card-tools -->
+	</div>
+	<!-- /.card-header for interlocuteur -->
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_name">{{ 'label.name'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.name" class="form-control" value="Madagascar">
+                </div>
+            </div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_phone">{{ 'label.phone'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.phone" class="form-control" value="XXXXX XXXX">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_fax">{{ 'label.fax'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.fax" class="form-control" value="5678">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line1">{{ 'label.line1'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.line1" class="form-control" value="Antananarivo">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line2">{{ 'label.line2'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.line2" class="form-control" value="Antsimondrano">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_line3">{{ 'label.line3'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.line3" class="form-control" value="Itaosy">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_postalCode">{{ 'label.postal_code'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.postalCode" class="form-control" value="102">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="project_edit_billingAddres_city">{{ 'label.city'|trans({}, 'address') }}</label>
+					<input type="text" ng-model="project.billingAddres.city" class="form-control">
+                </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="" for="project_edit_siteAddress_country">{{ 'label.country'|trans({}, 'address') }}</label>
+					<md-select
+						ng-model="project.billingAddres.country"
+						md-on-close="searchTerm.countries = ''"
+						data-md-container-class="selectHeader"
+						md-on-open="helpers.getCountries"
+						ng-change="helpers.handleCountriesChanged()"
+					>
+						<md-select-header class="select-header-search">
+							<input ng-model="searchTerm.countries"
+								placeholder="Rechercher" 
+								type="search"
+								ng-keydown="$event.stopPropagation()"
+								class="demo-header-searchbox md-text"
+							>
+						</md-select-header>
+						<md-option
+							ng-value="country.countryCode" 
+							ng-repeat="country in data.countries|filter:searchTerm.countries">
+							{{ '{{ country.name }}' }}
+						</md-option>
+					</md-select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.card-body -->
+</div>
+<pre>{{ '{{ searchTerm.countries }}' }}</pre>

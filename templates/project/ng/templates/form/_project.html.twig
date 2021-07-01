@@ -1,0 +1,163 @@
+{% trans_default_domain 'project' %}
+
+<div class="card card card-outline card-app-secondary h-100">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'title.project_information'|trans({}, 'project') }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="col-form-label ">{{ 'columns.roadmap'|trans }}</label>
+                <md-radio-group
+                    class="d-flex md-primary"
+                    ng-model="project.roadmap" 
+                    aria-labelledby="roadmap"
+                >
+                    <div class="mr-4">
+                        <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
+                    </div>
+                    <div>
+                        <md-radio-button value="0" class="md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
+                    </div>
+                </md-radio-group>
+                {% include 'project/ng/templates/form/_errors.html.twig' with {
+                    errorPath: 'data.errors.roadmap',
+                } %}
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+                        label: 'columns.prospect'|trans({}, 'project'),
+                        dataAutoComplete: 'data.clients',
+                        ngModel: 'project.prospect',
+                        searchTerm: 'searchTerm.client',
+                        mdOnOpen: 'helpers.getClient()',
+                        ngChangeHandler: 'helpers.handleClientChanged()',
+                        isProspect: true,
+                    } %}
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="project_edit_siteCode">{{ 'columns.siteCode'|trans }}</label>
+                    <input
+                        type="text" 
+                        ng-model="project.siteCode" 
+                        ="" 
+                        class="form-control"
+                        ng-class="(data.errors.siteCode && data.errors.siteCode.length > 0) ? 'border-danger' : ''"
+                    >
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.siteCode',
+                    } %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="project_edit_projectOwner">{{ 'columns.projectOwner'|trans }}</label>
+                    <input
+                        type="text" 
+                        ng-model="project.projectOwner" 
+                        ="" 
+                        class="form-control"
+                        ng-class="(data.errors.projectOwner && data.errors.projectOwner.length > 0) ? 'border-danger' : ''"
+                    >
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.projectOwner',
+                    } %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="project_edit_projectManager">
+                        {{ 'columns.projectManager'|trans }}
+                    </label>
+                    <input
+                        type="text" 
+                        ng-model="project.projectManager"
+                        ="" 
+                        class="form-control" 
+                        value="Test"
+                        ng-class="(data.errors.projectManager && data.errors.projectManager.length > 0) ? 'border-danger' : ''"
+                    >
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.projectManager',
+                    } %}
+                </div>
+            </div>
+            {# CONTACT #}
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label class="mb-0">{{  'columns.contact'|trans({}, 'project') }}</label>
+                        {% if is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW') %}{% endif %}
+                        <div class="contact-checkbox-container">
+                            <button type="button" class="btn btn-link btn-sm" ng-click="fns.showDialog($event)">
+                                {{ 'label.new_contact'|trans({}, 'project') }}
+                            </button>
+                        </div>
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.newContact',
+                        } %}
+                    </div>
+                    {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+                        ngModel: 'project.contact',
+                        searchTerm: 'searchTerm.contact',
+                        mdOnOpen: 'helpers.getUsers()',
+                        disabled: 'data.newContact',
+                        ngChangeHandler: 'helpers.handleUserChanged()',
+                    } %}
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.contact',
+                    } %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+                        label: 'columns.businessCharge'|trans({}, 'project'),
+                        ngModel: 'project.businessCharge',
+                        searchTerm: 'searchTerm.businessCharge',
+                        mdOnOpen: 'helpers.getBusinessCharge()',
+                        ngChangeHandler: 'helpers.handleBusinessCharge()',
+                    } %}
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.businessCharge',
+                    } %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
+                        label: 'columns.economist'|trans({}, 'project'),
+                        ngModel: 'project.economist',
+                        searchTerm: 'searchTerm.economists',
+                        mdOnOpen: 'helpers.getEconomist()',
+                        ngChangeHandler: 'helpers.handleEconomistChanged()',
+                    } %}
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.economist',
+                    } %}
+                </div>
+            </div>
+            {# DESCRIPTION DE L'OPERATION  #}
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="project_edit_descriptionOperation">
+                        {{ 'columns.descriptionOperation'|trans }}
+                    </label>
+                    <textarea 
+                        ng-model="project.descriptionOperation" 
+                        ="" 
+                        class="form-control"
+                    ></textarea>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.descriptionOperation',
+                    } %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
