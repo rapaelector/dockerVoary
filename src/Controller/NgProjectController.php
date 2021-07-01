@@ -28,7 +28,7 @@ class NgProjectController extends BaseController
     /**
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
      */
-    #[Route('/{id}/edit', name: 'project.ng.project_edit', methods: ['POST', 'GET'], options: ['expose' => true])]
+    #[Route('/{id}/follow-up', name: 'project.ng.project_follow_up', methods: ['POST', 'GET'], options: ['expose' => true])]
     public function index(
         Request $request, 
         Project $project, 
@@ -90,6 +90,9 @@ class NgProjectController extends BaseController
         }
         $countries = Countries::getNames();
         $icountries = array_flip($countries);
+        $disaSheetsValidation = array_map(function ($disaFile) use ($translator) {
+            return ['value' => $disaFile, 'label' => $translator->trans($disaFile, [], 'project')];
+        }, ProjectConstants::TYPE_DISA_SHEET);
 
         return $this->json([
             'clients' => $clientsFormatted,
@@ -102,6 +105,7 @@ class NgProjectController extends BaseController
             'caseTypes' => array_map(function ($caseType) use ($translator) {
                 return ['value' => $caseType, 'label' => $translator->trans($caseType, [], 'project')];
             }, ProjectConstants::CASE_TYPES),
+            'disaSheetsValidation' => $disaSheetsValidation,
         ]);
     }
 
@@ -117,6 +121,9 @@ class NgProjectController extends BaseController
         return $this->json(['project' => $projectFormatted]);
     }
 
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project), or @isGranted('ROLE_PROJECT_VIEW')")
+     */
     #[Route('/create/contact', name: 'project.ng.create_contact', options: ['expose' => true])]
     public function createContact(
         Request $request, 

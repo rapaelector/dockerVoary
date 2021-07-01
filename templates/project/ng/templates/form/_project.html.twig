@@ -8,16 +8,16 @@
         <div class="row">
             <div class="col-sm-6">
                 <label class="col-form-label ">{{ 'columns.roadmap'|trans }}</label>
-                <md-radio-group 
+                <md-radio-group
+                    class="d-flex md-primary"
                     ng-model="project.roadmap" 
                     aria-labelledby="roadmap"
-                    class="d-flex"
                 >
                     <div class="mr-4">
                         <md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
                     </div>
                     <div>
-                        <md-radio-button value="0">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
+                        <md-radio-button value="0" class="md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
                     </div>
                 </md-radio-group>
                 {% include 'project/ng/templates/form/_errors.html.twig' with {
@@ -91,6 +91,7 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-between align-items-center">
                         <label class="mb-0">{{  'columns.contact'|trans({}, 'project') }}</label>
+                        {% if is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW') %}{% endif %}
                         <div class="contact-checkbox-container">
                             <button type="button" class="btn btn-link btn-sm" ng-click="fns.showDialog($event)">
                                 {{ 'label.new_contact'|trans({}, 'project') }}
@@ -140,6 +141,7 @@
                     } %}
                 </div>
             </div>
+            {# DESCRIPTION DE L'OPERATION  #}
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="project_edit_descriptionOperation">

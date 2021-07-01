@@ -53,9 +53,17 @@
 						errorPath: 'data.errors.planningProject',
 					} %}
 				</div>
+				{# REPONSE POUR LE #}
+				<div class="col-sm-">
+					<div class="form-group">
+						<label for="project_edit_answerForThe">{{ 'columns.answerForThe'|trans }}</label>
+						<textarea ng-model="project.answerForThe" class="form-control"></textarea>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
+			{# PRIORIZATION DU DOSSIER #}
 			<div class="col-sm-6">
 				<label class="col-form-label ">{{ 'columns.priorizationOfFile'|trans }}</label>
 				<md-radio-group
@@ -64,18 +72,12 @@
 					class="d-flex"
 				>
 					<div class="mr-4">
-						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans }}</md-radio-button>
+						<md-radio-button value="1" class="md-primary">{{ 'label.yes'|trans({}, 'messages') }}</md-radio-button>
 					</div>
 					<div>
-						<md-radio-button value="0">{{ 'label.no'|trans }}</md-radio-button>
+						<md-radio-button value="0" class="md-primary">{{ 'label.no'|trans({}, 'messages') }}</md-radio-button>
 					</div>
 				</md-radio-group>
-			</div>
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label for="project_edit_answerForThe">{{ 'columns.answerForThe'|trans }}</label>
-					<textarea ng-model="project.answerForThe" class="form-control"></textarea>
-				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -89,6 +91,11 @@
 					</div>
 					<input type="text" ng-model="project.folderNameOnTheServer" maxlength="255" class="form-control" value="Xfds DDc dddff">
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				{% include 'project/ng/templates/form/_validation_of_the_file_disa.html.twig' %}
 			</div>
 		</div>
 		<div class="row">

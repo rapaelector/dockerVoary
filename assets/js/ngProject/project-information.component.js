@@ -15,11 +15,13 @@ function ProjectInformationController(
     $scope.onLoading = true;
     $scope.project = {
         caseType: [],
+        disaSheetValidation: [],
     };
     $scope.data = {
-        caseType: [],
-        project: null,
         users: [],
+        caseType: [],
+        disaSheetsValidation: [],
+        project: null,
         errors: null,
     };
     $scope.searchTerm = {
@@ -55,6 +57,7 @@ function ProjectInformationController(
             $scope.data.businessCharge = response.data.businessCharge;
             $scope.data.countries = response.data.countries;
             $scope.data.caseTypes = response.data.caseTypes;
+            $scope.data.disaSheetsValidation = response.data.disaSheetsValidation;
             $scope.onLoading = false;
         }, error => {
             console.info(error);
@@ -171,6 +174,15 @@ function ProjectInformationController(
         } else {
             $scope.project.caseType.push(item.value);
         }
+    };
+    $scope.toggleDisaFiles = function(item) {
+        var idx = $scope.project.disaSheetValidation.indexOf(item.value);
+        if (idx > -1) {
+            $scope.project.disaSheetValidation.splice(idx, 1);
+        } else {
+            $scope.project.disaSheetValidation.push(item.value);
+        }
+        console.info($scope.project.disaSheetValidation);
     };
 
     $scope.fns = {};

@@ -5,6 +5,7 @@
 		ng-repeat="caseType in data.caseTypes"
 	>
 		<md-checkbox
+			class="md-primary"
 			ng-click="toggle(caseType)"
 			ng-checked="project.caseType ? project.caseType.indexOf(caseType.value) > -1 : false"
 		>

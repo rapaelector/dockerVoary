@@ -2,7 +2,7 @@ title:
   edit_project: 'Modifier ce projet'
   project_list: Liste des projets
   list: Liste des projets
-  project_manager: 'Gestion des projets'
+  project_manager: 'Gestion de projet'
   bbiInfos: 'Infos Bonhomme Batiment'
   marcheInfos: 'Informations du marche'
   workDispatchInfo: 'Répartition des travaux'
@@ -25,6 +25,7 @@ label:
   serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
   add_new_contact: 'Ajouter contact'
   new_contact: 'Créer un contact'
+  validation_of_the_file_disa: 'Validation de la fiche disa avec'
 
 contact:
   label: Interlocuteur
@@ -114,6 +115,7 @@ bonhommePercentage :
   10percent : "10% (rénovation particulier de + de 2ans)"
   subcontractor : "SOUS-TRAITANT"
   0percent : "0% (AUTOLIQUIDATION)"
+
 disaSheetValidation :
   signed_quote: "Devis MDE signé"
   customer_order_form: "Bon de Commande du Client"

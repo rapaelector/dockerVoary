@@ -21,7 +21,7 @@ function ProjectService($http, fosJsRouting) {
             }
         }
 
-        return $http.post(fosJsRouting.generate('project.ng.project_edit', { id: projectId }), formData);
+        return $http.post(fosJsRouting.generate('project.ng.project_follow_up', { id: projectId }), formData);
     };
 
     _this.parseProject = function(project) {
