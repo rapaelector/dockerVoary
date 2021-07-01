@@ -16,8 +16,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6"></div>
         <div class="col-sm-12">
+        <div class="col-sm-6">
+            <app-project-piloting></app-project-piloting>
             <div class="row">
                 <div class="col-md-6 mt-3 mt-md-0">
                     {# ADRESSE FACTURATION #}
@@ -53,15 +54,33 @@
             {% include 'project/ng/templates/form/_devis_number_and_case_type.html.twig' %}
         </div>
     </div>
-    <div class="text-center pt-4 pb-3">
-        <button
-            class="btn btn-app-primary"
-            type="submit"
-            ng-click="fns.submit()"
-        >
-            {{ 'action.save'|trans({}, 'messages') }}
-        </button>
-        <a href="#" class="btn btn-app-secondary" type="button">{{ 'action.cancel'|trans({}, 'messages') }}</a>
+    <div class="row">
+        <div class="col-sm-10 text-center pt-4 pb-3">    
+            <button
+                class="btn btn-app-primary"
+                type="submit"
+                ng-click="fns.submit()"
+            >
+                {{ 'action.save'|trans({}, 'messages') }}
+            </button>
+            <a href="#" class="btn btn-app-secondary" type="button">{{ 'action.cancel'|trans({}, 'messages') }}</a>
+            <button
+                class="btn btn-outline-primary"
+                type="submit"
+                ng-click="fns.validate()"
+            >
+                {{ 'action.ask_for_validation'|trans({}, 'messages') }}
+            </button>
+        </div>
+        <div class="col-sm-2 pt-4 pb-3 text-right">
+            <button
+                class="btn btn-outline btn-danger"
+                type="submit"
+                ng-click="fns.archive()"
+            >
+                {{ 'action.folder_lost'|trans({}, 'messages') }}
+            </button>
+        </div>
     </div>
 </form>
 <div class="ng-project-loader" ng-if="onLoading">

@@ -125,6 +125,34 @@ class NgProjectController extends BaseController
         return $this->json(['project' => $projectFormatted]);
     }
 
+    #[Route('/{id}/exchange/history', name: '', options: ['expose' => true])]
+    public function getExchangeHistory(Project $project, SerializerInterface $serializer)
+    {
+        $mockData = [
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'lorem ipsum dolor sit amet',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Idealy henintsoa',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Henintsoa andrianirina',
+                'color' => '#000',
+            ],
+            [
+                'date' => (new \DateTime())->format('d/m/Y'),
+                'description' => 'Test test',
+                'color' => '#000',
+            ],
+        ]
+        return $this->json(['data' => ])
+    }
+
     /**
      * @Security("is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW')")
      */

@@ -15,3 +15,4 @@ import './../angular/shared/shared.module';
 import './contact-creation.controller';
 import './project.controller';
 import './project-information.component';
+import './project-piloting.component';

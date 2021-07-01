@@ -1,0 +1,12 @@
+<div class="card card-outline card-app-secondary">
+    <div class="card-body">
+        <div ng-repeat="item in mockData.exchangeHirtory">
+            <div class="row">
+                <div class="col-sm-4">
+                    {{ '{{ item.date|date }}' }}
+                </div>
+                <div class="col-sm-8">{{ '{{ item.description }}' }}</div>
+            </div>
+        </div>
+    </div>
+</div>

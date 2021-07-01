@@ -203,6 +203,18 @@ pdf:
     normal: Normal
     without_continuation: Sans suite
 
+label:
+  action: Action
+  prospect: Prospect
+  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
+  add_new_contact: 'Ajouter contact'
+  last_relaunch: 'Dernière relance'
+  next_step: 'Prochaine étage'
+  project_confidence_percentage: '% de confiance dans le projet'
+  archi: 'Archi oui/non'
+  who: 'Qui'
+  enter_a_valid_percentage: 'Entrez un(e) pourcentage valid'
+
 messages:
   delete_success: 'Project supprimé avec succès'
   delete_project: 'Souhaitez-vous supprimer ce projet'

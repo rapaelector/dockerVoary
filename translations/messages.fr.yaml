@@ -33,6 +33,8 @@ action:
   save: 'Enregistrer'
   show_profile: 'Voir profil'
   download: 'Télécharger'
+  ask_for_validation: 'Demande de validation du dossier'
+  folder_lost: 'Dossier perdu'
 
 title:
   delete_user: "Supprimer l'utilisateur"
