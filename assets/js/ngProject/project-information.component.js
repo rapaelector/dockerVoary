@@ -168,6 +168,9 @@ function ProjectInformationController(
         });
     };
     $scope.toggle = function(item) {
+        if ($scope.project.caseType == undefined || $scope.project.caseType == null) {
+            $scope.project.caseType = [];
+        }
         var idx = $scope.project.caseType.indexOf(item.value);
         if (idx > -1) {
             $scope.project.caseType.splice(idx, 1);
@@ -176,13 +179,15 @@ function ProjectInformationController(
         }
     };
     $scope.toggleDisaFiles = function(item) {
+        if ($scope.project.disaSheetValidation == undefined || $scope.project.disaSheetValidation == null) {
+            $scope.project.disaSheetValidation = [];
+        }
         var idx = $scope.project.disaSheetValidation.indexOf(item.value);
         if (idx > -1) {
             $scope.project.disaSheetValidation.splice(idx, 1);
         } else {
             $scope.project.disaSheetValidation.push(item.value);
         }
-        console.info($scope.project.disaSheetValidation);
     };
 
     $scope.fns = {};
