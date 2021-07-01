@@ -1,6 +1,9 @@
+import ContactCreationController from './contact-creation.controller.js';
+
 function ProjectInformationController(
     $scope,
     $mdToast,
+    $mdDialog,
     projectService,
     CASE_TYPES,
     PRIORIZATION_FILE_TYPES,
@@ -184,11 +187,32 @@ function ProjectInformationController(
             $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
         })
     };
+
+    $scope.fns.showDialog = function(jsEvent) {
+        // $mdDialog.alert().disableParentScroll(true);
+        $mdDialog.show({
+            controller: ContactCreationController,
+            templateUrl: 'contact-dialog-form.html',
+            disableParentScroll: true,
+            parent: angular.element(document.body),
+            targetEvent: jsEvent,
+            clickOutsideToClose: true,
+            bindToController: false,
+        }).then((response) => {
+            if (response) {
+                $scope.data.users.push(response);
+                $scope.project.contact = response.id;
+            }
+        }, error => {
+
+        });
+    }
 };
 
 ProjectInformationController.$inject = [
     '$scope',
     '$mdToast',
+    '$mdDialog',
     'projectService',
     'CASE_TYPES',
     'PRIORIZATION_FILE_TYPES',

@@ -8,7 +8,9 @@ use App\Entity\Project;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
 use App\Form\Project\NgProjectType;
+use App\Form\User\ContactType;
 use App\Service\Form\FormService;
+use App\Service\User\UserService;
 
 use App\Controller\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,10 +19,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Countries;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-#[Route('/project/ng')]
+#[Route('/project')]
 class NgProjectController extends BaseController
 {
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
     #[Route('/{id}/edit', name: 'project.ng.project_edit', methods: ['POST', 'GET'], options: ['expose' => true])]
     public function index(
         Request $request, 
@@ -63,7 +70,7 @@ class NgProjectController extends BaseController
         EntityManagerInterface $em, 
         SerializerInterface $serializer, 
         TranslatorInterface $translator,
-        \App\Service\User\UserService $userService
+        UserService $userService
     )
     {
         $clients = $em->getRepository(Client::class)->findAll();
@@ -108,5 +115,46 @@ class NgProjectController extends BaseController
         );
 
         return $this->json(['project' => $projectFormatted]);
+    }
+
+    #[Route('/create/contact', name: 'project.ng.create_contact', options: ['expose' => true])]
+    public function createContact(
+        Request $request, 
+        EntityManagerInterface $em, 
+        TranslatorInterface $translator, 
+        SerializerInterface $serializer, 
+        FormService $formService,
+        UserService $userService
+    )
+    {
+        $contact = new User();
+        $form = $this->createForm(ContactType::class, $contact,[
+            'csrf_protection' => false,
+        ]);
+        $form->submit(json_decode($request->getContent(), true));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mockPassword = md5($contact->getEmail());
+            $contact->setPassword($mockPassword);
+
+            $em->persist($contact);
+            $em->flush();
+
+            $contactFormatted = $serializer->normalize(
+                $contact,
+                'json',
+                ['groups' => 'project-form-data']
+            );
+            $contactFormatted['avatar'] = $userService->getUserAvatar($contact);
+            return $this->json([
+                'message' => $translator->trans('messages.contact_create_success', [], 'project'), 
+                'data' => $contactFormatted
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.contact_creation_failed', [], 'project'),
+            'errors' => $formService->getErrorsFromForm($form),
+        ], 400);
     }
 }

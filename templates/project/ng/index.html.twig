@@ -12,6 +12,17 @@
     ng-controller="ProjectController"
 {% endblock %}
 
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'title.project_manager'|trans({}, 'project'),
+        links: [
+            {label: 'title.home'|trans({}, 'messages'), routeName: 'home'},
+            {label: 'title.client_manger'|trans({}, 'project'), routeName: 'client.list'},
+            {label: 'title.edit_client'|trans({}, 'project') },
+        ],
+    } %} {% endembed %}
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid">
         {% include 'project/ng/templates/index.html.twig' %}

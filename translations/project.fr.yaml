@@ -15,7 +15,17 @@ title:
   amount: MONTANT
   norm1090: NORME EN 1090 - Classe EXE
   project_information: 'Information du projet'
-  
+  new_contact: 'Création contact'
+  edit_client: 'Modification du projet'
+  client_manger: 'Gestion des projets'
+
+label:
+  action: Action
+  prospect: Prospect
+  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
+  add_new_contact: 'Ajouter contact'
+  new_contact: 'Créer un contact'
+
 contact:
   label: Interlocuteur
   name: 'Nom'
@@ -191,15 +201,11 @@ pdf:
     normal: Normal
     without_continuation: Sans suite
 
-label:
-  action: Action
-  prospect: Prospect
-  serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
-  add_new_contact: 'Ajouter contact'
-
 messages:
   delete_success: 'Project supprimé avec succès'
   delete_project: 'Souhaitez-vous supprimer ce projet'
   editing_success: 'Modification du projet effectuée avec succès'
   editing_failed: 'la modification du projet à echoué'
   creation_success: 'Création du projet effectué avec succès'
+  contact_create_success: 'Contact creé avec succès'
+  contact_creation_failed: 'La création du contact à echoué'

@@ -12,5 +12,6 @@ import './app.module';
 import './app.config';
 import './project.service';
 import './../angular/shared/shared.module';
+import './contact-creation.controller';
 import './project.controller';
 import './project-information.component';

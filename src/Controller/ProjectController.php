@@ -322,7 +322,7 @@ class ProjectController extends BaseController
     /**
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
      */
-    #[Route('/{id}/edit', name: 'project.edit', methods: ['GET', 'POST'])]
+    #[Route('/old/{id}/edit', name: 'project.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
         $form = $this->createForm(ProjectEditType::class, $project);
