@@ -342,7 +342,9 @@ class Project
      * fr: Nom du dossier sur le serveur
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * groups={"project:create"}
+     * )
      * @Groups({"data-project"})
      */
     private $folderNameOnTheServer;

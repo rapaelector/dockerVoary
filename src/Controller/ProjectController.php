@@ -265,7 +265,7 @@ class ProjectController extends BaseController
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project, [
-            'validation_groups' => ['Default', 'project:create'],
+            'validation_groups' => ['Default', 'project:creat'],
         ]);
 
         // check if request get interlocuteurSelecs should be deleted or not

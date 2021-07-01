@@ -96,11 +96,11 @@ class ProjectControllerTest extends WebTestCase
 
         $client = static::createClient();
         $this->login($client, 'user_role_project_edit@app.locale');
-        $crawler = $client->request('GET', $this->generateProjectUrl('/edit'));
+        $crawler = $client->request('GET', $this->generateProjectUrl('/follow-up'));
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), $projectEditMessage);
         
         $this->login($client, 'user_role_project_view@app.locale');
-        $crawler = $client->request('GET', $this->generateProjectUrl('/edit'));
+        $crawler = $client->request('GET', $this->generateProjectUrl('/follow-up'));
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), $projectEditMessage);
 
         // TODO uncomment under codes and need to undertand why its not work for now
