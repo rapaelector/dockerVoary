@@ -7,7 +7,6 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-12 mb-2">
-                {# <label class="mr-2 text-nowrap">{{ 'label.archi'|trans }} :</label> #}
                 <md-radio-group ng-model="exchangeHistory.flag" aria-labelledby="favoriteFruit" class="d-flex mr-3">
                     <div class="row w-100">
                         <div class="col-sm-6">
@@ -31,9 +30,13 @@
                             type="date" 
                             ng-model="exchangeHistory.relaunchDate"
                             ng-disabled="exchangeHistory.flag != data.exchangeFlags[0]"
-                            class="form-control" 
+                            class="form-control"
+                            ng-class="data.errors.relaunchDate ? 'border-danger' : ''"
                             aria-invalid="false"
                         >
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.relaunchDate',
+                        } %}
                     </div>
 				</div>
             </div>
@@ -46,7 +49,11 @@
                             ng-model="exchangeHistory.nextStepDate" 
                             ng-disabled="exchangeHistory.flag != data.exchangeFlags[1]"
                             class="form-control"
+                            ng-class="data.errors.nextStepDate ? 'border-danger' : ''"
                         >
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.nextStepDate',
+                        } %}
                     </div>
 				</div>
                 <div class="form-group row">
@@ -73,11 +80,17 @@
                                 type="text" 
                                 ng-model="exchangeHistory.projectConfidencePercentage" 
                                 class="form-control" 
+                                ng-class="data.errors.projectConfidencePercentage ? 'border-danger' : ''"
                             >
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-12">
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.projectConfidencePercentage',
+                        } %}
                     </div>
                 </div>
             </div>
@@ -101,7 +114,7 @@
                             <label class="col-sm-2 col-form-label">{{ 'label.who'|trans }}</label>
                             <div class="col-sm-10">
                                 {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
-                                    ngModel: 'exchangeHistory.user',
+                                    ngModel: 'exchangeHistory.archiUser',
                                     data: 'data.users',
                                     searchTerm: 'searchTerm.users',
                                     mdOnOpen: 'helpers.getUsers()',

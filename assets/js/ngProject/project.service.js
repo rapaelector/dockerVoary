@@ -70,6 +70,14 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
                 }
             }
         }
+
+        if (res.relaunchDate == null || res.relaunchDate == undefined) {
+            delete(res.relaunchDate);
+        }
+        if (res.nextStepDate == null || res.nextStepDate == undefined) {
+            delete(res.nextStepDate);
+        }
+
         console.info(res);
 
         return res;

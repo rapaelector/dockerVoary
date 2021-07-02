@@ -32,6 +32,11 @@ class Relaunch
      */
     private $date;
 
+    public function __construct()
+    {
+        $this->date = new \DateTIme();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

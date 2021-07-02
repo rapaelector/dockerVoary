@@ -231,8 +231,15 @@ class NgProjectController extends BaseController
             } else if ($exchangeHistory->getFlag() == ProjectConstants::EXCHANGE_HISTORY_NEXT_STEP_TYPE) {
                 $exchangeHistory->setDate($exchangeHistory->getNextStepDate());
             }
-            $project->addExchangeHistory($exchangeHistory);
 
+            if (!$exchangeHistory->getRelaunchDate()) {
+                $exchangeHistory->setRelaunchDate(new \DateTime());
+            }
+            if (!$exchangeHistory->getNextStepDate()) {
+                $exchangeHistory->setNextStepDate(new \DateTime());
+            }
+
+            $project->addExchangeHistory($exchangeHistory);
             $em->persist($exchangeHistory);
             $em->flush();
 
@@ -248,6 +255,6 @@ class NgProjectController extends BaseController
         return $this->json([
             'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project'),
             'errors' => $formService->getErrorsFromForm($form),
-        ]);
+        ], 400);
     }
 }

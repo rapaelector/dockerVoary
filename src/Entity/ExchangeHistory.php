@@ -67,6 +67,17 @@ class ExchangeHistory
      */
     private $flag;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class)
+     */
+    private $archiUser;
+    
+    public function __construct()
+    {
+        $this->relaunchDate = new \DateTime();
+        $this->nextStepDate = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +163,18 @@ class ExchangeHistory
     public function setFlag(?string $flag): self
     {
         $this->flag = $flag;
+
+        return $this;
+    }
+
+    public function getArchiUser(): ?user
+    {
+        return $this->archiUser;
+    }
+
+    public function setArchiUser(?user $archiUser): self
+    {
+        $this->archiUser = $archiUser;
 
         return $this;
     }
