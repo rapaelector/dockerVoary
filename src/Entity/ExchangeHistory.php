@@ -24,17 +24,20 @@ class ExchangeHistory
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"exchange-history"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * Assert\Date
+     * @Groups({"exchange-history"})
+     * @Assert\Date
      */
     private $date;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"exchange-history"})
      */
     private $description;
 
@@ -44,6 +47,7 @@ class ExchangeHistory
      *  min = 0,
      *  max = 100,
      * )
+     * @Groups({"exchange-history"})
      */
     private $projectConfidencePercentage;
 
@@ -54,21 +58,25 @@ class ExchangeHistory
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"exchange-history"})
      */
     private $relaunchDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"exchange-history"})
      */
     private $nextStepDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"exchange-history"})
      */
     private $flag;
 
     /**
      * @ORM\ManyToOne(targetEntity=user::class)
+     * @Groups({"exchange-history"})
      */
     private $archiUser;
     

@@ -5,12 +5,38 @@
         <h3 class="card-title">{{ 'label.exchange_history'|trans }}</h3>
     </div>
     <div class="card-body">
+        {# <div>
+            {{ '{{ data.exchangeHistories|json }}' }}
+        </div> #}
+        {#
         <div ng-repeat="item in mockData.exchangeHirtory">
             <div class="row">
                 <div class="col-sm-4">
                     {{ '{{ item.date|date }}' }}
                 </div>
                 <div class="col-sm-8">{{ '{{ item.description }}' }}</div>
+            </div>
+        </div>
+        #}
+        <div class="timeline mb-0" ng-repeat="(key, items) in data.exchangeHistories">
+            <div class="time-label" ng-if="key">
+                <span class="bg-info">{{ '{{ key }}' }}</span>
+            </div>
+            <div ng-repeat="item in items">
+                {# <img class="media-object" src="{{ '{{ item.avatar }}' }}" width="24" height="24" style="border-radius: 50%;"> #}
+                {# <i class="fas fa-envelope bg-blue"></i> #}
+                <div class="timeline-item">
+                    <span class="time"></span>
+                    <h3
+                        class="timeline-header font-weight-bold" 
+                        ng-if="item.archiUser && item.archiUser.name"
+                    >
+                        {{ '{{ item.archiUser.name }}' }}
+                    </h3>
+                    <div class="timeline-body">
+                        {{ '{{ item.description }}' }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -48,7 +48,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({self::GROUP_USER_PROJECT, "project-form-data", "data-project"})
+     * @Groups({self::GROUP_USER_PROJECT, "project-form-data", "data-project", "exchange-history"})
      */
     private $id;
 
@@ -56,7 +56,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
      * @Assert\NotBlank
-     * @Groups({self::GROUP_USER_PROJECT, "project-form-data"})
+     * @Groups({self::GROUP_USER_PROJECT, "project-form-data", "exchange-history"})
      */
     private $email;
 
@@ -81,7 +81,7 @@ class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      * )
-     * @Groups({self::GROUP_USER_PROJECT, "project-form-data"})
+     * @Groups({self::GROUP_USER_PROJECT, "project-form-data", "exchange-history"})
      */
     private $firstName;
 
@@ -91,7 +91,7 @@ class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      * )
-     * @Groups({self::GROUP_USER_PROJECT, "project-form-data"})
+     * @Groups({self::GROUP_USER_PROJECT, "project-form-data", "exchange-history"})
      */
     private $lastName;
 

@@ -66,7 +66,7 @@ class Project
     const TYPE_PRIORIZATION_WITHOUT_CONTINUTATION = "SANS SUITE";
 
     // HISTORY RELAUNCH DESCRIPION
-    const HISTORY_RELAUNCH_DESCRIPTION = 'last_relauch';
+    const HISTORY_RELAUNCH_DESCRIPTION = 'last_relaunch';
     
     // HISTORY FLAG
     const EXCHANGE_HISTORY_RELAUNCH_TYPE = 'relaunch_type';

@@ -14,8 +14,10 @@ use App\Form\Project\NgProjectType;
 use App\Form\User\ContactType;
 use App\Service\Form\FormService;
 use App\Service\User\UserService;
-
 use App\Controller\BaseController;
+use App\Utils\Resolver;
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -24,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Countries;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 #[Route('/project')]
 class NgProjectController extends BaseController
@@ -130,35 +133,6 @@ class NgProjectController extends BaseController
         return $this->json(['project' => $projectFormatted]);
     }
 
-    #[Route('/{id}/exchange/history', name: '', options: ['expose' => true])]
-    public function getExchangeHistory(Project $project, SerializerInterface $serializer)
-    {
-        $mockData = [
-            [
-                'date' => (new \DateTime())->format('d/m/Y'),
-                'description' => 'lorem ipsum dolor sit amet',
-                'color' => '#000',
-            ],
-            [
-                'date' => (new \DateTime())->format('d/m/Y'),
-                'description' => 'Idealy henintsoa',
-                'color' => '#000',
-            ],
-            [
-                'date' => (new \DateTime())->format('d/m/Y'),
-                'description' => 'Henintsoa andrianirina',
-                'color' => '#000',
-            ],
-            [
-                'date' => (new \DateTime())->format('d/m/Y'),
-                'description' => 'Test test',
-                'color' => '#000',
-            ],
-        ];
-
-        return $this->json(['data' => $mockData]);
-    }
-
     /**
      * @Security("is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW')")
      */
@@ -201,6 +175,45 @@ class NgProjectController extends BaseController
             'message' => $translator->trans('messages.contact_creation_failed', [], 'project'),
             'errors' => $formService->getErrorsFromForm($form),
         ], 400);
+    }
+
+    #[Route('/{id}/get/exchange/history', name: 'project.ng.get_exchange_history', options: ['expose' => true])]
+    public function getExchangeHistory(
+        Project $project,
+        SerializerInterface $serializer,
+        UserService $userService,
+        TranslatorInterface $translator
+    )
+    {
+        $res = [];
+        $map = ['archiUser'];
+        $exchangeHistories = $project->getExchangeHistories();
+
+        foreach ($exchangeHistories as $history) {
+            if ($history->getDate()) {
+                $key = $history->getDate()->format('d/m/Y');
+                if (!array_key_exists($key, $res)) {
+                    $res[$key] = [];
+                }
+                if ($description = $history->getDescription()) {
+                    if ($description == ProjectConstants::HISTORY_RELAUNCH_DESCRIPTION) {
+                        $descriptionTranslated = $translator->trans('label.'.$description, [], 'project');
+                        $history->setDescription($descriptionTranslated);
+                    }
+                }
+                if ($user = Resolver::resolve([$history, 'archiUser'], null)) {
+                    $res[$key]['avatar'] = $userService->getUserAvatar($user);
+                }
+
+                $res[$key][] = $history;
+            }
+        }
+
+        // dump($res);
+        // return new Response('<body>lorem</body>');
+        return $this->json([
+            'data' => $serializer->normalize($res, 'json', ['groups' => 'exchange-history']),
+        ]);
     }
 
     #[Route('/{id}/save/exchange-history', name: 'project.ng.save_exchange_history', options: ['expose' => true])]

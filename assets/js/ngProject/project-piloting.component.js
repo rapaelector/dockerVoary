@@ -5,6 +5,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         users: [],
         exchangeFlags: [],
         errors: [],
+        exchangeHistories: [],
     };
     $scope.exchangeHistory = {
         relaunchDate: '',
@@ -26,6 +27,13 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         }, error => {
             console.info('failed to laodd');
         });
+        projectService.getExchangeHistories().then((response) => {
+            console.info(response);
+            console.info(response.data);
+            $scope.data.exchangeHistories = response.data.data;
+        }, error => {
+            console.info(error);
+        })
     }
 
     $scope.fns = {};
