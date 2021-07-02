@@ -115,7 +115,7 @@ class NgProjectController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/follow-up', name: 'project.ng.get_project', options: ['expose' => true])]
+    #[Route('/{id}/get/project', name: 'project.ng.get_project', options: ['expose' => true])]
     public function getProject(Project $project, SerializerInterface $serializer)
     {
         $projectFormatted = $serializer->normalize(
