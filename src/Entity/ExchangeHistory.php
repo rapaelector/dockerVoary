@@ -2,14 +2,24 @@
 
 namespace App\Entity;
 
+use App\Entity\Common\BlameableTrait;
+use App\Entity\Common\SoftDeleteableTrait;
+use App\Entity\Common\TimestampableTrait;
 use App\Repository\ExchangeHistoryRepository;
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ExchangeHistoryRepository::class)
  */
 class ExchangeHistory
 {
+    use BlameableTrait;
+    use SoftDeleteableTrait;
+    use TimestampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -19,6 +29,7 @@ class ExchangeHistory
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Date
      */
     private $date;
 
@@ -29,6 +40,10 @@ class ExchangeHistory
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @Assert\Range(
+     *  min = 0,
+     *  max = 100,
+     * )
      */
     private $projectConfidencePercentage;
 

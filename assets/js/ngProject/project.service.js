@@ -1,8 +1,8 @@
 angular.module('projectApp').factory('projectService', ProjectService);
 
-ProjectService.$inject = ['$http', 'fosJsRouting'];
+ProjectService.$inject = ['$http', 'fosJsRouting', 'PROJECT_ID'];
 
-function ProjectService($http, fosJsRouting) {
+function ProjectService($http, fosJsRouting, PROJECT_ID) {
     var _this = this;
 
     _this.getProject = function(projectId) {
@@ -53,9 +53,14 @@ function ProjectService($http, fosJsRouting) {
         return res;
     };
 
-    // _this.getExchangeHistory = function(projectId) {
-    //     return $http.get(fosJsRouting.generate('project.ng.get_exchange_history', { id: projectId }))
-    // }
+    _this.saveProjectPiloting = function(exchangeHistoryData) {
+        var formData = {...exchangeHistoryData };
+        if (formData.date) {
+            formData.date = moment(formData).toDate();
+        }
+
+        return $http.post(fosJsRouting.generate('project.ng.save_exchange_history', { id: PROJECT_ID }), formData);
+    }
 
     return _this;
 };

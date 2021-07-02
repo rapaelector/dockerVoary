@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\ExchangeHistory;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
+use App\Form\ExchangeHistoryType;
 use App\Form\Project\NgProjectType;
 use App\Form\User\ContactType;
 use App\Service\Form\FormService;
@@ -196,5 +198,38 @@ class NgProjectController extends BaseController
             'message' => $translator->trans('messages.contact_creation_failed', [], 'project'),
             'errors' => $formService->getErrorsFromForm($form),
         ], 400);
+    }
+
+    #[Route('/{id}/save/exchange-history', name: 'project.ng.save_exchange_history', options: ['expose' => true])]
+    public function saveExchangeHistory(
+        Request $request, 
+        Project $project, 
+        EntityManagerInterface $em, 
+        TranslatorInterface $translator, 
+        SerializerInterface $serializer,
+        FormService $formService
+    )
+    {
+        $exchangeHistory = new ExchangeHistory();
+        $form = $this->createForm(ExchangeHistoryType::class, $exchangeHistory, [
+            'csrf_protection' => false,
+            'allow_extra_fields' => true,
+        ]);
+        $form->submit(json_decode($request->getContent(), true));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($em);
+            $em->flush();
+
+            return $this->json([
+                'data' => $serializer->normalize($exchangeHistory, 'json'),
+                'message' => $translator->trans('messages.exchange_history_saved_successfull', [], 'project'),
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project'),
+            'errors' => $formService->getErrorsFromForm($form),
+        ]);
     }
 }

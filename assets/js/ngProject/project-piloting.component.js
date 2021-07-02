@@ -1,4 +1,5 @@
 function ProjectPilotingController($scope, projectService) {
+    $scope.onLoading = false;
     $scope.data = {
         users: [],
     };
@@ -11,19 +12,24 @@ function ProjectPilotingController($scope, projectService) {
     };
 
     this.$onInit = function() {
-        console.info('init project-piloting-component');
-        // projectService.getExchangeHistory().then((response) => {
-        //     $scope.data.exchangeHistory = response.data.exchangeHistory;
-        // }, error => {
-        //     console.info('failed to load exchangeHistory');
-        // });
         projectService.getFormData().then((response) => {
-            console.info('nothing fetch or error occuered');
             $scope.data.users = response.data.users;
         }, error => {
             console.info('failed to laodd');
         });
     }
+
+    $scope.fns = {};
+    $scope.fns.saveProjectPiloting = function() {
+        $scope.onLoading = true;
+        projectService.saveProjectPiloting($scope.exchangeHistory).then((response) => {
+            console.info(response);
+            $scope.onLoading = false;
+        }, error => {
+            console.info(error);
+            $scope.onLoading = false;
+        })
+    };
 }
 
 ProjectPilotingController.$inject = ['$scope', 'projectService'];
