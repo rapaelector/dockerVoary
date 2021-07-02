@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\Relaunch;
 use App\Entity\ExchangeHistory;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
@@ -98,6 +99,7 @@ class NgProjectController extends BaseController
         $priorizationOfFileFormatted = array_map(function ($elem) use ($translator) {
             return ['value' => $elem, 'label' => $translator->trans($elem, [], 'project')];
         }, ProjectConstants::PRIORIZATION_FILE_TYPE);
+        // $exchangeHistory = 
 
         return $this->json([
             'clients' => $clientsFormatted,
@@ -112,6 +114,7 @@ class NgProjectController extends BaseController
             }, ProjectConstants::CASE_TYPES),
             'disaSheetsValidation' => $disaSheetsValidation,
             'priorizationOfFileFormatted' => $priorizationOfFileFormatted,
+            'exchangeFlags' => ProjectConstants::EXCHANGE_HISTORIQUE_FLAG,
         ]);
     }
 
@@ -215,14 +218,29 @@ class NgProjectController extends BaseController
             'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
-        $form->submit(json_decode($request->getContent(), true));
+        $formData = json_decode($request->getContent(), true);
+        $form->submit($formData);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($em);
+            if ($exchangeHistory->getFlag() == ProjectConstants::EXCHANGE_HISTORY_RELAUNCH_TYPE) {
+                $relaunch = new Relaunch();
+                $project->setLastRelaunch($relaunch);
+                $project->addRelaunch($relaunch);
+                $exchangeHistory->setDate($exchangeHistory->getRelaunchDate());
+                $exchangeHistory->setDescription(ProjectConstants::HISTORY_RELAUNCH_DESCRIPTION);
+            } else if ($exchangeHistory->getFlag() == ProjectConstants::EXCHANGE_HISTORY_NEXT_STEP_TYPE) {
+                $exchangeHistory->setDate($exchangeHistory->getNextStepDate());
+            }
+            $project->addExchangeHistory($exchangeHistory);
+
+            $em->persist($exchangeHistory);
             $em->flush();
 
             return $this->json([
-                'data' => $serializer->normalize($exchangeHistory, 'json'),
+                'data' => [
+                    'exchangeHistory' => $serializer->normalize($exchangeHistory, 'json', ['groups' => 'data-project']),
+                    'project' => $serializer->normalize($project, 'json', ['groups' => 'project-form-data']),
+                ],
                 'message' => $translator->trans('messages.exchange_history_saved_successfull', [], 'project'),
             ]);
         }

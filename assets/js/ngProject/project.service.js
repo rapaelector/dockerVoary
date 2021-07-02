@@ -54,13 +54,25 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
     };
 
     _this.saveProjectPiloting = function(exchangeHistoryData) {
-        var formData = {...exchangeHistoryData };
-        if (formData.date) {
-            formData.date = moment(formData).toDate();
-        }
+        var formData = _this.formatProjectPiloting(exchangeHistoryData);
 
         return $http.post(fosJsRouting.generate('project.ng.save_exchange_history', { id: PROJECT_ID }), formData);
     }
 
+    _this.formatProjectPiloting = function(data) {
+        var res = {...data };
+        var dateType = ['date', 'relaunchDate', 'nexStepDate'];
+
+        for (var item in res) {
+            if (dateType.indexOf(item) > -1) {
+                if (res[item]) {
+                    res[item] = moment(res[item]).format('YYYY-MM-DD');
+                }
+            }
+        }
+        console.info(res);
+
+        return res;
+    }
     return _this;
 };

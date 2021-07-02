@@ -15,7 +15,19 @@ class ExchangeHistoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateType::class)
+            ->add('relaunchDate', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+            ->add('nextStepDate', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+            ->add('flag', TextType::class)
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
             ->add('description', TextareaType::class)
             ->add('projectConfidencePercentage', TextType::class)
         ;

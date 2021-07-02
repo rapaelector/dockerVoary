@@ -1,11 +1,15 @@
 function ProjectPilotingController($scope, projectService) {
     $scope.onLoading = false;
     $scope.data = {
+        isLastRelauch: '1',
         users: [],
+        exchangeFlags: [],
     };
     $scope.exchangeHistory = {
-        lastRelaunch: '',
-        date: '',
+        date: null,
+        relaunchDate: '',
+        nextStepDate: '',
+        flag: '',
         description: '',
         projectConfidencePercentage: '',
         archi: '',
@@ -14,6 +18,9 @@ function ProjectPilotingController($scope, projectService) {
     this.$onInit = function() {
         projectService.getFormData().then((response) => {
             $scope.data.users = response.data.users;
+            $scope.data.exchangeHistory = response.data.exchangeHistory;
+            $scope.data.exchangeFlags = response.data.exchangeFlags;
+            $scope.exchangeHistory.flag = $scope.data.exchangeFlags[0];
         }, error => {
             console.info('failed to laodd');
         });
@@ -22,8 +29,12 @@ function ProjectPilotingController($scope, projectService) {
     $scope.fns = {};
     $scope.fns.saveProjectPiloting = function() {
         $scope.onLoading = true;
+
+        if ($scope.data.isLastRelauch == '1') {
+            $scope.exchangeHistory.date = null;
+        }
+
         projectService.saveProjectPiloting($scope.exchangeHistory).then((response) => {
-            console.info(response);
             $scope.onLoading = false;
         }, error => {
             console.info(error);

@@ -65,6 +65,18 @@ class Project
     const TYPE_PRIORIZATION_NORMAL = "NORMAL";
     const TYPE_PRIORIZATION_WITHOUT_CONTINUTATION = "SANS SUITE";
 
+    // HISTORY RELAUNCH DESCRIPION
+    const HISTORY_RELAUNCH_DESCRIPTION = 'last_relauch';
+    
+    // HISTORY FLAG
+    const EXCHANGE_HISTORY_RELAUNCH_TYPE = 'relaunch_type';
+    const EXCHANGE_HISTORY_NEXT_STEP_TYPE = 'nex_step_type';
+
+    const EXCHANGE_HISTORIQUE_FLAG = [
+        self::EXCHANGE_HISTORY_RELAUNCH_TYPE,
+        self::EXCHANGE_HISTORY_NEXT_STEP_TYPE,
+    ];
+
     // CASE TYPE CHOICE
     const CASE_TYPES = [
         self::CASE_TYPE_EARTH_WORKS,

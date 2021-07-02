@@ -29,7 +29,7 @@ class ExchangeHistory
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\Date
+     * Assert\Date
      */
     private $date;
 
@@ -46,6 +46,26 @@ class ExchangeHistory
      * )
      */
     private $projectConfidencePercentage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="exchangeHistories")
+     */
+    private $Project;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $relaunchDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $nextStepDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $flag;
 
     public function getId(): ?int
     {
@@ -84,6 +104,54 @@ class ExchangeHistory
     public function setProjectConfidencePercentage(?string $projectConfidencePercentage): self
     {
         $this->projectConfidencePercentage = $projectConfidencePercentage;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->Project;
+    }
+
+    public function setProject(?Project $Project): self
+    {
+        $this->Project = $Project;
+
+        return $this;
+    }
+
+    public function getRelaunchDate(): ?\DateTimeInterface
+    {
+        return $this->relaunchDate;
+    }
+
+    public function setRelaunchDate(?\DateTimeInterface $relaunchDate): self
+    {
+        $this->relaunchDate = $relaunchDate;
+
+        return $this;
+    }
+
+    public function getNextStepDate(): ?\DateTimeInterface
+    {
+        return $this->nextStepDate;
+    }
+
+    public function setNextStepDate(?\DateTimeInterface $nextStepDate): self
+    {
+        $this->nextStepDate = $nextStepDate;
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(?string $flag): self
+    {
+        $this->flag = $flag;
 
         return $this;
     }

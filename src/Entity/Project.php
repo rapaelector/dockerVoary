@@ -378,7 +378,7 @@ class Project
     /**
      * Dernier relaunch
      * 
-     * @ORM\OneToOne(targetEntity=Relaunch::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Relaunch::class, cascade={"persist", "remove"}) 
      * @Groups({"data-project"})
      */
     private $lastRelaunch;
@@ -419,9 +419,15 @@ class Project
      */
     private $scope;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ExchangeHistory::class, mappedBy="Project")
+     */
+    private $exchangeHistories;
+
     public function __construct()
     {
         $this->relaunches = new ArrayCollection();
+        $this->exchangeHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -946,6 +952,36 @@ class Project
     public function setScope(?string $scope): self
     {
         $this->scope = $scope;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ExchangeHistory[]
+     */
+    public function getExchangeHistories(): Collection
+    {
+        return $this->exchangeHistories;
+    }
+
+    public function addExchangeHistory(ExchangeHistory $exchangeHistory): self
+    {
+        if (!$this->exchangeHistories->contains($exchangeHistory)) {
+            $this->exchangeHistories[] = $exchangeHistory;
+            $exchangeHistory->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExchangeHistory(ExchangeHistory $exchangeHistory): self
+    {
+        if ($this->exchangeHistories->removeElement($exchangeHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($exchangeHistory->getProject() === $this) {
+                $exchangeHistory->setProject(null);
+            }
+        }
 
         return $this;
     }
