@@ -78,8 +78,6 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
             delete(res.nextStepDate);
         }
 
-        console.info(res);
-
         return res;
     }
 

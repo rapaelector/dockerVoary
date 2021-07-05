@@ -69,8 +69,8 @@ class Project
     const HISTORY_RELAUNCH_DESCRIPTION = 'last_relaunch';
     
     // HISTORY FLAG
-    const EXCHANGE_HISTORY_RELAUNCH_TYPE = 'relaunch_type';
-    const EXCHANGE_HISTORY_NEXT_STEP_TYPE = 'nex_step_type';
+    const EXCHANGE_HISTORY_RELAUNCH_TYPE = 'type_relaunch';
+    const EXCHANGE_HISTORY_NEXT_STEP_TYPE = 'type_next_step';
 
     const EXCHANGE_HISTORIQUE_FLAG = [
         self::EXCHANGE_HISTORY_RELAUNCH_TYPE,

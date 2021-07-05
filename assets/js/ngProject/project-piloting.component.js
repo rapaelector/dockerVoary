@@ -6,6 +6,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         exchangeFlags: [],
         errors: [],
         exchangeHistories: [],
+        exchangeHistoryCount: 0,
     };
     $scope.exchangeHistory = {
         relaunchDate: '',
@@ -28,8 +29,8 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
             console.info('failed to laodd');
         });
         projectService.getExchangeHistories().then((response) => {
-            console.info(response);
-            $scope.data.exchangeHistories = response.data.data;
+            $scope.data.exchangeHistories = response.data.data.exchangeHistories;
+            $scope.data.exchangeHistoryCount = response.data.data.exchangeHistoryCount;
         }, error => {
             console.info(error);
         })
@@ -48,6 +49,9 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
             $scope.exchangeHistory.archiUser = null;
         }
     })
+    $scope.$watch('exchangeHistory', function() {
+
+    }, true);
     $scope.fns.saveProjectPiloting = function() {
         $scope.onLoading = true;
         $scope.data.errors = {};
@@ -60,6 +64,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
             $scope.exchangeHistory = {};
             console.info(response);
             $scope.data.exchangeHistories.push(response.data.data.exchangeHistory);
+            $scope.data.exchangeHistoryCount += 1;
             $scope.fns.showNotification(response.data.message);
         }, error => {
             $scope.onLoading = false;
@@ -88,14 +93,21 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         });
     }
     $scope.fns.canSubmit = function() {
+        if (!$scope.exchangeHistory || Object.keys($scope.exchangeHistory).length === 0) {
+            return false;
+        }
         if (
             ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[0] && ($scope.exchangeHistory.relaunchDate == null || $scope.exchangeHistory.relaunchDate == '')) ||
             ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[1] && ($scope.exchangeHistory.nextStepDate == null || $scope.exchangeHistory.nextStepDate == ''))
         ) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    $scope.fns.cancel = function() {
+        $scope.exchangeHistory = {};
     }
 }
 

@@ -76,7 +76,7 @@
                     <label class="col-sm-5 col-form-label">
                         {{ 'label.project_confidence_percentage'|trans }}
                     </label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-7">
                         <div class="input-group">
                             <input 
                                 type="text" 
@@ -88,10 +88,9 @@
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
                         {% include 'project/ng/templates/form/_errors.html.twig' with {
                             errorPath: 'data.errors.percentage',
+                            errorClass: 'text-sm'
                         } %}
                     </div>
                 </div>
@@ -99,7 +98,7 @@
             <div class="col-sm-12 mt-2">
                 <div class="row align-items-center no-gutters">
                     <div class="col-sm-5 d-flex flex-items-center">
-                        <label class="mr-2 text-nowrap">{{ 'label.archi'|trans }} :</label>
+                        <label class="mr-2 mb-0 text-nowrap">{{ 'label.archi'|trans }} :</label>
                         <md-radio-group ng-model="exchangeHistory.archi" aria-labelledby="favoriteFruit" class="d-flex mr-3">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -137,10 +136,17 @@
             <button
                 type="submit" 
                 class="btn btn-sm btn-app-primary"
-                ng-disabled="fns.canSubmit()"
+                ng-disabled="!fns.canSubmit()"
                 ng-click="fns.saveProjectPiloting()"
             >
                 {{ 'action.save'|trans({}, 'messages') }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-sm btn-app-secondary" 
+                ng-click="fns.cancel()"
+            >
+                {{ 'action.cancel'|trans({}, 'messages') }}
             </button>
         </div>
     </div>

@@ -2,7 +2,8 @@
 
 <div class="card card-outline card-app-secondary exchange-card">
     <div class="card-header sticky-top bg-white">
-        <h3 class="card-title">{{ 'label.exchange_history'|trans }}</h3>
+        <h3 class="card-title mr-1">{{ 'label.exchange_history'|trans }}</h3>
+        <span>({{ '{{ data.exchangeHistoryCount }}' }})</span>
     </div>
     <div class="card-body">
         <div class="timeline m-0" >
@@ -25,10 +26,16 @@
                                     width="30" height="30"
                                 >
                                 <div class="media-body">
-                                    <h5 class="mt-0 font-weight-bold">{{ '{{ item.archiUser.name }}' }}</h5>
+                                    <h5 class="mt-0 font-weight-bold" ng-if="item.archiUser">{{ '{{ item.archiUser.name }}' }}</h5>
                                     <h5 class="mt-0 font-weight-bold" ng-if="!item.archiUser">{{ 'label.auto'|trans }}</h5>
                                     {{ '{{ item.description }}' }}
                                 </div>
+                            </div>
+                            <div
+                                class="percentage-container text-muted text-sm" 
+                                title="{{ 'label.project_confidence_percentage'|trans ~ ': {{ item.percentage }}' }}%"
+                            >
+                                {{ '{{ item.percentage ? item.percentage : "-" }}' }} %
                             </div>
                         </div>
                     </div>

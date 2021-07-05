@@ -15,6 +15,6 @@ class ExchangeHistoryService
             return $classColor;
         }
 
-        return 'exchange-completion-default';
+        return 'exchange-completion-1';
     }
 }

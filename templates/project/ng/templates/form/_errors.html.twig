@@ -1,3 +1,5 @@
-<div ng-if="{{ errorPath }}" ng-repeat="error in {{ errorPath }}" class="text-danger">
+{% if errorClass is not defined %}{% set errorClass = '' %}{% endif %}
+
+<div ng-if="{{ errorPath }}" ng-repeat="error in {{ errorPath }}" class="text-danger {{ errorClass }}">
     {{ '{{ error }}' }}
 </div>

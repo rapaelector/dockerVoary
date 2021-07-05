@@ -182,6 +182,9 @@ label.required:after {
                 background: $value;
                 color: color-yiq($value);
             }
+            .card.card-oultline {
+                border: 1px solid $value;
+            }
         }
     }
     .exchange-completion-default {

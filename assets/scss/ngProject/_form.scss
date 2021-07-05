@@ -92,11 +92,15 @@ md-select {
     height: 75vh;
     overflow: auto;
     position: relative;
+    .card {
+        box-shadow: none;
+    }
     .card-header.sticky-top {
         position: sticky;
     }
     .card-body {
         min-height: unset;
+        box-shadow: none;
         .timeline {
             .time-label {
                 width: 90px;
@@ -114,6 +118,14 @@ md-select {
                     }
                 }
             }
+        }
+        .timeline>div>.timeline-item {
+            box-shadow: none;
+        }
+        .percentage-container {
+            position: absolute;
+            top: 8px;
+            right: 10px;
         }
     }
 }

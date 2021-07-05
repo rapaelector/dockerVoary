@@ -207,7 +207,10 @@ class NgProjectController extends BaseController
 
         
         return $this->json([
-            'data' => $res,
+            'data' => [
+                'exchangeHistories' => $res,
+                'exchangeHistoryCount' => count($exchangeHistories),
+            ],
         ]);
     }
 
