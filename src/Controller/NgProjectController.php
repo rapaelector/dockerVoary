@@ -197,22 +197,30 @@ class NgProjectController extends BaseController
                 }
                 if ($description = $history->getDescription()) {
                     if ($description == ProjectConstants::HISTORY_RELAUNCH_DESCRIPTION) {
-                        $descriptionTranslated = $translator->trans('label.'.$description, [], 'project');
+                        $descriptionTranslated = strtoupper($translator->trans('label.'.$description, [], 'project'));
+                        $user = $history->getArchiUser();
+                        if ($user) {
+                            $user->setLastName($translator->trans('label.auto', [], 'project'));
+                            $user->setFirstName('');
+                        }
+                        $history->setArchiUser($user);
                         $history->setDescription($descriptionTranslated);
                     }
                 }
-                if ($user = Resolver::resolve([$history, 'archiUser'], null)) {
-                    $res[$key]['avatar'] = $userService->getUserAvatar($user);
+                $normalizedHistory = $serializer->normalize($history, 'json', ['groups' => 'exchange-history']);
+                $normalizedHistory['avatar'] = $userService->getUserAvatar($user);
+                if ($projectConfidencePercentage = $history->getProjectConfidencePercentage()) {
+                    $class =  ($projectConfidencePercentage / 5) > 10 ? floor($projectConfidencePercentage / 5) : ceil($projectConfidencePercentage / 5);
+                    $normalizedHistory['class'] = 'exchange-completion-' .$class;
                 }
 
-                $res[$key][] = $history;
+                $res[$key][] = $normalizedHistory;
             }
         }
 
-        // dump($res);
-        // return new Response('<body>lorem</body>');
+        
         return $this->json([
-            'data' => $serializer->normalize($res, 'json', ['groups' => 'exchange-history']),
+            'data' => $res,
         ]);
     }
 

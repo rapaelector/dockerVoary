@@ -87,3 +87,32 @@ md-select {
 #contact-form-dialog {
     width: 600px;
 }
+
+.exchange-card {
+    height: 75vh;
+    overflow: auto;
+    position: relative;
+    .card-header.sticky-top {
+        position: sticky;
+    }
+    .card-body {
+        .timeline {
+            .time-label {
+                width: 90px;
+                position: absolute;
+                display: inline-block;
+            }
+            .timeline-item {
+                margin-left: 100px;
+                .timeline-avatar {
+                    object-fit: cover;
+                }
+                .media-body {
+                    h5 {
+                        font-size: _rem(14);
+                    }
+                }
+            }
+        }
+    }
+}

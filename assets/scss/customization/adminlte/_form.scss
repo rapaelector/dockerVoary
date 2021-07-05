@@ -177,6 +177,11 @@ label.required:after {
             background-color: $value;
             color: color-yiq($value);
         }
+        .exchange-completion-#{$name} {
+            .time-label {
+                background: $value;
+            }
+        }
     }
     .business-charge-change {
         width: 100%;

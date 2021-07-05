@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group row">
-					<label class="col-sm-3 col-form-label">{{ 'label.last_relaunch'|trans }} :</label>
+					<label class="col-sm-3 col-form-label">{{ 'label.last_relaunch_label'|trans }} :</label>
                     <div class="col-sm-9">
                         <input 
                             type="date" 
@@ -33,6 +33,7 @@
                             class="form-control"
                             ng-class="data.errors.relaunchDate ? 'border-danger' : ''"
                             aria-invalid="false"
+                            ng-required="exchangeHistory.flag != data.exchangeFlags[0]"
                         >
                         {% include 'project/ng/templates/form/_errors.html.twig' with {
                             errorPath: 'data.errors.relaunchDate',
@@ -50,6 +51,7 @@
                             ng-disabled="exchangeHistory.flag != data.exchangeFlags[1]"
                             class="form-control"
                             ng-class="data.errors.nextStepDate ? 'border-danger' : ''"
+                            ng-required="exchangeHistory.flag != data.exchangeFlags[1]"
                         >
                         {% include 'project/ng/templates/form/_errors.html.twig' with {
                             errorPath: 'data.errors.nextStepDate',
@@ -94,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 mt-4">
+            <div class="col-sm-12 mt-2">
                 <div class="row align-items-center no-gutters">
                     <div class="col-sm-5 d-flex flex-items-center">
                         <label class="mr-2 text-nowrap">{{ 'label.archi'|trans }} :</label>
@@ -134,7 +136,8 @@
         <div class="text-center">
             <button
                 type="submit" 
-                class="btn btn-sm btn-app-primary" 
+                class="btn btn-sm btn-app-primary"
+                ng-disabled="fns.canSubmit()"
                 ng-click="fns.saveProjectPiloting()"
             >
                 {{ 'action.save'|trans({}, 'messages') }}

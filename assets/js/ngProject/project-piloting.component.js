@@ -87,6 +87,16 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
             console.info('failed to laod md toast');
         });
     }
+    $scope.fns.canSubmit = function() {
+        if (
+            ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[0] && ($scope.exchangeHistory.relaunchDate == null || $scope.exchangeHistory.relaunchDate == '')) ||
+            ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[1] && ($scope.exchangeHistory.nextStepDate == null || $scope.exchangeHistory.nextStepDate == ''))
+        ) {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 ProjectPilotingController.$inject = ['$scope', '$mdToast', 'projectService'];

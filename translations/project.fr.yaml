@@ -30,7 +30,8 @@ label:
   prospect: Prospect
   serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
   add_new_contact: 'Ajouter contact'
-  last_relaunch: 'Dernière relance'
+  last_relaunch: 'DERNIÈRE RELANCE'
+  last_relaunch_label: 'Dernière relance'
   next_step: 'Prochaine étage'
   project_confidence_percentage: '% de confiance dans le projet'
   archi: 'Archi'
@@ -39,6 +40,7 @@ label:
   enter_a_valid_percentage: 'Entrez un(e) pourcentage valid'
   description: 'Description'
   exchange_history: 'Historique des échanges'
+  auto: 'AUTO'
 
 contact:
   label: Interlocuteur
