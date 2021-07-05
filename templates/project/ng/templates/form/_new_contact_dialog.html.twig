@@ -108,10 +108,19 @@
 
     
 	<md-dialog-actions layout="row">
-        <md-button ng-click="fns.cancelContactCreation()" type="submit" aria-label="cancel">
+        <md-button
+            ng-click="fns.cancelContactCreation()" 
+            type="button" 
+            aria-label="cancel"
+            class="bg-app-secondary"
+        >
 			{{ 'action.cancel'|trans({}, 'messages') }}
 		</md-button>
-		<md-button ng-click="fns.saveContact()" aria-label="save">
+		<md-button 
+            ng-click="fns.saveContact()" 
+            aria-label="save"
+            class="bg-app-primary"
+        >
 			{{ 'action.save'|trans({}, 'messages') }}
 		</md-button>
 	</md-dialog-actions>

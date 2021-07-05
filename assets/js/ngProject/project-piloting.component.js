@@ -62,7 +62,6 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         projectService.saveProjectPiloting($scope.exchangeHistory).then((response) => {
             $scope.onLoading = false;
             $scope.exchangeHistory = {};
-            console.info(response);
             $scope.data.exchangeHistories.push(response.data.data.exchangeHistory);
             $scope.data.exchangeHistoryCount += 1;
             $scope.fns.showNotification(response.data.message);
