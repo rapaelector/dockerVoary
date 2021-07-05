@@ -12,10 +12,11 @@ use App\Form\ProjectEditType;
 use App\Form\ExchangeHistoryType;
 use App\Form\Project\NgProjectType;
 use App\Form\User\ContactType;
-use App\Service\Form\FormService;
-use App\Service\User\UserService;
 use App\Controller\BaseController;
 use App\Utils\Resolver;
+use App\Service\Form\FormService;
+use App\Service\User\UserService;
+use App\Service\ExchangeHistory\ExchangeHistoryService;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -165,6 +166,7 @@ class NgProjectController extends BaseController
                 ['groups' => 'project-form-data']
             );
             $contactFormatted['avatar'] = $userService->getUserAvatar($contact);
+
             return $this->json([
                 'message' => $translator->trans('messages.contact_create_success', [], 'project'), 
                 'data' => $contactFormatted
@@ -182,7 +184,8 @@ class NgProjectController extends BaseController
         Project $project,
         SerializerInterface $serializer,
         UserService $userService,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        ExchangeHistoryService $exchangeHistoryService
     )
     {
         $res = [];
@@ -190,32 +193,16 @@ class NgProjectController extends BaseController
         $exchangeHistories = $project->getExchangeHistories();
 
         foreach ($exchangeHistories as $history) {
-            if ($history->getDate()) {
-                $key = $history->getDate()->format('d/m/Y');
-                if (!array_key_exists($key, $res)) {
-                    $res[$key] = [];
-                }
-                if ($description = $history->getDescription()) {
-                    if ($description == ProjectConstants::HISTORY_RELAUNCH_DESCRIPTION) {
-                        $descriptionTranslated = strtoupper($translator->trans('label.'.$description, [], 'project'));
-                        $user = $history->getArchiUser();
-                        if ($user) {
-                            $user->setLastName($translator->trans('label.auto', [], 'project'));
-                            $user->setFirstName('');
-                        }
-                        $history->setArchiUser($user);
-                        $history->setDescription($descriptionTranslated);
-                    }
-                }
-                $normalizedHistory = $serializer->normalize($history, 'json', ['groups' => 'exchange-history']);
-                $normalizedHistory['avatar'] = $userService->getUserAvatar($user);
-                if ($projectConfidencePercentage = $history->getProjectConfidencePercentage()) {
-                    $class =  ($projectConfidencePercentage / 5) > 10 ? floor($projectConfidencePercentage / 5) : ceil($projectConfidencePercentage / 5);
-                    $normalizedHistory['class'] = 'exchange-completion-' .$class;
-                }
-
-                $res[$key][] = $normalizedHistory;
+            if ($history->getDescription() == ProjectConstants::HISTORY_RELAUNCH_DESCRIPTION) {
+                $descriptionTranslated = $translator->trans('label.'.$history->getDescription(), [], 'project');
+                $history->setDescription($descriptionTranslated);
             }
+            $normalizedHistory = $serializer->normalize($history, 'json', ['groups' => 'exchange-history']);
+            $normalizedHistory['avatar'] = $userService->getUserAvatar($history->getArchiUser());
+            $normalizedHistory['class'] = $exchangeHistoryService->getExchangeHistoryColor($history);
+            $normalizedHistory['date'] = $history->getDate() ? $history->getDate()->format('d/m/Y') : '';
+
+            $res[] = $normalizedHistory;
         }
 
         
@@ -231,7 +218,9 @@ class NgProjectController extends BaseController
         EntityManagerInterface $em, 
         TranslatorInterface $translator, 
         SerializerInterface $serializer,
-        FormService $formService
+        FormService $formService,
+        UserService $userService,
+        ExchangeHistoryService $exchangeHistoryService
     )
     {
         $exchangeHistory = new ExchangeHistory();
@@ -253,20 +242,18 @@ class NgProjectController extends BaseController
                 $exchangeHistory->setDate($exchangeHistory->getNextStepDate());
             }
 
-            if (!$exchangeHistory->getRelaunchDate()) {
-                $exchangeHistory->setRelaunchDate(new \DateTime());
-            }
-            if (!$exchangeHistory->getNextStepDate()) {
-                $exchangeHistory->setNextStepDate(new \DateTime());
-            }
-
             $project->addExchangeHistory($exchangeHistory);
             $em->persist($exchangeHistory);
             $em->flush();
 
+            $normalizedHistory = $serializer->normalize($exchangeHistory, 'json', ['groups' => 'exchange-history']);
+            $normalizedHistory['avatar'] = $userService->getUserAvatar($exchangeHistory->getArchiUser());
+            $normalizedHistory['class'] = $exchangeHistoryService->getExchangeHistoryColor($exchangeHistory);
+            $normalizedHistory['date'] = $exchangeHistory->getDate() ? $exchangeHistory->getDate()->format('d/m/Y') : '';
+
             return $this->json([
                 'data' => [
-                    'exchangeHistory' => $serializer->normalize($exchangeHistory, 'json', ['groups' => 'data-project']),
+                    'exchangeHistory' => $normalizedHistory,
                     'project' => $serializer->normalize($project, 'json', ['groups' => 'project-form-data']),
                 ],
                 'message' => $translator->trans('messages.exchange_history_saved_successfull', [], 'project'),

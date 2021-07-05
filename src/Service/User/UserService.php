@@ -8,6 +8,7 @@ use App\Entity\Project;
 use App\Repository\UserRepository;
 use App\Utils\Resolver;
 
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Asset\Packages;
 use Vich\UploaderBundle\Storage\StorageInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,12 +21,19 @@ class UserService
     /** @var EntityManagerInterface $em */
     private $em;
 
-    public function __construct(UserRepository $repository, EntityManagerInterface $em, Packages $packages, StorageInterface $storage)
+    public function __construct(
+        UserRepository $repository, 
+        EntityManagerInterface $em, 
+        Packages $packages, 
+        StorageInterface $storage,
+        Security $security
+    )
     {
         $this->repository = $repository;
         $this->em = $em;
         $this->packages = $packages;
         $this->storage = $storage;
+        $this->security = $security;
     }
 
     public function prepareUserRemovable(User $user)

@@ -32,7 +32,7 @@ class ExchangeHistoryType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('description', TextareaType::class)
-            ->add('projectConfidencePercentage', TextType::class)
+            ->add('percentage', TextType::class)
             ->add('archiUser', EntityType::class, [
                 'class' => User::class,
             ])

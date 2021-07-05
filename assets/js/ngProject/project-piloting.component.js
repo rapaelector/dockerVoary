@@ -12,7 +12,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         nextStepDate: '',
         flag: '',
         description: '',
-        projectConfidencePercentage: '',
+        percentage: '',
         archi: '',
         date: null,
         archiUser: null,
@@ -29,7 +29,6 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         });
         projectService.getExchangeHistories().then((response) => {
             console.info(response);
-            console.info(response.data);
             $scope.data.exchangeHistories = response.data.data;
         }, error => {
             console.info(error);
@@ -52,7 +51,6 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
     $scope.fns.saveProjectPiloting = function() {
         $scope.onLoading = true;
         $scope.data.errors = {};
-
         if ($scope.data.isLastRelauch == '1') {
             $scope.exchangeHistory.date = null;
         }
@@ -60,6 +58,8 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         projectService.saveProjectPiloting($scope.exchangeHistory).then((response) => {
             $scope.onLoading = false;
             $scope.exchangeHistory = {};
+            console.info(response);
+            $scope.data.exchangeHistories.push(response.data.data.exchangeHistory);
             $scope.fns.showNotification(response.data.message);
         }, error => {
             $scope.onLoading = false;

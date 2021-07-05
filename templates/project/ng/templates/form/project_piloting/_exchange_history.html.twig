@@ -6,22 +6,22 @@
     </div>
     <div class="card-body">
         <div class="timeline m-0" >
-            <div ng-repeat="(key, items) in data.exchangeHistories">
-                <div ng-repeat="item in items" ng-class="item.class">
-                    <span class="time-label p-1 rounded text-center">{{ '{{ key }}' }}</span>
-                    <div class="timeline-item">
-                        <div class="card card-oultline">
-                            <div class="card-body p-2">
-                                <div class="media">
-                                    <img
-                                        src="{{ '{{ item.avatar }}' }}" 
-                                        class="align-self-start mr-3 rounded-circle timeline-avatar" 
-                                        width="30" height="30"
-                                    >
-                                    <div class="media-body">
-                                        <h5 class="mt-0">{{ '{{ item.archiUser.name }}' }}</h5>
-                                        {{ '{{ item.description }}' }}
-                                    </div>
+            {# <div ng-repeat="(key, items) in data.exchangeHistories">
+            </div> #}
+            <div ng-repeat="item in data.exchangeHistories" ng-class="item.class">
+                <span class="time-label p-1 rounded text-center">{{ '{{ item.date }}' }}</span>
+                <div class="timeline-item">
+                    <div class="card card-oultline">
+                        <div class="card-body p-2">
+                            <div class="media">
+                                <img
+                                    src="{{ '{{ item.avatar }}' }}" 
+                                    class="align-self-start mr-3 rounded-circle timeline-avatar" 
+                                    width="30" height="30"
+                                >
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{ '{{ item.archiUser.name }}' }}</h5>
+                                    {{ '{{ item.description }}' }}
                                 </div>
                             </div>
                         </div>

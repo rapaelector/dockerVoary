@@ -42,6 +42,8 @@ class ExchangeHistory
     private $description;
 
     /**
+     * % DE CONFIANCE DANS LE PROJET
+     * 
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      * @Assert\Range(
      *  min = 0,
@@ -49,9 +51,10 @@ class ExchangeHistory
      * )
      * @Groups({"exchange-history"})
      */
-    private $projectConfidencePercentage;
+    private $percentage;
 
     /**
+     * 
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="exchangeHistories")
      */
     private $Project;
@@ -82,8 +85,6 @@ class ExchangeHistory
     
     public function __construct()
     {
-        $this->relaunchDate = new \DateTime();
-        $this->nextStepDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -115,14 +116,14 @@ class ExchangeHistory
         return $this;
     }
 
-    public function getProjectConfidencePercentage(): ?string
+    public function getPercentage(): ?string
     {
-        return $this->projectConfidencePercentage;
+        return $this->percentage;
     }
 
-    public function setProjectConfidencePercentage(?string $projectConfidencePercentage): self
+    public function setPercentage(?string $percentage): self
     {
-        $this->projectConfidencePercentage = $projectConfidencePercentage;
+        $this->percentage = $percentage;
 
         return $this;
     }

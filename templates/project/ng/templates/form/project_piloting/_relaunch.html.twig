@@ -80,9 +80,9 @@
                         <div class="input-group">
                             <input 
                                 type="text" 
-                                ng-model="exchangeHistory.projectConfidencePercentage" 
+                                ng-model="exchangeHistory.percentage" 
                                 class="form-control" 
-                                ng-class="data.errors.projectConfidencePercentage ? 'border-danger' : ''"
+                                ng-class="data.errors.percentage ? 'border-danger' : ''"
                             >
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-sm-12">
                         {% include 'project/ng/templates/form/_errors.html.twig' with {
-                            errorPath: 'data.errors.projectConfidencePercentage',
+                            errorPath: 'data.errors.percentage',
                         } %}
                     </div>
                 </div>

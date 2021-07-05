@@ -180,6 +180,7 @@ label.required:after {
         .exchange-completion-#{$name} {
             .time-label {
                 background: $value;
+                color: color-yiq($value);
             }
         }
     }
