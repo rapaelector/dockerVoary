@@ -184,6 +184,13 @@ label.required:after {
             }
         }
     }
+    .exchange-completion-default {
+        .time-label {
+            background: $white;
+            color: color-yiq($white);
+            border: 1px solid $border-color;
+        }
+    }
     .business-charge-change {
         width: 100%;
         height: 100%;

@@ -6,21 +6,27 @@
     </div>
     <div class="card-body">
         <div class="timeline m-0" >
-            {# <div ng-repeat="(key, items) in data.exchangeHistories">
-            </div> #}
-            <div ng-repeat="item in data.exchangeHistories" ng-class="item.class">
+            <div ng-repeat="item in data.exchangeHistories" ng-class="item.class" class="m-0 mb-3">
                 <span class="time-label p-1 rounded text-center">{{ '{{ item.date }}' }}</span>
                 <div class="timeline-item">
-                    <div class="card card-oultline">
+                    <div class="card card-oultline m-0">
                         <div class="card-body p-2">
                             <div class="media">
                                 <img
+                                    ng-if="item.avatar"
                                     src="{{ '{{ item.avatar }}' }}" 
                                     class="align-self-start mr-3 rounded-circle timeline-avatar" 
                                     width="30" height="30"
                                 >
+                                <img
+                                    ng-if="!item.avatar"
+                                    src="{{ asset('/images/user.png') }}" 
+                                    class="align-self-start mr-3 rounded-circle timeline-avatar" 
+                                    width="30" height="30"
+                                >
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{ '{{ item.archiUser.name }}' }}</h5>
+                                    <h5 class="mt-0 font-weight-bold">{{ '{{ item.archiUser.name }}' }}</h5>
+                                    <h5 class="mt-0 font-weight-bold" ng-if="!item.archiUser">{{ 'label.auto'|trans }}</h5>
                                     {{ '{{ item.description }}' }}
                                 </div>
                             </div>

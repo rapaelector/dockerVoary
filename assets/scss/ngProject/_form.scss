@@ -96,6 +96,7 @@ md-select {
         position: sticky;
     }
     .card-body {
+        min-height: unset;
         .timeline {
             .time-label {
                 width: 90px;
@@ -115,4 +116,8 @@ md-select {
             }
         }
     }
+}
+
+.md-select-menu-container {
+    z-index: 1030 !important;
 }
