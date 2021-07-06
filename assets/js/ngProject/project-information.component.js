@@ -233,7 +233,7 @@ function ProjectInformationController(
             .textContent(APP_MESSAGES.folderValidationMessage)
             .ariaLabel('folder validation')
             .targetEvent(jsEvent)
-            .ok(APP_MESSAGES.action.validate)
+            .ok(APP_MESSAGES.action.send)
             .cancel(APP_MESSAGES.action.cancel);
 
         $mdDialog.show(confirm).then(function() {
@@ -241,7 +241,6 @@ function ProjectInformationController(
             projectService.changeFolderStatus('project.ng.submit_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.allowedActions = response.data.data.allowedActions;
-                console.info(response);
                 $scope.onLoading = false;
             }, error => {
                 $scope.onLoading = false;
@@ -265,7 +264,6 @@ function ProjectInformationController(
             projectService.changeFolderStatus('project.ng.archived_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.allowedActions = response.data.data.allowedActions;
-                console.info(response);
                 $scope.onLoading = false;
             }, error => {
                 $scope.onLoading = false;
@@ -289,7 +287,6 @@ function ProjectInformationController(
             projectService.changeFolderStatus('project.ng.validate_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.allowedActions = response.data.data.allowedActions;
-                console.info(response);
                 $scope.onLoading = false;
             }, error => {
                 $scope.onLoading = false;

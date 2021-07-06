@@ -37,6 +37,7 @@ action:
   folder_lost: 'Dossier perdu'
   validate: 'Valider'
   archived: 'Archiver'
+  send: 'Envoyer'
 
 title:
   delete_user: "Supprimer l'utilisateur"
