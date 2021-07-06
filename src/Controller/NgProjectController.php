@@ -6,7 +6,9 @@ use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\Relaunch;
+use App\Entity\Action;
 use App\Entity\ExchangeHistory;
+use App\Entity\Constants\Status;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
 use App\Form\ExchangeHistoryType;
@@ -272,5 +274,36 @@ class NgProjectController extends BaseController
             'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project'),
             'errors' => $formService->getErrorsFromForm($form),
         ], 400);
+    }
+
+    #[Route('/{id}/change/status', name: 'project.ng.validate_project', options: ['expose' => true])]
+    public function changeStatus(
+        Request $request, 
+        Project $project, 
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        SerializerInterface $serializer
+    )
+    {
+        if ($request->getMethod() == 'POST') {
+            $action = new Action();
+            $action->setName(Action::ACTION_CHANGE_STATUS);
+            $action->setPreviousValue($project->getStatus());
+            $action->setValue(Status::STATUS_SUBMITTED);
+            $project->setStatus(Status::STATUS_SUBMITTED);
+            $project->addAction($action);
+
+            $em->persist($action);
+            $em->flush();
+            
+            return $this->json([
+                'data' => $serializer->normalize($project, 'json', ['groups' => 'data-project']),
+                'message' => $translator->trans('messages.project_validation_success', [], 'project'),
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.project_validation_failed', [], 'project'),
+        ]);
     }
 }

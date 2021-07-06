@@ -6,9 +6,10 @@ use App\Repository\ProjectRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
+use App\Entity\Constants\Status;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\ProjectTrait;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -424,10 +425,22 @@ class Project
      */
     private $exchangeHistories;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Action::class)
+     */
+    private $actions;
+
     public function __construct()
     {
+        $this->status = Status::STATUS_PENDING;
         $this->relaunches = new ArrayCollection();
         $this->exchangeHistories = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -982,6 +995,42 @@ class Project
                 $exchangeHistory->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|action[]
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(action $action): self
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions[] = $action;
+        }
+
+        return $this;
+    }
+
+    public function removeAction(action $action): self
+    {
+        $this->actions->removeElement($action);
 
         return $this;
     }

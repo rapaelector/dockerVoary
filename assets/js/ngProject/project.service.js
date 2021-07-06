@@ -87,5 +87,10 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
         return $http.get(fosJsRouting.generate('project.ng.get_exchange_history', { id: projectId }));
     };
 
+    _this.validateFolder = function(projectId) {
+        var projectId = projectId ? projectId : PROJECT_ID;
+
+        return $http.post(fosJsRouting.generate('project.ng.validate_project', { id: projectId }));
+    }
     return _this;
 };

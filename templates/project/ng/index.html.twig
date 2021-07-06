@@ -32,6 +32,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {% include 'project/ng/global_vars.js.twig' %}
     <script>
         {# USER ID #}
         var PROJECT_ID = "{{ resolve([project, 'id'], null) }}";

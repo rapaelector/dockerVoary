@@ -10,7 +10,8 @@ function ProjectInformationController(
     MARKET_TYPES,
     SECOND_MARKET_TYPES,
     TYPE_BONHOME,
-    PROJECT_ID
+    PROJECT_ID,
+    APP_MESSAGES,
 ) {
     $scope.onLoading = true;
     $scope.project = {
@@ -204,9 +205,7 @@ function ProjectInformationController(
             $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
         })
     };
-
     $scope.fns.showDialog = function(jsEvent) {
-        // $mdDialog.alert().disableParentScroll(true);
         $mdDialog.show({
             controller: ContactCreationController,
             templateUrl: 'contact-dialog-form.html',
@@ -221,7 +220,30 @@ function ProjectInformationController(
                 $scope.project.contact = response.id;
             }
         }, error => {
+            console.error({ error });
+        });
+    }
+    $scope.fns.validate = function(jsEvent) {
+        var confirm = $mdDialog.confirm()
+            .title(APP_MESSAGES.folderValidationTitle)
+            .textContent(APP_MESSAGES.folderValidationMessage)
+            .ariaLabel('folder validation')
+            .targetEvent(jsEvent)
+            .ok(APP_MESSAGES.action.validate)
+            .cancel(APP_MESSAGES.action.cancel);
 
+        $mdDialog.show(confirm).then(function() {
+            $scope.onLoading = true;
+            projectService.validateFolder().then((response) => {
+                $scope.helpers.showSimpleToast(response.data.message);
+                $scope.onLoading = false;
+            }, error => {
+                $scope.onLoading = false;
+                $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
+            })
+        }, function(error) {
+            $scope.onLoading = false;
+            // $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
         });
     }
 };
@@ -236,7 +258,8 @@ ProjectInformationController.$inject = [
     'MARKET_TYPES',
     'SECOND_MARKET_TYPES',
     'TYPE_BONHOME',
-    'PROJECT_ID'
+    'PROJECT_ID',
+    'APP_MESSAGES',
 ];
 
 angular.module('projectApp').component('appProjectInformation', {

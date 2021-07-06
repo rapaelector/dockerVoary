@@ -19,6 +19,7 @@ title:
   edit_client: 'Modification du projet'
   client_manger: 'Gestion des projets'
   project_piloting: 'Pilotage du projet'
+  validate_project: 'Validation du dossier'
 
 label:
   action: Action
@@ -229,6 +230,9 @@ messages:
   contact_creation_failed: 'La création du contact a echoué'
   exchange_history_saved_successfull: 'Historique des échanges enregistré avec succès'
   exchange_history_saved_failed: "l'énregistrement de l'historique des échanges a échoué"
+  validate_project: 'Souhaitez-vous valider ce dossier?'
+  project_validation_success: 'Validation du dossier réussit'
+  project_validation_failed: 'Echec de validation du dossier'
 
 action:
   reminder: 'Rappel'

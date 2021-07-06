@@ -15,3 +15,6 @@ angular.module('projectApp').constant('TYPE_BONHOME', window.TYPE_BONHOME);
 
 // PROJECT ID
 angular.module('projectApp').constant('PROJECT_ID', window.PROJECT_ID);
+
+//
+angular.module('projectApp').constant('APP_MESSAGES', window.APP_MESSAGES);

@@ -68,7 +68,7 @@
             <button
                 class="btn btn-outline-primary"
                 type="submit"
-                ng-click="fns.validate()"
+                ng-click="fns.validate($event)"
             >
                 {{ 'action.ask_for_validation'|trans({}, 'messages') }}
             </button>
@@ -80,17 +80,6 @@
                 {{ 'action.folder_lost'|trans({}, 'messages') }}
             </button>
         </div>
-        {# 
-        <div class="col-sm-2 pt-4 pb-3 text-right">
-            <button
-                class="btn btn-outline btn-danger"
-                type="submit"
-                ng-click="fns.archive()"
-            >
-                {{ 'action.folder_lost'|trans({}, 'messages') }}
-            </button>
-        </div>
-        #}
     </div>
 </form>
 <div class="ng-project-loader" ng-if="onLoading">
