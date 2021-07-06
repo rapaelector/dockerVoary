@@ -101,7 +101,7 @@ class SidebarMenuBuilder
         }
 
         if ($this->security->isGranted('ROLE_PROJECT_VIEW')) {
-            $menu->addChild('menu.project_list', [
+            /*$menu->addChild('menu.project_list', [
                 'route' => 'project.list',
                 'linkAttributes' => ['class' => $linkClassName],
                 'extras' => [
@@ -109,7 +109,7 @@ class SidebarMenuBuilder
                     'icon_content' => 'engineering',
                     'label_wrapper' => 'p',
                 ],
-            ])->setAttributes(['class' => $navItem]);
+            ])->setAttributes(['class' => $navItem]);*/
 
             $menu->addChild('menu.project_management', [
                 'route' => 'project.case.list',

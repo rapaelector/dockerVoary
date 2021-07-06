@@ -23,7 +23,9 @@ export default [
             'user_profile_image',
             'user_can_login',
             'pc_deposit',
+            'project_pc_deposit',
             'architect',
+            'project_architect',
         ],
         className: '',
     },
@@ -33,7 +35,9 @@ export default [
      */
     {
         width: '70px',
-        cols: ['actions'],
+        cols: [
+            'actions',
+        ],
         className: 'text-center',
     },
 
@@ -56,6 +60,7 @@ export default [
             'updated_at', 
             'deleted_at',
             'last_relaunch',
+            'project_last_relaunch',
         ],
         className: 'text-center',
     },
@@ -90,6 +95,7 @@ export default [
             'project_amount_subcontracted_work',
             'project_amount_bbi_specific_work',
             'completion',
+            'project_completion',
         ],
     },
 
@@ -120,6 +126,7 @@ export default [
         width: '50px',
         cols: [
             'project_site_code',
+            'project_1090',
             'project_postal_code',
         ]
     },
@@ -143,6 +150,7 @@ export default [
             'client_type',
             'client_postal_code',
             'contact_name',
+            'project_contact_name',
             'project_roadmap',
             'project_description_area',
             'project_site_address',
@@ -151,6 +159,7 @@ export default [
             'market_type',
             'project_market_type',
             'work_schedule',
+            'project_work_schedule',
             'comment',
             'project_business_charge',
             'project_economiste',

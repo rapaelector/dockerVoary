@@ -30,6 +30,40 @@
         <div class="card-body">
             <div id="{{ datatable.tableId }}">Chargement...</div>
         </div>
+        <div class="modal-part">
+            <!-- Modal -->
+            <div class="modal fade" id="businessChargeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            {{ form_start(businessChargeForm, {'attr': {'class':'form-change-business-charge'}}) }}
+                            {{ form_row(businessChargeForm.businessCharge) }}
+                            <div class="float-right">
+                                <button type="button" class="btn btn-primary business-charge-change-save">Enregistrer</button>
+                            </div>
+                            {{ form_end(businessChargeForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-part">
+            <!-- Modal for economist -->
+            <div class="modal fade" id="economistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            {{ form_start(economistForm, {'attr': {'class':'form-change-economist'}}) }}
+                            {{ form_row(economistForm.economist) }}
+                            <div class="float-right">
+                                <button type="button" class="btn btn-primary business-economist-save">Enregistrer</button>
+                            </div>
+                            {{ form_end(economistForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
