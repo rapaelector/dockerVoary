@@ -47,7 +47,7 @@ label:
   type_relaunch: 'DERNIÈRE RELANCE'
 
 contact:
-  label: Interlocuteur
+  label: Contact
   name: 'Nom'
   first_name: 'Prénom'
   email: 'Email'
@@ -100,7 +100,7 @@ columns:
   notApplicable: "Sans objet"
   priorizationOfFile: "Priorisation du dossier"
   answerForThe: "Réponse pour le"
-  businessCharge: "Chargé(e) d'affaire"
+  businessCharge: "C.Affaires"
   economist: "Economiste"
   folderNameOnTheServer: "Nom du dossier sur le serveur"
   yes: 'Oui'

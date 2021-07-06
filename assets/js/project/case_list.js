@@ -44,30 +44,29 @@ window.initProjectCaseList = function({
     var dtPromise = window.App.DataTable.initAppDataTables({
         columnNames: [
             'current_case_folder_name_on_the_server',
-            'business_charge', 
-            'market_type', 
-            'project_description_area',
-            'project_postal_code', 
-            'project_site_address', 
-            'global_amount', 
-            'completion', 
-            'last_relaunch',
-            'pc_deposit', 
-            'architect', 
-            'work_schedule', 
-            'contact_name', 
-            'comment'
+            'project_business_charge',
+            'project_market_type',
+            'project_postal_code',
+            'project_site_address',
+            'project_global_amount',
+            'project_completion',
+            'project_last_relaunch',
+            'project_work_schedule',
+            'project_pc_deposit',
+            'project_architect',
+            'project_1090',
+            'project_contact_name',
+            'actions'
         ],
-        excludedColumns: [7], // exclude when exporting excel file
+        excludedColumns: [13],
         containerSelector: containerSelector,
         filtersContainerSelector: filtersContainerSelector,
         columnsCount: columnsCount,
         settings: settings,
         debug: false,
         enableFormatter: true,
-        redrawEvent: 'project_case.initDt',
+        redrawEvent: 'user.deleted',
         config: {
-            fixedColumns: false,
             "onAjaxSuccess": function (data) {
                 var formattedTotal = window.App.Utils.numberFormat(data.extras.total, 0, ',', ' ');
 
@@ -78,6 +77,10 @@ window.initProjectCaseList = function({
     dtPromise.then(function (dtInstance) {
         const tableId = dtInstance.table().node().id;
         var $table = $('#' + tableId);
+        let modal = $('#businessChargeModal');
+        let modalEconomist = $('#economistModal');
+        let idProject = null;
+        let idPreset = null;
         $table.on('draw.dt', function () {
             var $completionInputSelector = $(completionInputSelector);
 
@@ -107,6 +110,26 @@ window.initProjectCaseList = function({
                     $(this).val(dataValue);
                 }
             });
+
+            $('body').on('click', '.business-charge-change', (e) => {
+                e.preventDefault()
+                var values = $(e.target); // Button that triggered the modal
+                idProject = values.data('id');
+                idPreset = values.data('id-business-charge');
+                modal.modal('show');
+                $('form.form-change-business-charge').attr('data-id', idProject)
+                $("#project_business_charge_businessCharge").val(idPreset).trigger('change')
+            })
+
+            $('body').on('click', '.economist-change', (e) => {
+                e.preventDefault()
+                var values = $(e.target); // Button that triggered the modal
+                idProject = values.data('id');
+                idPreset = values.data('id-economist');
+                modalEconomist.modal('show');
+                $('form.form-economist').attr('data-id', idProject)
+                $("#economist_form_economist").val(idPreset).trigger('change')
+            })
 
             $('body').on('change', '.pc-deposit-select', function () {
                 var id = $(this).data('id');
@@ -160,33 +183,91 @@ window.initProjectCaseList = function({
                 }
             })
         })
+        //
+        // // then save the business charge
+        $('body').on('click', '.business-charge-change-save', (e) => {
+            let form = $('form.form-change-business-charge');
+            let values = form.serialize();
+            // then made some ajax there
+            $.ajax({
+                url: Routing.generate('project.edit.business.charge', {id: idProject}),
+                method: "POST",
+                accepts: "application/json; charset=utf-8",
+                data: values,
+                success: (data) => {
+                    modal.modal('hide');
+                    dtInstance.draw();
+                    Toast.fire({
+                        icon: data.type,
+                        title: data.message,
+                    });
+                    $("#project_business_charge_businessCharge").val(null).trigger('change')
+                },
+                error: function (error) {
+                    Toast.fire({
+                        icon: error.type,
+                        title: error.message,
+                    });
+                    $("#project_business_charge_businessCharge").val(null).trigger('change')
+                },
+            });
+            return false;
+        })
+        $('body').on('click', '.business-economist-save', (e) => {
+            let form = $('form.form-change-economist');
+            let values = form.serialize();
+            // then made some ajax there
+            $.ajax({
+                url: Routing.generate('project.edit.economist', {id: idProject}),
+                method: "POST",
+                accepts: "application/json; charset=utf-8",
+                data: values,
+                success: (data) => {
+                    modalEconomist.modal('hide');
+                    dtInstance.draw();
+                    Toast.fire({
+                        icon: data.type,
+                        title: data.message,
+                    });
+                    $("#economist_form_economist").val(null).trigger('change')
+                },
+                error: function (error) {
+                    Toast.fire({
+                        icon: error.type,
+                        title: error.message,
+                    });
+                    $("#economist_form_economist").val(null).trigger('change')
+                },
+            });
+            return false;
+        })
     });
 
     function updateFieldRequest({
         /**
          * spinner element
-         * 
+         *
          * @var String
          */
         spinnerElem,
 
         /**
          * field to update
-         * 
+         *
          * @var String
          */
         field,
 
         /**
          * data to send
-         * 
+         *
          * @var Object
          */
         data,
 
         /**
          * dtInstance
-         * 
+         *
          * @var Object
          */
         dtInstance,
@@ -212,7 +293,7 @@ window.initProjectCaseList = function({
                     $('body').removeClass('modal-open');
                 }
             },
-            error: function (error) { 
+            error: function (error) {
                 $spinner.addClass('d-none');
                 Toast.fire({
                     icon: error.type,

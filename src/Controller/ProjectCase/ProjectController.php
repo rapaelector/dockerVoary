@@ -4,6 +4,8 @@ namespace App\Controller\ProjectCase;
 
 use App\Entity\Project;
 
+use App\Form\EconomistFormType;
+use App\Form\ProjectBusinessChargeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,6 +46,10 @@ class ProjectController extends BaseController
             'name' => 'list',
             'translation_domain' => 'client',
         ];
+        // create form for business charge and economist
+        $project = new Project();
+        $businessChargeForm = $this->createForm(ProjectBusinessChargeType::class, $project, array('csrf_protection' => false));
+        $economistForm = $this->createForm(EconomistFormType::class, $project, array('csrf_protection' => false));
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('folderNameOnTheServer', TextColumn::class, [
@@ -60,15 +66,15 @@ class ProjectController extends BaseController
             /**
              * Change d'chef project en chargé d'affaire (Skype)
              */
-            ->add('businessCharge', TextColumn::class,  [
-                'field' => 'businessCharge.lastName',
-                'className' => 'dynamic-nowrap',
+            ->add('businessCharge', TwigColumn::class,  [
+                'template' => 'project/twig_columns/_business_charge.html.twig',
+                'className' => '',
                 'label' => $translator->trans('columns.resposible_business_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.resposible_business_raw', [], 'projects'),
                 ], true),
                 'filter' => $this->filterBuilder->buildFilter(
-                    ChoiceFilter::class, 
+                    ChoiceFilter::class,
                     array_merge(
                         $this->filterOptionsProvider->getOptions('business_project_charge'),
                         ['choices' => $this->filterOptionsProvider->getProjectBusinnessCharge()
@@ -82,7 +88,7 @@ class ProjectController extends BaseController
                     return $translator->trans($value, [], 'project');
                 },
                 'filter' => $this->filterBuilder->buildFilter(
-                    ChoiceFilter::class, 
+                    ChoiceFilter::class,
                     array_merge(
                         $this->filterOptionsProvider->getOptions('project_market_type'),
                         ['choices' => $this->filterOptionsProvider->getProjectMarketType()]
@@ -93,18 +99,6 @@ class ProjectController extends BaseController
                 ], true),
                 'searchable' => true,
             ])
-            ->add('project_description_area', TextColumn::class, [
-                'field' => 'projectDescription.area',
-                'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.project_description_area_tooltip', [], 'projects'),
-                'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('columns.project_description_area', [], 'projects'),
-                ], true),
-                'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('project_description_area')
-                ),
-            ])
             ->add('codePostal', TextColumn::class, [
                 'field' => 'siteAddress.postalCode',
                 'className' => 'dynamic-nowrap',
@@ -113,7 +107,7 @@ class ProjectController extends BaseController
                     'abbr' => $translator->trans('columns.code_postal_raw', [], 'projects'),
                 ], true),
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
+                    TextFilter::class,
                     $this->filterOptionsProvider->getOptions('postal_code')
                 ),
             ])
@@ -124,7 +118,7 @@ class ProjectController extends BaseController
                 'label' => $translator->trans('columns.city', [], 'projects'),
                 'meta' => $this->columnMeta([], true),
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
+                    TextFilter::class,
                     $this->filterOptionsProvider->getOptions('project_site_address')
                 ),
             ])
@@ -164,13 +158,21 @@ class ProjectController extends BaseController
                     ['type' => 'daterange',]
                 ),
             ])
+            ->add('planningProject', TextColumn::class, [
+                'label' => $translator->trans('columns.planning_project', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' =>  $translator->trans('columns.planning_project_raw', [], 'projects'),
+                ], true),
+            ])
+
             // PC DEPOSIT
             ->add('pcDeposit', TwigColumn::class, [
                 'label' => $translator->trans('columns.pc_deposit_tooltip', [], 'projects'),
                 'className' => 'px-0',
                 'template' => 'project_case/twig_columns/_pc_deposite.html.twig',
                 'filter' => $this->filterBuilder->buildFilter(
-                    ChoiceFilter::class, 
+                    ChoiceFilter::class,
                     array_merge(
                         $this->filterOptionsProvider->getOptions('pc_deposit'),
                         [
@@ -199,7 +201,7 @@ class ProjectController extends BaseController
                 'template' => 'project_case/twig_columns/_architect.html.twig',
                 'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
-                    ChoiceFilter::class, 
+                    ChoiceFilter::class,
                     array_merge(
                         $this->filterOptionsProvider->getOptions('architect'),
                         [
@@ -220,37 +222,35 @@ class ProjectController extends BaseController
                     ]
                 ], true),
             ])
-            ->add('planningProject', TextColumn::class, [
-                'label' => $translator->trans('columns.planning_project', [], 'projects'),
+            ->add('norm1090', TextColumn::class, [
                 'className' => 'dynamic-nowrap',
-                'meta' => $this->columnMeta([
-                    'abbr' =>  $translator->trans('columns.planning_project_raw', [], 'projects'),
-                ], true),
-            ])
-            ->add('contact_name', TextColumn::class, [
-                'field' => 'contact.lastName',
-                'className' => 'dynamic-nowrap',
-                'label' => $translator->trans('columns.contact_name', [], 'projects'),
+                'label' => $translator->trans('columns.norm1090', [], 'projects'),
                 'meta' => $this->columnMeta([], true),
                 'filter' => $this->filterBuilder->buildFilter(
-                    TextFilter::class, 
-                    $this->filterOptionsProvider->getOptions('contact_name')
+                    TextFilter::class,
+                    $this->filterOptionsProvider->getOptions('norm1090')
                 ),
             ])
-            // COMMENTAIRE
-            ->add('comment', TwigColumn::class, [
-                'label' => $translator->trans('columns.comment', [], 'projects'),
-                'template' => 'project_case/twig_columns/_comment.html.twig',
-                'meta' => $this->columnMeta([], true),
+            ->add('user_email', TextColumn::class, [
+                'field' => 'contact.email',
+                'label' => $translator->trans('contact.label', [], 'project'),
+                'className' => 'dynamic-nowrap',
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class,
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('user_email'),
+                        ['choices' => $this->filterOptionsProvider->getProjectInterlocutor()]
+                    )
+                ),
+                'searchable' => true,
             ])
-            // ->add('id', TextColumn::class, [
-            //     'label' => $translator->trans('action.action'),
-            //     'render' => $this->actionsRenderer('client.list', 'current_case/_actions.html.twig'),
-            //     'className' => 'text-center',
-            //     'searchable' => false,
-            //     'orderable' => false,
-            //     'meta' => $this->columnMeta([], true)
-            // ])
+            ->add('id', TextColumn::class, [
+                'label' => $translator->trans('label.action', [], 'project'),
+                'render' => $this->actionsRenderer('client.list', 'project/_actions.html.twig'),
+                'className' => 'text-center',
+                'searchable' => false,
+                'orderable' => false,
+            ])
         ;
 
         $table->createAdapter(ORMAdapter::class, [
@@ -293,7 +293,9 @@ class ProjectController extends BaseController
 
         return $this->render('project_case/index.html.twig', [
             'datatable' => $table,
-            'meta' => $this->columnMeta([], true)
+            'meta' => $this->columnMeta([], true),
+            'businessChargeForm' => $businessChargeForm->createView(),
+            'economistForm' => $economistForm->createView()
         ]);
     }
 
