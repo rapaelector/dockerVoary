@@ -1,12 +1,17 @@
 <script>
     var APP_MESSAGES = {
-        folderValidationTitle: "{{ 'title.validate_project'|trans({}, 'project') }}",
-        folderValidationMessage: "{{ 'messages.validate_project'|trans({}, 'project') }}",
+        folderValidationTitle: "{{ 'title.submit_project'|trans({}, 'project') }}",
+        folderValidationMessage: "{{ 'messages.submit_project'|trans({}, 'project') }}",
+        archivedFolderTitle: "{{ 'title.archived_project'|trans({}, 'project') }}",
+        archivedFolderMessage: "{{ 'messages.archived_project'|trans({}, 'project') }}",
+        validateFolderTitle: "{{ 'title.validate_project'|trans({}, 'project') }}",
+        validateFolderMessage: "{{ 'messages.validate_project'|trans({}, 'project') }}",
+        submitProjectMessage: "{{ 'title.submit_project'|trans({}, 'project') }}",
+        submitProjectMessage: "{{ 'messages.submit_project'|trans({}, 'project') }}",
         action: {
             validate: "{{ 'action.validate'|trans({}, 'messages') }}",
             cancel: "{{ 'action.cancel'|trans({}, 'messages') }}",
+            archived: "{{ 'action.archived'|trans({}, 'messages') }}",
         }
     };
-    
-    console.info(APP_MESSAGES);
 </script>

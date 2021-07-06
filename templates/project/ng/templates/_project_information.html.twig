@@ -68,14 +68,23 @@
             <button
                 class="btn btn-outline-primary"
                 type="submit"
-                ng-click="fns.validate($event)"
+                ng-click="fns.submitProject($event)"
+                ng-if="data.allowedActions.indexOf('submit') > -1"
             >
                 {{ 'action.ask_for_validation'|trans({}, 'messages') }}
             </button>
+            <md-button 
+                class="md-raised rounded"
+                ng-click="fns.validate($event)"
+                ng-if="data.allowedActions.indexOf('validate') > -1"
+            >
+                {{ 'action.validate'|trans({}, 'messages') }}
+            </md-button>
             <button
                 class="btn btn-outline btn-danger"
                 type="submit"
-                ng-click="fns.archive()"
+                ng-click="fns.archive($event)"
+                ng-if="data.allowedActions.indexOf('lose') > -1"
             >
                 {{ 'action.folder_lost'|trans({}, 'messages') }}
             </button>

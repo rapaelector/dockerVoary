@@ -36,6 +36,7 @@ action:
   ask_for_validation: 'Demande de validation du dossier'
   folder_lost: 'Dossier perdu'
   validate: 'Valider'
+  archived: 'Archiver'
 
 title:
   delete_user: "Supprimer l'utilisateur"

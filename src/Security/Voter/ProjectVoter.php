@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\Constants\Status;
 use App\Security\BaseVoter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -65,6 +66,28 @@ class ProjectVoter extends Voter
         return $this->security->iSGranted('ROLE_PROJECT_DELETE');
     }
 
+    public function canSubmit(Project $project, User $user)
+    {
+        return ($this->security->isGranted('ROLE_PROJECT_VALIDATE')) && ($this->security->isGranted('ROLE_PROJECT_EDIT')) && 
+            ($project->getStatus() == Status::STATUS_PENDING)
+        ;
+    }
+
+    public function canValidate(Project $project, User $user)
+    {
+        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() == Status::STATUS_SUBMITTED);
+    }
+    
+    public function canInValidate(Project $project, User $user)
+    {
+        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() == Status::STATUS_SUBMITTED);
+    }
+
+    public function canLose(Project $project, User $user)
+    {
+        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() != Status::STATUS_LOST);
+    }
+
     public static function getSupportedAttributes()
     {
         return [
@@ -73,6 +96,10 @@ class ProjectVoter extends Voter
             Attributes::SHOW,
             Attributes::EDIT,
             Attributes::DELETE,
+            Attributes::SUBMIT,
+            Attributes::VALIDATE,
+            Attributes::INVALIDATE,
+            Attributes::LOSE
         ];
     }
 }

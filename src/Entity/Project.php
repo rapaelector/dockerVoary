@@ -427,6 +427,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"data-project"})
      */
     private $status;
 

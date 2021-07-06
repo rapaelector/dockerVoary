@@ -16,4 +16,9 @@ class Attributes
 	const SHOW = 'show';
 	const EDIT = 'edit';
 	const DELETE = 'delete';
+	// STATUS
+	const SUBMIT = 'submit';
+	const VALIDATE = 'validate';
+	const INVALIDATE = 'invalidate';
+	const LOSE = 'lose';
 }

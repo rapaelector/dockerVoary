@@ -32,6 +32,7 @@ class RoleProvider
             self::ACTION_ADD,
             self::ACTION_EDIT,
             self::ACTION_DELETE,
+            self::ACTION_VALIDATE,
         ];
 
         return $actions;
@@ -144,6 +145,9 @@ class RoleProvider
             self::ACTION_ADD,
             self::ACTION_EDIT,
             self::ACTION_DELETE,
+            // self::ACTION_SUBMIT,
+            // self::ACTION_ARCHIVE,
+            self::ACTION_VALIDATE,
         ]);
     }
 

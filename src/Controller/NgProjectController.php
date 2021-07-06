@@ -8,6 +8,7 @@ use App\Entity\Project;
 use App\Entity\Relaunch;
 use App\Entity\Action;
 use App\Entity\ExchangeHistory;
+use App\Security\Voter\Attributes;
 use App\Entity\Constants\Status;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
@@ -28,14 +29,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Countries;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security as SecurityAnnotation;
+use Symfony\Component\Security\Core\Security;
 
 
 #[Route('/project')]
 class NgProjectController extends BaseController
 {
     /**
-     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
      */
     #[Route('/{id}/follow-up', name: 'project.ng.project_follow_up', methods: ['POST', 'GET'], options: ['expose' => true])]
     public function index(
@@ -125,19 +127,13 @@ class NgProjectController extends BaseController
     }
 
     #[Route('/{id}/get/project', name: 'project.ng.get_project', options: ['expose' => true])]
-    public function getProject(Project $project, SerializerInterface $serializer)
+    public function getProject(Project $project, SerializerInterface $serializer, Security $security)
     {
-        $projectFormatted = $serializer->normalize(
-            $project,
-            'json',
-            ['groups' => 'data-project']
-        );
-
-        return $this->json(['project' => $projectFormatted]);
+        return $this->json(['project' => $this->serializeProject($project, $serializer, $security)]);
     }
 
     /**
-     * @Security("is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW')")
+     * @SecurityAnnotation("is_granted('ROLE_PROJECT_EDIT') or is_granted('ROLE_PROJECT_VIEW')")
      */
     #[Route('/create/contact', name: 'project.ng.create_contact', options: ['expose' => true])]
     public function createContact(
@@ -276,28 +272,78 @@ class NgProjectController extends BaseController
         ], 400);
     }
 
-    #[Route('/{id}/change/status', name: 'project.ng.validate_project', options: ['expose' => true])]
-    public function changeStatus(
+    /**
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::SUBMIT'), project)")
+     */
+    #[Route('/{id}/submit/project', name: 'project.ng.submit_project', options: ['expose' => true])]
+    public function submitProject(
         Request $request, 
         Project $project, 
         EntityManagerInterface $em,
         TranslatorInterface $translator,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        Security $security
     )
     {
         if ($request->getMethod() == 'POST') {
-            $action = new Action();
-            $action->setName(Action::ACTION_CHANGE_STATUS);
-            $action->setPreviousValue($project->getStatus());
-            $action->setValue(Status::STATUS_SUBMITTED);
-            $project->setStatus(Status::STATUS_SUBMITTED);
-            $project->addAction($action);
-
-            $em->persist($action);
-            $em->flush();
+            $this->changeProjectStatus($project, $em, Status::STATUS_SUBMITTED);
             
             return $this->json([
-                'data' => $serializer->normalize($project, 'json', ['groups' => 'data-project']),
+                'data' => $this->serializeProject($project, $serializer, $security),
+                'message' => $translator->trans('messages.project_submitted_success', [], 'project'),
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.project_submitted_failed', [], 'project'),
+        ]);
+    }
+
+    /**
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::LOSE'), project)")
+     */
+    #[Route('/{id}/archived/project', name: 'project.ng.archived_project', options: ['expose' => true])]
+    public function archivedProject(
+        Request $request, 
+        Project $project, 
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        SerializerInterface $serializer,
+        Security $security
+    )
+    {
+        if ($request->getMethod() == 'POST') {
+            $this->changeProjectStatus($project, $em, Status::STATUS_LOST);
+
+            return $this->json([
+                'data' => $this->serializeProject($project, $serializer, $security),
+                'message' => $translator->trans('messages.project_archived_success', [], 'project'),
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.project_archived_failed', [], 'project'),
+        ]);
+    }
+
+    /**
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::VALIDATE'), project)")
+     */
+    #[Route('/{id}/validate/project', name: 'project.ng.validate_project', options: ['expose' => true])]
+    public function validateProject(
+        Request $request, 
+        Project $project, 
+        EntityManagerInterface $em,
+        SerializerInterface $serializer,
+        TranslatorInterface $translator,
+        Security $security
+    )
+    {
+        if ($request->getMethod() == 'POST') {
+            $this->changeProjectStatus($project, $em, Status::STATUS_VALIDATED);
+
+            return $this->json([
+                'data' => $this->serializeProject($project, $serializer, $security),
                 'message' => $translator->trans('messages.project_validation_success', [], 'project'),
             ]);
         }
@@ -305,5 +351,39 @@ class NgProjectController extends BaseController
         return $this->json([
             'message' => $translator->trans('messages.project_validation_failed', [], 'project'),
         ]);
+    }
+
+    private function changeProjectStatus(Project $project, EntityManagerInterface $em, $newValue)
+    {
+        $action = new Action();
+        $action->setName(Action::ACTION_CHANGE_STATUS);
+        $action->setPreviousValue($project->getStatus());
+        $action->setValue($newValue);
+        $project->setStatus($newValue);
+        $project->addAction($action);
+
+        $em->persist($action);
+        $em->flush();
+    }
+
+    private function serializeProject(Project $project, SerializerInterface $serializer, Security $security)
+    {
+        $allowedActions = [];
+        $normalizedData = $serializer->normalize($project, 'json', ['groups' => 'data-project']);
+        $status = [
+            Attributes::SUBMIT,
+            Attributes::VALIDATE,
+            Attributes::INVALIDATE,
+            Attributes::LOSE,
+        ];
+
+        foreach ($status as $val) {
+            if ($security->isGranted($val, $project)) {
+                $allowedActions[] = $val;
+            }
+        }
+        $normalizedData['allowedActions'] = $allowedActions;
+
+        return $normalizedData;
     }
 }

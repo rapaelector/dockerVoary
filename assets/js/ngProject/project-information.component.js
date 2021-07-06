@@ -24,6 +24,7 @@ function ProjectInformationController(
         disaSheetsValidation: [],
         project: null,
         errors: null,
+        allowedActions: [],
     };
     $scope.searchTerm = {
         users: '',
@@ -48,6 +49,9 @@ function ProjectInformationController(
         projectService.getProject(PROJECT_ID).then((response) => {
             $scope.data.project = response.data;
             $scope.project = projectService.parseProject(response.data.project);
+            if (response.data && response.data.project && response.data.project.allowedActions) {
+                $scope.data.allowedActions = response.data.project.allowedActions;
+            }
         }, error => {
             console.info(error);
         })
@@ -223,7 +227,7 @@ function ProjectInformationController(
             console.error({ error });
         });
     }
-    $scope.fns.validate = function(jsEvent) {
+    $scope.fns.submitProject = function(jsEvent) {
         var confirm = $mdDialog.confirm()
             .title(APP_MESSAGES.folderValidationTitle)
             .textContent(APP_MESSAGES.folderValidationMessage)
@@ -234,8 +238,10 @@ function ProjectInformationController(
 
         $mdDialog.show(confirm).then(function() {
             $scope.onLoading = true;
-            projectService.validateFolder().then((response) => {
+            projectService.changeFolderStatus('project.ng.submit_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
+                $scope.data.allowedActions = response.data.data.allowedActions;
+                console.info(response);
                 $scope.onLoading = false;
             }, error => {
                 $scope.onLoading = false;
@@ -243,7 +249,54 @@ function ProjectInformationController(
             })
         }, function(error) {
             $scope.onLoading = false;
-            // $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
+        });
+    }
+    $scope.fns.archive = function(jsEvent) {
+        var confirm = $mdDialog.confirm()
+            .title(APP_MESSAGES.archivedFolderTitle)
+            .textContent(APP_MESSAGES.archivedFolderMessage)
+            .ariaLabel('folder validation')
+            .targetEvent(jsEvent)
+            .ok(APP_MESSAGES.action.archived)
+            .cancel(APP_MESSAGES.action.cancel);
+
+        $mdDialog.show(confirm).then(function() {
+            $scope.onLoading = true;
+            projectService.changeFolderStatus('project.ng.archived_project').then((response) => {
+                $scope.helpers.showSimpleToast(response.data.message);
+                $scope.data.allowedActions = response.data.data.allowedActions;
+                console.info(response);
+                $scope.onLoading = false;
+            }, error => {
+                $scope.onLoading = false;
+                $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
+            })
+        }, function(error) {
+            $scope.onLoading = false;
+        });
+    };
+    $scope.fns.validate = function(jsEvent) {
+        var confirm = $mdDialog.confirm()
+            .title(APP_MESSAGES.validateFolderTitle)
+            .textContent(APP_MESSAGES.validateFolderMessage)
+            .ariaLabel('folder validation')
+            .targetEvent(jsEvent)
+            .ok(APP_MESSAGES.action.validate)
+            .cancel(APP_MESSAGES.action.cancel);
+
+        $mdDialog.show(confirm).then(function() {
+            $scope.onLoading = true;
+            projectService.changeFolderStatus('project.ng.validate_project').then((response) => {
+                $scope.helpers.showSimpleToast(response.data.message);
+                $scope.data.allowedActions = response.data.data.allowedActions;
+                console.info(response);
+                $scope.onLoading = false;
+            }, error => {
+                $scope.onLoading = false;
+                $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
+            })
+        }, function(error) {
+            $scope.onLoading = false;
         });
     }
 };
