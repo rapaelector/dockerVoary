@@ -212,6 +212,9 @@ class NgProjectController extends BaseController
         ]);
     }
 
+    /**
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
     #[Route('/{id}/save/exchange-history', name: 'project.ng.save_exchange_history', options: ['expose' => true])]
     public function saveExchangeHistory(
         Request $request, 
