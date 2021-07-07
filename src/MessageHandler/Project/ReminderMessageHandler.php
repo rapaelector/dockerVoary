@@ -19,6 +19,7 @@ final class ReminderMessageHandler implements MessageHandlerInterface
 
     /** @var string */
     private $email;
+    
     /** @var string */
     private $projectSiteCode;
 

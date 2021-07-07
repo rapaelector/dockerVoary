@@ -20,7 +20,9 @@ use App\Utils\Resolver;
 use App\Service\Form\FormService;
 use App\Service\User\UserService;
 use App\Service\ExchangeHistory\ExchangeHistoryService;
+use App\Message\Project\ValidateProject;
 
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -285,12 +287,14 @@ class NgProjectController extends BaseController
         EntityManagerInterface $em,
         TranslatorInterface $translator,
         SerializerInterface $serializer,
-        Security $security
+        Security $security,
+        MessageBusInterface $messageBus
     )
     {
         if ($request->getMethod() == 'POST') {
             $this->changeProjectStatus($project, $em, Status::STATUS_SUBMITTED);
-            
+            $messageBus->dispatch(new ValidateProject($project));
+
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security),
                 'message' => $translator->trans('messages.project_submitted_success', [], 'project'),

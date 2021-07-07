@@ -25,9 +25,7 @@ title:
 
 label:
   action: Action
-  # prospect: Prospect
-  # serverFolder: 'G:\2-BBT\1-AFFAIRES\1-PROSPECT\'
-  # add_new_contact: 'Ajouter contact'
+  cordially: 'Cordialement'
   validation_of_the_file_disa: 'Validation de la fiche disa avec'
   new_contact: 'Créer un contact'
   prospect: Prospect
@@ -243,3 +241,15 @@ messages:
 
 action:
   reminder: 'Rappel'
+
+email:
+  label:
+    hello: 'Bonjour'
+    project_information: 'Information du projet'
+
+  ask_for_validation:
+    prospect: 'Prospet'
+    title: 'Demande de validation du dossier'
+    validation_label: 'Lien de validation du dossier'
+    message: |
+      Le dossier suivant requiert une validation, veuillez vous connecter à l'ERP Bonhomme Batiment et valider ou invalider ce dossier en cliquant sur le lien suivant :  <a href="%validationLink%">%validationLabel%</a>

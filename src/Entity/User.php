@@ -87,7 +87,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"user:create"})
      * @Assert\Length(
      *      min = 2,
      * )
@@ -97,7 +97,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"user:create"})
      * @Groups({self::GROUP_USER_PROJECT})
      */
     private $phone;

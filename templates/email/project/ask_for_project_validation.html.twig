@@ -1,0 +1,46 @@
+{% trans_default_domain 'project' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>{{ 'email.label.hello'|trans }}</p>
+    <p>
+        {{ 'email.ask_for_validation.message'|trans({
+            '%validationLink%': absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})),
+            '%validationLabel%': 'email.ask_for_validation.validation_label'|trans,
+        }, 'project')|raw }}
+    </p>
+    <p>{{ 'email.label.project_information'|trans }}</p>
+    <ul>
+        {% if resolve([project, 'prospect', 'name'], null) or resolve([project, 'prospect', 'clientNumber'], null) %}
+            <li>
+                {{ 'email.ask_for_validation.prospect'|trans }}: {{ resolve([project, 'prospect', 'name'], null) }} - {{ resolve([project, 'prospect', 'clientNumber'], null) }}
+            </li>
+        {% endif %}
+        {% if resolve([project, 'folderNameOnTheServer'], null) %}
+            <li>
+                {{ 'columns.folderNameOnTheServer'|trans }}: {{ resolve([project, 'folderNameOnTheServer'], null) }}
+            </li>
+        {% endif %}
+        {% if resolve([project, 'priorizationOfFile'], null) %}
+            <li>
+                {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], null) }}
+            </li>
+        {% endif %}
+    </ul>
+    <p>
+        <a href="{{ absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})) }}">
+            {{ absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})) }}
+        </a>
+    </p>
+    <p>
+        {{ 'label.cordially'|trans }}
+    </p>
+</body>
+</html>
