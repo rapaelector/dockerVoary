@@ -75,7 +75,7 @@ class ProjectVoter extends Voter
 
     public function canValidate(Project $project, User $user)
     {
-        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() == Status::STATUS_SUBMITTED);
+        return $this->security->isGranted('ROLE_PROJECT_VALIDATE') && ($project->getStatus() == Status::STATUS_SUBMITTED);
     }
     
     public function canInValidate(Project $project, User $user)
@@ -85,7 +85,7 @@ class ProjectVoter extends Voter
 
     public function canLose(Project $project, User $user)
     {
-        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() != Status::STATUS_LOST) && ($project->getStatus() != Status::STATUS_VALIDATED);
+        return $this->security->isGranted('ROLE_PROJECT_VALIDATE') && ($project->getStatus() != Status::STATUS_LOST) && ($project->getStatus() != Status::STATUS_VALIDATED);
     }
 
     public static function getSupportedAttributes()

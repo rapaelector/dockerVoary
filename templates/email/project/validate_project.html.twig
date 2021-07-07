@@ -1,0 +1,38 @@
+{% trans_default_domain 'project' %}
+
+{% extends 'pdf_base.html.twig' %}
+
+{% block page_title %}{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block content %}
+    <div>
+        <p>{{ 'email.label.hello'|trans }}</p>
+        <p>
+            {{ 'email.project_validation.message'|trans({
+                '%projectName%': resolve([project, 'name'], null),
+                '%updatedDate%': resolve([project, 'updatedAt'], null)|date('d/m/Y'),
+                '%updatedBy%': resolve([project, 'updatedBy', 'name'], null),
+            }, 'project') }}
+        </p>
+        <p>{{ 'email.label.project_information'|trans }}</p>
+        <ul>
+            {% if resolve([project, 'prospect', 'name'], null) or resolve([project, 'prospect', 'clientNumber'], null) %}
+                <li>
+                    {{ 'email.ask_for_validation.prospect'|trans }}: {{ resolve([project, 'prospect', 'name'], null) }} - {{ resolve([project, 'prospect', 'clientNumber'], null) }}
+                </li>
+            {% endif %}
+            {% if resolve([project, 'folderNameOnTheServer'], null) %}
+                <li>
+                    {{ 'columns.folderNameOnTheServer'|trans }}: {{ resolve([project, 'folderNameOnTheServer'], null) }}
+                </li>
+            {% endif %}
+            {% if resolve([project, 'priorizationOfFile'], null) %}
+                <li>
+                    {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], null) }}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

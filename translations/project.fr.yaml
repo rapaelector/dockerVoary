@@ -252,4 +252,9 @@ email:
     title: 'Demande de validation du dossier'
     validation_label: 'Lien de validation du dossier'
     message: |
-      Le dossier suivant requiert une validation, veuillez vous connecter à l'ERP Bonhomme Batiment et valider ou invalider ce dossier en cliquant sur le lien suivant :  <a href="%validationLink%">%validationLabel%</a>
+      Le dossier suivant requiert une validation, veuillez vous connecter à l'ERP Bonhomme Batiment pour valider ce dossier en cliquant sur le lien suivant :  <a href="%validationLink%">%validationLabel%</a>
+  
+  project_validation:
+    title: 'Validation du dossier'
+    message: |
+      Le projet: %projectName% à étè validé le %updatedDate% par %updatedBy%

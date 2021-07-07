@@ -20,6 +20,7 @@ use App\Utils\Resolver;
 use App\Service\Form\FormService;
 use App\Service\User\UserService;
 use App\Service\ExchangeHistory\ExchangeHistoryService;
+use App\Message\Project\PreValidateProject;
 use App\Message\Project\ValidateProject;
 
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -39,7 +40,7 @@ use Symfony\Component\Security\Core\Security;
 class NgProjectController extends BaseController
 {
     /**
-     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project) or is_granted('ROLE_PROJECT_VALIDATE')")
      */
     #[Route('/{id}/follow-up', name: 'project.ng.project_follow_up', methods: ['POST', 'GET'], options: ['expose' => true])]
     public function index(
@@ -292,8 +293,8 @@ class NgProjectController extends BaseController
     )
     {
         if ($request->getMethod() == 'POST') {
-            $this->changeProjectStatus($project, $em, Status::STATUS_SUBMITTED);
-            $messageBus->dispatch(new ValidateProject($project));
+            $action = $this->changeProjectStatus($project, $em, Status::STATUS_SUBMITTED);
+            $messageBus->dispatch(new PreValidateProject($project, $action));
 
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security),
@@ -307,7 +308,7 @@ class NgProjectController extends BaseController
     }
 
     /**
-     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::LOSE'), project)")
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::LOSE'), project) or is_granted('ROLE_PROJECT_VALIDATE')")
      */
     #[Route('/{id}/archived/project', name: 'project.ng.archived_project', options: ['expose' => true])]
     public function archivedProject(
@@ -343,11 +344,13 @@ class NgProjectController extends BaseController
         EntityManagerInterface $em,
         SerializerInterface $serializer,
         TranslatorInterface $translator,
-        Security $security
+        Security $security,
+        MessageBusInterface $messageBus
     )
     {
         if ($request->getMethod() == 'POST') {
             $this->changeProjectStatus($project, $em, Status::STATUS_VALIDATED);
+            $messageBus->dispatch(new ValidateProject($project));
 
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security),
@@ -370,7 +373,9 @@ class NgProjectController extends BaseController
         $project->addAction($action);
 
         $em->persist($action);
-        $em->flush();
+        // $em->flush();
+
+        return $action;
     }
 
     private function serializeProject(Project $project, SerializerInterface $serializer, Security $security)

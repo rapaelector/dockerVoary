@@ -14,7 +14,7 @@ final class ValidateProject
         $this->project = $project;
     }
 
-    public function getProject()
+    public function getProject(): ?Project
     {
         return $this->project;
     }
