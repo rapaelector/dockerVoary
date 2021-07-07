@@ -85,7 +85,7 @@ class ProjectVoter extends Voter
 
     public function canLose(Project $project, User $user)
     {
-        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() != Status::STATUS_LOST);
+        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() != Status::STATUS_LOST) && ($project->getStatus() != Status::STATUS_VALIDATED);
     }
 
     public static function getSupportedAttributes()
