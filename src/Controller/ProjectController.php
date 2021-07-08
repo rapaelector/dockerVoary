@@ -37,6 +37,7 @@ use App\DataTables\Filter\RangeFilter;
 use App\DataTables\Filter\ChoiceRangeFilter;
 use Doctrine\ORM\QueryBuilder;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -374,6 +375,7 @@ class ProjectController extends BaseController
             ], Response::HTTP_SERVICE_UNAVAILABLE);
         }
     }
+
     /**
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
      */
@@ -430,12 +432,17 @@ class ProjectController extends BaseController
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), project)")
      */
     #[Route('/{id}/delete', name: 'project.delete', methods: ['POST', 'DELETE'])]
-    public function delete(Request $request, Project $project, TranslatorInterface $translator): Response
+    public function delete(Request $request, Project $project, TranslatorInterface $translator, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($project);
-            $entityManager->flush();
+            foreach ($project->getActions() as $action) {
+                $project->removeAction($action);
+                $em->remove($action);
+            }
+
+            $em->remove($project);
+            $em->flush();
+
             if ($request->isXMLHttpRequest()) {
                 return $this->json(['message' => $translator->trans('messages.delete_success', [], 'project')]);
             } else {

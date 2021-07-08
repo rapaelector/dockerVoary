@@ -4,14 +4,18 @@ namespace App\Entity;
 
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\TimestampableTrait;
+use App\Entity\Common\SoftDeleteableTrait;
 use App\Repository\ActionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @ORM\Entity(repositoryClass=ActionRepository::class)
  */
 class Action
 {
+    use SoftDeleteableTrait;
     use BlameableTrait;
     use TimestampableTrait;
 
