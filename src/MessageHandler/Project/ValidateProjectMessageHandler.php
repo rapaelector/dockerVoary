@@ -47,9 +47,10 @@ class ValidateProjectMessageHandler implements MessageHandlerInterface
     {
         $actions = $project->getActions();
         $validationRequester = null;
+        $mailSubject = $this->translator->trans('email.project_validation.title', [], 'project') .' '. Resolver::resolve([$project, 'name'], '');
 
         $mail = (new TemplatedEmail())
-            ->subject($this->translator->trans('email.project_validation.title', [], 'project'))
+            ->subject($mailSubject)
             ->htmlTemplate('email/project/validate_project.html.twig')
             ->context([
                 'project' => $project,
@@ -60,7 +61,6 @@ class ValidateProjectMessageHandler implements MessageHandlerInterface
                 $validationRequester = \App\Utils\EmailUtils::toAddress($action->getCreatedBy());
             }
         }
-
         $users = $this->em->getRepository(User::class)->getUserWithProjectValidateRole();
 
         $addresses = \App\Utils\EmailUtils::toAddresses($users);

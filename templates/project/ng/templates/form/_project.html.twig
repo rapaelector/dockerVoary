@@ -43,8 +43,7 @@
                     <label for="project_edit_siteCode">{{ 'columns.siteCode'|trans }}</label>
                     <input
                         type="text" 
-                        ng-model="project.siteCode" 
-                        ="" 
+                        ng-model="project.siteCode"  
                         class="form-control"
                         ng-class="(data.errors.siteCode && data.errors.siteCode.length > 0) ? 'border-danger' : ''"
                     >
@@ -58,8 +57,7 @@
                     <label for="project_edit_projectOwner">{{ 'columns.projectOwner'|trans }}</label>
                     <input
                         type="text" 
-                        ng-model="project.projectOwner" 
-                        ="" 
+                        ng-model="project.projectOwner"  
                         class="form-control"
                         ng-class="(data.errors.projectOwner && data.errors.projectOwner.length > 0) ? 'border-danger' : ''"
                     >
@@ -75,8 +73,7 @@
                     </label>
                     <input
                         type="text" 
-                        ng-model="project.projectManager"
-                        ="" 
+                        ng-model="project.projectManager" 
                         class="form-control" 
                         value="Test"
                         ng-class="(data.errors.projectManager && data.errors.projectManager.length > 0) ? 'border-danger' : ''"
@@ -148,14 +145,25 @@
                         {{ 'columns.descriptionOperation'|trans }}
                     </label>
                     <textarea 
-                        ng-model="project.descriptionOperation" 
-                        ="" 
+                        ng-model="project.descriptionOperation"  
                         class="form-control"
                     ></textarea>
                     {% include 'project/ng/templates/form/_errors.html.twig' with {
                         errorPath: 'data.errors.descriptionOperation',
                     } %}
                 </div>
+            </div>
+            <div class="col-sm-12">
+                <label for="project_edit_name">{{ 'columns.project_name'|trans }}</label>
+                    <input
+                        type="text" 
+                        ng-model="project.name"
+                        class="form-control"
+                        ng-class="(data.errors.name && data.errors.name.length > 0) ? 'border-danger' : ''"
+                    >
+                {% include 'project/ng/templates/form/_errors.html.twig' with {
+                    errorPath: 'data.errors.name',
+                } %}
             </div>
         </div>
     </div>

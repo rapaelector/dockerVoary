@@ -8,13 +8,13 @@
 
 {% block content %}
     <div>
-        <p>{{ 'email.label.hello'|trans }}</p>
+        <p>{{ 'email.label.hello'|trans }},</p>
         <p>
             {{ 'email.project_validation.message'|trans({
                 '%projectName%': resolve([project, 'name'], null),
                 '%updatedDate%': resolve([project, 'updatedAt'], null)|date('d/m/Y'),
                 '%updatedBy%': resolve([project, 'updatedBy', 'name'], null),
-            }, 'project') }}
+            }, 'project')|raw }}
         </p>
         <p>{{ 'email.label.project_information'|trans }}</p>
         <ul>
@@ -27,6 +27,12 @@
             <li>
                 {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], '-') }}
             </li>
+            <li>
+                {{ 'columns.project_name'|trans }}: {{ resolve([project, 'name'], '-') }}
+            </li>
         </ul>
+        <p>
+            {{ 'label.cordially'|trans }}
+        </p>
     </div>
 {% endblock %}

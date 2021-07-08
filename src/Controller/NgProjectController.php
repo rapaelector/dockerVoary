@@ -130,9 +130,14 @@ class NgProjectController extends BaseController
     }
 
     #[Route('/{id}/get/project', name: 'project.ng.get_project', options: ['expose' => true])]
-    public function getProject(Project $project, SerializerInterface $serializer, Security $security)
+    public function getProject(
+        Project $project, 
+        SerializerInterface $serializer, 
+        Security $security, 
+        TranslatorInterface $translator
+    )
     {
-        return $this->json(['project' => $this->serializeProject($project, $serializer, $security)]);
+        return $this->json(['project' => $this->serializeProject($project, $serializer, $security, $translator)]);
     }
 
     /**
@@ -297,7 +302,7 @@ class NgProjectController extends BaseController
             $messageBus->dispatch(new PreValidateProject($project, $action));
 
             return $this->json([
-                'data' => $this->serializeProject($project, $serializer, $security),
+                'data' => $this->serializeProject($project, $serializer, $security, $translator),
                 'message' => $translator->trans('messages.project_submitted_success', [], 'project'),
             ]);
         }
@@ -324,7 +329,7 @@ class NgProjectController extends BaseController
             $this->changeProjectStatus($project, $em, Status::STATUS_LOST);
 
             return $this->json([
-                'data' => $this->serializeProject($project, $serializer, $security),
+                'data' => $this->serializeProject($project, $serializer, $security, $translator),
                 'message' => $translator->trans('messages.project_archived_success', [], 'project'),
             ]);
         }
@@ -353,7 +358,7 @@ class NgProjectController extends BaseController
             $messageBus->dispatch(new ValidateProject($project));
 
             return $this->json([
-                'data' => $this->serializeProject($project, $serializer, $security),
+                'data' => $this->serializeProject($project, $serializer, $security, $translator),
                 'message' => $translator->trans('messages.project_validation_success', [], 'project'),
             ]);
         }
@@ -378,7 +383,7 @@ class NgProjectController extends BaseController
         return $action;
     }
 
-    private function serializeProject(Project $project, SerializerInterface $serializer, Security $security)
+    private function serializeProject(Project $project, SerializerInterface $serializer, Security $security, TranslatorInterface $translator)
     {
         $allowedActions = [];
         $normalizedData = $serializer->normalize($project, 'json', ['groups' => 'data-project']);
@@ -395,6 +400,7 @@ class NgProjectController extends BaseController
             }
         }
         $normalizedData['allowedActions'] = $allowedActions;
+        $normalizedData['statusLabel'] = $translator->trans(('status.' .$project->getStatus()), [], 'project');
 
         return $normalizedData;
     }

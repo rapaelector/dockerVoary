@@ -22,6 +22,7 @@ title:
   validate_project: 'Validation du dossier'
   archived_project: 'Archiver le dossier'
   submit_project: 'Demande de validation du dossier'
+  project_status: 'Etat du project'
 
 label:
   action: Action
@@ -107,7 +108,7 @@ columns:
   project_description: 'Description du projet'
   department: 'Département'
   market_type: 'Type de marche'
-  project_name: 'Nom du projet'
+  project_name: 'Nom du projet' 
   
 typeMarket:
   shadows : "Ombrières"
@@ -239,6 +240,11 @@ messages:
   project_submitted_success: 'Envoie du dossier effectué avec succès'
   project_submitted_failed: "Échec de l'envoi du dossier"
 
+status:
+  submitted: 'Demande de validation'
+  validated: 'Valider'
+  lost: 'Pérdu'
+
 action:
   reminder: 'Rappel'
 
@@ -252,9 +258,9 @@ email:
     title: 'Demande de validation du dossier'
     validation_label: 'Lien de validation du dossier'
     message: |
-      Le dossier suivant requiert une validation, veuillez vous connecter à l'ERP Bonhomme Batiment pour valider ce dossier en cliquant sur le lien suivant :  <a href="%validationLink%">%validationLabel%</a>
+      Le dossier <b>%projectName%</b> requiert une validation, veuillez vous connecter à l'ERP Bonhomme Batiment pour valider ce dossier en cliquant sur le lien suivant :  <a href="%validationLink%">%validationLabel%</a>
   
   project_validation:
     title: 'Validation du dossier'
     message: |
-      Le projet: %projectName% à étè validé le %updatedDate% par %updatedBy%
+      Le projet: <b>%projectName%</b> à étè validé le %updatedDate% par %updatedBy%

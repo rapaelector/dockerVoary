@@ -45,9 +45,9 @@ class PreValidateProjectMessageHandler implements MessageHandlerInterface
     private function sendEmail(Project $project, Action $action)
     {   
         $mailCcRecipients = [];
-
+        $mailSubject = $this->translator->trans('email.ask_for_validation.title', [], 'project') .' '. Resolver::resolve([$project, 'name'], '');
         $email = (new TemplatedEmail())
-            ->subject($this->translator->trans('email.ask_for_validation.title', [], 'project'))
+            ->subject($mailSubject)
             ->htmlTemplate('email/project/ask_for_project_validation.html.twig')
             ->context([
                 'project' => $project,

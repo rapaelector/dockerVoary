@@ -7,9 +7,10 @@
 {% block stylesheets %}{% endblock %}
 
 {% block content %}
-    <p>{{ 'email.label.hello'|trans }}</p>
+    <p>{{ 'email.label.hello'|trans }},</p>
     <p>
         {{ 'email.ask_for_validation.message'|trans({
+            '%projectName%': resolve([project, 'name'], ''),
             '%validationLink%': absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})),
             '%validationLabel%': 'email.ask_for_validation.validation_label'|trans,
         }, 'project')|raw }}
@@ -24,6 +25,9 @@
         </li>
         <li>
             {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], '-') }}
+        </li>
+        <li>
+            {{ 'columns.project_name'|trans }}: {{ resolve([project, 'name'], '-') }}
         </li>
     </ul>
     <p>
