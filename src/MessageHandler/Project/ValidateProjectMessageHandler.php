@@ -5,6 +5,7 @@ namespace App\MessageHandler\Project;
 use App\Entity\Project;
 use App\Utils\Resolver;
 use App\Entity\User;
+use App\Entity\Constants\Status;
 use App\Message\Project\ValidateProject;
 
 use Symfony\Component\Mailer\MailerInterface;
@@ -44,6 +45,9 @@ class ValidateProjectMessageHandler implements MessageHandlerInterface
 
     private function sendEmail(Project $project)
     {
+        $actions = $project->getActions();
+        $validationRequester = null;
+
         $mail = (new TemplatedEmail())
             ->subject($this->translator->trans('email.project_validation.title', [], 'project'))
             ->htmlTemplate('email/project/validate_project.html.twig')
@@ -51,13 +55,24 @@ class ValidateProjectMessageHandler implements MessageHandlerInterface
                 'project' => $project,
             ])
         ;
-        
-        $users = $this->em->getRepository(User::class)->findAll();
-        foreach ($users as $user) {
-            if (in_array('', $user->getRoles())) {
-                $email->to($user->getEmail());
-                $this->mailer->send($mail);
+        foreach ($actions as $action) {
+            if ($action->getValue() == Status::STATUS_SUBMITTED) {
+                $validationRequester = \App\Utils\EmailUtils::toAddress($action->getCreatedBy());
             }
         }
+
+        $users = $this->em->getRepository(User::class)->getUserWithProjectValidateRole();
+
+        $addresses = \App\Utils\EmailUtils::toAddresses($users);
+        if ($validationRequester) {
+            $mail->to($validationRequester);
+        }
+        if (count($addresses) > 0) {
+            foreach ($addresses as $address) {
+                $mail->addCc($address);
+            }
+        }
+
+        $this->mailer->send($mail);
     }   
 }

@@ -68,9 +68,7 @@ class ProjectVoter extends Voter
 
     public function canSubmit(Project $project, User $user)
     {
-        return ($this->security->isGranted('ROLE_PROJECT_VALIDATE')) && ($this->security->isGranted('ROLE_PROJECT_EDIT')) && 
-            ($project->getStatus() == Status::STATUS_PENDING)
-        ;
+        return $this->security->isGranted('ROLE_PROJECT_EDIT') && ($project->getStatus() == Status::STATUS_PENDING);
     }
 
     public function canValidate(Project $project, User $user)

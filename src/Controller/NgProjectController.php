@@ -373,7 +373,7 @@ class NgProjectController extends BaseController
         $project->addAction($action);
 
         $em->persist($action);
-        // $em->flush();
+        $em->flush();
 
         return $action;
     }

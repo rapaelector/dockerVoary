@@ -32,8 +32,8 @@ class PreValidateProjectMessageHandler implements MessageHandlerInterface
         EntityManagerInterface $em
     )
     {
-        $this->mailer = $mailer;
         $this->em = $em;
+        $this->mailer = $mailer;
         $this->translator = $translatorInterface;
     }
 
@@ -54,15 +54,9 @@ class PreValidateProjectMessageHandler implements MessageHandlerInterface
             ])
         ;
         
-        $users = $this->em->getRepository(User::class)
-            ->createQueryBuilder('u')
-            ->where('u.roles LIKE :role')
-            ->setParameter('role', '%ROLE_PROJECT_VALIDATE%')
-            ->getQuery()
-            ->getResult()
-        ;
-
+        $users = $this->em->getRepository(User::class)->getUserWithProjectValidateRole();
         $addresses = \App\Utils\EmailUtils::toAddresses($users);
+
         if (count($addresses) > 0) {
             $email->to(array_shift($addresses));
             foreach ($addresses as $address) {

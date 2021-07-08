@@ -305,7 +305,6 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
     private $prospect;
@@ -795,7 +794,7 @@ class Project
         return $this->prospect;
     }
 
-    public function setProspect(?Client $prospect): self
+    public function setProspect(Client $prospect): self
     {
         $this->prospect = $prospect;
 

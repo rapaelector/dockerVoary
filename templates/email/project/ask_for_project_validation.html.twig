@@ -16,25 +16,18 @@
     </p>
     <p>{{ 'email.label.project_information'|trans }}</p>
     <ul>
-        {% if resolve([project, 'prospect', 'name'], null) or resolve([project, 'prospect', 'clientNumber'], null) %}
-            <li>
-                {{ 'email.ask_for_validation.prospect'|trans }}: {{ resolve([project, 'prospect', 'name'], null) }} - {{ resolve([project, 'prospect', 'clientNumber'], null) }}
-            </li>
-        {% endif %}
-        {% if resolve([project, 'folderNameOnTheServer'], null) %}
-            <li>
-                {{ 'columns.folderNameOnTheServer'|trans }}: {{ resolve([project, 'folderNameOnTheServer'], null) }}
-            </li>
-        {% endif %}
-        {% if resolve([project, 'priorizationOfFile'], null) %}
-            <li>
-                {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], null) }}
-            </li>
-        {% endif %}
+        <li>
+            {{ 'email.ask_for_validation.prospect'|trans }}: {{ resolve([project, 'prospect', 'name'], '-') }} - {{ resolve([project, 'prospect', 'clientNumber'], '') }}
+        </li>
+        <li>
+            {{ 'columns.folderNameOnTheServer'|trans }}: {{ resolve([project, 'folderNameOnTheServer'], '-') }}
+        </li>
+        <li>
+            {{ 'columns.priorizationOfFile'|trans }}: {{ resolve([project, 'priorizationOfFile'], '-') }}
+        </li>
     </ul>
     <p>
-        <a href="{{ absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})) }}">
-            {# {{ absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], null)})) }} #}
+        <a href="{{ absolute_url(path('project.ng.project_follow_up',{id: resolve([project, 'id'], '-')})) }}">
             {{ 'email.ask_for_validation.validation_label'|trans }}
         </a>
     </p>
