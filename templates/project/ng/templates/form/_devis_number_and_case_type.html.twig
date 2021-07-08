@@ -23,8 +23,7 @@
 					<label for="project_edit_quoteValidatedMDEDate">{{ 'columns.quoteValidatedMDEDate'|trans }}</label>
 					<input
 						type="date" 
-						ng-model="project.quoteValidatedMDEDate" 
-						="" 
+						ng-model="project.quoteValidatedMDEDate"  
 						class="form-control"
 						ng-class="(data.errors.quoteValidatedMDEDate && data.errors.quoteValidatedMDEDate.length > 0) ? 'border-danger' : ''"
 					>
@@ -45,7 +44,6 @@
 					<label for="project_edit_planningProject">{{ 'columns.planningProject'|trans }}</label>
 					<textarea
 						ng-model="project.planningProject" 
-						=""
 						class="form-control"
 						ng-class="data.errors.planningProject.length > 0 ? 'border-danger' : ''"
 					></textarea>

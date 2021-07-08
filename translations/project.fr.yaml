@@ -44,6 +44,7 @@ label:
   auto: 'AUTO'
   last_relaunch: 'DERNIÈRE RELANCE'
   type_relaunch: 'DERNIÈRE RELANCE'
+  project_lose_reason: 'Raison de la perte du projet'
 
 contact:
   label: Contact
@@ -243,7 +244,14 @@ messages:
 status:
   submitted: 'Demande de validation'
   validated: 'Valider'
-  lost: 'Pérdu'
+  lost: 'Perdu'
+
+reason:
+  the_client_abandons_the_project: 'Le client abandonne le projet'
+  we_are_too_expensive: 'Nous sommes trop cher'
+  the_technical_solution: 'La solution technique'
+  lack_of_responsiveness: 'Manque de réactivité '
+  other: 'Autre'
 
 action:
   reminder: 'Rappel'
