@@ -432,7 +432,7 @@ class Project
     private $status;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Action::class)
+     * @ORM\ManyToMany(targetEntity=Action::class, cascade={"all"}, orphanRemoval=true)
      */
     private $actions;
 
