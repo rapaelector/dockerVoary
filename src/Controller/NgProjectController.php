@@ -299,7 +299,9 @@ class NgProjectController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $action = $this->changeProjectStatus($project, $em, Status::STATUS_SUBMITTED);
-            $messageBus->dispatch(new PreValidateProject($project, $action));
+            try {
+                $messageBus->dispatch(new PreValidateProject($project, $action));
+            } catch (\Exception $e) {}
 
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security, $translator),
@@ -355,7 +357,10 @@ class NgProjectController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $this->changeProjectStatus($project, $em, Status::STATUS_VALIDATED);
-            $messageBus->dispatch(new ValidateProject($project));
+            
+            try {
+                $messageBus->dispatch(new ValidateProject($project));
+            } catch (\Exception $th) {}
 
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security, $translator),
