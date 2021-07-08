@@ -1,6 +1,6 @@
 <div class="h6 m-0 pb-2" ng-if="data.statusLabel">
     {{ 'title.project_status'|trans({}, 'project') }}: 
-    <span class="badge badge-app-secondary text-uppercase p-1">
+    <span class="badge text-uppercase p-1" ng-class="data.statusBg">
         {{ '{{data.statusLabel }}' }}
     </span>
 </div>

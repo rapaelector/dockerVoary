@@ -26,6 +26,7 @@ function ProjectInformationController(
         errors: null,
         allowedActions: [],
         statusLabel: '',
+        statusBg: '',
     };
     $scope.searchTerm = {
         users: '',
@@ -51,6 +52,7 @@ function ProjectInformationController(
             $scope.data.project = response.data;
             $scope.project = projectService.parseProject(response.data.project);
             $scope.data.statusLabel = $scope.project.statusLabel;
+            $scope.data.status = $scope.project.status;
             if (response.data && response.data.project && response.data.project.allowedActions) {
                 $scope.data.allowedActions = response.data.project.allowedActions;
             }
@@ -86,6 +88,16 @@ function ProjectInformationController(
     $scope.$watch('project', function() {}, true);
 
     $scope.$watch('data.caseTypes', function() {}, true);
+
+    $scope.$watch('data.status', function() {
+        if ($scope.data.status == 'submitted') {
+            $scope.data.statusBg = 'bg-app-secondary';
+        } else if ($scope.data.status == 'validated') {
+            $scope.data.statusBg = 'bg-success';
+        } else if ($scope.data.status == 'lost') {
+            $scope.data.statusBg = 'bg-danger';
+        };
+    }, true);
 
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
@@ -203,6 +215,7 @@ function ProjectInformationController(
         projectService.saveProject(PROJECT_ID, $scope.project).then((response) => {
             $scope.onLoading = false;
             $scope.data.statusLabel = response.data.data.statusLabel;
+            $scope.data.status = response.data.data.status;
             $scope.helpers.showSimpleToast(response.data.message);
         }, error => {
             $scope.onLoading = false;
@@ -242,6 +255,7 @@ function ProjectInformationController(
             projectService.changeFolderStatus('project.ng.submit_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.statusLabel = response.data.data.statusLabel;
+                $scope.data.status = response.data.data.status;
                 $scope.data.allowedActions = response.data.data.allowedActions;
                 $scope.onLoading = false;
             }, error => {
@@ -267,6 +281,7 @@ function ProjectInformationController(
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.allowedActions = response.data.data.allowedActions;
                 $scope.data.statusLabel = response.data.data.statusLabel;
+                $scope.data.status = response.data.data.status;
                 $scope.onLoading = false;
             }, error => {
                 $scope.onLoading = false;
@@ -290,6 +305,7 @@ function ProjectInformationController(
             projectService.changeFolderStatus('project.ng.validate_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
                 $scope.data.statusLabel = response.data.data.statusLabel;
+                $scope.data.status = response.data.data.status;
                 $scope.data.allowedActions = response.data.data.allowedActions;
                 $scope.onLoading = false;
             }, error => {
