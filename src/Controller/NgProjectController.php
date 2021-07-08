@@ -8,12 +8,14 @@ use App\Entity\Project;
 use App\Entity\Relaunch;
 use App\Entity\Action;
 use App\Entity\ExchangeHistory;
+use App\Entity\ProjectMeta;
 use App\Security\Voter\Attributes;
 use App\Entity\Constants\Status;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\Form\ProjectEditType;
 use App\Form\ExchangeHistoryType;
 use App\Form\Project\NgProjectType;
+use App\Form\Project\ProjectMetaType;
 use App\Form\User\ContactType;
 use App\Controller\BaseController;
 use App\Utils\Resolver;
@@ -317,7 +319,7 @@ class NgProjectController extends BaseController
     /**
      * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::LOSE'), project) or is_granted('ROLE_PROJECT_VALIDATE')")
      */
-    #[Route('/{id}/archived/project', name: 'project.ng.archived_project', options: ['expose' => true])]
+    #[Route('/{id}/archived/project', name: 'project.ng.archived_project', methods: ['POST'], options: ['expose' => true])]
     public function archivedProject(
         Request $request, 
         Project $project, 
@@ -327,8 +329,20 @@ class NgProjectController extends BaseController
         Security $security
     )
     {
-        if ($request->getMethod() == 'POST') {
-            $this->changeProjectStatus($project, $em, Status::STATUS_LOST);
+        if (!$meta = $project->getMeta()) {
+            $meta = new ProjectMeta();
+        }
+        $form = $this->createForm(ProjectMetaType::class, $meta, [
+            'csrf_protection' => false,
+            'allow_extra_fields' => true,
+        ]);
+        $form->submit(json_decode($request->getContent(), true));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $project->setMeta($meta);
+            $action = $this->changeProjectStatus($project, $em, Status::STATUS_LOST, true);
+            $em->persist($action);
+            $em->flush();
 
             return $this->json([
                 'data' => $this->serializeProject($project, $serializer, $security, $translator),
@@ -373,7 +387,7 @@ class NgProjectController extends BaseController
         ]);
     }
 
-    private function changeProjectStatus(Project $project, EntityManagerInterface $em, $newValue)
+    private function changeProjectStatus(Project $project, EntityManagerInterface $em, $newValue, bool $isLost = false)
     {
         $action = new Action();
         $action->setName(Action::ACTION_CHANGE_STATUS);
@@ -382,8 +396,10 @@ class NgProjectController extends BaseController
         $project->setStatus($newValue);
         $project->addAction($action);
 
-        $em->persist($action);
-        $em->flush();
+        if (!$isLost) {
+            $em->persist($action);
+            $em->flush();
+        }
 
         return $action;
     }
@@ -406,6 +422,9 @@ class NgProjectController extends BaseController
         }
         $normalizedData['allowedActions'] = $allowedActions;
         $normalizedData['statusLabel'] = $project->getStatus() != Status::STATUS_PENDING ? $translator->trans(('status.' .$project->getStatus()), [], 'project') : '';
+        if ($reasonLost = Resolver::resolve([$project, 'meta', 'reasonLost'], null)) {
+            $normalizedData['meta']['reasonLost'] = $translator->trans('reason.' .$reasonLost, [], 'project');
+        }
 
         return $normalizedData;
     }

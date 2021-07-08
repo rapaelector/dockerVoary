@@ -14,7 +14,7 @@ function ContactCreationController($scope, $mdDialog, $http, $mdToast, fosJsRout
         errors: {},
     };
 
-    $scope.$init = function() {};
+    this.$onInit = function() {};
 
     $scope.fns = {};
     $scope.fns.cancelContactCreation = function() {

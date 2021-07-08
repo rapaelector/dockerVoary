@@ -1,0 +1,58 @@
+{% trans_default_domain 'project' %}
+
+<md-dialog aria-label="Event Dialog" id="contact-form-dialog">
+    <md-toolbar class="bg-white">
+        <div class="md-toolbar-tools">
+            <h3 class="card-title">{{ 'title.archived_project'|trans }}</h3>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="card card-outline card-app-secondary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{ 'label.project_lose_reason'|trans }}</label>
+                        <md-select 
+                            ng-model="projectLoseReason.reasonLost"
+                            ng-change="fns.projectLoseReasonChange()"
+                        >
+                            <md-option ng-repeat="item in data.projectLoseReasons" ng-value="item.value">
+                                {{ '{{ item.label }}' }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="col-sm-12 mt-2" ng-if="projectLoseReason.reasonLost == 'other'">
+                        <label>{{ 'label.description'|trans }}</label>
+                        <textarea
+                            ng-model="projectLoseReason.otherText" 
+                            class="form-control"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button
+            ng-click="fns.cancelArchiveProject()" 
+            type="button" 
+            aria-label="cancel"
+            class="bg-app-secondary"
+        >
+			{{ 'action.cancel'|trans({}, 'messages') }}
+		</md-button>
+		<md-button 
+            ng-click="fns.archiveProject()" 
+            aria-label="save"
+            class="bg-app-primary"
+        >
+			{{ 'action.save'|trans({}, 'messages') }}
+		</md-button>
+	</md-dialog-actions>
+</md-dialog>
+<div class="ng-project-loader" ng-if="onLoading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+    

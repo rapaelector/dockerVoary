@@ -436,6 +436,12 @@ class Project
      */
     private $actions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ProjectMeta::class, cascade={"all"})
+     * @Groups({"data-project"})
+     */
+    private $meta;
+
     public function __construct()
     {
         $this->status = Status::STATUS_PENDING;
@@ -1032,6 +1038,18 @@ class Project
     public function removeAction(action $action): self
     {
         $this->actions->removeElement($action);
+
+        return $this;
+    }
+
+    public function getMeta(): ?ProjectMeta
+    {
+        return $this->meta;
+    }
+
+    public function setMeta(?ProjectMeta $meta): self
+    {
+        $this->meta = $meta;
 
         return $this;
     }

@@ -1,4 +1,5 @@
 import ContactCreationController from './contact-creation.controller.js';
+import ArchiveProjectDialogController from './archive-project-dialog.controller.js';
 
 function ProjectInformationController(
     $scope,
@@ -51,8 +52,7 @@ function ProjectInformationController(
         projectService.getProject(PROJECT_ID).then((response) => {
             $scope.data.project = response.data;
             $scope.project = projectService.parseProject(response.data.project);
-            $scope.data.statusLabel = $scope.project.statusLabel;
-            $scope.data.status = $scope.project.status;
+            $scope.helpers.updateStatus($scope.project)
             if (response.data && response.data.project && response.data.project.allowedActions) {
                 $scope.data.allowedActions = response.data.project.allowedActions;
             }
@@ -207,6 +207,12 @@ function ProjectInformationController(
             $scope.project.disaSheetValidation.push(item.value);
         }
     };
+    $scope.helpers.updateStatus = function(data) {
+        if (data) {
+            $scope.data.statusLabel = data.statusLabel;
+            $scope.data.status = data.status;
+        }
+    };
 
     $scope.fns = {};
     $scope.fns.submit = function() {
@@ -254,8 +260,7 @@ function ProjectInformationController(
             $scope.onLoading = true;
             projectService.changeFolderStatus('project.ng.submit_project').then((response) => {
                 $scope.helpers.showSimpleToast(response.data.message);
-                $scope.data.statusLabel = response.data.data.statusLabel;
-                $scope.data.status = response.data.data.status;
+                $scope.helpers.updateStatus(response.data.data);
                 $scope.data.allowedActions = response.data.data.allowedActions;
                 $scope.onLoading = false;
             }, error => {
@@ -267,28 +272,24 @@ function ProjectInformationController(
         });
     }
     $scope.fns.archive = function(jsEvent) {
-        var confirm = $mdDialog.confirm()
-            .title(APP_MESSAGES.archivedFolderTitle)
-            .textContent(APP_MESSAGES.archivedFolderMessage)
-            .ariaLabel('folder validation')
-            .targetEvent(jsEvent)
-            .ok(APP_MESSAGES.action.archived)
-            .cancel(APP_MESSAGES.action.cancel);
-
-        $mdDialog.show(confirm).then(function() {
-            $scope.onLoading = true;
-            projectService.changeFolderStatus('project.ng.archived_project').then((response) => {
-                $scope.helpers.showSimpleToast(response.data.message);
-                $scope.data.allowedActions = response.data.data.allowedActions;
-                $scope.data.statusLabel = response.data.data.statusLabel;
-                $scope.data.status = response.data.data.status;
-                $scope.onLoading = false;
-            }, error => {
-                $scope.onLoading = false;
-                $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
-            })
-        }, function(error) {
-            $scope.onLoading = false;
+        $mdDialog.show({
+            controller: ArchiveProjectDialogController,
+            templateUrl: 'archive-project-dialog.html',
+            disableParentScroll: true,
+            parent: angular.element(document.body),
+            targetEvent: jsEvent,
+            clickOutsideToClose: true,
+            bindToController: false,
+        }).then((response) => {
+            if (response) {
+                $scope.project = response.data;
+                $scope.helpers.updateStatus(response.data);
+                $scope.helpers.showSimpleToast(response.message);
+                $scope.data.allowedActions = response.data.allowedActions;
+            }
+        }, error => {
+            // $scope.onLoading = false;
+            $scope.helpers.showSimpleToast(error.data.message, { toastClass: 'toast-error' });
         });
     };
     $scope.fns.validate = function(jsEvent) {

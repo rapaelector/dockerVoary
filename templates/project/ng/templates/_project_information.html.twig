@@ -1,7 +1,27 @@
 <div class="h6 m-0 pb-2" ng-if="data.statusLabel">
     {{ 'title.project_status'|trans({}, 'project') }}: 
-    <span class="badge text-uppercase p-1" ng-class="data.statusBg">
+    <span
+        class="badge text-uppercase p-1" 
+        ng-class="data.statusBg" 
+        {# 
+        data-toggle="tooltip" 
+        data-placement="bottom" title="{{ '{{ project. }}' }}"
+        data-container="body"
+        #}
+    />
         {{ '{{data.statusLabel }}' }}
+        <md-tooltip
+            ng-if="project && project.meta && project.meta.reasonLost && project.meta.reasonLost == 'other'"
+            md-direction="'top'"
+        >
+            {{ '{{ project.meta.otherText }}' }}
+        </md-tooltip>
+        <md-tooltip
+            ng-if="project && project.meta && project.meta.reasonLost && project.meta.reasonLost != 'other'"
+            md-direction="'top'"
+        >
+            {{ '{{ project.meta.reasonLost }}' }}
+        </md-tooltip>
     </span>
 </div>
 <form name="project-form">
