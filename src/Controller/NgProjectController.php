@@ -400,7 +400,7 @@ class NgProjectController extends BaseController
             }
         }
         $normalizedData['allowedActions'] = $allowedActions;
-        $normalizedData['statusLabel'] = $translator->trans(('status.' .$project->getStatus()), [], 'project');
+        $normalizedData['statusLabel'] = $project->getStatus() != Status::STATUS_PENDING ? $translator->trans(('status.' .$project->getStatus()), [], 'project') : '';
 
         return $normalizedData;
     }

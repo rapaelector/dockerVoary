@@ -1,7 +1,7 @@
-<div class="h6 m-0 pb-2" ng-if="project.statusLabel != 'pending'">
+<div class="h6 m-0 pb-2" ng-if="data.statusLabel">
     {{ 'title.project_status'|trans({}, 'project') }}: 
     <span class="badge badge-app-secondary text-uppercase p-1">
-        {{ '{{ project.statusLabel }}' }}
+        {{ '{{data.statusLabel }}' }}
     </span>
 </div>
 <form name="project-form">

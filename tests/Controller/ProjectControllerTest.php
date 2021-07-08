@@ -54,10 +54,13 @@ class ProjectControllerTest extends WebTestCase
         $this->assertStringNotContainsString("form-error-message", $client->getResponse()->getContent());
 
         // Create project with invalid data
-        // $formValues = $this->formatFormNames('project', $this->generateProject(true));
-        // $this->submitOverride($client, $form, $formValues);
-        // $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Faild to test invalid project data');
-        // $this->assertStringContainsString("form-error-message", $client->getResponse()->getContent());
+        // Login again to avoid redirection to the fucking login page and have 302(redirection) error code instead of 200(ok) code 
+        $this->login($client, 'user_role_project_add@app.locale');
+        $formValues = $this->formatFormNames('project', $this->generateProject(true));
+        $this->submitOverride($client, $form, $formValues);
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Faild to test invalid project data');
+        // $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode(), 'Faild to test invalid project data');
+        $this->assertStringContainsString("form-error-message", $client->getResponse()->getContent());
 
         // TODO : create user role checker but not now
         /**
@@ -189,12 +192,12 @@ class ProjectControllerTest extends WebTestCase
             "economist" => $user->getId(),
             "descriptionOperation" => "Lorem ipsum dolor sit amet consectetur",
             "contact" => [
-                "lastName" => $invalidData ? "" : "_henintsoa",
-                "firstName" => "Idealy",
-                "email" => $invalidData ? "misterData@gmail.com" : 'user_' .(new \DateTime())->getTimestamp(). '@app.locale',
-                "phone" => "xxx xx xxx xx",
-                "job" => "",
-                "fax" => "",
+                'lastName' => $invalidData ? '' : '_henintsoa',
+                'firstName' => "Idealy",
+                'email' => $invalidData ? 'test@gmail.com' : 'user_' .(new \DateTime())->getTimestamp(). '@app.locale',
+                'phone' => "xxx xx xxx xx",
+                'job' => '',
+                'fax' => '',
             ],
             // "billingAddres" => [
             //     "name" => "Livraison",
