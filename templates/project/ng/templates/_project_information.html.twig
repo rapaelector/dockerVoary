@@ -11,13 +11,13 @@
     />
         {{ '{{data.statusLabel }}' }}
         <md-tooltip
-            ng-if="project && project.meta && project.meta.reasonLost && project.meta.reasonLost == 'other'"
+            ng-if="project && project.meta && project.meta.reasonLost && (project.meta.reasonLost == 'other' || project.meta.reasonLost == 'Autre')"
             md-direction="'top'"
         >
             {{ '{{ project.meta.otherText }}' }}
         </md-tooltip>
         <md-tooltip
-            ng-if="project && project.meta && project.meta.reasonLost && project.meta.reasonLost != 'other'"
+            ng-if="project && project.meta && project.meta.reasonLost && project.meta.reasonLost != 'Autre'"
             md-direction="'top'"
         >
             {{ '{{ project.meta.reasonLost }}' }}
