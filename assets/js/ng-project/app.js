@@ -1,11 +1,10 @@
-import './../../scss/ngProject/app.scss';
+import './../../scss/ng-project/app.scss';
 
 import 'angular';
 import 'angular-animate';
 import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
-// import 'angular-material/angular-material.min.js';
 import 'angular-auto-complete/angular-auto-complete.js';
 
 import './app.module';

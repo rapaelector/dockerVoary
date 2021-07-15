@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app_project_schedule') }}
+{% endblock %}
+
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
+    style="height: auto;"
+    ng-app="projectScheduleApp"
+    ng-controller="projectScheduleController"
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <app-scheduler ressources="data.ressources"></app-scheduler>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app_project_schedule') }}
+{% endblock %}
+
