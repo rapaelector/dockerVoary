@@ -1,8 +1,20 @@
 <div>
     <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th 
+                    ng-repeat="column in $ctrl.columns"
+                    ng-class="getHeaderCellClassName(column)"
+                >{{ column.label }} </th>
+            </tr>
+        </thead>
         <tbody>
-            <tr ng-repeat="ressource in $ctrl.ressources">
-                <td>{{ ressource }}</td>
+            <tr ng-repeat="resource in $ctrl.resources" ng-init="resourceIndex = $index">
+                <td
+                    ng-repeat="column in $ctrl.columns"
+                    ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
+                    ng-class="getCellClassName(resource, column, resourceIndex)"
+                ></td>
             </tr>
         </tbody>
     </table>

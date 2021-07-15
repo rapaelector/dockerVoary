@@ -5,6 +5,7 @@ import 'angular-animate';
 import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
+import 'angular-sanitize';
 
 import './app.module';
 import './../angular/shared/shared.module';
