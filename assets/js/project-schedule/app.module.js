@@ -4,4 +4,5 @@ angular.module('projectScheduleApp', [
     'ngMaterial',
     'ngMessages',
     'angularMoment',
+    'daterangepicker',
 ]);

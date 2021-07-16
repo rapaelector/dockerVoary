@@ -8,10 +8,32 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
         columns: buildColumns(numberFormat),
         start: null,
         end: null,
+        date: {
+            startDate: moment().startOf('year'),
+            endDate: moment().endOf('year'),
+        },
+    };
+    $scope.options = {
+        dateRangePicker: {},
     };
 
     this.$onInit = function() {
-        $scope.data.start = moment().startOf('year').add(-6, 'months');
-        $scope.data.end = moment().endOf('year').add(3, 'months');
+        $scope.options.dateRangePicker = {
+            autoApply: true,
+            autoClose: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            ranges: {
+                "Aujourd'hui": [moment(), moment()],
+                "Hier": [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                "Les 7 derniers jours": [moment().subtract(6, 'days'), moment()],
+                "Les 30 derniers jours": [moment().subtract(29, 'days'), moment()],
+                "Ce mois": [moment().startOf('month'), moment().endOf('month')],
+                "Le mois dernier": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+        };
     };
+
+    $scope.$watch('data.date', function () {}, true);
 }]);

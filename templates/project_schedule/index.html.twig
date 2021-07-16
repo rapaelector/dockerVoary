@@ -6,6 +6,17 @@
 {% endblock %}
 
 
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: '',
+        links: [],
+    } %}
+        {% block extra_title %}    
+            <input date-range-picker options="options.dateRangePicker" class="form-control date-picker" type="text" ng-model="data.date" />
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
 {% block body_attr %}
     class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
     style="height: auto;"
@@ -19,8 +30,8 @@
         <app-scheduler
             resources="data.resources"
             columns="data.columns"
-            start="data.start"
-            end="data.end"
+            start="data.date.startDate"
+            end="data.date.endDate"
         ></app-scheduler>
     </div>
 {% endblock %}
