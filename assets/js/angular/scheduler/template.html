@@ -1,11 +1,20 @@
-<div>
+<div class="table-responsive">
     <table class="table table-bordered table-sm">
         <thead>
+            <tr>
+                <td colspan="{{ $ctrl.columns.length }}" rowspan="2"></td>
+                <th ng-repeat="year in years" colspan="{{ year.weeksCount }}">{{ year.name }}</th>
+            </tr>
+            <tr>
+                <th ng-repeat="month in months track by $index" colspan="{{ month.weeksCount }}">{{ month.name }}</th>
+            </tr>
             <tr>
                 <th 
                     ng-repeat="column in $ctrl.columns"
                     ng-class="getHeaderCellClassName(column)"
                 >{{ column.label }} </th>
+                <th ng-repeat="week in weeks track by $index">{{ week }}</th>
+            </th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +24,7 @@
                     ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
                     ng-class="getCellClassName(resource, column, resourceIndex)"
                 ></td>
+                <th ng-repeat="week in weeks track by $index"></th>
             </tr>
         </tbody>
     </table>

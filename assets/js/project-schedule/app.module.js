@@ -3,4 +3,5 @@ angular.module('projectScheduleApp', [
     'schedulerModule',
     'ngMaterial',
     'ngMessages',
+    'angularMoment',
 ]);
