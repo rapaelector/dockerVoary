@@ -15,10 +15,19 @@
     <div class="card card-outline-primary">
         <div class="card-header">
             <h3 class="card-title">{{ 'title.strategic_affairs'|trans({}, 'projects')  }}</h3>
-            <div class="card-tools text-uppercase text-muted">
-                <span>{{ 'columns.total_amount'|trans }}: </span>
-                <span  class="font-weight-bold" id="total"></span>
-                <span>€</span>
+            <div class="card-tools text-uppercase text-muted d-flex align-items-center">
+                <div>
+                    <span>{{ 'columns.total_amount'|trans }}: </span>
+                    <span  class="font-weight-bold" id="total"></span>
+                    <span>€</span>
+                </div>
+                <div class="ml-3">
+                    {% if is_granted('ROLE_PROJECT_ADD') %}
+                        <a href="{{ path('project.new') }}" data-toggle="tooltip" data-placement="bottom" title="{{ 'title.add_project'|trans({}, 'project') }}">
+                            <i class="material-icons">add</i>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="card-body py-0 pt-md-3 filter-collapse-container">

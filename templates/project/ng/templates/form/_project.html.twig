@@ -6,6 +6,7 @@
     </div>
     <div class="card-body">
         <div class="row">
+            {#
             <div class="col-sm-6">
                 <label class="col-form-label ">{{ 'columns.roadmap'|trans }}</label>
                 <md-radio-group
@@ -24,6 +25,7 @@
                     errorPath: 'data.errors.roadmap',
                 } %}
             </div>
+            #}
             <div class="col-sm-6">
                 <div class="form-group">
                     {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
@@ -37,7 +39,7 @@
                     } %}
                 </div>
             </div>
-            <div class="w-100"></div>
+            {#
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="project_edit_siteCode">{{ 'columns.siteCode'|trans }}</label>
@@ -52,6 +54,7 @@
                     } %}
                 </div>
             </div>
+            #}
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="project_edit_projectOwner">{{ 'columns.projectOwner'|trans }}</label>
@@ -167,5 +170,4 @@
             </div>
         </div>
     </div>
-    <!-- /.card-body -->
 </div>
