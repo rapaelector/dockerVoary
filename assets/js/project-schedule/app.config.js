@@ -1,0 +1,1 @@
+angular.module('projectScheduleApp').constant('DEFAULT_CELL_WIDTH', 24);

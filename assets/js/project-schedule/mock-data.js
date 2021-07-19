@@ -1,4 +1,5 @@
-const resources = [{
+const resources = [
+    {
         cdtTrx: 'Borisav',
         constructionSite: 'ADF 001',
         workType: 'T.C.E',
@@ -7,42 +8,42 @@ const resources = [{
         invoiced: '',
         remainsToInvoice: 299862.32,
     },
-    {
-        cdtTrx: 'Borisav',
-        constructionSite: 'ADF 001',
-        workType: 'Travaux sur existant',
-        area: '',
-        turnover: 9786.99,
-        invoiced: '',
-        remainsToInvoice: 9786.99,
-    },
-    {
-        cdtTrx: 'Drago',
-        constructionSite: 'ADAPEI 03',
-        workType: 'Travaux sur existant',
-        area: '',
-        turnover: 3527.4,
-        invoiced: '',
-        remainsToInvoice: 3527.4,
-    },
-    {
-        cdtTrx: 'J.B.V',
-        constructionSite: 'ATHENA 001',
-        workType: 'Oss Couv Bard Serr',
-        area: '',
-        turnover: 615000,
-        invoiced: 504890.59,
-        remainsToInvoice: 110109.41,
-    },
-    {
-        cdtTrx: 'Jéremy',
-        constructionSite: '2GBSIC 01',
-        workType: 'Oss Couv Bard',
-        area: '',
-        turnover: 210976.32,
-        invoiced: 194154.65,
-        remainsToInvoice: 16821.67,
-    },
+    // {
+    //     cdtTrx: 'Borisav',
+    //     constructionSite: 'ADF 001',
+    //     workType: 'Travaux sur existant',
+    //     area: '',
+    //     turnover: 9786.99,
+    //     invoiced: '',
+    //     remainsToInvoice: 9786.99,
+    // },
+    // {
+    //     cdtTrx: 'Drago',
+    //     constructionSite: 'ADAPEI 03',
+    //     workType: 'Travaux sur existant',
+    //     area: '',
+    //     turnover: 3527.4,
+    //     invoiced: '',
+    //     remainsToInvoice: 3527.4,
+    // },
+    // {
+    //     cdtTrx: 'J.B.V',
+    //     constructionSite: 'ATHENA 001',
+    //     workType: 'Oss Couv Bard Serr',
+    //     area: '',
+    //     turnover: 615000,
+    //     invoiced: 504890.59,
+    //     remainsToInvoice: 110109.41,
+    // },
+    // {
+    //     cdtTrx: 'Jéremy',
+    //     constructionSite: '2GBSIC 01',
+    //     workType: 'Oss Couv Bard',
+    //     area: '',
+    //     turnover: 210976.32,
+    //     invoiced: 194154.65,
+    //     remainsToInvoice: 16821.67,
+    // },
 ];
 
 /**
@@ -79,21 +80,19 @@ const resources = [{
                 data-placement="top"
             >` + column.label + `</div>` : '';
     },
- *  formatter: function (res, resource, index)
+ *  formatter: function (res, resource, index),
+    widht: {string, number}
  * }
  *
  * @param {callback} numberFormat 
  * @returns {array} array of object
  */
 const buildColumns = function(numberFormat) {
-    return [{
+    return [
+        {
             label: 'Cdt Trx',
             field: 'cdtTrx',
-            headerStyle:  {
-                'color': 'red',
-                'background': 'blue', 
-                'width': '200px',
-            },
+            width: 145,
         },
         {
             label: 'Chantier',
@@ -104,8 +103,6 @@ const buildColumns = function(numberFormat) {
                 return res ? '<div class="test" title="'+ res +'">' + res + '</div>' : '';
             },
             headerColumnFormatter: function (column, index) {
-                console.info(column);
-
                 return column ? `
                     <div 
                         class="dynamic-nowrap" 
@@ -115,6 +112,10 @@ const buildColumns = function(numberFormat) {
                         data-placement="top"
                     >` + column.label + `</div>` : '';
             },
+            classNameFormatter: function(res, resource, index) {
+                return 'dynamic-nowrap';
+            },
+            width: 150,
         },
         {
             label: 'Type de travaux',
@@ -134,7 +135,7 @@ const buildColumns = function(numberFormat) {
              * @returns {string}
              */
             classNameFormatter: function(res, resource, index) {
-                return 'lorem-ipsum-dolor';
+                return 'dynamic-nowrap';
             },
             /**
              * Change resource header content to html
@@ -144,8 +145,6 @@ const buildColumns = function(numberFormat) {
              * @returns {string} part of html
              */
             headerColumnFormatter: function (column, index) {
-                console.info(column);
-
                 return column ? `
                     <div 
                         class="dynamic-nowrap" 
@@ -155,11 +154,13 @@ const buildColumns = function(numberFormat) {
                         data-placement="top"
                     >` + column.label + `</div>` : '';
             },
+            width: 190,
         },
         {
             label: 'Surface en m2',
             field: 'area',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
+            width: 150,
         },
         {
             label: "Chiffre d'affaire",
@@ -168,7 +169,8 @@ const buildColumns = function(numberFormat) {
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
-            }
+            },
+            width: 200,
         },
         {
             label: 'Deja facture',
@@ -177,7 +179,8 @@ const buildColumns = function(numberFormat) {
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
-            }
+            },
+            width: 100,
         },
         {
             label: 'Reste a facturer',
@@ -186,7 +189,8 @@ const buildColumns = function(numberFormat) {
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
-            }
+            },
+            width: 180,
         },
     ];
 };

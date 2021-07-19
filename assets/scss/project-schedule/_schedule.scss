@@ -2,14 +2,68 @@
     text-transform: uppercase;
 }
 
-@mixin cell-design {
-    .scheduler-cell-workType, 
-    .scheduler-cell-turnover, 
-    .scheduler-cell-invoiced, 
-    .scheduler-cell-remainsToInvoice,
-    .scheduler-cell-constructionSite {
-        white-space: nowrap;
+.dynamic-nowrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@function monthFs($weekSize) {
+    @return 8 / 5 * $weekSize;
+}
+
+@function yearFs($weekSize) {
+    @return 10 / 5 * $weekSize;
+}
+
+$weekSize: 8px;
+
+@mixin scheduler-table {
+    .app-scheduler {
+        table.scheduler-table {
+            thead, tbody {
+                tr {
+                    th, td {
+                        border: 1px solid #999;
+                    }
+                }
+            }
+            
+            .scheduler-cell-workType, 
+            .scheduler-cell-turnover, 
+            .scheduler-cell-invoiced, 
+            .scheduler-cell-remainsToInvoice,
+            .scheduler-cell-constructionSite {
+                white-space: nowrap;
+            }
+        
+            .scheduler-cell-constructionSite {
+                background: $yellow;
+            }
+        
+            .scheduler-cell-cdtTrx {
+                color: $info;
+            }
+        
+            .scheduler-header-cell, .scheduler-cell {
+                overflow: hidden;
+            }
+            .schedule-year {
+                font-size: yearFs($weekSize);
+                font-weight: bold;
+            }
+
+            .schedule-month {
+                font-size: monthFs($weekSize);
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .schedule-weeks {
+                font-size: $weekSize;
+            }
+        }
     }
 }
 
-@include cell-design;
+@include scheduler-table;

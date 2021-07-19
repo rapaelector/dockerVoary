@@ -30,6 +30,7 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
             if (!dates[key]) {
                 dates[key] = {
                     month: current.format('MMMM'),
+                    monthNumber: current.format('M'),
                     year: moment(current).format('YYYY'),
                     weeks: [],
                 };
@@ -59,6 +60,8 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
             var dateGroup = dates[key];
             months.push({
                 name: dateGroup.month,
+                monthNumber: dateGroup.monthNumber,
+                year: dateGroup.year,
                 weeksCount: dateGroup.weeks.length,
             });
         }

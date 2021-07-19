@@ -1,16 +1,17 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-sm">
+    <table class="scheduler-table" ng-style="styles.table">
         <thead>
             <tr>
-                <td colspan="{{ $ctrl.columns.length }}" rowspan="2"></td>
+                <td colspan="{{ $ctrl.columns.length }}" rowspan="2" ng-style="columnMergeStyle()"></td>
                 <!-- Year -->
                 <th
                     ng-repeat="year in years" 
                     colspan="{{ year.weeksCount }}"
                     class="schedule-year"
-                    ng-bind-html="getYearHeaderFormatter(year.name, yearIndex)"
+                    ng-style="getYearStyles(year, yearIndex)"
                     ng-init="yearIndex = $index"
-                ></th>
+                    ng-class="getHeaderYearClassName(year, yearIndex)"
+                >{{ year.name }}</th>
             </tr>
             <tr>
                 <!-- Month list bottom the year -->
@@ -18,21 +19,27 @@
                     ng-repeat="month in months track by $index" 
                     colspan="{{ month.weeksCount }}"
                     class="schedule-month"
+                    ng-style="getMonthStyles(month, monthIndex)"
                     ng-init="monthIndex = $index"
-                    ng-bind-html="getMonthHeaderFormatter(month.name, monthIndex)"
-                ></th>
+                    ng-class="getHeaderMonthClassName(month, monthIndex)"
+                >{{ month.name }}</th>
             </tr>
             <tr>
                 <th
                     ng-repeat="column in $ctrl.columns"
                     ng-class="getHeaderCellClassName(column)"
                     ng-init="columnIndex = $index"
-                    ng-bind-html="getHeaderColumnFormatter(column, columnIndex)"
-                    ng-style="column.headerStyle"
-                ></th>
+                    ng-style="getColumnWidth(column)"
+                >
+                    {{ column.label }}
+                </th>
                 <th 
                     ng-repeat="week in weeks track by $index" 
                     class="schedule-weeks"
+                    ng-style="getHeaderWeeksStyle()"
+                    ng-class="$ctrl.headerWeekClassName"
+                    ng-init="weekIndex = $index"
+                    ng-class="getHeaderWeekClassName(week, weekIndex)"
                 >
                     {{ week }}
                 </th>
@@ -48,6 +55,7 @@
                 <th
                     ng-repeat="week in weeks track by $index"
                     class="schedule-cell"
+                    ng-style="getCellStyle()"
                 ></th>
             </tr>
         </tbody>

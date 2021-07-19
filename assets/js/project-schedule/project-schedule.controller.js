@@ -1,7 +1,12 @@
 import { resources, buildColumns, yearFormatter, monthFormatter } from './mock-data';
 import numberFormat from './../utils/number_format';
 
-angular.module('projectScheduleApp').controller('projectScheduleController', ['$scope', '$mdDialog', 'moment', function($scope, $mdDialog, moment) {
+angular.module('projectScheduleApp').controller('projectScheduleController', [
+    '$scope', 
+    '$mdDialog', 
+    'moment',
+    'DEFAULT_CELL_WIDTH',
+    function($scope, $mdDialog, moment, DEFAULT_CELL_WIDTH) {
 
     $scope.data = {
         resources: resources,
@@ -15,6 +20,15 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
     };
     $scope.options = {
         dateRangePicker: {},
+        scheduler: {
+            defaultCellWidth: DEFAULT_CELL_WIDTH,
+            cell: {
+                width: 24,
+            }
+        },
+        headerYearClassName: 'year-class text-center',
+        headerMonthClassName: 'month-class text-center',
+        headerWeekClassName: 'week-class text-center',
     };
     $scope.formatter = {
         yearFormatter: yearFormatter,
