@@ -1,4 +1,4 @@
-import { resources, buildColumns } from './mock-data';
+import { resources, buildColumns, yearFormatter, monthFormatter } from './mock-data';
 import numberFormat from './../utils/number_format';
 
 angular.module('projectScheduleApp').controller('projectScheduleController', ['$scope', '$mdDialog', 'moment', function($scope, $mdDialog, moment) {
@@ -15,6 +15,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
     };
     $scope.options = {
         dateRangePicker: {},
+    };
+    $scope.formatter = {
+        yearFormatter: yearFormatter,
+        monthFormatter: monthFormatter,
     };
 
     this.$onInit = function() {

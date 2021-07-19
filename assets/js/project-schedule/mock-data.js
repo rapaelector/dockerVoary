@@ -102,7 +102,21 @@ const buildColumns = function(numberFormat) {
     ];
 };
 
+const yearFormatter = function (value, index) {
+    console.info({value, index});
+
+    return '<div class="text-center text-uppercase">'+ value +'</div>';
+}
+
+const monthFormatter = function (value, index) {
+    console.info({value, index});
+
+    return '<div class="text-center"> '+ value + ' </div>';
+}
+
 export {
     resources,
     buildColumns,
+    yearFormatter,
+    monthFormatter,
 };

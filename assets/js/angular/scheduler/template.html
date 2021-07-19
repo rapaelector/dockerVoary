@@ -3,18 +3,32 @@
         <thead>
             <tr>
                 <td colspan="{{ $ctrl.columns.length }}" rowspan="2"></td>
-                <th ng-repeat="year in years" colspan="{{ year.weeksCount }}">{{ year.name }}</th>
+                <!-- Year -->
+                <th
+                    ng-repeat="year in years" 
+                    colspan="{{ year.weeksCount }}"
+                    class="schedule-year"
+                    ng-bind-html="getYearHeaderFormatter(year.name, yearIndex)"
+                    ng-init="yearIndex = $index"
+                ></th>
             </tr>
             <tr>
-                <th ng-repeat="month in months track by $index" colspan="{{ month.weeksCount }}">{{ month.name }}</th>
-            </tr>
-            <tr>
+                <!-- Month list bottom the year -->
                 <th 
+                    ng-repeat="month in months track by $index" 
+                    colspan="{{ month.weeksCount }}"
+                    class="schedule-month"
+                    ng-init="monthIndex = $index"
+                    ng-bind-html="getMonthHeaderFormatter(month.name, monthIndex)"
+                ></th>
+            </tr>
+            <tr>
+                <th
                     ng-repeat="column in $ctrl.columns"
                     ng-class="getHeaderCellClassName(column)"
                 >{{ column.label }} </th>
-                <th ng-repeat="week in weeks track by $index">{{ week }}</th>
-            </th>
+                    <th ng-repeat="week in weeks track by $index" class="schedule-weeks">{{ week }}</th>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +38,10 @@
                     ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
                     ng-class="getCellClassName(resource, column, resourceIndex)"
                 ></td>
-                <th ng-repeat="week in weeks track by $index"></th>
+                <th
+                    ng-repeat="week in weeks track by $index"
+                    class="schedule-cell"
+                ></th>
             </tr>
         </tbody>
     </table>

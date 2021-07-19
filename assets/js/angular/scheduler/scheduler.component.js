@@ -66,6 +66,26 @@ function SchedulerController($scope, $mdDialog, moment, calendarService) {
         return res;
     }
 
+    $scope.getYearHeaderFormatter = function (value, index) {
+        console.info($scope.$ctrl.yearFormatter);
+
+        if ($scope.$ctrl.yearFormatter) {
+            return $scope.$ctrl.yearFormatter(value, index);
+        }
+
+        return value;
+    };
+
+    $scope.getMonthHeaderFormatter = function (value, index) {
+        console.info($scope.$ctrl.monthFormatter);
+
+        if ($scope.$ctrl.monthFormatter) {
+            return $scope.$ctrl.monthFormatter(value, index);
+        }
+
+        return value;
+    };
+
     $scope.updateDates = function () {
         if (!$scope.start || !$scope.end) {
             return;
@@ -125,5 +145,15 @@ angular.module('schedulerModule').component('appScheduler', {
         columns: '=',
         start: '=',
         end: '=',
+        /**
+         * Year formatter
+         * Format year before rendering
+         */
+        yearFormatter: '=',
+        /**
+         * Month formatter
+         * Format year before rendering
+         */
+        monthFormatter: '=',
     }
 });
