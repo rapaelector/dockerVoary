@@ -26,8 +26,15 @@
                 <th
                     ng-repeat="column in $ctrl.columns"
                     ng-class="getHeaderCellClassName(column)"
-                >{{ column.label }} </th>
-                    <th ng-repeat="week in weeks track by $index" class="schedule-weeks">{{ week }}</th>
+                    ng-init="columnIndex = $index"
+                    ng-bind-html="getHeaderColumnFormatter(column, columnIndex)"
+                    ng-style="column.headerStyle"
+                ></th>
+                <th 
+                    ng-repeat="week in weeks track by $index" 
+                    class="schedule-weeks"
+                >
+                    {{ week }}
                 </th>
             </tr>
         </thead>

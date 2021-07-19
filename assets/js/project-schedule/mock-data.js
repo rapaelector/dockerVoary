@@ -45,10 +45,55 @@ const resources = [{
     },
 ];
 
+/**
+ * Array of object represent the resources columns can have the following attributes
+ * {
+ *   label: {String},
+ *   field: {String},
+ *   headerStyle: {Object} list of style
+ *      e.g: {'color': any, border: any, ...}
+ *  
+ *   Class to bind to the column header only
+ *   Column cell are not affected by those classe
+ *   headerClassName: 'text-uppercase text-nowrap text-truncate',
+ *   Give class to each column cell
+ *   Class no affected to the column header
+ * 
+ *   @param {Object} res 
+ *   @param {Object} resource 
+ *   @param {any} index 
+ *   @returns {string}
+ *  classNameFormatter: function(res, resource, index) {return 'lorem-ipsum-dolor';},
+ *  
+ *   Change resource header content to html
+ *   @param {Object} column 
+ *   @param {any} index 
+ *   @returns {string} part of html
+    headerColumnFormatter: function (column, index) {
+        return column ? `
+            <div 
+                class="dynamic-nowrap" 
+                title="` + column.label + `" 
+                data-toogle="tooltip" 
+                data-container="body" 
+                data-placement="top"
+            >` + column.label + `</div>` : '';
+    },
+ *  formatter: function (res, resource, index)
+ * }
+ *
+ * @param {callback} numberFormat 
+ * @returns {array} array of object
+ */
 const buildColumns = function(numberFormat) {
     return [{
             label: 'Cdt Trx',
             field: 'cdtTrx',
+            headerStyle:  {
+                'color': 'red',
+                'background': 'blue', 
+                'width': '200px',
+            },
         },
         {
             label: 'Chantier',
@@ -56,27 +101,71 @@ const buildColumns = function(numberFormat) {
             className: 'chantier-class',
             headerClassName: 'text-uppercase text-center',
             formatter: function(res, resource, index) {
-                return res ? '<b>' + res + '</b>' : '';
+                return res ? '<div class="test" title="'+ res +'">' + res + '</div>' : '';
+            },
+            headerColumnFormatter: function (column, index) {
+                console.info(column);
+
+                return column ? `
+                    <div 
+                        class="dynamic-nowrap" 
+                        title="` + column.label + `" 
+                        data-toogle="tooltip" 
+                        data-container="body" 
+                        data-placement="top"
+                    >` + column.label + `</div>` : '';
             },
         },
         {
             label: 'Type de travaux',
             field: 'workType',
-            headerClassName: 'text-uppercase',
+            /**
+             * Class to bind to the column header only
+             * Column cell are not affected by those classe
+             */
+            headerClassName: 'text-uppercase text-nowrap text-truncate',
+            /**
+             * Give class to each column cell
+             * Class no affected to the column header
+             * 
+             * @param {Object} res 
+             * @param {Object} resource 
+             * @param {any} index 
+             * @returns {string}
+             */
             classNameFormatter: function(res, resource, index) {
                 return 'lorem-ipsum-dolor';
+            },
+            /**
+             * Change resource header content to html
+             * 
+             * @param {Object} column 
+             * @param {any} index 
+             * @returns {string} part of html
+             */
+            headerColumnFormatter: function (column, index) {
+                console.info(column);
+
+                return column ? `
+                    <div 
+                        class="dynamic-nowrap" 
+                        title="` + column.label + `" 
+                        data-toogle="tooltip" 
+                        data-container="body" 
+                        data-placement="top"
+                    >` + column.label + `</div>` : '';
             },
         },
         {
             label: 'Surface en m2',
             field: 'area',
-            headerClassName: 'text-uppercase',
+            headerClassName: 'text-uppercase text-nowrap text-truncate',
         },
         {
             label: "Chiffre d'affaire",
             field: 'turnover',
             className: 'text-right',
-            headerClassName: 'text-uppercase',
+            headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
             }
@@ -85,7 +174,7 @@ const buildColumns = function(numberFormat) {
             label: 'Deja facture',
             field: 'invoiced',
             className: 'text-right',
-            headerClassName: 'text-uppercase',
+            headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
             }
@@ -94,7 +183,7 @@ const buildColumns = function(numberFormat) {
             label: 'Reste a facturer',
             field: 'remainsToInvoice',
             className: 'text-right',
-            headerClassName: 'text-uppercase',
+            headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
                 return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
             }
@@ -103,14 +192,10 @@ const buildColumns = function(numberFormat) {
 };
 
 const yearFormatter = function (value, index) {
-    console.info({value, index});
-
     return '<div class="text-center text-uppercase">'+ value +'</div>';
 }
 
 const monthFormatter = function (value, index) {
-    console.info({value, index});
-
     return '<div class="text-center"> '+ value + ' </div>';
 }
 

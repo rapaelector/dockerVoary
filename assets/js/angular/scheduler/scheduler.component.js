@@ -66,6 +66,14 @@ function SchedulerController($scope, $mdDialog, moment, calendarService) {
         return res;
     }
 
+    $scope.getHeaderColumnFormatter = function (column, index) {
+        if (column.headerColumnFormatter) {
+            return column.headerColumnFormatter(column, index);
+        }
+
+        return column.label;
+    }
+
     $scope.getYearHeaderFormatter = function (value, index) {
         console.info($scope.$ctrl.yearFormatter);
 

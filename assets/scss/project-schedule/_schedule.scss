@@ -1,0 +1,15 @@
+.schedule-month {
+    text-transform: uppercase;
+}
+
+@mixin cell-design {
+    .scheduler-cell-workType, 
+    .scheduler-cell-turnover, 
+    .scheduler-cell-invoiced, 
+    .scheduler-cell-remainsToInvoice,
+    .scheduler-cell-constructionSite {
+        white-space: nowrap;
+    }
+}
+
+@include cell-design;
