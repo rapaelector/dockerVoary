@@ -336,6 +336,83 @@ function SchedulerController(
 
         return res;
     };
+
+    // SCHEDULER EVENT HANDLER
+    /**
+     * Handler for row click
+     * 
+     * @param {object} resource 
+     * @param {column} column 
+     * @param {number} columnIndex 
+     */
+    $scope.onRowClick = function (resource, column, columnIndex) {
+        if ($scope.$ctrl.onRowClick) {
+            $scope.$ctrl.onRowClick(resource, column, columnIndex);
+        }
+    }
+
+    /**
+     * Handler for column header click
+     * 
+     * @param {object} column 
+     * @param {number} columnIndex 
+     */
+    $scope.onColumnHeaderClick = function (column, columnIndex) {
+        if ($scope.$ctrl.onColumnHeaderClick) {
+            $scope.$ctrl.onColumnHeaderClick(column, columnIndex);
+        }
+    }
+
+    /**
+     * Handler for header year click
+     * 
+     * @param {object} yearObject 
+     * @param {number} yearIndex
+     */
+    $scope.onHeaderYearClick = function (yearObject, yearIndex) {
+        if ($scope.$ctrl.onHeaderYearClick) {
+            $scope.$ctrl.onHeaderYearClick(yearObject, yearIndex);
+        }
+    }
+
+    /**
+     * Header for header month click
+     * 
+     * @param {object} monthObject 
+     * @param {number} monthIndex 
+     */
+    $scope.onHeaderMonthClick = function (monthObject, monthIndex) {
+        if ($scope.$ctrl.onHeaderMonthClick) {
+            $scope.$ctrl.onHeaderMonthClick(monthObject, monthIndex);
+        }
+    }
+
+    /**
+     * Handler for header week click
+     * 
+     * @param {object} weekObject 
+     * @param {number} weekIndex 
+     */
+    $scope.onHeaderWeekClick = function (weekObject, weekIndex) {
+        if ($scope.$ctrl.onHeaderWeekClick) {
+            $scope.$ctrl.onHeaderWeekClick(weekObject, weekIndex);
+        }
+    }
+
+    /**
+     * Handler for date cell click
+     * 
+     * @param {object} resource 
+     * @param {object} week 
+     * @param {number} weekIndex 
+     * @param {number} resourceIndex 
+     */
+    $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {
+        if ($scope.$ctrl.onCellClick) {
+            $scope.$ctrl.onCellClick(resource, week, weekIndex, resourceIndex);
+        }
+    }
+
 };
 
 SchedulerController.$inject = [
@@ -410,5 +487,14 @@ angular.module('schedulerModule').component('appScheduler', {
         headerYearClassName: '=',
         headerMonthClassName: '=',
         headerWeekClassName: '=',
+        /**
+         * Scheduler events handler
+         */
+        onRowClick: '=',
+        onColumnHeaderClick: '=',
+        onHeaderYearClick: '=',
+        onHeaderMonthClick: '=',
+        onHeaderWeekClick: '=',
+        onCellClick: '=',
     }
 });

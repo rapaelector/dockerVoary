@@ -11,6 +11,7 @@
                     ng-style="getYearStyles(year, yearIndex)"
                     ng-init="yearIndex = $index"
                     ng-class="getHeaderYearClassName(year, yearIndex)"
+                    ng-click="onHeaderYearClick(year)"
                 >{{ year.name }}</th>
             </tr>
             <tr>
@@ -22,6 +23,7 @@
                     ng-style="getMonthStyles(month, monthIndex)"
                     ng-init="monthIndex = $index"
                     ng-class="getHeaderMonthClassName(month, monthIndex)"
+                    ng-click="onHeaderMonthClick(month, monthIndex)"
                 >{{ month.name }}</th>
             </tr>
             <tr>
@@ -30,6 +32,7 @@
                     ng-class="getHeaderCellClassName(column)"
                     ng-init="columnIndex = $index"
                     ng-style="getColumnWidth(column)"
+                    ng-click="onColumnHeaderClick(column, columnIndex)"
                 >
                     {{ column.label }}
                 </th>
@@ -39,6 +42,7 @@
                     ng-style="getHeaderWeeksStyle()"
                     ng-init="weekIndex = $index"
                     ng-class="getHeaderWeekClassName(week, weekIndex)"
+                    ng-click="onHeaderWeekClick(week, weekIndex)"
                 >
                     {{ week.weekNumber }}
                 </th>
@@ -50,12 +54,14 @@
                     ng-repeat="column in $ctrl.columns"
                     ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
                     ng-class="getCellClassName(resource, column, resourceIndex)"
+                    ng-click="onRowClick(resource, column, columnIndex)"
                 ></td>
                 <th
                     ng-repeat="week in weeks track by $index"
                     ng-class="getDateCellClassName()"
                     ng-init="weekIndex = $index"
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
+                    ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
                 ></th>
             </tr>
         </tbody>

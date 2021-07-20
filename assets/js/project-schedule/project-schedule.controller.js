@@ -50,4 +50,28 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
     };
 
     $scope.$watch('data.date', function () {}, true);
+
+    $scope.onRowClick = function (resource, column, columnIndex) {
+        console.info('onRowClick called !!');
+    }
+
+    $scope.onColumnHeaderClick = function (column, columnIndex) {
+        console.info('onColumnHeaderClick called !!');
+    }
+
+    $scope.onHeaderYearClick = function (yearObject, yearIndex) {
+        console.info('onHeaderYearClick called !!');
+    }
+
+    $scope.onHeaderMonthClick = function (monthObject, monthIndex) {
+        console.info('onHeaderMonthClick called !!');
+    }
+
+    $scope.onHeaderWeekClick = function (weekObject, weekIndex) {
+        console.info('onHeaderWeekClick called !!');
+    }
+
+    $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {
+        console.info('onCellClick called !!');
+    }
 }]);
