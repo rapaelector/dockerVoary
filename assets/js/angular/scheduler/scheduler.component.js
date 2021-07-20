@@ -14,6 +14,7 @@ function SchedulerController(
     CELL_BORDER_WIDTH,
     CELL_EDGE_BORDER_WIDTH,
     BORDER_WEIGHT,
+    DEFAULT_DATE_FORMAT,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -25,6 +26,7 @@ function SchedulerController(
     $scope.styles = {
         table: {},
     };
+    $scope.events = [];
 
     this.$onInit = function () {};
 
@@ -64,6 +66,9 @@ function SchedulerController(
 
     $scope.$watch('$ctrl.events', function () {
         console.info($scope.$ctrl.events);
+        if ($scope.$ctrl.events) {
+            $scope.events = $scope.$ctrl.events;
+        }
     }, true);
     /**
      * Get resources to loop and display in the table
@@ -334,8 +339,9 @@ function SchedulerController(
         return res;
     }
 
-    $scope.getDateCellClassName = function () {
+    $scope.getCellClassName = function () {
         var res = ['scheduler-date-cell'];
+
 
         return res;
     };
@@ -416,6 +422,70 @@ function SchedulerController(
         }
     }
 
+    $scope.updateScheduler = function (resource, event, week, resourceIndex, weekIndex) {
+    };
+
+    /**
+     * 
+     * @param {object} resource 
+     * @param {week} week 
+     * @returns {array}
+     */
+    $scope.getCellId = function (resource, week) {
+        return 'scheduler-cell-' + resource.id + '-' + week.weekNumber;
+    }
+
+    /**
+     * Get event style
+     * 
+     * @param {event} event 
+     * @param {eventIndex} eventIndex 
+     * @returns {object} object of style
+     */
+    $scope.getEventStyle = function (event, eventIndex) {
+        var position = $scope.getEventPosition(event);
+        console.info({position});
+
+        return {
+            backgroundColor: event.backgroundColor,
+            color: event.color,
+            display: 'none',
+            position: 'inherit',
+            height: 0,
+            width: 0,
+            ...position,
+        };
+    }
+
+    /**
+     * Get event position from schedule cell position
+     * Get startPostion and endPosition of one event
+     * 
+     * @param {object} resource 
+     * @param {week} week 
+     * @returns {string}
+     */
+    $scope.getEventPosition = function (event) {
+        var startWeekNumber = moment(event.start).week();
+        var endWeekNumber = moment(event.end).week();
+        var startId = 'scheduler-cell-' + event.resource + '-' + startWeekNumber;
+        var endId = 'scheduler-cell-' + event.resource + '-' + endWeekNumber;
+        var $startCell = $('#' + startId);
+        var $endCell = $('#' + endId);
+
+        const right = $endCell.position().left + $endCell.outerWidth();
+        const left = $startCell.position().left;
+
+        return {
+            top: $startCell.position().top + 'px',
+            left: left + 'px',
+            right: right + 'px',
+            display: 'block',
+            width: (right - left) + 'px',
+            position: 'absolute',
+            height: $startCell.outerHeight(),
+        };
+    }
 };
 
 SchedulerController.$inject = [
@@ -432,6 +502,7 @@ SchedulerController.$inject = [
     'CELL_BORDER_WIDTH',
     'CELL_EDGE_BORDER_WIDTH',
     'BORDER_WEIGHT',
+    'DEFAULT_DATE_FORMAT',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {

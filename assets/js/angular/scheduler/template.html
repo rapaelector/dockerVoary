@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive table-container">
     <table class="scheduler-table" ng-style="styles.table">
         <thead>
             <tr>
@@ -58,12 +58,27 @@
                 ></td>
                 <th
                     ng-repeat="week in weeks track by $index"
-                    ng-class="getDateCellClassName()"
                     ng-init="weekIndex = $index"
+                    ng-class="getCellClassName()"
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
+                    id="{{ getCellId(resource, week) }}"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
-                ></th>
+                >
             </tr>
         </tbody>
     </table>
+    <div class="scheduler-events">
+        <div 
+            ng-repeat="event in events track by $index" 
+            class="schedule-event d-flex"
+            ng-style="getEventStyle(event, eventindex)"
+            ng-init="eventindex = $index"
+        >
+            <div>{{ event.resource }}</div>
+            <div>{{ event.start | date: 'yyyy-mm-dd' }}</div>
+            <div>{{ event.end | date: 'yyyy-MM-dd' }}</div>
+            <div>{{ event.title }}</div>
+        </div>
+    </div>
+</th>
 </div>

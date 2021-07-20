@@ -1,5 +1,6 @@
 const resources = [
     {
+        id: 1,
         cdtTrx: 'Borisav',
         constructionSite: 'ADF 001',
         workType: 'T.C.E',
@@ -9,6 +10,7 @@ const resources = [
         remainsToInvoice: 299862.32,
     },
     {
+        id: 2,
         cdtTrx: 'Borisav',
         constructionSite: 'ADF 001',
         workType: 'Travaux sur existant',
@@ -18,6 +20,7 @@ const resources = [
         remainsToInvoice: 9786.99,
     },
     {
+        id: 3,
         cdtTrx: 'Drago',
         constructionSite: 'ADAPEI 03',
         workType: 'Travaux sur existant',
@@ -27,6 +30,7 @@ const resources = [
         remainsToInvoice: 3527.4,
     },
     {
+        id: 4,
         cdtTrx: 'J.B.V',
         constructionSite: 'ATHENA 001',
         workType: 'Oss Couv Bard Serr',
@@ -36,6 +40,7 @@ const resources = [
         remainsToInvoice: 110109.41,
     },
     {
+        id: 5,
         cdtTrx: 'Jéremy',
         constructionSite: '2GBSIC 01',
         workType: 'Oss Couv Bard',
@@ -195,24 +200,45 @@ const buildColumns = function(numberFormat) {
     ];
 };
 
+/**
+ * Array of object
+ * Structure
+ *      [
+ *          {
+ *              resource: number,
+                title: string,
+                start: Moment,
+                end: Moment,
+                backgroundColor: string,
+                color: string,
+ *          },
+            ...
+ *      ]
+ */
 const events = [
     {
-        resource: resources,
+        resource: 1,
         title: 'test',
         start: moment().add(1, 'month'),
         end: moment().add(2, 'month'),
+        backgroundColor: 'orange',
+        color: '#fff',
     },
     {
-        resource: resources,
+        resource: 2,
         title: 'test',
-        start: moment().add(-8, 'month'),
+        start: moment().add(3, 'month'),
         end: moment().add(2, 'month'),
+        backgroundColor: 'blue',
+        color: '#fff'
     },
     {
-        resource: resources,
+        resource: 3,
         title: 'test',
         start: moment().add(2, 'month'),
         end: moment().add(3, 'month'),
+        backgroundColor: 'red',
+        color: '#fff'
     }
 ];
 

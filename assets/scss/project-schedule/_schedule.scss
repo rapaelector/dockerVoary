@@ -109,4 +109,26 @@ $cellBorder: 2px solid $borderColorDark;
     }
 }
 
-@include scheduler-table;
+@mixin scheduler-events {
+    .app-scheduler {
+        .table-container.table-responsive {
+            position: relative
+        }
+        .scheduler-events {
+            position: absolute;
+            top: 0;
+            left: 0;
+            .schedule-event {
+                overflow: hidden;
+                height: 24px;
+            }
+        }
+    }
+}
+
+@mixin _scheduler {
+    @include scheduler-table;
+    @include scheduler-events;
+}
+
+@include  _scheduler;
