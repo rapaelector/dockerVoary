@@ -227,7 +227,7 @@ const events = [
     {
         resource: 2,
         title: 'test',
-        start: moment().add(3, 'month'),
+        start: moment().add(-3, 'month'),
         end: moment().add(2, 'month'),
         backgroundColor: 'blue',
         color: '#fff'
@@ -235,8 +235,8 @@ const events = [
     {
         resource: 3,
         title: 'test',
-        start: moment().add(2, 'month'),
-        end: moment().add(3, 'month'),
+        start: moment().add(-6, 'month'),
+        end: moment().add(-5, 'month'),
         backgroundColor: 'red',
         color: '#fff'
     }
