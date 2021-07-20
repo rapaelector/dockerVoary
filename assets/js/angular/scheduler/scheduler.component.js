@@ -62,6 +62,9 @@ function SchedulerController(
         $scope.updateTableStyles();
     }, true);
 
+    $scope.$watch('$ctrl.events', function () {
+        console.info($scope.$ctrl.events);
+    }, true);
     /**
      * Get resources to loop and display in the table
      * 
@@ -174,7 +177,7 @@ function SchedulerController(
         return {
             width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px'),
             'border-left-width': cellBorderLeft + 'px',
-            'border-left-color': '#000',
+            'border-left-color': '#999',
         };
     };
 

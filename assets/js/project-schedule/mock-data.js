@@ -195,17 +195,29 @@ const buildColumns = function(numberFormat) {
     ];
 };
 
-const yearFormatter = function (value, index) {
-    return '<div class="text-center text-uppercase">'+ value +'</div>';
-}
-
-const monthFormatter = function (value, index) {
-    return '<div class="text-center"> '+ value + ' </div>';
-}
+const events = [
+    {
+        resource: resources,
+        title: 'test',
+        start: moment().add(1, 'month'),
+        end: moment().add(2, 'month'),
+    },
+    {
+        resource: resources,
+        title: 'test',
+        start: moment().add(-8, 'month'),
+        end: moment().add(2, 'month'),
+    },
+    {
+        resource: resources,
+        title: 'test',
+        start: moment().add(2, 'month'),
+        end: moment().add(3, 'month'),
+    }
+];
 
 export {
     resources,
     buildColumns,
-    yearFormatter,
-    monthFormatter,
+    events,
 };

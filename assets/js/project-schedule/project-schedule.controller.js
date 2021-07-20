@@ -1,4 +1,4 @@
-import { resources, buildColumns, yearFormatter, monthFormatter } from './mock-data';
+import { resources, buildColumns, events  } from './mock-data';
 import numberFormat from './../utils/number_format';
 
 angular.module('projectScheduleApp').controller('projectScheduleController', [
@@ -17,6 +17,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             startDate: moment().startOf('year'),
             endDate: moment().endOf('year'),
         },
+        events: events,
     };
     $scope.options = {
         dateRangePicker: {},

@@ -18,7 +18,7 @@
 
 $weekSize: 8px;
 $borderColor: #999;
-$borderColorDark: #000;
+$borderColorDark: $borderColor;
 $cellBorder: 2px solid $borderColorDark;
 
 @mixin scheduler-table {
@@ -27,7 +27,7 @@ $cellBorder: 2px solid $borderColorDark;
             thead, tbody {
                 tr {
                     th, td {
-                        border: 1px solid #999;
+                        border: 1px solid $borderColor;
                     }
                 }
             }
