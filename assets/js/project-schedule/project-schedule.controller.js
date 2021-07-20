@@ -51,27 +51,66 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
 
     $scope.$watch('data.date', function () {}, true);
 
+    /**
+     * Row click event
+     * 
+     * @param {object} resource 
+     * @param {object} column 
+     * @param {number} columnIndex 
+     */
     $scope.onRowClick = function (resource, column, columnIndex) {
-        console.info('onRowClick called !!');
+        console.info('onRowClick called !!', {resource, column, columnIndex});
     }
 
+    /**
+     * Column header click event
+     * 
+     * @param {object} column 
+     * @param {number} columnIndex 
+     */
     $scope.onColumnHeaderClick = function (column, columnIndex) {
-        console.info('onColumnHeaderClick called !!');
+        console.info('onColumnHeaderClick called !!', {column, columnIndex});
     }
 
+    /**
+     * Header year click event
+     * 
+     * @param {object} yearObject 
+     * @param {number} yearIndex 
+     */
     $scope.onHeaderYearClick = function (yearObject, yearIndex) {
-        console.info('onHeaderYearClick called !!');
+        console.info('onHeaderYearClick called !!', {yearObject, yearIndex});
     }
 
+    /**
+     * Header month click event
+     * 
+     * @param {object} monthObject 
+     * @param {number} monthIndex 
+     */
     $scope.onHeaderMonthClick = function (monthObject, monthIndex) {
-        console.info('onHeaderMonthClick called !!');
+        console.info('onHeaderMonthClick called !!', {monthObject, monthIndex});
     }
 
+    /**
+     * Header week click event
+     * 
+     * @param {object} weekObject 
+     * @param {number} weekIndex 
+     */
     $scope.onHeaderWeekClick = function (weekObject, weekIndex) {
-        console.info('onHeaderWeekClick called !!');
+        console.info('onHeaderWeekClick called !!', {weekObject, weekIndex});
     }
 
+    /**
+     * week cell click event
+     * 
+     * @param {object} resource 
+     * @param {object} week 
+     * @param {number} weekIndex 
+     * @param {number} resourceIndex 
+     */
     $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {
-        console.info('onCellClick called !!');
+        console.info('onCellClick called !!', {resource, week, weekIndex, resourceIndex});
     }
 }]);

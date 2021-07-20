@@ -11,7 +11,7 @@
                     ng-style="getYearStyles(year, yearIndex)"
                     ng-init="yearIndex = $index"
                     ng-class="getHeaderYearClassName(year, yearIndex)"
-                    ng-click="onHeaderYearClick(year)"
+                    ng-click="onHeaderYearClick(year, yearIndex)"
                 >{{ year.name }}</th>
             </tr>
             <tr>

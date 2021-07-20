@@ -475,7 +475,13 @@ angular.module('schedulerModule').component('appScheduler', {
          *              - i: index of the resource     
          */
         columns: '=',
+        /**
+         * Moment
+         */
         start: '=',
+        /**
+         * Moment
+         */
         end: '=',
         /**
          * Object
@@ -483,18 +489,128 @@ angular.module('schedulerModule').component('appScheduler', {
         options: '=',
         /**
          * Header class name
+         * String
          */
         headerYearClassName: '=',
-        headerMonthClassName: '=',
-        headerWeekClassName: '=',
         /**
-         * Scheduler events handler
+         * Header month class name
+         */
+        headerMonthClassName: '=',
+        /**
+         * Header week class name
+         */
+        headerWeekClassName: '=',
+        // SCHEDULER EVENTS HANDLER
+        /**
+         * Callback
+         * Args:
+         *  - resource (object)
+         *      structure:
+         *          {
+         *              area: string,
+         *              cdtTrx: string,
+         *              constructionSite: string,
+         *              invoiced: string
+         *              remainsToInvoice: number,
+         *              turnover: number,
+         *              workType: number,
+         *          }
+         *  - column (object)
+         *      structure:
+         *          {
+         *              field: string
+         *              label: string
+         *              width: string | number
+         *          }
+         *  - columnIndex (number)
          */
         onRowClick: '=',
+        /**
+         * Callback 
+         * - column
+         *      structure:
+         *          {
+         *              className: string,
+         *              classNameFormatter: callback (Object res, Object resource, Number index),
+         *              field: string,
+         *              formatter: callback (Object res, Object resource, Number index)
+         *              headerClass: string
+         *              headerColumnFormatter: callback (Object column, Number index)
+         *              label: string,
+         *              width: string | number,
+         *              columnIndex: number
+         *          }
+         * - columnIndex: number,
+         */
         onColumnHeaderClick: '=',
+        /**
+         * Callback
+         * - yearObject: object
+         *      structure:
+         *          {
+         *              monthsCount: number,
+         *              name: string,
+         *              weeksCount: number,
+         *          }
+         * 
+         * - yearIndex: number
+         */
         onHeaderYearClick: '=',
+        /**
+         * Callback
+         * - monthOject: object
+         *      structure:
+         *          {
+         *              monthIndex: number,
+         *              monthObject: object {name: string, monthNumber: string, year: string, weeksCount: number}
+         *          }
+         * - monthIndex: number
+         */
         onHeaderMonthClick: '=',
+        /**
+         * Callback
+         * - weekObject: object
+         *      structure:
+         *          {
+         *              endDay: Moment,
+         *              firstweek: boolean,
+         *              lastweek: boolean,
+         *              monthNumber: string
+         *              startDay: Moment
+         *              weekNumber: number
+         *              year: string
+         *          }
+         * - weekIndex: number
+         */
         onHeaderWeekClick: '=',
+        /**
+         * Callback
+         * - resource: object
+         *      structure:
+         *          {
+         *              area: string,
+         *              cdtTrx: string,
+         *              constructionSite: string,
+         *              invoiced: string
+         *              remainsToInvoice: number,
+         *              turnover: number,
+         *              workType: number,
+         *          }
+         * - week: object
+         *      structure:
+         *          {
+         *              year: string,
+         *              monthNumber: string,
+         *              firstWeek: boolean,
+         *              lastWeek: boolean,
+         *              weekNumber: number,
+         *              startDay: Moment,
+         *              endDay: Moment,
+         *          }
+         * - weekIndex: number
+         * - resourceIndex: number
+         */
         onCellClick: '=',
+        events: '=',
     }
 });
