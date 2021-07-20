@@ -37,11 +37,10 @@
                     ng-repeat="week in weeks track by $index" 
                     class="schedule-weeks"
                     ng-style="getHeaderWeeksStyle()"
-                    ng-class="$ctrl.headerWeekClassName"
                     ng-init="weekIndex = $index"
                     ng-class="getHeaderWeekClassName(week, weekIndex)"
                 >
-                    {{ week }}
+                    {{ week.weekNumber }}
                 </th>
             </tr>
         </thead>

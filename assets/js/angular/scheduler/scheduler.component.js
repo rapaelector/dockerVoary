@@ -61,7 +61,14 @@ function SchedulerController(
         $scope.updateTableStyles();
     }, true);
 
-    $scope.getResourceColumn = function(resource, column, i) {
+    /**
+     * 
+     * @param {object} resource 
+     * @param {object} column 
+     * @param {number} index 
+     * @returns {array} array of string
+     */
+    $scope.getResourceColumn = function(resource, column, index) {
         var res = null;
 
         if (column.field) {
@@ -69,13 +76,24 @@ function SchedulerController(
         }
 
         if (column.formatter) {
-            res = column.formatter(res, resource, i);
+            res = column.formatter(res, resource, index);
         }
 
         return res;
     };
 
-    $scope.getCellClassName = function(resource, column, i) {
+    /**
+     * Get resource cell class
+     * Each cell have its header columns name as class suffix
+     *      e.g: constructionSite(chantier) column
+     *              - each constructionSite cell have scheduler-cell-constructionSite class
+     * 
+     * @param {object} resource 
+     * @param {object} column 
+     * @param {number} index 
+     * @returns {array} array of string
+     */
+    $scope.getCellClassName = function(resource, column, index) {
         var res = ['scheduler-cell', 'scheduler-cell-' + column.field];
 
         if (column.className) {
@@ -83,13 +101,19 @@ function SchedulerController(
         }
 
         if (column.classNameFormatter) {
-            var className = column.classNameFormatter(res, resource, i);
+            var className = column.classNameFormatter(res, resource, index);
             res.push(className);
         }
 
         return res;
     }
 
+    /**
+     * Get resource header column class
+     * 
+     * @param {object} column 
+     * @returns {array} array of string
+     */
     $scope.getHeaderCellClassName = function(column) {
         var res = ['scheduler-header-cell', 'scheduler-header-cell-' + column.field];
 
@@ -100,6 +124,11 @@ function SchedulerController(
         return res;
     }
 
+    /**
+     * 
+     * @param {object} column 
+     * @returns {object} object of style
+     */
     $scope.getColumnWidth = function (column) {
         return column.width ? {
             'width': parseInt(column.width) + 'px',
@@ -157,6 +186,11 @@ function SchedulerController(
         $scope.styles.table = tableStyles;
     };
 
+    /**
+     * Get column merge style : column above the resource columns
+     * 
+     * @returns {object} object of style
+     */
     $scope.columnMergeStyle = function () {
         var width = 0;
         if (!$scope.$ctrl.columns) {
@@ -175,10 +209,11 @@ function SchedulerController(
     };
 
     /**
+     * Get header year style and bind to the year header with ng-style
      * 
-     * @param {Object} year 
+     * @param {object} year 
      * @param {number} index 
-     * @returns {Object}
+     * @returns {object} object of style
      */
     $scope.getYearStyles = function (year, index) {
         var width = year.weeksCount * resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
@@ -186,10 +221,11 @@ function SchedulerController(
     };
     
     /**
+     * Get header month style and bind to the month header with ng-style
      * 
-     * @param {Object} month 
+     * @param {object} month 
      * @param {number} index 
-     * @returns {Object}
+     * @returns {object} object of style
      */
     $scope.getMonthStyles = function (month, index) {
         var width = month.weeksCount * resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
@@ -197,8 +233,13 @@ function SchedulerController(
     };
 
     /**
-     * 
-     * @returns {array}
+     * Get header year class
+     * If the year is same as current year add additional class to the year
+     *      - scheduler-header-year-current
+     *  
+     * @param {object} year 
+     * @param {number} index 
+     * @returns {array} array of string
      */
     $scope.getHeaderYearClassName = function (year, index) {
         var res = [];
@@ -215,8 +256,13 @@ function SchedulerController(
     }
     
     /**
+     * Get header month class
+     * If the current month and current year is same as current month and current year add additional class to the header
+     *      - scheduler-header-month-current
      * 
-     * @returns {array}
+     * @param {object} month 
+     * @param {number} index 
+     * @returns {array} array of string
      */
     $scope.getHeaderMonthClassName = function (month, index) {
         var res = [];
@@ -231,11 +277,24 @@ function SchedulerController(
         return res;
     }
 
+    /**
+     * Get week number number class
+     * If the current week, month and year is same as week.startDay (moment) then add additional class to the current week
+     *      - scheduler-header-week-current
+     * 
+     * @param {object} week 
+     * @param {number} index 
+     * @returns {array} array of string
+     */
     $scope.getHeaderWeekClassName = function (week, index) {
         var res = [];
 
         if ($scope.$ctrl.headerWeekClassName) {
             res.push($scope.$ctrl.headerWeekClassName);
+        }
+
+        if (week.startDay.isSame(moment(), 'week')) {
+            res.push('scheduler-header-week-current');
         }
 
         return res;

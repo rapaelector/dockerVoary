@@ -27,15 +27,35 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
 
         while (current.isSameOrBefore(end)) {
             var key = current.format('YYYY-MM');
+            var monthNumber = current.format('M');
+            var year = moment(current).format('YYYY');
             if (!dates[key]) {
                 dates[key] = {
+                    monthNumber,
+                    year,
                     month: current.format('MMMM'),
-                    monthNumber: current.format('M'),
-                    year: moment(current).format('YYYY'),
                     weeks: [],
                 };
             }
-            dates[key].weeks.push(current.week());
+            
+            var firstWeek = moment(current);
+            var lastWeek = moment(current);
+            if (firstWeek.startOf('month').format('d') != 1) {
+                firstWeek = firstWeek.startOf('month').add(1, 'week').day(1);
+            }
+
+            if (lastWeek.endOf('month').format('d') != 1) {
+                lastWeek = lastWeek.endOf('month').day(1);
+            }
+            dates[key].weeks.push({
+                year,
+                monthNumber,
+                lastWeek,
+                firstWeek,
+                weekNumber: current.week(),
+                startDay: moment(current).startOf('week'),
+                endDay: moment(current).endOf('week'),
+            });
 
             // increment with one week
             current.add(1, 'weeks');
