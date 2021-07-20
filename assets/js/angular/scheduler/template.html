@@ -7,7 +7,7 @@
                 <th
                     ng-repeat="year in years" 
                     colspan="{{ year.weeksCount }}"
-                    class="schedule-year"
+                    class="scheduler-year"
                     ng-style="getYearStyles(year, yearIndex)"
                     ng-init="yearIndex = $index"
                     ng-class="getHeaderYearClassName(year, yearIndex)"
@@ -18,7 +18,7 @@
                 <th 
                     ng-repeat="month in months track by $index" 
                     colspan="{{ month.weeksCount }}"
-                    class="schedule-month"
+                    class="scheduler-month"
                     ng-style="getMonthStyles(month, monthIndex)"
                     ng-init="monthIndex = $index"
                     ng-class="getHeaderMonthClassName(month, monthIndex)"
@@ -35,7 +35,7 @@
                 </th>
                 <th 
                     ng-repeat="week in weeks track by $index" 
-                    class="schedule-weeks"
+                    class="scheduler-weeks"
                     ng-style="getHeaderWeeksStyle()"
                     ng-init="weekIndex = $index"
                     ng-class="getHeaderWeekClassName(week, weekIndex)"
@@ -45,7 +45,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="resource in $ctrl.resources" ng-init="resourceIndex = $index">
+            <tr ng-repeat="resource in $ctrl.resources"ng-init="resourceIndex = $index">
                 <td
                     ng-repeat="column in $ctrl.columns"
                     ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
@@ -53,8 +53,9 @@
                 ></td>
                 <th
                     ng-repeat="week in weeks track by $index"
-                    class="schedule-cell"
-                    ng-style="getCellStyle()"
+                    ng-class="getDateCellClassName()"
+                    ng-init="weekIndex = $index"
+                    ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
                 ></th>
             </tr>
         </tbody>

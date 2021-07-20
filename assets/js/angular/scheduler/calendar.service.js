@@ -12,6 +12,12 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
      * {
      *      month: string,
      *      weeks: number[],
+     *      firstWeek: boolean,
+     *      lastWeek: boolean,
+     *      year: string | number,
+     *      monthNumber: string | number,
+     *      startDay: moment,
+     *      endDay: moment,
      * }
      * 
      * @param {Moment} start 
@@ -41,17 +47,25 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
             var firstWeek = moment(current);
             var lastWeek = moment(current);
             if (firstWeek.startOf('month').format('d') != 1) {
-                firstWeek = firstWeek.startOf('month').add(1, 'week').day(1);
+                if (firstWeek.startOf('month').format('d') == 0) {
+                    firstWeek = firstWeek.startOf('month').add(1, 'day').day(1);
+                } else {
+                    firstWeek = firstWeek.startOf('month').add(1, 'week').day(1);
+                }
             }
 
             if (lastWeek.endOf('month').format('d') != 1) {
-                lastWeek = lastWeek.endOf('month').day(1);
+                if (lastWeek.endOf('month').format('d') == 0) {
+                    lastWeek = lastWeek.endOf('month').add(-1, 'week').day(1);
+                } else {
+                    lastWeek = lastWeek.endOf('month').day(1);
+                }
             }
             dates[key].weeks.push({
                 year,
                 monthNumber,
-                lastWeek,
-                firstWeek,
+                firstWeek: firstWeek.isSame(current),
+                lastWeek: lastWeek.isSame(current, 'week'),
                 weekNumber: current.week(),
                 startDay: moment(current).startOf('week'),
                 endDay: moment(current).endOf('week'),

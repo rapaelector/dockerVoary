@@ -17,6 +17,9 @@
 }
 
 $weekSize: 8px;
+$borderColor: #999;
+$borderColorDark: #000;
+$cellBorder: 2px solid $borderColorDark;
 
 @mixin scheduler-table {
     .app-scheduler {
@@ -28,7 +31,35 @@ $weekSize: 8px;
                     }
                 }
             }
-            
+            thead {
+                tr {
+                    &:last-child {
+                        th, td {
+                            &:last-child.scheduler-weeks {
+                                border-right: $cellBorder;
+                            }
+                        }
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    &:last-child {
+                        th, td {
+                            &.scheduler-date-cell {
+                                border-bottom: $cellBorder; 
+                            }
+                        }
+                    }
+                    th, td {
+                        &:last-child {
+                            &.scheduler-date-cell {
+                                border-right: $cellBorder;
+                            }
+                        }
+                    }
+                }
+            }
             .scheduler-cell-workType, 
             .scheduler-cell-turnover, 
             .scheduler-cell-invoiced, 
@@ -36,31 +67,43 @@ $weekSize: 8px;
             .scheduler-cell-constructionSite {
                 white-space: nowrap;
             }
-        
             .scheduler-cell-constructionSite {
                 background: $yellow;
             }
-        
             .scheduler-cell-cdtTrx {
                 color: $info;
             }
-        
             .scheduler-header-cell, .scheduler-cell {
                 overflow: hidden;
             }
-            .schedule-year {
+            .scheduler-year {
                 font-size: yearFs($weekSize);
                 font-weight: bold;
             }
-
-            .schedule-month {
+            .scheduler-month {
                 font-size: monthFs($weekSize);
                 font-weight: 600;
                 text-transform: uppercase;
             }
-
-            .schedule-weeks {
+            .scheduler-weeks {
                 font-size: $weekSize;
+            }
+            .scheduler-header-first-week,
+            .scheduler-header-last-week {
+                font-weight: bold;
+            }
+            .scheduler-weeks {
+                border-bottom: $cellBorder;
+                border-top: $cellBorder;
+            }
+            .scheduler-year, .scheduler-month {
+                border: $cellBorder;
+            }
+            .scheduler-header-first-week {
+                border-left: $cellBorder;
+            }
+            .scheduler-header-week-current {
+                background: $app-secondary;
             }
         }
     }

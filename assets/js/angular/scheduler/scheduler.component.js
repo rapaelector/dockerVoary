@@ -13,6 +13,7 @@ function SchedulerController(
     WEEK_EDGE_BORDER_WIDTH,
     CELL_BORDER_WIDTH,
     CELL_EDGE_BORDER_WIDTH,
+    BORDER_WEIGHT,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -62,6 +63,7 @@ function SchedulerController(
     }, true);
 
     /**
+     * Get resources to loop and display in the table
      * 
      * @param {object} resource 
      * @param {object} column 
@@ -150,8 +152,30 @@ function SchedulerController(
         return {width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px')};
     };
 
-    $scope.getCellStyle = function () {
-        return {width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px')};
+    /**
+     * 
+     * @param {object} week 
+     * @param {number} index 
+     * @returns {object} object of style
+     */
+    $scope.getCellStyle = function (resource, week, index, resourceIndex) {
+        var cellBorderLeft = 0;
+        var cellBorderRight = 0;
+        var cellBorderBottom = 0;
+
+        if (week.firstWeek) {
+            cellBorderLeft = BORDER_WEIGHT;
+        }
+
+        if (week.lastWeek) {
+            cellBorderRight = BORDER_WEIGHT;
+        }
+
+        return {
+            width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px'),
+            'border-left-width': cellBorderLeft + 'px',
+            'border-left-color': '#000',
+        };
     };
 
     /**
@@ -297,8 +321,21 @@ function SchedulerController(
             res.push('scheduler-header-week-current');
         }
 
+        if (week.firstWeek) {
+            res.push('scheduler-header-first-week');
+        };
+
+        if (week.lastWeek) {
+            res.push('scheduler-header-last-week')
+        }
         return res;
     }
+
+    $scope.getDateCellClassName = function () {
+        var res = ['scheduler-date-cell'];
+
+        return res;
+    };
 };
 
 SchedulerController.$inject = [
@@ -314,6 +351,7 @@ SchedulerController.$inject = [
     'WEEK_EDGE_BORDER_WIDTH',
     'CELL_BORDER_WIDTH',
     'CELL_EDGE_BORDER_WIDTH',
+    'BORDER_WEIGHT',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -362,16 +400,6 @@ angular.module('schedulerModule').component('appScheduler', {
         columns: '=',
         start: '=',
         end: '=',
-        /**
-         * Year formatter
-         * Format year before rendering
-         */
-        yearFormatter: '=',
-        /**
-         * Month formatter
-         * Format year before rendering
-         */
-        monthFormatter: '=',
         /**
          * Object
          */

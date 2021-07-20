@@ -30,10 +30,6 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         headerMonthClassName: 'month-class text-center',
         headerWeekClassName: 'week-class text-center',
     };
-    $scope.formatter = {
-        yearFormatter: yearFormatter,
-        monthFormatter: monthFormatter,
-    };
 
     this.$onInit = function() {
         $scope.options.dateRangePicker = {
