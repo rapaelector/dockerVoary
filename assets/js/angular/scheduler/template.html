@@ -70,14 +70,21 @@
     <div class="scheduler-events">
         <div 
             ng-repeat="event in events track by $index" 
-            class="schedule-event d-flex"
+            class="schedule-event"
             ng-style="getEventStyle(event, eventindex)"
             ng-init="eventindex = $index"
         >
-            <div>{{ event.resource }}</div>
-            <div>{{ event.start | date: 'yyyy-mm-dd' }}</div>
-            <div>{{ event.end | date: 'yyyy-MM-dd' }}</div>
-            <div>{{ event.title }}</div>
+            <div 
+                class="scheduler-event-inner d-flex"
+                data-placement="body"
+                data-toggle="popover"
+                data-placement="bottom" 
+                data-content="{{ event.bubbleHtml }}"
+                data-trigger="hover"
+                data-html="true"
+            >
+                <div>{{ event.title }}</div>
+            </div>
         </div>
     </div>
 </th>

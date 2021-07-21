@@ -28,7 +28,11 @@ function SchedulerController(
     };
     $scope.events = [];
 
-    this.$onInit = function () {};
+    this.$onInit = function () {
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    };
 
     $scope.$watch('$ctrl.start', function () {
         var start = moment($scope.$ctrl.start);
@@ -444,7 +448,6 @@ function SchedulerController(
      */
     $scope.getEventStyle = function (event, eventIndex) {
         var position = $scope.getEventPosition(event);
-        console.info({position});
 
         return {
             backgroundColor: event.backgroundColor,
@@ -484,6 +487,8 @@ function SchedulerController(
             width: (right - left) + 'px',
             position: 'absolute',
             height: $startCell.outerHeight(),
+            padding: '1px',
+            border: '1px solid transparent',
         };
     }
 };

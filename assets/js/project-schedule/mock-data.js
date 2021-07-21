@@ -223,6 +223,7 @@ const events = [
         end: moment().add(2, 'month'),
         backgroundColor: 'orange',
         color: '#fff',
+        bubbleHtml: `<div>lorem ipsum dolor </div>`,
     },
     {
         resource: 2,
@@ -230,7 +231,8 @@ const events = [
         start: moment().add(-3, 'month'),
         end: moment().add(2, 'month'),
         backgroundColor: 'blue',
-        color: '#fff'
+        color: '#fff',
+        bubbleHtml: `<div>------lorem ipsum dolor------</div>`,
     },
     {
         resource: 3,
@@ -238,7 +240,8 @@ const events = [
         start: moment().add(-6, 'month'),
         end: moment().add(-5, 'month'),
         backgroundColor: 'red',
-        color: '#fff'
+        color: '#fff',
+        bubbleHtml: `<div>++++++++lorem ipsum dolor++++++</div>`,
     }
 ];
 
