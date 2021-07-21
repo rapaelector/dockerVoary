@@ -82,6 +82,14 @@ class ExchangeHistory
      * @Groups({"exchange-history"})
      */
     private $archiUser;
+
+    /**
+     * Prise de note
+     * 
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"exchange-history"})
+     */
+    private $noteTaking;
     
     public function __construct()
     {
@@ -184,6 +192,18 @@ class ExchangeHistory
     public function setArchiUser(?string $archiUser): self
     {
         $this->archiUser = $archiUser;
+
+        return $this;
+    }
+
+    public function getNoteTaking(): ?string
+    {
+        return $this->noteTaking;
+    }
+
+    public function setNoteTaking(?string $noteTaking): self
+    {
+        $this->noteTaking = $noteTaking;
 
         return $this;
     }

@@ -45,6 +45,7 @@ label:
   last_relaunch: 'DERNIÈRE RELANCE'
   type_relaunch: 'DERNIÈRE RELANCE'
   project_lose_reason: 'Raison de la perte du projet'
+  note_taking: 'Prise de note'
 
 contact:
   label: Contact

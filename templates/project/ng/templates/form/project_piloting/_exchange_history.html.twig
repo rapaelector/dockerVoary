@@ -26,9 +26,10 @@
                                     width="30" height="30"
                                 >
                                 <div class="media-body">
-                                    <h5 class="mt-0 font-weight-bold" ng-if="item.archiUser">{{ '{{ item.archiUser.name }}' }}</h5>
+                                    <h5 class="mt-0 font-weight-bold" ng-if="item.archiUser">{{ '{{ item.archiUser }}' }}</h5>
                                     <h5 class="mt-0 font-weight-bold" ng-if="!item.archiUser">{{ 'label.auto'|trans }}</h5>
-                                    {{ '{{ item.description }}' }}
+                                    <div>{{ '{{ item.description }}' }}</div>
+                                    <div ng-if="item.noteTaking">{{ '{{ item.noteTaking }}' }}</div>
                                 </div>
                             </div>
                             <div

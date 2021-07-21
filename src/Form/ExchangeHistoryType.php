@@ -34,6 +34,7 @@ class ExchangeHistoryType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('percentage', TextType::class)
             ->add('archiUser', TextType::class)
+            ->add('noteTaking', TextareaType::class)
         ;
     }
 
