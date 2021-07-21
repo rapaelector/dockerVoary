@@ -61,8 +61,8 @@
                     ng-init="weekIndex = $index"
                     ng-class="getCellClassName()"
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
-                    id="{{ getCellId(resource, week) }}"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
+                    id="{{ getCellId(resource, week) }}"
                 >
             </tr>
         </tbody>
@@ -70,19 +70,14 @@
     <div class="scheduler-events">
         <div 
             ng-repeat="event in events track by $index" 
+            ng-class="getEventClass(event, eventIndex)"
+            ng-style="getEventStyle(event, eventIndex)"
+            ng-init="eventIndex = $index"
+            ng-mouseenter="onEventHover(event, eventIndex, $event)"
+            ng-mouseleave="onEventBlur(event, eventIndex, $event)"
             class="schedule-event"
-            ng-style="getEventStyle(event, eventindex)"
-            ng-init="eventindex = $index"
         >
-            <div 
-                class="scheduler-event-inner d-flex"
-                data-placement="body"
-                data-toggle="popover"
-                data-placement="bottom" 
-                data-content="{{ event.bubbleHtml }}"
-                data-trigger="hover"
-                data-html="true"
-            >
+            <div class="scheduler-event-inner d-flex">
                 <div>{{ event.title }}</div>
             </div>
         </div>
