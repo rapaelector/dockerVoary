@@ -223,15 +223,28 @@ const events = [
         end: moment().add(2, 'month'),
         backgroundColor: 'orange',
         color: '#fff',
-        bubbleHtml: `<div>lorem ipsum dolor </div>`,
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            fontSize: '16px',
+            textTransform: 'capitalize',
+        },
     },
     {
         resource: 2,
-        title: 'test',
+        title: '',
         start: moment().add(-3, 'month'),
         end: moment().add(2, 'month'),
-        backgroundColor: 'blue',
-        color: '#fff',
+        backgroundColor: 'rgba(0, 0, 255, .2)',
+        color: '#000',
         bubbleHtml: `<div>------lorem ipsum dolor------</div>`,
     },
     {
@@ -242,7 +255,33 @@ const events = [
         backgroundColor: 'red',
         color: '#fff',
         bubbleHtml: `<div>++++++++lorem ipsum dolor++++++</div>`,
-    }
+    },
+    {
+        resource: 4,
+        title: 'test',
+        start: moment().add(-1, 'month'),
+        end: moment().add(1, 'month'),
+        backgroundColor: 'grey',
+        color: '#fff',
+        bubbleHtml: '<div>******** lorem ipsum dolor **************** </div>',
+    },
+    {
+        resource: 1,
+        title: 'test',
+        start: moment().add(2, 'month'),
+        end: moment().add(3, 'month'),
+        backgroundColor: 'green',
+        color: '#fff',
+        bubbleHtml: '<div> ///////// lorem <b>ipusm</b> dolor /////////////</div>',
+    },
+    {
+        resource: 3,
+        title: 'test',
+        start: moment().add(2, 'month'),
+        end: moment().add(3, 'month'),
+        backgroundColor: 'brown',
+        color: '#fff',
+    },
 ];
 
 export {
