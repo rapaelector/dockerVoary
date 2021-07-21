@@ -23,6 +23,8 @@ class NgProjectType extends ProjectEditType
             ->remove('amountSubcontractedWork')
             ->remove('amountBBISpecificWork')
             ->remove('encryptiontype')
+            ->remove('roadmap')
+            ->remove('siteCode')
             ->add('scope', ChoiceType::class, [
                 'label' => false,
                 'choices' => Constants::SECOND_MARKET_TYPES,
