@@ -1,0 +1,7 @@
+{% set folderName = row.folderNameOnTheServer %}
+{% set projectName = row.name %}
+{% set id = row.id %}
+
+<div class="d-inline input-group py-0 project-case-field ">
+    {{ folderName ~ ' / ' ~ projectName }}
+</div>

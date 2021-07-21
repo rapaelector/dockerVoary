@@ -206,7 +206,6 @@ class NgProjectController extends BaseController
                 $history->setDescription($descriptionTranslated);
             }
             $normalizedHistory = $serializer->normalize($history, 'json', ['groups' => 'exchange-history']);
-            $normalizedHistory['avatar'] = $history->getArchiUser() ? $userService->getUserAvatar($history->getArchiUser()) : '';
             $normalizedHistory['class'] = $exchangeHistoryService->getExchangeHistoryColor($history);
             $normalizedHistory['date'] = $history->getDate() ? $history->getDate()->format('d/m/Y') : '';
 
@@ -266,7 +265,6 @@ class NgProjectController extends BaseController
                 $exchangeHistory->setDescription($descriptionTranslated);
             }
             $normalizedHistory = $serializer->normalize($exchangeHistory, 'json', ['groups' => 'exchange-history']);
-            $normalizedHistory['avatar'] = $exchangeHistory->getArchiUser() ? $userService->getUserAvatar($exchangeHistory->getArchiUser()) : '';
             $normalizedHistory['class'] = $exchangeHistoryService->getExchangeHistoryColor($exchangeHistory);
             $normalizedHistory['date'] = $exchangeHistory->getDate() ? $exchangeHistory->getDate()->format('d/m/Y') : '';
 

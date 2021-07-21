@@ -114,16 +114,12 @@
                         <div ng-if="exchangeHistory.archi == '1'" class="form-group row w-100 mb-0 no-gutters">
                             <label class="col-sm-2 col-form-label">{{ 'label.who'|trans }}</label>
                             <div class="col-sm-10">
-                                {% include 'project/ng/templates/form/_md_select_template.html.twig' with {
-                                    ngModel: 'exchangeHistory.archiUser',
-                                    data: 'data.users',
-                                    searchTerm: 'searchTerm.users',
-                                    mdOnOpen: 'helpers.getUsers()',
-                                    disabled: 'data.newContact',
-                                    ngChangeHandler: 'helpers.handleUserChanged()',
-                                    checkboxClass: 'w-100',
-                                    placeholder: 'label.choose_archi'|trans({}, 'project')
-                                } %}
+                                <input
+                                        type="text"
+                                        ng-model="exchangeHistory.archiUser"
+                                        class="form-control"
+                                        ng-class="data.errors.archiUser ? 'border-danger' : ''"
+                                >
                             </div>
                         </div>
                     </div>
