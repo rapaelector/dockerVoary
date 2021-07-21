@@ -69,7 +69,7 @@ class ProjectController extends BaseController
              */
             ->add('businessCharge', TwigColumn::class,  [
                 'template' => 'project/twig_columns/_business_charge.html.twig',
-                'className' => '',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.resposible_business_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.resposible_business_raw', [], 'projects'),
