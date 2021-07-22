@@ -215,7 +215,6 @@ function SchedulerController(
         for (const i in $scope.$ctrl.columns) {
             const columnWidth = $scope.$ctrl.columns[i].width;
             if (isNaN(parseInt(columnWidth))) {
-                console.info({columnWidth});
                 OK = false;
 
                 break;
@@ -247,7 +246,6 @@ function SchedulerController(
 
         for (const i in $scope.$ctrl.columns) {
             if (isNaN(parseInt($scope.$ctrl.columns[i].width))) {
-                console.info('Invalid column width', $scope.$ctrl.columns[i]);
                 return {width: 'auto'};
             }
             width += parseInt($scope.$ctrl.columns[i].width);
@@ -525,7 +523,6 @@ function SchedulerController(
         if (overlaps) {
             var eventOverlaps = Object.values(overlaps).filter(ov => ov.events.findIndex(e => e.id === event.id) > -1);
             if (eventOverlaps.length > 0) {
-                // console.info(eventOverlaps);
                 var eventOverlap = null;
                 for (var i in eventOverlaps) {
                     if (!eventOverlap || (eventOverlaps[i].count > eventOverlap.count)) {
@@ -536,15 +533,7 @@ function SchedulerController(
                 top += index * ROW_HEIGHT;
             }
         }
-        // if (overlaps[event.id]) {
-        //     var overlap = overlaps[event.id];
-        //     if (overlap.count > 0) {
-        //         console.info({overlap, event})
-        //         var index = overlap.events.findIndex(e => e.id === event.id);
-        //         top += index * ROW_HEIGHT;
-        //     }
-        // }
-
+        
         return {
             top: top + 'px',
             left: left + 'px',
