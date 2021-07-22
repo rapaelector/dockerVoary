@@ -493,8 +493,8 @@ function SchedulerController(
             width: (right - left) + 'px',
             position: 'absolute',
             height: $startCell.outerHeight(),
-            padding: '1px',
-            border: '1px solid transparent',
+            // padding: '1px',
+            // border: '1px solid transparent',
         };
     }
 
@@ -516,7 +516,11 @@ function SchedulerController(
      * @param {number} eventIndex 
      */
     $scope.getEventClass = function (event, eventIndex) {
-        var res = ['schedule-event-' + event.resource];
+        var res = ['scheduler-event-' + event.resource];
+
+        if (event.className) {
+            res.push(event.className);
+        }
 
         return res;
     }

@@ -63,7 +63,7 @@
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
                     id="{{ getCellId(resource, week) }}"
-                >
+                ></th>
             </tr>
         </tbody>
     </table>
@@ -75,12 +75,11 @@
             ng-init="eventIndex = $index"
             ng-mouseenter="onEventHover(event, eventIndex, $event)"
             ng-mouseleave="onEventBlur(event, eventIndex, $event)"
-            class="schedule-event"
+            class="scheduler-event"
         >
-            <div class="scheduler-event-inner d-flex">
+            <div class="scheduler-event-inner">
                 <div>{{ event.title }}</div>
             </div>
         </div>
     </div>
-</th>
 </div>

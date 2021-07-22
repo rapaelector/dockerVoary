@@ -118,9 +118,16 @@ $cellBorder: 2px solid $borderColorDark;
             position: absolute;
             top: 0;
             left: 0;
-            .schedule-event {
-                overflow: hidden;
-                height: 24px;
+            .scheduler-event-inner {
+                display: flex;
+                height: 100%;
+                font-size: 12px;
+                align-items: center;
+                padding: 0 2px;
+                .scheduler-event {
+                    height: 24px;
+                    overflow: hidden;
+                }
             }
         }
     }

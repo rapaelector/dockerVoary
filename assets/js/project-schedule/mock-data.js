@@ -234,9 +234,9 @@ const events = [
             <div>lorem ipsum dolor </div>
         `,
         style: {
-            fontSize: '16px',
             textTransform: 'capitalize',
         },
+        className: 'test-class-lorem lorem',
     },
     {
         resource: 2,
@@ -246,6 +246,7 @@ const events = [
         backgroundColor: 'rgba(0, 0, 255, .2)',
         color: '#000',
         bubbleHtml: `<div>------lorem ipsum dolor------</div>`,
+        className: '------------lorem-------------',
     },
     {
         resource: 3,
@@ -255,6 +256,7 @@ const events = [
         backgroundColor: 'red',
         color: '#fff',
         bubbleHtml: `<div>++++++++lorem ipsum dolor++++++</div>`,
+        className: '++++lorem+++++++++',
     },
     {
         resource: 4,
@@ -264,6 +266,7 @@ const events = [
         backgroundColor: 'grey',
         color: '#fff',
         bubbleHtml: '<div>******** lorem ipsum dolor **************** </div>',
+        className: '**********lorem*******',
     },
     {
         resource: 1,
@@ -273,6 +276,7 @@ const events = [
         backgroundColor: 'green',
         color: '#fff',
         bubbleHtml: '<div> ///////// lorem <b>ipusm</b> dolor /////////////</div>',
+        className: '//////// lorem ///////',
     },
     {
         resource: 3,
@@ -281,6 +285,7 @@ const events = [
         end: moment().add(3, 'month'),
         backgroundColor: 'brown',
         color: '#fff',
+        className: '\\\\\\\\\\\ lorem ///////',
     },
 ];
 
