@@ -237,9 +237,105 @@ const events = [
         id: 2,
         resource: 1,
         title: 'test',
-        start: moment('2021-08-27', 'YYYY-MM-DD'),
-        end: moment('2021-09-15', 'YYYY-MM-DD'),
+        start: moment('2021-07-27', 'YYYY-MM-DD'),
+        end: moment('2021-08-22', 'YYYY-MM-DD'),
         backgroundColor: 'red',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 3,
+        resource: 1,
+        title: 'test',
+        start: moment('2021-07-04', 'YYYY-MM-DD'),
+        end: moment('2021-10-15', 'YYYY-MM-DD'),
+        backgroundColor: 'black',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 4,
+        resource: 1,
+        title: 'test',
+        start: moment('2021-05-01', 'YYYY-MM-DD'),
+        end: moment('2021-09-15', 'YYYY-MM-DD'),
+        backgroundColor: 'green',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 22,
+        resource: 1,
+        title: 'Madagascar',
+        start: moment('2021-01-01', 'YYYY-MM-DD'),
+        end: moment('2021-01-30', 'YYYY-MM-DD'),
+        backgroundColor: 'red',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 23,
+        resource: 1,
+        title: 'Madagascar 2',
+        start: moment('2021-01-01', 'YYYY-MM-DD'),
+        end: moment('2021-02-10', 'YYYY-MM-DD'),
+        backgroundColor: 'blue',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            'text-transform': 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 24,
+        resource: 1,
+        title: 'Madagascar 3',
+        start: moment('2021-04-01', 'YYYY-MM-DD'),
+        end: moment('2021-08-10', 'YYYY-MM-DD'),
+        backgroundColor: 'violet',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 25,
+        resource: 1,
+        title: 'Madagascar 4',
+        start: moment('2021-02-05', 'YYYY-MM-DD'),
+        end: moment('2021-03-10', 'YYYY-MM-DD'),
+        backgroundColor: 'violet',
         color: '#fff',
         bubbleHtml: `
             <div>Red bacground popover</div>
@@ -290,7 +386,7 @@ const events = [
     //     className: '//////// lorem ///////',
     // },
     {
-        id: 3,
+        id: 6,
         resource: 3,
         title: 'test',
         start: moment('2021-03-01', 'YYYY-MM-DD'),

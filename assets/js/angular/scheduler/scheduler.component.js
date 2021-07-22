@@ -521,11 +521,29 @@ function SchedulerController(
             right = $endCell.position().left + $endCell.outerWidth();
         }
 
-        var overlap = $scope.countResourceEventOverlap(event.resource);
-        if (overlap > 0) {
-            var index = $scope.events.filter(e => e.resource === event.resource).findIndex(e => e.id === event.id);
-            top += index * ROW_HEIGHT;
+        var overlaps = $scope.computeResourceEventOverlap(event.resource);
+        if (overlaps) {
+            var eventOverlaps = Object.values(overlaps).filter(ov => ov.events.findIndex(e => e.id === event.id) > -1);
+            if (eventOverlaps.length > 0) {
+                // console.info(eventOverlaps);
+                var eventOverlap = null;
+                for (var i in eventOverlaps) {
+                    if (!eventOverlap || (eventOverlaps[i].count > eventOverlap.count)) {
+                        eventOverlap = eventOverlaps[i];
+                    }
+                }
+                var index = eventOverlap.events.findIndex(e => e.id === event.id);
+                top += index * ROW_HEIGHT;
+            }
         }
+        // if (overlaps[event.id]) {
+        //     var overlap = overlaps[event.id];
+        //     if (overlap.count > 0) {
+        //         console.info({overlap, event})
+        //         var index = overlap.events.findIndex(e => e.id === event.id);
+        //         top += index * ROW_HEIGHT;
+        //     }
+        // }
 
         return {
             top: top + 'px',
@@ -669,25 +687,65 @@ function SchedulerController(
         }
     };
 
-    $scope.countResourceEventOverlap = function (resourceId) {
+    /**
+     * 
+     * @param {number} resourceId 
+     * @returns {object} overlaps
+     */
+    $scope.computeResourceEventOverlap = function (resourceId) {
         var resourceEvents = $scope.events.filter(e => e.resource === resourceId);
         var overlaps = {};
-        var factor = 0;
 
         for (var i = 0; i < resourceEvents.length - 1; i++) {
             var event1 = resourceEvents[i];
-            let overlap = 0;
+            let overlap = {
+                count: 0,
+                start: moment(event1.start),
+                end: moment(event1.end),
+                events: [event1],
+            };
+
             for (var j = i + 1; j < resourceEvents.length; j++) {
                 var event2 = resourceEvents[j];
-                if (event2.start.isSameOrBefore(moment(event1.end)) && event2.end.isSameOrAfter(moment(event1.start))) {
-                    overlap++;
+                if (event2.start.isSameOrBefore(moment(overlap.end)) && event2.end.isSameOrAfter(moment(overlap.start))) {
+                    if (event2.start.isBefore(moment(overlap.start))) {
+                        overlap.start = moment(event2.start);
+                    }
+                    if (event2.end.isAfter(moment(overlap.end))) {
+                        overlap.end = moment(event2.end);
+                    }
+                    overlap.events.push(event2);
+                    overlap.count++;
                 }
             }
             overlaps[event1.id] = overlap;
         }
 
+        for (var i in overlaps) {
+            if (overlaps[i].count === 0) {
+                delete(overlaps[i]);
+            }
+        }
+
+        // if (Object.keys(overlaps).length > 0) {
+        //     factor = Math.max.apply(null, Object.values(overlaps));
+        // }
+
+        // return factor;
+        return overlaps;
+    };
+
+    /**
+     * 
+     * @param {number} resourceId 
+     * @returns {}
+     */
+    $scope.countResourceEventOverlap = function (resourceId) {
+        var factor = 0;
+        var overlaps = $scope.computeResourceEventOverlap(resourceId);
+
         if (Object.keys(overlaps).length > 0) {
-            factor = Math.max.apply(null, Object.values(overlaps));
+            factor = Math.max.apply(null, Object.values(overlaps).map(overlap => overlap.count));
         }
 
         return factor;
