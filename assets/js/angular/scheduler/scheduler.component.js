@@ -347,7 +347,7 @@ function SchedulerController(
         return res;
     }
 
-    $scope.getCellClassName = function () {
+    $scope.getDateCellClassName = function () {
         var res = ['scheduler-date-cell'];
 
 

@@ -59,7 +59,7 @@
                 <th
                     ng-repeat="week in weeks track by $index"
                     ng-init="weekIndex = $index"
-                    ng-class="getCellClassName()"
+                    ng-class="getDateCellClassName()"
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
                     id="{{ getCellId(resource, week) }}"
