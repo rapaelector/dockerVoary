@@ -1,4 +1,5 @@
 import './scheduler.module';
 import './scheduler.constants';
-import './calendar.service';
 import './scheduler.component';
+import './calendar.service';
+import './scheduler.service';

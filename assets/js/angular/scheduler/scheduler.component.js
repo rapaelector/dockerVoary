@@ -5,8 +5,9 @@ function SchedulerController(
     $mdDialog,
     $mdPanel,
     moment, 
-    calendarService, 
-    resolverService, 
+    calendarService,
+    resolverService,
+    schedulerService, 
     DEFAULT_CELL_WIDTH,
     YEAR_BORDER_WIDTH,
     MONTH_BORDER_WIDTH,
@@ -16,6 +17,10 @@ function SchedulerController(
     CELL_EDGE_BORDER_WIDTH,
     BORDER_WEIGHT,
     DEFAULT_DATE_FORMAT,
+    SCHEDULER_CELL_NAME,
+    SCHEDULER_EVENT_CLASS,
+    EVENT_Z_INDEX,
+    ROW_HEIGHT,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -78,6 +83,7 @@ function SchedulerController(
             $scope.events = $scope.$ctrl.events;
         }
     }, true);
+
     /**
      * Get resources to loop and display in the table
      * 
@@ -158,7 +164,7 @@ function SchedulerController(
         if (!$scope.start || !$scope.end) {
             return;
         }
-        $scope.dates = calendarService.getDates($scope.start, $scope.end);
+        $scope.dates = calendarService.getDates(moment($scope.start), moment($scope.end));
         $scope.weeks = calendarService.getDatesWeeks($scope.dates);
         $scope.months = calendarService.getDatesMonths($scope.dates);
         $scope.years = calendarService.getDatesYears($scope.dates);
@@ -178,6 +184,7 @@ function SchedulerController(
         var cellBorderLeft = 0;
         var cellBorderRight = 0;
         var cellBorderBottom = 0;
+        var rowHeight = ROW_HEIGHT * ($scope.countResourceEventOverlap(resource.id) + 1);
 
         if (week.firstWeek) {
             cellBorderLeft = BORDER_WEIGHT;
@@ -191,6 +198,7 @@ function SchedulerController(
             width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px'),
             'border-left-width': cellBorderLeft + 'px',
             'border-left-color': '#999',
+            'height': rowHeight + 'px',
         };
     };
 
@@ -440,7 +448,7 @@ function SchedulerController(
      * @returns {array}
      */
     $scope.getCellId = function (resource, week) {
-        return 'scheduler-cell-' + resource.id + '-' + week.weekNumber;
+        return schedulerService.generateCellId(resource.id, week.year, week.weekNumber);
     }
 
     /**
@@ -451,7 +459,7 @@ function SchedulerController(
      * @returns {object} object of style
      */
     $scope.getEventStyle = function (event, eventIndex) {
-        var position = $scope.getEventPosition(event);
+        var position = $scope.getEventStyleAndPosition(event, eventIndex);
         var eventStyle = event.style || {};
 
         return {
@@ -462,6 +470,7 @@ function SchedulerController(
             position: 'inherit',
             height: 0,
             width: 0,
+            zIndex: EVENT_Z_INDEX, 
             ...position,
         };
     }
@@ -472,32 +481,93 @@ function SchedulerController(
      * 
      * @param {object} resource 
      * @param {week} week 
-     * @returns {string}
+     * @returns {object} object of style
      */
-    $scope.getEventPosition = function (event) {
-        var startWeekNumber = moment(event.start).week();
-        var endWeekNumber = moment(event.end).week();
-        var startId = 'scheduler-cell-' + event.resource + '-' + startWeekNumber;
-        var endId = 'scheduler-cell-' + event.resource + '-' + endWeekNumber;
+    $scope.getEventStyleAndPosition = function (event, eventIndex) {
+        if (moment(event.start).isAfter($scope.end) || moment(event.end).isBefore($scope.start)) {
+            return {
+                opacity: 0,
+                display: 'none',
+            };
+        }
+
+        var left = null;
+        var right = null;
+        var top = null;
+
+        var startId = schedulerService.generateCellId(event.resource, moment(event.start).format('YYYY'), moment(event.start).week());
+        var endId = schedulerService.generateCellId(event.resource, moment(event.end).format('YYYY'), moment(event.end).week());
         var $startCell = $('#' + startId);
         var $endCell = $('#' + endId);
 
-        const right = $endCell.position().left + $endCell.outerWidth();
-        const left = $startCell.position().left;
+        if ($startCell.length == 0) {
+            var firstMondayDate = calendarService.nextMonday(moment($scope.start));
+            startId = schedulerService.generateCellId(event.resource, firstMondayDate.format('YYYY'), firstMondayDate.week());
+            $startCell = $('#' + startId);
+        }
+
+        if ($startCell.length > 0) {
+            left = $startCell.position().left;
+            top = $startCell.position().top;
+        }
+
+        if ($endCell.length == 0) {
+            endId = schedulerService.generateCellId(event.resource, moment($scope.end).format('YYYY'), moment($scope.end).week());
+            $endCell = $('#' + endId);
+        }
+
+        if ($endCell.length > 0) {
+            top = top ? top : $endCell.position().top;
+            right = $endCell.position().left + $endCell.outerWidth();
+        }
+
+        var overlap = $scope.countResourceEventOverlap(event.resource);
+        if (overlap > 0) {
+            var index = $scope.events.filter(e => e.resource === event.resource).findIndex(e => e.id === event.id);
+            top += index * ROW_HEIGHT;
+        }
 
         return {
-            top: $startCell.position().top + 'px',
+            top: top + 'px',
             left: left + 'px',
             right: right + 'px',
             display: 'block',
-            width: (right - left) + 'px',
+            width: ((right && left) ? (right - left) : 100) + 'px',
             position: 'absolute',
-            height: $startCell.outerHeight(),
-            // padding: '1px',
-            // border: '1px solid transparent',
+            height: ROW_HEIGHT + 'px',
+            zIndex: EVENT_Z_INDEX + eventIndex,
         };
     }
 
+    /**
+     * 
+     * @param {object} event 
+     * @returns {object}
+     */
+    $scope.getEventPositionStatus = function (event) {
+        let meta = {
+            overflowStart: false,
+            overflowEnd: false,
+        };
+        var startId = schedulerService.generateCellId(event.resource, moment(event.start).format('YYYY'), moment(event.start).week());
+        var endId = schedulerService.generateCellId(event.resource, moment(event.end).format('YYYY'), moment(event.end).week());
+        var $startCell = $('#' + startId);
+        var $endCell = $('#' + endId);
+
+        if (moment(event.start).isAfter($scope.end) || moment(event.end).isBefore($scope.start)) {
+            return meta;
+        }
+
+        if ($startCell.length == 0) {
+            meta.overflowStart = true;
+        }
+
+        if ($endCell.length == 0) {
+            meta.overflowEnd = true;
+        }
+
+        return meta;
+    }
     /**
      * 
      * @param {object} event 
@@ -516,10 +586,19 @@ function SchedulerController(
      * @param {number} eventIndex 
      */
     $scope.getEventClass = function (event, eventIndex) {
-        var res = ['scheduler-event-' + event.resource];
+        var res = [SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.id];
+        var positionStatus = $scope.getEventPositionStatus(event);
 
         if (event.className) {
             res.push(event.className);
+        }
+
+        if (positionStatus.overflowStart) {
+            res.push(SCHEDULER_EVENT_CLASS + '-overflow-start');
+        }
+
+        if (positionStatus.overflowEnd) {
+            res.push(SCHEDULER_EVENT_CLASS + '-overflow-end');
         }
 
         return res;
@@ -532,6 +611,10 @@ function SchedulerController(
      */
     $scope.showEventDetailDialog = function (event, jsEvent) {
         if (event.bubbleHtml) {
+            /**
+             * Set bubble z-index to avoid hidden bubble view
+             */
+            var bubbleIndex = EVENT_Z_INDEX + $scope.events.length + 10;
             var posX = 'center';
             var position = $mdPanel.newPanelPosition()
                 .relativeTo(jsEvent.target)
@@ -555,11 +638,12 @@ function SchedulerController(
                 animation: panelAnimation,
                 locals: {
                     activeEvent: event,
+                    zIndex: bubbleIndex,
                 },
                 hasBackdrop: false,
                 openFrom: jsEvent,
                 propagateContainerEvents: true,
-                zIndex: 200,
+                zIndex: bubbleIndex,
                 groupName: 'bubble',
             };
 
@@ -584,15 +668,40 @@ function SchedulerController(
             $scope.mdPanelRef = null;
         }
     };
-}1
-;
+
+    $scope.countResourceEventOverlap = function (resourceId) {
+        var resourceEvents = $scope.events.filter(e => e.resource === resourceId);
+        var overlaps = {};
+        var factor = 0;
+
+        for (var i = 0; i < resourceEvents.length - 1; i++) {
+            var event1 = resourceEvents[i];
+            let overlap = 0;
+            for (var j = i + 1; j < resourceEvents.length; j++) {
+                var event2 = resourceEvents[j];
+                if (event2.start.isSameOrBefore(moment(event1.end)) && event2.end.isSameOrAfter(moment(event1.start))) {
+                    overlap++;
+                }
+            }
+            overlaps[event1.id] = overlap;
+        }
+
+        if (Object.keys(overlaps).length > 0) {
+            factor = Math.max.apply(null, Object.values(overlaps));
+        }
+
+        return factor;
+    };
+};
+
 SchedulerController.$inject = [
     '$scope', 
     '$mdDialog',
     '$mdPanel',
     'moment', 
     'calendarService', 
-    'resolverService', 
+    'resolverService',
+    'schedulerService',
     'DEFAULT_CELL_WIDTH',
     'YEAR_BORDER_WIDTH',
     'MONTH_BORDER_WIDTH',
@@ -602,6 +711,10 @@ SchedulerController.$inject = [
     'CELL_EDGE_BORDER_WIDTH',
     'BORDER_WEIGHT',
     'DEFAULT_DATE_FORMAT',
+    'SCHEDULER_CELL_NAME',
+    'SCHEDULER_EVENT_CLASS',
+    'EVENT_Z_INDEX',
+    'ROW_HEIGHT',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {

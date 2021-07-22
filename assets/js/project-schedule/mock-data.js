@@ -217,12 +217,87 @@ const buildColumns = function(numberFormat) {
  */
 const events = [
     {
+        id: 1,
         resource: 1,
         title: 'test',
-        start: moment().add(1, 'month'),
-        end: moment().add(2, 'month'),
+        start: moment('2021-08-20', 'YYYY-MM-DD'),
+        end: moment('2021-08-27', 'YYYY-MM-DD'),
         backgroundColor: 'orange',
         color: '#fff',
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    {
+        id: 2,
+        resource: 1,
+        title: 'test',
+        start: moment('2021-08-27', 'YYYY-MM-DD'),
+        end: moment('2021-09-15', 'YYYY-MM-DD'),
+        backgroundColor: 'red',
+        color: '#fff',
+        bubbleHtml: `
+            <div>Red bacground popover</div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+    },
+    // {
+    //     resource: 2,
+    //     title: 'Lorem',
+    //     start: moment('2020-12-22', 'YYYY-MM-DD'),
+    //     end: moment('2021-07-26', 'YYYY-MM-DD'),
+    //     backgroundColor: 'yellow',
+    //     color: '#000',
+    //     bubbleHtml: `<div>------lorem ipsum dolor------</div>`,
+    //     className: '------------lorem-------------',
+    // },
+    // {
+    //     resource: 3,
+    //     title: 'test',
+    //     start: moment().add(-6, 'month'),
+    //     end: moment().add(-5, 'month'),
+    //     backgroundColor: 'red',
+    //     color: '#fff',
+    //     bubbleHtml: `<div>++++++++lorem ipsum dolor++++++</div>`,
+    //     className: '++++lorem+++++++++',
+    // },
+    // {
+    //     resource: 4,
+    //     title: 'test',
+    //     start: moment().add(-1, 'month'),
+    //     end: moment().add(1, 'month'),
+    //     backgroundColor: 'grey',
+    //     color: '#fff',
+    //     bubbleHtml: '<div>******** lorem ipsum dolor **************** </div>',
+    //     className: '**********lorem*******',
+    // },
+    // {
+    //     resource: 1,
+    //     title: 'test',
+    //     start: moment().add(2, 'month'),
+    //     end: moment().add(3, 'month'),
+    //     backgroundColor: 'green',
+    //     color: '#fff',
+    //     bubbleHtml: '<div> ///////// lorem <b>ipusm</b> dolor /////////////</div>',
+    //     className: '//////// lorem ///////',
+    // },
+    {
+        id: 3,
+        resource: 3,
+        title: 'test',
+        start: moment('2021-03-01', 'YYYY-MM-DD'),
+        end: moment('2021-05-01', 'YYYY-MM-DD'),
+        backgroundColor: 'brown',
+        color: '#fff',
+        className: 'scheduler-overflow-test',
         bubbleHtml: `
             <div>lorem ipsum dolor </div>
             <div>lorem ipsum dolor </div>
@@ -233,59 +308,6 @@ const events = [
             <div>lorem ipsum dolor </div>
             <div>lorem ipsum dolor </div>
         `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-    },
-    {
-        resource: 2,
-        title: '',
-        start: moment().add(-3, 'month'),
-        end: moment().add(2, 'month'),
-        backgroundColor: 'rgba(0, 0, 255, .2)',
-        color: '#000',
-        bubbleHtml: `<div>------lorem ipsum dolor------</div>`,
-        className: '------------lorem-------------',
-    },
-    {
-        resource: 3,
-        title: 'test',
-        start: moment().add(-6, 'month'),
-        end: moment().add(-5, 'month'),
-        backgroundColor: 'red',
-        color: '#fff',
-        bubbleHtml: `<div>++++++++lorem ipsum dolor++++++</div>`,
-        className: '++++lorem+++++++++',
-    },
-    {
-        resource: 4,
-        title: 'test',
-        start: moment().add(-1, 'month'),
-        end: moment().add(1, 'month'),
-        backgroundColor: 'grey',
-        color: '#fff',
-        bubbleHtml: '<div>******** lorem ipsum dolor **************** </div>',
-        className: '**********lorem*******',
-    },
-    {
-        resource: 1,
-        title: 'test',
-        start: moment().add(2, 'month'),
-        end: moment().add(3, 'month'),
-        backgroundColor: 'green',
-        color: '#fff',
-        bubbleHtml: '<div> ///////// lorem <b>ipusm</b> dolor /////////////</div>',
-        className: '//////// lorem ///////',
-    },
-    {
-        resource: 3,
-        title: 'test',
-        start: moment().add(2, 'month'),
-        end: moment().add(3, 'month'),
-        backgroundColor: 'brown',
-        color: '#fff',
-        className: '\\\\\\\\\\\ lorem ///////',
     },
 ];
 

@@ -122,5 +122,34 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
         return Object.values(years);
     }
 
+    _this.nextMonday = function (date) {
+        if (date.format('d') == 1) {
+            return date;
+        }
+
+        if (date.format('d') != 1 && date.format('d') == 0) {
+            return date.add(1, 'day').day(1);
+        }
+
+        return date.add(1, 'week').day(1);
+    };
+
+    /**
+     * 
+     * @param {Moment} date 
+     * @returns {Moment} date
+     */
+    _this.previousMonday = function (date) {
+        if (date.format('d') == 1) {
+            return date;
+        }
+
+        if (date.format('d') != 1 && date.format('d') == 0) {
+            return date.day(1);
+        }
+
+        return date.add(-1, 'week').day(1);
+    };
+
     return _this;
 }])
