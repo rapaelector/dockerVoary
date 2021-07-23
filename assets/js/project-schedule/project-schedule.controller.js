@@ -25,7 +25,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             defaultCellWidth: DEFAULT_CELL_WIDTH,
             cell: {
                 width: 24,
-            }
+            },
+            // event: {
+            //     bubbleDelay: 1000,
+            // }
         },
         headerYearClassName: 'year-class text-center',
         headerMonthClassName: 'month-class text-center',
@@ -113,5 +116,9 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      */
     $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {
         console.info('onCellClick called !!', {resource, week, weekIndex, resourceIndex});
+    }
+
+    $scope.onEventClick = function (event, eventIndex, jsEvent) {
+        console.info('Hello you click the event');
     }
 }]);

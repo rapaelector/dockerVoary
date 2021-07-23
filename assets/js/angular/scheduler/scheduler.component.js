@@ -4,7 +4,9 @@ function SchedulerController(
     $scope, 
     $mdDialog,
     $mdPanel,
-    moment, 
+    $timeout,
+    moment,
+    px,
     calendarService,
     resolverService,
     schedulerService, 
@@ -21,6 +23,7 @@ function SchedulerController(
     SCHEDULER_EVENT_CLASS,
     EVENT_Z_INDEX,
     ROW_HEIGHT,
+    DEFAULT_BUBBLE_TIMEOUT,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -29,11 +32,13 @@ function SchedulerController(
     $scope.start = null;
     $scope.end = null;
     $scope.options = {};
+    $scope.defaultOptions = {};
     $scope.styles = {
         table: {},
     };
     $scope.events = [];
     $scope.mdPanelRef = null;
+    $scope.triggerTimeout = null;
 
     this.$onInit = function () {
         $(function () {
@@ -42,6 +47,14 @@ function SchedulerController(
         $mdPanel.newPanelGroup('bubble', {
             maxOpen: 1,
         });
+        $scope.defaultOptions = {
+            event: {
+                bubbleDelay: DEFAULT_BUBBLE_TIMEOUT,
+            },
+            cell: {
+                width: DEFAULT_CELL_WIDTH,
+            },
+        }
     };
 
     $scope.$watch('$ctrl.start', function () {
@@ -69,12 +82,7 @@ function SchedulerController(
     });
 
     $scope.$watch('$ctrl.options', function () {
-        var defaultOptions = {
-            cell: {
-                width: '28px',
-            },
-        };
-        $scope.options = $.extend(true, defaultOptions, $scope.$ctrl.options);
+        $scope.options = $.extend(true, {}, $scope.defaultOptions, $scope.$ctrl.options);
         $scope.updateTableStyles();
     }, true);
 
@@ -155,8 +163,8 @@ function SchedulerController(
      */
     $scope.getColumnWidth = function (column) {
         return column.width ? {
-            'width': parseInt(column.width) + 'px',
-            'min-width': parseInt(column.width) + 'px',
+            'width': px(parseInt(column.width)),
+            'min-width': px(parseInt(column.width)),
         } : {};
     };
 
@@ -171,7 +179,7 @@ function SchedulerController(
     };
 
     $scope.getHeaderWeeksStyle = function () {
-        return {width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px')};
+        return {width: resolverService.resolve([$scope, 'options', 'cell', 'width'], $scope.defaultOptions.cell.width)};
     };
 
     /**
@@ -194,11 +202,12 @@ function SchedulerController(
             cellBorderRight = BORDER_WEIGHT;
         }
 
+        var widht = resolverService.resolve([$scope, 'options', 'cell', 'width'], $scope.defaultOptions.cell.width);
         return {
-            width: resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH + 'px'),
-            'border-left-width': cellBorderLeft + 'px',
+            width: px(widht),
+            'border-left-width': px(cellBorderLeft),
             'border-left-color': '#999',
-            'height': rowHeight + 'px',
+            'height': px(rowHeight),
         };
     };
 
@@ -224,7 +233,7 @@ function SchedulerController(
         const cellWidth = resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
         w += $scope.weeks.length * cellWidth;
         if (OK) {
-            tableStyles.width = w + 'px';
+            tableStyles.width = px(w);
             tableStyles['table-layout'] = 'fixed';
         } else {
             console.warn('NaN table style width');
@@ -263,7 +272,7 @@ function SchedulerController(
      */
     $scope.getYearStyles = function (year, index) {
         var width = year.weeksCount * resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
-        return {width: width + 'px'};
+        return {width: px(width)};
     };
     
     /**
@@ -275,7 +284,7 @@ function SchedulerController(
      */
     $scope.getMonthStyles = function (month, index) {
         var width = month.weeksCount * resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
-        return {width: width + 'px'};
+        return {width: px(width)};
     };
 
     /**
@@ -535,13 +544,13 @@ function SchedulerController(
         }
         
         return {
-            top: top + 'px',
-            left: left + 'px',
-            right: right + 'px',
+            top: px(top),
+            left: px(left),
+            right: px(right),
             display: 'block',
-            width: ((right && left) ? (right - left) : 100) + 'px',
+            width: px(((right && left) ? (right - left) : 100)),
             position: 'absolute',
-            height: ROW_HEIGHT + 'px',
+            height: px(ROW_HEIGHT),
             zIndex: EVENT_Z_INDEX + eventIndex,
         };
     }
@@ -580,11 +589,39 @@ function SchedulerController(
      * @param {object} event 
      * @param {number} eventIndex 
      */
-    $scope.onEventHover = function (event, eventIndex, jsEvent) {
-        $scope.showEventDetailDialog(event, jsEvent);
+    $scope.onEventMouseEnter = function (event, eventIndex, jsEvent) {
+        $scope.cancelBubblePanel();
+        $scope.triggerTimeout = $timeout(function () {
+            $scope.showEventDetailDialog(event, jsEvent);
+        }, $scope.getOption('event.bubbleDelay'));
     };
 
     $scope.onEventClick = function (event, eventIndex, jsEvent) {
+        $scope.$ctrl.onEventClick(event, eventIndex, jsEvent);
+    };
+
+    /**
+     * Handle event when mouse leave schedule event (schedule event lose focus)
+     * 
+     * @param {object} event 
+     * @param {number} eventIndex 
+     * @param {} jsEvent 
+     */
+    $scope.onEventMouseLeave = function (event, eventIndex, jsEvent) {
+        $scope.closeBubblePanel();
+        $scope.cancelBubblePanel();
+        $timeout(function () {
+            $scope.closeBubblePanel();
+        }, $scope.getOption('event.bubbleDelay'));
+    };
+
+    $scope.getOption = function (optionPath) {
+        var path = optionPath;
+        if (typeof optionPath === 'string') {
+            path = optionPath.split('.');
+        }
+
+        return resolverService.resolve([$scope.options].concat(path), resolverService.resolve([$scope.defaultOptions].concat(path)));
     };
 
     /**
@@ -606,6 +643,10 @@ function SchedulerController(
 
         if (positionStatus.overflowEnd) {
             res.push(SCHEDULER_EVENT_CLASS + '-overflow-end');
+        }
+
+        if ($scope.$ctrl.onEventClick) {
+            res.push(SCHEDULER_EVENT_CLASS + '-clickable');
         }
 
         return res;
@@ -654,22 +695,19 @@ function SchedulerController(
                 groupName: 'bubble',
             };
 
-            if ($scope.mdPanelRef) {
-                $scope.mdPanelRef.close();
-                $scope.mdPanelRef = null;
-            }
+            $scope.closeBubblePanel();
             $mdPanel.open(config).then(ref => $scope.mdPanelRef = ref);
         }
 	};
 
-    /**
-     * Handle event when mouse leave schedule event (schedule event lose focus)
-     * 
-     * @param {object} event 
-     * @param {number} eventIndex 
-     * @param {} jsEvent 
-     */
-    $scope.onEventBlur = function (event, eventIndex, jsEvent) {
+    $scope.cancelBubblePanel = function () {
+        if ($scope.triggerTimeout) {
+            $timeout.cancel($scope.triggerTimeout);
+            $scope.triggerTimeout = null;
+        }
+    };
+
+    $scope.closeBubblePanel = function () {
         if ($scope.mdPanelRef) {
             $scope.mdPanelRef.close();
             $scope.mdPanelRef = null;
@@ -745,7 +783,9 @@ SchedulerController.$inject = [
     '$scope', 
     '$mdDialog',
     '$mdPanel',
-    'moment', 
+    '$timeout',
+    'moment',
+    'px',
     'calendarService', 
     'resolverService',
     'schedulerService',
@@ -762,6 +802,7 @@ SchedulerController.$inject = [
     'SCHEDULER_EVENT_CLASS',
     'EVENT_Z_INDEX',
     'ROW_HEIGHT',
+    'DEFAULT_BUBBLE_TIMEOUT',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -944,6 +985,10 @@ angular.module('schedulerModule').component('appScheduler', {
          * - resourceIndex: number
          */
         onCellClick: '=',
+        /**
+         * - Event click 
+         */
+        onEventClick: '=',
         events: '=',
     }
 });

@@ -130,6 +130,12 @@ $cellBorder: 2px solid $borderColorDark;
                 }
             }
         }
+        .scheduler-event-clickable {
+            cursor: pointer;
+        }
+        .scheduler-date-cell[role=button] {
+            cursor: default;
+        }
     }
 }
 

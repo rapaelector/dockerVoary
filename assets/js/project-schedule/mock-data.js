@@ -317,7 +317,7 @@ const events = [
         id: 24,
         resource: 1,
         title: 'Madagascar 3',
-        start: moment('2021-04-01', 'YYYY-MM-DD'),
+        start: moment('2021-01-01', 'YYYY-MM-DD'),
         end: moment('2021-08-10', 'YYYY-MM-DD'),
         backgroundColor: 'violet',
         color: '#fff',
@@ -332,10 +332,10 @@ const events = [
     {
         id: 25,
         resource: 1,
-        title: 'Madagascar 4',
+        title: 'Madagascar 3',
         start: moment('2021-02-05', 'YYYY-MM-DD'),
-        end: moment('2021-03-10', 'YYYY-MM-DD'),
-        backgroundColor: 'violet',
+        end: moment('2021-08-10', 'YYYY-MM-DD'),
+        backgroundColor: 'grey',
         color: '#fff',
         bubbleHtml: `
             <div>Red bacground popover</div>
@@ -344,6 +344,78 @@ const events = [
             textTransform: 'capitalize',
         },
         className: 'test-class-lorem lorem',
+    },
+    {
+        id: 1,
+        resource: 1,
+        title: 'test',
+        start: moment('2021-06-20', 'YYYY-MM-DD'),
+        end: moment('2021-06-24', 'YYYY-MM-DD'),
+        backgroundColor: 'orange',
+        color: '#fff',
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+        group: 'group-test',
+    },
+    {
+        id: 71,
+        resource: 2,
+        title: 'test',
+        start: moment('2021-01-20', 'YYYY-MM-DD'),
+        end: moment('2021-01-24', 'YYYY-MM-DD'),
+        backgroundColor: 'red',
+        color: '#fff',
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+        group: 'group-test',
+    },
+    {
+        id: 30,
+        resource: 2,
+        title: 'test',
+        start: moment('2021-02-24', 'YYYY-MM-DD'),
+        end: moment('2021-02-25', 'YYYY-MM-DD'),
+        backgroundColor: 'pink',
+        color: '#fff',
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+        group: 'group-test',
+    },
+    {
+        id: 31,
+        resource: 3,
+        title: 'test',
+        start: moment('2021-02-24', 'YYYY-MM-DD'),
+        end: moment('2021-02-25', 'YYYY-MM-DD'),
+        backgroundColor: 'pink',
+        color: '#fff',
+        bubbleHtml: `
+            <div>lorem ipsum dolor </div>
+            <div>lorem ipsum dolor </div>
+        `,
+        style: {
+            textTransform: 'capitalize',
+        },
+        className: 'test-class-lorem lorem',
+        group: 'group-test',
     },
     // {
     //     resource: 2,
