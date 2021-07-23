@@ -58,6 +58,9 @@ $cellBorder: $borderWidth solid $borderColorDark;
             &.scheduler-resource-header-cdtTrx {
               border-left: $cellBorder;
             }
+            &.scheduler-header-firstweek {
+              border-left: $cellBorder;
+            }
           }
         }
       }
@@ -131,9 +134,6 @@ $cellBorder: $borderWidth solid $borderColorDark;
       }
       .scheduler-year, .scheduler-month {
         border: $cellBorder;
-      }
-      .scheduler-header-firstweek {
-        border-left: $cellBorder;
       }
       .scheduler-header-week-current {
         background: $app-secondary;
