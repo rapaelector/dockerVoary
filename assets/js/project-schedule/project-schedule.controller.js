@@ -26,9 +26,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             cell: {
                 width: 24,
             },
-            // event: {
-            //     bubbleDelay: 1000,
-            // }
+            event: {
+                zIndex: {
+                    'group-test': 10000,
+                }
+            }
         },
         headerYearClassName: 'year-class text-center',
         headerMonthClassName: 'month-class text-center',

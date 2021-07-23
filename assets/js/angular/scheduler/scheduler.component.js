@@ -11,19 +11,18 @@ function SchedulerController(
     resolverService,
     schedulerService, 
     DEFAULT_CELL_WIDTH,
-    YEAR_BORDER_WIDTH,
-    MONTH_BORDER_WIDTH,
-    WEEK_BORDER_WIDTH,
-    WEEK_EDGE_BORDER_WIDTH,
-    CELL_BORDER_WIDTH,
-    CELL_EDGE_BORDER_WIDTH,
-    BORDER_WEIGHT,
     DEFAULT_DATE_FORMAT,
-    SCHEDULER_CELL_NAME,
+    SCHEDULER_COLUMN_CLASS,
     SCHEDULER_EVENT_CLASS,
     EVENT_Z_INDEX,
     ROW_HEIGHT,
     DEFAULT_BUBBLE_TIMEOUT,
+    SCHEDULER_DATE_CELL_CLASS,
+    SCHEDULER_HEADER_WEEK_CLASS,
+    SCHEDULER_HEADER_MONTH_CLASS,
+    SCHEDULER_HEADER_YEAR_CLASS,
+    SCHEDULE_RESOURCE_HEADER_CLASS,
+    SCHEDULE_HEADER,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -126,7 +125,7 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getCellClassName = function(resource, column, index) {
-        var res = ['scheduler-cell', 'scheduler-cell-' + column.field];
+        var res = [SCHEDULER_COLUMN_CLASS, SCHEDULER_COLUMN_CLASS + '-' + column.field];
 
         if (column.className) {
             res.push(column.className);
@@ -147,7 +146,7 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getHeaderCellClassName = function(column) {
-        var res = ['scheduler-header-cell', 'scheduler-header-cell-' + column.field];
+        var res = [SCHEDULE_RESOURCE_HEADER_CLASS, SCHEDULE_RESOURCE_HEADER_CLASS + '-' + column.field];
 
         if (column.headerClassName) {
             res.push(column.headerClassName);
@@ -168,6 +167,11 @@ function SchedulerController(
         } : {};
     };
 
+    /**
+     * Update the date of scheduler depend on the input date
+     * 
+     * @returns {object}
+     */
     $scope.updateDates = function () {
         if (!$scope.start || !$scope.end) {
             return;
@@ -183,31 +187,20 @@ function SchedulerController(
     };
 
     /**
-     * 
+     * @param {object} resource
      * @param {object} week 
-     * @param {number} index 
+     * @param {number} index
+     * @param {number} resourceIndex
+     * 
      * @returns {object} object of style
      */
     $scope.getCellStyle = function (resource, week, index, resourceIndex) {
-        var cellBorderLeft = 0;
-        var cellBorderRight = 0;
-        var cellBorderBottom = 0;
         var rowHeight = ROW_HEIGHT * ($scope.countResourceEventOverlap(resource.id) + 1);
+        var width = resolverService.resolve([$scope, 'options', 'cell', 'width'], $scope.defaultOptions.cell.width);
 
-        if (week.firstWeek) {
-            cellBorderLeft = BORDER_WEIGHT;
-        }
-
-        if (week.lastWeek) {
-            cellBorderRight = BORDER_WEIGHT;
-        }
-
-        var widht = resolverService.resolve([$scope, 'options', 'cell', 'width'], $scope.defaultOptions.cell.width);
         return {
-            width: px(widht),
-            'border-left-width': px(cellBorderLeft),
-            'border-left-color': '#999',
-            'height': px(rowHeight),
+            width: px(width),
+            height: px(rowHeight),
         };
     };
 
@@ -297,14 +290,14 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getHeaderYearClassName = function (year, index) {
-        var res = [];
+        var res = [SCHEDULER_HEADER_YEAR_CLASS];
 
         if ($scope.$ctrl.headerYearClassName) {
             res.push($scope.$ctrl.headerYearClassName);
         }
 
         if (moment().format('YYYY') == year.name) {
-            res.push('scheduler-header-year-current');
+            res.push(SCHEDULE_HEADER + '-year-current');
         }
 
         return res;
@@ -320,13 +313,13 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getHeaderMonthClassName = function (month, index) {
-        var res = [];
+        var res = [SCHEDULER_HEADER_MONTH_CLASS];
 
         if ($scope.$ctrl.headerMonthClassName) {
             res.push($scope.$ctrl.headerMonthClassName);
         }
         if (moment(`${month.year}-${month.monthNumber}`, 'YYYY-M').isSame(moment(), 'month')) {
-            res.push('scheduler-header-month-current');
+            res.push(SCHEDULE_HEADER + '-month-current');
         }
 
         return res;
@@ -342,29 +335,36 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getHeaderWeekClassName = function (week, index) {
-        var res = [];
+        var res = [SCHEDULER_HEADER_WEEK_CLASS];
 
         if ($scope.$ctrl.headerWeekClassName) {
             res.push($scope.$ctrl.headerWeekClassName);
         }
 
         if (week.startDay.isSame(moment(), 'week')) {
-            res.push('scheduler-header-week-current');
+            res.push(SCHEDULE_HEADER + '-week-current');
         }
 
         if (week.firstWeek) {
-            res.push('scheduler-header-first-week');
+            res.push(SCHEDULE_HEADER + '-firstweek');
         };
 
         if (week.lastWeek) {
-            res.push('scheduler-header-last-week')
+            res.push(SCHEDULE_HEADER + '-lastweek')
         }
         return res;
     }
 
-    $scope.getDateCellClassName = function () {
-        var res = ['scheduler-date-cell'];
+    $scope.getDateCellClassName = function (resource, week, weekIndex, resourceIndex) {
+        var res = [SCHEDULER_DATE_CELL_CLASS];
 
+        if (week.firstWeek) {
+            res.push(SCHEDULER_DATE_CELL_CLASS + '-firstweek');
+        }
+
+        if (week.lastWeek) {
+            res.push(SCHEDULER_DATE_CELL_CLASS + '-lastweek');
+        }
 
         return res;
     };
@@ -551,14 +551,21 @@ function SchedulerController(
             width: px(((right && left) ? (right - left) : 100)),
             position: 'absolute',
             height: px(ROW_HEIGHT),
-            zIndex: EVENT_Z_INDEX + eventIndex,
+            zIndex: $scope.getEventZIndex(event),
         };
     }
 
+    $scope.getEventZIndex = function (event) {
+        const events = $scope.events.filter(e => event.group ? event.group === e.group : !e.group);
+        const eventIndex = events.findIndex(e => e.id === event.id) ?? 0;
+        const eventGroupZIndex = $scope.getOption(`event.zIndex.${event.group ?? '_default'}`, EVENT_Z_INDEX);
+
+        return eventGroupZIndex + eventIndex;
+    }
     /**
      * 
      * @param {object} event 
-     * @returns {object}
+     * @returns {object} meta
      */
     $scope.getEventPositionStatus = function (event) {
         let meta = {
@@ -596,6 +603,13 @@ function SchedulerController(
         }, $scope.getOption('event.bubbleDelay'));
     };
 
+    /**
+     * Handle click event when clicking event 
+     * 
+     * @param {object} event 
+     * @param {number} eventIndex 
+     * @param {angularEvent} jsEvent 
+     */
     $scope.onEventClick = function (event, eventIndex, jsEvent) {
         $scope.$ctrl.onEventClick(event, eventIndex, jsEvent);
     };
@@ -615,13 +629,19 @@ function SchedulerController(
         }, $scope.getOption('event.bubbleDelay'));
     };
 
-    $scope.getOption = function (optionPath) {
+    $scope.getOption = function (optionPath, defaultValue) {
         var path = optionPath;
         if (typeof optionPath === 'string') {
             path = optionPath.split('.');
         }
 
-        return resolverService.resolve([$scope.options].concat(path), resolverService.resolve([$scope.defaultOptions].concat(path)));
+        return resolverService.resolve(
+            [$scope.options].concat(path), 
+            resolverService.resolve(
+                [$scope.defaultOptions].concat(path), 
+                defaultValue
+            )
+        );
     };
 
     /**
@@ -649,11 +669,14 @@ function SchedulerController(
             res.push(SCHEDULER_EVENT_CLASS + '-clickable');
         }
 
+        if (event.group) {
+            res.push(SCHEDULER_EVENT_CLASS + '-' + event.group);
+        }
+
         return res;
     }
 
     /**
-     * 
      * @param {object} event 
      * @param {object} jsEvent 
      */
@@ -715,7 +738,6 @@ function SchedulerController(
     };
 
     /**
-     * 
      * @param {number} resourceId 
      * @returns {object} overlaps
      */
@@ -730,11 +752,13 @@ function SchedulerController(
                 start: moment(event1.start),
                 end: moment(event1.end),
                 events: [event1],
+                group: event1.group,
             };
 
             for (var j = i + 1; j < resourceEvents.length; j++) {
                 var event2 = resourceEvents[j];
-                if (event2.start.isSameOrBefore(moment(overlap.end)) && event2.end.isSameOrAfter(moment(overlap.start))) {
+                var sameGroup = (!event1.group && !event2.group) || (event1.group === event2.group);
+                if (sameGroup && event2.start.isSameOrBefore(moment(overlap.end)) && event2.end.isSameOrAfter(moment(overlap.start))) {
                     if (event2.start.isBefore(moment(overlap.start))) {
                         overlap.start = moment(event2.start);
                     }
@@ -754,18 +778,13 @@ function SchedulerController(
             }
         }
 
-        // if (Object.keys(overlaps).length > 0) {
-        //     factor = Math.max.apply(null, Object.values(overlaps));
-        // }
-
-        // return factor;
         return overlaps;
     };
 
     /**
      * 
      * @param {number} resourceId 
-     * @returns {}
+     * @returns {number} factor
      */
     $scope.countResourceEventOverlap = function (resourceId) {
         var factor = 0;
@@ -790,19 +809,18 @@ SchedulerController.$inject = [
     'resolverService',
     'schedulerService',
     'DEFAULT_CELL_WIDTH',
-    'YEAR_BORDER_WIDTH',
-    'MONTH_BORDER_WIDTH',
-    'WEEK_BORDER_WIDTH',
-    'WEEK_EDGE_BORDER_WIDTH',
-    'CELL_BORDER_WIDTH',
-    'CELL_EDGE_BORDER_WIDTH',
-    'BORDER_WEIGHT',
     'DEFAULT_DATE_FORMAT',
-    'SCHEDULER_CELL_NAME',
+    'SCHEDULER_COLUMN_CLASS',
     'SCHEDULER_EVENT_CLASS',
     'EVENT_Z_INDEX',
     'ROW_HEIGHT',
     'DEFAULT_BUBBLE_TIMEOUT',
+    'SCHEDULER_DATE_CELL_CLASS',
+    'SCHEDULER_HEADER_WEEK_CLASS',
+    'SCHEDULER_HEADER_MONTH_CLASS',
+    'SCHEDULER_HEADER_YEAR_CLASS',
+    'SCHEDULE_RESOURCE_HEADER_CLASS',
+    'SCHEDULE_HEADER',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {

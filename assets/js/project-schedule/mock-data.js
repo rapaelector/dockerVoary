@@ -215,208 +215,248 @@ const buildColumns = function(numberFormat) {
             ...
  *      ]
  */
+var bg = 'rgba(197, 217, 241, .5)';
+var color ='#000';
+var group = 'group-test';
+
 const events = [
     {
         id: 1,
         resource: 1,
-        title: 'test',
-        start: moment('2021-08-20', 'YYYY-MM-DD'),
-        end: moment('2021-08-27', 'YYYY-MM-DD'),
-        backgroundColor: 'orange',
-        color: '#fff',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
+        title: 'Madagascar',
+        start: moment('2021-01-01', 'YYYY-MM-DD').startOf('week'),
+        end: moment('2021-03', 'YYYY-MM').endOf('month'),
+        backgroundColor: bg,
     },
     {
         id: 2,
         resource: 1,
-        title: 'test',
-        start: moment('2021-07-27', 'YYYY-MM-DD'),
-        end: moment('2021-08-22', 'YYYY-MM-DD'),
-        backgroundColor: 'red',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
+        title: '*',
+        start: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
+        end: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
+        group: group,
     },
     {
         id: 3,
         resource: 1,
-        title: 'test',
-        start: moment('2021-07-04', 'YYYY-MM-DD'),
-        end: moment('2021-10-15', 'YYYY-MM-DD'),
-        backgroundColor: 'black',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
+        title: '*',
+        start: moment('2021-02', 'YYYY-MM').endOf('month'),
+        end: moment('2021-02', 'YYYY-MM').endOf('month'),
+        group: group,
     },
     {
         id: 4,
         resource: 1,
-        title: 'test',
-        start: moment('2021-05-01', 'YYYY-MM-DD'),
-        end: moment('2021-09-15', 'YYYY-MM-DD'),
-        backgroundColor: 'green',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
+        title: '*',
+        start: moment('2021-03', 'YYYY-MM').endOf('month'),
+        end: moment('2021-03', 'YYYY-MM').endOf('month'),
+        group: group,
     },
-    {
-        id: 22,
-        resource: 1,
-        title: 'Madagascar',
-        start: moment('2021-01-01', 'YYYY-MM-DD'),
-        end: moment('2021-01-30', 'YYYY-MM-DD'),
-        backgroundColor: 'red',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-    },
-    {
-        id: 23,
-        resource: 1,
-        title: 'Madagascar 2',
-        start: moment('2021-01-01', 'YYYY-MM-DD'),
-        end: moment('2021-02-10', 'YYYY-MM-DD'),
-        backgroundColor: 'blue',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            'text-transform': 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-    },
-    {
-        id: 24,
-        resource: 1,
-        title: 'Madagascar 3',
-        start: moment('2021-01-01', 'YYYY-MM-DD'),
-        end: moment('2021-08-10', 'YYYY-MM-DD'),
-        backgroundColor: 'violet',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-    },
-    {
-        id: 25,
-        resource: 1,
-        title: 'Madagascar 3',
-        start: moment('2021-02-05', 'YYYY-MM-DD'),
-        end: moment('2021-08-10', 'YYYY-MM-DD'),
-        backgroundColor: 'grey',
-        color: '#fff',
-        bubbleHtml: `
-            <div>Red bacground popover</div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-    },
-    {
-        id: 1,
-        resource: 1,
-        title: 'test',
-        start: moment('2021-06-20', 'YYYY-MM-DD'),
-        end: moment('2021-06-24', 'YYYY-MM-DD'),
-        backgroundColor: 'orange',
-        color: '#fff',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-        group: 'group-test',
-    },
-    {
-        id: 71,
-        resource: 2,
-        title: 'test',
-        start: moment('2021-01-20', 'YYYY-MM-DD'),
-        end: moment('2021-01-24', 'YYYY-MM-DD'),
-        backgroundColor: 'red',
-        color: '#fff',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-        group: 'group-test',
-    },
-    {
-        id: 30,
-        resource: 2,
-        title: 'test',
-        start: moment('2021-02-24', 'YYYY-MM-DD'),
-        end: moment('2021-02-25', 'YYYY-MM-DD'),
-        backgroundColor: 'pink',
-        color: '#fff',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-        group: 'group-test',
-    },
-    {
-        id: 31,
-        resource: 3,
-        title: 'test',
-        start: moment('2021-02-24', 'YYYY-MM-DD'),
-        end: moment('2021-02-25', 'YYYY-MM-DD'),
-        backgroundColor: 'pink',
-        color: '#fff',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-        style: {
-            textTransform: 'capitalize',
-        },
-        className: 'test-class-lorem lorem',
-        group: 'group-test',
-    },
+    /////////////////////////// START OVERLAP EVENT TEST ////////////////////////////////
+    // {
+    //     id: 102,
+    //     resource: 1,
+    //     title: '*',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD').startOf('week').add(3, 'weeks'),
+    //     end: moment('2021-01-01', 'YYYY-MM-DD').endOf('week').add(3, 'weeks'),
+    //     backgroundColor: 'none',
+    //     color: '#fff',
+    //     group: 'group-test',
+    // },
+    // {
+    //     id: 1,
+    //     resource: 1,
+    //     title: 'test',
+    //     start: moment('2021-08-20', 'YYYY-MM-DD'),
+    //     end: moment('2021-08-27', 'YYYY-MM-DD'),
+    //     backgroundColor: 'orange',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 2,
+    //     resource: 1,
+    //     title: 'test',
+    //     start: moment('2021-07-27', 'YYYY-MM-DD'),
+    //     end: moment('2021-08-22', 'YYYY-MM-DD'),
+    //     backgroundColor: 'red',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 3,
+    //     resource: 1,
+    //     title: 'test',
+    //     start: moment('2021-07-04', 'YYYY-MM-DD'),
+    //     end: moment('2021-10-15', 'YYYY-MM-DD'),
+    //     backgroundColor: 'black',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 4,
+    //     resource: 1,
+    //     title: 'test',
+    //     start: moment('2021-05-01', 'YYYY-MM-DD'),
+    //     end: moment('2021-09-15', 'YYYY-MM-DD'),
+    //     backgroundColor: 'green',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 22,
+    //     resource: 1,
+    //     title: 'Madagascar',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD'),
+    //     end: moment('2021-01-30', 'YYYY-MM-DD'),
+    //     backgroundColor: 'red',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 23,
+    //     resource: 1,
+    //     title: 'Madagascar 2',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD'),
+    //     end: moment('2021-02-10', 'YYYY-MM-DD'),
+    //     backgroundColor: 'blue',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         'text-transform': 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 24,
+    //     resource: 1,
+    //     title: 'Madagascar 3',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD'),
+    //     end: moment('2021-08-10', 'YYYY-MM-DD'),
+    //     backgroundColor: 'violet',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 25,
+    //     resource: 1,
+    //     title: 'Madagascar 3',
+    //     start: moment('2021-02-05', 'YYYY-MM-DD'),
+    //     end: moment('2021-08-10', 'YYYY-MM-DD'),
+    //     backgroundColor: 'grey',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>Red bacground popover</div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    // },
+    // {
+    //     id: 100,
+    //     resource: 1,
+    //     title: '*',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD').startOf('week').add(4, 'weeks'),
+    //     end: moment('2021-01-01', 'YYYY-MM-DD').endOf('week').add(4, 'weeks'),
+    //     backgroundColor: 'none',
+    //     color: '#fff',
+    //     group: 'group-test',
+    // },
+    // {
+    //     id: 71,
+    //     resource: 2,
+    //     title: 'test',
+    //     start: moment('2021-01-20', 'YYYY-MM-DD'),
+    //     end: moment('2021-01-24', 'YYYY-MM-DD'),
+    //     backgroundColor: 'red',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    //     group: 'group-test',
+    // },
+    // {
+    //     id: 30,
+    //     resource: 2,
+    //     title: 'test',
+    //     start: moment('2021-02-24', 'YYYY-MM-DD'),
+    //     end: moment('2021-02-25', 'YYYY-MM-DD'),
+    //     backgroundColor: 'pink',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    //     group: 'group-test',
+    // },
+    // {
+    //     id: 31,
+    //     resource: 3,
+    //     title: 'test',
+    //     start: moment('2021-02-24', 'YYYY-MM-DD'),
+    //     end: moment('2021-02-25', 'YYYY-MM-DD'),
+    //     backgroundColor: 'pink',
+    //     color: '#fff',
+    //     bubbleHtml: `
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //     `,
+    //     style: {
+    //         textTransform: 'capitalize',
+    //     },
+    //     className: 'test-class-lorem lorem',
+    //     group: 'group-test',
+    // },
+    ////////////////////////////// END OVERLAP TEST ///////////////////////////////////
     // {
     //     resource: 2,
     //     title: 'Lorem',
@@ -457,26 +497,26 @@ const events = [
     //     bubbleHtml: '<div> ///////// lorem <b>ipusm</b> dolor /////////////</div>',
     //     className: '//////// lorem ///////',
     // },
-    {
-        id: 6,
-        resource: 3,
-        title: 'test',
-        start: moment('2021-03-01', 'YYYY-MM-DD'),
-        end: moment('2021-05-01', 'YYYY-MM-DD'),
-        backgroundColor: 'brown',
-        color: '#fff',
-        className: 'scheduler-overflow-test',
-        bubbleHtml: `
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-            <div>lorem ipsum dolor </div>
-        `,
-    },
+    // {
+    //     id: 6,
+    //     resource: 3,
+    //     title: 'test',
+    //     start: moment('2021-03-01', 'YYYY-MM-DD'),
+    //     end: moment('2021-05-01', 'YYYY-MM-DD'),
+    //     backgroundColor: 'brown',
+    //     color: '#fff',
+    //     className: 'scheduler-overflow-test',
+    //     bubbleHtml: `
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //         <div>lorem ipsum dolor </div>
+    //     `,
+    // },
 ];
 
 export {

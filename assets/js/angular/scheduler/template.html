@@ -2,12 +2,11 @@
     <table class="scheduler-table" ng-style="styles.table">
         <thead>
             <tr>
-                <td colspan="{{ $ctrl.columns.length }}" rowspan="2" ng-style="columnMergeStyle()"></td>
+                <th colspan="{{ $ctrl.columns.length }}" rowspan="2" ng-style="columnMergeStyle()"></th>
                 <!-- Year -->
                 <th
                     ng-repeat="year in years" 
                     colspan="{{ year.weeksCount }}"
-                    class="scheduler-year"
                     ng-style="getYearStyles(year, yearIndex)"
                     ng-init="yearIndex = $index"
                     ng-class="getHeaderYearClassName(year, yearIndex)"
@@ -19,7 +18,6 @@
                 <th 
                     ng-repeat="month in months track by $index" 
                     colspan="{{ month.weeksCount }}"
-                    class="scheduler-month"
                     ng-style="getMonthStyles(month, monthIndex)"
                     ng-init="monthIndex = $index"
                     ng-class="getHeaderMonthClassName(month, monthIndex)"
@@ -38,7 +36,6 @@
                 </th>
                 <th 
                     ng-repeat="week in weeks track by $index" 
-                    class="scheduler-weeks"
                     ng-style="getHeaderWeeksStyle()"
                     ng-init="weekIndex = $index"
                     ng-class="getHeaderWeekClassName(week, weekIndex)"
@@ -59,7 +56,7 @@
                 <th
                     ng-repeat="week in weeks track by $index"
                     ng-init="weekIndex = $index"
-                    ng-class="getDateCellClassName()"
+                    ng-class="getDateCellClassName(resource, week, weekIndex, resourceIndex)"
                     ng-style="getCellStyle(resource, week, weekIndex, $ctrl.resources.length)"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
                     id="{{ getCellId(resource, week) }}"

@@ -1,147 +1,188 @@
 .schedule-month {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .dynamic-nowrap {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @function monthFs($weekSize) {
-    @return 8 / 5 * $weekSize;
+  @return 8 / 5 * $weekSize;
 }
 
 @function yearFs($weekSize) {
-    @return 10 / 5 * $weekSize;
+  @return 10 / 5 * $weekSize;
 }
 
 $weekSize: 8px;
-$borderColor: #999;
+$borderColor: #555;
 $borderColorDark: $borderColor;
-$cellBorder: 2px solid $borderColorDark;
+$borderWidth: 2px;
+$cellBorder: $borderWidth solid $borderColorDark;
 
 @mixin scheduler-table {
-    .app-scheduler {
-        table.scheduler-table {
-            thead, tbody {
-                tr {
-                    th, td {
-                        border: 1px solid $borderColor;
-                    }
-                }
+  .app-scheduler {
+    table.scheduler-table {
+      thead, tbody {
+        tr {
+          th, td {
+            border: 1px solid $borderColor;
+            &.scheduler-week {
+              font-weight: normal;
+              border-bottom: $borderWidth solid $borderColor;
+              font-size: 10px;
             }
-            thead {
-                tr {
-                    &:last-child {
-                        th, td {
-                            &:last-child.scheduler-weeks {
-                                border-right: $cellBorder;
-                            }
-                        }
-                    }
-                }
-            }
-            tbody {
-                tr {
-                    &:last-child {
-                        th, td {
-                            &.scheduler-date-cell {
-                                border-bottom: $cellBorder; 
-                            }
-                        }
-                    }
-                    th, td {
-                        &:last-child {
-                            &.scheduler-date-cell {
-                                border-right: $cellBorder;
-                            }
-                        }
-                    }
-                }
-            }
-            .scheduler-cell-workType, 
-            .scheduler-cell-turnover, 
-            .scheduler-cell-invoiced, 
-            .scheduler-cell-remainsToInvoice,
-            .scheduler-cell-constructionSite {
-                white-space: nowrap;
-            }
-            .scheduler-cell-constructionSite {
-                background: $yellow;
-            }
-            .scheduler-cell-cdtTrx {
-                color: $info;
-            }
-            .scheduler-header-cell, .scheduler-cell {
-                overflow: hidden;
-            }
-            .scheduler-year {
-                font-size: yearFs($weekSize);
-                font-weight: bold;
-            }
-            .scheduler-month {
-                font-size: monthFs($weekSize);
-                font-weight: 600;
-                text-transform: uppercase;
-            }
-            .scheduler-weeks {
-                font-size: $weekSize;
-            }
-            .scheduler-header-first-week,
-            .scheduler-header-last-week {
-                font-weight: bold;
-            }
-            .scheduler-weeks {
-                border-bottom: $cellBorder;
-                border-top: $cellBorder;
-            }
-            .scheduler-year, .scheduler-month {
-                border: $cellBorder;
-            }
-            .scheduler-header-first-week {
-                border-left: $cellBorder;
-            }
-            .scheduler-header-week-current {
-                background: $app-secondary;
-            }
+          }
         }
+      }
+      thead {
+        tr {
+          &:first-child {
+            th, td {
+              &:first-child {
+                border-top: 0;
+                border-left: 0;
+              }
+            }
+          }
+          &:last-child {
+            th, td {
+              &:last-child.scheduler-weeks {
+                border-right: $cellBorder;
+              }
+            }
+          }
+          th, td {
+            &.scheduler-resource-header-cdtTrx {
+              border-left: $cellBorder;
+            }
+          }
+        }
+      }
+      /**
+       * To change tbody tr and every child style
+       * Apply only for th, td elemen not its contents
+      */
+      tbody {
+        tr {
+          &:last-child {
+            th, td {
+              &.scheduler-date-cell {
+                border-bottom: $cellBorder; 
+              }
+            }
+          }
+          th, td {
+            font-weight: normal;
+            &:last-child {
+              &.scheduler-date-cell {
+                border-right: $cellBorder;
+              }
+            }
+            &.scheduler-date-cell-firstweek,
+            &.scheduler-date-cell-lastweek {
+              font-weight: bold;
+            }
+            &.scheduler-date-cell-firstweek {
+              border-left-width: $borderWidth !important;
+            }
+            &.scheduler-date-cell-lastweek {
+              border-right-width: $borderWidth !important;
+            }
+            &.scheduler-column:first-child {
+              border-left: $cellBorder;
+            }
+          }
+        }
+      }
+      .scheduler-column-workType, 
+      .scheduler-column-turnover, 
+      .scheduler-column-invoiced, 
+      .scheduler-column-remainsToInvoice,
+      .scheduler-column-constructionSite {
+        white-space: nowrap;
+      }
+      .scheduler-column-constructionSite {
+        background: $yellow;
+      }
+      .scheduler-column-cdtTrx {
+        color: $info;
+      }
+      .scheduler-resource-header, .scheduler-column {
+        overflow: hidden;
+      }
+      .scheduler-year {
+        font-size: yearFs($weekSize);
+        font-weight: bold;
+      }
+      .scheduler-month {
+        font-size: monthFs($weekSize);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .scheduler-weeks {
+        font-size: $weekSize;
+      }
+      .scheduler-weeks {
+        border-bottom: $cellBorder;
+        border-top: $cellBorder;
+      }
+      .scheduler-year, .scheduler-month {
+        border: $cellBorder;
+      }
+      .scheduler-header-firstweek {
+        border-left: $cellBorder;
+      }
+      .scheduler-header-week-current {
+        background: $app-secondary;
+      }
     }
+  }
 }
 
 @mixin scheduler-events {
-    .app-scheduler {
-        .table-container.table-responsive {
-            position: relative
-        }
-        .scheduler-events {
-            position: absolute;
-            top: 0;
-            left: 0;
-            .scheduler-event-inner {
-                display: flex;
-                height: 100%;
-                font-size: 12px;
-                align-items: center;
-                padding: 0 2px;
-                .scheduler-event {
-                    height: 24px;
-                    overflow: hidden;
-                }
-            }
-        }
-        .scheduler-event-clickable {
-            cursor: pointer;
-        }
-        .scheduler-date-cell[role=button] {
-            cursor: default;
-        }
+  .app-scheduler {
+    .table-container.table-responsive {
+      position: relative
     }
+    .scheduler-events {
+      position: absolute;
+      top: 0;
+      left: 0;
+      .scheduler-event-inner {
+        display: flex;
+        height: 100%;
+        font-size: 12px;
+        align-items: center;
+        padding: 0 2px;
+        .scheduler-event {
+          height: 24px;
+          overflow: hidden;
+        }
+      }
+    }
+    .scheduler-event-clickable {
+      cursor: pointer;
+    }
+    .scheduler-date-cell[role=button] {
+      cursor: default;
+    }
+    .scheduler-event-group-test {
+      .scheduler-event-inner {
+        justify-content: center;
+        align-items: center;
+        padding-top: 5px;
+        font-size: 17px;
+      }
+    }
+  }
 }
 
 @mixin _scheduler {
-    @include scheduler-table;
-    @include scheduler-events;
+  @include scheduler-table;
+  @include scheduler-events;
 }
 
 @include  _scheduler;
