@@ -798,6 +798,90 @@ function SchedulerController(
     };
 };
 
+    /**
+     * 
+     * @param {object} event 
+     * @param {number} eventIndex 
+     */
+    $scope.onEventHover = function (event, eventIndex, jsEvent) {
+        $scope.showEventDetailDialog(event, jsEvent);
+    };
+
+    $scope.onEventClick = function (event, eventIndex, jsEvent) {
+    };
+
+    /**
+     * 
+     * @param {event} event 
+     * @param {number} eventIndex 
+     */
+    $scope.getEventClass = function (event, eventIndex) {
+        var res = ['schedule-event-' + event.resource];
+
+        return res;
+    }
+
+    /**
+     * 
+     * @param {object} event 
+     * @param {object} jsEvent 
+     */
+    $scope.showEventDetailDialog = function (event, jsEvent) {
+        if (event.bubbleHtml) {
+            var posX = 'center';
+            var position = $mdPanel.newPanelPosition()
+                .relativeTo(jsEvent.target)
+                .addPanelPosition(posX, 'below');
+    
+            var from = $(jsEvent.target).offset();
+            from.top += $(jsEvent.target).outerHeight();
+            var panelAnimation = $mdPanel.newPanelAnimation()
+                .openFrom(jsEvent.target)
+                .duration(200)
+                .closeTo(jsEvent.target)
+                .withAnimation($mdPanel.animation.FADE);
+    
+            var config = {
+                attachTo: angular.element(document.body),
+                controller: EventDetailDialogController,
+                controllerAs: 'ctrl',
+                templateUrl: 'event-detail-panel.html',
+                panelClass: 'event-detail-panel',
+                position: position,
+                animation: panelAnimation,
+                locals: {
+                    activeEvent: event,
+                },
+                hasBackdrop: false,
+                openFrom: jsEvent,
+                propagateContainerEvents: true,
+                zIndex: 200,
+                groupName: 'bubble',
+            };
+
+            if ($scope.mdPanelRef) {
+                $scope.mdPanelRef.close();
+                $scope.mdPanelRef = null;
+            }
+            $mdPanel.open(config).then(ref => $scope.mdPanelRef = ref);
+        }
+	};
+
+    /**
+     * Handle event when mouse leave schedule event (schedule event lose focus)
+     * 
+     * @param {object} event 
+     * @param {number} eventIndex 
+     * @param {} jsEvent 
+     */
+    $scope.onEventBlur = function (event, eventIndex, jsEvent) {
+        if ($scope.mdPanelRef) {
+            $scope.mdPanelRef.close();
+            $scope.mdPanelRef = null;
+        }
+    };
+}1
+;
 SchedulerController.$inject = [
     '$scope', 
     '$mdDialog',
