@@ -13,6 +13,7 @@ import 'angular-daterangepicker/js/angular-daterangepicker';
 
 import './app.module';
 import './app.config';
+import './project-schedule.service';
 import './../angular/shared/shared.module';
 import './../angular/scheduler/scheduler';
 import './project-schedule.controller';

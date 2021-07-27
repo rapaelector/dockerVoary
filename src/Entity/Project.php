@@ -32,7 +32,7 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-project", "schedule-data"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $id;
 
@@ -40,7 +40,7 @@ class Project
      * Fr: code chantier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project", "schedule-data"})
+     * @Groups({"data-project", "scheduler-data"})
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -253,7 +253,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $caseType;
 
@@ -306,7 +306,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $prospect;
 

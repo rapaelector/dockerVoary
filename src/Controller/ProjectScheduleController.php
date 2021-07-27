@@ -23,11 +23,9 @@ class ProjectScheduleController extends AbstractController
     public function getResources(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $sites = $em->getRepository(Project::class)->getSites();
-        dump($sites);
 
-        return new Response('<body>lorem</body>');
         return $this->json([
-            'resources' => $serializer->normalize($sites, 'json', ['groups' => 'schedule-data']),
+            'resources' => $serializer->normalize($sites, 'json', ['groups' => 'scheduler-data']),
         ]);
     }
 }

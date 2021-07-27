@@ -1,15 +1,10 @@
 import { resources, buildColumns, events  } from './mock-data';
 import numberFormat from './../utils/number_format';
 
-angular.module('projectScheduleApp').controller('projectScheduleController', [
-    '$scope', 
-    '$mdDialog', 
-    'moment',
-    'DEFAULT_CELL_WIDTH',
-    function($scope, $mdDialog, moment, DEFAULT_CELL_WIDTH) {
+angular.module('projectScheduleApp').controller('projectScheduleController', ['$scope', '$mdDialog', 'moment','projectSchedulerService','resolverService', 'DEFAULT_CELL_WIDTH', function($scope, $mdDialog, moment, projectSchedulerService, resolverService, DEFAULT_CELL_WIDTH) {
 
     $scope.data = {
-        resources: resources,
+        resources: [],
         columns: buildColumns(numberFormat),
         start: null,
         end: null,
@@ -53,6 +48,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
                 "Le mois dernier": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
         };
+        projectSchedulerService.getResources().then(function (response) {
+            console.info(response);
+            $scope.data.resources = resolverService.resolve([response, 'data', 'resources'], []);
+        });
     };
 
     $scope.$watch('data.date', function () {}, true);

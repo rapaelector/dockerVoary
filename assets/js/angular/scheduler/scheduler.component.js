@@ -1,5 +1,7 @@
 import schedulerTemplate from './template.html';
+import get from 'lodash.get';
 import EventDetailDialogController from './event-detail.controller';
+
 function SchedulerController(
     $scope, 
     $mdDialog,
@@ -103,7 +105,7 @@ function SchedulerController(
         var res = null;
 
         if (column.field) {
-            res = resource[column.field];
+            res = get(resource, column.field);
         }
 
         if (column.formatter) {
@@ -796,7 +798,6 @@ function SchedulerController(
 
         return factor;
     };
-};
 
     /**
      * 
@@ -880,8 +881,8 @@ function SchedulerController(
             $scope.mdPanelRef = null;
         }
     };
-}1
-;
+}
+
 SchedulerController.$inject = [
     '$scope', 
     '$mdDialog',

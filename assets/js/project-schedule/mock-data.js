@@ -96,12 +96,12 @@ const buildColumns = function(numberFormat) {
     return [
         {
             label: 'Cdt Trx',
-            field: 'cdtTrx',
+            field: 'prospect.clientNumber',
             width: 145,
         },
         {
             label: 'Chantier',
-            field: 'constructionSite',
+            field: 'siteCode',
             className: 'chantier-class',
             headerClassName: 'text-uppercase text-center',
             formatter: function(res, resource, index) {
@@ -124,7 +124,7 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: 'Type de travaux',
-            field: 'workType',
+            field: 'caseType',
             /**
              * Class to bind to the column header only
              * Column cell are not affected by those classe
@@ -163,9 +163,12 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: 'Surface en m2',
-            field: 'area',
+            field: 'prospect.projectDescription.area',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             width: 150,
+            formatter: function (res, resource, index) {
+                console.info({res, resource, index});
+            }
         },
         {
             label: "Chiffre d'affaire",
