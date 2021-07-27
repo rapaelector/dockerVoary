@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 body {
     .nav-sidebar .nav-item > .nav-link {
         height: map-get($heights, sidebarNavlink);
@@ -7,7 +9,7 @@ body {
             font-size: 14px;
         }
         p > .right {
-            top: (map-get($heights, sidebarNavlink) - map-get($heights, badge)) / 2;
+            top: (map-get($heights, sidebarNavlink) - math.div(map-get($heights, badge), 2));
         }
     }
     // add spacing to .nav-icon when sidebar is not collapsed
@@ -42,7 +44,7 @@ body {
                         padding-right: 0;
                         width: 50px;
                         .nav-icon {
-                            margin-left: (50px - 25px) / 2;
+                            margin-left: math.div((50px - 25px), 2);
                         }
                     }
                 }

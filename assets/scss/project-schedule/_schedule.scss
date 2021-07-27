@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .schedule-month {
   text-transform: uppercase;
 }
@@ -9,11 +11,11 @@
 }
 
 @function monthFs($weekSize) {
-  @return 8 / 5 * $weekSize;
+  @return math.div(8, 5) * $weekSize;
 }
 
 @function yearFs($weekSize) {
-  @return 10 / 5 * $weekSize;
+  @return math.div(10, 5) * $weekSize;
 }
 
 $weekSize: 8px;
