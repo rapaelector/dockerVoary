@@ -45,6 +45,7 @@ label:
   last_relaunch: 'DERNIÈRE RELANCE'
   type_relaunch: 'DERNIÈRE RELANCE'
   project_lose_reason: 'Raison de la perte du projet'
+  note_taking: 'Prise de note'
 
 contact:
   label: Contact
@@ -135,7 +136,7 @@ bonhommePercentage :
   0percent : "0% (AUTOLIQUIDATION)"
 
 disaSheetValidation :
-  signed_quote: "Devis MDE signé"
+  signed_quote: "Devis signé"
   customer_order_form: "Bon de Commande du Client"
   authorization_letter: "Lettre d’autorisation de travailler en l’absence de commande ferme, signée par Christophe"
   subcontract: "Contrat de sous-traitance (si Bonhomme est sous-traitant) + devis MDE sans TVA"

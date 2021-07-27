@@ -52,7 +52,8 @@ class ProjectController extends BaseController
         $economistForm = $this->createForm(EconomistFormType::class, $project, array('csrf_protection' => false));
 
         $table =  $dataTableFactory->create([], $createOptions)
-            ->add('folderNameOnTheServer', TextColumn::class, [
+            ->add('folderNameOnTheServer', TwigColumn::class, [
+                'template' => 'project/twig_columns/_document_name.html.twig',
                 'label' => $translator->trans('columns.folder_name_on_the_server_tooltip', [], 'projects'),
                 'className' => 'dynamic-nowrap',
                 'meta' => $this->columnMeta([
@@ -68,7 +69,7 @@ class ProjectController extends BaseController
              */
             ->add('businessCharge', TwigColumn::class,  [
                 'template' => 'project/twig_columns/_business_charge.html.twig',
-                'className' => '',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.resposible_business_tooltip', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.resposible_business_raw', [], 'projects'),

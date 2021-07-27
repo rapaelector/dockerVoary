@@ -78,10 +78,18 @@ class ExchangeHistory
     private $flag;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"exchange-history"})
      */
     private $archiUser;
+
+    /**
+     * Prise de note
+     * 
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"exchange-history"})
+     */
+    private $noteTaking;
     
     public function __construct()
     {
@@ -176,14 +184,26 @@ class ExchangeHistory
         return $this;
     }
 
-    public function getArchiUser(): ?user
+    public function getArchiUser(): ?string
     {
         return $this->archiUser;
     }
 
-    public function setArchiUser(?user $archiUser): self
+    public function setArchiUser(?string $archiUser): self
     {
         $this->archiUser = $archiUser;
+
+        return $this;
+    }
+
+    public function getNoteTaking(): ?string
+    {
+        return $this->noteTaking;
+    }
+
+    public function setNoteTaking(?string $noteTaking): self
+    {
+        $this->noteTaking = $noteTaking;
 
         return $this;
     }
