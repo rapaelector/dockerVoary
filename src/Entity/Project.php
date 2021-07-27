@@ -32,7 +32,7 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "schedule-data"})
      */
     private $id;
 
@@ -40,7 +40,7 @@ class Project
      * Fr: code chantier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "schedule-data"})
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
