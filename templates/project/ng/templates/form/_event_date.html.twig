@@ -6,6 +6,7 @@
         <div class="row" ng-repeat="event in data.events">
             <div class="col-sm-11">
                 <div class="row">
+                    {# START #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
                         <input 
                             type="date" 
@@ -14,6 +15,7 @@
                             aria-invalid="false"
                         >
                     </div>
+                    {# END #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
                         <input 
                             type="date" 
@@ -22,7 +24,9 @@
                             aria-invalid="false"
                         >
                     </div>
+                    {# TYPE #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
+                        {#
                         <select class="custom-select" ng-model="event.type">
                             <option 
                                 ng-repeat="type in eventTypes" 
@@ -30,7 +34,18 @@
                             >
                                 {{ '{{ type.label }}' }}
                             </option>
-                        </select>
+                        </select> 
+                        #}
+                        <md-select ng-model="event.type">
+                            <md-optgroup>
+                                <md-option ng-value="type.value" ng-repeat="type in eventTypes">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons text-md mr-2" ng-class="['color-' + type.value]">circle</i>
+                                        <div>{{ '{{ type.label }}' }}</div>
+                                    </div>
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
                     </div>
                 </div>
             </div>
