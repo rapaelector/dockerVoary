@@ -422,6 +422,7 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity=ExchangeHistory::class, mappedBy="Project")
+     * @Groups({"data-project"})
      */
     private $exchangeHistories;
 
@@ -442,12 +443,19 @@ class Project
      */
     private $meta;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProjectEvent::class, mappedBy="project", cascade={"all"}, orphanRemoval=true)
+     * @Groups({"data-project"})
+     */
+    private $events;
+
     public function __construct()
     {
         $this->status = Status::STATUS_PENDING;
         $this->relaunches = new ArrayCollection();
         $this->exchangeHistories = new ArrayCollection();
         $this->actions = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1050,6 +1058,36 @@ class Project
     public function setMeta(?ProjectMeta $meta): self
     {
         $this->meta = $meta;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectEvent[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(ProjectEvent $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(ProjectEvent $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getProject() === $this) {
+                $event->setProject(null);
+            }
+        }
 
         return $this;
     }

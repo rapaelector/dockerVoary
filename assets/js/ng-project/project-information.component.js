@@ -6,6 +6,7 @@ function ProjectInformationController(
     $mdToast,
     $mdDialog,
     projectService,
+    resolverService,
     CASE_TYPES,
     PRIORIZATION_FILE_TYPES,
     MARKET_TYPES,
@@ -58,6 +59,7 @@ function ProjectInformationController(
         projectService.getProject(PROJECT_ID).then((response) => {
             $scope.data.project = response.data;
             $scope.project = projectService.parseProject(response.data.project);
+            $scope.data.events = projectService.parseEvents(resolverService.resolve([response, 'data', 'project', 'events'], []));
             $scope.helpers.updateStatus($scope.project)
             if (response.data && response.data.project && response.data.project.allowedActions) {
                 $scope.data.allowedActions = response.data.project.allowedActions;
@@ -241,7 +243,6 @@ function ProjectInformationController(
         $scope.onLoading = true;
         $scope.data.errors = {};
         $scope.project.events = $scope.data.events;
-        console.info($scope.project);
         projectService.saveProject(PROJECT_ID, $scope.project).then((response) => {
             $scope.onLoading = false;
             $scope.data.statusLabel = response.data.data.statusLabel;
@@ -356,6 +357,7 @@ ProjectInformationController.$inject = [
     '$mdToast',
     '$mdDialog',
     'projectService',
+    'resolverService',
     'CASE_TYPES',
     'PRIORIZATION_FILE_TYPES',
     'MARKET_TYPES',
