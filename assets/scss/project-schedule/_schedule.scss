@@ -27,6 +27,10 @@ $cellBorder: $borderWidth solid $borderColorDark;
 @mixin scheduler-table {
   .app-scheduler {
     table.scheduler-table {
+      .scheduler-resource-header,
+      .scheduler-column {
+        padding: 0 4px;
+      }
       thead, tbody {
         tr {
           th, td {
@@ -51,8 +55,10 @@ $cellBorder: $borderWidth solid $borderColorDark;
           }
           &:last-child {
             th, td {
-              &:last-child.scheduler-weeks {
-                border-right: $cellBorder;
+              &.scheduler-week {
+                &:last-child {
+                  border-right: $cellBorder;
+                }
               }
             }
           }
@@ -63,7 +69,7 @@ $cellBorder: $borderWidth solid $borderColorDark;
               border-left: 4px solid $borderColor;
             }
             &.scheduler-header-firstweek {
-              border-left: $cellBorder;
+              border-left: $borderWidth solid $borderColor;
             }
           }
         }
@@ -76,8 +82,9 @@ $cellBorder: $borderWidth solid $borderColorDark;
         tr {
           &:last-child {
             th, td {
-              &.scheduler-date-cell {
-                border-bottom: $cellBorder; 
+              border-bottom: $cellBorder;
+              &:first-child {
+                border-left: ($borderWidth + 2px) solid $borderColor;
               }
             }
           }
@@ -99,10 +106,10 @@ $cellBorder: $borderWidth solid $borderColorDark;
               border-right-width: $borderWidth !important;
             }
             &.scheduler-column:first-child {
-              border-left: $cellBorder;
+              border-left: ($borderWidth + 2px) solid $borderColor;
             }
             &.scheduler-column-siteCode {
-              background: $yellow;
+              background: rgb(255, 255, 0);
             }
             &.scheduler-column-prospect-clientNumber {
               color: $cyan;
@@ -126,18 +133,6 @@ $cellBorder: $borderWidth solid $borderColorDark;
       .scheduler-resource-header, .scheduler-column {
         overflow: hidden;
       }
-      .scheduler-year {
-        font-size: yearFs($weekSize);
-        font-weight: bold;
-      }
-      .scheduler-month {
-        font-size: monthFs($weekSize);
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-      .scheduler-weeks {
-        font-size: $weekSize;
-      }
       .scheduler-weeks {
         border-bottom: $cellBorder;
         border-top: $cellBorder;
@@ -150,6 +145,9 @@ $cellBorder: $borderWidth solid $borderColorDark;
       }
     }
   }
+  // .app-scheduler table.scheduler-table tbody tr th.scheduler-column:first-child, .app-scheduler table.scheduler-table tbody tr td.scheduler-column:first-child {
+  //   border-left: 4px solid $borderColor;
+  // }
 }
 
 @mixin scheduler-events {

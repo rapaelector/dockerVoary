@@ -226,7 +226,7 @@ class Project
      * Fr: MONTANT GLOBAL DU MARCHE
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $globalAmount;
 
@@ -234,7 +234,7 @@ class Project
      * Fr: montant des travaux sous-traiter
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $amountSubcontractedWork;
 
@@ -242,7 +242,7 @@ class Project
      * Fr: montant des traveau propre a bbi
      * 
      * @ORM\Column(type="integer", length=255, nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $amountBBISpecificWork;
 

@@ -1,0 +1,48 @@
+@use 'sass:math';
+
+$weekSize: 8px;
+
+@function monthFs($weekSize) {
+    @return math.div(8, 5) * $weekSize;
+}
+
+@function yearFs($weekSize) {
+    @return math.div(10, 5) * $weekSize;
+}
+
+@function scheduleColumnFs($weekSize) {
+    @return math.div(8, 5) * $weekSize;
+}
+
+@mixin _schedule {
+    .app-scheduler {
+        table.scheduler-table {
+            .scheduler-year, 
+            .scheduler-month, 
+            .scheduler-week, 
+            .scheduler-column,
+            .scheduler-date-cell,
+            .scheduler-resource-header {
+                background: #fff;
+            }
+        }
+    }
+    .scheduler-column {
+        font-size: scheduleColumnFs($weekSize);
+        font-weight: normal;
+    }
+    .scheduler-year {
+        font-size: yearFs($weekSize);
+        font-weight: bold;
+    }
+    .scheduler-month {
+        font-size: monthFs($weekSize);
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .scheduler-weeks {
+        font-size: $weekSize;
+    }
+}
+
+@include _schedule;

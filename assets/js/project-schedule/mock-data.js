@@ -172,7 +172,7 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: "Chiffre d'affaire",
-            field: 'turnover',
+            field: 'globalAmount',
             className: 'text-right',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
@@ -182,7 +182,7 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: 'Deja facture',
-            field: 'invoiced',
+            field: 'amountSubcontractedWork',
             className: 'text-right',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
@@ -192,7 +192,7 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: 'Reste a facturer',
-            field: 'remainsToInvoice',
+            field: 'amountBBISpecificWork',
             className: 'text-right',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             formatter: function(res, resource, index) {
@@ -209,13 +209,13 @@ const buildColumns = function(numberFormat) {
  *      [
  *          {
  *              resource: number,
-                title: string,
-                start: Moment,
-                end: Moment,
-                backgroundColor: string,
-                color: string,
- *          },
-            ...
+ *              title: string,
+ *              start: Moment,
+ *              end: Moment,
+ *              backgroundColor: string,
+ *              color: string,
+ *         },
+ *         ...
  *      ]
  */
 var bg = 'rgba(197, 217, 241, .5)';
