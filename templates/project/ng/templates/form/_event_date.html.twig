@@ -1,0 +1,47 @@
+<div class="card card card-outline card-app-secondary h-100">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'label.order_book_dates'|trans({}, 'messages') }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" ng-repeat="event in data.events">
+            <div class="col-sm-11">
+                <div class="row">
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <input 
+                            type="date" 
+                            ng-model="event.start"
+                            class="form-control"
+                            aria-invalid="false"
+                        >
+                    </div>
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <input 
+                            type="date" 
+                            ng-model="event.end"
+                            class="form-control"
+                            aria-invalid="false"
+                        >
+                    </div>
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <select class="custom-select" ng-model="event.type">
+                            <option 
+                                ng-repeat="type in eventTypes" 
+                                ng-value="type.value"
+                            >
+                                {{ '{{ type.label }}' }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <md-button class="md-icon-button" ng-click="removeEvent($index)">
+                    <i class="material-icons">clear</i>
+                </md-button>
+            </div>
+        </div>
+        <button class="btn btn-sm btn-app-primary" ng-click="addNewEvent()">
+            {{ 'action.add_date'|trans({}, 'messages') }}
+        </button>
+    </div>
+</div>

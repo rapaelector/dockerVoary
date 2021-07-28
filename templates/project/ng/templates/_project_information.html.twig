@@ -2,12 +2,7 @@
     {{ 'title.project_status'|trans({}, 'project') }}: 
     <span
         class="badge text-uppercase p-1" 
-        ng-class="data.statusBg" 
-        {# 
-        data-toggle="tooltip" 
-        data-placement="bottom" title="{{ '{{ project. }}' }}"
-        data-container="body"
-        #}
+        ng-class="data.statusBg"
     />
         {{ '{{data.statusLabel }}' }}
         <md-tooltip
@@ -79,6 +74,9 @@
                 VALIDATION DE LA FICHE DISA AVEC
             #}
             {% include 'project/ng/templates/form/_devis_number_and_case_type.html.twig' %}
+        </div>
+        <div class="col-sm-12 mt-3">
+            {% include 'project/ng/templates/form/_event_date.html.twig' %}
         </div>
     </div>
     <div class="row">

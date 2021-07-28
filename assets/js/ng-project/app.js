@@ -6,6 +6,8 @@ import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
 import 'angular-auto-complete/angular-auto-complete.js';
+import 'daterangepicker/daterangepicker';
+import 'angular-daterangepicker/js/angular-daterangepicker';
 
 import './app.module';
 import './app.config';

@@ -197,6 +197,23 @@ class Project
         self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 
+    // LEGENDS USE IN PROJECT SCHEDULER
+    const FRAME_ASSEMBLY = 'frame_assembly'; // montage charpente
+    const ISOTHERMAL_PANELS = 'isothermal_panels'; // panneaux isothermes
+    const ENVELOPE = 'envelope'; // enveloppe
+    const FORECASTS = 'forecasts'; // prévisions
+    const SUBCONTRACTING = 'subcontracting'; // sous traitance
+    const SHADE_HOUSE = 'shade_house'; // ombrière
+
+    const SCHEDULER_LEGENDS = [
+        self::FRAME_ASSEMBLY,
+        self::ISOTHERMAL_PANELS,
+        self::ENVELOPE,
+        self::FORECASTS,
+        self::SUBCONTRACTING,
+        self::SHADE_HOUSE,
+    ];
+
     public static function getTypeValues($values, $associative = false)
     {
         return $associative ? array_combine($values, $values) : $values;
