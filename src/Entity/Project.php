@@ -152,7 +152,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "scheduler-data"})
      */
     private $marketType;
 

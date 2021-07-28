@@ -57,8 +57,10 @@ $cellBorder: $borderWidth solid $borderColorDark;
             }
           }
           th, td {
-            &.scheduler-resource-header-cdtTrx {
-              border-left: $cellBorder;
+            border-top: $cellBorder;
+            border-bottom: $cellBorder;
+            &.scheduler-resource-header-prospect-clientNumber {
+              border-left: 4px solid $borderColor;
             }
             &.scheduler-header-firstweek {
               border-left: $cellBorder;
@@ -98,6 +100,12 @@ $cellBorder: $borderWidth solid $borderColorDark;
             }
             &.scheduler-column:first-child {
               border-left: $cellBorder;
+            }
+            &.scheduler-column-siteCode {
+              background: $yellow;
+            }
+            &.scheduler-column-prospect-clientNumber {
+              color: $cyan;
             }
           }
         }

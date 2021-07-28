@@ -80,7 +80,7 @@ const resources = [
             <div 
                 class="dynamic-nowrap" 
                 title="` + column.label + `" 
-                data-toogle="tooltip" 
+                data-toggle="tooltip" 
                 data-container="body" 
                 data-placement="top"
             >` + column.label + `</div>` : '';
@@ -112,7 +112,7 @@ const buildColumns = function(numberFormat) {
                     <div 
                         class="dynamic-nowrap" 
                         title="` + column.label + `" 
-                        data-toogle="tooltip" 
+                        data-toggle="tooltip" 
                         data-container="body" 
                         data-placement="top"
                     >` + column.label + `</div>` : '';
@@ -124,7 +124,7 @@ const buildColumns = function(numberFormat) {
         },
         {
             label: 'Type de travaux',
-            field: 'caseType',
+            field: 'marketType',
             /**
              * Class to bind to the column header only
              * Column cell are not affected by those classe
@@ -154,21 +154,21 @@ const buildColumns = function(numberFormat) {
                     <div 
                         class="dynamic-nowrap" 
                         title="` + column.label + `" 
-                        data-toogle="tooltip" 
+                        data-toggle="tooltip" 
                         data-container="body" 
                         data-placement="top"
                     >` + column.label + `</div>` : '';
             },
             width: 190,
+            formatter: function (res, resource, index) {
+                return res ? `<div class="dynamic-nowrap text-center" title="` + res + `">` + res + `</div>` : '';
+            }
         },
         {
             label: 'Surface en m2',
             field: 'prospect.projectDescription.area',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             width: 150,
-            formatter: function (res, resource, index) {
-                console.info({res, resource, index});
-            }
         },
         {
             label: "Chiffre d'affaire",
@@ -223,38 +223,38 @@ var color ='#000';
 var group = 'group-test';
 
 const events = [
-    {
-        id: 1,
-        resource: 1,
-        title: 'Madagascar',
-        start: moment('2021-01-01', 'YYYY-MM-DD').startOf('week'),
-        end: moment('2021-03', 'YYYY-MM').endOf('month'),
-        backgroundColor: bg,
-    },
-    {
-        id: 2,
-        resource: 1,
-        title: '*',
-        start: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
-        end: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
-        group: group,
-    },
-    {
-        id: 3,
-        resource: 1,
-        title: '*',
-        start: moment('2021-02', 'YYYY-MM').endOf('month'),
-        end: moment('2021-02', 'YYYY-MM').endOf('month'),
-        group: group,
-    },
-    {
-        id: 4,
-        resource: 1,
-        title: '*',
-        start: moment('2021-03', 'YYYY-MM').endOf('month'),
-        end: moment('2021-03', 'YYYY-MM').endOf('month'),
-        group: group,
-    },
+    // {
+    //     id: 1,
+    //     resource: 1,
+    //     title: 'Madagascar',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD').startOf('week'),
+    //     end: moment('2021-03', 'YYYY-MM').endOf('month'),
+    //     backgroundColor: bg,
+    // },
+    // {
+    //     id: 2,
+    //     resource: 1,
+    //     title: '*',
+    //     start: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
+    //     end: moment('2021-01-01', 'YYYY-MM-DD').endOf('month'),
+    //     group: group,
+    // },
+    // {
+    //     id: 3,
+    //     resource: 1,
+    //     title: '*',
+    //     start: moment('2021-02', 'YYYY-MM').endOf('month'),
+    //     end: moment('2021-02', 'YYYY-MM').endOf('month'),
+    //     group: group,
+    // },
+    // {
+    //     id: 4,
+    //     resource: 1,
+    //     title: '*',
+    //     start: moment('2021-03', 'YYYY-MM').endOf('month'),
+    //     end: moment('2021-03', 'YYYY-MM').endOf('month'),
+    //     group: group,
+    // },
     /////////////////////////// START OVERLAP EVENT TEST ////////////////////////////////
     // {
     //     id: 102,

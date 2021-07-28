@@ -45,6 +45,9 @@ function SchedulerController(
         $(function () {
             $('[data-toggle="popover"]').popover()
         });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
         $mdPanel.newPanelGroup('bubble', {
             maxOpen: 1,
         });
@@ -127,7 +130,8 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getCellClassName = function(resource, column, index) {
-        var res = [SCHEDULER_COLUMN_CLASS, SCHEDULER_COLUMN_CLASS + '-' + column.field];
+        var cellClass = column.field.replaceAll('.', '-');
+        var res = [SCHEDULER_COLUMN_CLASS, SCHEDULER_COLUMN_CLASS + '-' + cellClass];
 
         if (column.className) {
             res.push(column.className);
@@ -148,7 +152,8 @@ function SchedulerController(
      * @returns {array} array of string
      */
     $scope.getHeaderCellClassName = function(column) {
-        var res = [SCHEDULE_RESOURCE_HEADER_CLASS, SCHEDULE_RESOURCE_HEADER_CLASS + '-' + column.field];
+        var columnClass = column.field.replace('.', '-');
+        var res = [SCHEDULE_RESOURCE_HEADER_CLASS, SCHEDULE_RESOURCE_HEADER_CLASS + '-' + columnClass];
 
         if (column.headerClassName) {
             res.push(column.headerClassName);
