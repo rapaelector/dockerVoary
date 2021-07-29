@@ -231,6 +231,7 @@ messages:
   contact_create_success: 'Contact créé avec succès'
   contact_creation_failed: 'La création du contact a echoué'
   exchange_history_saved_successfull: 'Historique des échanges enregistré avec succès'
+  exchange_history_deleted_successfull: 'Historique des échanges supprimer avec succès'
   exchange_history_saved_failed: "l'énregistrement de l'historique des échanges a échoué"
   validate_project: 'Souhaitez-vous valider ce dossier?'
   project_validation_success: 'Dossier validé avec succès'

@@ -29,7 +29,7 @@
                                     <h5 class="mt-0 font-weight-bold" ng-if="item.archiUser">{{ '{{ item.archiUser }}' }}</h5>
                                     <h5 class="mt-0 font-weight-bold" ng-if="!item.archiUser">{{ 'label.auto'|trans }}</h5>
                                     <div>{{ '{{ item.description }}' }}</div>
-                                    <div ng-if="item.noteTaking">{{ '{{ item.noteTaking }}' }}</div>
+                                    <div ng-if="item.noteTaking" ng-bind-html="item.noteTaking | nl2br"></div>
                                 </div>
                             </div>
                             <div
@@ -37,6 +37,9 @@
                                 title="{{ 'label.project_confidence_percentage'|trans ~ ': {{ item.percentage }}' }}%"
                             >
                                 {{ '{{ item.percentage ? item.percentage : "-" }}' }} %
+                            </div>
+                            <div class="delete-button-container text-muted text-sm">
+                                <button ng-click="fns.deleteProjectPiloting(item.id)" class="btn btn-danger btn-sm">Supprimer</button>
                             </div>
                         </div>
                     </div>

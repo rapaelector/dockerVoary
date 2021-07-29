@@ -1467,7 +1467,12 @@ angular-messages@^1.8.2:
   resolved "https://registry.yarnpkg.com/angular-messages/-/angular-messages-1.8.2.tgz#47f0cf913030bc2231423ab9388acc14dd931837"
   integrity sha512-M1qNh/30cLJi4yJJ+3YB8saPonRcavz5Dquqz0T/aUySKJhIkUoeCkmF+BcLH4SJ5PBp04yy4CZUUeNRVi7jZA==
 
-angular-sanitize@^1.6.2:
+angular-nl2br@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/angular-nl2br/-/angular-nl2br-1.0.2.tgz#8341faf750aca9ceb54612c3c5686f6b006be411"
+  integrity sha1-g0H691Csqc61RhLDxWhvawBr5BE=
+
+angular-sanitize@^1.6.2, angular-sanitize@^1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.8.2.tgz#ae78040f00c5e2ce1c63780bcc47fa14a1698296"
   integrity sha512-OB6Goa+QN3byf5asQ7XRl7DKZejm/F/ZOqa9z1skqYVOWA2hoBxoCmt9E7+i7T/TbxZP5zYzKxNZVVJNu860Hg==

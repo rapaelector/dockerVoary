@@ -28,8 +28,8 @@
                 <div class="form-group row">
 					<label class="col-sm-3 col-form-label">{{ 'label.last_relaunch_label'|trans }} :</label>
                     <div class="col-sm-9">
-                        <input 
-                            type="date" 
+                        <input
+                            type="date"
                             ng-model="exchangeHistory.relaunchDate"
                             ng-disabled="exchangeHistory.flag != data.exchangeFlags[0]"
                             class="form-control"
@@ -51,7 +51,7 @@
                             <label class="col-sm-5 col-form-label">{{ 'label.next_step'|trans }} :</label>
                             <div class="col-sm-7">
                                 <input 
-                                    type="date" 
+                                    type="date"
                                     ng-model="exchangeHistory.nextStepDate" 
                                     ng-disabled="exchangeHistory.flag != data.exchangeFlags[1]"
                                     class="form-control"

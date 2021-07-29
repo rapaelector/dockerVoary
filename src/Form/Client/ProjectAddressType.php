@@ -55,6 +55,7 @@ class ProjectAddressType extends AbstractType
                 'preferred_choices' => function ($val, $key) {
                     return $val == 'FR';
                 },
+                'data'=> 'FR',
                 'label_attr' => [
                     'class' => 'text-nowrap',
                 ],

@@ -5,6 +5,8 @@ import 'angular-animate';
 import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
+import 'angular-nl2br';
+import 'angular-sanitize';
 // import 'angular-material/angular-material.min.js';
 import 'angular-auto-complete/angular-auto-complete.js';
 

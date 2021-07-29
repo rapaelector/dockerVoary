@@ -40,6 +40,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
     $scope.$watch('exchangeHistory.flag', function() {
         if ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[1]) {
             $scope.exchangeHistory.relaunchDate = null;
+            $scope.exchangeHistory.nextStepDate = new Date();
         } else if ($scope.exchangeHistory.flag == $scope.data.exchangeFlags[0]) {
             $scope.exchangeHistory.nextStepDate = null;
         }
@@ -64,6 +65,23 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
             $scope.exchangeHistory = {};
             $scope.data.exchangeHistories.push(response.data.data.exchangeHistory);
             $scope.data.exchangeHistoryCount += 1;
+            $scope.fns.showNotification(response.data.message);
+        }, error => {
+            $scope.onLoading = false;
+            $scope.data.errors = error.data.errors;
+            $scope.fns.showNotification(error.data.message, { toastClass: 'toast-error' });
+        })
+    };
+
+    $scope.fns.deleteProjectPiloting = function(id) {
+        $scope.onLoading = true;
+
+        projectService.deleteProjectPiloting(id).then((response) => {
+            $scope.onLoading = false;
+            $scope.data.exchangeHistories = $scope.data.exchangeHistories.filter(x => {
+                return x.id != id;
+            })
+            $scope.data.exchangeHistoryCount -= 1;
             $scope.fns.showNotification(response.data.message);
         }, error => {
             $scope.onLoading = false;

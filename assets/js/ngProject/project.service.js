@@ -59,6 +59,10 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
         return $http.post(fosJsRouting.generate('project.ng.save_exchange_history', { id: PROJECT_ID }), formData);
     }
 
+    _this.deleteProjectPiloting = function(id) {
+        return $http.post(fosJsRouting.generate('project.ng.delete_exchange_history', { id: PROJECT_ID, exchangeHistory: id }));
+    }
+
     _this.formatProjectPiloting = function(data) {
         var res = {...data };
         var dateType = ['date', 'relaunchDate', 'nexStepDate'];

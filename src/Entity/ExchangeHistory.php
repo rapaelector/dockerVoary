@@ -69,7 +69,7 @@ class ExchangeHistory
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"exchange-history"})
      */
-    private $nextStepDate;
+    protected $nextStepDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -93,6 +93,7 @@ class ExchangeHistory
     
     public function __construct()
     {
+        $this->setNextStepDate(new \DateTime());
     }
 
     public function getId(): ?int

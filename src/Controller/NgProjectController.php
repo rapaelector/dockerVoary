@@ -426,4 +426,38 @@ class NgProjectController extends BaseController
 
         return $normalizedData;
     }
+
+
+    /**
+     * @SecurityAnnotation("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), project)")
+     */
+    #[Route('{id}/delete/{exchangeHistory}/exchange-history', name: 'project.ng.delete_exchange_history', options: ['expose' => true])]
+    public function deleteExchangeHistory(
+        Request $request,
+        Project $project,
+        ExchangeHistory $exchangeHistory,
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        SerializerInterface $serializer,
+        FormService $formService,
+        ExchangeHistoryService $exchangeHistoryService
+    )
+    {
+        if ($project->getExchangeHistories()->contains($exchangeHistory)) {
+            $project->removeExchangeHistory($exchangeHistory);
+            $em->persist($project);
+            $em->flush();
+
+            return $this->json([
+                'data' => [
+                    'project' => $serializer->normalize($project, 'json', ['groups' => 'project-form-data']),
+                ],
+                'message' => $translator->trans('messages.exchange_history_deleted_successfull', [], 'project'),
+            ]);
+        }
+
+        return $this->json([
+            'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project')
+        ], 400);
+    }
 }

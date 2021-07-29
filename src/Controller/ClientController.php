@@ -78,19 +78,19 @@ class ClientController extends BaseController
                     $this->filterOptionsProvider->getOptions('client_code_postal')
                 ),
             ])
-            ->add('country', TwigColumn::class, [
-                'field' => 'address.country',
-                'label' => $translator->trans('label.country', [], 'client'),
-                'template' => 'shared/twig-columns/_country.html.twig',
-                'className' => 'text-center',
-                'filter' => $this->filterBuilder->buildFilter(
-                    ChoiceFilter::class, 
-                    array_merge(
-                        $this->filterOptionsProvider->getOptions('client_country'),
-                        ['choices' => $this->filterOptionsProvider->getClientCountries()
-                    ])
-                )
-            ])
+//            ->add('country', TwigColumn::class, [
+//                'field' => 'address.country',
+//                'label' => $translator->trans('label.country', [], 'client'),
+//                'template' => 'shared/twig-columns/_country.html.twig',
+//                'className' => 'text-center',
+//                'filter' => $this->filterBuilder->buildFilter(
+//                    ChoiceFilter::class,
+//                    array_merge(
+//                        $this->filterOptionsProvider->getOptions('client_country'),
+//                        ['choices' => $this->filterOptionsProvider->getClientCountries()
+//                    ])
+//                )
+//            ])
             ->add('activity', TextColumn::class, [
                 'label' => $translator->trans('label.activity', [], 'client'),
                 'render' => function ($value, $context) use ($translator) {
