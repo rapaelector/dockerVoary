@@ -8,34 +8,25 @@
                 <div class="row">
                     {# START #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
-                        <input 
-                            type="date" 
-                            ng-model="event.start"
-                            class="form-control"
-                            aria-invalid="false"
-                        >
+                        <md-datepicker 
+                            ng-model="event.start" 
+                            md-placeholder="Enter date"
+                            input-aria-describedby="datepicker-description"
+                            input-aria-labelledby="datepicker-header "
+                        ></md-datepicker>
                     </div>
                     {# END #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
-                        <input 
-                            type="date" 
-                            ng-model="event.end"
-                            class="form-control"
-                            aria-invalid="false"
-                        >
+                        <md-datepicker 
+                            ng-model="event.end" 
+                            md-placeholder="Enter date"
+                            md-min-date="event.start"
+                            input-aria-describedby="datepicker-description"
+                            input-aria-labelledby="datepicker-header "
+                        ></md-datepicker>
                     </div>
                     {# TYPE #}
                     <div class="mt-2 mt-sm-0 col-sm-4">
-                        {#
-                        <select class="custom-select" ng-model="event.type">
-                            <option 
-                                ng-repeat="type in eventTypes" 
-                                ng-value="type.value"
-                            >
-                                {{ '{{ type.label }}' }}
-                            </option>
-                        </select> 
-                        #}
                         <md-select ng-model="event.type">
                             <md-optgroup>
                                 <md-option ng-value="type.value" ng-repeat="type in eventTypes">

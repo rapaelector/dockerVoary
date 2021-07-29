@@ -48,26 +48,26 @@ class Client
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"project-form-data", "data-project", "scheduler-data"})
+     * @Groups({"project-form-data", "data-project", "project:scheduler-resource"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
-     * @Groups({"project-form-data", "data-project", "scheduler-data"})
+     * @Groups({"project-form-data", "data-project", "project:scheduler-resource"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"scheduler-data"})
+     * @Groups({"project:scheduler-resource"})
      */
     private $shortName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
-     * @Groups({"project-form-data", "scheduler-data"})
+     * @Groups({"project-form-data", "project:scheduler-resource"})
      */
     private $clientNumber;
 
@@ -133,7 +133,7 @@ class Client
     /**
      * @ORM\OneToOne(targetEntity=ProjectDescription::class, cascade={"persist", "remove"})
      * @Assert\Valid
-     * @Groups({"scheduler-data"})
+     * @Groups({"project:scheduler-resource"})
      */
     private $projectDescription;
 

@@ -19,6 +19,25 @@ class ProjectEventRepository extends ServiceEntityRepository
         parent::__construct($registry, ProjectEvent::class);
     }
 
+    public function getEventsBetweenDate(\DateTime $start = null, \DateTime $end = null)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($start && $end) {
+            $qb
+                ->where('(p.start BETWEEN :start AND :end) OR (p.end BETWEEN :start AND :end) OR (p.start <= :start AND p.end >= :end)')
+                ->setParameters([
+                    'start' => $start,
+                    'end' => $end,
+                ])
+            ;
+        }
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return ProjectEvent[] Returns an array of ProjectEvent objects
     //  */

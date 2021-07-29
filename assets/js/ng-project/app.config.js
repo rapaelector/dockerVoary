@@ -19,4 +19,4 @@ angular.module('projectApp').constant('PROJECT_ID', window.PROJECT_ID);
 //
 angular.module('projectApp').constant('APP_MESSAGES', window.APP_MESSAGES);
 
-angular.module('projectApp').constant('SCHEDULER_LEGENDS', window.SCHEDULER_LEGENDS);
+angular.module('projectApp').constant('PROJECT_EVENT_TYPES', window.PROJECT_EVENT_TYPES);

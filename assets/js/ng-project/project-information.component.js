@@ -14,7 +14,7 @@ function ProjectInformationController(
     TYPE_BONHOME,
     PROJECT_ID,
     APP_MESSAGES,
-    SCHEDULER_LEGENDS,
+    PROJECT_EVENT_TYPES,
 ) {
     $scope.onLoading = true;
     $scope.project = {
@@ -32,7 +32,7 @@ function ProjectInformationController(
         statusBg: '',
         events: [],
     };
-    $scope.eventTypes = SCHEDULER_LEGENDS,
+    $scope.eventTypes = PROJECT_EVENT_TYPES,
     $scope.searchTerm = {
         users: '',
         clients: '',
@@ -121,6 +121,18 @@ function ProjectInformationController(
         } else if ($scope.data.status == 'lost') {
             $scope.data.statusBg = 'bg-danger';
         };
+    }, true);
+
+    $scope.$watch('data.events', function () {
+        console.info({events: $scope.data.events});
+    }, true);
+    
+    $scope.$watch('event.start', function () {
+        console.info({events: $scope.data.events});
+    }, true);
+    
+    $scope.$watch('event.end', function () {
+        console.info({event: $scope.event});
     }, true);
 
     $scope.helpers = {};
@@ -365,7 +377,7 @@ ProjectInformationController.$inject = [
     'TYPE_BONHOME',
     'PROJECT_ID',
     'APP_MESSAGES',
-    'SCHEDULER_LEGENDS',
+    'PROJECT_EVENT_TYPES',
 ];
 
 angular.module('projectApp').component('appProjectInformation', {

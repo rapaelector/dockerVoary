@@ -37,7 +37,7 @@ class ProjectDescription
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
-     * @Groups({"scheduler-data"})
+     * @Groups({"project:scheduler-resource"})
      */
     private $area;
 

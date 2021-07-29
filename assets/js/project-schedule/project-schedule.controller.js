@@ -48,13 +48,22 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
                 "Le mois dernier": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
         };
-        projectSchedulerService.getResources().then(function (response) {
-            console.info(response);
+        
+        projectSchedulerService.getResources($scope.data.date).then(function (response) {
             $scope.data.resources = resolverService.resolve([response, 'data', 'resources'], []);
         });
+        $scope.updateEvents();
     };
 
-    $scope.$watch('data.date', function () {}, true);
+    $scope.$watch('data.date', function () {
+        $scope.updateEvents();
+    }, true);
+
+    $scope.updateEvents = function () {
+        projectSchedulerService.getEvents($scope.data.date).then(function (events) {
+            $scope.data.events = events;
+        });
+    };
 
     /**
      * Row click event

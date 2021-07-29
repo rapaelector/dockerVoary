@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\ProjectEvent;
+use App\Entity\Constants\Project as ProjectConstants;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,9 +31,9 @@ class ProjectScheduleController extends AbstractController
     )
     {
         $sites = $em->getRepository(Project::class)->getSites();
-        $normalizedSites = $serializer->normalize($sites, 'json', ['groups' => 'scheduler-data']);
+        $normalizedSites = $serializer->normalize($sites, 'json', ['groups' => 'project:scheduler-resource']);
         $shouldTranslatedFields = ['caseType'];
-
+        
         foreach ($normalizedSites as $key => $site) {
             $res = [];
             $normalizedSites[$key]['caseType'] = array_map(function ($val) use ($res, $translator) {
@@ -40,8 +42,23 @@ class ProjectScheduleController extends AbstractController
             $normalizedSites[$key]['marketType'] = $translator->trans($normalizedSites[$key]['marketType'], [], 'project');
         }
 
-        return $this->json([
-            'resources' => $normalizedSites,
-        ]);
+        return $this->json(['resources' => $normalizedSites]);
+    }
+
+    #[Route('/events', name: 'project_schedule.get_events', options: ['expose' => true])]
+    public function get_events(
+        Request $request, 
+        EntityManagerInterface $em, 
+        SerializerInterface $serializer,
+        TranslatorInterface $translator
+    )
+    {
+        $resEvents = [];
+        $start = \DateTime::createFromFormat('Y-m-d', $request->query->get('start'));
+        $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
+        $events = $em->getRepository(ProjectEvent::class)->getEventsBetweenDate($start, $end);
+        $normalizedEvents = $serializer->normalize($events, 'json', ['groups' => 'projectEvent:scheduler']);
+
+        return $this->json($normalizedEvents);
     }
 }

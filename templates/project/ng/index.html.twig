@@ -78,9 +78,9 @@
             })
         {% endfor %}
 
-        var SCHEDULER_LEGENDS = [];
-        {% for legend in constant('\\App\\Entity\\Constants\\Project::SCHEDULER_LEGENDS') %}
-            SCHEDULER_LEGENDS.push({
+        var PROJECT_EVENT_TYPES = [];
+        {% for legend in constant('\\App\\Entity\\ProjectEvent::PROJECT_EVENT_TYPES') %}
+            PROJECT_EVENT_TYPES.push({
                 label: '{{ ("scheduler_legend." ~ legend)|trans({}, "project") }}',
                 value: '{{ legend }}',
             })

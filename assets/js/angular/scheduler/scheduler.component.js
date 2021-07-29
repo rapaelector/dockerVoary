@@ -92,6 +92,7 @@ function SchedulerController(
 
     $scope.$watch('$ctrl.events', function () {
         if ($scope.$ctrl.events) {
+            console.info($scope.$ctrl.events);
             $scope.events = $scope.$ctrl.events;
         }
     }, true);
@@ -207,7 +208,7 @@ function SchedulerController(
 
         return {
             width: px(width),
-            height: px(rowHeight),
+            height: px(rowHeight + (resolverService.resolve([$scope.$ctrl, 'resources', 'length'], 0) === (resourceIndex + 1) ? 1 : 0)),
         };
     };
 
@@ -536,6 +537,7 @@ function SchedulerController(
         }
 
         var overlaps = $scope.computeResourceEventOverlap(event.resource);
+        var overlapCount = 0;
         if (overlaps) {
             var eventOverlaps = Object.values(overlaps).filter(ov => ov.events.findIndex(e => e.id === event.id) > -1);
             if (eventOverlaps.length > 0) {
@@ -547,17 +549,22 @@ function SchedulerController(
                 }
                 var index = eventOverlap.events.findIndex(e => e.id === event.id);
                 top += index * ROW_HEIGHT;
+                overlapCount = index;
             }
+        }
+
+        if (overlapCount < 1) {
+            top += 1;
         }
         
         return {
             top: px(top),
             left: px(left),
-            right: px(right),
+            right: px(right - 1),
             display: 'block',
-            width: px(((right && left) ? (right - left) : 100)),
+            width: px(((right && left) ? (right - left) : 100) - 1),
             position: 'absolute',
-            height: px(ROW_HEIGHT),
+            height: px(ROW_HEIGHT - 1),
             zIndex: $scope.getEventZIndex(event),
         };
     }

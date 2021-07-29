@@ -32,7 +32,7 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource", "projectEvent:scheduler"})
      */
     private $id;
 
@@ -40,7 +40,7 @@ class Project
      * Fr: code chantier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -152,7 +152,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $marketType;
 
@@ -226,7 +226,7 @@ class Project
      * Fr: MONTANT GLOBAL DU MARCHE
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $globalAmount;
 
@@ -234,7 +234,7 @@ class Project
      * Fr: montant des travaux sous-traiter
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $amountSubcontractedWork;
 
@@ -242,7 +242,7 @@ class Project
      * Fr: montant des traveau propre a bbi
      * 
      * @ORM\Column(type="integer", length=255, nullable=true)
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $amountBBISpecificWork;
 
@@ -253,7 +253,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $caseType;
 
@@ -306,7 +306,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project", "scheduler-data"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $prospect;
 
