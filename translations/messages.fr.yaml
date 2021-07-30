@@ -12,6 +12,7 @@ menu:
     project_list: 'Liste des projets'
     project_management: 'Gestion des projets'
     client_header: 'Client'
+    project_schedule: 'Carnet de commande'
 
 action:
   action: 'Action'
