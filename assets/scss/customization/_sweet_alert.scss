@@ -1,5 +1,7 @@
 // $swal2-icon-size: 2rem;
-$swal2-title-font-size: (20 / 16) * 1rem;
+@use 'sass:math';
+
+$swal2-title-font-size: math.div(20, 16) * 1rem;
 $swal2-content-font-size: 1rem;
 $swal2-input-font-size: 1rem;
 // $swal2-close-button-font-size: 2.5em !default;

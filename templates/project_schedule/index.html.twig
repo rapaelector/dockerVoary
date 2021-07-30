@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app_project_schedule') }}
+{% endblock %}
+
+
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: '',
+        links: [],
+    } %}
+        {% block extra_title %}    
+            <input date-range-picker options="options.dateRangePicker" class="form-control date-picker" type="text" ng-model="data.date" />
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover"
+    style="height: auto;"
+    ng-app="projectScheduleApp"
+    ng-controller="projectScheduleController"
+{% endblock %}
+
+
+{% block content %}
+    {% include 'project_schedule/ng/index.html.twig' %}
+    <div class="container-fluid">
+        <div ng-if="data.resources">
+            <app-scheduler
+                class="app-scheduler"
+                resources="data.resources"
+                columns="data.columns"
+                start="data.date.startDate"
+                end="data.date.endDate"
+                options="options.scheduler"
+                header-year-class-name="options.headerYearClassName"
+                header-month-class-name="options.headerMonthClassName"
+                header-week-class-name="options.headerWeekClassName"
+                on-row-click="onRowClick"
+                on-column-header-click="onColumnHeaderClick"
+                on-header-year-click="onHeaderYearClick"
+                on-header-month-click="onHeaderMonthClick"
+                on-header-week-click="onHeaderWeekClick"
+                on-cell-click="onCellClick"
+                events="data.events"
+                on-event-click="onEventClick"
+            ></app-scheduler>
+        </div>
+        <div class="loader" ng-if="loadingResources || loadingEvents">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app_project_schedule') }}
+{% endblock %}
+

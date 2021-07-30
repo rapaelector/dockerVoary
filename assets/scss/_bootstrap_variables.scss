@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /**
  * Override Bootstrap's default variables
  */
@@ -9,7 +11,7 @@ $app-primary: #2e3192;
 $app-secondary: #f69c4a;
 
 // body font size
-$font-size-base: (14 / 16) * 1rem;
+$font-size-base: math.div(14, 16) * 1rem;
 
 // body font family
 $font-family-base: Roboto;

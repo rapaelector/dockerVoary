@@ -24,6 +24,11 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
         return $http.post(fosJsRouting.generate('project.ng.project_follow_up', { id: projectId }), formData);
     };
 
+    /**
+     * 
+     * @param {object} project 
+     * @returns {object} parsedProject
+     */
     _this.parseProject = function(project) {
         var res = {...project };
         var map = ['businessCharge', 'contact', 'economist', 'ocbsDriver', 'prospect', 'recordAssistant', 'tceDriver'];
@@ -50,6 +55,24 @@ function ProjectService($http, fosJsRouting, PROJECT_ID) {
             }
         }
 
+        return res;
+    };
+
+    _this.parseEvents = function (events) {
+        var res = [...events];
+        
+        if (res.length > 0) {
+            for (var item in res) {
+                if (res[item] && res[item].start) {
+                    res[item].start = moment(res[item].start);
+                }
+                if (res[item] && res[item].end) {
+                    res[item].end = moment(events[item].end);
+                }
+            }
+        }
+
+        console.info({res});
         return res;
     };
 

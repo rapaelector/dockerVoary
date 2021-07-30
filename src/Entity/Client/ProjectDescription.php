@@ -7,6 +7,7 @@ use App\Entity\Traits\Client\ProjectDescriptionTrait;
 use App\Repository\Client\ProjectDescriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectDescriptionRepository::class)
@@ -36,6 +37,7 @@ class ProjectDescription
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Groups({"project:scheduler-resource"})
      */
     private $area;
 
