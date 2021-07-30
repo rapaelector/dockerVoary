@@ -49,6 +49,9 @@ class ProjectEvent
         self::EVENT_TYPE_SUBCONTRACTING => '#da9694',
         self::EVENT_TYPE_SHADE_HOUSE => '#1f497d',
     ];
+
+    const PAYMENT_BACKGROUND_COLOR = 'transparent';
+    const PAYMENT_COLOR = '#000';
     ////////////////////// END OF EVENT TYPE //////////////////
 
     /**

@@ -43,6 +43,11 @@ $weekSize: 8px;
     .scheduler-weeks {
         font-size: $weekSize;
     }
+    .scheduler-event {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @include _schedule;

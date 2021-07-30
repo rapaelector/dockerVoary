@@ -829,7 +829,11 @@ function SchedulerController(
      * @param {number} eventIndex 
      */
     $scope.getEventClass = function (event, eventIndex) {
-        var res = ['schedule-event-' + event.resource];
+        var res = [SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.resource];
+
+        if (event.group) {
+            res.push(SCHEDULER_EVENT_CLASS + '-group-' + event.group);
+        }
 
         return res;
     }

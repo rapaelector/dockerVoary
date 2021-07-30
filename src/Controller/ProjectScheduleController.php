@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\ProjectEvent;
 use App\Entity\Constants\Project as ProjectConstants;
+use App\Service\Project\ProjectEventService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +51,8 @@ class ProjectScheduleController extends AbstractController
         Request $request, 
         EntityManagerInterface $em, 
         SerializerInterface $serializer,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        ProjectEventService $projectEventService
     )
     {
         $resEvents = [];
@@ -58,7 +60,9 @@ class ProjectScheduleController extends AbstractController
         $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
         $events = $em->getRepository(ProjectEvent::class)->getEventsBetweenDate($start, $end);
         $normalizedEvents = $serializer->normalize($events, 'json', ['groups' => 'projectEvent:scheduler']);
+        $paymentEvents = $projectEventService->getPaymentEvents($events);
+        $res = array_merge($normalizedEvents, $paymentEvents);
 
-        return $this->json($normalizedEvents);
+        return $this->json($res);
     }
 }

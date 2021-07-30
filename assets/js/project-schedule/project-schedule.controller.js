@@ -23,7 +23,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
             },
             event: {
                 zIndex: {
-                    'group-test': 10000,
+                    'payment': 99999,
                 }
             }
         },
