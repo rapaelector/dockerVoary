@@ -61,8 +61,7 @@ class ProjectScheduleController extends AbstractController
         $events = $em->getRepository(ProjectEvent::class)->getEventsBetweenDate($start, $end);
         $normalizedEvents = $serializer->normalize($events, 'json', ['groups' => 'projectEvent:scheduler']);
         $paymentEvents = $projectEventService->getPaymentEvents($events);
-        $res = array_merge($normalizedEvents, $paymentEvents);
 
-        return $this->json($res);
+        return $this->json(array_merge($normalizedEvents, $paymentEvents));
     }
 }
