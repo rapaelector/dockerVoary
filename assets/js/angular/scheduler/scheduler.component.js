@@ -25,6 +25,8 @@ function SchedulerController(
     SCHEDULER_HEADER_YEAR_CLASS,
     SCHEDULE_RESOURCE_HEADER_CLASS,
     SCHEDULE_HEADER,
+    BUBBLE_DEFAULT_WIDTH,
+    BUBBLE_CLASS,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -40,6 +42,7 @@ function SchedulerController(
     $scope.events = [];
     $scope.mdPanelRef = null;
     $scope.triggerTimeout = null;
+    $scope.bubbleDefaultConfig = {};
 
     this.$onInit = function () {
         $(function () {
@@ -54,6 +57,10 @@ function SchedulerController(
         $scope.defaultOptions = {
             event: {
                 bubbleDelay: DEFAULT_BUBBLE_TIMEOUT,
+                bubbleHtml: {
+                    zIndex: EVENT_Z_INDEX,
+                    width: px(BUBBLE_DEFAULT_WIDTH),
+                },
             },
             cell: {
                 width: DEFAULT_CELL_WIDTH,
@@ -92,7 +99,6 @@ function SchedulerController(
 
     $scope.$watch('$ctrl.events', function () {
         if ($scope.$ctrl.events) {
-            console.info($scope.$ctrl.events);
             $scope.events = $scope.$ctrl.events;
         }
     }, true);
@@ -699,7 +705,11 @@ function SchedulerController(
             /**
              * Set bubble z-index to avoid hidden bubble view
              */
-            var bubbleIndex = EVENT_Z_INDEX + $scope.events.length + 10;
+            var panelClass = [BUBBLE_CLASS];
+            if (event.group) {
+                panelClass.push(BUBBLE_CLASS + '-group-' + event.group);
+            }
+
             var posX = 'center';
             var position = $mdPanel.newPanelPosition()
                 .relativeTo(jsEvent.target)
@@ -707,30 +717,36 @@ function SchedulerController(
     
             var from = $(jsEvent.target).offset();
             from.top += $(jsEvent.target).outerHeight();
-            var panelAnimation = $mdPanel.newPanelAnimation()
-                .openFrom(jsEvent.target)
-                .duration(200)
-                .closeTo(jsEvent.target)
-                .withAnimation($mdPanel.animation.FADE);
+            
     
-            var config = {
-                attachTo: angular.element(document.body),
-                controller: EventDetailDialogController,
-                controllerAs: 'ctrl',
-                templateUrl: 'event-detail-panel.html',
-                panelClass: 'event-detail-panel',
+            // var config = {
+            //     attachTo: angular.element(document.body),
+            //     controller: EventDetailDialogController,
+            //     controllerAs: 'ctrl',
+            //     templateUrl: 'event-detail-panel.html',
+            //     panelClass: panelClass.join(' '),
+            //     position: position,
+            //     animation: panelAnimation,
+            //     locals: {
+            //         activeEvent: event,
+            //     },
+            //     hasBackdrop: false,
+            //     openFrom: jsEvent,
+            //     propagateContainerEvents: true,
+            //     zIndex: bubbleIndex,
+            //     groupName: 'bubble',
+            // };
+
+            var config = $scope.buildBubbleConfig({
+                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+                panelClass: panelClass.join(' '),
                 position: position,
-                animation: panelAnimation,
+                jsEvent: jsEvent,
+                groupName: event.group,
                 locals: {
                     activeEvent: event,
-                    zIndex: bubbleIndex,
                 },
-                hasBackdrop: false,
-                openFrom: jsEvent,
-                propagateContainerEvents: true,
-                zIndex: bubbleIndex,
-                groupName: 'bubble',
-            };
+            });
 
             $scope.closeBubblePanel();
             $mdPanel.open(config).then(ref => $scope.mdPanelRef = ref);
@@ -744,11 +760,49 @@ function SchedulerController(
         }
     };
 
+    /**
+     * 
+     * @param {object} options
+     *  - structure
+     *      {
+     *          panelClass: string
+     *          zIndex: number
+     *          locals: object {activeEvent}
+     *          jsEvent: object,
+     *          group: string,
+     *          position: 
+     *      } 
+     */
+    $scope.buildBubbleConfig = function (options) {
+        var panelAnimation = $mdPanel.newPanelAnimation()
+                .openFrom(options.jsEvent.target)
+                .duration(200)
+                .closeTo(options.jsEvent.target)
+                .withAnimation($mdPanel.animation.FADE)
+            ;
+
+        return {
+            attachTo: angular.element(document.body),
+            controller: EventDetailDialogController,
+            controllerAs: 'ctrl',
+            templateUrl: 'event-detail-panel.html',
+            panelClass: [BUBBLE_CLASS, resolverService.resolve([options, 'panelClass'], '')].join(' '),
+            position: resolverService.resolve([options, 'position'], {}),
+            animation: panelAnimation,
+            locals: resolverService.resolve([options, 'locals'], {}),
+            hasBackdrop: false,
+            openFrom: resolverService.resolve([options, 'jsEvent']),
+            propagateContainerEvents: true,
+            zIndex: resolverService.resolve([options, 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+            groupName: resolverService.resolve([options, 'group'], ''),
+        };
+    };
+
     $scope.closeBubblePanel = function () {
-        if ($scope.mdPanelRef) {
-            $scope.mdPanelRef.close();
-            $scope.mdPanelRef = null;
-        }
+        // if ($scope.mdPanelRef) {
+        //     $scope.mdPanelRef.close();
+        //     $scope.mdPanelRef = null;
+        // }
     };
 
     /**
@@ -845,6 +899,11 @@ function SchedulerController(
      */
     $scope.showEventDetailDialog = function (event, jsEvent) {
         if (event.bubbleHtml) {
+            var panelClass = [BUBBLE_CLASS];
+            if (event.group) {
+                panelClass.push(BUBBLE_CLASS + '-group-' + event.group);
+            }
+
             var posX = 'center';
             var position = $mdPanel.newPanelPosition()
                 .relativeTo(jsEvent.target)
@@ -856,25 +915,37 @@ function SchedulerController(
                 .openFrom(jsEvent.target)
                 .duration(200)
                 .closeTo(jsEvent.target)
-                .withAnimation($mdPanel.animation.FADE);
+                .withAnimation($mdPanel.animation.FADE)
+            ;
     
-            var config = {
-                attachTo: angular.element(document.body),
-                controller: EventDetailDialogController,
-                controllerAs: 'ctrl',
-                templateUrl: 'event-detail-panel.html',
-                panelClass: 'event-detail-panel',
+            // var config = {
+            //     attachTo: angular.element(document.body),
+            //     controller: EventDetailDialogController,
+            //     controllerAs: 'ctrl',
+            //     templateUrl: 'event-detail-panel.html',
+            //     panelClass: panelClass.join(' '),
+            //     position: position,
+            //     animation: panelAnimation,
+            //     locals: {
+            //         activeEvent: event,
+            //         width: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'width'], $scope.defaultOptions.event.bubbleHtml.width),
+            //     },
+            //     hasBackdrop: false,
+            //     openFrom: jsEvent,
+            //     propagateContainerEvents: true,
+            //     zIndex: resolverService.resolve([$scope, 'options', 'event', 'bubbleHtml', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+            //     groupName: 'bubble',
+            // };
+            var config = $scope.buildBubbleConfig({
+                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+                panelClass: panelClass.join(' '),
                 position: position,
-                animation: panelAnimation,
+                jsEvent: jsEvent,
+                groupName: event.group,
                 locals: {
                     activeEvent: event,
                 },
-                hasBackdrop: false,
-                openFrom: jsEvent,
-                propagateContainerEvents: true,
-                zIndex: 200,
-                groupName: 'bubble',
-            };
+            });
 
             if ($scope.mdPanelRef) {
                 $scope.mdPanelRef.close();
@@ -922,6 +993,8 @@ SchedulerController.$inject = [
     'SCHEDULER_HEADER_YEAR_CLASS',
     'SCHEDULE_RESOURCE_HEADER_CLASS',
     'SCHEDULE_HEADER',
+    'BUBBLE_DEFAULT_WIDTH',
+    'BUBBLE_CLASS',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -978,6 +1051,21 @@ angular.module('schedulerModule').component('appScheduler', {
         end: '=',
         /**
          * Object
+         * Structure with default config
+         *  {
+         *       defaultCellWidth: DEFAULT_CELL_WIDTH, 24
+         *       cell: {
+         *           width: 24,
+         *       },
+         *       event: {
+         *           zIndex: {
+         *               'payment': 9999,
+         *           },
+         *           bubbleHtml: {
+         *               zIndex: 9999999,
+         *          }
+         *       }
+         *   }
          */
         options: '=',
         /**

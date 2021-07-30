@@ -24,6 +24,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
             event: {
                 zIndex: {
                     'payment': 9999,
+                },
+                bubbleHtml: {
+                    zIndex: 9999999,
+                    width: '300px',
                 }
             }
         },

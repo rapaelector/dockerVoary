@@ -186,6 +186,13 @@ $cellBorder: $borderWidth solid $borderColorDark;
       }
     }
   }
+
+  .scheduler-event-bubble-html-group-payment md-dialog {
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
+    text-align: center;
+  }
 }
 
 @mixin _scheduler {

@@ -11,3 +11,5 @@ angular.module('schedulerModule').constant('SCHEDULER_HEADER_MONTH_CLASS', 'sche
 angular.module('schedulerModule').constant('SCHEDULER_HEADER_YEAR_CLASS', 'scheduler-year');
 angular.module('schedulerModule').constant('SCHEDULE_RESOURCE_HEADER_CLASS', 'scheduler-resource-header');
 angular.module('schedulerModule').constant('SCHEDULE_HEADER', 'scheduler-header');
+angular.module('schedulerModule').constant('BUBBLE_DEFAULT_WIDTH', 200);
+angular.module('schedulerModule').constant('BUBBLE_CLASS', 'scheduler-event-bubble-html');

@@ -39,7 +39,7 @@ class ProjectEventService
                     'group' => 'payment',
                     'backgroundColor' => ProjectEvent::PAYMENT_BACKGROUND_COLOR,
                     'color' => ProjectEvent::PAYMENT_COLOR,
-                    'bubbleHtml' => $amount,
+                    'bubbleHtml' => number_format($amount, 2, ',', '.') .' €',
                 ]);
             }
         }
