@@ -58,4 +58,17 @@ trait ProjectEventTrait
 
         return $res;
     }
+
+    /**
+     * @Groups({"projectEvent:scheduler"})
+     */
+    public function getBubbleHtml()
+    {
+        $bubble = sprintf('
+            <div class="text-center"> %s — %s </div>
+            ', $this->start->format('Y/m/d'), $this->end->format('Y/m/d')
+        );
+
+        return $bubble;
+    }
 }

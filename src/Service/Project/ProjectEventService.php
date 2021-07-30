@@ -35,7 +35,7 @@ class ProjectEventService
                 $res[] = array_merge($result, [
                     'id' => uniqid($event->getId()),
                     'resource' => $event->getResource(),
-                    'title' => 'aaa-' .$event->getId(),
+                    'title' => $amount,
                     'group' => 'payment',
                     'backgroundColor' => ProjectEvent::PAYMENT_BACKGROUND_COLOR,
                     'color' => ProjectEvent::PAYMENT_COLOR,

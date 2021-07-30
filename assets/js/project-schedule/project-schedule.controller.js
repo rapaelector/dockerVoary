@@ -28,7 +28,14 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
                 bubbleHtml: {
                     zIndex: 9999999,
                     width: '300px',
-                }
+                },
+                titleFormatter:  function (title, event) {
+                    return (event.group == 'payment') ? '▮▮' : title;
+                },
+                bubbleDelay: {
+                    payment: 100,
+                    default: 400,
+                },
             }
         },
         headerYearClassName: 'year-class text-center',
@@ -37,6 +44,8 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
     };
 
     this.$onInit = function() {
+        $scope.loadingResources = true;
+        $scope.loadingEvents = true;
         $scope.options.dateRangePicker = {
             autoApply: true,
             autoClose: true,
@@ -55,6 +64,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
         
         projectSchedulerService.getResources($scope.data.date).then(function (response) {
             $scope.data.resources = resolverService.resolve([response, 'data', 'resources'], []);
+            $scope.loadingResources = false;
         });
         $scope.updateEvents();
     };
@@ -64,8 +74,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
     }, true);
 
     $scope.updateEvents = function () {
+        $scope.loadingEvents = true;
         projectSchedulerService.getEvents($scope.data.date).then(function (events) {
             $scope.data.events = events;
+            $scope.loadingEvents = false;
         });
     };
 
@@ -76,9 +88,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} column 
      * @param {number} columnIndex 
      */
-    $scope.onRowClick = function (resource, column, columnIndex) {
-        console.info('onRowClick called !!', {resource, column, columnIndex});
-    }
+    $scope.onRowClick = function (resource, column, columnIndex) {}
 
     /**
      * Column header click event
@@ -86,9 +96,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} column 
      * @param {number} columnIndex 
      */
-    $scope.onColumnHeaderClick = function (column, columnIndex) {
-        console.info('onColumnHeaderClick called !!', {column, columnIndex});
-    }
+    $scope.onColumnHeaderClick = function (column, columnIndex) {}
 
     /**
      * Header year click event
@@ -96,9 +104,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} yearObject 
      * @param {number} yearIndex 
      */
-    $scope.onHeaderYearClick = function (yearObject, yearIndex) {
-        console.info('onHeaderYearClick called !!', {yearObject, yearIndex});
-    }
+    $scope.onHeaderYearClick = function (yearObject, yearIndex) {}
 
     /**
      * Header month click event
@@ -106,9 +112,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} monthObject 
      * @param {number} monthIndex 
      */
-    $scope.onHeaderMonthClick = function (monthObject, monthIndex) {
-        console.info('onHeaderMonthClick called !!', {monthObject, monthIndex});
-    }
+    $scope.onHeaderMonthClick = function (monthObject, monthIndex) {}
 
     /**
      * Header week click event
@@ -116,9 +120,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} weekObject 
      * @param {number} weekIndex 
      */
-    $scope.onHeaderWeekClick = function (weekObject, weekIndex) {
-        console.info('onHeaderWeekClick called !!', {weekObject, weekIndex});
-    }
+    $scope.onHeaderWeekClick = function (weekObject, weekIndex) {}
 
     /**
      * week cell click event
@@ -128,11 +130,14 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {number} weekIndex 
      * @param {number} resourceIndex 
      */
-    $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {
-        console.info('onCellClick called !!', {resource, week, weekIndex, resourceIndex});
-    }
+    $scope.onCellClick = function (resource, week, weekIndex, resourceIndex) {}
 
-    $scope.onEventClick = function (event, eventIndex, jsEvent) {
-        console.info('Hello you click the event');
-    }
+    /**
+     * Handle event click
+     * 
+     * @param {object} event 
+     * @param {number} eventIndex 
+     * @param {object} jsEvent 
+     */
+    $scope.onEventClick = function (event, eventIndex, jsEvent) {}
 }]);

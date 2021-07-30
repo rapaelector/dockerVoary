@@ -72,9 +72,10 @@
             ng-style="getEventStyle(event, eventIndex)"
             ng-init="eventIndex = $index"
             ng-mouseenter="onEventMouseEnter(event, eventIndex, $event)"
-            ng-mouseleave="onEventMouseLeave(event, eventIndex, $event)"        >
+            ng-mouseleave="onEventMouseLeave(event, eventIndex, $event)"
+        >
             <div class="scheduler-event-inner">
-                <div>{{ event.title }}</div>
+                <div ng-bind-html="formatTitle(event)"></div>
             </div>
         </div>
     </div>

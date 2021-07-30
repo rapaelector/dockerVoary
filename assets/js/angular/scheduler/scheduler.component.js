@@ -617,10 +617,15 @@ function SchedulerController(
      * @param {number} eventIndex 
      */
     $scope.onEventMouseEnter = function (event, eventIndex, jsEvent) {
+        var bubbleDelay = $scope.getOption('event.bubbleDelay');
+        if (typeof bubbleDelay === 'object') {
+            bubbleDelay = resolverService.resolve([bubbleDelay, event.group], resolverService.resolve([bubbleDelay, 'default'], DEFAULT_BUBBLE_TIMEOUT));
+        }
+
         $scope.cancelBubblePanel();
         $scope.triggerTimeout = $timeout(function () {
             $scope.showEventDetailDialog(event, jsEvent);
-        }, $scope.getOption('event.bubbleDelay'));
+        }, bubbleDelay);
     };
 
     /**
@@ -717,28 +722,9 @@ function SchedulerController(
     
             var from = $(jsEvent.target).offset();
             from.top += $(jsEvent.target).outerHeight();
-            
-    
-            // var config = {
-            //     attachTo: angular.element(document.body),
-            //     controller: EventDetailDialogController,
-            //     controllerAs: 'ctrl',
-            //     templateUrl: 'event-detail-panel.html',
-            //     panelClass: panelClass.join(' '),
-            //     position: position,
-            //     animation: panelAnimation,
-            //     locals: {
-            //         activeEvent: event,
-            //     },
-            //     hasBackdrop: false,
-            //     openFrom: jsEvent,
-            //     propagateContainerEvents: true,
-            //     zIndex: bubbleIndex,
-            //     groupName: 'bubble',
-            // };
 
             var config = $scope.buildBubbleConfig({
-                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubbleHtml', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
                 panelClass: panelClass.join(' '),
                 position: position,
                 jsEvent: jsEvent,
@@ -793,16 +779,16 @@ function SchedulerController(
             hasBackdrop: false,
             openFrom: resolverService.resolve([options, 'jsEvent']),
             propagateContainerEvents: true,
-            zIndex: resolverService.resolve([options, 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+            zIndex: resolverService.resolve([options, 'bubbleIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
             groupName: resolverService.resolve([options, 'group'], ''),
         };
     };
 
     $scope.closeBubblePanel = function () {
-        // if ($scope.mdPanelRef) {
-        //     $scope.mdPanelRef.close();
-        //     $scope.mdPanelRef = null;
-        // }
+        if ($scope.mdPanelRef) {
+            $scope.mdPanelRef.close();
+            $scope.mdPanelRef = null;
+        }
     };
 
     /**
@@ -917,27 +903,8 @@ function SchedulerController(
                 .closeTo(jsEvent.target)
                 .withAnimation($mdPanel.animation.FADE)
             ;
-    
-            // var config = {
-            //     attachTo: angular.element(document.body),
-            //     controller: EventDetailDialogController,
-            //     controllerAs: 'ctrl',
-            //     templateUrl: 'event-detail-panel.html',
-            //     panelClass: panelClass.join(' '),
-            //     position: position,
-            //     animation: panelAnimation,
-            //     locals: {
-            //         activeEvent: event,
-            //         width: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'width'], $scope.defaultOptions.event.bubbleHtml.width),
-            //     },
-            //     hasBackdrop: false,
-            //     openFrom: jsEvent,
-            //     propagateContainerEvents: true,
-            //     zIndex: resolverService.resolve([$scope, 'options', 'event', 'bubbleHtml', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
-            //     groupName: 'bubble',
-            // };
             var config = $scope.buildBubbleConfig({
-                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubble', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
+                bubbleIndex: resolverService.resolve([$scope, 'options', 'event', 'bubbleHtml', 'zIndex'], $scope.defaultOptions.event.bubbleHtml.zIndex),
                 panelClass: panelClass.join(' '),
                 position: position,
                 jsEvent: jsEvent,
@@ -968,6 +935,14 @@ function SchedulerController(
             $scope.mdPanelRef = null;
         }
     };
+
+    $scope.formatTitle = function (event) {
+        if (resolverService.resolve([$scope, 'options', 'event', 'titleFormatter'], null)) {
+            return $scope.options.event.titleFormatter(event.title, event);
+        }
+
+        return event.title;
+    }
 }
 
 SchedulerController.$inject = [
@@ -1063,7 +1038,11 @@ angular.module('schedulerModule').component('appScheduler', {
          *           },
          *           bubbleHtml: {
          *               zIndex: 9999999,
-         *          }
+         *          },
+         *          titleFormatter: function (title, event) {
+         *              
+         *          },
+         *          bubbleDelay: number | object {group: number, default: number}
          *       }
          *   }
          */
@@ -1075,10 +1054,12 @@ angular.module('schedulerModule').component('appScheduler', {
         headerYearClassName: '=',
         /**
          * Header month class name
+         * String
          */
         headerMonthClassName: '=',
         /**
          * Header week class name
+         * String
          */
         headerWeekClassName: '=',
         // SCHEDULER EVENTS HANDLER
@@ -1193,9 +1174,26 @@ angular.module('schedulerModule').component('appScheduler', {
          */
         onCellClick: '=',
         /**
-         * - Event click 
+         * - Event click callback
          */
         onEventClick: '=',
+        /**
+         * - Array of object
+         *      structure:
+         *          [
+         *              {
+         *                  backgroundColor: "#1f497d"
+         *                  end: "2021-01-23T00:00:00+00:00"
+         *                  id: 14
+         *                  project: {id: 3}
+         *                  resource: 3
+         *                  start: "2020-12-31T00:00:00+00:00"
+         *                  type: "shade_house"
+         *                  
+         *              },
+         *              {...}
+         *          ]
+         */
         events: '=',
     }
 });

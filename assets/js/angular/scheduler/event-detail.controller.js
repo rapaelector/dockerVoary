@@ -10,11 +10,6 @@ function EventDetailDialogController ($scope, $http, $mdDialog, activeEvent) {
 
 	$scope.getEventDetailStyle = function () {
 		return {};
-		// return {
-		// 	width: width,
-		// 	minWidth: width,
-		// 	maxWidth: width,
-		// };
 	}
 }
 

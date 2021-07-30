@@ -193,6 +193,30 @@ $cellBorder: $borderWidth solid $borderColorDark;
     min-width: 120px;
     text-align: center;
   }
+
+  .app-scheduler .scheduler-events .scheduler-event-inner {
+    justify-content: center;
+    letter-spacing: -1px;
+    font-size: 8px;
+    > div {
+      overflow: hidden;
+    }
+  }
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #00000047;
+    z-index: 1040;
+    md-progress-circular {
+        position: relative;
+        left: 50%;
+        top: 40%;
+    }
+  }
 }
 
 @mixin _scheduler {
