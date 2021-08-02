@@ -2,6 +2,7 @@ angular.module('schedulerModule').constant('DEFAULT_CELL_WIDTH', 24);
 angular.module('schedulerModule').constant('DEFAULT_DATE_FORMAT', 'YYYY-MM-DD');
 angular.module('schedulerModule').constant('SCHEDULER_COLUMN_CLASS', 'scheduler-column');
 angular.module('schedulerModule').constant('SCHEDULER_EVENT_CLASS', 'scheduler-event');
+angular.module('schedulerModule').constant('SCHEDULER_COLUMN_HEADER', 'scheduler-column-header');
 angular.module('schedulerModule').constant('EVENT_Z_INDEX', 1000);
 angular.module('schedulerModule').constant('ROW_HEIGHT', 24);
 angular.module('schedulerModule').constant('DEFAULT_BUBBLE_TIMEOUT', 400);

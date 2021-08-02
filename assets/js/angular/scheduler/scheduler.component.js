@@ -27,6 +27,7 @@ function SchedulerController(
     SCHEDULE_HEADER,
     BUBBLE_DEFAULT_WIDTH,
     BUBBLE_CLASS,
+    SCHEDULER_COLUMN_HEADER,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -174,11 +175,55 @@ function SchedulerController(
      * @param {object} column 
      * @returns {object} object of style
      */
-    $scope.getColumnWidth = function (column) {
-        return column.width ? {
-            'width': px(parseInt(column.width)),
-            'min-width': px(parseInt(column.width)),
-        } : {};
+    $scope.getResourceHeaderColumnStyle = function (column, columnIndex) {
+        var style = {};
+        var stickynessStyle = $scope.getSticknessStyle(column, columnIndex, false);
+        if (column.width) {
+            style.width = px(parseInt(column.width));
+            style.minWidth = px(parseInt(column.width));
+        }
+
+        return {...style, ...stickynessStyle};
+    };
+
+    /**
+     * 
+     * @param {object} column 
+     * @param {number} columnIndex
+     * @returns {object} style
+     */
+    $scope.getResourceColumnStyle = function (column, columnIndex) {
+        var style = {};
+        var stickynessStyle = $scope.getSticknessStyle(column, columnIndex, true);
+
+        return {...style, ...stickynessStyle};
+    };
+
+    /**
+     * 
+     * @param {object} column 
+     * @param {number} columnIndex 
+     * @returns {object} style
+     */
+    $scope.getSticknessStyle = function (column, columnIndex, debug) {
+        var style = {};
+        var left = 0;
+        if (column.sticky) {
+            $scope.$ctrl.columns.filter((c, index) => c.sticky && (index < columnIndex)).forEach((c, index) => {
+                const header$ = $('#' + $scope.getResourceHeaderId(c, index));
+                if (header$.length) {
+                    left += header$.width();
+                }
+            });
+            style.position = 'sticky';
+            style.left = left;
+        }
+
+        return style;
+    };
+
+    $scope.getResourceHeaderId = function (column, columnIndex) {
+        return [SCHEDULER_COLUMN_HEADER, column.field.replaceAll('.', '-'), columnIndex].join('-');
     };
 
     /**
@@ -254,20 +299,11 @@ function SchedulerController(
      * 
      * @returns {object} object of style
      */
-    $scope.columnMergeStyle = function () {
+    $scope.columnMergeStyle = function (column, columnIndex) {
         var width = 0;
-        if (!$scope.$ctrl.columns) {
-            return;
-        }
-
-        for (const i in $scope.$ctrl.columns) {
-            if (isNaN(parseInt($scope.$ctrl.columns[i].width))) {
-                return {width: 'auto'};
-            }
-            width += parseInt($scope.$ctrl.columns[i].width);
-        }
-
-        return { width: width };
+        var columnMergeSticky = $scope.getSticknessStyle(column, columnIndex);
+        
+        return {...columnMergeSticky};
     };
 
     /**
@@ -970,6 +1006,7 @@ SchedulerController.$inject = [
     'SCHEDULE_HEADER',
     'BUBBLE_DEFAULT_WIDTH',
     'BUBBLE_CLASS',
+    'SCHEDULER_COLUMN_HEADER',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {

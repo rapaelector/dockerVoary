@@ -2,7 +2,13 @@
     <table class="scheduler-table" ng-style="styles.table">
         <thead>
             <tr>
-                <th colspan="{{ $ctrl.columns.length }}" rowspan="2" ng-style="columnMergeStyle()"></th>
+                <th 
+                    rowspan="2" 
+                    widht="{{ column.width }}"
+                    class="empty-column-header"
+                    ng-repeat="column in $ctrl.columns"
+                    ng-style="columnMergeStyle(column, $index)"
+                ></th>
                 <!-- Year -->
                 <th
                     ng-repeat="year in years" 
@@ -28,9 +34,9 @@
                 <th
                     ng-repeat="column in $ctrl.columns"
                     ng-class="getHeaderCellClassName(column)"
-                    ng-init="columnIndex = $index"
-                    ng-style="getColumnWidth(column)"
-                    ng-click="onColumnHeaderClick(column, columnIndex)"
+                    id="{{ getResourceHeaderId(column, $index) }}"
+                    ng-style="getResourceHeaderColumnStyle(column, $index)"
+                    ng-click="onColumnHeaderClick(column, $index)"
                 >
                     {{ column.label }}
                 </th>
@@ -51,7 +57,8 @@
                     ng-repeat="column in $ctrl.columns"
                     ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
                     ng-class="getCellClassName(resource, column, resourceIndex)"
-                    ng-click="onRowClick(resource, column, columnIndex)"
+                    ng-click="onRowClick(resource, column, $index)"
+                    ng-style="getResourceColumnStyle(column, $index)"
                 ></td>
                 <th
                     ng-repeat="week in weeks track by $index"
@@ -59,7 +66,7 @@
                     ng-class="getDateCellClassName(resource, week, weekIndex, resourceIndex)"
                     ng-style="getCellStyle(resource, week, weekIndex, resourceIndex)"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
-                    id="{{ getCellId(resource, week) }}"
+                    id="{{ getColumnHeaderId(resource, week) }}"
                 ></th>
             </tr>
         </tbody>

@@ -47,9 +47,11 @@ $cellBorder: $borderWidth solid $borderColorDark;
         tr {
           &:first-child {
             th, td {
-              &:first-child {
+              &.empty-column-header {
                 border-top: 0;
                 border-left: 0;
+                border-right: 0;
+                background: #f4f6f9;
               }
             }
           }
