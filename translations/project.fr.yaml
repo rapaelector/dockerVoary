@@ -23,6 +23,7 @@ title:
   archived_project: 'Archiver le dossier'
   submit_project: 'Demande de validation du dossier'
   project_status: 'Etat du project'
+  order_book_schedule: 'Échéancier du carnet de commande'
 
 label:
   action: Action
@@ -46,6 +47,7 @@ label:
   type_relaunch: 'DERNIÈRE RELANCE'
   project_lose_reason: 'Raison de la perte du projet'
   note_taking: 'Prise de note'
+  period: 'Période'
 
 contact:
   label: Contact

@@ -23,10 +23,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
             },
             event: {
                 zIndex: {
-                    'payment': 9999,
+                    'payment': 1500,
                 },
                 bubbleHtml: {
-                    zIndex: 9999999,
+                    zIndex: 2000,
                     width: '300px',
                 },
                 titleFormatter:  function (title, event) {
@@ -53,12 +53,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
                 format: 'DD/MM/YYYY'
             },
             ranges: {
-                "Aujourd'hui": [moment(), moment()],
-                "Hier": [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                "Les 7 derniers jours": [moment().subtract(6, 'days'), moment()],
-                "Les 30 derniers jours": [moment().subtract(29, 'days'), moment()],
-                "Ce mois": [moment().startOf('month'), moment().endOf('month')],
-                "Le mois dernier": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                "Les 6 dérnier mois": [moment(moment().endOf('month').add(-6, 'month').startOf('month')), moment(moment().endOf('month').add(-1, 'month'))],
+                "Année dérniere": [moment(moment().add(-1, 'year').format('YYYY') + '-01-01'), moment(moment().add(-1, 'year').format('YYYY') + '-12-31')],
+                "6 prochains mois": [moment(), moment().add(6, 'month')],
+                "12 prochains mois": [moment(), moment().add(12, 'month').endOf('month')],
+                "12 mois glissant": [moment(), moment().add(1, 'year').endOf('month')],
             },
         };
         

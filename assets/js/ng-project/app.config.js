@@ -20,3 +20,26 @@ angular.module('projectApp').constant('PROJECT_ID', window.PROJECT_ID);
 angular.module('projectApp').constant('APP_MESSAGES', window.APP_MESSAGES);
 
 angular.module('projectApp').constant('PROJECT_EVENT_TYPES', window.PROJECT_EVENT_TYPES);
+
+angular.module('projectApp').constant('DATE_FORMAT', 'DD/MM/YYYY');
+
+angular.module('projectApp').config(['$mdDateLocaleProvider', 'DATE_FORMAT', function ($mdDateLocaleProvider, DATE_FORMAT) {
+    /**
+     * @param date {Date}
+     * @returns {string} string representation of the provided date
+     */
+    $mdDateLocaleProvider.formatDate = function(date) {
+        // return date ? moment(date).format('L') : '';
+        return date ? moment(date).format(DATE_FORMAT) : '';
+    };
+
+    /**
+     * @param dateString {string} string that can be converted to a Date
+     * @returns {Date} JavaScript Date object created from the provided dateString
+     */
+    $mdDateLocaleProvider.parseDate = function(dateString) {
+        // var m = moment(dateString, 'L', true);
+        var m = moment(dateString, DATE_FORMAT, true);
+        return m.isValid() ? m.toDate() : new Date(NaN);
+    };
+}])

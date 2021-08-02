@@ -123,17 +123,11 @@ function ProjectInformationController(
         };
     }, true);
 
-    $scope.$watch('data.events', function () {
-        console.info({events: $scope.data.events});
-    }, true);
+    $scope.$watch('data.events', function () {}, true);
     
-    $scope.$watch('event.start', function () {
-        console.info({events: $scope.data.events});
-    }, true);
+    $scope.$watch('event.start', function () {}, true);
     
-    $scope.$watch('event.end', function () {
-        console.info({event: $scope.event});
-    }, true);
+    $scope.$watch('event.end', function () {}, true);
 
     $scope.helpers = {};
     $scope.helpers.getUsers = function() {
