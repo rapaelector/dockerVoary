@@ -14,3 +14,4 @@ angular.module('schedulerModule').constant('SCHEDULE_RESOURCE_HEADER_CLASS', 'sc
 angular.module('schedulerModule').constant('SCHEDULE_HEADER', 'scheduler-header');
 angular.module('schedulerModule').constant('BUBBLE_DEFAULT_WIDTH', 200);
 angular.module('schedulerModule').constant('BUBBLE_CLASS', 'scheduler-event-bubble-html');
+angular.module('schedulerModule').constant('BACKGROUND_COLOR', '#f4f6f9');

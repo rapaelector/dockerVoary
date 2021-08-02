@@ -3,9 +3,8 @@
         <thead>
             <tr>
                 <th 
-                    rowspan="2" 
-                    widht="{{ column.width }}"
-                    class="empty-column-header"
+                    rowspan="2"
+                    ng-class="getMergeClass()"
                     ng-repeat="column in $ctrl.columns"
                     ng-style="columnMergeStyle(column, $index)"
                 ></th>
@@ -66,7 +65,7 @@
                     ng-class="getDateCellClassName(resource, week, weekIndex, resourceIndex)"
                     ng-style="getCellStyle(resource, week, weekIndex, resourceIndex)"
                     ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
-                    id="{{ getColumnHeaderId(resource, week) }}"
+                    id="{{ getCellId(resource, week) }}"
                 ></th>
             </tr>
         </tbody>

@@ -45,16 +45,16 @@ $cellBorder: $borderWidth solid $borderColorDark;
       }
       thead {
         tr {
-          &:first-child {
-            th, td {
-              &.empty-column-header {
-                border-top: 0;
-                border-left: 0;
-                border-right: 0;
-                background: #f4f6f9;
-              }
-            }
-          }
+          // &:first-child {
+          //   th, td {
+          //     &.empty-column-header {
+          //       border-top: 0;
+          //       border-left: 0;
+          //       border-right: 0;
+          //       background: #f4f6f9;
+          //     }
+          //   }
+          // }
           &:last-child {
             th, td {
               &.scheduler-week {

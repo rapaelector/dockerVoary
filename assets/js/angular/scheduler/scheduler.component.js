@@ -28,6 +28,7 @@ function SchedulerController(
     BUBBLE_DEFAULT_WIDTH,
     BUBBLE_CLASS,
     SCHEDULER_COLUMN_HEADER,
+    BACKGROUND_COLOR,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -66,6 +67,7 @@ function SchedulerController(
             cell: {
                 width: DEFAULT_CELL_WIDTH,
             },
+            backgroundColor: BACKGROUND_COLOR,
         }
     };
 
@@ -208,6 +210,8 @@ function SchedulerController(
     $scope.getSticknessStyle = function (column, columnIndex, debug) {
         var style = {};
         var left = 0;
+        var zIndexes = $scope.getOption(`event.zIndex`) ?? EVENT_Z_INDEX;
+        var zIndex = typeof zIndexes === 'object' ? Math.max(...Object.values(zIndexes)) : zIndexes;
         if (column.sticky) {
             $scope.$ctrl.columns.filter((c, index) => c.sticky && (index < columnIndex)).forEach((c, index) => {
                 const header$ = $('#' + $scope.getResourceHeaderId(c, index));
@@ -217,6 +221,7 @@ function SchedulerController(
             });
             style.position = 'sticky';
             style.left = left;
+            style.zIndex = zIndex + 1 + ($scope.$ctrl.events ? $scope.$ctrl.events.length : 0);
         }
 
         return style;
@@ -300,10 +305,16 @@ function SchedulerController(
      * @returns {object} object of style
      */
     $scope.columnMergeStyle = function (column, columnIndex) {
-        var width = 0;
         var columnMergeSticky = $scope.getSticknessStyle(column, columnIndex);
-        
-        return {...columnMergeSticky};
+        var styles = {
+            width: column.width,
+            backgroundColor: $scope.getOption('backgroundColor'),
+            borderTopColor: $scope.getOption('backgroundColor'),
+            borderLeftColor: $scope.getOption('backgroundColor'),
+            borderRightColor: $scope.getOption('backgroundColor'),
+        };
+
+        return {...styles, ...columnMergeSticky};
     };
 
     /**
@@ -979,6 +990,20 @@ function SchedulerController(
 
         return event.title;
     }
+
+    /**
+     * 
+     * @param {object} resource 
+     * @param {week} week 
+     * @returns {array}
+     */
+    $scope.getCellId = function (resource, week) {
+        return schedulerService.generateCellId(resource.id, week.year, week.weekNumber);
+    }
+
+    $scope.getMergeClass = function () {
+        return '';
+    };
 }
 
 SchedulerController.$inject = [
@@ -1007,6 +1032,7 @@ SchedulerController.$inject = [
     'BUBBLE_DEFAULT_WIDTH',
     'BUBBLE_CLASS',
     'SCHEDULER_COLUMN_HEADER',
+    'BACKGROUND_COLOR',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -1072,15 +1098,15 @@ angular.module('schedulerModule').component('appScheduler', {
          *       event: {
          *           zIndex: {
          *               'payment': 9999,
+         *               _default: number // default z-index if zIndex group have no z-index
          *           },
          *           bubbleHtml: {
          *               zIndex: 9999999,
          *          },
-         *          titleFormatter: function (title, event) {
-         *              
-         *          },
+         *          titleFormatter: function (title, event) {},
          *          bubbleDelay: number | object {group: number, default: number}
-         *       }
+         *       },
+         *       backgroundColor: string "#f4f6f9",
          *   }
          */
         options: '=',
