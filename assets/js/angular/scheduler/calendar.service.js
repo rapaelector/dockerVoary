@@ -43,29 +43,12 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
                     weeks: [],
                 };
             }
-            
-            var firstWeek = moment(current);
-            var lastWeek = moment(current);
-            if (firstWeek.startOf('month').format('d') != 1) {
-                if (firstWeek.startOf('month').format('d') == 0) {
-                    firstWeek = firstWeek.startOf('month').add(1, 'day').day(1);
-                } else {
-                    firstWeek = firstWeek.startOf('month').add(1, 'week').day(1);
-                }
-            }
 
-            if (lastWeek.endOf('month').format('d') != 1) {
-                if (lastWeek.endOf('month').format('d') == 0) {
-                    lastWeek = lastWeek.endOf('month').add(-1, 'week').day(1);
-                } else {
-                    lastWeek = lastWeek.endOf('month').day(1);
-                }
-            }
             dates[key].weeks.push({
                 year,
                 monthNumber,
-                firstWeek: firstWeek.isSame(current),
-                lastWeek: lastWeek.isSame(current, 'week'),
+                firstWeek: _this.isFirstWeek(current),
+                lastWeek: _this.isLastWeek(current),
                 weekNumber: current.week(),
                 startDay: moment(current).startOf('week'),
                 endDay: moment(current).endOf('week'),
@@ -150,6 +133,33 @@ angular.module('schedulerModule').factory('calendarService', ['moment', function
 
         return date.add(-1, 'week').day(1);
     };
+
+    _this.isFirstWeek = function (date) {
+        var firstWeek = moment(date);
+        if (firstWeek.startOf('month').format('d') != 1) {
+            if (firstWeek.startOf('month').format('d') == 0) {
+                firstWeek = firstWeek.startOf('month').add(1, 'day').day(1);
+            } else {
+                firstWeek = firstWeek.startOf('month').add(1, 'week').day(1);
+            }
+        }
+
+        return firstWeek.isSame(date);
+    }
+
+    _this.isLastWeek = function (date) {
+        var lastWeek = moment(date);
+
+        if (lastWeek.endOf('month').format('d') != 1) {
+            if (lastWeek.endOf('month').format('d') == 0) {
+                lastWeek = lastWeek.endOf('month').add(-1, 'week').day(1);
+            } else {
+                lastWeek = lastWeek.endOf('month').day(1);
+            }
+        }
+
+        return lastWeek.isSame(date, 'week');
+    }
 
     return _this;
 }])

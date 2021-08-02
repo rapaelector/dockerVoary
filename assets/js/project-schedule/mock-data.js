@@ -98,7 +98,7 @@ const buildColumns = function(numberFormat) {
             label: 'Cdt Trx',
             field: 'prospect.clientNumber',
             width: 145,
-            sticky: true,
+            // sticky: true,
         },
         {
             label: 'Chantier',
@@ -170,7 +170,7 @@ const buildColumns = function(numberFormat) {
             field: 'prospect.projectDescription.area',
             headerClassName: 'text-uppercase text-nowrap text-truncate',
             width: 150,
-            sticky: true,
+            // sticky: true,
         },
         {
             label: "Chiffre d'affaire",

@@ -1,0 +1,27 @@
+@mixin scheduler-table-sticky-columns {
+    .app-scheduler {
+        table.scheduler-table.sticky-columns {
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 0px;
+            .scheduler-year, 
+            .scheduler-month, 
+            .scheduler-week, 
+            .scheduler-column,
+            .scheduler-date-cell,
+            .scheduler-resource-header {
+                border-right: none;
+                border-bottom: none;
+            }
+            thead {
+                tr {
+                    th, td {
+                        &.scheduler-header-lastweek {
+                            // border-right: $cellBorder;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

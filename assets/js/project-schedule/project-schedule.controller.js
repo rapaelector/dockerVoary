@@ -54,6 +54,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
                 format: 'DD/MM/YYYY'
             },
             ranges: {
+                "Année courant": [moment().startOf('year'), moment().endOf('year')],
                 "Les 6 dérnier mois": [moment(moment().endOf('month').add(-6, 'month').startOf('month')), moment(moment().endOf('month').add(-1, 'month'))],
                 "Année dérniere": [moment(moment().add(-1, 'year').format('YYYY') + '-01-01'), moment(moment().add(-1, 'year').format('YYYY') + '-12-31')],
                 "6 prochains mois": [moment(), moment().add(6, 'month')],

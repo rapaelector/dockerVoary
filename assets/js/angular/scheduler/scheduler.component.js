@@ -45,6 +45,7 @@ function SchedulerController(
     $scope.mdPanelRef = null;
     $scope.triggerTimeout = null;
     $scope.bubbleDefaultConfig = {};
+    $scope.stickyColumns = false;
 
     this.$onInit = function () {
         $(function () {
@@ -92,6 +93,7 @@ function SchedulerController(
     });
 
     $scope.$watch('$ctrl.columns', function () {
+        $scope.stickyColumns = $scope.$ctrl.columns ? $scope.$ctrl.columns.filter(c => c.sticky).length > 0 : false;
         $scope.updateTableStyles();
     });
 
@@ -102,7 +104,19 @@ function SchedulerController(
 
     $scope.$watch('$ctrl.events', function () {
         if ($scope.$ctrl.events) {
-            $scope.events = $scope.$ctrl.events;
+            $scope.events = [...$scope.$ctrl.events].map(event => {
+                var schedulerMeta = {
+                    isStartFirstWeek: calendarService.isFirstWeek(event.start),
+                    isStartLastWeek: calendarService.isLastWeek(event.start),
+                    isEndFirstWeek: calendarService.isFirstWeek(event.end),
+                    isEndLastWeek: calendarService.isLastWeek(event.end),
+                };
+
+                return {
+                    ...event,
+                    schedulerMeta,
+                };
+            });
         }
     }, true);
 
@@ -216,7 +230,7 @@ function SchedulerController(
             $scope.$ctrl.columns.filter((c, index) => c.sticky && (index < columnIndex)).forEach((c, index) => {
                 const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                 if (header$.length) {
-                    left += header$.width();
+                    left += header$.outerWidth();
                 }
             });
             style.position = 'sticky';
@@ -264,7 +278,7 @@ function SchedulerController(
 
         return {
             width: px(width),
-            height: px(rowHeight + (resolverService.resolve([$scope.$ctrl, 'resources', 'length'], 0) === (resourceIndex + 1) ? 1 : 0)),
+            height: px(rowHeight + (resolverService.resolve([$scope.$ctrl, 'resources', 'length'], 0) === (resourceIndex + 1) ? 0 : 0)),
         };
     };
 
@@ -562,11 +576,13 @@ function SchedulerController(
         var left = null;
         var right = null;
         var top = null;
+        var width = 100;
 
         var startId = schedulerService.generateCellId(event.resource, moment(event.start).format('YYYY'), moment(event.start).week());
         var endId = schedulerService.generateCellId(event.resource, moment(event.end).format('YYYY'), moment(event.end).week());
         var $startCell = $('#' + startId);
         var $endCell = $('#' + endId);
+        var extraWidth = 0;
 
         if ($startCell.length == 0) {
             var firstMondayDate = calendarService.nextMonday(moment($scope.start));
@@ -586,7 +602,7 @@ function SchedulerController(
 
         if ($endCell.length > 0) {
             top = top ? top : $endCell.position().top;
-            right = $endCell.position().left + $endCell.outerWidth();
+            right = ($endCell.position().left + $endCell.outerWidth()) - $endCell.css("border-left-width").replace('px', '');
         }
 
         var overlaps = $scope.computeResourceEventOverlap(event.resource);
@@ -607,15 +623,25 @@ function SchedulerController(
         }
 
         if (overlapCount < 1) {
-            top += 1;
+            top += 0.5;
         }
+
+        if (true) {
+            left += 0.5;
+            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : 0.5;
+        }
+
         
+        if (right && left) {
+            width = (right - left) + extraWidth;
+        }
+
         return {
             top: px(top),
             left: px(left),
             right: px(right - 1),
             display: 'block',
-            width: px(((right && left) ? (right - left) : 100) - 1),
+            width: px(width),
             position: 'absolute',
             height: px(ROW_HEIGHT - 1),
             zIndex: $scope.getEventZIndex(event),

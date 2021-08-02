@@ -6,6 +6,8 @@
 @import 'bootstrap/scss/_functions';
 @import 'bootstrap/scss/_mixins';
 @import 'bootstrap/scss/_variables';
+@import './variables';
+@import './table_sticky_columns';
 @import './schedule';
 @import './md_panel';
 @import './popover';
