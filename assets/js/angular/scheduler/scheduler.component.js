@@ -627,8 +627,12 @@ function SchedulerController(
         }
 
         if (true) {
-            left += 0.5;
-            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : 0.5;
+            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 1 : 0.5);
+        }
+
+        if ($scope.stickyColumns) {
+            left += 1;
+            extraWidth += 1;
         }
 
         

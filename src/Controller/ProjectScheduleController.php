@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Serializer\Normalizer\DateTimeNormalizerCallback;
 
 #[Route('/project/scheduler')]
 class ProjectScheduleController extends AbstractController
@@ -59,7 +60,13 @@ class ProjectScheduleController extends AbstractController
         $start = \DateTime::createFromFormat('Y-m-d', $request->query->get('start'));
         $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
         $events = $em->getRepository(ProjectEvent::class)->getEventsBetweenDate($start, $end);
-        $normalizedEvents = $serializer->normalize($events, 'json', ['groups' => 'projectEvent:scheduler']);
+        $normalizedEvents = $serializer->normalize($events, 'json', [
+            'groups' => 'projectEvent:scheduler',
+            \Symfony\Component\Serializer\Normalizer\AbstractNormalizer::CALLBACKS => [
+                'start' => DateTimeNormalizerCallback::buildCallback('Y-m-d'),
+                'end' => DateTimeNormalizerCallback::buildCallback('Y-m-d'),
+            ],
+        ]);
         $paymentEvents = $projectEventService->getPaymentEvents($events);
 
         return $this->json(array_merge($normalizedEvents, $paymentEvents));
