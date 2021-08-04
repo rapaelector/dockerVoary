@@ -116,6 +116,14 @@ class Client
     private $billingAddress;
 
     /**
+     * @ORM\OneToMany(targetEntity=Project::class, cascade={"persist", "remove"}, mappedBy="prospect")
+     * @Assert\Valid
+     *
+     * Adresse de livraison
+     */
+    private $projects;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
@@ -135,10 +143,19 @@ class Client
      */
     private $projectDescription;
 
+    /**
+     * fr: Chargé(e) d'affaire
+     *
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $businessCharge;
+
     public function __construct()
     {
         $this->type = self::TYPE_PROSPECT;
         $this->contacts = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,6 +319,30 @@ class Client
         return $this;
     }
 
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        $this->projects->removeElement($project);
+
+        return $this;
+    }
+
     public function getProjectDescription(): ?ProjectDescription
     {
         return $this->projectDescription;
@@ -312,5 +353,29 @@ class Client
         $this->projectDescription = $projectDescription;
 
         return $this;
+    }
+
+    public function getContactName() {
+        if (!$this->getContacts()->isEmpty()) {
+            return $this->contacts[0]->getLastName();
+        }
+        return '';
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getBusinessCharge(): ?User
+    {
+        return $this->businessCharge;
+    }
+
+    /**
+     * @param null|User $businessCharge
+     */
+    public function setBusinessCharge(?User $businessCharge): void
+    {
+        $this->businessCharge = $businessCharge;
     }
 }

@@ -1,0 +1,10 @@
+{% set businessCharge = row.businessCharge %}
+{% set id = row.id %}
+
+<div class="input-group py-0 project-case-field prospect-business-change business-charge-change"  data-id="{{ row.id }}" data-id-business-charge="{{ resolve([businessCharge, 'id']) }}">
+    {% if businessCharge is defined and businessCharge is not null %}
+        {{ businessCharge.lastname }}
+    {% else %}
+
+    {% endif %}
+</div>

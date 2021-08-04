@@ -45,6 +45,9 @@ class ClientType extends AbstractType
                     'data-type' => 'select2'
                 ],
             ])
+            ->add('businessCharge', null, [
+                'label'=>"label.businessCharge"
+            ])
             /**
              * https://suivi.espai-web.com/tache/4892%20%20data-toggle=
              * Dans le PJ (Toute cette partie ne présente pas de grand intérêt à ce stade de la prise de renseignement)

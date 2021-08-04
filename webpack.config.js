@@ -33,6 +33,12 @@ Encore
      */
     .addEntry('app_client', './assets/js/client/app.js')
 
+
+    /**
+     * Entry for project case but in the same folder of project
+     */
+    .addEntry('app_prospect_list', './assets/js/client/list.js')
+
     /***
      * Entry for project
      * - For client collection type

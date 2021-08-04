@@ -42,6 +42,23 @@
                     <div class="card-body pt-0">
                         <div id="{{ datatable.tableId }}">Chargement...</div>
                     </div>
+                    <div class="modal-part">
+                        <!-- Modal -->
+                        <div class="modal fade" id="businessChargeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(businessChargeForm, {'attr': {'class':'form-change-business-charge'}}) }}
+                                        {{ form_row(businessChargeForm.businessCharge) }}
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary business-charge-change-save">Enregistrer</button>
+                                        </div>
+                                        {{ form_end(businessChargeForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,22 +67,15 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('app_prospect_list') }}
     <script>
-        $(function () {
-            window.App.DataTable.initAppDataTables({
-                columnNames: [
-                    'client_number', 'client_name', 'client_postal_code',
-                    'client_activity', 'client_created_at', 'actions'
-                ],
-                excludedColumns: [6],
+        $(function() {
+            window.initProjectList({
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
                 settings: {{ datatable_settings(datatable)|raw }},
-                debug: false,
-                enableFormatter: true,
-                redrawEvent: 'client.deleted',
-            })
+            });
         });
     </script>
 {% endblock %}

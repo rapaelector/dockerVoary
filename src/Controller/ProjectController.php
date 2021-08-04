@@ -355,7 +355,6 @@ class ProjectController extends BaseController
             $form = $this->createForm(ProjectBusinessChargeType::class, $tmpProject, ['csrf_protection' => false]);
             $form->handleRequest($request);
 
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $project->setBusinessCharge($tmpProject->getBusinessCharge());
                 $em = $this->getDoctrine()->getManager();

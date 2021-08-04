@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="col-md-6 mt-3 mt-md-3">
-            <div class="card card-outline card-app-secondary h-100">
+            <div class="card card-outline card-app-secondary">
                 <div class="card-header">
                     <h3 class="card-title">{{ 'title.business_billing_address'|trans({}, 'client') }}</h3>
                 <!-- /.card-tools -->
@@ -78,6 +78,19 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     {% include 'address/_form_address.template.twig' with {'form': form.billingAddress} %}
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <div class="card card-outline card-app-secondary ">
+                <div class="card-header">
+                    <h3 class="card-title">{{ form_label(form.businessCharge) }}</h3>
+                <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        {{ form_widget(form.businessCharge) }}
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>

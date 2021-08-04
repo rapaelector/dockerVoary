@@ -138,6 +138,7 @@ export default [
     {
         width: '100px',
         cols: [
+            'prospect_business_charge',
             'user_firstName',
             'user_lastName',
             'client_short_name',
@@ -185,9 +186,21 @@ export default [
      * - FIELDS WITH VERY LONG CONTENTS
      */
     {
-        width: '200px',
+        width: '100px',
         cols: [
             'client_name',
+            'project_prospect',
+        ],
+        className: 'text-left',
+    },
+    /**
+     * - EXTRA FIELDS
+     * - FIELDS WITH VERY LONG CONTENTS
+     */
+    {
+        width: '100px',
+        cols: [
+            'prospect_name',
             'project_prospect',
         ],
         className: 'text-left',

@@ -304,7 +304,7 @@ class Project
     private $tceDriver;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"}, inversedBy="projects")
      * @ORM\JoinColumn(nullable=true)
      * @Groups({"data-project"})
      */
