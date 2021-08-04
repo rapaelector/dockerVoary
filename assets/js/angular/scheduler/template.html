@@ -1,0 +1,82 @@
+<div class="table-responsive table-container">
+    <table class="scheduler-table" ng-style="styles.table">
+        <thead>
+            <tr>
+                <th colspan="{{ $ctrl.columns.length }}" rowspan="2" ng-style="columnMergeStyle()"></th>
+                <!-- Year -->
+                <th
+                    ng-repeat="year in years" 
+                    colspan="{{ year.weeksCount }}"
+                    ng-style="getYearStyles(year, yearIndex)"
+                    ng-init="yearIndex = $index"
+                    ng-class="getHeaderYearClassName(year, yearIndex)"
+                    ng-click="onHeaderYearClick(year, yearIndex)"
+                >{{ year.name }}</th>
+            </tr>
+            <tr>
+                <!-- Month list bottom the year -->
+                <th 
+                    ng-repeat="month in months track by $index" 
+                    colspan="{{ month.weeksCount }}"
+                    ng-style="getMonthStyles(month, monthIndex)"
+                    ng-init="monthIndex = $index"
+                    ng-class="getHeaderMonthClassName(month, monthIndex)"
+                    ng-click="onHeaderMonthClick(month, monthIndex)"
+                >{{ month.name }}</th>
+            </tr>
+            <tr>
+                <th
+                    ng-repeat="column in $ctrl.columns"
+                    ng-class="getHeaderCellClassName(column)"
+                    ng-init="columnIndex = $index"
+                    ng-style="getColumnWidth(column)"
+                    ng-click="onColumnHeaderClick(column, columnIndex)"
+                >
+                    {{ column.label }}
+                </th>
+                <th 
+                    ng-repeat="week in weeks track by $index" 
+                    ng-style="getHeaderWeeksStyle()"
+                    ng-init="weekIndex = $index"
+                    ng-class="getHeaderWeekClassName(week, weekIndex)"
+                    ng-click="onHeaderWeekClick(week, weekIndex)"
+                >
+                    {{ week.weekNumber }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="resource in $ctrl.resources"ng-init="resourceIndex = $index">
+                <td
+                    ng-repeat="column in $ctrl.columns"
+                    ng-bind-html="getResourceColumn(resource, column, resourceIndex)"
+                    ng-class="getCellClassName(resource, column, resourceIndex)"
+                    ng-click="onRowClick(resource, column, columnIndex)"
+                ></td>
+                <th
+                    ng-repeat="week in weeks track by $index"
+                    ng-init="weekIndex = $index"
+                    ng-class="getDateCellClassName(resource, week, weekIndex, resourceIndex)"
+                    ng-style="getCellStyle(resource, week, weekIndex, resourceIndex)"
+                    ng-click="onCellClick(resource, week, weekIndex, resourceIndex)"
+                    id="{{ getCellId(resource, week) }}"
+                ></th>
+            </tr>
+        </tbody>
+    </table>
+    <div class="scheduler-events">
+        <div 
+            ng-repeat="event in events track by $index" 
+            ng-class="getEventClass(event, eventIndex)"
+            ng-click="onEventClick(event, eventIndex, $event)"
+            ng-style="getEventStyle(event, eventIndex)"
+            ng-init="eventIndex = $index"
+            ng-mouseenter="onEventMouseEnter(event, eventIndex, $event)"
+            ng-mouseleave="onEventMouseLeave(event, eventIndex, $event)"
+        >
+            <div class="scheduler-event-inner">
+                <div ng-bind-html="formatTitle(event)"></div>
+            </div>
+        </div>
+    </div>
+</div>

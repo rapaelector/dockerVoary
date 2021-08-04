@@ -12,4 +12,26 @@ trait ProjectTrait
 
         return 'Projet-' .$this->getId(). '.pdf';
     }
+
+    public function getProvisionalAmount()
+    {
+        return $this->globalAmount;
+    }
+
+    public function getPaymentWeeks()
+    {
+        $res = [];
+        foreach ($this->events as $event) {
+            $res = array_merge($res, $event->getPaymentWeeks()); 
+        }
+
+        return $res;
+    }
+
+    public function getWeekPaymentAmount()
+    {
+        $getPaymentWeeksCount = count($this->getPaymentWeeks());
+        
+        return $getPaymentWeeksCount > 0 ? ($this->getProvisionalAmount() / $getPaymentWeeksCount) : $this->getProvisionalAmount();
+    }
 }

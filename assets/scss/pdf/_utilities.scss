@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .bordered {
     border: $border !important;
 }
@@ -106,13 +108,13 @@
     margin-top: 1rem;
 }
 .pr-05 {
-    padding-right: $spacing / 2;
+    padding-right: math.div($spacing, 2);
 }
 .pl-05 {
-    padding-left: $spacing / 2;
+    padding-left: math.div($spacing, 2);
 }
 .pt-05 {
-    padding-top: $spacing / 2;
+    padding-top: math.div($spacing, 2);
 }
 .pt-1 {
     padding-top: $spacing;

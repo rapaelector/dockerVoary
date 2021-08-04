@@ -1,4 +1,4 @@
-import './../../scss/ngProject/app.scss';
+import './../../scss/ng-project/app.scss';
 
 import 'angular';
 import 'angular-animate';
@@ -9,6 +9,8 @@ import 'angular-nl2br';
 import 'angular-sanitize';
 // import 'angular-material/angular-material.min.js';
 import 'angular-auto-complete/angular-auto-complete.js';
+import 'daterangepicker/daterangepicker';
+import 'angular-daterangepicker/js/angular-daterangepicker';
 
 import './app.module';
 import './app.config';

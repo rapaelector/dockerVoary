@@ -274,3 +274,11 @@ email:
     title: 'Validation du dossier'
     message: |
       Le projet: <b>%projectName%</b> à étè validé le %updatedDate% par %updatedBy%
+
+scheduler_legend:
+  frame_assembly: 'Montage charpente'
+  isothermal_panels: 'Panneaux isothermes'
+  envelope: 'Enveloppe'
+  forecasts: 'Prévisions'
+  subcontracting: 'Sous traitance'
+  shade_house: 'Ombrière'

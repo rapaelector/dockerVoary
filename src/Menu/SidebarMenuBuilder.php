@@ -101,22 +101,24 @@ class SidebarMenuBuilder
         }
 
         if ($this->security->isGranted('ROLE_PROJECT_VIEW')) {
-            /*$menu->addChild('menu.project_list', [
-                'route' => 'project.list',
-                'linkAttributes' => ['class' => $linkClassName],
-                'extras' => [
-                    'icon' => $icon,
-                    'icon_content' => 'engineering',
-                    'label_wrapper' => 'p',
-                ],
-            ])->setAttributes(['class' => $navItem]);*/
-
+            // GESTION DES PROJETS
             $menu->addChild('menu.project_management', [
                 'route' => 'project.case.list',
                 'linkAttributes' => ['class' => $linkClassName],
                 'extras' => [
                     'icon' => $icon,
                     'icon_content' => 'engineering',
+                    'label_wrapper' => 'p',
+                ],
+            ])->setAttributes(['class' => $navItem]);
+            
+            // PROJECT SCHEDULER
+            $menu->addChild('menu.project_schedule', [
+                'route' => 'project_schedule',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'calendar_today',
                     'label_wrapper' => 'p',
                 ],
             ])->setAttributes(['class' => $navItem]);

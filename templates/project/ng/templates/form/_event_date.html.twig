@@ -1,0 +1,53 @@
+<div class="card card card-outline card-app-secondary h-100">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'label.order_book_dates'|trans({}, 'messages') }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" ng-repeat="event in data.events">
+            <div class="col-sm-11">
+                <div class="row">
+                    {# START #}
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <md-datepicker 
+                            ng-model="event.start" 
+                            md-placeholder="Enter date"
+                            input-aria-describedby="datepicker-description"
+                            input-aria-labelledby="datepicker-header "
+                        ></md-datepicker>
+                    </div>
+                    {# END #}
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <md-datepicker 
+                            ng-model="event.end" 
+                            md-placeholder="Enter date"
+                            md-min-date="event.start"
+                            input-aria-describedby="datepicker-description"
+                            input-aria-labelledby="datepicker-header "
+                        ></md-datepicker>
+                    </div>
+                    {# TYPE #}
+                    <div class="mt-2 mt-sm-0 col-sm-4">
+                        <md-select ng-model="event.type">
+                            <md-optgroup>
+                                <md-option ng-value="type.value" ng-repeat="type in eventTypes">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons text-md mr-2" ng-class="['color-' + type.value]">circle</i>
+                                        <div>{{ '{{ type.label }}' }}</div>
+                                    </div>
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <md-button class="md-icon-button" ng-click="removeEvent($index)">
+                    <i class="material-icons">clear</i>
+                </md-button>
+            </div>
+        </div>
+        <button class="btn btn-sm btn-app-primary" ng-click="addNewEvent()">
+            {{ 'action.add_date'|trans({}, 'messages') }}
+        </button>
+    </div>
+</div>

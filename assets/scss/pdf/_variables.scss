@@ -1,7 +1,9 @@
+@use 'sass:math';
+
 $base-font-size: 12;
 
 @function _rem($px-value) {
-	@return $px-value / $base-font-size * 1rem;
+	@return math.div($px-value, $base-font-size) * 1rem;
 }
 
 // the signature-title may change several time so we put it in another variable

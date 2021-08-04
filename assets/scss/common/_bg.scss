@@ -1,0 +1,10 @@
+@import './../constants';
+
+@each $name, $value in $project-event-types {
+    .bg-#{$name} {
+        background-color: $value;
+    }
+    .color-#{$name} {
+        color: $value;
+    }
+}

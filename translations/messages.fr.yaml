@@ -12,6 +12,7 @@ menu:
     project_list: 'Liste des projets'
     project_management: 'Gestion des projets'
     client_header: 'Client'
+    project_schedule: 'Carnet de commande'
 
 action:
   action: 'Action'
@@ -38,6 +39,8 @@ action:
   validate: 'Valider'
   archived: 'Archiver'
   send: 'Envoyer'
+  add_date: 'Ajouter date'
+  remove_date: 'Supprimer'
 
 title:
   delete_user: "Supprimer l'utilisateur"
@@ -53,6 +56,7 @@ label:
   created_at: 'Crée le'
   yes: 'Oui'
   no: 'Non'
+  order_book_dates: "Dates carnet de commande"
   
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'

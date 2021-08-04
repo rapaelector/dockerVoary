@@ -1,0 +1,9 @@
+@mixin _md_panel {
+    md-dialog.event-detail-dialog {
+        opacity: 1 !important;
+        padding: 4px 8px;
+        z-index: 9999999;
+    }
+}
+
+@include _md_panel;

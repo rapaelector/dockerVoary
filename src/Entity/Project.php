@@ -32,7 +32,7 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource", "projectEvent:scheduler"})
      */
     private $id;
 
@@ -40,7 +40,7 @@ class Project
      * Fr: code chantier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -152,7 +152,7 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $marketType;
 
@@ -226,7 +226,7 @@ class Project
      * Fr: MONTANT GLOBAL DU MARCHE
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $globalAmount;
 
@@ -234,7 +234,7 @@ class Project
      * Fr: montant des travaux sous-traiter
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $amountSubcontractedWork;
 
@@ -242,7 +242,7 @@ class Project
      * Fr: montant des traveau propre a bbi
      * 
      * @ORM\Column(type="integer", length=255, nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $amountBBISpecificWork;
 
@@ -253,7 +253,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $caseType;
 
@@ -306,7 +306,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"}, inversedBy="projects")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:scheduler-resource"})
      */
     private $prospect;
 
@@ -422,6 +422,7 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity=ExchangeHistory::class, mappedBy="Project")
+     * @Groups({"data-project"})
      */
     private $exchangeHistories;
 
@@ -442,12 +443,19 @@ class Project
      */
     private $meta;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProjectEvent::class, mappedBy="project", cascade={"all"}, orphanRemoval=true)
+     * @Groups({"data-project"})
+     */
+    private $events;
+
     public function __construct()
     {
         $this->status = Status::STATUS_PENDING;
         $this->relaunches = new ArrayCollection();
         $this->exchangeHistories = new ArrayCollection();
         $this->actions = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1050,6 +1058,36 @@ class Project
     public function setMeta(?ProjectMeta $meta): self
     {
         $this->meta = $meta;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectEvent[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(ProjectEvent $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(ProjectEvent $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getProject() === $this) {
+                $event->setProject(null);
+            }
+        }
 
         return $this;
     }

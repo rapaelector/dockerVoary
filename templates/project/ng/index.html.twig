@@ -34,7 +34,7 @@
     {{ parent() }}
     {% include 'project/ng/global_vars.js.twig' %}
     <script>
-        {# USER ID #}
+        {# PROJECT ID #}
         var PROJECT_ID = "{{ resolve([project, 'id'], null) }}";
 
         {# TYPE DE DOSSIER #}
@@ -75,6 +75,14 @@
             TYPE_BONHOME.push({
                 label: '{{ type|trans({}, "project") }}',
                 value: '{{ type }}',
+            })
+        {% endfor %}
+
+        var PROJECT_EVENT_TYPES = [];
+        {% for legend in constant('\\App\\Entity\\ProjectEvent::PROJECT_EVENT_TYPES') %}
+            PROJECT_EVENT_TYPES.push({
+                label: '{{ ("scheduler_legend." ~ legend)|trans({}, "project") }}',
+                value: '{{ legend }}',
             })
         {% endfor %}
     </script>

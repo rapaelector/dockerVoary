@@ -1,0 +1,7 @@
+@mixin _popover {
+    body .popover {
+        top: -100px;
+    }
+}
+
+@include _popover;

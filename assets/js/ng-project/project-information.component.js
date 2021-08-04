@@ -6,6 +6,7 @@ function ProjectInformationController(
     $mdToast,
     $mdDialog,
     projectService,
+    resolverService,
     CASE_TYPES,
     PRIORIZATION_FILE_TYPES,
     MARKET_TYPES,
@@ -13,6 +14,7 @@ function ProjectInformationController(
     TYPE_BONHOME,
     PROJECT_ID,
     APP_MESSAGES,
+    PROJECT_EVENT_TYPES,
 ) {
     $scope.onLoading = true;
     $scope.project = {
@@ -28,7 +30,9 @@ function ProjectInformationController(
         allowedActions: [],
         statusLabel: '',
         statusBg: '',
+        events: [],
     };
+    $scope.eventTypes = PROJECT_EVENT_TYPES,
     $scope.searchTerm = {
         users: '',
         clients: '',
@@ -39,6 +43,9 @@ function ProjectInformationController(
         recordAssistant: '',
         ocbsDriver: '',
         tceDriver: '',
+    };
+    $scope.options = {
+        dateRangePicker: {},
     };
 
     this.$onInit = function() {
@@ -52,6 +59,7 @@ function ProjectInformationController(
         projectService.getProject(PROJECT_ID).then((response) => {
             $scope.data.project = response.data;
             $scope.project = projectService.parseProject(response.data.project);
+            $scope.data.events = projectService.parseEvents(resolverService.resolve([response, 'data', 'project', 'events'], []));
             $scope.helpers.updateStatus($scope.project)
             if (response.data && response.data.project && response.data.project.allowedActions) {
                 $scope.data.allowedActions = response.data.project.allowedActions;
@@ -73,6 +81,22 @@ function ProjectInformationController(
             console.info(error);
             $scope.onLoading = false;
         });
+
+        $scope.options.dateRangePicker = {
+            autoApply: true,
+            autoClose: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            ranges: {
+                "Aujourd'hui": [moment(), moment()],
+                "Hier": [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                "Les 7 derniers jours": [moment().subtract(6, 'days'), moment()],
+                "Les 30 derniers jours": [moment().subtract(29, 'days'), moment()],
+                "Ce mois": [moment().startOf('month'), moment().endOf('month')],
+                "Le mois dernier": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+        };
     };
 
     $scope.$watch('data.newContact', function() {
@@ -97,6 +121,18 @@ function ProjectInformationController(
         } else if ($scope.data.status == 'lost') {
             $scope.data.statusBg = 'bg-danger';
         };
+    }, true);
+
+    $scope.$watch('data.events', function () {
+        console.info({events: $scope.data.events});
+    }, true);
+    
+    $scope.$watch('event.start', function () {
+        console.info({events: $scope.data.events});
+    }, true);
+    
+    $scope.$watch('event.end', function () {
+        console.info({event: $scope.event});
     }, true);
 
     $scope.helpers = {};
@@ -218,6 +254,7 @@ function ProjectInformationController(
     $scope.fns.submit = function() {
         $scope.onLoading = true;
         $scope.data.errors = {};
+        $scope.project.events = $scope.data.events;
         projectService.saveProject(PROJECT_ID, $scope.project).then((response) => {
             $scope.onLoading = false;
             $scope.data.statusLabel = response.data.data.statusLabel;
@@ -317,6 +354,14 @@ function ProjectInformationController(
             $scope.onLoading = false;
         });
     }
+
+    $scope.addNewEvent = function () {
+        $scope.data.events.push({});
+    }
+
+    $scope.removeEvent = function (eventIndex) {
+        $scope.data.events.splice(eventIndex, 1);
+    };
 };
 
 ProjectInformationController.$inject = [
@@ -324,6 +369,7 @@ ProjectInformationController.$inject = [
     '$mdToast',
     '$mdDialog',
     'projectService',
+    'resolverService',
     'CASE_TYPES',
     'PRIORIZATION_FILE_TYPES',
     'MARKET_TYPES',
@@ -331,6 +377,7 @@ ProjectInformationController.$inject = [
     'TYPE_BONHOME',
     'PROJECT_ID',
     'APP_MESSAGES',
+    'PROJECT_EVENT_TYPES',
 ];
 
 angular.module('projectApp').component('appProjectInformation', {

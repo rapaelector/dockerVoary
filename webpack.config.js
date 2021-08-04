@@ -49,10 +49,12 @@ Encore
      * Entry for project case but in the same folder of project
      */
     .addEntry('app_case_list', './assets/js/project/case_list.js')
+
     /**
      * Entry for project case in list project
      */
     .addEntry('app_project_list', './assets/js/project/list.js')
+
     /***
      * Entry for entry for new project
      * - For client collection type
@@ -74,8 +76,13 @@ Encore
      * Entry for project_ng
      * Project make by angular
      */
-    .addEntry('ng_project', './assets/js/ngProject/app.js')
-    
+    .addEntry('ng_project', './assets/js/ng-project/app.js')
+
+    /**
+     * Project schedule app
+     */
+    .addEntry('app_project_schedule', './assets/js/project-schedule/app.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 
@@ -94,10 +101,10 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+        .enableBuildNotifications()
+        .enableSourceMaps(!Encore.isProduction())
+        // enables hashed filenames (e.g. app.abc123.css)
+        .enableVersioning(Encore.isProduction())
 
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
@@ -123,8 +130,9 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
-;
+    .autoProvidejQuery();
+
+    Encore.addLoader({ test: /\.html$/i, loader: 'html-loader' });
 
 var config = Encore.getWebpackConfig();
 
