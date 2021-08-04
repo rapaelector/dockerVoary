@@ -22,6 +22,9 @@ label:
   name: 'Nom'
   short_name: 'Nom raccourci'
   client_number: 'N° prospect'
+  client_name: 'Nom'
+  contact_name: 'Nom'
+  prospect_name: "Nom de l'entreprise"
   activity: 'Activité'
   tva_rate: 'TVA'
   siret: 'Siret'
@@ -38,6 +41,7 @@ label:
   project_address: "Adresse du projet, ou souhait d'implantation"
   line1: 'adresse'
   city: 'Ville'
+  businessCharge: "Chargé(e) d'affaire"
 
 project_description:
   project_description: 'Description de projet'

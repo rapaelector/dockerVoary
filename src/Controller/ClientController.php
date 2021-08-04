@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Form\ClientBusinessChargeType;
 use App\Form\ClientType;
 use App\Entity\Project;
+use App\Form\ProjectBusinessChargeType;
 use App\Repository\ClientRepository;
 use App\Controller\BaseController;
 use App\Service\Client\ClientServiceInterface;
 use App\Security\Voter\ClientVoter;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +55,8 @@ class ClientController extends BaseController
             'name' => 'list',
             'translation_domain' => 'client',
         ];
+        $client = new Client();
+        $businessChargeForm = $this->createForm(ClientBusinessChargeType::class, $client, array('csrf_protection' => false));
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('clientNumber', TextColumn::class, [
@@ -62,8 +67,19 @@ class ClientController extends BaseController
                     $this->filterOptionsProvider->getOptions('client_number')
                 ),
             ])
+            ->add('clientName', TwigColumn::class, [
+                'label' => $translator->trans('label.contact_name', [], 'client'),
+                'template' => 'client/twig_columns/_contact_name.html.twig',
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('label.contact_name', [], 'project'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap',
+                    ],
+                ], true),
+            ])
             ->add('name', TextColumn::class, [
-                'label' => $translator->trans('label.name', [], 'client'),
+                'label' => $translator->trans('label.prospect_name', [], 'client'),
                 'className' => 'dynamic-nowrap',
                 'filter' => $this->filterBuilder->buildFilter(
                     TextFilter::class, 
@@ -106,6 +122,17 @@ class ClientController extends BaseController
                 'searchable' => true,
                 'orderable' => true,
             ])
+            ->add('businessCharge', TwigColumn::class, [
+                'label' => $translator->trans('columns.businessCharge', [], 'project'),
+                'template' => 'client/twig_columns/_prospect_business_charge.html.twig',
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.businessCharge', [], 'project'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap',
+                    ],
+                ], true),
+            ])
             ->add('createdAt', DateTimeColumn::class, [
                 'label' => $translator->trans('label.created_at', [], 'messages'),
                 'format' => 'd/m/Y',
@@ -135,6 +162,7 @@ class ClientController extends BaseController
                     ->select('client')
                     ->from(Client::class, 'client')
                     ->leftJoin('client.billingAddress', 'address')
+                    ->leftJoin('client.contacts', 'contacts')
                     ->distinct('client')
                 ;
             }  
@@ -149,6 +177,7 @@ class ClientController extends BaseController
         return $this->render('client/index.html.twig', [
             'clients' => $clientRepository->findAll(),
             'datatable' => $table,
+            'businessChargeForm' => $businessChargeForm->createView(),
         ]);
     }
 
@@ -281,4 +310,36 @@ class ClientController extends BaseController
 
         return $this->redirectToRoute('client.list');
     }
+
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), client)")
+     */
+    #[Route('/business-charge/{id}', name: 'client.edit.business.charge', methods: ['POST'], options: ['expose' => true])]
+    public function editBusinessCharge(Request $request, Client $client, TranslatorInterface $translator): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $tmpClient = new Client();
+            $form = $this->createForm(ClientBusinessChargeType::class, $tmpClient, ['csrf_protection' => false]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                $client->setBusinessCharge($tmpClient->getBusinessCharge());
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($tmpClient);
+                $em->persist($client);
+                $this->getDoctrine()->getManager()->flush();
+
+                return new JsonResponse([
+                    'type' => 'success',
+                    'message' => $translator->trans('business_charge.success', [], 'projects')
+                ], Response::HTTP_OK);
+            }
+
+            return new JsonResponse([
+                'type' => 'error',
+                'message' => $translator->trans('business_charge.error', [], 'projects')
+            ], Response::HTTP_SERVICE_UNAVAILABLE);
+        }
+    }
+
 }
