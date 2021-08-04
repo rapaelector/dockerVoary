@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3">
                     <div class="d-flex align-items-center">
-                        <label class="pr-2">{{ 'label.period'|trans({}, 'project') }}</label>
+                        <label class="pr-2 m-0">{{ 'label.period'|trans({}, 'project') }}</label>
                         <input 
                             date-range-picker 
                             options="options.dateRangePicker" 
@@ -69,6 +69,7 @@
                 on-cell-click="onCellClick"
                 events="data.events"
                 on-event-click="onEventClick"
+                force-sticky="'true'"
             ></app-scheduler>
         </div>
         <div class="loader" ng-if="loadingResources || loadingEvents">

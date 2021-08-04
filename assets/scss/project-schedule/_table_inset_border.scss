@@ -1,0 +1,15 @@
+@mixin scheduler-table-inset-border {
+    .app-scheduler {
+        table.scheduler-table.inset-border {
+            .scheduler-year, 
+            .scheduler-month, 
+            .scheduler-week, 
+            .scheduler-column,
+            .scheduler-date-cell,
+            .scheduler-resource-header {
+                border: none;
+                box-shadow: inset 1px 0px #555, inset 0px 1px #555 !important;
+            }
+        }
+    }
+}

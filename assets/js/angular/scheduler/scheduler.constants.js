@@ -15,3 +15,7 @@ angular.module('schedulerModule').constant('SCHEDULE_HEADER', 'scheduler-header'
 angular.module('schedulerModule').constant('BUBBLE_DEFAULT_WIDTH', 200);
 angular.module('schedulerModule').constant('BUBBLE_CLASS', 'scheduler-event-bubble-html');
 angular.module('schedulerModule').constant('BACKGROUND_COLOR', '#f4f6f9');
+angular.module('schedulerModule').constant('SCHEDULER_COLUMN_STICKY_CLASS', 'sticky-column');
+angular.module('schedulerModule').constant('SCHEDULER_BORDER_COLOR', '#555');
+angular.module('schedulerModule').constant('SCHEDULER_COLUMN_VERTICAL_DIVIDER', 'scheduler-column-vertical-divider');
+angular.module('schedulerModule').constant('SCHEDULER_LAST_COLUMN', 'scheduler-last-column');

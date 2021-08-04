@@ -1,6 +1,7 @@
 @use 'sass:math';
 
 $weekSize: 8px;
+$borderColor: #555;
 
 @function monthFs($weekSize) {
     @return math.div(8, 5) * $weekSize;
@@ -16,6 +17,9 @@ $weekSize: 8px;
 
 @mixin _schedule {
     .app-scheduler {
+        .scheduler-table-container {
+            box-shadow: 1px 0px 0px $borderColor;
+        }
         table.scheduler-table {
             .scheduler-year, 
             .scheduler-month, 

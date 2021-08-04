@@ -209,6 +209,7 @@
   @include scheduler-table;
   @include scheduler-events;
   @include scheduler-table-sticky-columns;
+  @include scheduler-table-inset-border;
 }
 
 @include  _scheduler;

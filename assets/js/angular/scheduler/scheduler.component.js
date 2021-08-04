@@ -29,6 +29,10 @@ function SchedulerController(
     BUBBLE_CLASS,
     SCHEDULER_COLUMN_HEADER,
     BACKGROUND_COLOR,
+    SCHEDULER_COLUMN_STICKY_CLASS,
+    SCHEDULER_BORDER_COLOR,
+    SCHEDULER_COLUMN_VERTICAL_DIVIDER,
+    SCHEDULER_LAST_COLUMN,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -46,6 +50,8 @@ function SchedulerController(
     $scope.triggerTimeout = null;
     $scope.bubbleDefaultConfig = {};
     $scope.stickyColumns = false;
+    $scope.forceSticky = false;
+    $scope.columns = {};
 
     this.$onInit = function () {
         $(function () {
@@ -93,7 +99,8 @@ function SchedulerController(
     });
 
     $scope.$watch('$ctrl.columns', function () {
-        $scope.stickyColumns = $scope.$ctrl.columns ? $scope.$ctrl.columns.filter(c => c.sticky).length > 0 : false;
+        $scope.columns = $scope.$ctrl.columns;
+        $scope.stickyColumns = $scope.columns ? $scope.columns.filter(c => c.sticky).length > 0 : false;
         $scope.updateTableStyles();
     });
 
@@ -102,6 +109,17 @@ function SchedulerController(
         $scope.updateTableStyles();
     }, true);
 
+    $scope.$watch('$ctrl.forceSticky', function () {
+        $scope.forceSticky = $scope.$ctrl.forceSticky;
+    });
+    /**
+     * Add additional attributes into the event
+     * added attributes
+     *      - isStartFirstWeek {boolean} to know if the event have start first week
+     *      - isStartLastWeek {boolean} to know if the event have start last week 
+     *      - isEndFirstWeek {boolean} to know if the event have end first week
+     *      - isEndLastWeek {boolean} to know if the event have end last week
+     */
     $scope.$watch('$ctrl.events', function () {
         if ($scope.$ctrl.events) {
             $scope.events = [...$scope.$ctrl.events].map(event => {
@@ -153,9 +171,10 @@ function SchedulerController(
      * @param {number} index 
      * @returns {array} array of string
      */
-    $scope.getCellClassName = function(resource, column, index) {
+    $scope.getCellClassName = function(resource, column, index, columnIndex) {
         var cellClass = column.field.replaceAll('.', '-');
         var res = [SCHEDULER_COLUMN_CLASS, SCHEDULER_COLUMN_CLASS + '-' + cellClass];
+        var isLastColumn =  ($scope.columns.length - 1) === columnIndex;
 
         if (column.className) {
             res.push(column.className);
@@ -164,6 +183,14 @@ function SchedulerController(
         if (column.classNameFormatter) {
             var className = column.classNameFormatter(res, resource, index);
             res.push(className);
+        }
+
+        if (column.sticky) {
+            res.push(SCHEDULER_COLUMN_STICKY_CLASS);
+        }
+
+        if (isLastColumn) {
+            res.push(SCHEDULER_LAST_COLUMN);
         }
 
         return res;
@@ -175,18 +202,28 @@ function SchedulerController(
      * @param {object} column 
      * @returns {array} array of string
      */
-    $scope.getHeaderCellClassName = function(column) {
+    $scope.getHeaderCellClassName = function(column, columnIndex) {
         var columnClass = column.field.replace('.', '-');
         var res = [SCHEDULE_RESOURCE_HEADER_CLASS, SCHEDULE_RESOURCE_HEADER_CLASS + '-' + columnClass];
+        var isLastColumn =  ($scope.columns.length - 1) === columnIndex;
 
         if (column.headerClassName) {
             res.push(column.headerClassName);
+        }
+
+        if (column.sticky) {
+            res.push(SCHEDULER_COLUMN_STICKY_CLASS);
+        }
+
+        if (isLastColumn) {
+            res.push(SCHEDULER_LAST_COLUMN);
         }
 
         return res;
     }
 
     /**
+     * Get resource header column style
      * 
      * @param {object} column 
      * @returns {object} object of style
@@ -194,6 +231,7 @@ function SchedulerController(
     $scope.getResourceHeaderColumnStyle = function (column, columnIndex) {
         var style = {};
         var stickynessStyle = $scope.getSticknessStyle(column, columnIndex, false);
+
         if (column.width) {
             style.width = px(parseInt(column.width));
             style.minWidth = px(parseInt(column.width));
@@ -203,6 +241,7 @@ function SchedulerController(
     };
 
     /**
+     * Get resource column style
      * 
      * @param {object} column 
      * @param {number} columnIndex
@@ -226,13 +265,36 @@ function SchedulerController(
         var left = 0;
         var zIndexes = $scope.getOption(`event.zIndex`) ?? EVENT_Z_INDEX;
         var zIndex = typeof zIndexes === 'object' ? Math.max(...Object.values(zIndexes)) : zIndexes;
+        var stick = false;
         if (column.sticky) {
-            $scope.$ctrl.columns.filter((c, index) => c.sticky && (index < columnIndex)).forEach((c, index) => {
-                const header$ = $('#' + $scope.getResourceHeaderId(c, index));
-                if (header$.length) {
-                    left += header$.outerWidth();
+            $scope.columns.forEach((c, index) => {
+                if (c.sticky && (index < columnIndex)) {
+                    const header$ = $('#' + $scope.getResourceHeaderId(c, index));
+                    if (header$.length) {
+                        left += header$.outerWidth();
+                    }
                 }
             });
+            stick = true;
+        }
+        // if ((columnIndex === ($scope.columns.length - 1)) && !column.sticky) {
+        //     var columns =$scope.columns;
+        //     var stickyColumns = columns.filter(c => c.sticky);
+        //     if (stickyColumns.length > 0) {
+        //         stick = true;
+        //         left = 0;
+        //        $scope.columns.forEach((c, index) => {
+        //             if (c.sticky && (index < columns.length - 1)) {
+        //                 const header$ = $('#' + $scope.getResourceHeaderId(c, index));
+        //                 if (header$.length) {
+        //                     left += header$.outerWidth();
+        //                 }
+        //             }
+        //         });
+        //     }
+        // }
+
+        if (stick) {
             style.position = 'sticky';
             style.left = left;
             style.zIndex = zIndex + 1 + ($scope.$ctrl.events ? $scope.$ctrl.events.length : 0);
@@ -288,12 +350,12 @@ function SchedulerController(
     $scope.updateTableStyles = function () {
         const tableStyles = {};
         let w = 0;
-        if (!$scope.weeks || !$scope.$ctrl.columns) {
+        if (!$scope.weeks || !$scope.columns) {
             return;
         }
         let OK = true;
-        for (const i in $scope.$ctrl.columns) {
-            const columnWidth = $scope.$ctrl.columns[i].width;
+        for (const i in $scope.columns) {
+            const columnWidth = $scope.columns[i].width;
             if (isNaN(parseInt(columnWidth))) {
                 OK = false;
 
@@ -318,7 +380,7 @@ function SchedulerController(
      * 
      * @returns {object} object of style
      */
-    $scope.columnMergeStyle = function (column, columnIndex) {
+    $scope.getResourceHeaderEmptyColumnStyle = function (column, columnIndex) {
         var columnMergeSticky = $scope.getSticknessStyle(column, columnIndex);
         var styles = {
             width: column.width,
@@ -328,7 +390,32 @@ function SchedulerController(
             borderRightColor: $scope.getOption('backgroundColor'),
         };
 
-        return {...styles, ...columnMergeSticky};
+        var stickyStyle = {};
+        var zIndexes = $scope.getOption(`event.zIndex`) ?? EVENT_Z_INDEX;
+        var zIndex = typeof zIndexes === 'object' ? Math.max(...Object.values(zIndexes)) : zIndexes;
+
+        if ((columnIndex === ($scope.columns.length - 1))) {
+            var columns =$scope.columns;
+            var stickyColumns = columns.filter(c => c.sticky);
+            if (stickyColumns.length > 0) {
+                var left = 0;
+               $scope.columns.forEach((c, index) => {
+                    if (c.sticky && (stickyColumns.indexOf(c) < stickyColumns.length - 1) && (index < columns.length - 1)) {
+                        const header$ = $('#' + $scope.getResourceHeaderId(c, index));
+                        if (header$.length) {
+                            left += header$.outerWidth();
+                        }
+                    }
+                });
+                stickyStyle = {
+                    position: 'sticky',
+                    left: left + 1,
+                    zIndex: zIndex + 1 + ($scope.$ctrl.events ? $scope.$ctrl.events.length : 0),
+                }
+            }
+        }
+
+        return {...styles, ...columnMergeSticky, ...stickyStyle};
     };
 
     /**
@@ -340,7 +427,10 @@ function SchedulerController(
      */
     $scope.getYearStyles = function (year, index) {
         var width = year.weeksCount * resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
-        return {width: px(width)};
+
+        return {
+            width: px(width),
+        };
     };
     
     /**
@@ -627,7 +717,7 @@ function SchedulerController(
         }
 
         if (true) {
-            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 1 : 0.5);
+            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
         }
 
         if ($scope.stickyColumns) {
@@ -640,12 +730,17 @@ function SchedulerController(
             width = (right - left) + extraWidth;
         }
 
+        if ($scope.stickyColumns) {
+            width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
+            left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
+        }
+
         return {
             top: px(top),
-            left: px(left),
+            left: px(left + 1),
             right: px(right - 1),
             display: 'block',
-            width: px(width),
+            width: px(width - 1),
             position: 'absolute',
             height: px(ROW_HEIGHT - 1),
             zIndex: $scope.getEventZIndex(event),
@@ -956,7 +1051,6 @@ function SchedulerController(
     }
 
     /**
-     * 
      * @param {object} event 
      * @param {object} jsEvent 
      */
@@ -1004,7 +1098,7 @@ function SchedulerController(
      * 
      * @param {object} event 
      * @param {number} eventIndex 
-     * @param {} jsEvent 
+     * @param {object} jsEvent 
      */
     $scope.onEventBlur = function (event, eventIndex, jsEvent) {
         if ($scope.mdPanelRef) {
@@ -1013,6 +1107,12 @@ function SchedulerController(
         }
     };
 
+    /**
+     * Format title of the event if the event have titleFormatter
+     * 
+     * @param {object} event
+     * @return {any}  
+     */
     $scope.formatTitle = function (event) {
         if (resolverService.resolve([$scope, 'options', 'event', 'titleFormatter'], null)) {
             return $scope.options.event.titleFormatter(event.title, event);
@@ -1031,8 +1131,50 @@ function SchedulerController(
         return schedulerService.generateCellId(resource.id, week.year, week.weekNumber);
     }
 
-    $scope.getMergeClass = function () {
-        return '';
+    /**
+     * Get resource header empty column class
+     * 
+     * @param {object} column
+     * @param {number} columnIndex
+     * @return {array} res 
+     */
+    $scope.getResourceHeaderEmptyColumnClass = function (column, columnIndex) {
+        var res = [SCHEDULER_COLUMN_HEADER + '-top-cell'];
+        var isLastIndex = ($scope.columns.length - 1) == columnIndex;
+        if (isLastIndex) {
+            res.push(SCHEDULER_LAST_COLUMN);
+        }
+
+        return res;
+    };
+
+    $scope.getEmptyStickyColumnStyle = function () {
+        var left = 0;
+       $scope.columns.forEach((c, index) => {
+            if (c.sticky) {
+                const header$ = $('#' + $scope.getResourceHeaderId(c, index));
+                if (header$.length) {
+                    left += header$.outerWidth();
+                } else {
+                    console.warn( $scope.getResourceHeaderId(c, index) + ' not found');
+                }
+            }
+        });
+        var zIndexes = $scope.getOption(`event.zIndex`) ?? EVENT_Z_INDEX;
+        var zIndex = typeof zIndexes === 'object' ? (Math.max(...Object.values(zIndexes)) + 100) : zIndexes;
+
+        var styles = {
+            left: px(left - 2),
+            zIndex: zIndex,
+        };
+
+        return styles;
+    };
+
+    $scope.getEmptyStickyColumnClass = function () {
+        var classes = [SCHEDULER_COLUMN_VERTICAL_DIVIDER];
+
+        return classes;
     };
 }
 
@@ -1063,6 +1205,10 @@ SchedulerController.$inject = [
     'BUBBLE_CLASS',
     'SCHEDULER_COLUMN_HEADER',
     'BACKGROUND_COLOR',
+    'SCHEDULER_COLUMN_STICKY_CLASS',
+    'SCHEDULER_BORDER_COLOR',
+    'SCHEDULER_COLUMN_VERTICAL_DIVIDER',
+    'SCHEDULER_LAST_COLUMN',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -1106,7 +1252,21 @@ angular.module('schedulerModule').component('appScheduler', {
          *          args:
          *              - res: data of the cell
          *              - resource: resouce object
-         *              - i: index of the resource     
+         *              - i: index of the resource
+         * 
+         *      @param {Object} res 
+         *      @param {Object} resource 
+         *      @param {any} index 
+         *      @returns {string}
+         *      - classNameFormatter: function to format the class
+         *      
+         *  
+         *      Change resource header content to html
+         *  
+         *      @param {Object} column 
+         *      @param {any} index 
+         *      @returns {string} part of html
+         *      - headerColumnFormatter: function (column, index) {
          */
         columns: '=',
         /**
@@ -1288,5 +1448,15 @@ angular.module('schedulerModule').component('appScheduler', {
          *          ]
          */
         events: '=',
+        /**
+         * Force the width of the last resource column width like the width of last sticky column
+         * If the last column width is bigger than the last sticky column 
+         *      then take the last column width and change the last sticky column width like the last column width
+         * 
+         * - boolean
+         * - default value false
+         * 
+         */
+        forceSticky: '=',
     }
 });
