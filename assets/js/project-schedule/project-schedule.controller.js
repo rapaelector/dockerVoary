@@ -1,18 +1,33 @@
-import { resources, buildColumns, events  } from './mock-data';
 import numberFormat from './../utils/number_format';
+import ColumnsVisibilityController from './columns-visibility.controller';
 
-angular.module('projectScheduleApp').controller('projectScheduleController', ['$scope', '$mdDialog', 'moment','projectSchedulerService','resolverService', 'DEFAULT_CELL_WIDTH', function($scope, $mdDialog, moment, projectSchedulerService, resolverService, DEFAULT_CELL_WIDTH) {
+angular.module('projectScheduleApp').controller('projectScheduleController', [
+    '$scope', 
+    '$mdPanel',
+    '$mdDialog', 
+    'moment',
+    'projectSchedulerService',
+    'resolverService', 
+    'DEFAULT_CELL_WIDTH', function(
+        $scope, 
+        $mdPanel,
+        $mdDialog, 
+        moment,
+        projectSchedulerService, 
+        resolverService, 
+        DEFAULT_CELL_WIDTH
+    ) {
 
     $scope.data = {
         resources: [],
-        columns: buildColumns(numberFormat),
+        columns: [],
         start: null,
         end: null,
         date: {
             startDate: moment().startOf('year'),
             endDate: moment().endOf('year'),
         },
-        events: events,
+        events: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -23,19 +38,19 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
             },
             event: {
                 zIndex: {
-                    'payment': 1500,
-                    _default: 1000,
+                    'payment': 100,
+                    _default: 50,
                 },
                 bubbleHtml: {
-                    zIndex: 2000,
+                    zIndex: 1000,
                     width: '300px',
                 },
                 titleFormatter:  function (title, event) {
                     return (event.group == 'payment') ? '▮▮' : title;
                 },
                 bubbleDelay: {
-                    payment: 100,
-                    default: 400,
+                    payment: 500,
+                    default: 1000,
                 },
             }
         },
@@ -63,6 +78,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
             },
         };
         
+        $scope.data.columns = projectSchedulerService.buildColumns(numberFormat);
         projectSchedulerService.getResources($scope.data.date).then(function (response) {
             $scope.data.resources = resolverService.resolve([response, 'data', 'resources'], []);
             $scope.loadingResources = false;
@@ -141,4 +157,34 @@ angular.module('projectScheduleApp').controller('projectScheduleController', ['$
      * @param {object} jsEvent 
      */
     $scope.onEventClick = function (event, eventIndex, jsEvent) {}
+
+    $scope.showVisibilityModal = function (ev) {
+        var position = $mdPanel.newPanelPosition()
+            .relativeTo('.button-target')
+            .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+
+        var config = {
+            attachTo: angular.element(document.body),
+            controller: ColumnsVisibilityController,
+            controllerAs: 'ctrl',
+            templateUrl: 'columns-visibility.html',
+            panelClass: 'demo-menu-example',
+            position: position,
+            locals: {
+                columns: $scope.data.columns,
+            },
+            openFrom: ev,
+            clickOutsideToClose: true,
+            escapeToClose: true,
+            focusOnOpen: false,
+            zIndex: 1000,
+            onCloseSuccess: (mdPanelRef, columns) => {
+                if (Array.isArray(columns)) {
+                    $scope.data.columns = columns;
+                }
+            },
+        };
+
+        $mdPanel.open(config);
+    };
 }]);

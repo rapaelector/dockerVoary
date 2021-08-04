@@ -37,7 +37,7 @@
                     ng-repeat="column in columns"
                     ng-class="getHeaderCellClassName(column, $index)"
                     id="{{ getResourceHeaderId(column, $index) }}"
-                    ng-style="getResourceHeaderColumnStyle(column, $index)"
+                    ng-style="styles.columnHeaders[$index]"
                     ng-click="onColumnHeaderClick(column, $index)"
                 >
                     {{ column.label }}
@@ -54,12 +54,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="resource in $ctrl.resources"ng-init="resourceIndex = $index">
+            <tr ng-repeat="resource in resources"ng-init="resourceIndex = $index">
                 <td
                     ng-repeat="column in columns"
                     ng-click="onRowClick(resource, column, $index)"
                     ng-class="getCellClassName(resource, column, resourceIndex, $index)"
-                    ng-style="getResourceColumnStyle(column, $index)"
+                    ng-style="styles.columns[$index]"
                 >
                     <div ng-bind-html="getResourceColumn(resource, column, resourceIndex)"></div>
                 </td>

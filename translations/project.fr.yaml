@@ -48,6 +48,7 @@ label:
   project_lose_reason: 'Raison de la perte du projet'
   note_taking: 'Prise de note'
   period: 'Période'
+  column_visibility: 'Colonnes à afficher'
 
 contact:
   label: Contact

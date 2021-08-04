@@ -23,8 +23,10 @@ class ProjectRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             // ->select('p.siteCode siteCode, p.caseType caseType')
-            ->leftJoin('p.prospect', 'prospect')
-            ->leftJoin('prospect.projectDescription', 'projectDescription')
+            // ->leftJoin('p.prospect', 'prospect')
+            // ->leftJoin('prospect.projectDescription', 'projectDescription')
+            ->where('p.completion >= :completion')
+            ->setParameter('completion', 90)
             ->getQuery()
             ->getResult()
         ;

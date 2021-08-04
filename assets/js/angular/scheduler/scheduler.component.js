@@ -44,8 +44,11 @@ function SchedulerController(
     $scope.defaultOptions = {};
     $scope.styles = {
         table: {},
+        columnHeaders: [],
+        columns: [],
     };
     $scope.events = [];
+    $scope.resources = [];
     $scope.mdPanelRef = null;
     $scope.triggerTimeout = null;
     $scope.bubbleDefaultConfig = {};
@@ -98,11 +101,57 @@ function SchedulerController(
         $scope.updateTableStyles();
     });
 
+    $scope.buildPlaceholderResource = function (index) {
+        return {
+            id: 1000000000 + Math.random() * 100000000,
+        };
+    }
+
+    $scope.$watch('$ctrl.resources', function () {
+        $scope.resources = $scope.$ctrl.resources ? $scope.$ctrl.resources : [];
+        if ($scope.$ctrl.minRowCount && $scope.resources.length < $scope.$ctrl.minRowCount) {
+            for (var i = 0; i < $scope.$ctrl.minRowCount - $scope.resources.length; i++) {
+                $scope.resources.push($scope.buildPlaceholderResource(i));
+            }
+        }
+    }, true);
+
     $scope.$watch('$ctrl.columns', function () {
-        $scope.columns = $scope.$ctrl.columns;
+        $scope.columns = Array.isArray($scope.$ctrl.columns) ? $scope.$ctrl.columns.filter(c => c.visible === undefined || c.visible) : [];
         $scope.stickyColumns = $scope.columns ? $scope.columns.filter(c => c.sticky).length > 0 : false;
+        // $scope.updateTableStyles();
+        $scope.columns.forEach((column, columnIndex) => {
+            $timeout(() => {
+                $scope.styles.columnHeaders[columnIndex] = $scope.getResourceHeaderColumnStyle(column, columnIndex);
+                $scope.styles.columns[columnIndex] = $scope.getResourceColumnStyle(column, columnIndex);
+                if (columnIndex === ($scope.columns.length - 1)) {
+                    $timeout(() => {
+                        $scope.fixStickyColumns();
+                    }, 100);
+                }
+            }, 100 * columnIndex);
+        });
+    }, true);
+
+    $scope.fixStickyColumns = function () {
+        if (!$scope.stickyColumns || 
+            !$scope.columns || 
+            $scope.columns.length === 0 || 
+            $scope.columns[$scope.columns.length - 1].sticky ||
+            $scope.columns.filter(c => c.sticky).length === 0
+        ) {
+            return;
+        }
+        var lastStickyIndex = 0;
+        $scope.columns.forEach((c, index) => lastStickyIndex = c.sticky ? index : lastStickyIndex);
+        var lastStickyWidth = $scope.styles.columnHeaders[lastStickyIndex].width;
+        var lastColumnWidth = $scope.styles.columnHeaders[$scope.columns.length - 1].width;
+        var updateIndex = lastStickyWidth < lastColumnWidth ? lastStickyIndex : ($scope.columns.length - 1);
+        var newWidth = lastStickyWidth < lastColumnWidth ? lastColumnWidth : lastStickyWidth;
+        $scope.styles.columnHeaders[updateIndex].width = newWidth;
+        $scope.styles.columnHeaders[updateIndex].minWidth = newWidth;
         $scope.updateTableStyles();
-    });
+    };
 
     $scope.$watch('$ctrl.options', function () {
         $scope.options = $.extend(true, {}, $scope.defaultOptions, $scope.$ctrl.options);
@@ -297,7 +346,7 @@ function SchedulerController(
         if (stick) {
             style.position = 'sticky';
             style.left = left;
-            style.zIndex = zIndex + 1 + ($scope.$ctrl.events ? $scope.$ctrl.events.length : 0);
+            style.zIndex = zIndex + 10;
         }
 
         return style;
@@ -340,6 +389,7 @@ function SchedulerController(
 
         return {
             width: px(width),
+            minWidth: px(width),
             height: px(rowHeight + (resolverService.resolve([$scope.$ctrl, 'resources', 'length'], 0) === (resourceIndex + 1) ? 0 : 0)),
         };
     };
@@ -354,9 +404,10 @@ function SchedulerController(
             return;
         }
         let OK = true;
-        for (const i in $scope.columns) {
-            const columnWidth = $scope.columns[i].width;
+        for (const i in $scope.styles.columnHeaders) {
+            const columnWidth = $scope.styles.columnHeaders[i].width;
             if (isNaN(parseInt(columnWidth))) {
+                console.warn('Invalid width at index', i);
                 OK = false;
 
                 break;
@@ -367,7 +418,7 @@ function SchedulerController(
         w += $scope.weeks.length * cellWidth;
         if (OK) {
             tableStyles.width = px(w);
-            tableStyles['table-layout'] = 'fixed';
+            // tableStyles['table-layout'] = 'fixed';
         } else {
             console.warn('NaN table style width');
         }
@@ -410,7 +461,7 @@ function SchedulerController(
                 stickyStyle = {
                     position: 'sticky',
                     left: left + 1,
-                    zIndex: zIndex + 1 + ($scope.$ctrl.events ? $scope.$ctrl.events.length : 0),
+                    zIndex: zIndex + 10,
                 }
             }
         }
@@ -748,11 +799,9 @@ function SchedulerController(
     }
 
     $scope.getEventZIndex = function (event) {
-        const events = $scope.events.filter(e => event.group ? event.group === e.group : !e.group);
-        const eventIndex = events.findIndex(e => e.id === event.id) ?? 0;
         const eventGroupZIndex = $scope.getOption(`event.zIndex.${event.group ?? '_default'}`, EVENT_Z_INDEX);
 
-        return eventGroupZIndex + eventIndex;
+        return eventGroupZIndex;
     }
     /**
      * 
@@ -1242,12 +1291,16 @@ angular.module('schedulerModule').component('appScheduler', {
          *      formatter: function(res, resource, index) {
          *          return res ? '<b>' + res + '</b>' : '';
          *      },
+         *      sticky: boolean,
+         *      visible: boolean {true}
          * }
          * Oject argument explaination:
          *      - label: label to show in the table header
          *      - field: resource field to display in each cell
          *      - className: cell data class, bind to each data td cell
          *      - headerClassName: Bind to the column header th
+         *      - sticky: boolean if the column should sticky
+         *      - visible: boolean default valeu true; Make all columns visible
          *      - formatter: function to format the cell value (can be anything)
          *          args:
          *              - res: data of the cell
@@ -1458,5 +1511,6 @@ angular.module('schedulerModule').component('appScheduler', {
          * 
          */
         forceSticky: '=',
+        minRowCount: '=',
     }
 });

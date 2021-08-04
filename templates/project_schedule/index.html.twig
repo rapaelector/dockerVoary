@@ -17,12 +17,12 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-8 col-md-9">
+                <div class="col-sm-6 col-md">
                     <h1 class="m-0">
                         {{ 'title.order_book_schedule'|trans({}, 'project') }}
                     </h1>
                 </div>
-                <div class="col-sm-4 col-md-3">
+                <div class="col-sm-4 col-md-4 justify-self-end">
                     <div class="d-flex align-items-center">
                         <label class="pr-2 m-0">{{ 'label.period'|trans({}, 'project') }}</label>
                         <input 
@@ -32,6 +32,13 @@
                             type="text" 
                             ng-model="data.date"
                         />
+                        <md-button 
+                            class="md-icon-button button-target" 
+                            ng-click="showVisibilityModal($event)"
+                        >
+                            <md-tooltip md-direction="bottom">{{ 'label.column_visibility'|trans({}, 'project') }}</md-tooltip>
+                            <i class="material-icons">settings</i>
+                        </md-button>
                     </div>
                 </div>
             </div>
@@ -70,6 +77,7 @@
                 events="data.events"
                 on-event-click="onEventClick"
                 force-sticky="'true'"
+                min-row-count="14"
             ></app-scheduler>
         </div>
         <div class="loader" ng-if="loadingResources || loadingEvents">

@@ -1,0 +1,32 @@
+@mixin dialog {
+    .md-button.md-icon-button {
+        min-width: 40px;
+    }
+    md-dialog.columns-visibility-dialog {
+        width: 600px;
+        opacity: 1 !important;
+        md-tab-item {
+            color: #fff !important;
+        }
+        md-tab-content {
+            height: 600px;
+        }
+        md-tabs {
+            height: 350px;
+        }
+        table.table {
+            tr {
+                th, td {
+                    padding: 0;
+                    vertical-align: middle;
+                    md-checkbox {
+                        height: 36px;
+                        min-height: 36px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include dialog;

@@ -41,6 +41,7 @@ action:
   send: 'Envoyer'
   add_date: 'Ajouter date'
   remove_date: 'Supprimer'
+  ok: 'OK'
 
 title:
   delete_user: "Supprimer l'utilisateur"

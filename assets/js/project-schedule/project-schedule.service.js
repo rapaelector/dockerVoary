@@ -38,5 +38,163 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
         });
     };
 
+    
+    /**
+     * Array of object represent the resources columns can have the following attributes
+     * {
+     *   label: {String},
+     *   field: {String},
+     *   headerStyle: {Object} list of style
+     *      e.g: {'color': any, border: any, ...}
+     *  
+     *   Class to bind to the column header only
+     *   Column cell are not affected by those classe
+     *   headerClassName: 'text-uppercase text-nowrap text-truncate',
+     *   Give class to each column cell
+     *   Class no affected to the column header
+     * 
+     *   @param {Object} res 
+     *   @param {Object} resource 
+     *   @param {any} index 
+     *   @returns {string}
+     *  classNameFormatter: function(res, resource, index) {return 'lorem-ipsum-dolor';},
+     *  
+     *   Change resource header content to html
+     *   @param {Object} column 
+     *   @param {any} index 
+     *   @returns {string} part of html
+        headerColumnFormatter: function (column, index) {
+            return column ? `
+                <div 
+                    class="dynamic-nowrap" 
+                    title="` + column.label + `" 
+                    data-toggle="tooltip" 
+                    data-container="body" 
+                    data-placement="top"
+                >` + column.label + `</div>` : '';
+        },
+    *  formatter: function (res, resource, index),
+        widht: {string, number}
+    * }
+    *
+    * @param {callback} numberFormat 
+    * @returns {array} array of object
+    */
+    _this.buildColumns = function(numberFormat) {
+        return [
+            {
+                label: 'Cdt Trx',
+                field: 'prospect.clientNumber',
+                width: 145,
+                sticky: true,
+            },
+            {
+                label: 'Chantier',
+                field: 'siteCode',
+                className: 'chantier-class',
+                headerClassName: 'text-uppercase text-center',
+                formatter: function(res, resource, index) {
+                    return res ? '<div class="test" title="'+ res +'">' + res + '</div>' : '';
+                },
+                headerColumnFormatter: function (column, index) {
+                    return column ? `
+                        <div 
+                            class="dynamic-nowrap" 
+                            title="` + column.label + `" 
+                            data-toggle="tooltip" 
+                            data-container="body" 
+                            data-placement="top"
+                        >` + column.label + `</div>` : '';
+                },
+                classNameFormatter: function(res, resource, index) {
+                    return 'dynamic-nowrap';
+                },
+                width: 150,
+                visible: true,
+            },
+            {
+                label: 'Type de travaux',
+                field: 'marketType',
+                /**
+                 * Class to bind to the column header only
+                 * Column cell are not affected by those classe
+                 */
+                headerClassName: 'text-uppercase text-nowrap text-truncate',
+                /**
+                 * Give class to each column cell
+                 * Class no affected to the column header
+                 * 
+                 * @param {Object} res 
+                 * @param {Object} resource 
+                 * @param {any} index 
+                 * @returns {string}
+                 */
+                classNameFormatter: function(res, resource, index) {
+                    return 'dynamic-nowrap';
+                },
+                /**
+                 * Change resource header content to html
+                 * 
+                 * @param {Object} column 
+                 * @param {any} index 
+                 * @returns {string} part of html
+                 */
+                headerColumnFormatter: function (column, index) {
+                    return column ? `
+                        <div 
+                            class="dynamic-nowrap" 
+                            title="` + column.label + `" 
+                            data-toggle="tooltip" 
+                            data-container="body" 
+                            data-placement="top"
+                        >` + column.label + `</div>` : '';
+                },
+                width: 190,
+                formatter: function (res, resource, index) {
+                    return res ? `<div class="dynamic-nowrap text-center" title="` + res + `">` + res + `</div>` : '';
+                },
+                visible: true,
+            },
+            {
+                label: 'Surface en m2',
+                field: 'prospect.projectDescription.area',
+                headerClassName: 'text-uppercase text-nowrap text-truncate',
+                width: 150,
+                // sticky: true,
+            },
+            {
+                label: "Chiffre d'affaire",
+                field: 'globalAmount',
+                className: 'text-right',
+                headerClassName: 'text-uppercase text-nowrap text-truncate',
+                formatter: function(res, resource, index) {
+                    return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
+                },
+                width: 200,
+            },
+            {
+                label: 'Deja facture',
+                field: 'amountSubcontractedWork',
+                className: 'text-right',
+                headerClassName: 'text-uppercase text-nowrap text-truncate',
+                formatter: function(res, resource, index) {
+                    return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
+                },
+                width: 100,
+            },
+            {
+                label: 'Reste a facturer',
+                field: 'amountBBISpecificWork',
+                className: 'text-right',
+                headerClassName: 'text-uppercase text-nowrap text-truncate',
+                formatter: function(res, resource, index) {
+                    return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
+                },
+                width: 150,
+                // sticky: true,
+            },
+        ];
+    };
+
     return _this;    
 }])
