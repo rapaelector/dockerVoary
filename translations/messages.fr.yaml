@@ -58,6 +58,7 @@ label:
   yes: 'Oui'
   no: 'Non'
   order_book_dates: "Dates carnet de commande"
+  action: 'Action'
   
 message:
   delete_user: 'Souhaitez-vous supprimer cet utilisateur'

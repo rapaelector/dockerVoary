@@ -179,6 +179,7 @@ columns:
 business_charge:
   success: Chargé(e) d'affaire mise à jour avec success
   error:  Chargé(e) d'affaire n'a pas été mise à jours
+
 economist:
   success: Economiste mise à jour avec success
   error:  Economiste n'a pas été mise à jours
@@ -204,3 +205,8 @@ reminder:
           quelques nouvelles sur laa date possible de début des travaux,
 
           Cordialement
+
+load_plan:
+  title: 'Plan de charge économiste'
+  nature_of_the_costing: 'Nature du chiffrage'
+  week_number: "N° semaine pour remise de d'etude"

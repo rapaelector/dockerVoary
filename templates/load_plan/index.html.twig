@@ -1,0 +1,58 @@
+{% trans_default_domain 'projects' %}
+
+{% extends 'project/layout.html.twig' %}
+{% block title %}{{ 'title.list'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
+
+{% block content_header %}
+    {% embed 'layout/content/_content_header.html.twig' with {
+        title: 'load_plan.title'|trans,
+        links: [],
+    } %} {% endembed %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <row>
+            <div class="col-12">
+                <div class="card card-outline card-app-primary">
+                    <div class="card-body">
+                        <div class="card-body py-0 pt-md-3 filter-collapse-container">
+                            {% include template_datatable_filters with {
+                                datatable: datatable,
+                                filterCollapseId: 'load-plan-filter',
+                            } %}
+                        </div>
+                        <div id="{{ datatable.tableId }}"></div>
+                    </div>
+                </div>
+            </div>
+        </row>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            window.App.DataTable.initAppDataTables({
+                columnNames: [
+                    'natureOfTheCosting',
+                    'weekNumber',
+                    'actions'
+                ],
+                excludedColumns: [9],
+                containerSelector: '#{{ datatable.tableId }}',
+                filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
+                columnsCount: {{ datatable.columns|length }},
+                settings: {{ datatable_settings(datatable)|raw }},
+                debug: false,
+                enableFormatter: true,
+                redrawEvent: 'user.deleted',
+            });
+        });
+    </script>
+{% endblock %}

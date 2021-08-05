@@ -449,6 +449,11 @@ class Project
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity=LoadPlan::class, mappedBy="Project")
+     */
+    private $loadPlans;
+
     public function __construct()
     {
         $this->status = Status::STATUS_PENDING;
@@ -456,6 +461,7 @@ class Project
         $this->exchangeHistories = new ArrayCollection();
         $this->actions = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->loadPlans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1086,6 +1092,36 @@ class Project
             // set the owning side to null (unless already changed)
             if ($event->getProject() === $this) {
                 $event->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LoadPlan[]
+     */
+    public function getLoadPlans(): Collection
+    {
+        return $this->loadPlans;
+    }
+
+    public function addLoadPlan(LoadPlan $loadPlan): self
+    {
+        if (!$this->loadPlans->contains($loadPlan)) {
+            $this->loadPlans[] = $loadPlan;
+            $loadPlan->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoadPlan(LoadPlan $loadPlan): self
+    {
+        if ($this->loadPlans->removeElement($loadPlan)) {
+            // set the owning side to null (unless already changed)
+            if ($loadPlan->getProject() === $this) {
+                $loadPlan->setProject(null);
             }
         }
 
