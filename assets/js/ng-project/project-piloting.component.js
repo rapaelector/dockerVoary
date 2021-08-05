@@ -1,4 +1,4 @@
-function ProjectPilotingController($scope, $mdToast, projectService) {
+function ProjectPilotingController($scope, $mdDialog, $mdToast, projectService) {
     $scope.onLoading = false;
     $scope.data = {
         isLastRelauch: '1',
@@ -73,21 +73,34 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
         })
     };
 
-    $scope.fns.deleteProjectPiloting = function(id) {
-        $scope.onLoading = true;
+    $scope.fns.deleteProjectPiloting = function(id, ev) {
+        var confirm = $mdDialog.confirm()
+            .title("Supprimer historique d'échange")
+            .textContent('Souhaitez-vous supprimer cete historique?')
+            .ariaLabel('Lucky day')
+            .clickOutsideToClose(true)
+            .targetEvent(ev)
+            .ok('Supprimer')
+            .cancel('Annuler')
+        ;
 
-        projectService.deleteProjectPiloting(id).then((response) => {
-            $scope.onLoading = false;
-            $scope.data.exchangeHistories = $scope.data.exchangeHistories.filter(x => {
-                return x.id != id;
+        $mdDialog.show(confirm).then(function () {
+            $scope.onLoading = true;
+            projectService.deleteProjectPiloting(id).then((response) => {
+                $scope.onLoading = false;
+                $scope.data.exchangeHistories = $scope.data.exchangeHistories.filter(x => {
+                    return x.id != id;
+                })
+                $scope.data.exchangeHistoryCount -= 1;
+                $scope.fns.showNotification(response.data.message);
+            }, error => {
+                $scope.onLoading = false;
+                $scope.data.errors = error.data.errors;
+                $scope.fns.showNotification(error.data.message, { toastClass: 'toast-error' });
             })
-            $scope.data.exchangeHistoryCount -= 1;
-            $scope.fns.showNotification(response.data.message);
-        }, error => {
+        }, function () {
             $scope.onLoading = false;
-            $scope.data.errors = error.data.errors;
-            $scope.fns.showNotification(error.data.message, { toastClass: 'toast-error' });
-        })
+        });
     };
 
     $scope.fns.showNotification = function(message, options) {
@@ -128,7 +141,7 @@ function ProjectPilotingController($scope, $mdToast, projectService) {
     }
 }
 
-ProjectPilotingController.$inject = ['$scope', '$mdToast', 'projectService'];
+ProjectPilotingController.$inject = ['$scope', '$mdDialog', '$mdToast', 'projectService'];
 
 angular.module('projectApp').component('appProjectPiloting', {
     templateUrl: 'project-piloting.html',
