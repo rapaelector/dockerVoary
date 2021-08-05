@@ -9,16 +9,73 @@
 	<md-dialog-content class="mt-3">
         <div class="container-fluid">
             <div class="row">
+                {# Project select #}
+                <div class="col-sm-12 mb-3">
+                    <label>{{ 'load_plan.label.project'|trans }}</label>
+                    <md-select
+                        ng-model="form.project"
+                        md-on-close="searchTerm = ''"
+                        data-md-container-class="selectHeader"
+                        ng-change="onProjectChange()"
+                        ng-disabled="false"
+                        placeholder="Project"
+                        ng-class="data.errors.project ? 'border-danger' : ''"
+                    >
+                        <md-select-header class="select-header-search">
+                            <input ng-model="searchTerm"
+                                type="search"
+                                placeholder="Rechercher"
+                                ng-keydown="$event.stopPropagation()"
+                                class="demo-header-searchbox md-text"
+                            >
+                        </md-select-header>
+                        <md-optgroup label="project">
+                            <md-option 
+                                ng-value="item.id" 
+                                ng-repeat="item in data.projects|filter:searchTerm"
+                            >
+                                <div class="media">
+                                    <div class="media-body">
+                                        <div class="media-heading font-weight-bold">{{ '{{ item.name }}' }}</div>
+                                        <div 
+                                            class="media-body-content" 
+                                            ng-if="item.prospect && item.prospect.clientNumber"
+                                        >
+                                            {{ '{{ item.prospect.clientNumber }}' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.project',
+                    } %}
+                </div>
                 <div class="col-sm-6">
-                    <md-input-container>
+                    <md-input-container class="w-100">
                         <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
-                        <input type="text">
+                        <input 
+                            type="text" 
+                            ng-model="form.natureOfTheCosting"
+                            ng-class="data.errors.natureOfTheCosting ? 'border-danger' : ''"
+                        >
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.natureOfTheCosting',
+                        } %}
                     </md-input-container>
                 </div>
                 <div class="col-sm-6">
-                    <md-input-container>
+                    <md-input-container class="w-100">
                         <label>{{ 'load_plan.label.week_number'|trans }}</label>
-                        <input type="text">
+                        <input
+                            type="text" 
+                            ng-model="form.weekNumber"
+                            ng-class="data.errors.weekNumber ? 'border-danger' : ''"
+                        >
+                        {% include 'project/ng/templates/form/_errors.html.twig' with {
+                            errorPath: 'data.errors.weekNumber',
+                        } %}
                     </md-input-container>
                 </div>
             </div>
@@ -34,3 +91,6 @@
         </md-button>
     </md-dialog-actions>
 </md-dialog>
+<div class="loader" ng-if="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>

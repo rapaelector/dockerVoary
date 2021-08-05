@@ -15,3 +15,4 @@ import './../angular/shared/shared.module';
 import './app.module';
 import './app.config';
 import './load-plan.controller';
+import './load-plan.service';

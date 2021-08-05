@@ -208,7 +208,13 @@ reminder:
 
 load_plan:
   title: 'Plan de charge économiste'
+  
   label:
     new_load_plan: 'Créer une plan de charge économiste'
     nature_of_the_costing: 'Nature du chiffrage'
     week_number: "N° semaine pour remise de d'etude"
+    project: 'Projet'
+  
+  messages:
+    saving_successfull: 'Charge économiste enregistré avec succès'
+    saving_errors: "L'enregistrement du charge économiste à echoué"

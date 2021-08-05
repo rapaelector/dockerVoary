@@ -9,6 +9,8 @@ use App\Entity\Common\TimestampableTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * PLAN DE CHARGE ECONOMISTE
@@ -28,6 +30,7 @@ class LoadPlan
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"loadPlan:list"})
      */
     private $id;
 
@@ -35,6 +38,8 @@ class LoadPlan
      * Nature du chiffrage
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
+     * @Groups({"loadPlan:list"})
      */
     private $natureOfTheCosting;
 
@@ -42,11 +47,15 @@ class LoadPlan
      * N° Semaine pour remise de l'etude
      * 
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type("integer")
+     * @Groups({"loadPlan:list"})
      */
     private $weekNumber;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans")
+     * @Groups({"loadPlan:list"})
+     * @Assert\NotBlank
      */
     private $project;
 

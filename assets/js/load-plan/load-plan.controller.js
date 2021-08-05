@@ -1,6 +1,6 @@
 import NewLoadPlanDialogController from './new-load-plan-dialog.controller';
 
-angular.module('loadPlanApp').controller('loadPlanController', ['$scope', '$mdDialog', function ($scope, $mdDialog) {
+angular.module('loadPlanApp').controller('loadPlanController', ['$scope', '$mdDialog', 'loadPlanService', function ($scope, $mdDialog, loadPlanService) {
     this.$onInit = () => {};
 
     $scope.addLoadPlan = (event) => {

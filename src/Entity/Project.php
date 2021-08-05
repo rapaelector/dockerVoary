@@ -32,7 +32,13 @@ class Project
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"data-project", "project:scheduler-resource", "projectEvent:scheduler"})
+     * @Groups({
+     *  "data-project", 
+     *  "project:scheduler-resource", 
+     *  "projectEvent:scheduler",
+     *  "loadPlan:create",
+     *  "loadPlan:list"
+     * })
      */
     private $id;
 
@@ -40,7 +46,7 @@ class Project
      * Fr: code chantier
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project", "project:scheduler-resource"})
+     * @Groups({"data-project", "project:scheduler-resource", "loadPlan:list"})
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
@@ -306,7 +312,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"}, inversedBy="projects")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project", "project:scheduler-resource"})
+     * @Groups({"data-project", "project:scheduler-resource", "loadPlan:create"})
      */
     private $prospect;
 
@@ -406,7 +412,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "loadPlan:create", "loadPlan:list"})
      */
     private $name;
 

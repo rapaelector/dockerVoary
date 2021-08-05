@@ -3,4 +3,6 @@
 @import 'bootstrap/scss/_functions';
 @import 'bootstrap/scss/_mixins';
 @import 'bootstrap/scss/_variables';
+@import './../common/md_select';
+@import './../common/loader';
 @import './dialog';
