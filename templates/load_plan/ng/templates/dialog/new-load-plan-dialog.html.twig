@@ -1,0 +1,36 @@
+{% trans_default_domain 'projects' %}
+
+<md-dialog aria-label="Event Detail Dialog" class="new-load-plan-dialog p-0">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="text-white">{{ 'load_plan.label.new_load_plan'|trans }}</h2>
+        </div>
+    </md-toolbar>
+	<md-dialog-content class="mt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <md-input-container>
+                        <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+                <div class="col-sm-6">
+                    <md-input-container>
+                        <label>{{ 'load_plan.label.week_number'|trans }}</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+	</md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button ng-click="saveLoadPlan($event)">
+            {{ 'action.save'|trans({}, 'messages') }}
+        </md-button>
+        <md-button ng-click="cancel($event)">
+            {{ 'action.cancel'|trans({}, 'messages') }}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

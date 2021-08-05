@@ -1,0 +1,10 @@
+@mixin dialog {
+    md-dialog.new-load-plan-dialog {
+        width: 600px;
+        md-dialog-content {
+            overflow: hidden;
+        }
+    }
+}
+
+@include dialog;

@@ -1,9 +1,19 @@
 {% trans_default_domain 'projects' %}
 
 {% extends 'project/layout.html.twig' %}
-{% block title %}{{ 'title.list'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'load_plan.title'|trans }} | {{ parent() }}{% endblock %}
 
-{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('load_plan_app') }}
+{% endblock %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" 
+    style="height: auto;"
+    ng-app="loadPlanApp"
+    ng-controller="loadPlanController"
+{% endblock %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
@@ -14,10 +24,26 @@
 
 
 {% block content %}
+    {# Include angular part here #}
+    {% include 'load_plan/ng/index.html.twig' %}
+
     <div class="container-fluid">
         <row>
             <div class="col-12">
                 <div class="card card-outline card-app-primary">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            {% if true %}
+                                <md-button 
+                                    class="md-icon-button md-primary" 
+                                    aria-label="add-load-plan"
+                                    ng-click="addLoadPlan($event)"
+                                >
+                                    <i class="material-icons">add</i>
+                                </md-button>
+                            {% endif %}
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="card-body py-0 pt-md-3 filter-collapse-container">
                             {% include template_datatable_filters with {
@@ -36,6 +62,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('load_plan_app') }}
     <script>
         $(function() {
             window.App.DataTable.initAppDataTables({

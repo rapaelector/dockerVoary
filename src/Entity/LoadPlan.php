@@ -3,13 +3,27 @@
 namespace App\Entity;
 
 use App\Repository\LoadPlanRepository;
+use App\Entity\Common\BlameableTrait;
+use App\Entity\Common\SoftDeleteableTrait;
+use App\Entity\Common\TimestampableTrait;
+
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * PLAN DE CHARGE ECONOMISTE
+ * 
+ * SoftDeleteable annotation must be used with SoftDeleteableTrait
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * @Gedmo\Loggable
  * @ORM\Entity(repositoryClass=LoadPlanRepository::class)
  */
 class LoadPlan
 {
+    use BlameableTrait;
+    use SoftDeleteableTrait;
+    use TimestampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

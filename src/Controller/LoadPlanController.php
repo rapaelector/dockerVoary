@@ -37,10 +37,10 @@ class LoadPlanController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('natureOfTheCosting', TextColumn::class, [
-                'label' => $translator->trans('load_plan.nature_of_the_costing', [], 'projects')
+                'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects')
             ])
             ->add('weekNumber', TextColumn::class, [
-                'label' => $translator->trans('load_plan.week_number', [], 'projects')
+                'label' => $translator->trans('load_plan.label.week_number', [], 'projects')
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),

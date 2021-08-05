@@ -33,7 +33,6 @@ Encore
      */
     .addEntry('app_client', './assets/js/client/app.js')
 
-
     /**
      * Entry for project case but in the same folder of project
      */
@@ -82,6 +81,13 @@ Encore
      * Project schedule app
      */
     .addEntry('app_project_schedule', './assets/js/project-schedule/app.js')
+    
+    /**
+     * Plan de charge economiste
+     * 
+     * Load plan app
+     */
+    .addEntry('load_plan_app', './assets/js/load-plan/app.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
