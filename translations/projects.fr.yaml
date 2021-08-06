@@ -206,6 +206,7 @@ reminder:
 
           Cordialement
 
+# PLAN DE CHARGE ECONOMISTE
 load_plan:
   title: 'Plan de charge économiste'
   
@@ -214,7 +215,16 @@ load_plan:
     nature_of_the_costing: 'Nature du chiffrage'
     week_number: "N° semaine pour remise de d'etude"
     project: 'Projet'
+    delete_load_plan: 'Supprimer cete charge économiste'
   
+  task_type:
+    meter_consultation: 'Mètre Consultation '
+    pre_study: 'Pré étude '
+    sketch: 'Esquisse '
+    encryption: 'Chiffrage '
+
   messages:
     saving_successfull: 'Charge économiste enregistré avec succès'
     saving_errors: "L'enregistrement du charge économiste à echoué"
+    delete_load_plan: 'Souhaitez-vous supprimer cete charge économiste?'
+    delete_successfull: 'Charge économiste supprimé avec succès'

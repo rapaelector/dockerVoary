@@ -39,11 +39,14 @@ class LoadPlanController extends BaseController
 
         $table =  $dataTableFactory->create([], $createOptions)
             ->add('natureOfTheCosting', TextColumn::class, [
-                'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects')
+                'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
+                'render' => function ($value, $row) use ($translator) {
+                    return $translator->trans('load_plan.task_type.' .$value, [], 'projects');
+                },
             ])
-            ->add('weekNumber', TextColumn::class, [
-                'label' => $translator->trans('load_plan.label.week_number', [], 'projects')
-            ])
+            // ->add('weekNumber', TextColumn::class, [
+            //     'label' => $translator->trans('load_plan.label.week_number', [], 'projects')
+            // ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),
                 'render' => $this->actionsRenderer('load_plan.list', 'load_plan/_actions.html.twig'),
@@ -73,15 +76,6 @@ class LoadPlanController extends BaseController
             'datatable' => $table,
         ]);
     }
-    
-    #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
-    public function getProjects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
-    {
-        $projects = $em->getRepository(Project::class)->findAll();
-        $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:create']);
-        
-        return $this->json(['projects' => $normalizedProjects]);
-    }
 
     #[Route('/new', name: 'load_plan.new', options: ['expose' => true])]
     public function new(
@@ -105,14 +99,58 @@ class LoadPlanController extends BaseController
 
             $normalizedLoadPlan = $serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']);
             return $this->json([
-                'messages' => $translator->trans('load_plan.messages.saving_successfull', [], 'projects'),
+                'message' => $translator->trans('load_plan.messages.saving_successfull', [], 'projects'),
                 'data' => $normalizedLoadPlan,
             ]);
         }
 
         return $this->json([
-            'messages' => $translator->trans('load_plan.messages.saving_errors', [], 'projects'),
+            'message' => $translator->trans('load_plan.messages.saving_errors', [], 'projects'),
             'errors' => $formService->getErrorsFromForm($form)
         ], 400);
+    }
+
+    #[Route('/delete/{id}', name: 'load_plan.delete', methods: ['POST', 'DELETE'], options: ['expose' => true])]
+    public function delete(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        if ($this->isCsrfTokenValid('delete'.$loadPlan->getId(), $request->request->get('_token'))) {
+            $em->remove($loadPlan);
+            $em->flush();
+
+            return $this->json([
+                'message' => $translator->trans('load_plan.messages.delete_successfull', [], 'projects')
+            ]);
+        }
+
+        return $this->redirectToRoute('load_plan.index');
+    }
+
+    #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
+    public function getProjects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
+    {
+        $query = $request->query->get('q');
+        $projects = $em->getRepository(Project::class)->createQueryBuilder('p')
+            ->where('p.name LIKE :name')
+            ->setParameters([
+                'name' => '%' . $query . '%',
+            ])
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ; 
+        $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:create']);
+        
+        return $this->json($normalizedProjects);
+    }
+
+    #[Route('/config', name: 'load_plan.config', options: ['expose' => true])]
+    public function getConfig(Request $request, TranslatorInterface $translator)
+    {
+        $taskTypesTranslated = [];
+        foreach (LoadPlan::TASK_TYPES as $task) {
+            $taskTypesTranslated[] = ['label' => $translator->trans('load_plan.task_type.' .$task, [], 'projects'), 'value' => $task];
+        }
+
+        return $this->json(['taskTypes' => $taskTypesTranslated]);
     }
 }

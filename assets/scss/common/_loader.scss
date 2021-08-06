@@ -12,3 +12,23 @@
         top: 40%;
     }
 }
+
+md-toast {
+    &.toast-success {
+        .md-toast-content {
+            background: $green;
+        }
+    }
+    &.toast-error {
+        .md-toast-content {
+            background: $red;
+        }
+    }
+}
+
+@media (min-width: 960px) {
+    md-toast {
+        position: fixed;
+        z-index: 1040;
+    }
+}

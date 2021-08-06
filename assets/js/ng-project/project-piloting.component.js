@@ -121,7 +121,8 @@ function ProjectPilotingController($scope, $mdDialog, $mdToast, projectService) 
         }).catch(function() {
             console.info('failed to laod md toast');
         });
-    }
+    };
+
     $scope.fns.canSubmit = function() {
         if (!$scope.exchangeHistory || Object.keys($scope.exchangeHistory).length === 0) {
             return false;
@@ -134,7 +135,7 @@ function ProjectPilotingController($scope, $mdDialog, $mdToast, projectService) 
         }
 
         return true;
-    }
+    };
 
     $scope.fns.cancel = function() {
         $scope.exchangeHistory = {};

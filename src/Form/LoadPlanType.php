@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class LoadPlanType extends AbstractType
 {
@@ -16,7 +17,13 @@ class LoadPlanType extends AbstractType
     {
         $builder
             ->add('natureOfTheCosting', TextType::class)
-            ->add('weekNumber', TextType::class)
+            // ->add('weekNumber', TextType::class)
+            ->add('start', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('end', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('project', EntityType::class, [
                 'class' => Project::class
             ])

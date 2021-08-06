@@ -1,0 +1,11 @@
+{% embed 'shared/form/_delete_form.html.twig' with {
+        confirm: {
+            title: 'load_plan.label.delete_load_plan'|trans({}, 'projects'),
+            html: 'load_plan.messages.delete_load_plan'|trans({}, 'projects'),
+        },
+        deleteAction: path(deleteRoute, {'id': id}),
+        token: csrf_token('delete' ~ id),
+        ajax: true,
+        successEvent: 'load_plan.delete',
+    } %}
+{% endembed %}

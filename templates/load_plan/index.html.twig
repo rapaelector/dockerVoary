@@ -35,7 +35,7 @@
                         <div class="card-tools">
                             {% if true %}
                                 <md-button 
-                                    class="md-icon-button md-primary" 
+                                    class="md-icon-button md-primary m-n2" 
                                     aria-label="add-load-plan"
                                     ng-click="addLoadPlan($event)"
                                 >
@@ -68,7 +68,6 @@
             window.App.DataTable.initAppDataTables({
                 columnNames: [
                     'natureOfTheCosting',
-                    'weekNumber',
                     'actions'
                 ],
                 excludedColumns: [9],
@@ -78,7 +77,7 @@
                 settings: {{ datatable_settings(datatable)|raw }},
                 debug: false,
                 enableFormatter: true,
-                redrawEvent: 'user.deleted',
+                redrawEvent: 'load_plan.delete',
             });
         });
     </script>

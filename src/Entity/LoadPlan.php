@@ -25,6 +25,19 @@ class LoadPlan
     use BlameableTrait;
     use SoftDeleteableTrait;
     use TimestampableTrait;
+    
+    // TASK TYPES // TYPE DE TACHE
+    const METER_CONSULTATION = 'meter_consultation'; // Mètre Consultation 
+    const PRE_STUDY = 'pre_study'; // Pré étude 
+    const SKETCH = 'sketch'; // Esquisse 
+    const ENCRYPTION = 'encryption'; // Chiffrage 
+
+    const TASK_TYPES = [
+        self::METER_CONSULTATION => self::METER_CONSULTATION,
+        self::PRE_STUDY => self::PRE_STUDY,
+        self::SKETCH => self::SKETCH,
+        self::ENCRYPTION => self::ENCRYPTION,
+    ];
 
     /**
      * @ORM\Id
@@ -58,6 +71,16 @@ class LoadPlan
      * @Assert\NotBlank
      */
     private $project;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $start;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $end;
 
     public function getId(): ?int
     {
@@ -96,6 +119,30 @@ class LoadPlan
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getStart(): ?\DateTimeInterface
+    {
+        return $this->start;
+    }
+
+    public function setStart(?\DateTimeInterface $start): self
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(?\DateTimeInterface $end): self
+    {
+        $this->end = $end;
 
         return $this;
     }
