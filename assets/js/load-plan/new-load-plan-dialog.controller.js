@@ -100,15 +100,16 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
 		if (query == undefined) {
 			query = '';
 		}
-		console.info(loadPlanService.getProjects(query, config));
 
         return loadPlanService.getProjects(query, config);
     }
 
 	$scope.selectedProjectChange = (item) => {
+        console.info(item);
+
 		if (item) {
 			$scope.form.project = item.id;
-			$scope.data.selectedProject = item.name + ' ' + item.prospect.clientNumber;
+			// $scope.data.selectedProject = item.name + ' ' + resolverService.resolve([item, 'prospect', 'clientNumber'], null);
 		}
     };
 };

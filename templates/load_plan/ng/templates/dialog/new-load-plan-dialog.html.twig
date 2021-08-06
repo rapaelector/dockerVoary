@@ -27,7 +27,7 @@
                         input-aria-labelledby="favoriteStateLabel">
                         <md-item-template>
                             <span md-highlight-text="projectSearchText" md-highlight-flags="^i">
-                                {{ '{{ item.name }}' }}
+                                {{ '{{ item.name }}' }} — {{ '{{ item.prospect.clientNumber }}' }}
                             </span>
                         </md-item-template>
                         <md-not-found>
