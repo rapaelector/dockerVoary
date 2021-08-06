@@ -212,6 +212,7 @@ load_plan:
   
   label:
     new_load_plan: 'Créer une plan de charge économiste'
+    edit_load_plan: "Modification du plan de charge économiste"
     nature_of_the_costing: 'Nature du chiffrage'
     week_number: "N° semaine pour remise de d'etude"
     project: 'Projet'
@@ -228,3 +229,5 @@ load_plan:
     saving_errors: "L'enregistrement du charge économiste à echoué"
     delete_load_plan: 'Souhaitez-vous supprimer cete charge économiste?'
     delete_successfull: 'Charge économiste supprimé avec succès'
+    edit_successfull: 'Modification du charge économiste effectué avec succès'
+    edit_failed: 'La modification du charge économiste à echoué'

@@ -38,15 +38,24 @@ class LoadPlanController extends BaseController
         ];
 
         $table =  $dataTableFactory->create([], $createOptions)
+            ->add('project.economist', TextColumn::class, [
+                'field' => 'project.economist',
+                'label' => $translator->trans('columns.economist', [], 'project'),
+            ])
+            // ->add('project_folder_name_on_the_server', TextColumn::class, [
+            //     'field' => 'project.folderNameOnTheServer',
+            //     'label' => $translator->trans('columns.folder_name_on_the_server', [], 'project'),
+            // ])
+            // ->add('site_address_postal_code', TextColumn::class, [
+            //     'field' => 'siteAddress.postalCode',
+            //     'label' => $translator->trans('label.postal_code_abbr', [], 'address')
+            // ])
             ->add('natureOfTheCosting', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans('load_plan.task_type.' .$value, [], 'projects');
                 },
             ])
-            // ->add('weekNumber', TextColumn::class, [
-            //     'label' => $translator->trans('load_plan.label.week_number', [], 'projects')
-            // ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),
                 'render' => $this->actionsRenderer('load_plan.list', 'load_plan/_actions.html.twig'),
@@ -63,6 +72,8 @@ class LoadPlanController extends BaseController
                     ->select('loadPlan')
                     ->from(LoadPlan::class, 'loadPlan')
                     ->leftJoin('loadPlan.project', 'project')
+                    ->leftJoin('project.siteAddress', 'siteAddress')
+                    ->distinct('loadPlan')
                 ;
             }  
         ]);
@@ -152,5 +163,35 @@ class LoadPlanController extends BaseController
         }
 
         return $this->json(['taskTypes' => $taskTypesTranslated]);
+    }
+
+    #[Route('/{id}', name: 'load_plan.get_load_plan', options: ['expose' => true], requirements: ["id" => "\d+"])]
+    public function getLoadPlan(Request $request, LoadPlan $loadPlan, SerializerInterface $serializer)
+    {
+        return $this->json($serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']));
+    }
+
+    #[Route('/edit/{id}', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
+    public function edit(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        
+        if ($request->getMethod() == 'POST') {
+            $form = $this->createForm(LoadPlanType::class, $loadPlan, [
+                'csrf_protection' => false,
+                'allow_extra_fields' => true,
+            ]);
+
+            $form->submit(json_decode($request->getContent(), true));
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+    
+                return $this->json(['message' => $translator->trans('load_plan.messages.edit_successfull', [], 'projects')]);
+            }
+
+            return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')]);
+        }
+
+        return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')], 400);
     }
 }

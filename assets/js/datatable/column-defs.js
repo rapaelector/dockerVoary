@@ -48,6 +48,7 @@ export default [
         width: '65px',
         cols: [
             'project_global_amount',
+            'economist',
         ],
     },
     /**

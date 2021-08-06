@@ -107,6 +107,7 @@ columns:
   businessCharge: "C.Affaires"
   economist: "Economiste"
   folderNameOnTheServer: "Nom du dossier sur le serveur"
+  folder_name_on_the_server: "Nom du dossier sur le serveur"
   yes: 'Oui'
   no: 'Non'
   area: 'Surface'

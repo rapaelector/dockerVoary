@@ -37,7 +37,7 @@
                                 <md-button 
                                     class="md-icon-button md-primary m-n2" 
                                     aria-label="add-load-plan"
-                                    ng-click="addLoadPlan($event)"
+                                    ng-click="addLoadPlan('creation', null, $event)"
                                 >
                                     <i class="material-icons">add</i>
                                 </md-button>
@@ -62,15 +62,22 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('load_plan_app') }}
     <script>
+        var MESSAGES = {
+            modalTitle: {
+                new: '{{ "load_plan.label.new_load_plan"|trans }}',
+                edit: '{{ "load_plan.label.edit_load_plan"|trans }}',
+            },
+        };
+
         $(function() {
             window.App.DataTable.initAppDataTables({
                 columnNames: [
-                    'natureOfTheCosting',
-                    'actions'
+                    'economist',
+                    'nature_of_the_costing',
+                    'actions',
                 ],
-                excludedColumns: [9],
+                excludedColumns: [2],
                 containerSelector: '#{{ datatable.tableId }}',
                 filtersContainerSelector: '#{{ datatable.tableFiltersId }}',
                 columnsCount: {{ datatable.columns|length }},
@@ -81,4 +88,5 @@
             });
         });
     </script>
+    {{ encore_entry_script_tags('load_plan_app') }}
 {% endblock %}

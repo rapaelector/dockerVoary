@@ -66,7 +66,7 @@ class LoadPlan
     private $weekNumber;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans")
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans", cascade={"all"})
      * @Groups({"loadPlan:list"})
      * @Assert\NotBlank
      */
@@ -74,11 +74,13 @@ class LoadPlan
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"loadPlan:list"})
      */
     private $start;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"loadPlan:list"})
      */
     private $end;
 

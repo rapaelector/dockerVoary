@@ -3,6 +3,8 @@ import { primaryPalette, secondaryPalette } from './../angular/shared/config';
 
 angular.module('loadPlanApp').constant('DATE_FORMAT', 'DD/MM/YYYY');
 
+angular.module('loadPlanApp').constant('MESSAGES', window.MESSAGES);
+
 angular.module('loadPlanApp').config(['$mdDateLocaleProvider', 'DATE_FORMAT', function ($mdDateLocaleProvider, DATE_FORMAT) {
     /**
      * @param date {Date}

@@ -6,5 +6,6 @@ label:
   line2: 'Adresse 2'
   line3: 'Adresse 3'
   postal_code: 'Code postale'
+  postal_code_abbr: 'CP'
   city: 'Ville'
   country: 'Pays'

@@ -1,13 +1,10 @@
 angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting', 'resolverService', 'DATE_FORMAT', function ($http, fosJsRouting, resolverService, DATE_FORMAT) {
     var _this = this;
 
-    // _this.getProjects = () => {
-    //     return $http.get(fosJsRouting.generate('load_plan.projects'));
-    // };
-
-    _this.saveLoadPlan = (formData) => {
+    _this.saveLoadPlan = (formData, mode) => {
         var formattedData = _this.formatFormData(formData);
-        return $http.post(fosJsRouting.generate('load_plan.new'), formattedData);
+
+        return mode === 'edit' && formattedData.id ? $http.post(fosJsRouting.generate('load_plan.edit', {id: formattedData.id}), formattedData) : $http.post(fosJsRouting.generate('load_plan.new'), formattedData);
     };
 
     /**
@@ -27,6 +24,15 @@ angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting
 
     _this.getConfig = () => {
         return $http.get(fosJsRouting.generate('load_plan.config'));
+    };
+
+    /**
+     * 
+     * @param {number} projectId 
+     * @returns 
+     */
+    _this.getLoadPlan = (projectId) => {
+        return $http.get(fosJsRouting.generate('load_plan.get_load_plan', {id: projectId}));
     };
 
     /**

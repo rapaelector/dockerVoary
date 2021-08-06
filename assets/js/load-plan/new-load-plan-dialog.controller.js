@@ -1,6 +1,26 @@
-NewLoadPlanDialogController.$inject = ['$scope', '$mdDialog', '$mdToast', '$element', '$q', 'loadPlanService', 'resolverService'];
+LoadPlanDialogController.$inject = [
+    '$scope',
+    '$mdDialog',
+    '$mdToast',
+    '$element',
+    '$q',
+    'loadPlanService',
+    'resolverService',
+    'options',
+    'MESSAGES',
+];
 
-function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q, loadPlanService, resolverService) {
+function LoadPlanDialogController (
+    $scope, 
+    $mdDialog, 
+    $mdToast, 
+    $element, 
+    $q, 
+    loadPlanService, 
+    resolverService,
+    options,
+    MESSAGES,
+) {
     $scope.data = {
         projects: [],
         errors: [],
@@ -15,16 +35,29 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
     };
     $scope.config = {
         taskTypes: [],
+        modalTitle: '',
+        mode: '',
     };
     $scope.projectCanceller = null; 
 
     this.$onInit = () => {
-        // loadPlanService.getProjects().then((response) => {
-        //     $scope.data.projects = response.data.projects;
-        // });
+        $scope.config.modalTitle = MESSAGES ? MESSAGES.modalTitle.new : 'Créer une plan de charge économiste';
+        $scope.config.mode = 'create';
+
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
         });
+        if (options && options.mode === 'edit' && options.id) {
+            $scope.config.mode = options.mode;
+            $scope.config.modalTitle = MESSAGES.modalTitle.edit;
+            $scope.loading = true;
+            loadPlanService.getLoadPlan(options.id).then((response) => {
+                $scope.loading = false;
+                $scope.form = response.data;
+                $scope.selectedProjectChange(response.data);
+            }, error => console.warn(error));
+        }
+
         $scope.projectCanceller = $q.defer();
     };
 
@@ -40,7 +73,7 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
             $scope.form.end = $scope.form.start;
         }
 
-        loadPlanService.saveLoadPlan($scope.form).then((response) => {
+        loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
             $mdDialog.hide();
             $scope.loading = false;
             $scope.showNotification(response.data.message);
@@ -49,6 +82,7 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
             $mdDialog.hide();
             $scope.loading = false;
             $scope.data.errors = errors.errors;
+            console.warn(errors);
             $scope.showNotification(response.data.message, {toastClass: 'toast-error'});
         });
     };
@@ -74,7 +108,7 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
             $mdToast.simple()
             .textContent(message)
             .position('top right')
-            .hideDelay(500000)
+            .hideDelay(5000)
             .toastClass(options.toastClass)
         ).then(() => {
             console.info('Toast dismissed');
@@ -105,8 +139,6 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
     }
 
 	$scope.selectedProjectChange = (item) => {
-        console.info(item);
-
 		if (item) {
 			$scope.form.project = item.id;
 			// $scope.data.selectedProject = item.name + ' ' + resolverService.resolve([item, 'prospect', 'clientNumber'], null);
@@ -114,4 +146,4 @@ function NewLoadPlanDialogController ($scope, $mdDialog, $mdToast, $element, $q,
     };
 };
 
-export default NewLoadPlanDialogController;
+export default LoadPlanDialogController;

@@ -456,7 +456,7 @@ class Project
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=LoadPlan::class, mappedBy="Project")
+     * @ORM\OneToMany(targetEntity=LoadPlan::class, mappedBy="project")
      */
     private $loadPlans;
 
