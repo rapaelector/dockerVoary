@@ -120,7 +120,7 @@ class Project
     private $descriptionOperation;
 
     /**
-     * fr: Chargé(e) d'affaire
+     * fr: Chargé(e) d'affaire (commercial)
      * 
      * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)

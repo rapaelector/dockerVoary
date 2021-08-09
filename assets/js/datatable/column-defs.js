@@ -170,6 +170,7 @@ export default [
             'site_address_postal_code',
             'location',
             'activity',
+            'area',
         ],
         className: ''
     },

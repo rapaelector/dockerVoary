@@ -221,6 +221,8 @@ load_plan:
     location: 'Localisation'
     activity: 'Activité'
     comment: 'Commentaires'
+    area: 'Surface'
+    business_charge: 'Commercial'
   
   task_type:
     meter_consultation: 'Mètre Consultation '

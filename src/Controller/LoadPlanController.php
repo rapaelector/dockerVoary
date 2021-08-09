@@ -38,15 +38,38 @@ class LoadPlanController extends BaseController
         ];
 
         $table =  $dataTableFactory->create([], $createOptions)
+            ->add('businessCharge', TextColumn::class, [
+                'field' => 'businessCharge.firstName',
+                'className' => 'dynamic-nowrap',
+                'label' => $translator->trans('load_plan.label.business_charge', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.business_charge', [], 'projects')
+                ], true),
+            ])
             ->add('economist', TextColumn::class, [
-                'field' => 'project.economist',
+                'field' => 'economist.firstName',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.economist', [], 'project'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.economist', [], 'project'),
+                ], true),
             ])
             ->add('projectFolderNameOnTheServer', TextColumn::class, [
                 'field' => 'project.folderNameOnTheServer',
                 'label' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
+                ], true),
             ])
+            // Surface
+            ->add('area', TextColumn::class, [
+                'field' => 'projectDescription.area',
+                'label' => $translator->trans('load_plan.label.area', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.area', [], 'projects'),
+                ], true),
+            ])
+            // Activité
             ->add('activity', TextColumn::class, [
                 'field' => 'project.marketType',
                 'label' => $translator->trans('load_plan.label.activity', [], 'projects'),
@@ -54,25 +77,41 @@ class LoadPlanController extends BaseController
                 'render' => function ($value, $row) use ($translator) {
                     return $value ? $translator->trans($value, [], 'project') : '';
                 },
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.activity', [], 'projects'),
+                ], true),
             ])
             // CP
             ->add('siteAddressPostalCode', TextColumn::class, [
                 'field' => 'siteAddress.postalCode',
-                'label' => $translator->trans('label.postal_code_abbr', [], 'address')
+                'label' => $translator->trans('label.postal_code_abbr', [], 'address'),            
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('label.postal_code_abbr', [], 'address'),
+                ], true),
             ])
             ->add('location', TextColumn::class, [
                 'field' => 'siteAddress.line1',
-                'label' => $translator->trans('load_plan.label.location', [], 'projects')
+                'label' => $translator->trans('load_plan.label.location', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.location', [], 'projects'),
+                ], true),
             ])
             ->add('natureOfTheCosting', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans('load_plan.task_type.' .$value, [], 'projects');
                 },
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
+                ], true),
             ])
             ->add('comment', TextColumn::class, [
                 'field' => 'project.comment',
                 'label' => $translator->trans('load_plan.label.comment', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.comment', [], 'projects'),
+                ], true),
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),
@@ -91,6 +130,10 @@ class LoadPlanController extends BaseController
                     ->from(LoadPlan::class, 'loadPlan')
                     ->leftJoin('loadPlan.project', 'project')
                     ->leftJoin('project.siteAddress', 'siteAddress')
+                    ->leftJoin('project.prospect', 'prospect')
+                    ->leftJoin('prospect.projectDescription', 'projectDescription')
+                    ->leftJoin('project.businessCharge', 'businessCharge')
+                    ->leftJoin('project.economist', 'economist')
                     ->distinct('loadPlan')
                 ;
             }  
