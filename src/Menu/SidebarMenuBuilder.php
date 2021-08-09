@@ -135,7 +135,7 @@ class SidebarMenuBuilder
                 'linkAttributes' => ['class' => $linkClassName],
                 'extras' => [
                     'icon' => $icon,
-                    'icon_content' => 'calendar_today',
+                    'icon_content' => 'content_paste',
                     'label_wrapper' => 'p',
                 ],
             ])->setAttributes(['class' => $navItem]);
