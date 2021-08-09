@@ -165,6 +165,11 @@ export default [
             'comment',
             'project_business_charge',
             'project_economiste',
+            'nature_of_the_costing',
+            'project_folder_name_on_the_server',
+            'site_address_postal_code',
+            'location',
+            'activity',
         ],
         className: ''
     },

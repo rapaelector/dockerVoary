@@ -38,23 +38,41 @@ class LoadPlanController extends BaseController
         ];
 
         $table =  $dataTableFactory->create([], $createOptions)
-            ->add('project.economist', TextColumn::class, [
+            ->add('economist', TextColumn::class, [
                 'field' => 'project.economist',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.economist', [], 'project'),
             ])
-            // ->add('project_folder_name_on_the_server', TextColumn::class, [
-            //     'field' => 'project.folderNameOnTheServer',
-            //     'label' => $translator->trans('columns.folder_name_on_the_server', [], 'project'),
-            // ])
-            // ->add('site_address_postal_code', TextColumn::class, [
-            //     'field' => 'siteAddress.postalCode',
-            //     'label' => $translator->trans('label.postal_code_abbr', [], 'address')
-            // ])
+            ->add('projectFolderNameOnTheServer', TextColumn::class, [
+                'field' => 'project.folderNameOnTheServer',
+                'label' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
+            ])
+            ->add('activity', TextColumn::class, [
+                'field' => 'project.marketType',
+                'label' => $translator->trans('load_plan.label.activity', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'render' => function ($value, $row) use ($translator) {
+                    return $value ? $translator->trans($value, [], 'project') : '';
+                },
+            ])
+            // CP
+            ->add('siteAddressPostalCode', TextColumn::class, [
+                'field' => 'siteAddress.postalCode',
+                'label' => $translator->trans('label.postal_code_abbr', [], 'address')
+            ])
+            ->add('location', TextColumn::class, [
+                'field' => 'siteAddress.line1',
+                'label' => $translator->trans('load_plan.label.location', [], 'projects')
+            ])
             ->add('natureOfTheCosting', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans('load_plan.task_type.' .$value, [], 'projects');
                 },
+            ])
+            ->add('comment', TextColumn::class, [
+                'field' => 'project.comment',
+                'label' => $translator->trans('load_plan.label.comment', [], 'projects'),
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),

@@ -217,6 +217,10 @@ load_plan:
     week_number: "N° semaine pour remise de d'etude"
     project: 'Projet'
     delete_load_plan: 'Supprimer cete charge économiste'
+    project_folder_name_on_the_server: 'Nom dossier'
+    location: 'Localisation'
+    activity: 'Activité'
+    comment: 'Commentaires'
   
   task_type:
     meter_consultation: 'Mètre Consultation '
