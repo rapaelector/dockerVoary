@@ -84,6 +84,14 @@ class LoadPlan
      */
     private $end;
 
+    /**
+     * Fr: Temps d'etude estime
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"loadPlan:list"})
+     */
+    private $estimatedStudyTime;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -145,6 +153,18 @@ class LoadPlan
     public function setEnd(?\DateTimeInterface $end): self
     {
         $this->end = $end;
+
+        return $this;
+    }
+
+    public function getEstimatedStudyTime(): ?string
+    {
+        return $this->estimatedStudyTime;
+    }
+
+    public function setEstimatedStudyTime(?string $estimatedStudyTime): self
+    {
+        $this->estimatedStudyTime = $estimatedStudyTime;
 
         return $this;
     }

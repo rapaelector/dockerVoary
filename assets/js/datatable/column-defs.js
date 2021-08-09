@@ -73,7 +73,9 @@ export default [
      */
     {
         width: '30px',
-        cols: [],
+        cols: [
+            'week_number_for_submission_of_the_study',
+        ],
     },
 
     /**
@@ -171,6 +173,7 @@ export default [
             'location',
             'activity',
             'area',
+            'estimated_study_time',
         ],
         className: ''
     },

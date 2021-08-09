@@ -38,6 +38,7 @@ class LoadPlanController extends BaseController
         ];
 
         $table =  $dataTableFactory->create([], $createOptions)
+            // Commercial 
             ->add('businessCharge', TextColumn::class, [
                 'field' => 'businessCharge.firstName',
                 'className' => 'dynamic-nowrap',
@@ -46,6 +47,7 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.business_charge', [], 'projects')
                 ], true),
             ])
+            // Economist
             ->add('economist', TextColumn::class, [
                 'field' => 'economist.firstName',
                 'className' => 'dynamic-nowrap',
@@ -54,6 +56,7 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('columns.economist', [], 'project'),
                 ], true),
             ])
+            // Nom dossier
             ->add('projectFolderNameOnTheServer', TextColumn::class, [
                 'field' => 'project.folderNameOnTheServer',
                 'label' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
@@ -89,6 +92,7 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('label.postal_code_abbr', [], 'address'),
                 ], true),
             ])
+            // Localisation
             ->add('location', TextColumn::class, [
                 'field' => 'siteAddress.line1',
                 'label' => $translator->trans('load_plan.label.location', [], 'projects'),
@@ -96,6 +100,7 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.location', [], 'projects'),
                 ], true),
             ])
+            // Nature du chiffrage
             ->add('natureOfTheCosting', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 'render' => function ($value, $row) use ($translator) {
@@ -105,6 +110,24 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 ], true),
             ])
+            // Temps d'etude estime
+            ->add('estimatedStudyTime', TextColumn::class, [
+                'label' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
+                'className' => 'dynamic-nowrap',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
+                ], true),
+            ])
+            // N° semaine pour remise de l'etude
+            ->add('start', DateTimeColumn::class, [
+                'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
+                'format' => 'W',
+                'className' => 'dynamic-nowrap text-center',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
+                ], true)
+            ])
+            // Commentaires
             ->add('comment', TextColumn::class, [
                 'field' => 'project.comment',
                 'label' => $translator->trans('load_plan.label.comment', [], 'projects'),

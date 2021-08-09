@@ -32,6 +32,7 @@ function LoadPlanDialogController (
         weekNumber: null,
         start: null,
         end: null,
+        estimatedStudyTime: null,
     };
     $scope.config = {
         taskTypes: [],

@@ -27,6 +27,7 @@ class LoadPlanType extends AbstractType
             ->add('project', EntityType::class, [
                 'class' => Project::class
             ])
+            ->add('estimatedStudyTime', TextType::class)
         ;
     }
 

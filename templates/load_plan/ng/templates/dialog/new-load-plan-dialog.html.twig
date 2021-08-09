@@ -39,7 +39,7 @@
                     } %}
                 </div>
                 {# Nature du chiffrage #}
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <md-input-container class="w-100">
                         <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
                         <md-select ng-model="form.natureOfTheCosting">
@@ -50,6 +50,12 @@
                                 {{ '{{ task.label }}' }}
                             </md-option>
                         </md-select>
+                    </md-input-container>
+                </div>
+                <div class="col-sm-6">
+                    <md-input-container>
+                        <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
+                        <input ng-model="form.estimatedStudyTime">
                     </md-input-container>
                 </div>
                 {# start date #}

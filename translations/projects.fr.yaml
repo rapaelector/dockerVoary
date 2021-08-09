@@ -223,6 +223,9 @@ load_plan:
     comment: 'Commentaires'
     area: 'Surface'
     business_charge: 'Commercial'
+    estimated_study_time: "Temps d'etude estime"
+    week_number_for_submission_of_the_study: "N° semaine pour remise de l'etude"
+    week_number_for_submission_of_the_study_abbr: "N° semaine"
   
   task_type:
     meter_consultation: 'Mètre Consultation '
