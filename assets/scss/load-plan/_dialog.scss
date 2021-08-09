@@ -4,14 +4,18 @@
         md-dialog-content {
             overflow: hidden;
         }
-        .project-autocomplete {
-            // md-input-container {
-            //     margin-bottom: 0 !important;
-            // }
-            // md-autocomplete md-autocomplete-wrap md-progress-linear.md-inline {
-            //     bottom: 20px !important;
-            // }
+    }
+    .md-datepicker-input-container {
+        width: 80% !important;
+    }
+    md-input-container {
+        label {
+            font-weight: normal !important;
+            color: rgba(0, 0, 0, 0.34);
         }
+    }
+    .md-icon-button + .md-datepicker-input-container {
+        margin: 0;
     }
 }
 

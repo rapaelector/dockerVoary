@@ -211,6 +211,7 @@ load_plan:
   title: 'Plan de charge économiste'
   
   label:
+    add_load_plan: 'Ajouter une plan de charge'
     new_load_plan: 'Créer une plan de charge économiste'
     edit_load_plan: "Modification du plan de charge économiste"
     nature_of_the_costing: 'Nature du chiffrage'

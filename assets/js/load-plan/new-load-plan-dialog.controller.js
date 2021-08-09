@@ -31,7 +31,6 @@ function LoadPlanDialogController (
         natureOfTheCosting: null,
         weekNumber: null,
         start: null,
-        end: null,
         estimatedStudyTime: null,
     };
     $scope.config = {

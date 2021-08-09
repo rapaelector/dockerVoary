@@ -3,7 +3,8 @@
 <md-dialog aria-label="Event Detail Dialog" class="new-load-plan-dialog p-0">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2 class="text-white">{{ '{{ config.modalTitle }}' }}</h2>
+            {# <h2 class="text-white">{{ '{{ config.modalTitle }}' }}</h2> #}
+            <h2 class="text-white">{{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}</h2>
         </div>
     </md-toolbar>
 	<md-dialog-content class="m-3">
@@ -52,8 +53,9 @@
                         </md-select>
                     </md-input-container>
                 </div>
+                {# Temps d'etude estime #}
                 <div class="col-sm-6">
-                    <md-input-container>
+                    <md-input-container class="w-100">
                         <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
                         <input ng-model="form.estimatedStudyTime">
                     </md-input-container>
@@ -70,17 +72,18 @@
                     {# <span>({{ '{{ form.start.format("W") }}' }})</span> #}
                 </div>
                 {# end date #}
-                <div class="col-sm-6">
-                    <md-datepicker 
-                        ng-model="form.end"
-                        md-placeholder="Entrer une date" 
-                        md-open-on-focus
-                        class="w-100"
-                        md-min-date="form.start"
-                    >
-                    </md-datepicker>
-                    {# <span>({{ '{{ form.end | date:w }}' }})</span> #}
-                </div>
+                {# 
+                    <div class="col-sm-6">
+                        <md-datepicker 
+                            ng-model="form.end"
+                            md-placeholder="Entrer une date" 
+                            md-open-on-focus
+                            class="w-100"
+                            md-min-date="form.start"
+                        >
+                        </md-datepicker>
+                    </div>
+                #}
             </div>
         </div>
 	</md-dialog-content>
