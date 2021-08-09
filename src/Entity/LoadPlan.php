@@ -66,7 +66,7 @@ class LoadPlan
     private $weekNumber;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans")
      * @Groups({"loadPlan:list"})
      * @Assert\NotBlank
      */
@@ -85,12 +85,36 @@ class LoadPlan
     private $end;
 
     /**
-     * Fr: Temps d'etude estime
+     * Temps d'etude estime
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"loadPlan:list"})
      */
     private $estimatedStudyTime;
+
+    /**
+     * Date butoire
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups({"loadPlan:list"})
+     */
+    private $deadline;
+
+    /**
+     * Date realisation devis
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups({"loadPlan:list"})
+     */
+    private $realizationQuotationDate;
+
+    /**
+     * Temps d'etude effectif
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"loadPlan:list"})
+     */
+    private $effectiveStudyTime;
 
     public function getId(): ?int
     {
@@ -165,6 +189,42 @@ class LoadPlan
     public function setEstimatedStudyTime(?string $estimatedStudyTime): self
     {
         $this->estimatedStudyTime = $estimatedStudyTime;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeInterface
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(?\DateTimeInterface $deadline): self
+    {
+        $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    public function getRealizationQuotationDate(): ?\DateTimeInterface
+    {
+        return $this->realizationQuotationDate;
+    }
+
+    public function setRealizationQuotationDate(?\DateTimeInterface $realizationQuotationDate): self
+    {
+        $this->realizationQuotationDate = $realizationQuotationDate;
+
+        return $this;
+    }
+
+    public function getEffectiveStudyTime(): ?string
+    {
+        return $this->effectiveStudyTime;
+    }
+
+    public function setEffectiveStudyTime(?string $effectiveStudyTime): self
+    {
+        $this->effectiveStudyTime = $effectiveStudyTime;
 
         return $this;
     }

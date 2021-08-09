@@ -312,7 +312,7 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"}, inversedBy="projects")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project", "project:scheduler-resource", "loadPlan:create"})
+     * @Groups({"data-project", "project:scheduler-resource", "loadPlan:create", "loadPlan:list"})
      */
     private $prospect;
 

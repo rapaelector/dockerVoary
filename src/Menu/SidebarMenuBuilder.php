@@ -124,7 +124,24 @@ class SidebarMenuBuilder
             ])->setAttributes(['class' => $navItem]);
         }
 
-        // add text
+        /**
+         * TODO:
+         *      - Add roles for load plan here (Plan de charge économiste)
+         *      - Change load plan icon
+         */
+        if (true) {
+            $menu->addChild('menu.load_plan', [
+                'route' => 'load_plan.list',
+                'linkAttributes' => ['class' => $linkClassName],
+                'extras' => [
+                    'icon' => $icon,
+                    'icon_content' => 'calendar_today',
+                    'label_wrapper' => 'p',
+                ],
+            ])->setAttributes(['class' => $navItem]);
+        }
+
+        // offre nav link
         $menu->addChild('menu.offers_header', [])->setAttribute('class', $subTitleClass);
 
         // Offers submenu

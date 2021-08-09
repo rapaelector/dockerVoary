@@ -39,6 +39,7 @@
                                     aria-label="add-load-plan"
                                     ng-click="addLoadPlan('creation', null, $event)"
                                 >
+                                    <md-tooltip md-direction="bottom">{{ 'load_plan.label.add_load_plan_long'|trans }}</md-tooltip>
                                     <i class="material-icons">add</i>
                                 </md-button>
                             {% endif %}
@@ -51,7 +52,7 @@
                                 filterCollapseId: 'load-plan-filter',
                             } %}
                         </div>
-                        <div id="{{ datatable.tableId }}"></div>
+                        <div id="{{ datatable.tableId }}">{{ 'label.loading'|trans({}, 'messages') }}</div>
                     </div>
                 </div>
             </div>
@@ -82,8 +83,11 @@
                     'site_address_postal_code',
                     'location',
                     'estimated_study_time',
+                    'deadline',
                     'week_number_for_submission_of_the_study',
                     'comment',
+                    'realization_quotation_date',
+                    'effective_study_time',
                     'actions',
                 ],
                 excludedColumns: [2],

@@ -61,7 +61,7 @@
                     </md-input-container>
                 </div>
                 {# start date #}
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <md-datepicker 
                         ng-model="form.start"
                         md-placeholder="Entrer une date" 
@@ -70,6 +70,30 @@
                     >
                     </md-datepicker>
                     {# <span>({{ '{{ form.start.format("W") }}' }})</span> #}
+                </div>
+                <div class="col-sm-4">
+                    <md-datepicker 
+                        ng-model="form.deadline"
+                        md-placeholder="{{ 'load_plan.label.deadline'|trans({}, 'projects') }}" 
+                        md-open-on-focus
+                        class="w-100"
+                    >
+                    </md-datepicker>
+                </div>
+                <div class="col-sm-4 ml-n2">
+                    <md-datepicker 
+                        ng-model="form.realizationQuotationDate"
+                        md-placeholder="{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}" 
+                        md-open-on-focus
+                        class="w-100"
+                    >
+                    </md-datepicker>
+                </div>
+                <div class="col-sm-12 mt-3">
+                    <md-input-container class="w-100">
+                        <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
+                        <input ng-model="form.effectiveStudyTime">
+                    </md-input-container>
                 </div>
                 {# end date #}
                 {# 

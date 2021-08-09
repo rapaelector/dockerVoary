@@ -24,6 +24,7 @@ function LoadPlanDialogController (
     $scope.data = {
         projects: [],
         errors: [],
+        selectedProject: null,
     };
     $scope.loading = false;
     $scope.form = {
@@ -54,7 +55,9 @@ function LoadPlanDialogController (
             loadPlanService.getLoadPlan(options.id).then((response) => {
                 $scope.loading = false;
                 $scope.form = response.data;
-                $scope.selectedProjectChange(response.data);
+                // Restore the project when edit the load plan
+                $scope.data.selectedProject = $scope.form.project;
+                // $scope.selectedProjectChange(response.data.project);
             }, error => console.warn(error));
         }
 
@@ -139,6 +142,7 @@ function LoadPlanDialogController (
     }
 
 	$scope.selectedProjectChange = (item) => {
+        console.info($scope.data.selectedProject);
 		if (item) {
 			$scope.form.project = item.id;
 			// $scope.data.selectedProject = item.name + ' ' + resolverService.resolve([item, 'prospect', 'clientNumber'], null);

@@ -118,6 +118,14 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 ], true),
             ])
+            // Date butoire
+            ->add('deadline', DateTimeColumn::class, [
+                'label' => $translator->trans('load_plan.label.deadline', [], 'projects'),
+                'format' => 'd/m/Y',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.deadline', [], 'projects'),
+                ], true),
+            ])
             // N° semaine pour remise de l'etude
             ->add('start', DateTimeColumn::class, [
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
@@ -129,12 +137,27 @@ class LoadPlanController extends BaseController
             ])
             // Commentaires
             ->add('comment', TextColumn::class, [
-                'field' => 'project.comment',
+                'field' => 'project.planningProject',
                 'label' => $translator->trans('load_plan.label.comment', [], 'projects'),
                 'className' => 'dynamic-nowrap',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.comment', [], 'projects'),
                 ], true),
+            ])
+            // Date de realisation devis
+            ->add('realizationQuotationDate', DateTimeColumn::class, [
+                'label' => $translator->trans('load_plan.label.realization_quotation_date', [], 'projects'),
+                'format' => 'd/m/Y',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.realization_quotation_date_abbr', [], 'projects'),
+                ], true)
+            ])
+            // Temps d'etude effectif
+            ->add('effectiveStudyTime', TextColumn::class, [
+                'label' => $translator->trans('load_plan.label.effective_study_time', [], 'projects'),
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('load_plan.label.effective_study_time_abbr', [], 'projects'),
+                ], true)
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),

@@ -24,10 +24,17 @@ class LoadPlanType extends AbstractType
             ->add('end', DateType::class, [
                 'widget' => 'single_text',
             ])
+            ->add('deadline', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('realizationQuotationDate', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('project', EntityType::class, [
                 'class' => Project::class
             ])
             ->add('estimatedStudyTime', TextType::class)
+            ->add('effectiveStudyTime', TextType::class)
         ;
     }
 

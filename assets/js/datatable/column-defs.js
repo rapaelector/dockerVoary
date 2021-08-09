@@ -62,6 +62,8 @@ export default [
             'deleted_at',
             'last_relaunch',
             'project_last_relaunch',
+            'deadline',
+            'realization_quotation_date',
         ],
         className: 'text-center',
     },
@@ -174,6 +176,7 @@ export default [
             'activity',
             'area',
             'estimated_study_time',
+            'effective_study_time',
         ],
         className: ''
     },

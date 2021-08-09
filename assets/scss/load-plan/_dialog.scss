@@ -8,10 +8,21 @@
     .md-datepicker-input-container {
         width: 80% !important;
     }
+    md-autocomplete {
+        &.project-autocomplete {
+            md-autocomplete-wrap md-input-container {
+                margin-bottom: 0 !important;
+            }
+            md-progress-linear.md-inline {
+                bottom: 20px !important;
+            }
+        }
+    }
     md-input-container {
         label {
             font-weight: normal !important;
             color: rgba(0, 0, 0, 0.34);
+            margin-bottom: 0 !important;
         }
     }
     .md-icon-button + .md-datepicker-input-container {

@@ -67,7 +67,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
-     * @Groups({"project-form-data", "project:scheduler-resource", "loadPlan:create"})
+     * @Groups({"project-form-data", "project:scheduler-resource", "loadPlan:create", "loadPlan:list"})
      */
     private $clientNumber;
 

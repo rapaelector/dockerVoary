@@ -212,6 +212,7 @@ load_plan:
   
   label:
     add_load_plan: 'Ajouter une plan de charge'
+    add_load_plan_long: "Ajouter une plan de charge économiste"
     new_load_plan: 'Créer une plan de charge économiste'
     edit_load_plan: "Modification du plan de charge économiste"
     nature_of_the_costing: 'Nature du chiffrage'
@@ -227,6 +228,12 @@ load_plan:
     estimated_study_time: "Temps d'etude estime"
     week_number_for_submission_of_the_study: "N° semaine pour remise de l'etude"
     week_number_for_submission_of_the_study_abbr: "N° semaine"
+    deadline: 'Date buttoire'
+    realization_quotation_date: 'Date realization devis'
+    realization_quotation_date_abbr: 'Date de devis'
+    effective_study_time: "Temps d'etude effectif"
+    effective_study_time_raw: "Temps d'etude<br />effectif"
+    effective_study_time_abbr: "Temps d'etude"
   
   task_type:
     meter_consultation: 'Mètre Consultation '
