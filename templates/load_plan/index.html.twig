@@ -27,37 +27,35 @@
     {# Include angular part here #}
     {% include 'load_plan/ng/index.html.twig' %}
 
-    <div class="container-fluid">
-        <row>
-            <div class="col-12">
-                <div class="card card-outline card-app-primary">
-                    <div class="card-header">
-                        <div class="card-tools">
-                            {% if true %}
-                                <md-button 
-                                    class="md-icon-button md-primary m-n2" 
-                                    aria-label="add-load-plan"
-                                    ng-click="addLoadPlan('creation', null, $event)"
-                                >
-                                    <md-tooltip md-direction="bottom">{{ 'load_plan.label.add_load_plan_long'|trans }}</md-tooltip>
-                                    <i class="material-icons">add</i>
-                                </md-button>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-body py-0 pt-md-3 filter-collapse-container">
-                            {% include template_datatable_filters with {
-                                datatable: datatable,
-                                filterCollapseId: 'load-plan-filter',
-                            } %}
-                        </div>
-                        <div id="{{ datatable.tableId }}">{{ 'label.loading'|trans({}, 'messages') }}</div>
+    <row>
+        <div class="col-12">
+            <div class="card card-outline card-app-primary">
+                <div class="card-header">
+                    <div class="card-tools">
+                        {% if true %}
+                            <md-button 
+                                class="md-icon-button md-primary m-n2" 
+                                aria-label="add-load-plan"
+                                ng-click="addLoadPlan('creation', null, $event)"
+                            >
+                                <md-tooltip md-direction="bottom">{{ 'load_plan.label.add_load_plan_long'|trans }}</md-tooltip>
+                                <i class="material-icons">add</i>
+                            </md-button>
+                        {% endif %}
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="card-body py-0 pt-md-3 filter-collapse-container">
+                        {% include template_datatable_filters with {
+                            datatable: datatable,
+                            filterCollapseId: 'load-plan-filter',
+                        } %}
+                    </div>
+                    <div id="{{ datatable.tableId }}">{{ 'label.loading'|trans({}, 'messages') }}</div>
+                </div>
             </div>
-        </row>
-    </div>
+        </div>
+    </row>
 {% endblock %}
 
 
