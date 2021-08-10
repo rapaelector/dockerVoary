@@ -45,12 +45,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-body py-0 pt-md-3 filter-collapse-container">
-                        {% include template_datatable_filters with {
-                            datatable: datatable,
-                            filterCollapseId: 'load-plan-filter',
-                        } %}
-                    </div>
+                    {% include template_datatable_filters with {
+                        datatable: datatable,
+                        filterCollapseId: 'load-plan-filter-collapse',
+                    } %}
+                </div>
+                <div class="card-body">
                     <div id="{{ datatable.tableId }}">{{ 'label.loading'|trans({}, 'messages') }}</div>
                 </div>
             </div>

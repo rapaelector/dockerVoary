@@ -13,6 +13,7 @@ use App\DataTables\Adapter\ORMAdapter;
 use App\DataTables\DataTable;
 use App\DataTables\DataTableFactory;
 use App\Service\Form\FormService;
+use App\DataTables\Filter\ChoiceFilter;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,6 +47,13 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.business_charge', [], 'projects')
                 ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('business_charge'),
+                        ['choices' => $this->filterOptionsProvider->getLoadPlanBusinessCharge()]
+                    )
+                ),
             ])
             // Economist
             ->add('economist', TextColumn::class, [
@@ -63,6 +71,13 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
                 ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('project_folder_name_on_the_server'),
+                        ['choices' => $this->filterOptionsProvider->getProjectFolderNameOnTheServer()]
+                    )
+                ),
             ])
             // Surface
             ->add('area', TextColumn::class, [
@@ -83,6 +98,13 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.activity', [], 'projects'),
                 ], true),
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('load_plan_activity'),
+                        ['choices' => $this->filterOptionsProvider->getPlanActivities()]
+                    )
+                ),
             ])
             // CP
             ->add('siteAddressPostalCode', TextColumn::class, [
@@ -103,12 +125,21 @@ class LoadPlanController extends BaseController
             // Nature du chiffrage
             ->add('natureOfTheCosting', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
+                'className' => 'dynamic-nowrap',
                 'render' => function ($value, $row) use ($translator) {
                     return $translator->trans('load_plan.task_type.' .$value, [], 'projects');
                 },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 ], true),
+                'searchable' => false,
+                // 'filter' => $this->filterBuilder->buildFilter(
+                //     ChoiceFilter::class, 
+                //     array_merge(
+                //         $this->filterOptionsProvider->getOptions('nature_of_the_costing'),
+                //         ['choices' => $this->filterOptionsProvider->getNatureOfTheCosting()]
+                //     )
+                // ),
             ])
             // Temps d'etude estime
             ->add('estimatedStudyTime', TextColumn::class, [

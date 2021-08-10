@@ -5,6 +5,7 @@ namespace App\DataTables\Filter;
 use App\Entity\Client;
 use App\Entity\Address;
 use App\Entity\Project;
+use App\Entity\LoadPlan;
 use App\Entity\Constants\Project as ProjectConstants;
 use App\DataTables\Filter\FilterConstants;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,6 +101,22 @@ class FilterOptionsProvider
             'choices' => [],
         ],
         'roadmap' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'load_plan_activity' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'project_folder_name_on_the_server' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'business_charge' => [
+            'type' => 'choice',
+            'choices' => [],
+        ],
+        'nature_of_the_costing' => [
             'type' => 'choice',
             'choices' => [],
         ],
@@ -216,5 +233,62 @@ class FilterOptionsProvider
         $projectInterlocutors = array_column($projectInterlocutors, 'contactEmail');
 
         return array_combine($projectInterlocutors, $projectInterlocutors);
+    }
+
+    public function getPlanActivities()
+    {
+        $loadPlanActivities = [];
+        foreach (ProjectConstants::FIRST_MARKET_TYPES as $activity) {
+            $loadPlanActivities[$activity] = $this->translator->trans($activity, [], 'project');
+        }
+
+        return $loadPlanActivities;
+    }
+
+    public function getProjectFolderNameOnTheServer()
+    {
+        $folders = array_column($this->em->getRepository(LoadPlan::class)
+            ->createQueryBuilder('l')
+            ->select('DISTINCT(project.folderNameOnTheServer) folderNameOnTheServer')
+            ->leftJoin('l.project', 'project')
+            ->getQuery()
+            ->getResult()
+        , 'folderNameOnTheServer');
+
+        return array_combine($folders, $folders);
+    }
+
+    // COMMERCIAL
+    public function getLoadPlanBusinessCharge()
+    {
+        $res = [];
+        $businessCharges = $this->em->getRepository(LoadPlan::class)
+            ->createQueryBuilder('l')
+            ->select('DISTINCT(businessCharge.firstName) firstName, businessCharge.lastName lastName')
+            ->leftJoin('l.project', 'project')
+            ->leftJoin('project.businessCharge', 'businessCharge')
+            ->where('businessCharge.firstName IS NOT NULL OR businessCharge.lastName IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $firstNames = array_column($businessCharges, 'firstName');
+        $lastNames = array_column($businessCharges, 'lastName');
+        $businessChargesList = array_combine($firstNames, $lastNames);
+        foreach ($businessChargesList as $key => $businessCharge) {
+            $res[$key] = $businessCharge . ' ' .$key;
+        }
+
+        return $res;
+    }
+
+    public function getNatureOfTheCosting()
+    {
+        $res = [];
+        foreach (LoadPlan::TASK_TYPES as $studyTime) {
+            $res[$studyTime] = $this->translator->trans('load_plan.task_type.' .$studyTime, [], 'projects');
+        }
+
+        return $res;
     }
 }

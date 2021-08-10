@@ -28,7 +28,10 @@ class LoadPlan
     use TimestampableTrait;
     use LoadPlanTrait;
     
-    // TASK TYPES // TYPE DE TACHE
+    /**
+     * TASK TYPES
+     * TYPE DE TACHE
+    */
     const METER_CONSULTATION = 'meter_consultation'; // Mètre Consultation 
     const PRE_STUDY = 'pre_study'; // Pré étude 
     const SKETCH = 'sketch'; // Esquisse 

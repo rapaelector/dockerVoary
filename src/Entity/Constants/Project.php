@@ -7,7 +7,7 @@ namespace App\Entity\Constants;
  */
 class Project
 {
-    // type marche
+    // TYPE MARCHE
     const TYPE_MARCHE_SHADOWS = 'typeMarket.shadows'; // Ombrières
     const TYPE_MARCHE_TENDER = 'typeMarket.tender'; // Appel d’offre
     const TYPE_MARCHE_T_C_E = 'typeMarket.tce'; // T.C.E
@@ -23,26 +23,26 @@ class Project
     const TYPE_MARCHE_WORK_ON_EXISTING = 'typeMarket.work_on_existing'; // Travaux sur existant
     const TYPE_MARCHE_SIMPLE_SUPPLY = 'typeMarket.simple_supply'; // Fourniture simple
 
-    // bonhome est il
+    // BONHOME EST IL
     const TYPE_BONHOMME_CONTRACT_HOLDER = "bonhommePercentage.contract_holder";
     const TYPE_BONHOMME_20PERCENT = "bonhommePercentage.20percent";
     const TYPE_BONHOMME_10PERCENT = "bonhommePercentage.10percent";
     const TYPE_BONHOMME_SUBCONTRACTOR = "bonhommePercentage.subcontractor";
     const TYPE_BONHOMME_0PERCENT = "bonhommePercentage.0percent";
 
-    // validation de la fiche DISA
+    // VALIDATION DE LA FICHE DISA
     const TYPE_DISA_SHEET_SIGNED_QUOTE = "disaSheetValidation.signed_quote";
     const TYPE_DISA_SHEET_CUSTOMER_ORDER_FORM = "disaSheetValidation.customer_order_form";
     const TYPE_DISA_SHEET_AUTHORIZATION_LETTER = "disaSheetValidation.authorization_letter";
     const TYPE_DISA_SHEET_SUBCONTRACT = "disaSheetValidation.subcontract";
 
-    // mode de reglement
+    // MODE DE REGLEMENT
     const PAYMENT_TYPE_CARD = "payment.type.card";
     const PAYMENT_TYPE_CASH = "payment.type.cash";
     const PAYMENT_TYPE_TRANSFER = "payment.type.transfer";
     const PAYMENT_TYPE_CHECK = "payment.type.check";
 
-    // type de dossier
+    // TYPE DE DOSSIER
     const CASE_TYPE_EARTH_WORKS = "caseType.earthWorks";
     const CASE_TYPE_BIG_WORK = "caseType.bigWork";
     const CASE_TYPE_PLUMBING = "caseType.plumbing";
