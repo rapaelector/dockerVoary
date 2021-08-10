@@ -107,18 +107,44 @@ class FilterOptionsProvider
         'load_plan_activity' => [
             'type' => 'choice',
             'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ],
         ],
         'project_folder_name_on_the_server' => [
             'type' => 'choice',
             'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ]
         ],
         'business_charge' => [
             'type' => 'choice',
             'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ]
         ],
         'nature_of_the_costing' => [
             'type' => 'choice',
             'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ]
+        ],
+        'estimated_study_time' => [
+            'type' => 'choice',
+            'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ]
+        ],
+        'effective_study_time' => [
+            'type' => 'choice',
+            'choices' => [],
+            'attr' => [
+                'style' => 'text-transform: capitalize;'
+            ]
         ],
     ];
 
@@ -287,6 +313,16 @@ class FilterOptionsProvider
         $res = [];
         foreach (LoadPlan::TASK_TYPES as $studyTime) {
             $res[$studyTime] = $this->translator->trans('load_plan.task_type.' .$studyTime, [], 'projects');
+        }
+
+        return $res;
+    }
+
+    public function getEstimatedStudyTime()
+    {
+        $res = [];
+        foreach (LoadPlan::STUDY_TIME as $studyTime) {
+            $res[$studyTime] = $this->translator->trans('load_plan.study_time.' .$studyTime, [], 'projects');
         }
 
         return $res;

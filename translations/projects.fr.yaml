@@ -211,8 +211,8 @@ load_plan:
   title: 'Plan de charge économiste'
   
   label:
-    add_load_plan: 'Ajouter une plan de charge'
-    add_load_plan_long: "Ajouter une plan de charge économiste"
+    add_load_plan: 'Ajouter un plan de charge'
+    add_load_plan_long: "Ajouter un plan de charge économiste"
     new_load_plan: 'Créer une plan de charge économiste'
     edit_load_plan: "Modification du plan de charge économiste"
     nature_of_the_costing: 'Nature du chiffrage'
@@ -225,13 +225,13 @@ load_plan:
     comment: 'Commentaires'
     area: 'Surface'
     business_charge: 'Commercial'
-    estimated_study_time: "Temps d'etude estimé"
-    week_number_for_submission_of_the_study: "N° semaine pour remise de l'etude"
+    estimated_study_time: "Temps d'étude estimé"
+    week_number_for_submission_of_the_study: "N° semaine pour remise de l'étude"
     week_number_for_submission_of_the_study_abbr: "N° semaine"
     deadline: 'Date butoire'
-    realization_quotation_date: 'Date realization devis'
+    realization_quotation_date: 'Date réalisation devis'
     realization_quotation_date_abbr: 'Date de devis'
-    effective_study_time: "Temps d'etude effectif"
+    effective_study_time: "Temps d'étude effectif"
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
   

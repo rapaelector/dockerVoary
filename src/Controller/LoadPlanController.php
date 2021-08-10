@@ -45,8 +45,12 @@ class LoadPlanController extends BaseController
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('load_plan.label.business_charge', [], 'projects'),
                 'meta' => $this->columnMeta([
-                    'abbr' => $translator->trans('load_plan.label.business_charge', [], 'projects')
-                ], true),
+                    'abbr' => $translator->trans('load_plan.label.business_charge', [], 'projects'),
+                    'label_attr' => [
+                        'style' => 'text-transform: uppercase',
+                    ],
+                ], false),
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     ChoiceFilter::class, 
                     array_merge(
@@ -62,7 +66,10 @@ class LoadPlanController extends BaseController
                 'label' => $translator->trans('columns.economist', [], 'project'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.economist', [], 'project'),
-                ], true),
+                    'label_attr' => [
+                        'style' => 'text-transform: uppercase',
+                    ],
+                ], false),
             ])
             // Nom dossier
             ->add('projectFolderNameOnTheServer', TextColumn::class, [
@@ -70,7 +77,11 @@ class LoadPlanController extends BaseController
                 'label' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.project_folder_name_on_the_server', [], 'projects'),
-                ], true),
+                    'label_attr' => [
+                        'style' => 'text-transform: uppercase',
+                    ],
+                ], false),
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     ChoiceFilter::class, 
                     array_merge(
@@ -98,6 +109,7 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.activity', [], 'projects'),
                 ], true),
+                'searchable' => true,
                 'filter' => $this->filterBuilder->buildFilter(
                     ChoiceFilter::class, 
                     array_merge(
@@ -132,14 +144,14 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.nature_of_the_costing', [], 'projects'),
                 ], true),
-                'searchable' => false,
-                // 'filter' => $this->filterBuilder->buildFilter(
-                //     ChoiceFilter::class, 
-                //     array_merge(
-                //         $this->filterOptionsProvider->getOptions('nature_of_the_costing'),
-                //         ['choices' => $this->filterOptionsProvider->getNatureOfTheCosting()]
-                //     )
-                // ),
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('nature_of_the_costing'),
+                        ['choices' => $this->filterOptionsProvider->getNatureOfTheCosting()]
+                    )
+                ),
             ])
             // Temps d'etude estime
             ->add('estimatedStudyTime', TextColumn::class, [
@@ -151,6 +163,14 @@ class LoadPlanController extends BaseController
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 ], true),
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('estimated_study_time'),
+                        ['choices' => $this->filterOptionsProvider->getEstimatedStudyTime()]
+                    )
+                ),
             ])
             // Date butoire
             ->add('deadline', DateTimeColumn::class, [
@@ -194,7 +214,15 @@ class LoadPlanController extends BaseController
                 },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.effective_study_time_abbr', [], 'projects'),
-                ], true)
+                ], true),
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceFilter::class, 
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('effective_study_time'),
+                        ['choices' => $this->filterOptionsProvider->getEstimatedStudyTime()]
+                    )
+                ),
             ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action'),

@@ -131,7 +131,7 @@ class LoadPlan
     private $realizationQuotationDate;
 
     /**
-     * Temps d'etude
+     * Temps d'etude estimé
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
@@ -142,7 +142,7 @@ class LoadPlan
     private $effectiveStudyTime;
 
     /**
-     * Date de devis
+     * Temps d'etude effectif
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
