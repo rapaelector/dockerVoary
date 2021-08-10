@@ -1,12 +1,15 @@
 @mixin dialog {
     md-dialog.new-load-plan-dialog {
         width: 600px;
-        md-dialog-content {
-            overflow: hidden;
-        }
+        md-dialog-content {}
     }
     .md-datepicker-input-container {
         width: 80% !important;
+    }
+    .hide-icons {
+        .md-datepicker-input-container {
+            width: 100% !important;
+        }
     }
     md-autocomplete {
         &.project-autocomplete {

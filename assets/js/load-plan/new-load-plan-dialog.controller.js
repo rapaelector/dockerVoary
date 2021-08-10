@@ -33,9 +33,12 @@ function LoadPlanDialogController (
         weekNumber: null,
         start: null,
         estimatedStudyTime: null,
+        estimatedStudyTime: null,
+        effectiveStudyTime: null,
     };
     $scope.config = {
         taskTypes: [],
+        studyTime: [],
         modalTitle: '',
         mode: '',
     };
@@ -47,6 +50,7 @@ function LoadPlanDialogController (
 
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
+            $scope.config.studyTime = response.data.studyTime;
         });
         if (options && options.mode === 'edit' && options.id) {
             $scope.config.mode = options.mode;

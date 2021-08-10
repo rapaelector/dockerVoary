@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class LoadPlanType extends AbstractType
 {
@@ -33,8 +35,12 @@ class LoadPlanType extends AbstractType
             ->add('project', EntityType::class, [
                 'class' => Project::class
             ])
-            ->add('estimatedStudyTime', TextType::class)
-            ->add('effectiveStudyTime', TextType::class)
+            ->add('estimatedStudyTime', ChoiceType::class, [
+                'choices' => LoadPlan::STUDY_TIME,
+            ])
+            ->add('effectiveStudyTime', ChoiceType::class, [
+                'choices' => LoadPlan::STUDY_TIME,
+            ])
         ;
     }
 

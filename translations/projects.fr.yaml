@@ -225,15 +225,15 @@ load_plan:
     comment: 'Commentaires'
     area: 'Surface'
     business_charge: 'Commercial'
-    estimated_study_time: "Temps d'etude estime"
+    estimated_study_time: "Temps d'etude estimé"
     week_number_for_submission_of_the_study: "N° semaine pour remise de l'etude"
     week_number_for_submission_of_the_study_abbr: "N° semaine"
-    deadline: 'Date buttoire'
+    deadline: 'Date butoire'
     realization_quotation_date: 'Date realization devis'
     realization_quotation_date_abbr: 'Date de devis'
     effective_study_time: "Temps d'etude effectif"
-    effective_study_time_raw: "Temps d'etude<br />effectif"
-    effective_study_time_abbr: "Temps d'etude"
+    effective_study_time_raw: "Temps d'étude<br />effectif"
+    effective_study_time_abbr: "Temps d'étude"
   
   task_type:
     meter_consultation: 'Mètre Consultation '
@@ -248,3 +248,13 @@ load_plan:
     delete_successfull: 'Charge économiste supprimé avec succès'
     edit_successfull: 'Modification du charge économiste effectué avec succès'
     edit_failed: 'La modification du charge économiste à echoué'
+
+  study_time:
+    2: '1/4 journée'
+    4: '1/2 journée'
+    8: '1 jour'
+    12: '1 jour et demi'
+    16: '2 jours'
+    24: '3 jours'
+    32: '4 jours'
+    40: '5 jours'

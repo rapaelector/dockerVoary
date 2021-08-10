@@ -7,11 +7,11 @@
             <h2 class="text-white">{{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}</h2>
         </div>
     </md-toolbar>
-	<md-dialog-content class="m-3">
+	<md-dialog-content class="p-3">
         <div class="container-fluid">
             <div class="row">
                 {# Project select #}
-                <div class="col-sm-12 mt-3">
+                <div class="col-sm-12">
                     <md-autocomplete
                         class="project-autocomplete"
                         md-no-cache="noCache"
@@ -39,8 +39,86 @@
                         errorPath: 'data.errors.project',
                     } %}
                 </div>
-                {# Nature du chiffrage #}
+
+                {# Temps d'etude estime #}
                 <div class="col-sm-6">
+                    <md-input-container class="w-100">
+                        <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
+                        <md-select ng-model="form.estimatedStudyTime">
+                            <md-option
+                                ng-repeat="time in config.studyTime" 
+                                ng-value="time.value"
+                            >
+                                {{ '{{ time.label }}' }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                {# Temps d'etude effectif #}
+                <div class="col-sm-6">
+                    <md-input-container class="w-100">
+                        <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
+                        <md-select ng-model="form.effectiveStudyTime">
+                            <md-option
+                                ng-repeat="time in config.studyTime" 
+                                ng-value="time.value"
+                            >
+                                {{ '{{ time.label }}' }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                {# N° semaine #}
+                <div class="col-sm-6">
+                    <md-input-container class="w-100 mb-0">
+                        <label id="week-number">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
+                        <md-datepicker 
+                            class="w-100 hide-icons"
+                            ng-model="form.start"
+                            input-aria-labelledby="week-number"
+                            md-open-on-focus
+                            md-hide-icons="calendar"
+                        >
+                        </md-datepicker>
+                    </md-input-container>
+                </div>
+                
+                <div class="w-100"></div>
+
+                {# Date buttoire #}
+                <div class="col-sm-6">
+                    <md-input-container class="w-100 mb-0">
+                        <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
+                        <md-datepicker 
+                            class="w-100 hide-icons"
+                            ng-model="form.deadline"
+                            md-open-on-focus
+                            input-aria-labelledby="deadline-date"
+                            md-hide-icons="calendar"
+                        >
+                        </md-datepicker>
+                    </md-input-container>
+                </div>
+
+                {# Date realization devis #}
+                <div class="col-sm-6 ml-n2">
+                    <md-input-container class="w-100 mb-0">
+                        <label id="realization-devis-date">{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}</label>
+                        <md-datepicker 
+                            class="w-100 hide-icons"
+                            ng-model="form.realizationQuotationDate"
+                            md-open-on-focus
+                            input-aria-labelledby="realization-devis-date"
+                            md-hide-icons="calendar"
+                        >
+                        </md-datepicker>
+                    </md-input-container>
+                </div>
+
+                {# Nature du chiffrage #}
+                <div class="col-sm-12">
                     <md-input-container class="w-100">
                         <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
                         <md-select ng-model="form.natureOfTheCosting">
@@ -53,61 +131,6 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                {# Temps d'etude estime #}
-                <div class="col-sm-6">
-                    <md-input-container class="w-100">
-                        <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
-                        <input ng-model="form.estimatedStudyTime">
-                    </md-input-container>
-                </div>
-                {# start date #}
-                <div class="col-sm-4">
-                    <md-datepicker 
-                        ng-model="form.start"
-                        md-placeholder="Entrer une date" 
-                        md-open-on-focus
-                        class="w-100"
-                    >
-                    </md-datepicker>
-                    {# <span>({{ '{{ form.start.format("W") }}' }})</span> #}
-                </div>
-                <div class="col-sm-4">
-                    <md-datepicker 
-                        ng-model="form.deadline"
-                        md-placeholder="{{ 'load_plan.label.deadline'|trans({}, 'projects') }}" 
-                        md-open-on-focus
-                        class="w-100"
-                    >
-                    </md-datepicker>
-                </div>
-                <div class="col-sm-4 ml-n2">
-                    <md-datepicker 
-                        ng-model="form.realizationQuotationDate"
-                        md-placeholder="{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}" 
-                        md-open-on-focus
-                        class="w-100"
-                    >
-                    </md-datepicker>
-                </div>
-                <div class="col-sm-12 mt-3">
-                    <md-input-container class="w-100">
-                        <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
-                        <input ng-model="form.effectiveStudyTime">
-                    </md-input-container>
-                </div>
-                {# end date #}
-                {# 
-                    <div class="col-sm-6">
-                        <md-datepicker 
-                            ng-model="form.end"
-                            md-placeholder="Entrer une date" 
-                            md-open-on-focus
-                            class="w-100"
-                            md-min-date="form.start"
-                        >
-                        </md-datepicker>
-                    </div>
-                #}
             </div>
         </div>
 	</md-dialog-content>

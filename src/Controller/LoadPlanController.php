@@ -114,6 +114,9 @@ class LoadPlanController extends BaseController
             ->add('estimatedStudyTime', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 'className' => 'dynamic-nowrap',
+                'render' => function ($value, $row) use ($translator) {
+                    return $translator->trans('load_plan.study_time.' .$value, [], 'projects');
+                },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 ], true),
@@ -155,6 +158,9 @@ class LoadPlanController extends BaseController
             // Temps d'etude effectif
             ->add('effectiveStudyTime', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.effective_study_time', [], 'projects'),
+                'render' => function ($value, $row) use ($translator) {
+                    return $translator->trans('load_plan.study_time.' .$value, [], 'projects');
+                },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.effective_study_time_abbr', [], 'projects'),
                 ], true)
@@ -269,7 +275,15 @@ class LoadPlanController extends BaseController
             $taskTypesTranslated[] = ['label' => $translator->trans('load_plan.task_type.' .$task, [], 'projects'), 'value' => $task];
         }
 
-        return $this->json(['taskTypes' => $taskTypesTranslated]);
+        $studyTime = [];
+        foreach (LoadPlan::STUDY_TIME as $time) {
+            $studyTime[] = ['label' => $translator->trans('load_plan.study_time.' .$time, [], 'projects'), 'value' => $time];
+        }
+        
+        return $this->json([
+            'taskTypes' => $taskTypesTranslated,
+            'studyTime' => $studyTime,
+        ]);
     }
 
     #[Route('/{id}', name: 'load_plan.get_load_plan', options: ['expose' => true], requirements: ["id" => "\d+"])]

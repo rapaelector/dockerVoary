@@ -6,6 +6,7 @@ use App\Repository\LoadPlanRepository;
 use App\Entity\Common\BlameableTrait;
 use App\Entity\Common\SoftDeleteableTrait;
 use App\Entity\Common\TimestampableTrait;
+use App\Entity\Traits\LoadPlanTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,6 +26,7 @@ class LoadPlan
     use BlameableTrait;
     use SoftDeleteableTrait;
     use TimestampableTrait;
+    use LoadPlanTrait;
     
     // TASK TYPES // TYPE DE TACHE
     const METER_CONSULTATION = 'meter_consultation'; // Mètre Consultation 
@@ -37,6 +39,31 @@ class LoadPlan
         self::PRE_STUDY => self::PRE_STUDY,
         self::SKETCH => self::SKETCH,
         self::ENCRYPTION => self::ENCRYPTION,
+    ];
+
+    /**
+     * estimated_study_time, effective_study_time
+     * Temps d'etude estime, temps d'etude effectif
+     */
+    const QUARTER_OF_A_DAY = 2; // 1/4 journée
+    const HALF_DAY = 4; // 1/2 journée
+    const ONE_DAY = 8; // 1 jour
+    const ONE_DAY_AND_HALF = 12; // 1 jour et demi
+    const TWO_DAYS = 16; // 2 jours
+    const THREE_DAYS = 24; // 3 jours
+    const FOUR_DAYS = 32; // 4 jours
+    const FIVE_DAYS = 40; // 5 jours
+
+    // Temps d'etude
+    const STUDY_TIME = [
+        self::QUARTER_OF_A_DAY,
+        self::HALF_DAY,
+        self::ONE_DAY,
+        self::ONE_DAY_AND_HALF,
+        self::TWO_DAYS,
+        self::THREE_DAYS,
+        self::FOUR_DAYS,
+        self::FIVE_DAYS,
     ];
 
     /**
@@ -85,14 +112,6 @@ class LoadPlan
     private $end;
 
     /**
-     * Temps d'etude estime
-     * 
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"loadPlan:list"})
-     */
-    private $estimatedStudyTime;
-
-    /**
      * Date butoire
      * 
      * @ORM\Column(type="date", nullable=true)
@@ -109,12 +128,26 @@ class LoadPlan
     private $realizationQuotationDate;
 
     /**
-     * Temps d'etude effectif
+     * Temps d'etude
      * 
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
+     * Assert\Choice(
+     *      callback="getStudyTime",
+     * )
      */
     private $effectiveStudyTime;
+
+    /**
+     * Date de devis
+     * 
+     * @ORM\Column(type="smallint", nullable=true)
+     * @Groups({"loadPlan:list"})
+     * Assert\Choice(
+     *      callback="getStudyTime",
+     * )
+     */
+    private $estimatedStudyTime;
 
     public function getId(): ?int
     {
@@ -181,18 +214,6 @@ class LoadPlan
         return $this;
     }
 
-    public function getEstimatedStudyTime(): ?string
-    {
-        return $this->estimatedStudyTime;
-    }
-
-    public function setEstimatedStudyTime(?string $estimatedStudyTime): self
-    {
-        $this->estimatedStudyTime = $estimatedStudyTime;
-
-        return $this;
-    }
-
     public function getDeadline(): ?\DateTimeInterface
     {
         return $this->deadline;
@@ -217,14 +238,26 @@ class LoadPlan
         return $this;
     }
 
-    public function getEffectiveStudyTime(): ?string
+    public function getEffectiveStudyTime(): ?int
     {
         return $this->effectiveStudyTime;
     }
 
-    public function setEffectiveStudyTime(?string $effectiveStudyTime): self
+    public function setEffectiveStudyTime(?int $effectiveStudyTime): self
     {
         $this->effectiveStudyTime = $effectiveStudyTime;
+
+        return $this;
+    }
+
+    public function getEstimatedStudyTime(): ?int
+    {
+        return $this->estimatedStudyTime;
+    }
+
+    public function setEstimatedStudyTime(?int $estimatedStudyTime): self
+    {
+        $this->estimatedStudyTime = $estimatedStudyTime;
 
         return $this;
     }
