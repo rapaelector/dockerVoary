@@ -89,6 +89,12 @@ Encore
      */
     .addEntry('load_plan_app', './assets/js/load-plan/app.js')
 
+    /**
+     * Plan de charge economiste planning
+     * Load plan planning app
+     */
+    .addEntry('load_plan_planning_app', './assets/js/load-plan-planning/app.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

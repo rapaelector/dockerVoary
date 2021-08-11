@@ -1,4 +1,4 @@
-import './../../scss/load-plan/app.scss';
+import './../../scss/load-plan-planning/app.scss';
 
 import 'moment';
 import 'angular';
@@ -12,8 +12,7 @@ import 'daterangepicker/daterangepicker';
 import 'angular-daterangepicker/js/angular-daterangepicker';
 
 import './../angular/shared/shared.module';
+import './../angular/scheduler/scheduler';
 import './../angular/load-plan-planning/load-plan-planning';
-import './app.module';
-import './app.config';
-import './load-plan.controller';
-import './load-plan.service';
+import './load-plan-planning.module';
+import './load-plan-planning.controller';

@@ -1,5 +1,6 @@
-angular.module('loadPlanApp', [
+angular.module('loadPlanPlanningApp', [
     'sharedModule',
+    'schedulerModule',
     'ngMaterial',
     'ngMessages',
     'angularMoment',

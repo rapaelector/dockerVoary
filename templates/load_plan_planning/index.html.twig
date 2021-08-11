@@ -1,0 +1,26 @@
+{% trans_default_domain 'projects' %}
+
+{% extends 'project/layout.html.twig' %}
+{% block title %}{{ 'load_plan.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('load_plan_planning_app') }}
+{% endblock %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" 
+    style="height: auto;"
+    ng-app="loadPlanPlanningApp"
+    ng-controller="loadPlanPlanningController"
+{% endblock %}
+
+{% block content %}
+    <app-load-plan-planning></app-load-plan-planning>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('load_plan_planning_app') }}
+{% endblock %}
