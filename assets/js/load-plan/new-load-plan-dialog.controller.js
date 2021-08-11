@@ -86,11 +86,11 @@ function LoadPlanDialogController (
             $scope.showNotification(response.data.message);
             window.location.reload();
         }, errors => {
-            $mdDialog.hide();
+            // $mdDialog.hide();
             $scope.loading = false;
-            $scope.data.errors = errors.errors;
             console.warn(errors);
-            $scope.showNotification(response.data.message, {toastClass: 'toast-error'});
+            $scope.data.errors = errors.data.errors;
+            $scope.showNotification(errors.data.message, {toastClass: 'toast-error'});
         });
     };
 

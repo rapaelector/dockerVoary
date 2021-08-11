@@ -12,6 +12,9 @@
             <div class="row">
                 {# Project select #}
                 <div class="col-sm-12">
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.project',
+                    } %}
                     <md-autocomplete
                         class="project-autocomplete"
                         md-no-cache="noCache"
@@ -35,9 +38,6 @@
                             Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
                         </md-not-found>
                     </md-autocomplete>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.project',
-                    } %}
                 </div>
 
                 {# Temps d'etude estime #}
@@ -73,7 +73,7 @@
                 {# N° semaine #}
                 <div class="col-sm-6">
                     <md-input-container class="w-100 mb-0">
-                        <label id="week-number">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
+                        <label id="week-number">{{ 'load_plan.label.week_for_submission_of_the_study'|trans({}, 'projects') }}</label>
                         <md-datepicker 
                             class="w-100 hide-icons"
                             ng-model="form.start"
@@ -87,7 +87,7 @@
                 
                 <div class="w-100"></div>
 
-                {# Date buttoire #}
+                {# Date butoire #}
                 <div class="col-sm-6">
                     <md-input-container class="w-100 mb-0">
                         <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>

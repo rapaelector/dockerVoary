@@ -227,6 +227,7 @@ load_plan:
     business_charge: 'Commercial'
     estimated_study_time: "Temps d'étude estimé"
     week_number_for_submission_of_the_study: "N° semaine pour remise de l'étude"
+    week_for_submission_of_the_study: "Semaine pour remise de l'étude"
     week_number_for_submission_of_the_study_abbr: "N° semaine"
     deadline: 'Date butoire'
     realization_quotation_date: 'Date réalisation devis'
