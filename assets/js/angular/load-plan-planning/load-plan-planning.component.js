@@ -31,6 +31,16 @@ function LoadPlanPlanningController($scope) {
         $scope.options.headerMonthClassName = textCenter;
         $scope.options.headerWeekClassName = textCenter;
     }
+
+    $scope.$watch('$ctrl.start', () => {
+        $scope.data.date.startDate = $scope.$ctrl.start;
+        console.info($scope.$ctrl.start);
+    });
+    
+    $scope.$watch('$ctrl.end', () => {
+        $scope.data.date.endDate = $scope.$ctrl.end;
+        console.info($scope.$ctrl.end);
+    })
 }
 
 LoadPlanPlanningController.$inject = ['$scope'];
@@ -38,4 +48,14 @@ LoadPlanPlanningController.$inject = ['$scope'];
 angular.module('loadPlanPlanningModule').component('appLoadPlanPlanning', {
     template: loadPlanPlanningTemplate,
     controller: LoadPlanPlanningController,
+    bindings: {
+        /**
+         * moment()
+         */
+        start: '=',
+        /**
+         * moment()
+         */
+        end: '=',
+    }
 })

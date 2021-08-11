@@ -259,3 +259,6 @@ load_plan:
     24: '3 jours'
     32: '4 jours'
     40: '5 jours'
+
+load_plan_planning:
+  title: 'Planning de plan de charge économiste'

@@ -15,8 +15,44 @@
     ng-controller="loadPlanPlanningController"
 {% endblock %}
 
+{% block content_header %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6 col-md">
+                    <h1 class="m-0">
+                        {{ 'load_plan_planning.title'|trans({}, 'projects') }}
+                    </h1>
+                </div>
+                <div class="col-sm-4 col-md-4 justify-self-end">
+                    <div class="d-flex align-items-center">
+                        <label class="pr-2 m-0">{{ 'label.period'|trans({}, 'project') }}</label>
+                        <input 
+                            date-range-picker 
+                            options="options.dateRangePicker" 
+                            class="form-control date-picker text-center" 
+                            type="text" 
+                            ng-model="data.date"
+                        />
+                        <md-button 
+                            class="md-icon-button button-target" 
+                            ng-click="showVisibilityModal($event)"
+                        >
+                            <md-tooltip md-direction="bottom">{{ 'label.column_visibility'|trans({}, 'project') }}</md-tooltip>
+                            <i class="material-icons">settings</i>
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <app-load-plan-planning></app-load-plan-planning>
+    <app-load-plan-planning
+        start="data.date.startDate"
+        end="data.date.endDate"
+    ></app-load-plan-planning>
 {% endblock %}
 
 
