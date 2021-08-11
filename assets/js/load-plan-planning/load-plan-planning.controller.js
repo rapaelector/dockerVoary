@@ -1,9 +1,11 @@
-angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', ['$scope', function($scope) {
+angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', ['$scope', 'loadPlanPlanningService', function($scope, loadPlanPlanningService) {
+    
     $scope.data = {
         date: {
             startDate: moment().startOf('year'),
             endDate: moment().endOf('year'),
         },
+        resources: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -25,9 +27,10 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
                 "12 mois glissant": [moment(), moment().add(1, 'year').endOf('month')],
             },
         };
-    };
 
-    $scope.$watch('data.date', () => {
-        console.info($scope.data.date);
-    }, true)
+        loadPlanPlanningService.getResources().then((response) => {
+            $scope.data.resources = response.data.resources;
+            console.info({response, data: $scope.data.resources});
+        })
+    };
 }]);

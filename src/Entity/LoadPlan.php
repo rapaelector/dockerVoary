@@ -73,7 +73,7 @@ class LoadPlan
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"loadPlan:list"})
+     * @Groups({"loadPlan:list", "loadPlan:planning"})
      */
     private $id;
 
@@ -97,14 +97,14 @@ class LoadPlan
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans")
-     * @Groups({"loadPlan:list"})
+     * @Groups({"loadPlan:list", "loadPlan:planning"})
      * @Assert\NotBlank
      */
     private $project;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"loadPlan:list"})
+     * @Groups({"loadPlan:list", "loadPlan:planning"})
      */
     private $start;
 

@@ -25,7 +25,7 @@ class ProjectScheduleController extends AbstractController
     }
 
     #[Route('/resources', name: 'project_schedule.get_resources', options: ['expose' => true])]
-    public function getResources(
+    public function resources(
         Request $request, 
         EntityManagerInterface $em, 
         SerializerInterface $serializer,
@@ -48,7 +48,7 @@ class ProjectScheduleController extends AbstractController
     }
 
     #[Route('/events', name: 'project_schedule.get_events', options: ['expose' => true])]
-    public function get_events(
+    public function events(
         Request $request, 
         EntityManagerInterface $em, 
         SerializerInterface $serializer,

@@ -37,7 +37,8 @@ class Project
      *  "project:scheduler-resource", 
      *  "projectEvent:scheduler",
      *  "loadPlan:create",
-     *  "loadPlan:list"
+     *  "loadPlan:list",
+     *  "loadPlan:planning",
      * })
      */
     private $id;
@@ -127,7 +128,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "loadPlan:planning"})
      */
     private $businessCharge;
 
@@ -139,7 +140,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "loadPlan:planning"})
      */
     private $economist;
 
@@ -362,7 +363,7 @@ class Project
      * @Assert\NotBlank(
      * groups={"project:create"}
      * )
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "loadPlan:planning"})
      */
     private $folderNameOnTheServer;
 

@@ -19,6 +19,14 @@ class LoadPlanRepository extends ServiceEntityRepository
         parent::__construct($registry, LoadPlan::class);
     }
 
+    public function getProjects()
+    {
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.project', 'project')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return LoadPlan[] Returns an array of LoadPlan objects
     //  */

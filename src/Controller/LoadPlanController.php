@@ -309,7 +309,7 @@ class LoadPlanController extends BaseController
     }
 
     #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
-    public function getProjects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
+    public function projects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
         $query = $request->query->get('q');
         $projects = $em->getRepository(Project::class)->createQueryBuilder('p')
@@ -327,7 +327,7 @@ class LoadPlanController extends BaseController
     }
 
     #[Route('/config', name: 'load_plan.config', options: ['expose' => true])]
-    public function getConfig(Request $request, TranslatorInterface $translator)
+    public function config(Request $request, TranslatorInterface $translator)
     {
         $taskTypesTranslated = [];
         foreach (LoadPlan::TASK_TYPES as $task) {
@@ -346,7 +346,7 @@ class LoadPlanController extends BaseController
     }
 
     #[Route('/{id}', name: 'load_plan.get_load_plan', options: ['expose' => true], requirements: ["id" => "\d+"])]
-    public function getLoadPlan(Request $request, LoadPlan $loadPlan, SerializerInterface $serializer)
+    public function loadPlan(Request $request, LoadPlan $loadPlan, SerializerInterface $serializer)
     {
         return $this->json($serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']));
     }

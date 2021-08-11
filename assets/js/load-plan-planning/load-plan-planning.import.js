@@ -15,4 +15,5 @@ import './../angular/shared/shared.module';
 import './../angular/scheduler/scheduler';
 import './../angular/load-plan-planning/load-plan-planning';
 import './load-plan-planning.module';
+import './load-plan-planning.service';
 import './load-plan-planning.controller';
