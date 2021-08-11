@@ -2,7 +2,8 @@ angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting
     var _this = this;
 
     _this.saveLoadPlan = (formData, mode) => {
-        var formattedData = _this.formatFormData(formData);
+        // var formattedData = _this.formatFormData(formData);
+        var formattedData = formData;
 
         return mode === 'edit' && formattedData.id ? $http.post(fosJsRouting.generate('load_plan.edit', {id: formattedData.id}), formattedData) : $http.post(fosJsRouting.generate('load_plan.new'), formattedData);
     };

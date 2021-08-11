@@ -22,15 +22,19 @@ class LoadPlanType extends AbstractType
             // ->add('weekNumber', TextType::class)
             ->add('start', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ])
             ->add('end', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ])
             ->add('realizationQuotationDate', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ])
             ->add('project', EntityType::class, [
                 'class' => Project::class

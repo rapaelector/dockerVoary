@@ -8,6 +8,7 @@ LoadPlanDialogController.$inject = [
     'resolverService',
     'options',
     'MESSAGES',
+    'moment',
 ];
 
 function LoadPlanDialogController (
@@ -20,6 +21,7 @@ function LoadPlanDialogController (
     resolverService,
     options,
     MESSAGES,
+    moment
 ) {
     $scope.data = {
         projects: [],
@@ -30,11 +32,13 @@ function LoadPlanDialogController (
     $scope.form = {
         project: null,
         natureOfTheCosting: null,
-        weekNumber: null,
-        start: null,
         estimatedStudyTime: null,
         estimatedStudyTime: null,
         effectiveStudyTime: null,
+        // Date type
+        start: null,
+        deadline: null,
+        realizationQuotationDate: null,
     };
     $scope.config = {
         taskTypes: [],
@@ -76,15 +80,20 @@ function LoadPlanDialogController (
      */
     $scope.saveLoadPlan = (event) => {
         $scope.loading = true;
-        if (moment($scope.form.end).isBefore(moment($scope.form.start))) {
-            $scope.form.end = $scope.form.start;
-        }
+        // start = N° semaine pour remise de l'etude
+        $scope.form.start = moment($scope.form.start).startOf('week').format('YYYY-MM-DD');
+        $scope.form.end = moment($scope.form.start).endOf('week').format('YYYY-MM-DD');
+        $scope.form.deadline = moment($scope.form.deadline).format('YYYY-MM-DD');
+        $scope.form.realizationQuotationDate = moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD');
+
+        console.info($scope.form.start);
+        console.info($scope.form.end);
 
         loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
             $mdDialog.hide();
             $scope.loading = false;
             $scope.showNotification(response.data.message);
-            window.location.reload();
+            // window.location.reload();
         }, errors => {
             // $mdDialog.hide();
             $scope.loading = false;

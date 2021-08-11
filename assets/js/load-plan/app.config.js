@@ -26,7 +26,9 @@ angular.module('loadPlanApp').config(['$mdDateLocaleProvider', 'DATE_FORMAT', fu
     };
 }]);
 
-angular.module('loadPlanApp').config(['$mdThemingProvider', function ($mdThemingProvider) {
+angular.module('loadPlanApp').config(['$mdThemingProvider', 'moment', function ($mdThemingProvider, moment) {
+    moment.locale('fr');
+    
 	$mdThemingProvider.definePalette('primaryPalette', primaryPalette);
 	
     $mdThemingProvider.definePalette('secondaryPalette', secondaryPalette);
