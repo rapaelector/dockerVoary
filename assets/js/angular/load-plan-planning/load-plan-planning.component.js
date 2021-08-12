@@ -18,35 +18,8 @@ function LoadPlanPlanningController($scope) {
         headerWeekClassName: null,
     };
 
-    const loadPlanPlanningColumns = [
-        {
-            label: 'Project',
-            field: 'folderNameOnTheServer',
-            headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
-            width: 200,
-        },
-        {
-            label: 'Commer',
-            field: 'businessCharge.name',
-            headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
-            width: 200,
-        },
-        {
-            label: 'Eco',
-            field: 'economist.name',
-            headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
-            width: 200,
-        }
-    ];
-
     this.$onInit = () =>  {
         var textCenter = 'text-center';
-        // $scope.data.events = events;
-        $scope.data.resources = resources;
-        $scope.data.columns = loadPlanPlanningColumns;
         $scope.data.date.startDate = moment();
         $scope.data.date.endDate = moment().add(1, 'year');
         $scope.options.headerYearClassName = textCenter;
@@ -68,6 +41,10 @@ function LoadPlanPlanningController($scope) {
     
     $scope.$watch('$ctrl.events', function() {
         $scope.data.events = $scope.$ctrl.events;
+    }, true);
+
+    $scope.$watch('$ctrl.columns', function () {
+        $scope.data.columns = $scope.$ctrl.columns;
     }, true);
 }
 

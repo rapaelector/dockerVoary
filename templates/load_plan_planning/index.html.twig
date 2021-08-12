@@ -49,12 +49,18 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'load_plan_planning/ng/index.html.twig' %}
+    
     <app-load-plan-planning
         start="data.date.startDate"
         end="data.date.endDate"
         resources="data.resources"
         events="data.events"
+        columns="data.columns"
     ></app-load-plan-planning>
+    <div class="loader" ng-if="loadingResources || loadingEvents">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
 {% endblock %}
 
 

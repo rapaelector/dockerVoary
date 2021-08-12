@@ -11,9 +11,10 @@ import 'angular-moment/angular-moment';
 import 'daterangepicker/daterangepicker';
 import 'angular-daterangepicker/js/angular-daterangepicker';
 
+import './load-plan-planning.module';
 import './../angular/shared/shared.module';
 import './../angular/scheduler/scheduler';
+import './load-plan-planning.config';
 import './../angular/load-plan-planning/load-plan-planning';
-import './load-plan-planning.module';
 import './load-plan-planning.service';
 import './load-plan-planning.controller';

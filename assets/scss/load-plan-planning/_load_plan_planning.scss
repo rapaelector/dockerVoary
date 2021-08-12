@@ -3,6 +3,14 @@
         font-size: 12px !important;
         font-weight: bold !important;
     }
+    md-dialog {
+        opacity: 1 !important;
+    }
+    md-dialog.columns-visibility-dialog {
+        md-tab-content {
+            height: 200px !important;
+        }
+    }
 }
 
 @include load_plan_planning;

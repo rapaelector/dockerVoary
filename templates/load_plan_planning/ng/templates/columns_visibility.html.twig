@@ -1,0 +1,52 @@
+<md-dialog aria-label="Event Detail Dialog" class="columns-visibility-dialog p-0">
+    <md-dialog-content>
+        <md-tabs class="md-primary" md-center-tabs>
+            <md-tab label="{{ 'label.column_visibility'|trans({}, 'project') }}">
+                <md-content class="md-padding">
+                    <div class="md-body-1">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-center small text-muted text-uppercase">{{ 'Afficher' }}</th>
+                                    <th class="text-center small text-muted text-uppercase">{{ 'Figer' }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="column in columns">
+                                    <td>{{ '{{ column.label }}' }}</td>
+                                    <td class="text-center">
+                                        <md-checkbox 
+                                            aria-label="checkbox-1" 
+                                            class="md-secondary" 
+                                            ng-model="column.visible"
+                                            ng-true-value="true"
+                                            ng-false-value="false"
+                                            ng-change="onVisibilityChange(column, $index)"
+                                        ></md-checkbox>
+                                    </td>
+                                    <td class="text-center">
+                                        <md-checkbox
+                                            aria-label="checkbox-2" 
+                                            class="md-secondary"
+                                            ng-disabled="!column.visible"
+                                            ng-model="column.sticky"
+                                        ></md-checkbox>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </md-content>
+        </md-tab>
+	</md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button ng-click="saveColumnsVisibility()">
+            {{ 'action.ok'|trans({}, 'messages') }}
+        </md-button>
+        <md-button ng-click="cancel()">
+            {{ 'action.cancel'|trans({}, 'messages') }}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

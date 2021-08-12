@@ -1,5 +1,11 @@
 $boxShadow: inset -1px 0px 0px $borderColor;
 $stickyBoxShadow: inset 1px 0px #555, inset -1px 0px #555, inset 0px 1px #555 !important;
+$weekSize: 8px;
+$borderColor: #555;
+$borderColorDark: $borderColor;
+$borderEdgeWidth: 2px;
+$cellBorder: $borderEdgeWidth solid $borderColorDark;
+$cellHeight: 24px;
 
 @mixin scheduler-table-sticky-columns {
     .app-scheduler {
@@ -160,3 +166,5 @@ $stickyBoxShadow: inset 1px 0px #555, inset -1px 0px #555, inset 0px 1px #555 !i
         }
     }
 }
+
+@include scheduler-table-sticky-columns;
