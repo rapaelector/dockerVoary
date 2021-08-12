@@ -39,6 +39,7 @@ class Project
      *  "loadPlan:create",
      *  "loadPlan:list",
      *  "loadPlan:planning",
+     *  "loadPlan:planning-event",
      * })
      */
     private $id;

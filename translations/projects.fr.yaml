@@ -236,6 +236,9 @@ load_plan:
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
   
+  action:
+    change_to_planning_view: 'Affichage planning'
+
   task_type:
     meter_consultation: 'Mètre Consultation '
     pre_study: 'Pré étude '

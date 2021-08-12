@@ -230,7 +230,7 @@ const events = [
         end: moment('2021-01-27', 'YYYY-MM-DD'),
         type: "shade_house",
         project: 3,
-        resource: 5,
+        resource: 1,
         backgroundColor: "#1f497d",
         bubbleHtml: "\r\n            <div class=\"text-center\"> 2020/12/30 — 2021/01/27 </div>\r\n            "
     },
@@ -240,7 +240,7 @@ const events = [
         end: moment('2021-02-20', 'YYYY-MM-DD'),
         type: "frame_assembly",
         project: 3,
-        resource: 6,
+        resource: 2,
         backgroundColor: "#00b050",
         bubbleHtml: "\r\n            <div class=\"text-center\"> 2021/04/30 — 2021/02/20 </div>\r\n            "
     },
@@ -250,7 +250,7 @@ const events = [
         end: moment('2021-07-30', 'YYYY-MM-DD'),
         type: "isothermal_panels",
         project: 5,
-        resource: 1,
+        resource: 3,
         backgroundColor: "#f79646",
         bubbleHtml: "\r\n            <div class=\"text-center\"> 2021/06/30 — 2021/07/30 </div>\r\n            "
     },

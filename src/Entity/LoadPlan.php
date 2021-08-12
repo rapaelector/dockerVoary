@@ -44,6 +44,25 @@ class LoadPlan
         self::ENCRYPTION => self::ENCRYPTION,
     ];
 
+    const METER_CONSULTATION_SHORT = 'c'; // Mètre Consultation
+    const PRE_STUDY_SHORT = 'e'; // pre etude
+    const SKETCH_SHORT = 'es'; // Esquise
+    const ENCRYPTION_SHORT = 'px'; // Chiffrage 
+
+    const TASK_TYPES_PLANNING = [
+        self::METER_CONSULTATION => self::METER_CONSULTATION_SHORT,
+        self::PRE_STUDY => self::PRE_STUDY_SHORT,
+        self::SKETCH => self::SKETCH_SHORT,
+        self::ENCRYPTION => self::ENCRYPTION_SHORT,
+    ];
+
+    const TASK_TYPES_PLANNING_COLORS = [
+        self::METER_CONSULTATION => '#ff0000', // red
+        self::PRE_STUDY => '#0000ff',
+        self::SKETCH => '#008000',
+        self::ENCRYPTION => '#ffff00',
+    ];
+
     /**
      * estimated_study_time, effective_study_time
      * Temps d'etude estime, temps d'etude effectif
@@ -73,7 +92,7 @@ class LoadPlan
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"loadPlan:list", "loadPlan:planning"})
+     * @Groups({"loadPlan:list", "loadPlan:planning", "loadPlan:planning-event"})
      */
     private $id;
 
@@ -82,7 +101,7 @@ class LoadPlan
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
-     * @Groups({"loadPlan:list"})
+     * @Groups({"loadPlan:list", "loadPlan:planning-event"})
      */
     private $natureOfTheCosting;
 
@@ -97,20 +116,20 @@ class LoadPlan
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="loadPlans")
-     * @Groups({"loadPlan:list", "loadPlan:planning"})
+     * @Groups({"loadPlan:list", "loadPlan:planning", "loadPlan:planning-event"})
      * @Assert\NotBlank
      */
     private $project;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"loadPlan:list", "loadPlan:planning"})
+     * @Groups({"loadPlan:list", "loadPlan:planning", "loadPlan:planning-event"})
      */
     private $start;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"loadPlan:list"})
+     * @Groups({"loadPlan:list", "loadPlan:planning-event"})
      */
     private $end;
 

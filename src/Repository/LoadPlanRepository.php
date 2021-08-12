@@ -27,6 +27,27 @@ class LoadPlanRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function getEventsBetweenDate(\DateTime $start = null, \DateTime $end = null)
+    {
+        $qb = $this->createQueryBuilder('l');
+
+        if ($start && $end) {
+            $qb
+                ->where('(l.start BETWEEN :start AND :end) OR (l.end BETWEEN :start AND :end) OR (l.start <= :start AND l.end >= :end)')
+                ->setParameters([
+                    'start' => $start,
+                    'end' => $end,
+                ])
+            ;
+        }
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return LoadPlan[] Returns an array of LoadPlan objects
     //  */

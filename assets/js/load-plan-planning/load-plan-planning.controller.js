@@ -6,6 +6,7 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
             endDate: moment().endOf('year'),
         },
         resources: [],
+        events: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -30,7 +31,22 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
 
         loadPlanPlanningService.getResources().then((response) => {
             $scope.data.resources = response.data.resources;
-            console.info({response, data: $scope.data.resources});
-        })
+        });
+
+        $scope.updateEvents();
+    };
+
+    $scope.$watch('data.date', function () {
+        $scope.updateEvents();
+    }, true);
+
+    $scope.updateEvents = () => {
+        var start = moment($scope.data.date.startDate).format('YYYY-MM-DD');
+        var end = moment($scope.data.date.endDate).format('YYYY-MM-DD');
+
+        loadPlanPlanningService.getEvents({start: start, end: end}).then(function (events) {
+            $scope.data.events = events;
+            // console.info({events: $scope.data.events}, 'lorem ipsum dolor');
+        });
     };
 }]);

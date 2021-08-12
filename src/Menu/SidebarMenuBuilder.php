@@ -128,6 +128,7 @@ class SidebarMenuBuilder
          * TODO:
          *      - Add roles for load plan here (Plan de charge économiste)
          *      - Change load plan icon
+         *      - the load plan planning link place should change but for now put it just here
          */
         if (true) {
             $menu->addChild('menu.load_plan', [

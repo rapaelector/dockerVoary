@@ -32,7 +32,13 @@
             <div class="card card-outline card-app-primary">
                 <div class="card-header">
                     <div class="card-tools">
+                        {# TODO: - add roles #}
                         {% if true %}
+                            <md-button class="md-raised md-primary">
+                                <a href="{{ path('load_plan_planning.index') }}" class="text-white text-capitalize">
+                                    {{ 'load_plan.action.change_to_planning_view'|trans }}
+                                </a>
+                            </md-button>
                             <md-button 
                                 class="md-icon-button md-primary m-n2" 
                                 aria-label="add-load-plan"

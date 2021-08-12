@@ -1,5 +1,5 @@
 import loadPlanPlanningTemplate from './load-plan-planning-template.html';
-import {resources, buildColumns, events, loadPlanPlanningColumns} from './../mock-data.js';
+import {resources, buildColumns, events} from './../mock-data.js';
 import numberFormat from './../../utils/number_format';
 
 function LoadPlanPlanningController($scope) {
@@ -18,35 +18,57 @@ function LoadPlanPlanningController($scope) {
         headerWeekClassName: null,
     };
 
+    const loadPlanPlanningColumns = [
+        {
+            label: 'Project',
+            field: 'folderNameOnTheServer',
+            headerClassName: 'text-uppercase',
+            className: 'dynamic-nowrap text-uppercase',
+            width: 200,
+        },
+        {
+            label: 'Commer',
+            field: 'businessCharge.name',
+            headerClassName: 'text-uppercase',
+            className: 'dynamic-nowrap text-uppercase',
+            width: 200,
+        },
+        {
+            label: 'Eco',
+            field: 'economist.name',
+            headerClassName: 'text-uppercase',
+            className: 'dynamic-nowrap text-uppercase',
+            width: 200,
+        }
+    ];
+
     this.$onInit = () =>  {
         var textCenter = 'text-center';
+        // $scope.data.events = events;
         $scope.data.resources = resources;
         $scope.data.columns = loadPlanPlanningColumns;
-        console.info({loadPlanPlanningColumns});
-        // $scope.data.columns = [];
         $scope.data.date.startDate = moment();
         $scope.data.date.endDate = moment().add(1, 'year');
-        $scope.data.events = events;
         $scope.options.headerYearClassName = textCenter;
         $scope.options.headerMonthClassName = textCenter;
         $scope.options.headerWeekClassName = textCenter;
     }
 
-    $scope.$watch('$ctrl.start', () => {
+    $scope.$watch('$ctrl.start', function() {
         $scope.data.date.startDate = $scope.$ctrl.start;
     });
     
-    $scope.$watch('$ctrl.end', () => {
+    $scope.$watch('$ctrl.end', function() {
         $scope.data.date.endDate = $scope.$ctrl.end;
     });
 
-    $scope.$watch('$ctrl.resources', () => {
+    $scope.$watch('$ctrl.resources', function() {
         $scope.data.resources = $scope.$ctrl.resources;
     }, true);
     
-    // $scope.$watch('$ctrl.columns', () => {
-    //     $scope.data.columns = $scope.$ctrl.columns;
-    // }, true);
+    $scope.$watch('$ctrl.events', function() {
+        $scope.data.events = $scope.$ctrl.events;
+    }, true);
 }
 
 LoadPlanPlanningController.$inject = ['$scope'];
@@ -127,5 +149,24 @@ angular.module('loadPlanPlanningModule').component('appLoadPlanPlanning', {
          *      - headerColumnFormatter: function (column, index) {
          */
         columns: '=',
+
+        /**
+         * - Array of object
+         *      structure:
+         *          [
+         *              {
+         *                  backgroundColor: "#1f497d"
+         *                  end: "2021-01-23T00:00:00+00:00"
+         *                  id: 14
+         *                  project: {id: 3}
+         *                  resource: 3
+         *                  start: "2020-12-31T00:00:00+00:00"
+         *                  type: "shade_house"
+         *                  
+         *              },
+         *              {...}
+         *          ]
+         */
+        events: '=',
     }
 })
