@@ -38,7 +38,7 @@
                             class="md-icon-button button-target" 
                             ng-click="showVisibilityModal($event)"
                         >
-                            <md-tooltip md-direction="bottom">{{ 'label.column_visibility'|trans({}, 'project') }}</md-tooltip>
+                            <md-tooltip md-direction="bottom">{{ 'label.column_configuration'|trans({}, 'project') }}</md-tooltip>
                             <i class="material-icons">settings</i>
                         </md-button>
                     </div>
@@ -66,5 +66,16 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        var MESSAGES = {
+            columns: {
+                label: {
+                    project: '{{ "load_plan_planning.columns.label.project"|trans }}',
+                    business_charge: '{{ "load_plan_planning.columns.label.business_charge"|trans }}',
+                    economist: '{{ "load_plan_planning.columns.label.economist"|trans }}',
+                }
+            }
+        }
+    </script>
     {{ encore_entry_script_tags('load_plan_planning_app') }}
 {% endblock %}

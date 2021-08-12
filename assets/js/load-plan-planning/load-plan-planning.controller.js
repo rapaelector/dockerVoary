@@ -3,8 +3,9 @@ import ColumnsVisibilityController from './columns-visibility.controller';
 angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
     '$scope', 
     '$mdPanel', 
-    'loadPlanPlanningService', 
-    function($scope, $mdPanel, loadPlanPlanningService) {
+    'loadPlanPlanningService',
+    'MESSAGES',
+    function($scope, $mdPanel, loadPlanPlanningService, MESSAGES) {
     
     $scope.data = {
         date: {
@@ -23,21 +24,21 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
 
     const loadPlanPlanningColumns = [
         {
-            label: 'Project',
+            label: MESSAGES.columns.label.project,
             field: 'folderNameOnTheServer',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
             width: 200,
         },
         {
-            label: 'Commer',
+            label: MESSAGES.columns.label.business_charge,
             field: 'businessCharge.name',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
             width: 200,
         },
         {
-            label: 'Eco',
+            label: MESSAGES.columns.label.economist,
             field: 'economist.name',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
@@ -92,8 +93,6 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
      * @param {object} ev 
      */
     $scope.showVisibilityModal = (ev) => {
-        console.info('showVisibilityModal');
-        
         var position = $mdPanel.newPanelPosition()
             .relativeTo('.button-target')
             .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);

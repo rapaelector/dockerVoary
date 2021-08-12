@@ -1,15 +1,18 @@
 @mixin load_plan_planning {
+    md-dialog.columns-visibility-dialog {
+        opacity: 1 !important;
+        height: 300px !important;
+        overflow: hidden;
+        md-dialog-content {
+            overflow: hidden;
+        }
+    }
     .load-plan-event {
         font-size: 12px !important;
         font-weight: bold !important;
     }
-    md-dialog {
-        opacity: 1 !important;
-    }
-    md-dialog.columns-visibility-dialog {
-        md-tab-content {
-            height: 200px !important;
-        }
+    button.md-icon-button.button-target.md-button.md-ink-ripple {
+        min-width: 40px;
     }
 }
 

@@ -1,5 +1,7 @@
 import { primaryPalette, secondaryPalette } from './../angular/shared/config';
 
+angular.module('loadPlanPlanningApp').constant('MESSAGES', window.MESSAGES);
+
 angular.module('loadPlanPlanningApp').config(['$mdThemingProvider', function ($mdThemingProvider) {
 	$mdThemingProvider.definePalette('primaryPalette', primaryPalette);
 	

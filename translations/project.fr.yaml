@@ -49,6 +49,7 @@ label:
   note_taking: 'Prise de note'
   period: 'Période'
   column_visibility: 'Colonnes à afficher'
+  column_configuration: 'Configuration des colonnes'
 
 contact:
   label: Contact

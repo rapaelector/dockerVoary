@@ -265,3 +265,9 @@ load_plan:
 
 load_plan_planning:
   title: 'Planning de plan de charge économiste'
+
+  columns:
+    label:
+      project: 'Projet'
+      business_charge: 'Commercial'
+      economist: 'Economiste'
