@@ -77,7 +77,7 @@ class LoadPlanPlanningController extends BaseController
             $res[$key]['bubbleHtml'] = '';
             $res[$key]['start'] = $event['start'];
             $res[$key]['end'] = $event['end'];
-            $res[$key]['className'] = 'text-uppercase';
+            $res[$key]['className'] = 'text-uppercase load-plan-event';
         }
         
         // return new Response('<body> lorem </body>');

@@ -896,7 +896,7 @@ function SchedulerController(
      * @param {number} eventIndex 
      */
     $scope.getEventClass = function (event, eventIndex) {
-        var res = [SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.id];
+        var res = [SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.id, SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.resource];
         var positionStatus = $scope.getEventPositionStatus(event);
 
         if (event.className) {
@@ -917,6 +917,7 @@ function SchedulerController(
 
         if (event.group) {
             res.push(SCHEDULER_EVENT_CLASS + '-' + event.group);
+            res.push(SCHEDULER_EVENT_CLASS + '-group-' + event.group);
         }
 
         return res;
@@ -1083,21 +1084,6 @@ function SchedulerController(
 
     $scope.onEventClick = function (event, eventIndex, jsEvent) {
     };
-
-    /**
-     * 
-     * @param {event} event 
-     * @param {number} eventIndex 
-     */
-    $scope.getEventClass = function (event, eventIndex) {
-        var res = [SCHEDULER_EVENT_CLASS, SCHEDULER_EVENT_CLASS + '-' + event.resource];
-
-        if (event.group) {
-            res.push(SCHEDULER_EVENT_CLASS + '-group-' + event.group);
-        }
-
-        return res;
-    }
 
     /**
      * @param {object} event 
@@ -1495,7 +1481,6 @@ angular.module('schedulerModule').component('appScheduler', {
          *                  resource: 3
          *                  start: "2020-12-31T00:00:00+00:00"
          *                  type: "shade_house"
-         *                  
          *              },
          *              {...}
          *          ]

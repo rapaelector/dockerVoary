@@ -1,0 +1,8 @@
+@mixin load_plan_planning {
+    .load-plan-event {
+        font-size: 12px !important;
+        font-weight: bold !important;
+    }
+}
+
+@include load_plan_planning;

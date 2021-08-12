@@ -57,10 +57,10 @@ class LoadPlan
     ];
 
     const TASK_TYPES_PLANNING_COLORS = [
-        self::METER_CONSULTATION => '#ff0000', // red
-        self::PRE_STUDY => '#0000ff',
-        self::SKETCH => '#008000',
-        self::ENCRYPTION => '#ffff00',
+        self::METER_CONSULTATION => 'rgb(169, 208, 142)', // Métre consulation => vert claire
+        self::PRE_STUDY => 'rgb(244, 176, 132)', // Pré ètude => 
+        self::SKETCH => 'rgb(255, 192, 0)', // Esquise => orange
+        self::ENCRYPTION => 'rgb(84, 130, 53)', // chiffrage => vert foncé
     ];
 
     /**
