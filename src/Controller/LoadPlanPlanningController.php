@@ -80,7 +80,6 @@ class LoadPlanPlanningController extends BaseController
             $res[$key]['className'] = 'text-uppercase load-plan-event';
         }
         
-        // return new Response('<body> lorem </body>');
         return $this->json(['events' => $res]);
     }
 }

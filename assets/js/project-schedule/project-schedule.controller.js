@@ -95,7 +95,6 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         projectSchedulerService.getEvents($scope.data.date).then(function (events) {
             $scope.data.events = events;
             $scope.loadingEvents = false;
-            console.info($scope.data.events);
         });
     };
 

@@ -293,7 +293,7 @@ class LoadPlanController extends BaseController
         ], 400);
     }
 
-    #[Route('/delete/{id}', name: 'load_plan.delete', methods: ['POST', 'DELETE'], options: ['expose' => true])]
+    #[Route('/{id}/delete', name: 'load_plan.delete', methods: ['POST', 'DELETE'], options: ['expose' => true])]
     public function delete(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         if ($this->isCsrfTokenValid('delete'.$loadPlan->getId(), $request->request->get('_token'))) {
@@ -305,7 +305,7 @@ class LoadPlanController extends BaseController
             ]);
         }
 
-        return $this->redirectToRoute('load_plan.index');
+        return $this->redirectToRoute('load_plan.list');
     }
 
     #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
@@ -351,7 +351,7 @@ class LoadPlanController extends BaseController
         return $this->json($serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']));
     }
 
-    #[Route('/edit/{id}', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
+    #[Route('/{id}/edit', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
     public function edit(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         

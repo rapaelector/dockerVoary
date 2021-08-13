@@ -57,8 +57,25 @@ class ProjectScheduleController extends AbstractController
     )
     {
         $resEvents = [];
-        $start = \DateTime::createFromFormat('Y-m-d', $request->query->get('start'));
-        $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
+        // $start = \DateTime::createFromFormat('Y-m-d', $request->query->get('start'));
+        // $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
+
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
+
+        if (!$start) {
+            $start_ = (new \DateTIme())->format('Y') . '-01-01';
+            $start = (\DateTime::createFromFormat('Y-m-d', $start_))->format('Y-m-d');
+        }
+        
+        if (!$end) {
+            $end_ = (new \DateTime())->format('Y') . '-12-31';
+            $end = (\DateTime::createFromFormat('Y-m-d', $end_))->format('Y-m-d');
+        }
+
+        $start = \DateTime::createFromFormat('Y-m-d', $start);
+        $end = \DateTime::createFromFormat('Y-m-d', $end);
+
         $events = $em->getRepository(ProjectEvent::class)->getEventsBetweenDate($start, $end);
         $normalizedEvents = $serializer->normalize($events, 'json', [
             'groups' => 'projectEvent:scheduler',
