@@ -19,7 +19,7 @@ class LoadPlanPlanningControllerTest extends WebTestCase
         $client = static::createClient();
         $this->login($client, 'test@gmail.com');
         $crawler = $client->request('GET', '/load/plan/planning/');
-        $pageTitle = 'Planning de plan de charge économiste';
+        $pageTitle = 'Planning du plan de charge économiste';
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant reach load plan list');
         $this->assertStringContainsString($pageTitle, $client->getResponse()->getContent());

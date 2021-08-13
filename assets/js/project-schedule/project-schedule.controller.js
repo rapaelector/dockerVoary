@@ -52,6 +52,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
                     payment: 500,
                     default: 1000,
                 },
+            },
+            positionsFix: {
+                stickyColumnsLeft: 2,
+                stickyColumnsExtraWidth: 1,
             }
         },
         headerYearClassName: 'year-class text-center',

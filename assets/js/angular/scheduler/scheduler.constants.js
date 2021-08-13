@@ -19,3 +19,27 @@ angular.module('schedulerModule').constant('SCHEDULER_COLUMN_STICKY_CLASS', 'sti
 angular.module('schedulerModule').constant('SCHEDULER_BORDER_COLOR', '#555');
 angular.module('schedulerModule').constant('SCHEDULER_COLUMN_VERTICAL_DIVIDER', 'scheduler-column-vertical-divider');
 angular.module('schedulerModule').constant('SCHEDULER_LAST_COLUMN', 'scheduler-last-column');
+
+angular.module('schedulerModule').constant('STICKY_COLUMNS_LEFT', 1);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_EXTRA_WIDTH', 1);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_MINUS_LEFT', 2);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_WIDTH', 1);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_END_FIRST_WEEK_WIDTH', 0);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT', 2);
+
+angular.module('schedulerModule').constant('END_LAST_WEEK_EXTRA_WIDTH', 0);
+angular.module('schedulerModule').constant('END_FIRST_WEEK_EXTRA_WIDTH', 2);
+angular.module('schedulerModule').constant('EXTRA_WIDTH', 0.5);
+angular.module('schedulerModule').constant('STICKY_COLUMNS_FIRST_WEEK_WIDTH', 0);
+
+// REMOVE LEFT OF EVENT
+angular.module('schedulerModule').constant('MINUS_LEFT', 0);
+angular.module('schedulerModule').constant('START_FIRST_WEEK_MINUS_LEFT', 0);
+// WIDHT OF START FIRST WEEK
+angular.module('schedulerModule').constant('START_FIRST_WEEK_WIDTH', 0);
+// WIDTH OF END WEEK
+// angular.module('schedulerModule').constant('END_FIRST_WEEK_WIDTH', 0);
+angular.module('schedulerModule').constant('END_LAST_WEEK_WIDTH', 0);
+
+angular.module('schedulerModule').constant('POSITIONS_FIX_LEFT', 0);
+angular.module('schedulerModule').constant('POSITIONS_FIX_EXTRA_WIDTH', 0);

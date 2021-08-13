@@ -16,6 +16,13 @@ function LoadPlanPlanningController($scope) {
         headerYearClassName: null,
         headerMonthClassName: null,
         headerWeekClassName: null,
+        positionsFix: {
+            stickyColumnsLeft: 2,
+            stickyColumnsFirstWeekWidth: 1,
+            minusLeft: 0.5,
+            startFirstWeekWidth: 1,
+            endLastWeekWidth: 1,
+        },
     };
 
     this.$onInit = () =>  {

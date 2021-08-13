@@ -33,6 +33,21 @@ function SchedulerController(
     SCHEDULER_BORDER_COLOR,
     SCHEDULER_COLUMN_VERTICAL_DIVIDER,
     SCHEDULER_LAST_COLUMN,
+
+    STICKY_COLUMNS_LEFT,
+    STICKY_COLUMNS_EXTRA_WIDTH,
+    STICKY_COLUMNS_MINUS_LEFT,
+    STICKY_COLUMNS_WIDTH,
+    STICKY_COLUMNS_END_FIRST_WEEK_WIDTH,
+    STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT,
+    END_LAST_WEEK_EXTRA_WIDTH,
+    END_FIRST_WEEK_EXTRA_WIDTH,
+    EXTRA_WIDTH,
+    STICKY_COLUMNS_FIRST_WEEK_WIDTH,
+    MINUS_LEFT,
+    START_FIRST_WEEK_MINUS_LEFT,
+    START_FIRST_WEEK_WIDTH,
+    END_LAST_WEEK_WIDTH,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -78,6 +93,22 @@ function SchedulerController(
                 width: DEFAULT_CELL_WIDTH,
             },
             backgroundColor: BACKGROUND_COLOR,
+            positionsFix: {
+                stickyColumnsLeft: STICKY_COLUMNS_LEFT,
+                stickyColumnsExtraWidth: STICKY_COLUMNS_EXTRA_WIDTH,
+                stickyColumnsMinusLeft: STICKY_COLUMNS_MINUS_LEFT,
+                stickyColumnsWidth: STICKY_COLUMNS_WIDTH,
+                stickyColumnsEndFirstWeekWidth: STICKY_COLUMNS_END_FIRST_WEEK_WIDTH,
+                stickyColumnsEndFirstWeekMinusLeft: STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT,
+                endLastWeekExtraWidth: END_LAST_WEEK_EXTRA_WIDTH,
+                endFirstWeekExtraWidth: END_FIRST_WEEK_EXTRA_WIDTH,
+                extraWidth: EXTRA_WIDTH,
+                stickyColumnsFirstWeekWidth: STICKY_COLUMNS_FIRST_WEEK_WIDTH,
+                minusLeft: MINUS_LEFT,
+                startFirstWeekMinusLeft: START_FIRST_WEEK_MINUS_LEFT,
+                startFirstWeekWidth: START_FIRST_WEEK_WIDTH,
+                endLastWeekWidth: END_LAST_WEEK_WIDTH,
+            }
         }
     };
 
@@ -100,6 +131,10 @@ function SchedulerController(
         $scope.updateDates();
         $scope.updateTableStyles();
     });
+
+    $scope.$watch('$ctrl.positionsFix', function () {
+        $scope.positionsFix = $scope.$ctrl.positionsFix;
+    }, true);
 
     $scope.buildPlaceholderResource = function (index) {
         return {
@@ -161,6 +196,7 @@ function SchedulerController(
     $scope.$watch('$ctrl.forceSticky', function () {
         $scope.forceSticky = $scope.$ctrl.forceSticky;
     });
+    
     /**
      * Add additional attributes into the event
      * added attributes
@@ -185,6 +221,7 @@ function SchedulerController(
                 };
             });
         }
+
     }, true);
 
     /**
@@ -352,6 +389,12 @@ function SchedulerController(
         return style;
     };
 
+    /**
+     * 
+     * @param {object} column 
+     * @param {number} columnIndex 
+     * @returns {string}
+     */
     $scope.getResourceHeaderId = function (column, columnIndex) {
         return [SCHEDULER_COLUMN_HEADER, column.field.replaceAll('.', '-'), columnIndex].join('-');
     };
@@ -450,7 +493,7 @@ function SchedulerController(
             var stickyColumns = columns.filter(c => c.sticky);
             if (stickyColumns.length > 0) {
                 var left = 0;
-               $scope.columns.forEach((c, index) => {
+                $scope.columns.forEach((c, index) => {
                     if (c.sticky && (stickyColumns.indexOf(c) < stickyColumns.length - 1) && (index < columns.length - 1)) {
                         const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                         if (header$.length) {
@@ -707,11 +750,12 @@ function SchedulerController(
      * @returns {object} object of style
      */
     $scope.getEventStyleAndPosition = function (event, eventIndex) {
+        const hideStyle = {
+            opacity: 0,
+            display: 'none',
+        };
         if (moment(event.start).isAfter($scope.end) || moment(event.end).isBefore($scope.start)) {
-            return {
-                opacity: 0,
-                display: 'none',
-            };
+            return hideStyle;
         }
 
         var left = null;
@@ -734,6 +778,8 @@ function SchedulerController(
         if ($startCell.length > 0) {
             left = $startCell.position().left;
             top = $startCell.position().top;
+        } else {
+            return hideStyle;
         }
 
         if ($endCell.length == 0) {
@@ -744,6 +790,8 @@ function SchedulerController(
         if ($endCell.length > 0) {
             top = top ? top : $endCell.position().top;
             right = ($endCell.position().left + $endCell.outerWidth()) - $endCell.css("border-left-width").replace('px', '');
+        } else {
+            return hideStyle;
         }
 
         var overlaps = $scope.computeResourceEventOverlap(event.resource);
@@ -767,13 +815,34 @@ function SchedulerController(
             top += 0.5;
         }
 
+        // console.info('endLastWeekExtraWidth : ------- ' + $scope.getOption('positionsFix.endLastWeekExtraWidth'));
+        // console.info('endFirstWeekExtraWidth : ------- ' + $scope.getOption('positionsFix.endFirstWeekExtraWidth'));
+        // console.info('extraWidth : ------- ' + $scope.getOption('positionsFix.extraWidth'));
+        // console.info('stickyColumnsLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsLeft'));
+        // console.info('stickyColumnsExtraWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsExtraWidth'));
+        // console.info('stickyColumnsEndFirstWeekWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth'));
+        // console.info('stickyColumnsEndFirstWeekMinusLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft'));
+        // console.info('stickyColumnsWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsWidth'));
+        // console.info('stickyColumnsMinusLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsMinusLeft'));
+
+        // console.info({event});
+
         if (true) {
-            extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
+            // extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
+            if (event.schedulerMeta.isEndLastWeek) {
+                extraWidth = $scope.getOption('positionsFix.endLastWeekExtraWidth');
+            } else if (event.schedulerMeta.isEndFirstWeek) {
+                extraWidth = $scope.getOption('positionsFix.endFirstWeekExtraWidth');
+            } else {
+                extraWidth = $scope.getOption('positionsFix.extraWidth');
+            }
         }
 
         if ($scope.stickyColumns) {
-            left += 1;
-            extraWidth += 1;
+            // left += 1;
+            left += $scope.getOption('positionsFix.stickyColumnsLeft');
+            // extraWidth += 1;
+            extraWidth += $scope.getOption('positionsFix.stickyColumnsExtraWidth');
         }
 
         
@@ -781,9 +850,32 @@ function SchedulerController(
             width = (right - left) + extraWidth;
         }
 
+        // Manala left
         if ($scope.stickyColumns) {
-            width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
-            left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
+            // width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
+            // left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
+            if (event.schedulerMeta.isEndFirstWeek) {
+                width += $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth');
+                left -= $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft');
+            } else {
+                width += $scope.getOption('positionsFix.stickyColumnsWidth');
+                left -= $scope.getOption('positionsFix.stickyColumnsMinusLeft');
+            }
+
+            if (event.schedulerMeta.isStartFirstWeek) {
+                width += $scope.getOption('positionsFix.stickyColumnsFirstWeekWidth');
+            }
+        } else {
+            if (event.schedulerMeta.isStartFirstWeek) {
+                width += $scope.getOption('positionsFix.startFirstWeekWidth')
+                left -= $scope.getOption('positionsFix.startFirstWeekMinusLeft');
+            } else {
+                left -= $scope.getOption('positionsFix.minusLeft');
+            }
+
+            if (event.schedulerMeta.isEndLastWeek) {
+                width += $scope.getOption('positionsFix.endLastWeekWidth');
+            }
         }
 
         return {
@@ -1185,7 +1277,7 @@ function SchedulerController(
 
     $scope.getEmptyStickyColumnStyle = function () {
         var left = 0;
-       $scope.columns.forEach((c, index) => {
+        $scope.columns.forEach((c, index) => {
             if (c.sticky) {
                 const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                 if (header$.length) {
@@ -1244,6 +1336,21 @@ SchedulerController.$inject = [
     'SCHEDULER_BORDER_COLOR',
     'SCHEDULER_COLUMN_VERTICAL_DIVIDER',
     'SCHEDULER_LAST_COLUMN',
+
+    'STICKY_COLUMNS_LEFT',
+    'STICKY_COLUMNS_EXTRA_WIDTH',
+    'STICKY_COLUMNS_MINUS_LEFT',
+    'STICKY_COLUMNS_WIDTH',
+    'STICKY_COLUMNS_END_FIRST_WEEK_WIDTH',
+    'STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT',
+    'END_LAST_WEEK_EXTRA_WIDTH',
+    'END_FIRST_WEEK_EXTRA_WIDTH',
+    'EXTRA_WIDTH',
+    'STICKY_COLUMNS_FIRST_WEEK_WIDTH',
+    'MINUS_LEFT',
+    'START_FIRST_WEEK_MINUS_LEFT',
+    'START_FIRST_WEEK_WIDTH',
+    'END_LAST_WEEK_WIDTH',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -1336,6 +1443,17 @@ angular.module('schedulerModule').component('appScheduler', {
          *          bubbleDelay: number | object {group: number, default: number}
          *       },
          *       backgroundColor: string "#f4f6f9",
+         *       positionsFix: {
+         *          stickyColumnsLeft: number
+         *          stickyColumnsExtraWidth: number
+         *          left: number,
+         *          width: number,
+         *          stickyColumnsEndFirstWeekWidth: number,
+         *          stickyColumnsEndFirstWeekMinusLeft: number,
+         *          endLastWeekExtraWidth: number
+         *          endFirstWeekExtraWidth: number
+         *          extraWidth: number
+         *      }
          *   }
          */
         options: '=',

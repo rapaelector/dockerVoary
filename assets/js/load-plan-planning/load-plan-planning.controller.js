@@ -28,21 +28,22 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
             field: 'folderNameOnTheServer',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
-            width: 200,
+            width: 100,
+            sticky: true,
         },
         {
             label: MESSAGES.columns.label.business_charge,
             field: 'businessCharge.name',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
-            width: 200,
+            width: 150,
         },
         {
             label: MESSAGES.columns.label.economist,
             field: 'economist.name',
             headerClassName: 'text-uppercase',
             className: 'dynamic-nowrap text-uppercase',
-            width: 200,
+            width: 150,
         }
     ];
 

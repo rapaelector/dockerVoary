@@ -264,7 +264,7 @@ load_plan:
     40: '5 jours'
 
 load_plan_planning:
-  title: 'Planning de plan de charge économiste'
+  title: 'Planning du plan de charge économiste'
 
   columns:
     label:
