@@ -93,9 +93,8 @@ function LoadPlanDialogController (
             $mdDialog.hide();
             $scope.loading = false;
             $scope.showNotification(response.data.message);
-            // window.location.reload();
+            window.location.reload();
         }, errors => {
-            // $mdDialog.hide();
             $scope.loading = false;
             console.warn(errors);
             $scope.data.errors = errors.data.errors;
