@@ -455,11 +455,12 @@ function SchedulerController(
 
                 break;
             }
-            w += +columnWidth;
+            w += parseInt(columnWidth);
         }
         const cellWidth = resolverService.resolve([$scope, 'options', 'cell', 'width'], DEFAULT_CELL_WIDTH);
+
         w += $scope.weeks.length * cellWidth;
-        if (OK) {
+        if (OK && !isNaN(w)) {
             tableStyles.width = px(w);
             // tableStyles['table-layout'] = 'fixed';
         } else {

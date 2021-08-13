@@ -27,7 +27,7 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
             label: MESSAGES.columns.label.project,
             field: 'folderNameOnTheServer',
             headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
+            className: 'dynamic-nowrap',
             width: 100,
             sticky: true,
         },
@@ -35,14 +35,14 @@ angular.module('loadPlanPlanningApp').controller('loadPlanPlanningController', [
             label: MESSAGES.columns.label.business_charge,
             field: 'businessCharge.name',
             headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
+            className: 'dynamic-nowrap',
             width: 150,
         },
         {
             label: MESSAGES.columns.label.economist,
             field: 'economist.name',
             headerClassName: 'text-uppercase',
-            className: 'dynamic-nowrap text-uppercase',
+            className: 'dynamic-nowrap',
             width: 150,
         }
     ];

@@ -8,9 +8,9 @@ body {
         .nav-icon.material-icons {
             font-size: 14px;
         }
-        p > .right {
-            top: (map-get($heights, sidebarNavlink) - math.div(map-get($heights, badge), 2));
-        }
+    }
+    .nav-sidebar .nav-link p {
+        white-space: nowrap !important;
     }
     // add spacing to .nav-icon when sidebar is not collapsed
     &:not(.sidebar-collapse) {
