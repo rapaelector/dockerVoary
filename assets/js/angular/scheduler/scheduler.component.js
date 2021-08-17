@@ -94,22 +94,6 @@ function SchedulerController(
                 width: DEFAULT_CELL_WIDTH,
             },
             backgroundColor: BACKGROUND_COLOR,
-            // positionsFix: {
-            //     stickyColumnsLeft: POSITION_FIX_STICKY_COLUMNS_LEFT,
-            //     stickyColumnsExtraWidth: POSITION_FIX_STICKY_COLUMNS_EXTRA_WIDTH,
-            //     stickyColumnsMinusLeft: POSITION_FIX_STICKY_COLUMNS_MINUS_LEFT,
-            //     stickyColumnsWidth: POSITION_FIX_STICKY_COLUMNS_WIDTH,
-            //     stickyColumnsEndFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_WIDTH,
-            //     stickyColumnsEndFirstWeekMinusLeft: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT,
-            //     endLastWeekExtraWidth: POSITION_FIX_END_LAST_WEEK_EXTRA_WIDTH,
-            //     endFirstWeekExtraWidth: POSITION_FIX_END_FIRST_WEEK_EXTRA_WIDTH,
-            //     extraWidth: POSITION_FIX_EXTRA_WIDTH,
-            //     stickyColumnsFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_FIRST_WEEK_WIDTH,
-            //     minusLeft: POSITION_FIX_MINUS_LEFT,
-            //     startFirstWeekMinusLeft: POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT,
-            //     startFirstWeekWidth: POSITION_FIX_START_FIRST_WEEK_WIDTH,
-            //     endLastWeekWidth: POSITION_FIX_END_LAST_WEEK_WIDTH,
-            // },
             positionsFix: POSITIONS_FIX,
         }
     };
@@ -367,29 +351,14 @@ function SchedulerController(
                 if (c.sticky && (index < columnIndex)) {
                     const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                     if (header$.length) {
-                        left += header$.outerWidth();
+                        // left += header$.outerWidth();
+                        left += c.width;
                     }
                 }
             });
             stick = true;
         }
-        // if ((columnIndex === ($scope.columns.length - 1)) && !column.sticky) {
-        //     var columns =$scope.columns;
-        //     var stickyColumns = columns.filter(c => c.sticky);
-        //     if (stickyColumns.length > 0) {
-        //         stick = true;
-        //         left = 0;
-        //        $scope.columns.forEach((c, index) => {
-        //             if (c.sticky && (index < columns.length - 1)) {
-        //                 const header$ = $('#' + $scope.getResourceHeaderId(c, index));
-        //                 if (header$.length) {
-        //                     left += header$.outerWidth();
-        //                 }
-        //             }
-        //         });
-        //     }
-        // }
-
+        
         if (stick) {
             style.position = 'sticky';
             style.left = left;
@@ -899,6 +868,7 @@ function SchedulerController(
     };
 
     /**
+     * Get the event position depent on the startCell element and endCell element
      * 
      * @param {jQueryObject} startCell$
      * @param {jQueryObject} endCell$ 
@@ -917,11 +887,11 @@ function SchedulerController(
 
         if (endCell$.length > 0) {
             var endCellPosition = $scope.getCellPosition(endCell$);
-            var borderLeft = parseInt(endCell$.css("border-left-width").replace('px', ''));
-            
+            // var borderLeft = endCellPosition.left + endCell$.innerWidth() + parseInt(endCell$.css("border-left-width").replace('px', ''));
+            var borderLeft = endCellPosition.left + endCell$.innerWidth();
             top = top ? top : endCellPosition.top;
+            right = borderLeft;
             // right = ($scope.getCellPosition(endCell$).left + endCell$.outerWidth()) - endCell$.css("border-left-width").replace('px', '');
-            right = (endCellPosition.left + endCell$.innerWidth() + borderLeft);
         }
 
         return {
@@ -931,6 +901,11 @@ function SchedulerController(
         };
     };
 
+    /**
+     * 
+     * @param {object} event 
+     * @returns {number}
+     */
     $scope.getEventZIndex = function (event) {
         const eventGroupZIndex = $scope.getOption(`event.zIndex.${event.group ?? '_default'}`, EVENT_Z_INDEX);
 

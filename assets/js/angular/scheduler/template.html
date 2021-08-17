@@ -61,7 +61,11 @@
                     ng-class="getCellClassName(resource, column, resourceIndex, $index)"
                     ng-style="styles.columns[$index]"
                 >
-                    <div ng-bind-html="getResourceColumn(resource, column, resourceIndex)" ng-style="getResourceColumnDivStyle(column, $index)"></div>
+                    <div
+                        ng-bind-html="getResourceColumn(resource, column, resourceIndex)" 
+                        ng-style="getResourceColumnDivStyle(column, $index)"
+                        class="column-resource-data"
+                    ></div>
                 </td>
                 <td
                     ng-repeat="week in weeks track by $index"

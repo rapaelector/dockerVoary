@@ -109,7 +109,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 classNameFormatter: function(res, resource, index) {
                     return 'dynamic-nowrap';
                 },
-                width: 130,
+                width: 100,
                 visible: true,
             },
             {

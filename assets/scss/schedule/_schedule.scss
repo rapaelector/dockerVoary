@@ -57,8 +57,7 @@ $borderColor: #555;
 @mixin scheduler-table {
     .app-scheduler {
         table.scheduler-table {
-        .scheduler-resource-header,
-        .scheduler-column {
+        .scheduler-resource-header {
             padding: 0 4px;
         }
         thead, tbody {
@@ -149,6 +148,16 @@ $borderColor: #555;
                         //     right: 0;
                         //     bottom: 0;
                         // }
+                    }
+                    &.scheduler-column {
+                        padding: 0 !important;
+                        .column-resource-data {
+                            overflow: hidden;
+                            text-overflow: hidden;
+                        }
+                        & > div {
+                            padding: 0 2px;
+                        }
                     }
                 }
             }
