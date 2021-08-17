@@ -346,8 +346,8 @@ function SchedulerController(
     $scope.getResourceColumnDivStyle = function (column, columnIndex) {
         return {
             width: column.width,
-            maxWidth: column.width,
             minWidth: column.width,
+            maxWidth: column.width,
         };
     }
     /**
@@ -489,6 +489,8 @@ function SchedulerController(
         var columnMergeSticky = $scope.getSticknessStyle(column, columnIndex);
         var styles = {
             width: column.width,
+            maxWidth: column.width,
+            minWidth: column.width,
             backgroundColor: $scope.getOption('backgroundColor'),
             borderTopColor: $scope.getOption('backgroundColor'),
             borderLeftColor: $scope.getOption('backgroundColor'),

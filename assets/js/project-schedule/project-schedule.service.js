@@ -149,7 +149,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                             data-placement="top"
                         >` + column.label + `</div>` : '';
                 },
-                width: 190,
+                width: 150,
                 formatter: function (res, resource, index) {
                     return res ? `<div class="dynamic-nowrap text-center" title="` + res + `">` + res + `</div>` : '';
                 },

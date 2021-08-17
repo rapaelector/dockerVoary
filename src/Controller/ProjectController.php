@@ -289,7 +289,7 @@ class ProjectController extends BaseController
                 $entityManager->flush();
                 $this->addFlash('success', $translator->trans('messages.creation_success', [], 'project'));
                 
-                return $this->redirectToRoute('project.list');
+                return $this->redirectToRoute('project.case.list');
             }
         }
 
