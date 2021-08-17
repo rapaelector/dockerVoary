@@ -141,20 +141,20 @@
     .table-container.table-responsive {
       position: relative
     }
-    .scheduler-events {
-      position: absolute;
-      top: 0;
-      left: 0;
-      .scheduler-event-inner {
-        display: flex;
-        height: 100%;
-        font-size: 12px;
-        align-items: center;
-        padding: 0 2px;
-        .scheduler-event {
-          height: 24px;
-          overflow: hidden;
-        }
+    // .scheduler-events {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    // }
+    .scheduler-event-inner {
+      display: flex;
+      height: 100%;
+      font-size: 12px;
+      align-items: center;
+      padding: 0 2px;
+      .scheduler-event {
+        height: 24px;
+        overflow: hidden;
       }
     }
     .scheduler-event-clickable {
@@ -180,7 +180,8 @@
     text-align: center;
   }
 
-  .app-scheduler .scheduler-events .scheduler-event-inner {
+  // .app-scheduler .scheduler-events .scheduler-event-inner {
+  .app-scheduler .scheduler-event-inner {
     justify-content: center;
     letter-spacing: -1px;
     font-size: 8px;

@@ -351,7 +351,6 @@ function SchedulerController(
                 if (c.sticky && (index < columnIndex)) {
                     const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                     if (header$.length) {
-                        // left += header$.outerWidth();
                         left += c.width;
                     }
                 }
@@ -479,7 +478,7 @@ function SchedulerController(
                     if (c.sticky && (stickyColumns.indexOf(c) < stickyColumns.length - 1) && (index < columns.length - 1)) {
                         const header$ = $('#' + $scope.getResourceHeaderId(c, index));
                         if (header$.length) {
-                            left += header$.outerWidth();
+                            left += c.width;
                         }
                     }
                 });
@@ -709,10 +708,12 @@ function SchedulerController(
     $scope.getEventStyle = function (event, eventIndex) {
         var position = $scope.getEventStyleAndPosition(event, eventIndex);
         var eventStyle = event.style || {};
+        var boxShadow = `-2px 0px 0px ` + event.backgroundColor + `aa`;
 
         return {
             ...eventStyle,
             backgroundColor: event.backgroundColor,
+            boxShadow: boxShadow,
             color: event.color,
             display: 'none',
             position: 'inherit',
@@ -785,62 +786,6 @@ function SchedulerController(
             top += 0.5;
         }
 
-        // console.info('endLastWeekExtraWidth : ------- ' + $scope.getOption('positionsFix.endLastWeekExtraWidth'));
-        // console.info('endFirstWeekExtraWidth : ------- ' + $scope.getOption('positionsFix.endFirstWeekExtraWidth'));
-        // console.info('extraWidth : ------- ' + $scope.getOption('positionsFix.extraWidth'));
-        // console.info('stickyColumnsLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsLeft'));
-        // console.info('stickyColumnsExtraWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsExtraWidth'));
-        // console.info('stickyColumnsEndFirstWeekWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth'));
-        // console.info('stickyColumnsEndFirstWeekMinusLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft'));
-        // console.info('stickyColumnsWidth : ------- ' + $scope.getOption('positionsFix.stickyColumnsWidth'));
-        // console.info('stickyColumnsMinusLeft : ------- ' + $scope.getOption('positionsFix.stickyColumnsMinusLeft'));
-
-        // console.info({event});
-
-        // extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
-        // if (event.schedulerMeta.isEndLastWeek) {
-        //     extraWidth = $scope.getOption('positionsFix.endLastWeekExtraWidth');
-        // } else if (event.schedulerMeta.isEndFirstWeek) {
-        //     extraWidth = $scope.getOption('positionsFix.endFirstWeekExtraWidth');
-        // } else {
-        //     extraWidth = $scope.getOption('positionsFix.extraWidth');
-        // }
-
-        // if ($scope.stickyColumns) {
-        //     // left += 1;
-        //     left += $scope.getOption('positionsFix.stickyColumnsLeft');
-        //     // extraWidth += 1;
-        //     extraWidth += $scope.getOption('positionsFix.stickyColumnsExtraWidth');
-        // }
-
-        // Manala left
-        // if ($scope.stickyColumns) {
-        //     // width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
-        //     // left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
-        //     if (event.schedulerMeta.isEndFirstWeek) {
-        //         width += $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth');
-        //         left -= $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft');
-        //     } else {
-        //         width += $scope.getOption('positionsFix.stickyColumnsWidth');
-        //         left -= $scope.getOption('positionsFix.stickyColumnsMinusLeft');
-        //     }
-
-        //     if (event.schedulerMeta.isStartFirstWeek) {
-        //         width += $scope.getOption('positionsFix.stickyColumnsFirstWeekWidth');
-        //     }
-        // } else {
-        //     if (event.schedulerMeta.isStartFirstWeek) {
-        //         width += $scope.getOption('positionsFix.startFirstWeekWidth')
-        //         left -= $scope.getOption('positionsFix.startFirstWeekMinusLeft');
-        //     } else {
-        //         left -= $scope.getOption('positionsFix.minusLeft');
-        //     }
-
-        //     if (event.schedulerMeta.isEndLastWeek) {
-        //         width += $scope.getOption('positionsFix.endLastWeekWidth');
-        //     }
-        // }
-
         return {
             top: px(top),
             left: px(left),
@@ -858,13 +803,16 @@ function SchedulerController(
      * @param {jQueryObject} elem$ 
      * @returns {object} {left, top}
      */
-    $scope.getCellPosition = function (elem$) {
-        var leftFix =  elem$.css("border-left-width").replace('px', '') - parseInt(elem$.css("border-right-width").replace('px', ''));
-        
-        return {
-            left: elem$.position().left + leftFix,
+    $scope.getCellPosition = function (elem$, isStart) {
+        var leftFix =  parseInt(elem$.css("border-right-width").replace('px', '')) - parseInt(elem$.css("border-left-width").replace('px', ''));
+        var borderLeftWidth = parseInt(elem$.css("border-left-width").replace('px', ''));
+
+        var res = {
+            left: elem$.position().left + (borderLeftWidth <= 2 ? 0 : borderLeftWidth) + 1,
             top: elem$.position().top
         };
+
+        return res;
     };
 
     /**
@@ -887,11 +835,9 @@ function SchedulerController(
 
         if (endCell$.length > 0) {
             var endCellPosition = $scope.getCellPosition(endCell$);
-            // var borderLeft = endCellPosition.left + endCell$.innerWidth() + parseInt(endCell$.css("border-left-width").replace('px', ''));
-            var borderLeft = endCellPosition.left + endCell$.innerWidth();
+            var borderLeft = endCellPosition.left + endCell$.innerWidth() + parseInt(endCell$.css("border-left-width").replace('px', ''));
             top = top ? top : endCellPosition.top;
             right = borderLeft;
-            // right = ($scope.getCellPosition(endCell$).left + endCell$.outerWidth()) - endCell$.css("border-left-width").replace('px', '');
         }
 
         return {

@@ -86,9 +86,6 @@ function LoadPlanDialogController (
         $scope.form.deadline = moment($scope.form.deadline).format('YYYY-MM-DD');
         $scope.form.realizationQuotationDate = moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD');
 
-        console.info($scope.form.start);
-        console.info($scope.form.end);
-
         loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
             $mdDialog.hide();
             $scope.loading = false;
@@ -154,8 +151,7 @@ function LoadPlanDialogController (
     }
 
 	$scope.selectedProjectChange = (item) => {
-        console.info($scope.data.selectedProject);
-		if (item) {
+        if (item) {
 			$scope.form.project = item.id;
 			// $scope.data.selectedProject = item.name + ' ' + resolverService.resolve([item, 'prospect', 'clientNumber'], null);
 		}

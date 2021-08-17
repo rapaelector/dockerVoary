@@ -195,12 +195,13 @@ $borderColor: #555;
 @mixin scheduler-events {
     .app-scheduler {
         .table-container.table-responsive {
-        position: relative
+            position: relative
         }
-        .scheduler-events {
-        position: absolute;
-        top: 0;
-        left: 0;
+        // .scheduler-events {
+        //     // position: absolute;
+        //     // top: 0;
+        //     // left: 0;
+        // }
         .scheduler-event-inner {
             display: flex;
             height: 100%;
@@ -208,10 +209,9 @@ $borderColor: #555;
             align-items: center;
             padding: 0 2px;
             .scheduler-event {
-            height: 24px;
-            overflow: hidden;
+                height: 24px;
+                overflow: hidden;
             }
-        }
         }
         .scheduler-event-clickable {
         cursor: pointer;
@@ -236,12 +236,13 @@ $borderColor: #555;
     text-align: center;
 }
 
-.app-scheduler .scheduler-events .scheduler-event-inner {
+// .app-scheduler .scheduler-events .scheduler-event-inner {
+.app-scheduler .scheduler-event-inner {
     justify-content: center;
     letter-spacing: -1px;
     font-size: 8px;
     > div {
-    overflow: hidden;
+        overflow: hidden;
     }
 }
 

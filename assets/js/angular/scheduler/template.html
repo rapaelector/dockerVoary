@@ -78,19 +78,17 @@
             </tr>
         </tbody>
     </table>
-    <div class="scheduler-events">
-        <div 
-            ng-repeat="event in events track by $index" 
-            ng-class="getEventClass(event, eventIndex)"
-            ng-click="onEventClick(event, eventIndex, $event)"
-            ng-style="getEventStyle(event, eventIndex)"
-            ng-init="eventIndex = $index"
-            ng-mouseenter="onEventMouseEnter(event, eventIndex, $event)"
-            ng-mouseleave="onEventMouseLeave(event, eventIndex, $event)"
-        >
-            <div class="scheduler-event-inner">
-                <div ng-bind-html="formatTitle(event)"></div>
-            </div>
+    <div 
+        ng-repeat="event in events track by $index" 
+        ng-class="getEventClass(event, eventIndex)"
+        ng-click="onEventClick(event, eventIndex, $event)"
+        ng-style="getEventStyle(event, eventIndex)"
+        ng-init="eventIndex = $index"
+        ng-mouseenter="onEventMouseEnter(event, eventIndex, $event)"
+        ng-mouseleave="onEventMouseLeave(event, eventIndex, $event)"
+    >
+        <div class="scheduler-event-inner">
+            <div ng-bind-html="formatTitle(event)"></div>
         </div>
     </div>
 </div>
