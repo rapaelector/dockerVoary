@@ -43,3 +43,26 @@ angular.module('schedulerModule').constant('POSITION_FIX_END_LAST_WEEK_WIDTH', 0
 
 angular.module('schedulerModule').constant('POSITIONS_FIX_LEFT', 0);
 angular.module('schedulerModule').constant('POSITIONS_FIX_EXTRA_WIDTH', 0);
+
+angular.module('schedulerModule').constant('POSITIONS_FIX', {
+    extraWidth: 0,
+    startFirstWeekExtraWidth: 0,
+    endFirstWeekExtraWidth: 0,
+    endFirstWeekExtraWidth: 0,
+    endLastWeekExtraWidth: 0,
+    stickyColumnsExtraWidthExtraWidth: 0,
+    stickyColumnsStartFirstWeekExtraWidth: 0,
+    stickyColumnsEndFirstWeekExtraWidth: 0,
+    stickyColumnsEndFirstWeekExtraWidth: 0,
+    stickyColumnsEndLastWeekExtraWidth: 0,
+    left: 0,
+    startFirstWeekLeft: 0,
+    endFirstWeekLeft: 0,
+    endFirstWeekLeft: 0,
+    endLastWeekLeft: 0,
+    stickyColumnsExtraWidthLeft: 0,
+    stickyColumnsStartFirstWeekLeft: 0,
+    stickyColumnsEndFirstWeekLeft: 0,
+    stickyColumnsEndFirstWeekLeft: 0,
+    stickyColumnsEndLastWeekLeft: 0,
+});

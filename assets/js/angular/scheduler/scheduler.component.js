@@ -48,6 +48,7 @@ function SchedulerController(
     POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT,
     POSITION_FIX_START_FIRST_WEEK_WIDTH,
     POSITION_FIX_END_LAST_WEEK_WIDTH,
+    POSITIONS_FIX,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -93,22 +94,23 @@ function SchedulerController(
                 width: DEFAULT_CELL_WIDTH,
             },
             backgroundColor: BACKGROUND_COLOR,
-            positionsFix: {
-                stickyColumnsLeft: POSITION_FIX_STICKY_COLUMNS_LEFT,
-                stickyColumnsExtraWidth: POSITION_FIX_STICKY_COLUMNS_EXTRA_WIDTH,
-                stickyColumnsMinusLeft: POSITION_FIX_STICKY_COLUMNS_MINUS_LEFT,
-                stickyColumnsWidth: POSITION_FIX_STICKY_COLUMNS_WIDTH,
-                stickyColumnsEndFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_WIDTH,
-                stickyColumnsEndFirstWeekMinusLeft: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT,
-                endLastWeekExtraWidth: POSITION_FIX_END_LAST_WEEK_EXTRA_WIDTH,
-                endFirstWeekExtraWidth: POSITION_FIX_END_FIRST_WEEK_EXTRA_WIDTH,
-                extraWidth: POSITION_FIX_EXTRA_WIDTH,
-                stickyColumnsFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_FIRST_WEEK_WIDTH,
-                minusLeft: POSITION_FIX_MINUS_LEFT,
-                startFirstWeekMinusLeft: POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT,
-                startFirstWeekWidth: POSITION_FIX_START_FIRST_WEEK_WIDTH,
-                endLastWeekWidth: POSITION_FIX_END_LAST_WEEK_WIDTH,
-            }
+            // positionsFix: {
+            //     stickyColumnsLeft: POSITION_FIX_STICKY_COLUMNS_LEFT,
+            //     stickyColumnsExtraWidth: POSITION_FIX_STICKY_COLUMNS_EXTRA_WIDTH,
+            //     stickyColumnsMinusLeft: POSITION_FIX_STICKY_COLUMNS_MINUS_LEFT,
+            //     stickyColumnsWidth: POSITION_FIX_STICKY_COLUMNS_WIDTH,
+            //     stickyColumnsEndFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_WIDTH,
+            //     stickyColumnsEndFirstWeekMinusLeft: POSITION_FIX_STICKY_COLUMNS_END_FIRST_WEEK_MINUS_LEFT,
+            //     endLastWeekExtraWidth: POSITION_FIX_END_LAST_WEEK_EXTRA_WIDTH,
+            //     endFirstWeekExtraWidth: POSITION_FIX_END_FIRST_WEEK_EXTRA_WIDTH,
+            //     extraWidth: POSITION_FIX_EXTRA_WIDTH,
+            //     stickyColumnsFirstWeekWidth: POSITION_FIX_STICKY_COLUMNS_FIRST_WEEK_WIDTH,
+            //     minusLeft: POSITION_FIX_MINUS_LEFT,
+            //     startFirstWeekMinusLeft: POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT,
+            //     startFirstWeekWidth: POSITION_FIX_START_FIRST_WEEK_WIDTH,
+            //     endLastWeekWidth: POSITION_FIX_END_LAST_WEEK_WIDTH,
+            // },
+            positionsFix: POSITIONS_FIX,
         }
     };
 
@@ -321,6 +323,7 @@ function SchedulerController(
         if (column.width) {
             style.width = px(parseInt(column.width));
             style.minWidth = px(parseInt(column.width));
+            style.maxWidth = px(parseInt(column.width));
         }
 
         return {...style, ...stickynessStyle};
@@ -340,6 +343,13 @@ function SchedulerController(
         return {...style, ...stickynessStyle};
     };
 
+    $scope.getResourceColumnDivStyle = function (column, columnIndex) {
+        return {
+            width: column.width,
+            maxWidth: column.width,
+            minWidth: column.width,
+        };
+    }
     /**
      * 
      * @param {object} column 
@@ -759,11 +769,7 @@ function SchedulerController(
             return hideStyle;
         }
 
-        var left = null;
-        var right = null;
-        var top = null;
         var width = 100;
-
         var startId = schedulerService.generateCellId(event.resource, moment(event.start).format('YYYY'), moment(event.start).week());
         var endId = schedulerService.generateCellId(event.resource, moment(event.end).format('YYYY'), moment(event.end).week());
         var $startCell = $('#' + startId);
@@ -776,27 +782,19 @@ function SchedulerController(
             $startCell = $('#' + startId);
         }
 
-        if ($startCell.length > 0) {
-            left = $startCell.position().left;
-            top = $startCell.position().top;
-        } else {
-            return hideStyle;
-        }
-
         if ($endCell.length == 0) {
             endId = schedulerService.generateCellId(event.resource, moment($scope.end).format('YYYY'), moment($scope.end).week());
             $endCell = $('#' + endId);
         }
 
-        if ($endCell.length > 0) {
-            top = top ? top : $endCell.position().top;
-            right = ($endCell.position().left + $endCell.outerWidth()) - $endCell.css("border-left-width").replace('px', '');
-        } else {
+        if ($endCell.length <= 0 || $startCell.length <= 0) {
             return hideStyle;
         }
 
+        var { left, top, right } = $scope.getEventPosition($startCell, $endCell);
         var overlaps = $scope.computeResourceEventOverlap(event.resource);
         var overlapCount = 0;
+
         if (overlaps) {
             var eventOverlaps = Object.values(overlaps).filter(ov => ov.events.findIndex(e => e.id === event.id) > -1);
             if (eventOverlaps.length > 0) {
@@ -828,68 +826,108 @@ function SchedulerController(
 
         // console.info({event});
 
-        if (true) {
-            // extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
-            if (event.schedulerMeta.isEndLastWeek) {
-                extraWidth = $scope.getOption('positionsFix.endLastWeekExtraWidth');
-            } else if (event.schedulerMeta.isEndFirstWeek) {
-                extraWidth = $scope.getOption('positionsFix.endFirstWeekExtraWidth');
-            } else {
-                extraWidth = $scope.getOption('positionsFix.extraWidth');
-            }
-        }
+        // extraWidth = event.schedulerMeta.isEndLastWeek ? 0 : (event.schedulerMeta.isEndFirstWeek ? 2 : 0.5);
+        // if (event.schedulerMeta.isEndLastWeek) {
+        //     extraWidth = $scope.getOption('positionsFix.endLastWeekExtraWidth');
+        // } else if (event.schedulerMeta.isEndFirstWeek) {
+        //     extraWidth = $scope.getOption('positionsFix.endFirstWeekExtraWidth');
+        // } else {
+        //     extraWidth = $scope.getOption('positionsFix.extraWidth');
+        // }
 
-        if ($scope.stickyColumns) {
-            // left += 1;
-            left += $scope.getOption('positionsFix.stickyColumnsLeft');
-            // extraWidth += 1;
-            extraWidth += $scope.getOption('positionsFix.stickyColumnsExtraWidth');
-        }
-
-        
-        if (right && left) {
-            width = (right - left) + extraWidth;
-        }
+        // if ($scope.stickyColumns) {
+        //     // left += 1;
+        //     left += $scope.getOption('positionsFix.stickyColumnsLeft');
+        //     // extraWidth += 1;
+        //     extraWidth += $scope.getOption('positionsFix.stickyColumnsExtraWidth');
+        // }
 
         // Manala left
-        if ($scope.stickyColumns) {
-            // width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
-            // left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
-            if (event.schedulerMeta.isEndFirstWeek) {
-                width += $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth');
-                left -= $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft');
-            } else {
-                width += $scope.getOption('positionsFix.stickyColumnsWidth');
-                left -= $scope.getOption('positionsFix.stickyColumnsMinusLeft');
-            }
+        // if ($scope.stickyColumns) {
+        //     // width += event.schedulerMeta.isEndFirstWeek ? 0 : 1;
+        //     // left -= event.schedulerMeta.isEndFirstWeek ? 2 : 2;
+        //     if (event.schedulerMeta.isEndFirstWeek) {
+        //         width += $scope.getOption('positionsFix.stickyColumnsEndFirstWeekWidth');
+        //         left -= $scope.getOption('positionsFix.stickyColumnsEndFirstWeekMinusLeft');
+        //     } else {
+        //         width += $scope.getOption('positionsFix.stickyColumnsWidth');
+        //         left -= $scope.getOption('positionsFix.stickyColumnsMinusLeft');
+        //     }
 
-            if (event.schedulerMeta.isStartFirstWeek) {
-                width += $scope.getOption('positionsFix.stickyColumnsFirstWeekWidth');
-            }
-        } else {
-            if (event.schedulerMeta.isStartFirstWeek) {
-                width += $scope.getOption('positionsFix.startFirstWeekWidth')
-                left -= $scope.getOption('positionsFix.startFirstWeekMinusLeft');
-            } else {
-                left -= $scope.getOption('positionsFix.minusLeft');
-            }
+        //     if (event.schedulerMeta.isStartFirstWeek) {
+        //         width += $scope.getOption('positionsFix.stickyColumnsFirstWeekWidth');
+        //     }
+        // } else {
+        //     if (event.schedulerMeta.isStartFirstWeek) {
+        //         width += $scope.getOption('positionsFix.startFirstWeekWidth')
+        //         left -= $scope.getOption('positionsFix.startFirstWeekMinusLeft');
+        //     } else {
+        //         left -= $scope.getOption('positionsFix.minusLeft');
+        //     }
 
-            if (event.schedulerMeta.isEndLastWeek) {
-                width += $scope.getOption('positionsFix.endLastWeekWidth');
-            }
-        }
+        //     if (event.schedulerMeta.isEndLastWeek) {
+        //         width += $scope.getOption('positionsFix.endLastWeekWidth');
+        //     }
+        // }
 
         return {
             top: px(top),
-            left: px(left + 1),
-            right: px(right - 1),
+            left: px(left),
+            right: px(right),
             display: 'block',
-            width: px(width - 1),
+            width: px(right - left),
             position: 'absolute',
             height: px(ROW_HEIGHT - 1),
             zIndex: $scope.getEventZIndex(event),
         };
     }
+
+    /**
+     * 
+     * @param {jQueryObject} elem$ 
+     * @returns {object} {left, top}
+     */
+    $scope.getCellPosition = function (elem$) {
+        var leftFix =  elem$.css("border-left-width").replace('px', '') - parseInt(elem$.css("border-right-width").replace('px', ''));
+        
+        return {
+            left: elem$.position().left + leftFix,
+            top: elem$.position().top
+        };
+    };
+
+    /**
+     * 
+     * @param {jQueryObject} startCell$
+     * @param {jQueryObject} endCell$ 
+     * @return {object} {left, top, right}
+     */
+    $scope.getEventPosition = function (startCell$, endCell$) {
+        var left = 0;
+        var top = 0;
+        var right = 0;
+
+        if (startCell$.length > 0) {
+            var startCellPosition = $scope.getCellPosition(startCell$);
+            left = startCellPosition.left;
+            top = startCellPosition.top;
+        }
+
+        if (endCell$.length > 0) {
+            var endCellPosition = $scope.getCellPosition(endCell$);
+            var borderLeft = parseInt(endCell$.css("border-left-width").replace('px', ''));
+            
+            top = top ? top : endCellPosition.top;
+            // right = ($scope.getCellPosition(endCell$).left + endCell$.outerWidth()) - endCell$.css("border-left-width").replace('px', '');
+            right = (endCellPosition.left + endCell$.innerWidth() + borderLeft);
+        }
+
+        return {
+            left,
+            top,
+            right,
+        };
+    };
 
     $scope.getEventZIndex = function (event) {
         const eventGroupZIndex = $scope.getOption(`event.zIndex.${event.group ?? '_default'}`, EVENT_Z_INDEX);
@@ -1352,6 +1390,8 @@ SchedulerController.$inject = [
     'POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT',
     'POSITION_FIX_START_FIRST_WEEK_WIDTH',
     'POSITION_FIX_END_LAST_WEEK_WIDTH',
+
+    'POSITIONS_FIX',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {

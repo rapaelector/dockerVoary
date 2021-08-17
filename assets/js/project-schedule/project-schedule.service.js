@@ -85,7 +85,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
             {
                 label: 'Cdt Trx',
                 field: 'prospect.clientNumber',
-                width: 145,
+                width: 100,
                 sticky: true,
             },
             {
@@ -109,7 +109,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 classNameFormatter: function(res, resource, index) {
                     return 'dynamic-nowrap';
                 },
-                width: 150,
+                width: 130,
                 visible: true,
             },
             {
@@ -170,7 +170,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 formatter: function(res, resource, index) {
                     return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
                 },
-                width: 200,
+                width: 100,
             },
             {
                 label: 'Deja facture',
@@ -190,7 +190,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 formatter: function(res, resource, index) {
                     return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
                 },
-                width: 150,
+                width: 100,
                 // sticky: true,
             },
         ];

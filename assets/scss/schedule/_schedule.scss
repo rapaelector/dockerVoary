@@ -105,41 +105,52 @@ $borderColor: #555;
         */
         tbody {
             tr {
-            &:last-child {
-                th, td {
-                border-bottom: $cellBorder;
-                &:first-child {
-                    border-left: ($borderEdgeWidth + 2px) solid $borderColor;
-                }
-                }
-            }
-            th, td {
-                font-weight: normal;
                 &:last-child {
-                &.scheduler-date-cell {
-                    border-right: $cellBorder;
+                    th, td {
+                    border-bottom: $cellBorder;
+                    &:first-child {
+                        border-left: ($borderEdgeWidth + 2px) solid $borderColor;
+                    }
+                    }
                 }
+                th, td {
+                    font-weight: normal;
+                    &:last-child {
+                    &.scheduler-date-cell {
+                        border-right: $cellBorder;
+                    }
+                    }
+                    &.scheduler-date-cell-firstweek,
+                    &.scheduler-date-cell-lastweek {
+                        font-weight: bold;
+                    }
+                    &.scheduler-date-cell-firstweek {
+                        border-left-width: $borderEdgeWidth !important;
+                    }
+                    &.scheduler-date-cell-lastweek {
+                        border-right-width: $borderEdgeWidth !important;
+                    }
+                    &.scheduler-column:first-child {
+                        border-left: $borderEdgeWidth solid $borderColor;
+                    }
+                    &.scheduler-column-siteCode {
+                        background: rgb(255, 255, 0);
+                    }
+                    &.scheduler-column-prospect-clientNumber {
+                        color: $cyan;
+                    }
+                    &.scheduler-date-cell {
+                        // position: relative;
+                        padding: 0;
+                        // .event-target-container {
+                        //     position: absolute;
+                        //     left: 0;
+                        //     top: 0;
+                        //     right: 0;
+                        //     bottom: 0;
+                        // }
+                    }
                 }
-                &.scheduler-date-cell-firstweek,
-                &.scheduler-date-cell-lastweek {
-                    font-weight: bold;
-                }
-                &.scheduler-date-cell-firstweek {
-                    border-left-width: $borderEdgeWidth !important;
-                }
-                &.scheduler-date-cell-lastweek {
-                    border-right-width: $borderEdgeWidth !important;
-                }
-                &.scheduler-column:first-child {
-                    border-left: $borderEdgeWidth solid $borderColor;
-                }
-                &.scheduler-column-siteCode {
-                    background: rgb(255, 255, 0);
-                }
-                &.scheduler-column-prospect-clientNumber {
-                    color: $cyan;
-                }
-            }
             }
         }
         .scheduler-column-workType, 
