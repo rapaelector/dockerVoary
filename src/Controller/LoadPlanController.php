@@ -22,10 +22,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * @IsGranted("ROLE_LOAD_PLAN_VIEW")
+ */
 #[Route('/load/plan')]
 class LoadPlanController extends BaseController
 {
+    /**
+     * @IsGranted("ROLE_LOAD_PLAN_VIEW")
+     */
     #[Route('/', name: 'load_plan.list')]
     public function index(
         Request $request,
@@ -260,6 +268,9 @@ class LoadPlanController extends BaseController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_LOAD_PLAN_ADD")
+     */
     #[Route('/new', name: 'load_plan.new', options: ['expose' => true])]
     public function new(
         Request $request, 
@@ -293,6 +304,36 @@ class LoadPlanController extends BaseController
         ], 400);
     }
 
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), loadPlan)")
+     */
+    #[Route('/{id}/edit', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
+    public function edit(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        
+        if ($request->getMethod() == 'POST') {
+            $form = $this->createForm(LoadPlanType::class, $loadPlan, [
+                'csrf_protection' => false,
+                'allow_extra_fields' => true,
+            ]);
+
+            $form->submit(json_decode($request->getContent(), true));
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+    
+                return $this->json(['message' => $translator->trans('load_plan.messages.edit_successfull', [], 'projects')]);
+            }
+
+            return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')]);
+        }
+
+        return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')], 400);
+    }
+
+    /**
+     * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), loadPlan)")
+     */
     #[Route('/{id}/delete', name: 'load_plan.delete', methods: ['POST', 'DELETE'], options: ['expose' => true])]
     public function delete(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
     {
@@ -307,7 +348,7 @@ class LoadPlanController extends BaseController
 
         return $this->redirectToRoute('load_plan.list');
     }
-
+    
     #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
     public function projects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
@@ -349,29 +390,5 @@ class LoadPlanController extends BaseController
     public function loadPlan(Request $request, LoadPlan $loadPlan, SerializerInterface $serializer)
     {
         return $this->json($serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']));
-    }
-
-    #[Route('/{id}/edit', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
-    public function edit(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
-    {
-        
-        if ($request->getMethod() == 'POST') {
-            $form = $this->createForm(LoadPlanType::class, $loadPlan, [
-                'csrf_protection' => false,
-                'allow_extra_fields' => true,
-            ]);
-
-            $form->submit(json_decode($request->getContent(), true));
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $em->flush();
-    
-                return $this->json(['message' => $translator->trans('load_plan.messages.edit_successfull', [], 'projects')]);
-            }
-
-            return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')]);
-        }
-
-        return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')], 400);
     }
 }

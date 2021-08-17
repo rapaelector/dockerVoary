@@ -11,7 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Serializer\Normalizer\DateTimeNormalizerCallback;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_LOAD_PLAN_VIEW")
+ */
 #[Route('/load/plan/planning')]
 class LoadPlanPlanningController extends BaseController
 {
@@ -77,7 +81,6 @@ class LoadPlanPlanningController extends BaseController
             $res[$key]['bubbleHtml'] = '';
             $res[$key]['start'] = $event['start'];
             $res[$key]['end'] = $event['end'];
-            // $res[$key]['className'] = 'text-uppercase load-plan-event';
         }
         
         return $this->json(['events' => $res]);

@@ -27,5 +27,12 @@ user:
 
 prospect:
     role: 'Gestion des prospects'
+
 project:
     role: 'Gestion des projets'
+
+load_plan:
+    role: 'Gestion plan de charge économiste'
+
+project_scheduler:
+    role: 'Gestion carnet de commande'

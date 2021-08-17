@@ -19,12 +19,12 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6 col-md">
+                <div class="col-sm-6 col-md-7">
                     <h1 class="m-0">
                         {{ 'load_plan_planning.title'|trans({}, 'projects') }}
                     </h1>
                 </div>
-                <div class="col-sm-4 col-md-4 justify-self-end">
+                <div class="col-sm-4 col-md-5 justify-self-end">
                     <div class="d-flex align-items-center">
                         <label class="pr-2 m-0">{{ 'label.period'|trans({}, 'project') }}</label>
                         <input 
@@ -34,6 +34,17 @@
                             type="text" 
                             ng-model="data.date"
                         />
+
+                        <a 
+                            href="{{ path('load_plan.list') }}" 
+                            class="btn btn-link text-secondary d-flex align-items-center"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="{{ 'load_plan.action.table_view'|trans }}"
+                        >
+                            <span class="material-icons">view_list</span>
+                        </a>
+                        
                         <md-button 
                             class="md-icon-button button-target" 
                             ng-click="showVisibilityModal($event)"

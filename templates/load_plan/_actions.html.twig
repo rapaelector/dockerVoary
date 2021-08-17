@@ -1,3 +1,11 @@
+{% if context is defined %}
+    {% set loadPlan = context %}
+{% elseif context is not defined and loadPlan is defined %}
+    {% set loadPlan = loadPlan %}
+{% else %}
+    {% set loadPlan = null %}
+{% endif %}
+
 <div class="dropdown">
     <button class="btn btn-icon dropdown-toggle"
         type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
@@ -8,13 +16,18 @@
     </button>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
         
-        <button class="dropdown-item btn btn-link edit-load-plan" data-action="edit" data-id="{{ id }}">
-            <i class="material-icons">edit</i>
-            <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
-        </button>
-        {% include 'load_plan/_delete_form.html.twig' with {
-            deleteRoute: 'load_plan.delete',
-            id: id,
-        } %}
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), loadPlan) %}    
+            <button class="dropdown-item btn btn-link edit-load-plan" data-action="edit" data-id="{{ id }}">
+                <i class="material-icons">edit</i>
+                <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
+            </button>
+        {% endif %}
+
+        {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::DELETE'), loadPlan) %}
+            {% include 'load_plan/_delete_form.html.twig' with {
+                deleteRoute: 'load_plan.delete',
+                id: id,
+            } %}
+        {% endif %}
     </div>
 </div>

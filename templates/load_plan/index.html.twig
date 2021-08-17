@@ -30,23 +30,30 @@
     <row>
         <div class="col-12">
             <div class="card card-outline card-app-primary">
-                <div class="card-header">
+                <div class="card-header py-0">
                     <div class="card-tools">
                         {# TODO: - add roles #}
-                        {% if true %}
-                            <md-button class="md-raised md-primary">
-                                <a href="{{ path('load_plan_planning.index') }}" class="text-white text-capitalize">
-                                    {{ 'load_plan.action.change_to_planning_view'|trans }}
-                                </a>
-                            </md-button>
-                            <md-button 
-                                class="md-icon-button md-primary m-n2" 
-                                aria-label="add-load-plan"
-                                ng-click="addLoadPlan('creation', null, $event)"
+                        {% if is_granted('ROLE_LOAD_PLAN_VIEW') %}
+                            <a 
+                                href="{{ path('load_plan_planning.index') }}" 
+                                class="btn btn-link text-secondary"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="{{ 'load_plan.action.planning_view'|trans }}"
                             >
-                                <md-tooltip md-direction="bottom">{{ 'load_plan.label.add_load_plan_long'|trans }}</md-tooltip>
-                                <i class="material-icons">add</i>
-                            </md-button>
+                                <span class="material-icons">event</span>
+                            </a>
+
+                            {% if is_granted('ROLE_LOAD_PLAN_ADD') %}
+                                <md-button 
+                                    class="md-icon-button md-primary m-n2" 
+                                    aria-label="add-load-plan"
+                                    ng-click="addLoadPlan('creation', null, $event)"
+                                >
+                                    <md-tooltip md-direction="bottom">{{ 'load_plan.label.add_load_plan_long'|trans }}</md-tooltip>
+                                    <i class="material-icons">add</i>
+                                </md-button>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

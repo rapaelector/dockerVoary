@@ -114,6 +114,8 @@ class RoleProvider
         $roles[] = self::getUserRoles();
         $roles[] = self::getClientRoles();
         $roles[] = self::getProjectRoles();
+        $roles[] = self::getLoadPlanRoles();
+        $roles[] = self::getProjectSchedulerRoles();
 
         return $roles;
     }
@@ -148,6 +150,23 @@ class RoleProvider
             // self::ACTION_SUBMIT,
             // self::ACTION_ARCHIVE,
             self::ACTION_VALIDATE,
+        ]);
+    }
+
+    public static function getLoadPlanRoles()
+    {
+        return self::buildRoles('load_plan.role', 'ROLE_LOAD_PLAN', [
+            self::ACTION_VIEW,
+            self::ACTION_ADD,
+            self::ACTION_EDIT,
+            self::ACTION_DELETE,
+        ]);
+    }
+
+    public static function getProjectSchedulerRoles()
+    {
+        return self::buildRoles('project_scheduler.role', 'ROLE_POJECT_SCHEDULER', [
+            self::ACTION_VIEW,
         ]);
     }
 

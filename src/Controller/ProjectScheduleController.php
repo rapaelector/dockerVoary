@@ -14,7 +14,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Serializer\Normalizer\DateTimeNormalizerCallback;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_POJECT_SCHEDULER_VIEW")
+ */
 #[Route('/project/scheduler')]
 class ProjectScheduleController extends AbstractController
 {
