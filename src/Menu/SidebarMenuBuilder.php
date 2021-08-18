@@ -113,15 +113,17 @@ class SidebarMenuBuilder
             ])->setAttributes(['class' => $navItem]);
             
             // PROJECT SCHEDULER
-            $menu->addChild('menu.project_schedule', [
-                'route' => 'project_schedule',
-                'linkAttributes' => ['class' => $linkClassName],
-                'extras' => [
-                    'icon' => $icon,
-                    'icon_content' => 'calendar_today',
-                    'label_wrapper' => 'p',
-                ],
-            ])->setAttributes(['class' => $navItem]);
+            if ($this->security->isGranted('ROLE_POJECT_SCHEDULER_VIEW')) {
+                $menu->addChild('menu.project_schedule', [
+                    'route' => 'project_schedule',
+                    'linkAttributes' => ['class' => $linkClassName],
+                    'extras' => [
+                        'icon' => $icon,
+                        'icon_content' => 'calendar_today',
+                        'label_wrapper' => 'p',
+                    ],
+                ])->setAttributes(['class' => $navItem]);
+            }
         }
 
         /**
@@ -130,7 +132,7 @@ class SidebarMenuBuilder
          *      - Change load plan icon
          *      - the load plan planning link place should change but for now put it just here
          */
-        if (true) {
+        if ($this->security->isGranted('ROLE_LOAD_PLAN_VIEW')) {
             $menu->addChild('menu.load_plan', [
                 'route' => 'load_plan.list',
                 'linkAttributes' => ['class' => $linkClassName],

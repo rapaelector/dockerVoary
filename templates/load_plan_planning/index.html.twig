@@ -38,10 +38,10 @@
                         <a 
                             href="{{ path('load_plan.list') }}" 
                             class="btn btn-link text-secondary d-flex align-items-center"
-                            data-toggle="tooltip"
-                            data-placement="bottom"
-                            title="{{ 'load_plan.action.table_view'|trans }}"
                         >
+                            <md-tooltip md-direction="bottom">
+                                {{ 'load_plan.action.table_view'|trans }}
+                            </md-tooltip>
                             <span class="material-icons">view_list</span>
                         </a>
                         
