@@ -33,6 +33,13 @@ class UserFixture extends Fixture
             'ROLE_PROJECT_ADD',
             'ROLE_PROJECT_EDIT',
             'ROLE_PROJECT_DELETE',
+            // ROLE LOAD PLAN
+            'ROLE_LOAD_PLAN_VIEW',
+            'ROLE_LOAD_PLAN_ADD',
+            'ROLE_LOAD_PLAN_EDIT',
+            'ROLE_LOAD_PLAN_DELETE',
+            // ROLE PROJECT SCHEDULER
+            'ROLE_POJECT_SCHEDULER_VIEW',
         ];
 
         /**
