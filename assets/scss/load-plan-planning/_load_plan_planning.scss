@@ -17,6 +17,10 @@
     .md-button.md-icon-button {
         min-width: 40px;
     }
+    .form-control.date-picker {
+        width: 178px;
+        padding: 0 8px;
+    }
 }
 
 @include load_plan_planning;
