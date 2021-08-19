@@ -34,16 +34,13 @@
                     <div class="card-tools d-flex align-items-center">
                         {# TODO: - add roles #}
                         {% if is_granted('ROLE_LOAD_PLAN_VIEW') %}
-                            <a 
-                                href="{{ path('load_plan_planning.index') }}" 
-                                class="btn btn-link text-secondary d-flex align-items-center"
-                            >
+                            <md-button class="md-icon-button md-primary" aria-label="More" ng-href="{{ path('load_plan_planning.index') }}">
+                                {# <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon> #}
                                 <md-tooltip md-direction="bottom">
                                     {{ 'load_plan.action.planning_view'|trans }}
                                 </md-tooltip>
                                 <span class="material-icons">event</span>
-                            </a>
-
+                            </md-button>
                             {% if is_granted('ROLE_LOAD_PLAN_ADD') %}
                                 <md-button 
                                     class="md-icon-button md-primary m-n2" 
