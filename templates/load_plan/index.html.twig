@@ -1,6 +1,6 @@
 {% trans_default_domain 'projects' %}
 
-{% extends 'project/layout.html.twig' %}
+{% extends 'load_plan/layout.html.twig' %}
 {% block title %}{{ 'load_plan.title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
@@ -30,13 +30,13 @@
     <row>
         <div class="col-12">
             <div class="card card-outline card-app-primary">
-                <div class="card-header py-0">
-                    <div class="card-tools">
+                <div class="card-header py-2">
+                    <div class="card-tools d-flex align-items-center">
                         {# TODO: - add roles #}
                         {% if is_granted('ROLE_LOAD_PLAN_VIEW') %}
                             <a 
                                 href="{{ path('load_plan_planning.index') }}" 
-                                class="btn btn-link text-secondary"
+                                class="btn btn-link text-secondary d-flex align-items-center"
                             >
                                 <md-tooltip md-direction="bottom">
                                     {{ 'load_plan.action.planning_view'|trans }}

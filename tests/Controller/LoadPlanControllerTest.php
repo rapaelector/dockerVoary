@@ -16,7 +16,6 @@ class LoadPlanControllerTest extends WebTestCase
 
     public function testIndex()
     {
-        // No roles check here because we don't define load plan till now
         $client = static::createClient();
         $this->login($client, 'test@gmail.com');
         $crawler = $client->request('GET', '/load/plan/');
@@ -24,6 +23,24 @@ class LoadPlanControllerTest extends WebTestCase
         // First check if the load plan list page have no bugs
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant reach load plan list');
         $this->assertStringContainsString($pageTitle, $client->getResponse()->getContent());
+
+        /** 
+         * Create role checker
+         * Have a good role
+         */
+        $this->login($client, 'user_role_load_plan_view@app.locale');
+        $crawler = $client->request('GET', '/load/plan/');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant reach load plan list');
+        $this->assertStringContainsString($pageTitle, $client->getResponse()->getContent());
+
+        /**
+         * Bad role
+         * Should be forbidden
+         */
+        $this->login($client, 'user_role_load_plan_add@app.locale');
+        $crawler = $client->request('GET', '/load/plan/');
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Cant reach load plan list');
+        // $this->assertStringContainsString($pageTitle, $client->getResponse()->getContent());
     }
 
     public function testNew()
@@ -45,6 +62,14 @@ class LoadPlanControllerTest extends WebTestCase
         $client->request('POST', '/load/plan/new', [], [], [], json_encode($this->generateLoadPlanData(true)));
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode(), 'Saving load plan fake data failed');
         $this->assertStringContainsString('errors', $client->getResponse()->getContent());
+        
+        /**
+         * Check with bad role
+         * Should be forbidden
+         */
+        $this->login($client, 'user_role_load_plan_delete@app.locale');
+        $client->request('POST', '/load/plan/new', [], [], [], json_encode($this->generateLoadPlanData(true)));
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Saving load plan fake data failed');
     }
 
     public function testEdit()
@@ -59,6 +84,10 @@ class LoadPlanControllerTest extends WebTestCase
         $client->request('POST', $this->generateUrl('/load/plan/', '/edit'), [], [], [], json_encode($this->generateLoadPlanData(true)));
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Edit load plan with bad request');
         $this->assertStringContainsString('message', $client->getResponse()->getContent());
+        
+        $this->login($client, 'user_role_load_plan_delete@app.locale');
+        $client->request('POST', $this->generateUrl('/load/plan/', '/edit'), [], [], [], json_encode($this->generateLoadPlanData(true)));
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Edit load plan with bad request');
     }
 
     /**
@@ -95,6 +124,14 @@ class LoadPlanControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/load/plan/projects');
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get projects from load plan failed');
+        
+        $this->login($client, 'user_role_load_plan_view@app.locale');
+        $crawler = $client->request('GET', '/load/plan/projects');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get projects from load plan failed');
+        
+        $this->login($client, 'user_role_load_plan_edit@app.locale');
+        $crawler = $client->request('GET', '/load/plan/projects');
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Get projects from load plan failed');
     }
     
     public function testConfig()
@@ -106,6 +143,14 @@ class LoadPlanControllerTest extends WebTestCase
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get load plan config failed');
         $this->assertStringContainsString('taskTypes', $client->getResponse()->getContent());
         $this->assertStringContainsString('studyTime', $client->getResponse()->getContent());
+
+        $this->login($client, 'user_role_load_plan_view@app.locale');
+        $crawler = $client->request('GET', '/load/plan/config');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get load plan config failed');
+        
+        $this->login($client, 'user_role_load_plan_delete@app.locale');
+        $crawler = $client->request('GET', '/load/plan/config');
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Get load plan config failed');
     }
 
     public function testLoadPlan()
@@ -115,6 +160,14 @@ class LoadPlanControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', $this->generateUrl('/load/plan/'));
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get load plan failed');
+        
+        $this->login($client, 'user_role_load_plan_view@app.locale');
+        $crawler = $client->request('GET', $this->generateUrl('/load/plan/'));
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Get load plan failed');
+        
+        $this->login($client, 'user_role_load_plan_delete@app.locale');
+        $crawler = $client->request('GET', $this->generateUrl('/load/plan/'));
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Get load plan failed');
     }
     /**
      * Create load plan data

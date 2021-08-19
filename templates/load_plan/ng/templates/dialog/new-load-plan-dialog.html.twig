@@ -12,11 +12,9 @@
             <div class="row">
                 {# Project select #}
                 <div class="col-sm-12">
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.project',
-                    } %}
                     <md-autocomplete
                         class="project-autocomplete"
+                        ng-class="data.errors.project ? 'border-danger' : ''"
                         md-no-cache="noCache"
                         md-selected-item="data.selectedProject"
                         md-search-text="project"
@@ -38,6 +36,9 @@
                             Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
                         </md-not-found>
                     </md-autocomplete>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.project',
+                    } %}
                 </div>
 
                 {# Temps d'etude estime #}
@@ -53,6 +54,9 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.estimatedStudyTime',
+                    } %}
                 </div>
 
                 {# Temps d'etude effectif #}
@@ -63,11 +67,15 @@
                             <md-option
                                 ng-repeat="time in config.studyTime" 
                                 ng-value="time.value"
+                                ng-class="data.errors.effectiveStudyTime ? 'border-danger' : ''"
                             >
                                 {{ '{{ time.label }}' }}
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.effectiveStudyTime',
+                    } %}
                 </div>
 
                 {# N° semaine #}
@@ -80,9 +88,13 @@
                             input-aria-labelledby="week-number"
                             md-open-on-focus
                             md-hide-icons="calendar"
+                            ng-class="data.errors.start ? 'border-danger' : ''"
                         >
                         </md-datepicker>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.start',
+                    } %}
                 </div>
                 
                 <div class="w-100"></div>
@@ -97,9 +109,13 @@
                             md-open-on-focus
                             input-aria-labelledby="deadline-date"
                             md-hide-icons="calendar"
+                            ng-class="data.errors.deadline ? 'border-danger' : ''"
                         >
                         </md-datepicker>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.deadline',
+                    } %}
                 </div>
 
                 {# Date realization devis #}
@@ -111,10 +127,14 @@
                             ng-model="form.realizationQuotationDate"
                             md-open-on-focus
                             input-aria-labelledby="realization-devis-date"
+                            ng-class="data.errors.realizationQuotationDate ? 'border-danger' : ''"
                             md-hide-icons="calendar"
                         >
                         </md-datepicker>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.realizationQuotationDate',
+                    } %}
                 </div>
 
                 {# Nature du chiffrage #}
@@ -125,11 +145,15 @@
                             <md-option
                                 ng-repeat="task in config.taskTypes" 
                                 ng-value="task.value"
+                                ng-class="data.errors.natureOfTheCosting ? 'border-danger' : ''"
                             >
                                 {{ '{{ task.label }}' }}
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        errorPath: 'data.errors.natureOfTheCosting',
+                    } %}
                 </div>
             </div>
         </div>

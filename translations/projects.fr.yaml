@@ -240,7 +240,7 @@ load_plan:
     change_to_planning_view: 'Affichage planning'
     change_to_table_view: 'Affichage tableaux'
     planning_view: 'Voir planning'
-    table_view: 'Voir tableaux'
+    table_view: 'Voir tableau'
 
   task_type:
     meter_consultation: 'Mètre Consultation '

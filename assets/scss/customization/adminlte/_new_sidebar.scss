@@ -1,0 +1,17 @@
+.nav-sidebar > .nav-item .nav-icon {
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+}
+
+.nav-flat .nav-item > .nav-link > .nav-icon {
+    margin-left: 0;
+}
+
+.sidebar-collapse .nav-flat.nav-child-indent .nav-treeview .nav-icon {
+    margin-left: 0 !important;
+}
+
+:not(.sidebar-collapse) .nav-flat.nav-child-indent .nav-treeview .nav-icon {
+    margin-left: 0.85rem;
+}

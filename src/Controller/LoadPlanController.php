@@ -310,7 +310,6 @@ class LoadPlanController extends BaseController
     #[Route('/{id}/edit', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
     public function edit(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
     {
-        
         if ($request->getMethod() == 'POST') {
             $form = $this->createForm(LoadPlanType::class, $loadPlan, [
                 'csrf_protection' => false,
