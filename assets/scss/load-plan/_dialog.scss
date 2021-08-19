@@ -1,7 +1,6 @@
 @mixin dialog {
     md-dialog.new-load-plan-dialog {
         width: 600px;
-        md-dialog-content {}
     }
     .md-datepicker-input-container {
         width: 80% !important;
@@ -30,6 +29,9 @@
     }
     .md-icon-button + .md-datepicker-input-container {
         margin: 0;
+    }
+    md-input-container:not(.md-input-has-value):not(.md-input-has-placeholder) input:not(:focus) {
+        color: rgba(0,0,0,0.87) !important;
     }
 }
 

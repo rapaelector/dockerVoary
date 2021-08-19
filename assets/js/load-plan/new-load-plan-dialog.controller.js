@@ -25,7 +25,7 @@ function LoadPlanDialogController (
 ) {
     $scope.data = {
         projects: [],
-        errors: [],
+        errors: {},
         selectedProject: null,
     };
     $scope.loading = false;
@@ -47,11 +47,13 @@ function LoadPlanDialogController (
         mode: '',
     };
     $scope.projectCanceller = null; 
+    $scope.formName = '';
+    $scope.excludeField = ['project', 'end'];
 
     this.$onInit = () => {
+        $scope.formName = 'loadPlanForm';
         $scope.config.modalTitle = MESSAGES ? MESSAGES.modalTitle.new : 'Créer une plan de charge économiste';
         $scope.config.mode = 'create';
-
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
             $scope.config.studyTime = response.data.studyTime;
@@ -72,6 +74,21 @@ function LoadPlanDialogController (
         $scope.projectCanceller = $q.defer();
     };
 
+    $scope.$watch('form', function (newValue, oldValue) {
+        var changedFields = [];
+        for (var field in newValue) {
+            try {
+                if (newValue[field] !== oldValue[field]) {
+                    changedFields.push(field);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+        $scope.setFormValidity(changedFields, true);
+
+    }, true);
+
     /**
      * Save load plan
      * If form end dat is before form start date then force the end date to the start date
@@ -87,16 +104,31 @@ function LoadPlanDialogController (
         $scope.form.realizationQuotationDate = moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD');
 
         loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
+            var fields = ['deadline', 'effectiveStudyTime', 'estimatedStudyTime', 'natureOfTheCosting', 'realizationQuotationDate', 'start'];
             $mdDialog.hide();
             $scope.loading = false;
             $scope.showNotification(response.data.message);
+            $scope.setFormValidity(fields, true);
             window.location.reload();
         }, errors => {
             $scope.loading = false;
-            console.warn(errors);
-            $scope.data.errors = errors.data.errors;
+            $scope.data.errors[$scope.formName] = errors.data.errors;
             $scope.showNotification(errors.data.message, {toastClass: 'toast-error'});
+            $scope.setFormValidity(Object.keys(errors.data.errors), false);
         });
+    };
+
+    $scope.setFormValidity = (fields, isValid) => {
+        for (var field of fields) {
+            try {
+                if ($scope.excludeField.indexOf(field) < 0) {
+                    $scope.loadPlanForm[field].$setValidity('serverErrors', isValid);
+                    $scope.loadPlanForm[field].$setDirty();
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
     };
 
     $scope.cancel = (event) => {

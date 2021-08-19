@@ -1,0 +1,5 @@
+<div ng-messages="{{ form }}.{{ field }}.$error" multiple md-auto-hide="false">
+    <div ng-message="{{ errorKey ?? 'serverErrors' }}">
+        <div ng-repeat="m in {{ (errors ?? 'data.errors.' ~ form) ~ '.' ~ field }}">{{ '{{ m }}' }}</div>
+    </div>
+</div>

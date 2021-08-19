@@ -101,6 +101,7 @@ class LoadPlan
      * 
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
+     * @Assert\NotBlank
      * @Groups({"loadPlan:list", "loadPlan:planning-event"})
      */
     private $natureOfTheCosting;
@@ -154,7 +155,8 @@ class LoadPlan
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
-     * Assert\Choice(
+     * @Assert\NotBlank
+     * @Assert\Choice(
      *      callback="getStudyTime",
      * )
      */
@@ -165,7 +167,8 @@ class LoadPlan
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
-     * Assert\Choice(
+     * @Assert\NotBlank
+     * @Assert\Choice(
      *      callback="getStudyTime",
      * )
      */

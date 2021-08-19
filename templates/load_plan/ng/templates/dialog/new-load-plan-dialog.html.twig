@@ -3,160 +3,175 @@
 <md-dialog aria-label="Event Detail Dialog" class="new-load-plan-dialog p-0">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            {# <h2 class="text-white">{{ '{{ config.modalTitle }}' }}</h2> #}
             <h2 class="text-white">{{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}</h2>
         </div>
     </md-toolbar>
 	<md-dialog-content class="p-3">
-        <div class="container-fluid">
-            <div class="row">
-                {# Project select #}
-                <div class="col-sm-12">
-                    <md-autocomplete
-                        class="project-autocomplete"
-                        ng-class="data.errors.project ? 'border-danger' : ''"
-                        md-no-cache="noCache"
-                        md-selected-item="data.selectedProject"
-                        md-search-text="project"
-                        md-name="projectSearchInput"
-                        md-selected-item-change="selectedProjectChange(item)"
-                        md-items="item in queryProjectSearch(project)"
-                        md-item-text="item.name"
-                        md-min-length="0"
-                        md-menu-class="project-dropdown"
-                        md-floating-label="Projet"
-                        md-clear-button="true"
-                        input-aria-labelledby="favoriteStateLabel">
-                        <md-item-template>
-                            <span md-highlight-text="projectSearchText" md-highlight-flags="^i">
-                                {{ '{{ item.name }}' }} — {{ '{{ item.prospect.clientNumber }}' }}
-                            </span>
-                        </md-item-template>
-                        <md-not-found>
-                            Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
-                        </md-not-found>
-                    </md-autocomplete>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.project',
-                    } %}
-                </div>
-
-                {# Temps d'etude estime #}
-                <div class="col-sm-6">
-                    <md-input-container class="w-100">
-                        <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
-                        <md-select ng-model="form.estimatedStudyTime">
-                            <md-option
-                                ng-repeat="time in config.studyTime" 
-                                ng-value="time.value"
+        <form name="{{ '{{ formName }}' }}">
+            <div class="container-fluid">
+                <div class="row">
+                    {# Project select #}
+                    <div class="col-sm-12">
+                        <md-input-container class="w-100 my-0">
+                            <md-autocomplete
+                                class="project-autocomplete"
+                                md-no-cache="noCache"
+                                md-selected-item="data.selectedProject"
+                                md-search-text="project"
+                                md-selected-item-change="selectedProjectChange(item)"
+                                md-items="item in queryProjectSearch(project)"
+                                md-item-text="item.name"
+                                md-min-length="0"
+                                md-menu-class="project-dropdown"
+                                md-floating-label="Projet"
+                                md-clear-button="true"
+                                input-aria-labelledby="favoriteStateLabel">
+                                <md-item-template>
+                                    <span md-highlight-text="projectSearchText" md-highlight-flags="^i">
+                                        {{ '{{ item.name }}' }} — {{ '{{ item.prospect.clientNumber }}' }}
+                                    </span>
+                                </md-item-template>
+                                <md-not-found>
+                                    Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
+                                </md-not-found>
+                            </md-autocomplete>
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.loadPlanForm.project',
+                                errorClass: 'text-sm mt-n3 mb-2',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    {# Temps d'etude estime #}
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100">
+                            <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
+                            <md-select 
+                                ng-model="form.estimatedStudyTime"
+                                name="estimatedStudyTime"
                             >
-                                {{ '{{ time.label }}' }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.estimatedStudyTime',
-                    } %}
-                </div>
-
-                {# Temps d'etude effectif #}
-                <div class="col-sm-6">
-                    <md-input-container class="w-100">
-                        <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
-                        <md-select ng-model="form.effectiveStudyTime">
-                            <md-option
-                                ng-repeat="time in config.studyTime" 
-                                ng-value="time.value"
-                                ng-class="data.errors.effectiveStudyTime ? 'border-danger' : ''"
+                                <md-option
+                                    ng-repeat="time in config.studyTime" 
+                                    ng-value="time.value"
+                                >
+                                    {{ '{{ time.label }}' }}
+                                </md-option>
+                            </md-select>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'estimatedStudyTime',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    {# Temps d'etude effectif #}
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100">
+                            <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
+                            <md-select 
+                                ng-model="form.effectiveStudyTime"
+                                name="effectiveStudyTime"
                             >
-                                {{ '{{ time.label }}' }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.effectiveStudyTime',
-                    } %}
-                </div>
-
-                {# N° semaine #}
-                <div class="col-sm-6">
-                    <md-input-container class="w-100 mb-0">
-                        <label id="week-number">{{ 'load_plan.label.week_for_submission_of_the_study'|trans({}, 'projects') }}</label>
-                        <md-datepicker 
-                            class="w-100 hide-icons"
-                            ng-model="form.start"
-                            input-aria-labelledby="week-number"
-                            md-open-on-focus
-                            md-hide-icons="calendar"
-                            ng-class="data.errors.start ? 'border-danger' : ''"
-                        >
-                        </md-datepicker>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.start',
-                    } %}
-                </div>
-                
-                <div class="w-100"></div>
-
-                {# Date butoire #}
-                <div class="col-sm-6">
-                    <md-input-container class="w-100 mb-0">
-                        <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
-                        <md-datepicker 
-                            class="w-100 hide-icons"
-                            ng-model="form.deadline"
-                            md-open-on-focus
-                            input-aria-labelledby="deadline-date"
-                            md-hide-icons="calendar"
-                            ng-class="data.errors.deadline ? 'border-danger' : ''"
-                        >
-                        </md-datepicker>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.deadline',
-                    } %}
-                </div>
-
-                {# Date realization devis #}
-                <div class="col-sm-6 ml-n2">
-                    <md-input-container class="w-100 mb-0">
-                        <label id="realization-devis-date">{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}</label>
-                        <md-datepicker 
-                            class="w-100 hide-icons"
-                            ng-model="form.realizationQuotationDate"
-                            md-open-on-focus
-                            input-aria-labelledby="realization-devis-date"
-                            ng-class="data.errors.realizationQuotationDate ? 'border-danger' : ''"
-                            md-hide-icons="calendar"
-                        >
-                        </md-datepicker>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.realizationQuotationDate',
-                    } %}
-                </div>
-
-                {# Nature du chiffrage #}
-                <div class="col-sm-12">
-                    <md-input-container class="w-100">
-                        <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
-                        <md-select ng-model="form.natureOfTheCosting">
-                            <md-option
-                                ng-repeat="task in config.taskTypes" 
-                                ng-value="task.value"
-                                ng-class="data.errors.natureOfTheCosting ? 'border-danger' : ''"
+                                <md-option
+                                    ng-repeat="time in config.studyTime" 
+                                    ng-value="time.value"
+                                >
+                                    {{ '{{ time.label }}' }}
+                                </md-option>
+                            </md-select>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'effectiveStudyTime',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    {# N° semaine #}
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">{{ 'load_plan.label.week_for_submission_of_the_study'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.start"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="start"
+                                md-hide-icons="calendar"
                             >
-                                {{ '{{ task.label }}' }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    {% include 'project/ng/templates/form/_errors.html.twig' with {
-                        errorPath: 'data.errors.natureOfTheCosting',
-                    } %}
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'start',
+                            } %}
+                        </md-input-container>
+                    </div>
+                    
+                    <div class="w-100"></div>
+    
+                    {# Date butoire #}
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.deadline"
+                                md-open-on-focus
+                                input-aria-labelledby="deadline-date"
+                                md-hide-icons="calendar"
+                                name="deadline"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'deadline',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    {# Date realization devis #}
+                    <div class="col-sm-6 ml-n2">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="realization-devis-date">{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.realizationQuotationDate"
+                                md-open-on-focus
+                                input-aria-labelledby="realization-devis-date"
+                                name="realizationQuotationDate"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'realizationQuotationDate',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    {# Nature du chiffrage #}
+                    <div class="col-sm-12">
+                        <md-input-container class="w-100">
+                            <label>{{ 'load_plan.label.nature_of_the_costing'|trans }}</label>
+                            <md-select 
+                                ng-model="form.natureOfTheCosting"
+                                name="natureOfTheCosting"
+                            >
+                                <md-option
+                                    ng-repeat="task in config.taskTypes" 
+                                    ng-value="task.value"
+                                >
+                                    {{ '{{ task.label }}' }}
+                                </md-option>
+                            </md-select>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'natureOfTheCosting',
+                            } %}
+                        </md-input-container>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form> 
 	</md-dialog-content>
 
     <md-dialog-actions layout="row">

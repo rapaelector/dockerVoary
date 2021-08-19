@@ -229,7 +229,7 @@ load_plan:
     week_number_for_submission_of_the_study: "N° semaine pour remise de l'étude"
     week_for_submission_of_the_study: "Semaine pour remise de l'étude"
     week_number_for_submission_of_the_study_abbr: "N° semaine"
-    deadline: 'Date butoire'
+    deadline: 'Date butoir'
     realization_quotation_date: 'Date réalisation devis'
     realization_quotation_date_abbr: 'Date de devis'
     effective_study_time: "Temps d'étude effectif"
@@ -249,12 +249,12 @@ load_plan:
     encryption: 'Chiffrage '
 
   messages:
-    saving_successfull: 'Charge économiste enregistré avec succès'
-    saving_errors: "L'enregistrement du charge économiste à echoué"
+    saving_successfull: 'Charge économiste enregistrée avec succès'
+    saving_errors: "L'enregistrement de la charge économiste a échoué"
     delete_load_plan: 'Souhaitez-vous supprimer cete charge économiste?'
-    delete_successfull: 'Charge économiste supprimé avec succès'
-    edit_successfull: 'Modification du charge économiste effectué avec succès'
-    edit_failed: 'La modification du charge économiste à echoué'
+    delete_successfull: 'Charge économiste supprimée avec succès'
+    edit_successfull: 'Modification de la charge économiste effectuée avec succès'
+    edit_failed: 'La modification de la charge économiste a échoué'
 
   study_time:
     2: '1/4 journée'
