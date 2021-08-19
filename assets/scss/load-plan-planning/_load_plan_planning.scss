@@ -14,6 +14,9 @@
     button.md-icon-button.button-target.md-button.md-ink-ripple {
         min-width: 40px;
     }
+    .md-button.md-icon-button {
+        min-width: 40px;
+    }
 }
 
 @include load_plan_planning;

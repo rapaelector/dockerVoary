@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Lab;
 
 use App\Controller\BaseController;
 use App\Entity\LoadPlan;
@@ -16,21 +16,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @IsGranted("ROLE_LOAD_PLAN_VIEW")
  */
-#[Route('/load/plan/planning')]
-class LoadPlanPlanningController extends BaseController
+#[Route('/load/plan/planning/lab')]
+class LoadPlanPlanningLabController extends BaseController
 {
-    #[Route('/', name: 'load_plan_planning.index')]
+    #[Route('/', name: 'load_plan_planning.lab.index')]
     public function index(Request $request)
     {
         return $this->render('load_plan_planning/index.html.twig');
     }
 
-    #[Route('/resources', name: 'load_plan_planning.resources', options: ['expose' => true])]
+    #[Route('/resources', name: 'load_plan_planning.lab.resources', options: ['expose' => true])]
     public function resources(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $projects = $em->getRepository(LoadPlan::class)->getProjects();
         $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:planning']);
         $res = [];
+        dump($normalizedProjects);
+
         foreach ($normalizedProjects as $key => $project) {
             $res[$key]['id'] = $project['id'];
             $res[$key]['economist'] = $project['project']['economist'];
@@ -38,11 +40,12 @@ class LoadPlanPlanningController extends BaseController
             $res[$key]['loadPlanId'] = $project['project']['id'];
             $res[$key]['folderNameOnTheServer'] = $project['project']['folderNameOnTheServer'];
         }
-
-        return $this->json(['resources' => $res]);
+        dump($res);
+        
+        return new Response('<body> lorem </body>');
     }
 
-    #[Route('/events', name: 'load_plan_planning.events', options: ['expose' => true])]
+    #[Route('/events', name: 'load_plan_planning.lab.events', options: ['expose' => true])]
     public function events(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $resEvents = [];
@@ -72,6 +75,8 @@ class LoadPlanPlanningController extends BaseController
         ]);
 
         $res = [];
+        dump($normalizedEvents);
+        
         foreach ($normalizedEvents as $key => $event) {
             $res[$key]['id'] = $event['id'];
             $res[$key]['resource'] = $event['id'];
@@ -82,7 +87,8 @@ class LoadPlanPlanningController extends BaseController
             $res[$key]['start'] = $event['start'];
             $res[$key]['end'] = $event['end'];
         }
+        dump($res);
         
-        return $this->json(['events' => $res]);
+        return new Response('<body> lorem </body>');
     }
 }
