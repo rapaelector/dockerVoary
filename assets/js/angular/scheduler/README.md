@@ -231,6 +231,7 @@ export {resource, column, event, options, buildColumn};
 | headerWeekClassName       | string                                                                                        | Class to add to the header week "scheduler-week"          |
 | forceSticky               | boolean                                                                                       | Force the table and column to be sticky                   | false
 | minRowCount               | number                                                                                        | Number for empty row to display when loading the scheduler| 14
+| totals                    | [array of totals](#totals_def)                                       | Total to dispaly in the table footer                      | []
 | [onRowClick](#on_row_click_def)                       | (resource: [Resource](#resource_def), column: [Column](#column_def), columnIndex: number) => void | function to call when the row is clicked              |
 | [onColumnHeaderClick](#on_column_header_click_def)    | (column: [Column](#column_def), columnIndex: object) => void                                  | function to call when the columnHeader is clicked           |
 | [onHeaderYearClick](#on_header_year_click_def)        | (yearObject: [YearObject](#year_object_def), yearIndex: number) => void                       | function to call when the headerYear is clicked              |
@@ -314,6 +315,18 @@ Any JavaScript object, `{[key: string]: any}`
     bubbleHtml: `<div> lorem </div>`,
  },
 ```
+
+<a name="totals_def"></a>
+
+### @Type Totals
+
+| Attributes    | Type              | Description
+| --------------| ----------------- | ----------------
+| amout         | number            |
+| month         | string \| number  |
+| year          | string \| number  |
+
+
 <a name="options_def"></a>
 
 ### @Type OptionsObject

@@ -87,6 +87,17 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         projectSchedulerService.getResources($scope.data.date).then(function (response) {
             $scope.data.resources = resolverService.resolve([response, 'data', 'resources'], []);
             $scope.loadingResources = false;
+            var total = 0;
+            $scope.data.resources.forEach(r => {
+                if (!isNaN(r.amountBBISpecificWork)) {
+                    total += +r.amountBBISpecificWork;
+                }
+                var totalColumnIndex = $scope.data.columns.findIndex(c => c.field === 'amountBBISpecificWork');
+                if (totalColumnIndex > -1) {
+                    $scope.data.columns[totalColumnIndex].totals = [total];
+                }
+            });
+            
         });
         $scope.updateEvents();
     };

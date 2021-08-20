@@ -197,6 +197,7 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                     return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
                 },
                 width: 100,
+                isTotal: true,
                 // sticky: true,
             },
         ];

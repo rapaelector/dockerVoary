@@ -78,27 +78,22 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="{{ columns.length }}"></td>
-                <td
-                    colspan="{{ month.weeksCount }}"
-                    ng-repeat="month in months track by $index"
-                    ng-class="getFooterMonthClassName(month, $index)"
-                >
-                    {{ displayTotal(month, $index) }}
+            <tr 
+                ng-repeat="total in totals track by $index"
+                ng-init="totalIndex = $index"
+            >
+                <td colspan="{{ getTotalBlankColspan() }}" ng-if="getTotalBlankColspan() > 0"></td>
+                <td colspan="{{ getTotalTitleColspan() }}" ng-if="getTotalTitleColspan() > 0">tain'alika</td>
+                <td colspan="{{ getTotalColspan() }}" class="text-right" ng-if="getTotalColspan() > 0">
+                    {{ getTotal(totalIndex) }}
                 </td>
-            </tr>
-            <tr>
-                <td colspan="{{ columns.length + weeks.length }}" class="td-divider"></td>
-            </tr>
-            <tr>
-                <td colspan="{{ columns.length }}"></td>
                 <td
                     colspan="{{ month.weeksCount }}"
                     ng-repeat="month in months track by $index"
-                    ng-class="getFooterMonthClassName(month, $index)"
+                    ng-init="monthIndex = $index"
+                    ng-class="getFooterMonthClassName(month, $monthIndex)"
                 >
-                    {{ displayTotal(month, $index) }}
+                    {{ displayTotal(month, totalIndex, monthIndex) }}
                 </td>
             </tr>
         </tfoot>

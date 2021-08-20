@@ -90,7 +90,7 @@ class ProjectScheduleController extends AbstractController
         
         return $this->json([
             'events' => array_merge($normalizedEvents, $paymentEvents),
-            'totals' => $paymentTotals,
+            'totals' => [$paymentTotals],
         ]);
     }
 }

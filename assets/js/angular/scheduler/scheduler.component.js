@@ -1328,17 +1328,40 @@ function SchedulerController(
      * @param {number} monthIndex 
      * @return {any}
      */
-    $scope.displayTotal = function (month, monthIndex) {
+    $scope.displayTotal = function (month, totalIndex, monthIndex) {
         /**
          * Use in month
          * - monthNumber
          * - year
          */
-        var total = $scope.$ctrl.totals.find((total) => {
+        var total = $scope.$ctrl.totals[totalIndex].find((total) => {
             return (+total.year == +month.year) && (+total.month == +month.monthNumber);
         });
-        
+
         return total && total.amount ? numberFormat(total.amount, 0, '.', ' ') : '';
+    };
+
+    $scope.getTotalBlankColspan = function () {
+        return $scope.columns.filter(c => c.visible).length - 3;
+    };
+    
+    $scope.getTotalTitleColspan = function () {
+        var visibleCount = $scope.columns.filter(c => c.visible).length;
+
+        return visibleCount < 2 ? 0 : (visibleCount === 2 ? 1 : 2);
+    };
+
+    $scope.getTotalColspan = function () {
+        return $scope.columns.filter(c => c.visible).length < 1 ? 0 : 1;
+    };
+
+    $scope.getTotal = function (totalIndex) {
+        var totalColumn = $scope.columns.find(c => c.isTotal);
+        if (totalColumn) {
+            return numberFormat(resolverService.resolve([totalColumn, 'totals', totalIndex], 0), 2, ',', ' ') + ' €';
+        }
+
+        return '';
     };
 }
 
@@ -1474,15 +1497,19 @@ angular.module('schedulerModule').component('appScheduler', {
          */
         events: '=',
         /**
-         * Data structure: array of object
-         *      Structure:
+         * Array of array
+         *      Structure:[[...], [....]]
+         *      [
          *          [
          *              {
          *                  "amount": 9666.666666666666,
          *                  "year": "2021",
          *                  "month": "01",
-         *              }
-         *          ]
+         *              },
+         *              {....}
+         *          ],
+         *          [],
+         *      ]
          */
         totals: '=',
         /**
