@@ -364,6 +364,21 @@ Any JavaScript object, `{[key: string]: any}`
 | boxShadow         | boolean                                                   | false     | If should add box shadow to the event if not stickyColumns
 | boxShadowSticky   | boolean                                                   | false     | If should add box shadow to the event if the table is stickyColumns
 
+```JavaScript
+{
+    zIndex: {
+        'payment': 9999, // group z-index
+        _default: 100 // default z-index if zIndex group have no z-index
+    },
+    bubbleHtml: {
+        zIndex: 100, // default bubble zIndex
+    },
+    titleFormatter: function (title, event) {
+        return '';
+    },
+    bubbleDelay: 2
+}
+```
 
 <a name="year_object_def"></a>
 
@@ -375,6 +390,13 @@ Any JavaScript object, `{[key: string]: any}`
 | name              | string | number   | The year (eg: 2020, 2019)
 | weeksCount        | number            | Weeks count in the year (52) depend on the start and end of the scheduler date
 
+```JavaScript
+{
+    monthsCount: 12,
+    name: "2021",
+    weeksCount: 52,
+}
+```
 
 <a name="month_object_def"></a>
 
@@ -385,8 +407,16 @@ Any JavaScript object, `{[key: string]: any}`
 | monthNumber       | number            | Number of the month
 | name              | string            | Name of the month (eg: mars, juin...)
 | weeksCount        | number            | Weeks count in the month 
-| year              | number            | Year where the month is
+| year              | number | string   | Year where the month is
 
+```JavaScript
+{
+    monthNumber: "3",
+    name: "mars",
+    weeksCount: 5,
+    year: "2021",
+}
+```
 
 <a name="week_object_def"></a>
 
@@ -402,6 +432,17 @@ Any JavaScript object, `{[key: string]: any}`
 | weekNumber        | number            | Number of the week in the entiry year 
 | year              | string            | Year where the week is
 
+```JavaScript
+{
+    endDay: Moment,
+    firstWeek: false,
+    lastWeek: false,
+    monthNumber: "1",
+    startDay: Moment,
+    weekNumber: 3,
+    year: "2021",
+}
+```
 
 <a name="on_row_click_def"></a>
 
