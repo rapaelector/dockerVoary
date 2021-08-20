@@ -208,7 +208,9 @@ const options = {
         titleFormatter: function (title, event) {
             return '';
         },
-        bubbleDelay: 2
+        bubbleDelay: 2,
+        boxShadow: true,
+        boxShadowSticky: true,
     },
 };
 
@@ -223,7 +225,7 @@ export {resource, column, event, options, buildColumn};
 | events                    | [Event](#event_def)[]                                                                         | Event to display in the date scheduler                    |
 | start                     | Date \| string \| Moment                                                                      | Start of the scheduler date                               |
 | end                       | Date \| string \| Moment                                                                      | End of the scheduler date                                 |
-| options                   | Object                                                                                        | Option to change event, cell, positionsFix configuration  | 
+| options                   | [OptionObject](#options_def)                                                                  | Option to change event, cell, positionsFix configuration  | 
 | headerYearClassName       | string                                                                                        | Class to add to the header year "scheduler-year"          |
 | headerMonthClassName      | string                                                                                        | Class to add to the header month "scheduler-month"        |
 | headerWeekClassName       | string                                                                                        | Class to add to the header week "scheduler-week"          |
@@ -312,7 +314,9 @@ Any JavaScript object, `{[key: string]: any}`
     bubbleHtml: `<div> lorem </div>`,
  },
 ```
-### Options
+<a name="options_def"></a>
+
+### @Type OptionsObject
 | Attributes            | Type                                  | Madatory  | 
 | --------------------- | ------------------------              | --------  |
 | defaultCellWidth      | number                                | false     |
@@ -355,8 +359,10 @@ Any JavaScript object, `{[key: string]: any}`
 | ----------------- | -----------------------------------------------------     | --------  | -----------
 | zIndex            | object {_default: number, [key: string]: number}          | false     | Zindex to apply to the event + event of the index
 | bubbleHtml        | object {zIndex: number}                                   | false     | bubble zIndex
-| titleFormatter    | (title: string, event: jsEvent) => any                     | false     | Function to format the event title 
+| titleFormatter    | (title: string, event: jsEvent) => any                    | false     | Function to format the event title 
 | bubbleDelay       | number \| object {[key: string]: number, default: number} | false     | If (number) then its the duration between of show the bubble and hide it esle if (object) bubbleDelay have group 
+| boxShadow         | boolean                                                   | false     | If should add box shadow to the event if not stickyColumns
+| boxShadowSticky   | boolean                                                   | false     | If should add box shadow to the event if the table is stickyColumns
 
 
 <a name="year_object_def"></a>

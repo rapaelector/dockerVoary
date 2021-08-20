@@ -57,10 +57,10 @@ class LoadPlan
     ];
 
     const TASK_TYPES_PLANNING_COLORS = [
-        self::METER_CONSULTATION => 'rgb(169, 208, 142)', // Métre consulation => vert claire
-        self::PRE_STUDY => 'rgb(244, 176, 132)', // Pré ètude => 
-        self::SKETCH => 'rgb(255, 192, 0)', // Esquise => orange
-        self::ENCRYPTION => 'rgb(84, 130, 53)', // chiffrage => vert foncé
+        self::METER_CONSULTATION => '#a9d08e', // 'rgb(169, 208, 142)' Métre consulation => vert claire
+        self::PRE_STUDY => '#f4b084', // rgb(244, 176, 132)' Pré ètude => maron
+        self::SKETCH => '#ffc000', // rgb(255, 192, 0)' Esquise => orange
+        self::ENCRYPTION => '#548235', // rgb(84, 130, 53)' chiffrage => vert foncé
     ];
 
     /**

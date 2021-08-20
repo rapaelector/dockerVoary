@@ -31,7 +31,6 @@ angular.module('schedulerModule').constant('POSITION_FIX_END_LAST_WEEK_EXTRA_WID
 angular.module('schedulerModule').constant('POSITION_FIX_END_FIRST_WEEK_EXTRA_WIDTH', 2);
 angular.module('schedulerModule').constant('POSITION_FIX_EXTRA_WIDTH', 0.5);
 angular.module('schedulerModule').constant('POSITION_FIX_STICKY_COLUMNS_FIRST_WEEK_WIDTH', 0);
-
 // REMOVE LEFT OF EVENT
 angular.module('schedulerModule').constant('POSITION_FIX_MINUS_LEFT', 0);
 angular.module('schedulerModule').constant('POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT', 0);
@@ -40,10 +39,8 @@ angular.module('schedulerModule').constant('POSITION_FIX_START_FIRST_WEEK_WIDTH'
 // WIDTH OF END WEEK
 // angular.module('schedulerModule').constant('END_FIRST_WEEK_WIDTH', 0);
 angular.module('schedulerModule').constant('POSITION_FIX_END_LAST_WEEK_WIDTH', 0);
-
 angular.module('schedulerModule').constant('POSITIONS_FIX_LEFT', 0);
 angular.module('schedulerModule').constant('POSITIONS_FIX_EXTRA_WIDTH', 0);
-
 angular.module('schedulerModule').constant('POSITIONS_FIX', {
     extraWidth: 0,
     startFirstWeekExtraWidth: 0,
@@ -66,3 +63,6 @@ angular.module('schedulerModule').constant('POSITIONS_FIX', {
     stickyColumnsEndFirstWeekLeft: 0,
     stickyColumnsEndLastWeekLeft: 0,
 });
+// Event box shadow
+angular.module('schedulerModule').constant('BOX_SHADOW', true);
+angular.module('schedulerModule').constant('BOX_SHADOW_STICKY', true);

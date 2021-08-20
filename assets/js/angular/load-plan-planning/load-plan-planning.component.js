@@ -16,6 +16,10 @@ function LoadPlanPlanningController($scope) {
         headerYearClassName: null,
         headerMonthClassName: null,
         headerWeekClassName: null,
+        event: {
+            boxShadowSticky: false,
+            boxShadow: true,
+        },
         positionsFix: {
             stickyColumnsLeft: 2,
             stickyColumnsFirstWeekWidth: 1,

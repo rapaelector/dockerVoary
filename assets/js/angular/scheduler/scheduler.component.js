@@ -49,6 +49,9 @@ function SchedulerController(
     POSITION_FIX_START_FIRST_WEEK_WIDTH,
     POSITION_FIX_END_LAST_WEEK_WIDTH,
     POSITIONS_FIX,
+    // Event box shadow
+    BOX_SHADOW,
+    BOX_SHADOW_STICKY,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -89,6 +92,8 @@ function SchedulerController(
                     zIndex: EVENT_Z_INDEX,
                     width: px(BUBBLE_DEFAULT_WIDTH),
                 },
+                boxShadow: BOX_SHADOW,
+                boxShadowSticky: BOX_SHADOW_STICKY,
             },
             cell: {
                 width: DEFAULT_CELL_WIDTH,
@@ -708,7 +713,16 @@ function SchedulerController(
     $scope.getEventStyle = function (event, eventIndex) {
         var position = $scope.getEventStyleAndPosition(event, eventIndex);
         var eventStyle = event.style || {};
-        var boxShadow = `-2px 0px 0px ` + event.backgroundColor + `aa`;
+        var boxShadow = '';
+        var boxShadowValue = `-2px 0px 0px ` + event.backgroundColor + `aa`;
+        
+        if ($scope.stickyColumns && $scope.getOption('event.boxShadowSticky')) {
+            boxShadow = boxShadowValue;
+        }
+
+        if (!$scope.stickyColumns && $scope.getOption('event.boxShadow')) {
+            boxShadow = boxShadowValue;
+        }
 
         return {
             ...eventStyle,
@@ -1313,8 +1327,10 @@ SchedulerController.$inject = [
     'POSITION_FIX_START_FIRST_WEEK_MINUS_LEFT',
     'POSITION_FIX_START_FIRST_WEEK_WIDTH',
     'POSITION_FIX_END_LAST_WEEK_WIDTH',
-
     'POSITIONS_FIX',
+    // Event box shadow
+    'BOX_SHADOW',
+    'BOX_SHADOW_STICKY',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -1404,7 +1420,9 @@ angular.module('schedulerModule').component('appScheduler', {
          *               zIndex: 9999999,
          *          },
          *          titleFormatter: function (title, event) {},
-         *          bubbleDelay: number | object {group: number, default: number}
+         *          bubbleDelay: number | object {group: number, default: number},
+         *          boxShadow: boolean (true),
+         *          boxShadowSticky: boolean (true)
          *       },
          *       backgroundColor: string "#f4f6f9",
          *       positionsFix: {
