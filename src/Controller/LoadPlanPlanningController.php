@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\BaseController;
 use App\Entity\LoadPlan;
+use App\Entity\Project;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,15 +29,15 @@ class LoadPlanPlanningController extends BaseController
     #[Route('/resources', name: 'load_plan_planning.resources', options: ['expose' => true])]
     public function resources(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
-        $projects = $em->getRepository(LoadPlan::class)->getProjects();
+        $projects = $em->getRepository(Project::class)->findAll();
         $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:planning']);
         $res = [];
         foreach ($normalizedProjects as $key => $project) {
             $res[$key]['id'] = $project['id'];
-            $res[$key]['economist'] = $project['project']['economist'];
-            $res[$key]['businessCharge'] = $project['project']['businessCharge'];
-            $res[$key]['loadPlanId'] = $project['project']['id'];
-            $res[$key]['folderNameOnTheServer'] = $project['project']['folderNameOnTheServer'];
+            $res[$key]['economist'] = $project['economist'];
+            $res[$key]['businessCharge'] = $project['businessCharge'];
+            // $res[$key]['loadPlanId'] = $project['id'];
+            $res[$key]['folderNameOnTheServer'] = $project['folderNameOnTheServer'];
         }
 
         return $this->json(['resources' => $res]);
@@ -74,7 +75,7 @@ class LoadPlanPlanningController extends BaseController
         $res = [];
         foreach ($normalizedEvents as $key => $event) {
             $res[$key]['id'] = $event['id'];
-            $res[$key]['resource'] = $event['id'];
+            $res[$key]['resource'] = $event['project']['id'];
             $res[$key]['title'] = array_key_exists($event['natureOfTheCosting'], LoadPlan::TASK_TYPES_PLANNING) ? LoadPlan::TASK_TYPES_PLANNING[$event['natureOfTheCosting']] : $event['natureOfTheCosting'];
             $res[$key]['backgroundColor'] = array_key_exists($event['natureOfTheCosting'], LoadPlan::TASK_TYPES_PLANNING_COLORS) ? LoadPlan::TASK_TYPES_PLANNING_COLORS[$event['natureOfTheCosting']] : $event['natureOfTheCosting'];
             $res[$key]['color'] = '#000000';
