@@ -65,6 +65,7 @@
                 start="data.date.startDate"
                 end="data.date.endDate"
                 events="data.events"
+                totals="data.totals"
                 options="options.scheduler"
                 header-year-class-name="options.headerYearClassName"
                 header-month-class-name="options.headerMonthClassName"
@@ -80,6 +81,7 @@
                 min-row-count="14"
             ></app-scheduler>
         </div>
+        <pre>{{ '{{ data.totals|json }}' }}</pre>
         <div class="loader" ng-if="loadingResources || loadingEvents">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
         </div>

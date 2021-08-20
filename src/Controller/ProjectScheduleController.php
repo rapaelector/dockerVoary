@@ -61,9 +61,6 @@ class ProjectScheduleController extends AbstractController
     )
     {
         $resEvents = [];
-        // $start = \DateTime::createFromFormat('Y-m-d', $request->query->get('start'));
-        // $end = \DateTime::createFromFormat('Y-m-d', $request->query->get('end'));
-
         $start = $request->query->get('start');
         $end = $request->query->get('end');
 
@@ -88,8 +85,12 @@ class ProjectScheduleController extends AbstractController
                 'end' => DateTimeNormalizerCallback::buildCallback('Y-m-d'),
             ],
         ]);
-        $paymentEvents = $projectEventService->getPaymentEvents($events);
-
-        return $this->json(array_merge($normalizedEvents, $paymentEvents));
+        $paymentEvents = $projectEventService->getPaymentEvents($events)['paymentEvents'];
+        $paymentTotals = $projectEventService->getPaymentEvents($events)['paymentTotals'];
+        
+        return $this->json([
+            'events' => array_merge($normalizedEvents, $paymentEvents),
+            'totals' => $paymentTotals,
+        ]);
     }
 }

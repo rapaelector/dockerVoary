@@ -19,6 +19,7 @@ class ProjectEventService
     public function getPaymentEvents(array $events = [])
     {
         $res = [];
+        $totals = [];
         $projects = [];
         
         foreach ($events as $event) {
@@ -41,9 +42,24 @@ class ProjectEventService
                     'color' => ProjectEvent::PAYMENT_COLOR,
                     'bubbleHtml' => number_format($amount, 2, ',', '.') .' €',
                 ]);
+                
+                $date = (\DateTime::createFromFormat('Y-m-d', explode('T', $result['start'])[0]));
+                $key = (clone $date)->format('Y-m');
+
+                if (!array_key_exists($key, $totals)) {
+                    $totals[$key] = [
+                        'amount' => 0,
+                        'year' => $date->format('Y'),
+                        'month' => $date->format('m'),
+                    ];
+                }
+                $totals[$key]['amount'] += $amount;
             }
         }
 
-        return $res;
+        return [
+            'paymentEvents' => $res,
+            'paymentTotals' => array_values($totals),
+        ];
     }
 }

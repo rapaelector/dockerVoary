@@ -1,6 +1,7 @@
 import schedulerTemplate from './template.html';
 import get from 'lodash.get';
 import EventDetailDialogController from './event-detail.controller';
+import numberFormat from "./../../utils/number_format";
 
 function SchedulerController(
     $scope, 
@@ -68,12 +69,13 @@ function SchedulerController(
     };
     $scope.events = [];
     $scope.resources = [];
+    $scope.columns = [];
+    $scope.totals = [];
     $scope.mdPanelRef = null;
     $scope.triggerTimeout = null;
     $scope.bubbleDefaultConfig = {};
     $scope.stickyColumns = false;
     $scope.forceSticky = false;
-    $scope.columns = {};
 
     this.$onInit = function () {
         $(function () {
@@ -157,6 +159,10 @@ function SchedulerController(
                 }
             }, 100 * columnIndex);
         });
+    }, true);
+
+    $scope.$watch('$ctrl.totals', function () {
+        $scope.totals = [...$scope.$ctrl.totals];
     }, true);
 
     $scope.fixStickyColumns = function () {
@@ -272,7 +278,6 @@ function SchedulerController(
 
         return res;
     }
-
     /**
      * Get resource header column class
      * 
@@ -317,7 +322,6 @@ function SchedulerController(
 
         return {...style, ...stickynessStyle};
     };
-
     /**
      * Get resource column style
      * 
@@ -571,6 +575,22 @@ function SchedulerController(
     }
 
     /**
+     * 
+     * @param {object} month 
+     * @param {number} monthIndex 
+     * @returns {array} res
+     */
+    $scope.getFooterMonthClassName = function (month, monthIndex) {
+        var res = [SCHEDULER_HEADER_MONTH_CLASS, 'text-right pr-2'];
+        
+        if (moment(`${month.year}-${month.monthNumber}`, 'YYYY-M').isSame(moment(), 'month')) {
+            res.push(SCHEDULE_HEADER + '-month-current');
+        }
+
+        return res;
+    };
+
+    /**
      * Get week number number class
      * If the current week, month and year is same as week.startDay (moment) then add additional class to the current week
      *      - scheduler-header-week-current
@@ -600,7 +620,29 @@ function SchedulerController(
         return res;
     }
 
+    /**
+     * 
+     * @param {object} resource 
+     * @param {object} week 
+     * @param {number} weekIndex 
+     * @param {number} resourceIndex 
+     * @returns {array} res
+     */
     $scope.getDateCellClassName = function (resource, week, weekIndex, resourceIndex) {
+        return $scope.getWeekCellClassName(week, weekIndex);
+    };
+
+    /**
+     * 
+     * @param {object} week 
+     * @param {number} weekIndex 
+     * @returns {array} res
+     */
+    $scope.getDateCellFooterClassName = function (week, weekIndex) {
+        return $scope.getWeekCellClassName(week, weekIndex);
+    }
+
+    $scope.getWeekCellClassName = function (week, weekIndex) {
         var res = [SCHEDULER_DATE_CELL_CLASS];
 
         if (week.firstWeek) {
@@ -1279,6 +1321,25 @@ function SchedulerController(
 
         return classes;
     };
+
+    /**
+     * 
+     * @param {object} month 
+     * @param {number} monthIndex 
+     * @return {any}
+     */
+    $scope.displayTotal = function (month, monthIndex) {
+        /**
+         * Use in month
+         * - monthNumber
+         * - year
+         */
+        var total = $scope.$ctrl.totals.find((total) => {
+            return (+total.year == +month.year) && (+total.month == +month.monthNumber);
+        });
+        
+        return total && total.amount ? numberFormat(total.amount, 0, '.', ' ') : '';
+    };
 }
 
 SchedulerController.$inject = [
@@ -1395,6 +1456,35 @@ angular.module('schedulerModule').component('appScheduler', {
          *      - headerColumnFormatter: function (column, index) {
          */
         columns: '=',
+        /**
+         * Data structure: array of object
+         *      structure:
+         *          [
+         *              {
+         *                  backgroundColor: "#1f497d"
+         *                  end: "2021-01-23T00:00:00+00:00"
+         *                  id: 14
+         *                  project: {id: 3}
+         *                  resource: 3
+         *                  start: "2020-12-31T00:00:00+00:00"
+         *                  type: "shade_house"
+         *              },
+         *              {...}
+         *          ]
+         */
+        events: '=',
+        /**
+         * Data structure: array of object
+         *      Structure:
+         *          [
+         *              {
+         *                  "amount": 9666.666666666666,
+         *                  "year": "2021",
+         *                  "month": "01",
+         *              }
+         *          ]
+         */
+        totals: '=',
         /**
          * Moment
          */
@@ -1569,23 +1659,6 @@ angular.module('schedulerModule').component('appScheduler', {
          * - Event click callback
          */
         onEventClick: '=',
-        /**
-         * - Array of object
-         *      structure:
-         *          [
-         *              {
-         *                  backgroundColor: "#1f497d"
-         *                  end: "2021-01-23T00:00:00+00:00"
-         *                  id: 14
-         *                  project: {id: 3}
-         *                  resource: 3
-         *                  start: "2020-12-31T00:00:00+00:00"
-         *                  type: "shade_house"
-         *              },
-         *              {...}
-         *          ]
-         */
-        events: '=',
         /**
          * Force the width of the last resource column width like the width of last sticky column
          * If the last column width is bigger than the last sticky column 

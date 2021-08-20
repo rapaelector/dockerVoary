@@ -162,6 +162,22 @@ $borderColor: #555;
                 }
             }
         }
+
+        tfoot {
+            tr td {
+                border: 1px solid $borderColor;
+                height: 24px;
+                &.td-divider {
+                    border: none;
+                }
+                &.scheduler-date-cell-firstweek {
+                    border-left-width: $borderEdgeWidth !important;
+                }
+                &.scheduler-date-cell-lastweek {
+                    border-right-width: $borderEdgeWidth !important;
+                }
+            }
+        }
         .scheduler-column-workType, 
         .scheduler-column-turnover, 
         .scheduler-column-invoiced, 

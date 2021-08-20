@@ -30,11 +30,17 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
             start: start,
             end: end,
         })).then(response => {
-            return response.data.map(event => ({
+            var events = response.data.events.map(event => ({
                 ...event,
                 start: moment(event.start),
                 end: moment(event.end),
-            }))
+            }));
+            var totals = response.data.totals;
+
+            return {
+                events,
+                totals,
+            };
         });
     };
 

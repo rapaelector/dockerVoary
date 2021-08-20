@@ -54,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="resource in resources"ng-init="resourceIndex = $index">
+            <tr ng-repeat="resource in resources" ng-init="resourceIndex = $index">
                 <td
                     ng-repeat="column in columns"
                     ng-click="onRowClick(resource, column, $index)"
@@ -77,6 +77,31 @@
                 ></td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="{{ columns.length }}"></td>
+                <td
+                    colspan="{{ month.weeksCount }}"
+                    ng-repeat="month in months track by $index"
+                    ng-class="getFooterMonthClassName(month, $index)"
+                >
+                    {{ displayTotal(month, $index) }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="{{ columns.length + weeks.length }}" class="td-divider"></td>
+            </tr>
+            <tr>
+                <td colspan="{{ columns.length }}"></td>
+                <td
+                    colspan="{{ month.weeksCount }}"
+                    ng-repeat="month in months track by $index"
+                    ng-class="getFooterMonthClassName(month, $index)"
+                >
+                    {{ displayTotal(month, $index) }}
+                </td>
+            </tr>
+        </tfoot>
     </table>
     <div 
         ng-repeat="event in events track by $index" 

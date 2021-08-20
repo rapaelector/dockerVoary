@@ -28,6 +28,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             endDate: moment().endOf('year'),
         },
         events: [],
+        totals: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -96,8 +97,9 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
 
     $scope.updateEvents = function () {
         $scope.loadingEvents = true;
-        projectSchedulerService.getEvents($scope.data.date).then(function (events) {
-            $scope.data.events = events;
+        projectSchedulerService.getEvents($scope.data.date).then(function (response) {
+            $scope.data.events = response.events;
+            $scope.data.totals = response.totals;
             $scope.loadingEvents = false;
         });
     };
