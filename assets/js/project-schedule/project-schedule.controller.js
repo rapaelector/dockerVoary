@@ -8,14 +8,16 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
     'moment',
     'projectSchedulerService',
     'resolverService', 
-    'DEFAULT_CELL_WIDTH', function(
+    'DEFAULT_CELL_WIDTH',
+    'FOOTER_TITLE', function(
         $scope, 
         $mdPanel,
         $mdDialog, 
         moment,
         projectSchedulerService, 
         resolverService, 
-        DEFAULT_CELL_WIDTH
+        DEFAULT_CELL_WIDTH,
+        FOOTER_TITLE,
     ) {
 
     $scope.data = {
@@ -62,6 +64,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         headerYearClassName: 'year-class text-center',
         headerMonthClassName: 'month-class text-center',
         headerWeekClassName: 'week-class text-center',
+        footerTitle: FOOTER_TITLE,
     };
 
     this.$onInit = function() {
@@ -122,7 +125,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      * @param {object} column 
      * @param {number} columnIndex 
      */
-    $scope.onRowClick = function (resource, column, columnIndex) {}
+    $scope.onRowClick = function (resource, column, columnIndex) {
+        if (column.field === 'prospect.clientNumber') {
+            window.open(projectSchedulerService.generateUrl(resource, column));
+        }
+    }
 
     /**
      * Column header click event

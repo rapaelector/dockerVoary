@@ -330,11 +330,12 @@ Any JavaScript object, `{[key: string]: any}`
 <a name="options_def"></a>
 
 ### @Type OptionsObject
-| Attributes            | Type                                  | Madatory  | 
-| --------------------- | ------------------------              | --------  |
-| defaultCellWidth      | number                                | false     |
+| Attributes            | Type                                  | Madatory  | DefaultValue
+| --------------------- | ------------------------              | --------  | --------------
+| defaultCellWidth      | number                                | false     | 
 | cell                  | object {width: number}                | false     |
 | event                 | [OptionEvent](#option_event_def)      | false     |
+| footerTitle           | string                                | false     | 'Total'
 
 ```JavaScript
 {
@@ -362,6 +363,7 @@ Any JavaScript object, `{[key: string]: any}`
          */
         bubbleDelay: 2
     },
+    footerTitle: 'titre',
 }
 ```
 <a name="option_event_def"></a>

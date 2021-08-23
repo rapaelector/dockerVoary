@@ -2,7 +2,7 @@ import loadPlanPlanningTemplate from './load-plan-planning-template.html';
 import {resources, buildColumns, events} from './../mock-data.js';
 import numberFormat from './../../utils/number_format';
 
-function LoadPlanPlanningController($scope) {
+function LoadPlanPlanningController($scope, fosJsRouting) {
     $scope.data = {
         resources: [],
         columns: [],
@@ -57,9 +57,15 @@ function LoadPlanPlanningController($scope) {
     $scope.$watch('$ctrl.columns', function () {
         $scope.data.columns = $scope.$ctrl.columns;
     }, true);
+
+    $scope.onRowClick = function (resource, column, columnIndex) {
+        if (column.field === 'folderNameOnTheServer') {
+            window.open(fosJsRouting.generate('load_plan.list', {folderNameOnTheServer: resource.folderNameOnTheServer}));
+        }
+    };
 }
 
-LoadPlanPlanningController.$inject = ['$scope'];
+LoadPlanPlanningController.$inject = ['$scope', 'fosJsRouting'];
 
 angular.module('loadPlanPlanningModule').component('appLoadPlanPlanning', {
     template: loadPlanPlanningTemplate,

@@ -82,9 +82,24 @@
                 ng-repeat="total in totals track by $index"
                 ng-init="totalIndex = $index"
             >
-                <td colspan="{{ getTotalBlankColspan() }}" ng-if="getTotalBlankColspan() > 0"></td>
-                <td colspan="{{ getTotalTitleColspan() }}" ng-if="getTotalTitleColspan() > 0">tain'alika</td>
-                <td colspan="{{ getTotalColspan() }}" class="text-right" ng-if="getTotalColspan() > 0">
+                <td
+                    ng-class="getFooterBlankCellClassName()" 
+                    colspan="{{ getTotalBlankColspan() }}" 
+                    ng-if="getTotalBlankColspan() > 0"
+                ></td>
+                <td 
+                    ng-class="getFooterTitleClassName()" 
+                    colspan="{{ getTotalTitleColspan() }}" 
+                    ng-if="getTotalTitleColspan() > 0"
+                >
+                    {{ getFooterTitle() }}
+                </td>
+                <td 
+                    ng-class="getFooterTotalClassName()" 
+                    colspan="{{ getTotalColspan() }}"
+                    class="text-right" 
+                    ng-if="getTotalColspan() > 0"
+                >
                     {{ getTotal(totalIndex) }}
                 </td>
                 <td

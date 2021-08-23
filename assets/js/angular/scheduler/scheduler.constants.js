@@ -66,3 +66,8 @@ angular.module('schedulerModule').constant('POSITIONS_FIX', {
 // Event box shadow
 angular.module('schedulerModule').constant('BOX_SHADOW', true);
 angular.module('schedulerModule').constant('BOX_SHADOW_STICKY', true);
+// Footer class name
+angular.module('schedulerModule').constant('FOOTER_BLANK_CELL_CLASS_NAME', 'footer-blank-cell');
+angular.module('schedulerModule').constant('FOOTER_TITLE_CLASS_NAME', 'footer-title');
+angular.module('schedulerModule').constant('FOOTER_TOTAL_CLASS_NAME', 'footer-total');
+angular.module('schedulerModule').constant('FOOTER_TITLE', 'Total');

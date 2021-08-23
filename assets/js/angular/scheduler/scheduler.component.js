@@ -53,6 +53,11 @@ function SchedulerController(
     // Event box shadow
     BOX_SHADOW,
     BOX_SHADOW_STICKY,
+    // Footer className
+    FOOTER_BLANK_CELL_CLASS_NAME,
+    FOOTER_TITLE_CLASS_NAME,
+    FOOTER_TOTAL_CLASS_NAME,
+    FOOTER_TITLE,
 ) {
     $scope.weeks = null;
     $scope.months = null;
@@ -102,6 +107,7 @@ function SchedulerController(
             },
             backgroundColor: BACKGROUND_COLOR,
             positionsFix: POSITIONS_FIX,
+            footerTitle: FOOTER_TITLE,
         }
     };
 
@@ -162,7 +168,9 @@ function SchedulerController(
     }, true);
 
     $scope.$watch('$ctrl.totals', function () {
-        $scope.totals = [...$scope.$ctrl.totals];
+        if ($scope.$ctrl.totals) {
+            $scope.totals = [...$scope.$ctrl.totals];
+        }
     }, true);
 
     $scope.fixStickyColumns = function () {
@@ -1341,20 +1349,31 @@ function SchedulerController(
         return total && total.amount ? numberFormat(total.amount, 0, '.', ' ') : '';
     };
 
+    function visibleColumnFilter(column) {
+        return column.visible === undefined || column.visible;
+    }
+
     $scope.getTotalBlankColspan = function () {
-        return $scope.columns.filter(c => c.visible).length - 3;
+        const visibleCount = $scope.columns.filter(visibleColumnFilter).length;
+
+        return  Math.max(0, visibleCount - 3);
     };
     
     $scope.getTotalTitleColspan = function () {
-        var visibleCount = $scope.columns.filter(c => c.visible).length;
+        var visibleCount = $scope.columns.filter(visibleColumnFilter).length;
 
         return visibleCount < 2 ? 0 : (visibleCount === 2 ? 1 : 2);
     };
 
     $scope.getTotalColspan = function () {
-        return $scope.columns.filter(c => c.visible).length < 1 ? 0 : 1;
+        return $scope.columns.filter(visibleColumnFilter).length < 1 ? 0 : 1;
     };
 
+    /**
+     * 
+     * @param {number} totalIndex 
+     * @returns 
+     */
     $scope.getTotal = function (totalIndex) {
         var totalColumn = $scope.columns.find(c => c.isTotal);
         if (totalColumn) {
@@ -1362,6 +1381,28 @@ function SchedulerController(
         }
 
         return '';
+    };
+
+    $scope.getFooterBlankCellClassName = function () {
+        var res = [FOOTER_BLANK_CELL_CLASS_NAME];
+
+        return res;
+    };
+
+    $scope.getFooterTitleClassName = function () {
+        var res = [FOOTER_TITLE_CLASS_NAME];
+
+        return res;
+    };
+
+    $scope.getFooterTotalClassName = function () {
+        var res = [FOOTER_TOTAL_CLASS_NAME];
+
+        return res;
+    };
+
+    $scope.getFooterTitle = function () {
+        return $scope.getOption('footerTitle');
     };
 }
 
@@ -1415,6 +1456,12 @@ SchedulerController.$inject = [
     // Event box shadow
     'BOX_SHADOW',
     'BOX_SHADOW_STICKY',
+    // Footer className
+    'FOOTER_BLANK_CELL_CLASS_NAME',
+    'FOOTER_TITLE_CLASS_NAME',
+    'FOOTER_TOTAL_CLASS_NAME',
+    // Footer title
+    'FOOTER_TITLE',
 ];
 
 angular.module('schedulerModule').component('appScheduler', {
@@ -1552,7 +1599,8 @@ angular.module('schedulerModule').component('appScheduler', {
          *          endLastWeekExtraWidth: number
          *          endFirstWeekExtraWidth: number
          *          extraWidth: number
-         *      }
+         *      },
+         *      footerTitle: string(Total)
          *   }
          */
         options: '=',

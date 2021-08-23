@@ -194,13 +194,17 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 className: 'text-right',
                 headerClassName: 'text-uppercase text-nowrap text-truncate',
                 formatter: function(res, resource, index) {
-                    return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
+                    return (res ? (numberFormat(res, 2, ',', ' ')) : '-') + ' €';
                 },
                 width: 100,
                 isTotal: true,
                 // sticky: true,
             },
         ];
+    };
+
+    _this.generateUrl = function (resource, column) {
+        return fosJsRouting.generate('project.ng.project_follow_up', {id: resource.id});
     };
 
     return _this;    

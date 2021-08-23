@@ -34,7 +34,7 @@ class LoadPlanController extends BaseController
     /**
      * @IsGranted("ROLE_LOAD_PLAN_VIEW")
      */
-    #[Route('/', name: 'load_plan.list')]
+    #[Route('/', name: 'load_plan.list', options: ['expose' => true])]
     public function index(
         Request $request,
         TranslatorInterface $translator, 
