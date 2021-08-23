@@ -112,7 +112,7 @@
                 var search = window.location.search;
                 if (search && search.length > 1) {
                     var params = search.split('&')[1].replace('folderNameOnTheServer=', '');
-                    $('#projectFolderNameOnTheServer_filter').val(params).trigger('change');
+                    $('#projectFolderNameOnTheServer_filter').val(params.replaceAll('%20', ' ')).trigger('change');
                 }
             });
         });
