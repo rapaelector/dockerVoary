@@ -112,8 +112,6 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             
         });
         projectSchedulerService.getMarketType().then(function (response) {
-            console.info({marketTypes: response.data});
-
             $scope.data.marketTypes = response.data;
         });
         $scope.updateEvents();
@@ -139,11 +137,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      * @param {object} column 
      * @param {number} columnIndex 
      */
-    $scope.onRowClick = function (resource, column, columnIndex) {
+    $scope.onRowClick = function (resource, column, columnIndex, event) {
         // if (column.field === 'prospect.clientNumber') {
         //     window.open(projectSchedulerService.generateUrl(resource, column));
         // }
-        $scope.showOrderBookDialog();
+        $scope.showOrderBookDialog(resource, column, event);
     }
 
     /**
@@ -151,7 +149,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      * 
      * @param {object} options 
      */
-    $scope.showOrderBookDialog = (ev) => {
+    $scope.showOrderBookDialog = (resource, column, ev) => {
         var position = $mdPanel.newPanelPosition().absolute().center();
             
         var config = {
@@ -163,20 +161,18 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             position: position,
             locals: {
                 options: {
-                    modalTitle: $scope.oderBookModalTitle,
+                    modalTitle: (resource && resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
                     marketTypes: $scope.data.marketTypes,
                 },
+                resource,
+                column,
             },
             openFrom: ev,
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: false,
             zIndex: 1000,
-            onCloseSuccess: (mdPanelRef, columns) => {
-                if (Array.isArray(columns)) {
-                    $scope.data.columns = columns;
-                }
-            },
+            onCloseSuccess: (mdPanelRef, columns) => {},
         };
 
         $mdPanel.open(config);

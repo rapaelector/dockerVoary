@@ -249,5 +249,14 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
         });
 	};
 
+    /**
+     * 
+     * @param {number} projectId 
+     * @returns {promise}
+     */
+    _this.getProject = (projectId) => {
+        return $http.get(fosJsRouting.generate('', {id: projectId}));
+    };
+    
     return _this;    
 }])

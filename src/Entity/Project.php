@@ -40,6 +40,7 @@ class Project
      *  "loadPlan:list",
      *  "loadPlan:planning",
      *  "loadPlan:planning-event",
+     *  "project:provisional-order-book"
      * })
      */
     private $id;
@@ -160,7 +161,11 @@ class Project
      * @ORM\Column(nullable=true)
      * 
      * Fr: type de marche
-     * @Groups({"data-project", "project:scheduler-resource"})
+     * @Groups({
+     *  "data-project", 
+     *  "project:scheduler-resource", 
+     *  "project:provisional-order-book"
+     * })
      */
     private $marketType;
 
@@ -184,7 +189,7 @@ class Project
      * Fr: mode de reglement acompte
      * 
      * @ORM\Column(nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:provisional-order-book"})
      */
     private $paymentChoice;
 
@@ -192,7 +197,7 @@ class Project
      * Fr: mode de reglement pourcentage
      * 
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:provisional-order-book"})
      */
     private $paymentPercentage;
 
@@ -201,7 +206,7 @@ class Project
      * 
      * @ORM\Column(type="date", length=255, nullable=true)
      * Assert\Date
-     * @Groups({"data-project"})
+     * @Groups({"data-project", "project:provisional-order-book"})
      */
     private $depositeDateEdit;
 
@@ -314,7 +319,13 @@ class Project
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, cascade={"persist"}, inversedBy="projects")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"data-project", "project:scheduler-resource", "loadPlan:create", "loadPlan:list"})
+     * @Groups({
+     *  "data-project", 
+     *  "project:scheduler-resource", 
+     *  "loadPlan:create", 
+     *  "loadPlan:list",
+     *  "project:provisional-order-book"
+     * })
      */
     private $prospect;
 
@@ -414,7 +425,13 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project", "loadPlan:create", "loadPlan:list", "project:scheduler-resource"})
+     * @Groups({
+     *  "data-project", 
+     *  "loadPlan:create", 
+     *  "loadPlan:list", 
+     *  "project:scheduler-resource",
+     *  "project:provisional-order-book"
+     * })
      */
     private $name;
 

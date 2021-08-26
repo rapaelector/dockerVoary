@@ -1,27 +1,56 @@
 OrderBookController.$inject = [
     '$scope', 
-    '$element', 
+    '$element',
+    '$mdDialog',
     '$q', 
-    'projectSchedulerService', 
-    'options'
+    'projectSchedulerService',
+    'resolverService',
+    'mdPanelRef',
+    'options',
+    'resource',
+    'column'
 ];
 
-function OrderBookController($scope, $element, $q, projectSchedulerService, options) {
+function OrderBookController(
+    $scope, 
+    $element,
+    $mdDialog,
+    $q, 
+    projectSchedulerService,
+    resolverService,
+    mdPanelRef,
+    options, 
+    resource, 
+    column
+) {
     $scope.oderBookModalTitle = '';
     $scope.data = {
         marketTypes: [],
+        selectedProject: null,
     };
     $scope.form = {
+        project: null,
         marketType: null,
         depositeDateEdit: null,
     };
     $scope.projectCanceller = null;
 
     this.$onInit = () => {
-        console.info({options});
         $scope.oderBookModalTitle = options.modalTitle;
         $scope.data.marketTypes = options.marketTypes;
         $scope.projectCanceller = $q.defer();
+        if (resource && column && resource.id) {
+            projectSchedulerService.getProject(resource.id).then((response) => {
+                $scope.form = response.data;
+                $scope.data.selectedProject = {
+                    id: $scope.form.id, 
+                    name: $scope.form.name, 
+                    prospect: {
+                        clientNumber: resolverService.resolve([$scope, 'form', 'prospect', 'clientNumber'], ''),
+                    }
+                };
+            })
+        }
     };
 
     $element.find('input').on('keydown', (ev) => {
@@ -60,7 +89,7 @@ function OrderBookController($scope, $element, $q, projectSchedulerService, opti
     };
 
     $scope.cancel = () => {
-        $mdDialog.hide();
+        mdPanelRef.close();
     };
 };
 

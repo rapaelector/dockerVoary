@@ -57,7 +57,7 @@
             <tr ng-repeat="resource in resources" ng-init="resourceIndex = $index">
                 <td
                     ng-repeat="column in columns"
-                    ng-click="onRowClick(resource, column, $index)"
+                    ng-click="onRowClick(resource, column, $index, $event)"
                     ng-class="getCellClassName(resource, column, resourceIndex, $index)"
                     ng-style="styles.columns[$index]"
                 >

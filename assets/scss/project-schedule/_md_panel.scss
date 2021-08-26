@@ -1,7 +1,10 @@
 @mixin _md_panel {
     md-dialog {
-        opacity: 1 !important;
-        padding: 4px 8px;
+        &.event-detail-dialog, 
+        &.order-book-dialog {
+            opacity: 1 !important;
+            padding: 4px 8px;
+        }
         &.event-detail-dialog {
             z-index: 9999999;
         }

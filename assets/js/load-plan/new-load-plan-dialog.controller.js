@@ -67,6 +67,7 @@ function LoadPlanDialogController (
                 $scope.form = response.data;
                 // Restore the project when edit the load plan
                 $scope.data.selectedProject = $scope.form.project;
+                console.info({selectedProject: $scope.data.selectedProject, project: $scope.form.project});
                 // $scope.selectedProjectChange(response.data.project);
             }, error => console.warn(error));
         }

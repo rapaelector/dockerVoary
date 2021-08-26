@@ -460,14 +460,4 @@ class NgProjectController extends BaseController
             'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project')
         ], 400);
     }
-
-    #[Route('/market/type', name: 'project.ng.market_type', options: ['expose' => true])]
-    public function marketType(TranslatorInterface $translator)
-    {
-        $marketTypes = array_map(function ($marketType) use ($translator) {
-            return ['label' => $translator->trans($marketType, [], 'project'), 'value' => $marketType];
-        }, ProjectConstants::TYPE_DE_MARCHE);
-
-        return $this->json($marketTypes);
-    }
 }
