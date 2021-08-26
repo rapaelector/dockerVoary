@@ -197,6 +197,17 @@ class Project
         self::TYPE_MARCHE_ASBESTOS_REMOVAL,
     ];
 
+    /**
+     * Choice between deliveryDate(date de livraison) and workDuration(durée du chantier)
+     */
+    const TYPE_DELIVERY_DATE = 'type_delivery_date';
+    const TYPE_WORK_DURATION = 'type_work_duration';
+
+    const TYPES = [
+        self::TYPE_DELIVERY_DATE,
+        self::TYPE_WORK_DURATION
+    ];
+
     public static function getTypeValues($values, $associative = false)
     {
         return $associative ? array_combine($values, $values) : $values;

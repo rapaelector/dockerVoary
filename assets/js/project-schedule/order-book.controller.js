@@ -2,6 +2,7 @@ OrderBookController.$inject = [
     '$scope', 
     '$element',
     '$mdDialog',
+    '$mdToast',
     '$q', 
     'projectSchedulerService',
     'resolverService',
@@ -15,6 +16,7 @@ function OrderBookController(
     $scope, 
     $element,
     $mdDialog,
+    $mdToast,
     $q, 
     projectSchedulerService,
     resolverService,
@@ -27,28 +29,32 @@ function OrderBookController(
     $scope.data = {
         marketTypes: [],
         selectedProject: null,
+        types: [],
     };
     $scope.form = {
         project: null,
         marketType: null,
         depositeDateEdit: null,
+        id: null,
+        type: null,
     };
     $scope.projectCanceller = null;
+    $scope.saveOrderBookLoader = false;
+    $scope.types = {
+        typeWorkDuration: 'type_work_duration',
+        typeDeliveryDate: 'type_delivery_date',
+    }
 
     this.$onInit = () => {
         $scope.oderBookModalTitle = options.modalTitle;
         $scope.data.marketTypes = options.marketTypes;
+        $scope.data.types = options.types;
+
         $scope.projectCanceller = $q.defer();
         if (resource && column && resource.id) {
+            $scope.form.id = resource.id;
             projectSchedulerService.getProject(resource.id).then((response) => {
                 $scope.form = response.data;
-                $scope.data.selectedProject = {
-                    id: $scope.form.id, 
-                    name: $scope.form.name, 
-                    prospect: {
-                        clientNumber: resolverService.resolve([$scope, 'form', 'prospect', 'clientNumber'], ''),
-                    }
-                };
             })
         }
     };
@@ -85,11 +91,70 @@ function OrderBookController(
     };
 
     $scope.saveOrderBook = () => {
-        console.info({formData: $scope.form});
+        $scope.saveOrderBookLoader = true;
+
+        if ($scope.form.id) {
+            console.info({formData: $scope.form});
+            
+            if ($scope.form.type === $scope.types.typeDeliveryDate) {
+                $scope.form.workDuration = null;
+            }
+            
+            if ($scope.form.type === $scope.types.typeWorkDuration) {
+                $scope.form.deliveryDate = null;
+            }
+
+            projectSchedulerService.updateProject($scope.form.id, $scope.form).then((response) => {
+                mdPanelRef.close();
+                $scope.saveOrderBookLoader = false;
+                $scope.showNotification(response.data.message, 'toast-success');
+            }, errors => {
+                console.info({errors});
+                console.warn(errors);
+                mdPanelRef.close();
+                $scope.showNotification(errors.data.message, 'toast-danger');
+                $scope.saveOrderBookLoader = false;
+            });
+        } else {
+            projectSchedulerService.createProject($scope.form).then((response) => {
+                mdPanelRef.close();
+                $scope.saveOrderBookLoader = false;
+                $scope.showNotification(response.data.message, 'toast-success');
+            }, errors => {
+                console.info({errors});
+                console.warn(errors);
+                mdPanelRef.close();
+                $scope.showNotification(response.data.message, 'toast-error');
+                $scope.saveOrderBookLoader = false;
+
+            })
+        }
     };
 
     $scope.cancel = () => {
         mdPanelRef.close();
+    };
+
+    $scope.showNotification = (message, toastClass) => {
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(message)
+            .position('top right')
+            .hideDelay(5000)
+            .toastClass(toastClass)
+        ).then(() => {
+            console.info('Toast dismissed');
+        }).catch(() => {
+            console.info('failed to laod md toast');
+        });
+    };
+
+    $scope.isTypeDeliveryDate = () => {
+        return $scope.form.type === $scope.types.typeDeliveryDate;
+    };
+
+    $scope.isTypeWorkDuration = () => {
+        return $scope.form.type == $scope.types.typeWorkDuration;
     };
 };
 

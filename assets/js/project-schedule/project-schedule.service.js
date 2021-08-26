@@ -222,8 +222,8 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
      * Get market type
      * @returns {promise}
      */
-    _this.getMarketType = function () {
-        return $http.get(fosJsRouting.generate('project.ng.market_type'));
+    _this.getConfig = function () {
+        return $http.get(fosJsRouting.generate('project.ng.project_config'));
     };
 
     /**
@@ -255,8 +255,23 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
      * @returns {promise}
      */
     _this.getProject = (projectId) => {
-        return $http.get(fosJsRouting.generate('', {id: projectId}));
+        return $http.get(fosJsRouting.generate('project.ng.project', {id: projectId}));
     };
     
+    /**
+     * 
+     * @param {number} projectId
+     * @param {object} formData 
+     * @return {promise}
+     */
+    _this.updateProject = (projectId, formData) => {
+        return $http.post(fosJsRouting.generate('project.ng.update_project', {id: projectId}), formData);
+    };
+    
+
+    _this.createProject = (formData) => {
+        return $http.post(fosJsRouting.generate('project.ng.create_project'), formData)
+    };
+
     return _this;    
 }])

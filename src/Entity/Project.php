@@ -469,15 +469,59 @@ class Project
     private $meta;
 
     /**
+     * Evenement utiliser dans carnet de commande
+     * 
      * @ORM\OneToMany(targetEntity=ProjectEvent::class, mappedBy="project", cascade={"all"}, orphanRemoval=true)
      * @Groups({"data-project"})
      */
     private $events;
 
     /**
+     * Plan de charge economiste
+     * 
      * @ORM\OneToMany(targetEntity=LoadPlan::class, mappedBy="project")
      */
     private $loadPlans;
+
+    /**
+     * Montant prévisionnel
+     * 
+     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @Groups({"project:provisional-order-book"})
+     */
+    private $provisionalAmount;
+
+    /**
+     * Date de livraison
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups({"project:provisional-order-book"})
+     */
+    private $deliveryDate;
+
+    /**
+     * Date de démarrage
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups({"project:provisional-order-book"})
+     */
+    private $startingDate;
+
+    /**
+     * Durée du chantier
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"project:provisional-order-book"})
+     */
+    private $workDuration;
+
+    /**
+     * Choix entre workDuration (Durée du chantier) ou deliveryDate (Date de livraison)
+     * 
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"project:provisional-order-book"})
+     */
+    private $type;
 
     public function __construct()
     {
@@ -1149,6 +1193,66 @@ class Project
                 $loadPlan->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProvisionalAmount(): ?string
+    {
+        return $this->provisionalAmount;
+    }
+
+    public function setProvisionalAmount(?string $provisionalAmount): self
+    {
+        $this->provisionalAmount = $provisionalAmount;
+
+        return $this;
+    }
+
+    public function getDeliveryDate(): ?\DateTimeInterface
+    {
+        return $this->deliveryDate;
+    }
+
+    public function setDeliveryDate(?\DateTimeInterface $deliveryDate): self
+    {
+        $this->deliveryDate = $deliveryDate;
+
+        return $this;
+    }
+
+    public function getStartingDate(): ?\DateTimeInterface
+    {
+        return $this->startingDate;
+    }
+
+    public function setStartingDate(?\DateTimeInterface $startingDate): self
+    {
+        $this->startingDate = $startingDate;
+
+        return $this;
+    }
+
+    public function getWorkDuration(): ?string
+    {
+        return $this->workDuration;
+    }
+
+    public function setWorkDuration(?string $workDuration): self
+    {
+        $this->workDuration = $workDuration;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -38,6 +38,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         events: [],
         totals: [],
         marketTypes: [],
+        types: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -111,8 +112,9 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             });
             
         });
-        projectSchedulerService.getMarketType().then(function (response) {
-            $scope.data.marketTypes = response.data;
+        projectSchedulerService.getConfig().then(function (response) {
+            $scope.data.marketTypes = response.data.marketTypes;
+            $scope.data.types = response.data.projectTypes;
         });
         $scope.updateEvents();
     };
@@ -159,10 +161,13 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             templateUrl: 'order-book-dialog.html',
             panelClass: 'order-book-panel',
             position: position,
+            hasBackdrop: true,
+            disableParentScroll: true,
             locals: {
                 options: {
                     modalTitle: (resource && resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
                     marketTypes: $scope.data.marketTypes,
+                    types: $scope.data.types,
                 },
                 resource,
                 column,

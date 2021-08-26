@@ -9,6 +9,7 @@
         <form name="{{ '{{ formName }}' }}">
             <div class="container-fluid">
                 <div class="row">
+                    {# 
                     <div class="col-sm-12">
                         <md-input-container class="w-100 my-0">
                             <md-autocomplete
@@ -39,7 +40,17 @@
                             } %}
                         </md-input-container>
                     </div>
-    
+                    #}
+
+                    {# Projet #}
+                    <div class="col-sm-12">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>{{ 'order_book.label.project'|trans({}, 'projects') }}</label>
+                            <input ng-model="form.name">
+                        </md-input-container>
+                    </div>
+                    
+                    {# Type de marche #}
                     <div class="col-sm-12">
                         <md-input-container class="w-100">
                             <label>{{ 'columns.marketType'|trans([], 'project') }}</label>
@@ -60,71 +71,88 @@
                             } %}
                         </md-input-container>
                     </div>
-    
+
+                    {# Date de démarrage du chantier #}
                     <div class="col-sm-6">
                         <md-input-container class="w-100 mb-0">
                             <label id="week-number">{{ 'order_book.label.start_date_of_the_site'|trans({}, 'projects') }}</label>
                             <md-datepicker 
                                 class="w-100 hide-icons"
-                                ng-model="form.start"
+                                ng-model="form.startingDate"
                                 input-aria-labelledby="week-number"
                                 md-open-on-focus
-                                name="start"
+                                name="startingDate"
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
                             {% include "load_plan/ng/templates/errors.html.twig" with {
                                 form: 'loadPlanForm',
-                                field: 'start',
+                                field: 'startingDate',
                             } %}
                         </md-input-container>
                     </div>
-    
+
+                    {# Montant prévisionnel #}
                     <div class="col-sm-6">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>{{ 'order_book.label.provisional_amount'|trans({}, 'projects') }}</label>
-                            <input ng-model="user.firstName">
+                            <input ng-model="form.provisionalAmount">
                         </md-input-container>
                     </div>
                     
                     <div class="col-sm-6">
+                        <md-radio-group ng-model="form.type" class="d-flex flex-wrap mt-3">
+                            <md-radio-button
+                                ng-value="type.value"
+                                ng-repeat="type in data.types"
+                                class="md-primary w-50 d-flex align-items-center mb-1"
+                            >
+                                {{ '{{ type.label }}' }}
+                            </md-radio-button>
+                        </md-radio-group>
+                    </div>
+
+                    {# Date de livraison #}
+                    <div class="col-sm-6" ng-if="isTypeDeliveryDate()">
                         <md-input-container class="w-100 mb-0">
                             <label id="week-number">{{ 'order_book.label.delivery_date'|trans({}, 'projects') }}</label>
                             <md-datepicker 
                                 class="w-100 hide-icons"
-                                ng-model="form.start"
+                                ng-model="form.deliveryDate"
                                 input-aria-labelledby="week-number"
                                 md-open-on-focus
-                                name="start"
+                                name="deliveryDate"
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
                             {% include "load_plan/ng/templates/errors.html.twig" with {
                                 form: 'loadPlanForm',
-                                field: 'start',
+                                field: 'deliveryDate',
                             } %}
                         </md-input-container>
                     </div>
                     
-                    <div class="col-sm-6">
+                    {# Durée du chantier #}
+                    <div class="col-sm-6" ng-if="isTypeWorkDuration()">
                         <md-input-container class="w-100 mb-0">
                             <label id="week-number">{{ 'order_book.label.duration_of_the_work'|trans({}, 'projects') }}</label>
                             <md-datepicker 
                                 class="w-100 hide-icons"
-                                ng-model="form.start"
+                                ng-model="form.workDuration"
                                 input-aria-labelledby="week-number"
                                 md-open-on-focus
-                                name="start"
+                                name="workDuration"
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
                             {% include "load_plan/ng/templates/errors.html.twig" with {
                                 form: 'loadPlanForm',
-                                field: 'start',
+                                field: 'workDuration',
                             } %}
                         </md-input-container>
                     </div>
                     
+                    {# Date dd l'acompte #}
                     <div class="col-sm-6">
                         <md-input-container class="w-100 mb-0">
                             <label id="week-number">{{ 'order_book.label.deposit_date'|trans({}, 'projects') }}</label>
@@ -143,7 +171,8 @@
                             } %}
                         </md-input-container>
                     </div>
-    
+
+                    {# % d'acompte #}
                     <div class="col-sm-6">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>{{ 'order_book.label.deposit_percentage'|trans({}, 'projects') }}</label>
@@ -157,10 +186,14 @@
 
     <md-dialog-actions layout="row">
         <md-button ng-click="saveOrderBook()">
-            {{ 'action.ok'|trans({}, 'messages') }}
+            {{ 'action.save'|trans({}, 'messages') }}
         </md-button>
         <md-button ng-click="cancel()">
             {{ 'action.cancel'|trans({}, 'messages') }}
         </md-button>
     </md-dialog-actions>
 </md-dialog>
+
+<div class="loader" ng-if="saveOrderBookLoader">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
