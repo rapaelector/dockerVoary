@@ -1,23 +1,29 @@
 import numberFormat from './../utils/number_format';
 import ColumnsVisibilityController from './columns-visibility.controller';
+import OrderBookController from './order-book.controller';
 
 angular.module('projectScheduleApp').controller('projectScheduleController', [
     '$scope', 
     '$mdPanel',
-    '$mdDialog', 
+    '$mdDialog',
+    '$element',
     'moment',
     'projectSchedulerService',
     'resolverService', 
     'DEFAULT_CELL_WIDTH',
-    'FOOTER_TITLE', function(
+    'FOOTER_TITLE',
+    'MESSAGES',
+    function(
         $scope, 
         $mdPanel,
-        $mdDialog, 
+        $mdDialog,
+        $element,
         moment,
         projectSchedulerService, 
         resolverService, 
         DEFAULT_CELL_WIDTH,
         FOOTER_TITLE,
+        MESSAGES,
     ) {
 
     $scope.data = {
@@ -31,6 +37,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         },
         events: [],
         totals: [],
+        marketTypes: [],
     };
     $scope.options = {
         dateRangePicker: {},
@@ -66,8 +73,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         headerWeekClassName: 'week-class text-center',
         footerTitle: FOOTER_TITLE,
     };
+    $scope.oderBookModalTitle = '';
 
     this.$onInit = function() {
+        $scope.oderBookModalTitle = MESSAGES.oderBookModalAddTitle;
         $scope.loadingResources = true;
         $scope.loadingEvents = true;
         $scope.options.dateRangePicker = {
@@ -102,6 +111,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             });
             
         });
+        projectSchedulerService.getMarketType().then(function (response) {
+            console.info({marketTypes: response.data});
+
+            $scope.data.marketTypes = response.data;
+        });
         $scope.updateEvents();
     };
 
@@ -126,9 +140,46 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      * @param {number} columnIndex 
      */
     $scope.onRowClick = function (resource, column, columnIndex) {
-        if (column.field === 'prospect.clientNumber') {
-            window.open(projectSchedulerService.generateUrl(resource, column));
-        }
+        // if (column.field === 'prospect.clientNumber') {
+        //     window.open(projectSchedulerService.generateUrl(resource, column));
+        // }
+        $scope.showOrderBookDialog();
+    }
+
+    /**
+     * Show new order book modal (Echéancier carnet de commande)
+     * 
+     * @param {object} options 
+     */
+    $scope.showOrderBookDialog = (ev) => {
+        var position = $mdPanel.newPanelPosition().absolute().center();
+            
+        var config = {
+            attachTo: angular.element(document.body),
+            controller: OrderBookController,
+            controllerAs: 'ctrl',
+            templateUrl: 'order-book-dialog.html',
+            panelClass: 'order-book-panel',
+            position: position,
+            locals: {
+                options: {
+                    modalTitle: $scope.oderBookModalTitle,
+                    marketTypes: $scope.data.marketTypes,
+                },
+            },
+            openFrom: ev,
+            clickOutsideToClose: true,
+            escapeToClose: true,
+            focusOnOpen: false,
+            zIndex: 1000,
+            onCloseSuccess: (mdPanelRef, columns) => {
+                if (Array.isArray(columns)) {
+                    $scope.data.columns = columns;
+                }
+            },
+        };
+
+        $mdPanel.open(config);
     }
 
     /**
@@ -201,7 +252,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: false,
-            zIndex: 1000,
+            zIndex: 99,
             onCloseSuccess: (mdPanelRef, columns) => {
                 if (Array.isArray(columns)) {
                     $scope.data.columns = columns;

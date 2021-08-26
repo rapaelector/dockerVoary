@@ -1,0 +1,166 @@
+<md-dialog aria-label="Event Detail Dialog" class="order-book-dialog p-0">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="text-white">{{ '{{ oderBookModalTitle }}' }}</h2>
+        </div>
+    </md-toolbar>
+
+	<md-dialog-content>
+        <form name="{{ '{{ formName }}' }}">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <md-input-container class="w-100 my-0">
+                            <md-autocomplete
+                                class="project-autocomplete"
+                                md-no-cache="noCache"
+                                md-selected-item="data.selectedProject"
+                                md-search-text="project"
+                                md-selected-item-change="selectedProjectChange(item)"
+                                md-items="item in queryProjectSearch(project)"
+                                md-item-text="item.name"
+                                md-min-length="0"
+                                md-menu-class="project-dropdown"
+                                md-floating-label="Projet"
+                                md-clear-button="true"
+                                input-aria-labelledby="favoriteStateLabel">
+                                <md-item-template>
+                                    <span md-highlight-text="projectSearchText" md-highlight-flags="^i">
+                                        {{ '{{ item.name }}' }} — {{ '{{ item.prospect.clientNumber }}' }}
+                                    </span>
+                                </md-item-template>
+                                <md-not-found>
+                                    Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
+                                </md-not-found>
+                            </md-autocomplete>
+                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                                errorPath: 'data.errors.loadPlanForm.project',
+                                errorClass: 'text-sm mt-n3 mb-2',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    <div class="col-sm-12">
+                        <md-input-container class="w-100">
+                            <label>{{ 'columns.marketType'|trans([], 'project') }}</label>
+                            <md-select 
+                                ng-model="form.marketType"
+                                name="marketType"
+                            >
+                                <md-option
+                                    ng-repeat="market in data.marketTypes" 
+                                    ng-value="market.value"
+                                >
+                                    {{ '{{ market.label }}' }}
+                                </md-option>
+                            </md-select>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'natureOfTheCosting',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">{{ 'order_book.label.start_date_of_the_site'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.start"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="start"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'start',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    <div class="col-sm-6">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>{{ 'order_book.label.provisional_amount'|trans({}, 'projects') }}</label>
+                            <input ng-model="user.firstName">
+                        </md-input-container>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">{{ 'order_book.label.delivery_date'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.start"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="start"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'start',
+                            } %}
+                        </md-input-container>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">{{ 'order_book.label.duration_of_the_work'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.start"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="start"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'start',
+                            } %}
+                        </md-input-container>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">{{ 'order_book.label.deposit_date'|trans({}, 'projects') }}</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.depositeDateEdit"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="start"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'start',
+                            } %}
+                        </md-input-container>
+                    </div>
+    
+                    <div class="col-sm-6">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>{{ 'order_book.label.deposit_percentage'|trans({}, 'projects') }}</label>
+                            <input ng-model="form.paymentPercentage">
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+	</md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button ng-click="saveOrderBook()">
+            {{ 'action.ok'|trans({}, 'messages') }}
+        </md-button>
+        <md-button ng-click="cancel()">
+            {{ 'action.cancel'|trans({}, 'messages') }}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

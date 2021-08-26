@@ -32,6 +32,15 @@
                             type="text" 
                             ng-model="data.date"
                         />
+
+                        <md-button 
+                            class="md-icon-button button-target" 
+                            ng-click="showOrderBookDialog($event)"
+                        >
+                            <md-tooltip md-direction="bottom">{{ 'label.column_configuration'|trans({}, 'project') }}</md-tooltip>
+                            <i class="material-icons">add</i>
+                        </md-button>
+                        
                         <md-button 
                             class="md-icon-button button-target" 
                             ng-click="showVisibilityModal($event)"
@@ -89,6 +98,12 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        var MESSAGES = {
+            oderBookModalAddTitle: '{{ "order_book.oder_book_modal_add_title"|trans([], "projects") }}',
+            oderBookModalEditTitle: '{{ "order_book.oder_book_modal_edit_title"|trans([], "projects") }}',
+        };
+    </script>
     {{ encore_entry_script_tags('app_project_schedule') }}
 {% endblock %}
 

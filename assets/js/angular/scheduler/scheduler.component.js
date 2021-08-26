@@ -673,6 +673,7 @@ function SchedulerController(
      * @param {number} columnIndex 
      */
     $scope.onRowClick = function (resource, column, columnIndex) {
+        console.info({resource, column, columnIndex});
         if ($scope.$ctrl.onRowClick) {
             $scope.$ctrl.onRowClick(resource, column, columnIndex);
         }

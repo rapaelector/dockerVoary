@@ -1,4 +1,8 @@
-angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http', 'fosJsRouting', 'moment', function ($http, fosJsRouting, moment) {
+angular.module('projectScheduleApp').factory('projectSchedulerService', [
+    '$http', 
+    'fosJsRouting', 
+    'moment', 
+    function ($http, fosJsRouting, moment) {
     var _this = this;
 
     /**
@@ -204,9 +208,46 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
         ];
     };
 
+    /**
+     * 
+     * @param {Resource} resource 
+     * @param {Column} column 
+     * @returns 
+     */
     _this.generateUrl = function (resource, column) {
         return fosJsRouting.generate('project.ng.project_follow_up', {id: resource.id});
     };
+
+    /**
+     * Get market type
+     * @returns {promise}
+     */
+    _this.getMarketType = function () {
+        return $http.get(fosJsRouting.generate('project.ng.market_type'));
+    };
+
+    /**
+     * 
+     * @param {string} projectName 
+     * @param {object} config 
+     * @param {any} key 
+     * @returns promise
+     */
+    _this.getProjects = function (projectName, config, key) {
+        var timers = [];
+
+		return new Promise(function (resolve, reject) {
+			timers[key] = setTimeout(function () {
+                $http.get(fosJsRouting.generate('load_plan.projects', {
+                    q: projectName
+                }), config).then(function (response) {
+                    resolve(response.data);
+                }).catch(function (error) {
+                    resolve([]);
+                });
+            }, 500);
+        });
+	};
 
     return _this;    
 }])

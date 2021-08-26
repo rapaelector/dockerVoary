@@ -1,8 +1,59 @@
 @mixin _md_panel {
-    md-dialog.event-detail-dialog {
+    md-dialog {
         opacity: 1 !important;
         padding: 4px 8px;
-        z-index: 9999999;
+        &.event-detail-dialog {
+            z-index: 9999999;
+        }
+        &.order-book-dialog {
+            max-width: 100%;
+            width: 600px;
+            md-dialog-content {
+                overflow: hidden;
+            }
+        }
+    }
+    // Override some dialog a-index
+    /**
+     * TODO fix z-index for some scheduler element because its so height then some of md element are hidden by others element
+    */
+    .md-virtual-repeat-container.md-autocomplete-suggestions-container, .md-standard-list-container.md-autocomplete-suggestions-container,
+    .md-datepicker-calendar-pane,
+    .md-select-menu-container {
+        z-index: 1009 !important;
+    }
+    // Customization of some material angular input design
+    // Those code should be put somewhere who can be reusable
+    .md-datepicker-input-container {
+        width: 80% !important;
+    }
+    .hide-icons {
+        .md-datepicker-input-container {
+            width: 100% !important;
+        }
+    }
+    md-autocomplete {
+        &.project-autocomplete {
+            md-autocomplete-wrap md-input-container {
+                margin-bottom: 0 !important;
+            }
+            md-progress-linear.md-inline {
+                bottom: 20px !important;
+            }
+        }
+    }
+    md-input-container {
+        label {
+            font-weight: normal !important;
+            color: rgba(0, 0, 0, 0.34);
+            margin-bottom: 0 !important;
+        }
+    }
+    .md-icon-button + .md-datepicker-input-container {
+        margin: 0;
+    }
+    md-input-container:not(.md-input-has-value):not(.md-input-has-placeholder) input:not(:focus) {
+        color: rgba(0,0,0,0.87) !important;
     }
 }
 

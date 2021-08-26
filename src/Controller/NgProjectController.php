@@ -80,7 +80,7 @@ class NgProjectController extends BaseController
         ]);
     }
 
-    #[Route('/get/data', name: 'project.ng.form_data', options: ['expose' => true])]
+    #[Route('/data', name: 'project.ng.form_data', options: ['expose' => true])]
     public function getFormData(
         Request $request, 
         EntityManagerInterface $em, 
@@ -131,7 +131,7 @@ class NgProjectController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/get/project', name: 'project.ng.get_project', options: ['expose' => true])]
+    #[Route('/{id}/project', name: 'project.ng.get_project', options: ['expose' => true])]
     public function getProject(
         Project $project, 
         SerializerInterface $serializer, 
@@ -459,5 +459,15 @@ class NgProjectController extends BaseController
         return $this->json([
             'message' => $translator->trans('messages.exchange_history_saved_failed', [], 'project')
         ], 400);
+    }
+
+    #[Route('/market/type', name: 'project.ng.market_type', options: ['expose' => true])]
+    public function marketType(TranslatorInterface $translator)
+    {
+        $marketTypes = array_map(function ($marketType) use ($translator) {
+            return ['label' => $translator->trans($marketType, [], 'project'), 'value' => $marketType];
+        }, ProjectConstants::TYPE_DE_MARCHE);
+
+        return $this->json($marketTypes);
     }
 }

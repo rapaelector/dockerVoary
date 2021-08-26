@@ -193,8 +193,10 @@ messages:
   comment_saved: 'Commentaire enregistré avec succès'
   reminder_success: 'Rappel envoyer avec succès'
   reminder_error: 'Votre demande de rappel a échouer'
+
 action:
   reminder: 'Rappel'
+
 reminder:
   email:
     subject: Bonhome Batiment Rappel
@@ -274,3 +276,16 @@ load_plan_planning:
       project: 'Projet'
       business_charge: 'Commercial'
       economist: 'Economiste'
+
+# PROJECT SCHEDULER (Echéancier carnet de commande)
+order_book:
+  oder_book_modal_add_title: 'Ajouter ce projet au carnet de commande prévisionnel'
+  oder_book_modal_edit_title: 'Modifier cette carnet de commande prévisionnel'
+
+  label:
+    start_date_of_the_site: 'Date de démarrage du chantier'
+    provisional_amount: 'Montant prévisionnel'
+    delivery_date: 'Date de livraison'
+    duration_of_the_work: 'Durée du chantier'
+    deposit_date: "Date de l'acompte"
+    deposit_percentage: "% d'acompte"
