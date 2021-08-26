@@ -90,13 +90,14 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
         return [
             {
                 label: 'Cdt Trx',
-                field: 'prospect.clientNumber',
-                width: 100,
+                field: 'businessCharge.name',
+                width: 150,
+                className: 'dynamic-nowrap',
                 sticky: true,
             },
             {
                 label: 'Chantier',
-                field: 'siteCode',
+                field: 'name',
                 className: 'chantier-class',
                 headerClassName: 'text-uppercase text-center',
                 formatter: function(res, resource, index) {
@@ -161,13 +162,13 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', ['$http'
                 },
                 visible: true,
             },
-            {
-                label: 'Surface en m2',
-                field: 'prospect.projectDescription.area',
-                headerClassName: 'text-uppercase text-nowrap text-truncate',
-                width: 150,
-                // sticky: true,
-            },
+            // {
+            //     label: 'Surface en m2',
+            //     field: 'prospect.projectDescription.area',
+            //     headerClassName: 'text-uppercase text-nowrap text-truncate',
+            //     width: 150,
+            //     // sticky: true,
+            // },
             {
                 label: "Chiffre d'affaire",
                 field: 'globalAmount',

@@ -129,7 +129,7 @@ class Project
      * @Assert\NotBlank(
      *  groups={"project:create"}
      * )
-     * @Groups({"data-project", "loadPlan:planning"})
+     * @Groups({"data-project", "loadPlan:planning", "project:scheduler-resource"})
      */
     private $businessCharge;
 
@@ -414,7 +414,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"data-project", "loadPlan:create", "loadPlan:list"})
+     * @Groups({"data-project", "loadPlan:create", "loadPlan:list", "project:scheduler-resource"})
      */
     private $name;
 
