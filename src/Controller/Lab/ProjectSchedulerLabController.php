@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Lab;
 
 use App\Entity\Project;
 use App\Entity\ProjectEvent;
@@ -16,42 +16,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Serializer\Normalizer\DateTimeNormalizerCallback;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * @IsGranted("ROLE_POJECT_SCHEDULER_VIEW")
- */
-#[Route('/project/scheduler')]
-class ProjectScheduleController extends AbstractController
+#[Route('/project/scheduler/lab')]
+class ProjectSchedulerLabController
 {
-    #[Route('/', name: 'project_schedule')]
-    public function index(): Response
-    {
-        return $this->render('project_schedule/index.html.twig');
-    }
-
-    #[Route('/resources', name: 'project_schedule.get_resources', options: ['expose' => true])]
-    public function resources(
-        Request $request, 
-        EntityManagerInterface $em, 
-        SerializerInterface $serializer,
-        TranslatorInterface $translator
-    )
-    {
-        $sites = $em->getRepository(Project::class)->getSites();
-        $normalizedSites = $serializer->normalize($sites, 'json', ['groups' => 'project:scheduler-resource']);
-        $shouldTranslatedFields = ['caseType'];
-        
-        foreach ($normalizedSites as $key => $site) {
-            $res = [];
-            $normalizedSites[$key]['caseType'] = array_map(function ($val) use ($res, $translator) {
-                return $res[] = $translator->trans($val, [], 'project');
-            }, $normalizedSites[$key]['caseType']);
-            $normalizedSites[$key]['marketType'] = $translator->trans($normalizedSites[$key]['marketType'], [], 'project');
-        }
-
-        return $this->json(['resources' => $normalizedSites]);
-    }
-
-    #[Route('/events', name: 'project_schedule.get_events', options: ['expose' => true])]
+    #[Route('/events', name: 'project_schedule.lab.get_events', options: ['expose' => true])]
     public function events(
         Request $request, 
         EntityManagerInterface $em, 
@@ -86,20 +54,23 @@ class ProjectScheduleController extends AbstractController
             ],
         ]);
 
+        dump($normalizedEvents);
+
         $normalizedEventsFormatted = array_map(function ($event) {
-            // Change the background here 
-            $event['backgroundColor'] = '#00b050';
-            
+            $event['backgroundColor'] = 'red';
+
             return $event;
         }, $normalizedEvents);
+
+        dump($normalizedEventsFormatted);
 
         $paymentEvents = $projectEventService->getPaymentEvents($events)['paymentEvents'];
         $paymentTotals = $projectEventService->getPaymentEvents($events)['paymentTotals'];
         
-        return $this->json([
-            'events' => array_merge($normalizedEventsFormatted, $paymentEvents),
-            // 'events' => array_merge($normalizedEvents, $paymentEvents),
-            'totals' => [$paymentTotals],
-        ]);
+        return new Response('<body> lorem </body>');
+        // return $this->json([
+        //     'events' => array_merge($normalizedEvents, $paymentEvents),
+        //     'totals' => [$paymentTotals],
+        // ]);
     }
 }

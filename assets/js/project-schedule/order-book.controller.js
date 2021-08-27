@@ -30,6 +30,7 @@ function OrderBookController(
         marketTypes: [],
         selectedProject: null,
         types: [],
+        errors: [],
     };
     $scope.form = {
         project: null,
@@ -43,7 +44,8 @@ function OrderBookController(
     $scope.types = {
         typeWorkDuration: 'type_work_duration',
         typeDeliveryDate: 'type_delivery_date',
-    }
+    };
+    $scope.formName = 'projectOrderBook';
 
     this.$onInit = () => {
         $scope.oderBookModalTitle = options.modalTitle;
@@ -94,8 +96,6 @@ function OrderBookController(
         $scope.saveOrderBookLoader = true;
 
         if ($scope.form.id) {
-            console.info({formData: $scope.form});
-            
             if ($scope.form.type === $scope.types.typeDeliveryDate) {
                 $scope.form.workDuration = null;
             }

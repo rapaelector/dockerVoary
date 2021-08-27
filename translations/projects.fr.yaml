@@ -175,6 +175,8 @@ columns:
   pc_deposit_raw: 'PC'
   project_description_area: 'Surface'
   project_description_area_tooltip: '<span class="text-uppercase">Surface</span>'
+  project_name: 'Nom du projet'
+  business_charge_column: 'C affaire'
 
 business_charge:
   success: Chargé(e) d'affaire mise à jour avec success

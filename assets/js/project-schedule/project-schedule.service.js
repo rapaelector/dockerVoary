@@ -1,8 +1,14 @@
 angular.module('projectScheduleApp').factory('projectSchedulerService', [
     '$http', 
     'fosJsRouting', 
-    'moment', 
-    function ($http, fosJsRouting, moment) {
+    'moment',
+    'MESSAGES',
+    function (
+        $http, 
+        fosJsRouting,
+        moment,
+        MESSAGES
+    ) {
     var _this = this;
 
     /**
@@ -93,29 +99,28 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
     _this.buildColumns = function(numberFormat) {
         return [
             {
-                label: 'Cdt Trx',
+                // label: 'Cdt Trx',
+                label: MESSAGES.columns.businessCharge,
                 field: 'businessCharge.name',
-                width: 150,
+                width: 100,
                 className: 'dynamic-nowrap',
+                headerClassName: 'text-uppercase',
                 sticky: true,
             },
             {
-                label: 'Chantier',
+                // label: 'Chantier',
+                label: MESSAGES.columns.projectName,
                 field: 'name',
                 className: 'chantier-class',
-                headerClassName: 'text-uppercase text-center',
+                headerClassName: 'text-uppercase text-center dynamic-nowrap',
                 formatter: function(res, resource, index) {
                     return res ? '<div class="test" title="'+ res +'">' + res + '</div>' : '';
                 },
                 headerColumnFormatter: function (column, index) {
                     return column ? `
-                        <div 
-                            class="dynamic-nowrap" 
-                            title="` + column.label + `" 
-                            data-toggle="tooltip" 
-                            data-container="body" 
-                            data-placement="top"
-                        >` + column.label + `</div>` : '';
+                        <div class="dynamic-nowrap" title="`+ column.label +`">`
+                            + column.label +
+                        `</div>` : '';
                 },
                 classNameFormatter: function(res, resource, index) {
                     return 'dynamic-nowrap';
@@ -182,6 +187,9 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
                     return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
                 },
                 width: 100,
+                headerColumnFormatter: function (column, index) {
+                    return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
+                },
             },
             {
                 label: 'Deja facture',
@@ -192,6 +200,9 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
                     return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
                 },
                 width: 100,
+                headerColumnFormatter: function (column, index) {
+                    return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
+                },
             },
             {
                 label: 'Reste a facturer',
@@ -200,6 +211,9 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
                 headerClassName: 'text-uppercase text-nowrap text-truncate',
                 formatter: function(res, resource, index) {
                     return (res ? (numberFormat(res, 2, ',', ' ')) : '-') + ' €';
+                },
+                headerColumnFormatter: function (column, index) {
+                    return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
                 },
                 width: 100,
                 isTotal: true,

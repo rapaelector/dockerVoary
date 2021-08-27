@@ -35,7 +35,7 @@
                                 </md-not-found>
                             </md-autocomplete>
                             {% include 'project/ng/templates/form/_errors.html.twig' with {
-                                errorPath: 'data.errors.loadPlanForm.project',
+                                errorPath: 'data.errors.projectOrderBook.project',
                                 errorClass: 'text-sm mt-n3 mb-2',
                             } %}
                         </md-input-container>
@@ -65,9 +65,9 @@
                                     {{ '{{ market.label }}' }}
                                 </md-option>
                             </md-select>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'natureOfTheCosting',
+                            {% include "shared/ng/errors.html.twig" with {
+                                form: 'projectOrderBook',
+                                field: 'marketType',
                             } %}
                         </md-input-container>
                     </div>
@@ -85,8 +85,8 @@
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
+                            {% include "shared/ng/errors.html.twig" with {
+                                form: 'projectOrderBook',
                                 field: 'startingDate',
                             } %}
                         </md-input-container>
@@ -100,56 +100,60 @@
                         </md-input-container>
                     </div>
                     
-                    <div class="col-sm-6">
-                        <md-radio-group ng-model="form.type" class="d-flex flex-wrap mt-3">
-                            <md-radio-button
-                                ng-value="type.value"
-                                ng-repeat="type in data.types"
-                                class="md-primary w-50 d-flex align-items-center mb-1"
-                            >
-                                {{ '{{ type.label }}' }}
-                            </md-radio-button>
-                        </md-radio-group>
-                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <md-radio-group ng-model="form.type" class="d-flex flex-wrap mt-3">
+                                    <md-radio-button
+                                        ng-value="type.value"
+                                        ng-repeat="type in data.types"
+                                        class="md-primary w-50 d-flex align-items-center mb-1"
+                                    >
+                                        {{ '{{ type.label }}' }}
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
 
-                    {# Date de livraison #}
-                    <div class="col-sm-6" ng-if="isTypeDeliveryDate()">
-                        <md-input-container class="w-100 mb-0">
-                            <label id="week-number">{{ 'order_book.label.delivery_date'|trans({}, 'projects') }}</label>
-                            <md-datepicker 
-                                class="w-100 hide-icons"
-                                ng-model="form.deliveryDate"
-                                input-aria-labelledby="week-number"
-                                md-open-on-focus
-                                name="deliveryDate"
-                                md-hide-icons="calendar"
-                            >
-                            </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'deliveryDate',
-                            } %}
-                        </md-input-container>
-                    </div>
-                    
-                    {# Durée du chantier #}
-                    <div class="col-sm-6" ng-if="isTypeWorkDuration()">
-                        <md-input-container class="w-100 mb-0">
-                            <label id="week-number">{{ 'order_book.label.duration_of_the_work'|trans({}, 'projects') }}</label>
-                            <md-datepicker 
-                                class="w-100 hide-icons"
-                                ng-model="form.workDuration"
-                                input-aria-labelledby="week-number"
-                                md-open-on-focus
-                                name="workDuration"
-                                md-hide-icons="calendar"
-                            >
-                            </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'workDuration',
-                            } %}
-                        </md-input-container>
+                            {# Date de livraison #}
+                            <div class="col-sm-6" ng-if="isTypeDeliveryDate()">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="week-number">{{ 'order_book.label.delivery_date'|trans({}, 'projects') }}</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.deliveryDate"
+                                        input-aria-labelledby="week-number"
+                                        md-open-on-focus
+                                        name="deliveryDate"
+                                        md-hide-icons="calendar"
+                                    >
+                                    </md-datepicker>
+                                    {% include "shared/ng/errors.html.twig" with {
+                                        form: 'projectOrderBook',
+                                        field: 'deliveryDate',
+                                    } %}
+                                </md-input-container>
+                            </div>
+                            
+                            {# Durée du chantier #}
+                            <div class="col-sm-6" ng-if="isTypeWorkDuration()">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="week-number">{{ 'order_book.label.duration_of_the_work'|trans({}, 'projects') }}</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.workDuration"
+                                        input-aria-labelledby="week-number"
+                                        md-open-on-focus
+                                        name="workDuration"
+                                        md-hide-icons="calendar"
+                                    >
+                                    </md-datepicker>
+                                    {% include "shared/ng/errors.html.twig" with {
+                                        form: 'projectOrderBook',
+                                        field: 'workDuration',
+                                    } %}
+                                </md-input-container>
+                            </div>
+                        </div>
                     </div>
                     
                     {# Date dd l'acompte #}
@@ -165,9 +169,9 @@
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'start',
+                            {% include "shared/ng/errors.html.twig" with {
+                                form: 'projectOrderBook',
+                                field: 'depositeDateEdit',
                             } %}
                         </md-input-container>
                     </div>

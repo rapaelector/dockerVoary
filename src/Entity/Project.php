@@ -158,9 +158,9 @@ class Project
     private $norm1090;
 
     /**
-     * @ORM\Column(nullable=true)
-     * 
      * Fr: type de marche
+     * 
+     * @ORM\Column(nullable=true)
      * @Groups({
      *  "data-project", 
      *  "project:scheduler-resource", 
@@ -197,6 +197,7 @@ class Project
      * Fr: mode de reglement pourcentage
      * 
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Range(min = 0, max = 100)
      * @Groups({"data-project", "project:provisional-order-book"})
      */
     private $paymentPercentage;
@@ -488,6 +489,7 @@ class Project
      * 
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      * @Groups({"project:provisional-order-book"})
+     * @Assert\Type("integer")
      */
     private $provisionalAmount;
 
@@ -496,6 +498,7 @@ class Project
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"project:provisional-order-book"})
+     * @Assert\Date
      */
     private $deliveryDate;
 
@@ -503,6 +506,7 @@ class Project
      * Date de démarrage
      * 
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Date
      * @Groups({"project:provisional-order-book"})
      */
     private $startingDate;
@@ -520,6 +524,7 @@ class Project
      * 
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Groups({"project:provisional-order-book"})
+     * @Assert\Type("string")
      */
     private $type;
 

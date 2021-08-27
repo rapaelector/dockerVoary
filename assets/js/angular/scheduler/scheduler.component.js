@@ -1404,6 +1404,12 @@ function SchedulerController(
     $scope.getFooterTitle = function () {
         return $scope.getOption('footerTitle');
     };
+
+    $scope.columnHeaderFormatted = function (column, index) {
+        if (column.headerColumnFormatter) {
+            return column.headerColumnFormatter(column, index);
+        }
+    };
 }
 
 SchedulerController.$inject = [

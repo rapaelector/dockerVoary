@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @Gedmo\Loggable
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass=ProjectEventRepository::class)
  */
 class ProjectEvent
@@ -40,18 +41,24 @@ class ProjectEvent
         self::EVENT_TYPE_SHADE_HOUSE,
     ];
     
-    const EVENT_DEFAULT_COLOR = '#fff';
-    const EVENT_COLORS = [
-        self::EVENT_TYPE_FRAME_ASSEMBLY => '#00b050',
-        self::EVENT_TYPE_ISOTHERMAL_PANELS => '#f79646',
-        self::EVENT_TYPE_ENVELOPE => '#ffc000',
-        self::EVENT_TYPE_FORECASTS => '#c5d9f1',
-        self::EVENT_TYPE_SUBCONTRACTING => '#da9694',
-        self::EVENT_TYPE_SHADE_HOUSE => '#1f497d',
-    ];
-
-    const PAYMENT_BACKGROUND_COLOR = 'transparent';
     const PAYMENT_COLOR = '#000';
+    const DEFAULT_EVENT_BACKGROUND = '#fff';
+    const PAYMENT_BACKGROUND_COLOR = 'transparent';
+    const EVENT_TYPE_SHADE_HOUSE_COLOR = '#fff';
+    
+    const DARK_COLOR = '#000';
+    const LIGHT_COLOR = '#fff';
+
+    const EVENT_NEW_COLORS = [
+        self::EVENT_TYPE_FRAME_ASSEMBLY => ['label' => 'frame_assembly', 'backColor' => '#00b050', 'fontColor' => self::DARK_COLOR],
+        self::EVENT_TYPE_ISOTHERMAL_PANELS => ['label' => 'isothermal_panels', 'backColor' => '#f79646', 'fontColor' => self::DARK_COLOR],
+        self::EVENT_TYPE_ENVELOPE => ['label' => 'envelope', 'backColor' => '#ffc000', 'fontColor' => self::DARK_COLOR],
+        self::EVENT_TYPE_FORECASTS => ['label' => 'forecasts', 'backColor' => '#c5d9f1', 'fontColor' => self::DARK_COLOR],
+        self::EVENT_TYPE_SUBCONTRACTING => ['label' => 'subcontracting', 'backColor' => '#da9694', 'fontColor' => self::DARK_COLOR],
+        // self::EVENT_TYPE_SHADE_HOUSE => ['label' => 'shade_house', 'backColor' => '#1f497d', 'fontColor' => self::LIGHT_COLOR],
+        self::EVENT_TYPE_SHADE_HOUSE => ['label' => 'shade_house', 'backColor' => '#1f497d', 'fontColor' => self::DARK_COLOR],
+    ];
+    
     ////////////////////// END OF EVENT TYPE //////////////////
 
     /**

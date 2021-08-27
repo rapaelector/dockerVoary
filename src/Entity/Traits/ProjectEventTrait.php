@@ -5,8 +5,35 @@ namespace App\Entity\Traits;
 use App\Utils\Resolver;
 use App\Entity\Constants\Project;
 use Symfony\Component\Serializer\Annotation\Groups;
+
 trait ProjectEventTrait
 {
+    /**
+     * Groups({"list", "data"})
+     * @Groups({"projectEvent:scheduler"})
+     */
+    public $backgroundColor;
+
+    /**
+     * Groups({"list", "data"})
+     * @Groups({"projectEvent:scheduler"})
+     */
+    public $color;
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function onPostLoad()
+    {
+        $defaultBackColor = self::DEFAULT_EVENT_BACKGROUND;
+        $defaultFontColor = self::DARK_COLOR;
+
+        if ($this->type) {
+            $this->color = Resolver::resolve([$this->getColorFromType($this->type), 'fontColor'], $defaultFontColor);
+            $this->backgroundColor = Resolver::resolve([$this->getColorFromType($this->type), 'backColor'], $defaultBackColor);
+        }
+    }
+
     /**
      * @Groups({"projectEvent:scheduler"})
      */
@@ -15,12 +42,15 @@ trait ProjectEventTrait
         return Resolver::resolve([$this, 'project', 'id'], null);
     }
 
-    /**
-     * @Groups({"projectEvent:scheduler"})
-     */
-    public function getBackgroundColor()
+    public function getColorFromType($type)
     {
-        return array_key_exists($this->type, self::EVENT_COLORS) ? self::EVENT_COLORS[$this->type] : self::EVENT_DEFAULT_COLOR;
+        // return array_key_exists($this->type, self::EVENT_COLORS) ? self::EVENT_COLORS[$this->type] : self::EVENT_DEFAULT_COLOR;
+        $colors = self::EVENT_NEW_COLORS;
+
+        $defaultBackColor = 'transparent'; // transparent
+        $default = ['backColor' => $defaultBackColor, 'fontColor' => self::DARK_COLOR];
+
+        return $type ? Resolver::resolve([$colors, $type], $default) : $default;
     }
 
     public function getPaymentWeeks()

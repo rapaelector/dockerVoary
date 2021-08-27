@@ -40,7 +40,8 @@
                     ng-style="styles.columnHeaders[$index]"
                     ng-click="onColumnHeaderClick(column, $index)"
                 >
-                    {{ column.label }}
+                    <div ng-if="column.headerColumnFormatter" ng-bind-html="columnHeaderFormatted(column, $index)"></div>
+                    <span ng-if="!column.headerColumnFormatter">{{ column.label }}</span>
                 </th>
                 <th 
                     ng-repeat="week in weeks track by $index" 

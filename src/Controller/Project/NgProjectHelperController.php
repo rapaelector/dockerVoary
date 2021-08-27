@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Service\Form\FormService;
 
 #[Route('/project')]
 class NgProjectHelperController extends BaseController
@@ -42,7 +43,13 @@ class NgProjectHelperController extends BaseController
     }
 
     #[Route('/{id}/update/project', name: 'project.ng.update_project', options: ['expose' => true])]
-    public function updateProject(Request $request, Project $project, EntityManagerInterface $em, TranslatorInterface $translator)
+    public function updateProject(
+        Request $request, 
+        Project $project, 
+        EntityManagerInterface $em, 
+        TranslatorInterface $translator,
+        FormService $formService
+    )
     {
         $form = $this->createForm(ProjectOrderBookType::class, $project, [
             'csrf_protection' => false,
@@ -57,6 +64,11 @@ class NgProjectHelperController extends BaseController
                 
                 return $this->json(['message' => $translator->trans('messages.save_order_book_successfull', [], 'projects')], 200);
             }
+
+            return $this->json([
+                'errors' => $formService->getErrorsFromForm($form),
+                'message' => $translator->trans('messages.save_order_book_failed', [], 'projects'),
+            ]);
         }
 
         return $this->json(['message' => $translator->trans('messages.save_order_book_failed', [], 'projects')], 400);
