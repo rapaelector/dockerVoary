@@ -528,6 +528,11 @@ class Project
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $visibleInPlanning;
+
     public function __construct()
     {
         $this->status = Status::STATUS_PENDING;
@@ -1258,6 +1263,18 @@ class Project
     public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getVisibleInPlanning(): ?bool
+    {
+        return $this->visibleInPlanning;
+    }
+
+    public function setVisibleInPlanning(?bool $visibleInPlanning): self
+    {
+        $this->visibleInPlanning = $visibleInPlanning;
 
         return $this;
     }

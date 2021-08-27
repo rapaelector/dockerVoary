@@ -139,6 +139,11 @@ window.initProjectCaseList = function({
 
                 if (!isNaN(value) && (value == 1 || value == 0) && (currentValue != value)) {
                     $(this).data('value', value);
+
+                    if (value > 90) {
+                        $('body').trigger('valueChange', {value: value, id: id});
+                    }
+
                     updateFieldRequest({
                         spinnerElem: $pcDeposeLoader,
                         field: 'pc_deposit',

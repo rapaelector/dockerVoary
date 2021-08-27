@@ -2,7 +2,17 @@
 
 {% extends 'project_case/layout.html.twig' %}
 
-{% block body_attr %}class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" style="height: auto;"{% endblock %}
+{% block name %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app_ng_project_list') }}
+{% endblock name %}
+
+{% block body_attr %}
+    class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" 
+    style="height: auto;"
+    ng-app="projectListApp"
+    ng-controller="projectListController"
+{% endblock %}
 
 {% block content_header %}
     {% embed 'layout/content/_content_header.html.twig' with {
@@ -78,6 +88,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {# Angular part #}
+    {{ encore_entry_script_tags('app_ng_project_list') }}
     {{ encore_entry_script_tags('app_case_list') }}
     <script>
         $(function() {

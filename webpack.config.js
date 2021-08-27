@@ -45,6 +45,11 @@ Encore
     .addEntry('app_project', './assets/js/project/app.js')
 
     /**
+     * Entry for project list angular
+     */
+    .addEntry('app_ng_project_list', './assets/js/ng-project-list/app.js')
+
+    /**
      * Entry for project case but in the same folder of project
      */
     .addEntry('app_case_list', './assets/js/project/case_list.js')

@@ -1,0 +1,151 @@
+<md-dialog aria-label="Event Detail Dialog" class="order-book-dialog p-0">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="text-white">{{ oderBookModalTitle }}</h2>
+        </div>
+    </md-toolbar>
+
+	<md-dialog-content class="p-3">
+        <form name="{{ formName }}">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Projet -->
+                    <div class="col-sm-12">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Projet</label>
+                            <input ng-model="form.name">
+                        </md-input-container>
+                    </div>
+                    
+                    <!-- Type de marche -->
+                    <div class="col-sm-12">
+                        <md-input-container class="w-100">
+                            <label>Type de marche</label>
+                            <md-select 
+                                ng-model="form.marketType"
+                                name="marketType"
+                            >
+                                <md-option
+                                    ng-repeat="market in data.marketTypes" 
+                                    ng-value="market.value"
+                                >
+                                    {{ market.label }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <!-- Date de démarrage du chantier -->
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">Date de démarrage du chantier</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.startingDate"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="startingDate"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                        </md-input-container>
+                    </div>
+
+                    <!-- Montant prévisionnel -->
+                    <div class="col-sm-6">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Montant prévisionnel</label>
+                            <input ng-model="form.provisionalAmount">
+                        </md-input-container>
+                    </div>
+                    
+                    <!-- types -->
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <md-radio-group ng-model="form.type" class="d-flex flex-wrap mt-3">
+                                    <md-radio-button
+                                        ng-value="type.value"
+                                        ng-repeat="type in data.types"
+                                        class="md-primary w-50 d-flex align-items-center mb-1"
+                                    >
+                                        {{ type.label }}
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+
+                            <!-- Date de livraison -->
+                            <div class="col-sm-6" ng-if="isTypeDeliveryDate()">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="week-number">Date de livraison</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.deliveryDate"
+                                        input-aria-labelledby="week-number"
+                                        md-open-on-focus
+                                        name="deliveryDate"
+                                        md-hide-icons="calendar"
+                                    >
+                                    </md-datepicker>
+                                </md-input-container>
+                            </div>
+                            
+                            <!-- Durée du chantier -->
+                            <div class="col-sm-6" ng-if="isTypeWorkDuration()">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="week-number">Durée du chantier</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.workDuration"
+                                        input-aria-labelledby="week-number"
+                                        md-open-on-focus
+                                        name="workDuration"
+                                        md-hide-icons="calendar"
+                                    >
+                                    </md-datepicker>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date d'acompte -->
+                    <div class="col-sm-6">
+                        <md-input-container class="w-100 mb-0">
+                            <label id="week-number">Date d'acompte</label>
+                            <md-datepicker 
+                                class="w-100 hide-icons"
+                                ng-model="form.depositeDateEdit"
+                                input-aria-labelledby="week-number"
+                                md-open-on-focus
+                                name="depositeDateEdit"
+                                md-hide-icons="calendar"
+                            >
+                            </md-datepicker>
+                        </md-input-container>
+                    </div>
+
+                    <!-- d'acompte -->
+                    <div class="col-sm-6">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>% acompte</label>
+                            <input ng-model="form.paymentPercentage">
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+	</md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button ng-click="saveOrderBook()">
+            Enregistrer
+        </md-button>
+        <md-button ng-click="cancel()">
+            Annuler
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
+
+<div class="loader" ng-if="saveOrderBookLoader">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>

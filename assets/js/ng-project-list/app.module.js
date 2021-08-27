@@ -1,9 +1,8 @@
-angular.module('projectScheduleApp', [
+angular.module('projectListApp', [
     'sharedModule',
-    'schedulerModule',
-    'coreProjectScheduleModule',
     'ngMaterial',
     'ngMessages',
     'angularMoment',
     'daterangepicker',
+    'coreProjectScheduleModule',
 ]);

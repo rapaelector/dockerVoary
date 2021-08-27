@@ -1,6 +1,5 @@
 import numberFormat from './../utils/number_format';
 import ColumnsVisibilityController from './columns-visibility.controller';
-import OrderBookController from './order-book.controller';
 
 angular.module('projectScheduleApp').controller('projectScheduleController', [
     '$scope', 
@@ -9,6 +8,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
     '$element',
     'moment',
     'projectSchedulerService',
+    'coreProjectScheduleService',
     'resolverService', 
     'DEFAULT_CELL_WIDTH',
     'FOOTER_TITLE',
@@ -19,7 +19,8 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         $mdDialog,
         $element,
         moment,
-        projectSchedulerService, 
+        projectSchedulerService,
+        coreProjectScheduleService,
         resolverService, 
         DEFAULT_CELL_WIDTH,
         FOOTER_TITLE,
@@ -143,7 +144,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         // if (column.field === 'prospect.clientNumber') {
         //     window.open(projectSchedulerService.generateUrl(resource, column));
         // }
-        $scope.showOrderBookDialog(resource, column, event);
+        $scope.updateOrderBookDialog(resource, column, event);
     }
 
     /**
@@ -151,38 +152,13 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
      * 
      * @param {object} options 
      */
-    $scope.showOrderBookDialog = (resource, column, ev) => {
-        var position = $mdPanel.newPanelPosition().absolute().center();
-            
-        var config = {
-            attachTo: angular.element(document.body),
-            controller: OrderBookController,
-            controllerAs: 'ctrl',
-            templateUrl: 'order-book-dialog.html',
-            panelClass: 'order-book-panel',
-            position: position,
-            hasBackdrop: true,
-            disableParentScroll: true,
-            locals: {
-                options: {
-                    modalTitle: (resource && resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
-                    marketTypes: $scope.data.marketTypes,
-                    types: $scope.data.types,
-                },
-                resource,
-                column,
-            },
-            openFrom: ev,
-            clickOutsideToClose: true,
-            escapeToClose: true,
-            focusOnOpen: false,
-            zIndex: 1000,
-            onCloseSuccess: (mdPanelRef, columns) => {},
-        };
-
-        $mdPanel.open(config);
+    $scope.updateOrderBookDialog = (resource, column, ev) => {
+        coreProjectScheduleService.showUpdateModal(resource, column, ev);
     }
 
+    $scope.createOrderBookDialog = () => {
+        coreProjectScheduleService.showCreateModal(ev);
+    };
     /**
      * Column header click event
      * 
