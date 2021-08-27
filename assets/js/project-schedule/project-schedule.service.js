@@ -191,34 +191,34 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
                     return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
                 },
             },
-            {
-                label: 'Deja facture',
-                field: 'amountSubcontractedWork',
-                className: 'text-right',
-                headerClassName: 'text-uppercase text-nowrap text-truncate',
-                formatter: function(res, resource, index) {
-                    return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
-                },
-                width: 100,
-                headerColumnFormatter: function (column, index) {
-                    return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
-                },
-            },
-            {
-                label: 'Reste a facturer',
-                field: 'amountBBISpecificWork',
-                className: 'text-right',
-                headerClassName: 'text-uppercase text-nowrap text-truncate',
-                formatter: function(res, resource, index) {
-                    return (res ? (numberFormat(res, 2, ',', ' ')) : '-') + ' €';
-                },
-                headerColumnFormatter: function (column, index) {
-                    return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
-                },
-                width: 100,
-                isTotal: true,
-                // sticky: true,
-            },
+            // {
+            //     label: 'Deja facture',
+            //     field: 'amountSubcontractedWork',
+            //     className: 'text-right',
+            //     headerClassName: 'text-uppercase text-nowrap text-truncate',
+            //     formatter: function(res, resource, index) {
+            //         return res ? (numberFormat(res, 2, ',', ' ') + ' €') : '';
+            //     },
+            //     width: 100,
+            //     headerColumnFormatter: function (column, index) {
+            //         return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
+            //     },
+            // },
+            // {
+            //     label: 'Reste a facturer',
+            //     field: 'amountBBISpecificWork',
+            //     className: 'text-right',
+            //     headerClassName: 'text-uppercase text-nowrap text-truncate',
+            //     formatter: function(res, resource, index) {
+            //         return (res ? (numberFormat(res, 2, ',', ' ')) : '-') + ' €';
+            //     },
+            //     headerColumnFormatter: function (column, index) {
+            //         return `<div class="dynamic-nowrap" title="` + column.label + `">` + column.label + `</div>`;
+            //     },
+            //     width: 100,
+            //     isTotal: true,
+            //     // sticky: true,
+            // },
         ];
     };
 

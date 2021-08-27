@@ -50,6 +50,7 @@ label:
   period: 'Période'
   column_visibility: 'Colonnes à afficher'
   column_configuration: 'Configuration des colonnes'
+  add_new_ligne: 'Ajouter une ligne'
 
 contact:
   label: Contact

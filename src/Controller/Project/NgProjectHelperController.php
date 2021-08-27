@@ -68,7 +68,7 @@ class NgProjectHelperController extends BaseController
             return $this->json([
                 'errors' => $formService->getErrorsFromForm($form),
                 'message' => $translator->trans('messages.save_order_book_failed', [], 'projects'),
-            ]);
+            ], 400);
         }
 
         return $this->json(['message' => $translator->trans('messages.save_order_book_failed', [], 'projects')], 400);

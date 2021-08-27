@@ -46,6 +46,8 @@ function OrderBookController(
         typeDeliveryDate: 'type_delivery_date',
     };
     $scope.formName = 'projectOrderBook';
+    $scope.projectOrderBookForm = {};
+    $scope.excludeField = [];
 
     this.$onInit = () => {
         $scope.oderBookModalTitle = options.modalTitle;
@@ -60,6 +62,21 @@ function OrderBookController(
             })
         }
     };
+
+    $scope.$watch('form', function (newValue, oldValue) {
+        var changedFields = [];
+        for (var field in newValue) {
+            try {
+                if (newValue[field] !== oldValue[field]) {
+                    changedFields.push(field);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+        $scope.setFormValidity(changedFields, true);
+
+    }, true);
 
     $element.find('input').on('keydown', (ev) => {
         ev.stopPropagation();
@@ -105,15 +122,29 @@ function OrderBookController(
             }
 
             projectSchedulerService.updateProject($scope.form.id, $scope.form).then((response) => {
+                var fields = [
+                    'name',
+                    'marketType',
+                    'startingDate',
+                    'provisionalAmount',
+                    'type',
+                    'deliveryDate',
+                    'workDuration',
+                    'depositeDateEdit',
+                    'paymentPercentage',
+                ];
+
                 mdPanelRef.close();
                 $scope.saveOrderBookLoader = false;
                 $scope.showNotification(response.data.message, 'toast-success');
+                $scope.setFormValidity(fields, true);
             }, errors => {
                 console.info({errors});
-                console.warn(errors);
-                mdPanelRef.close();
-                $scope.showNotification(errors.data.message, 'toast-danger');
+                console.warn(errors.data.message);
+                $scope.showNotification(errors.data.message, 'toast-error');
                 $scope.saveOrderBookLoader = false;
+                $scope.data.errors[$scope.formName] = errors.data.errors;
+                $scope.setFormValidity(Object.keys(errors.data.errors), false);
             });
         } else {
             projectSchedulerService.createProject($scope.form).then((response) => {
@@ -123,10 +154,9 @@ function OrderBookController(
             }, errors => {
                 console.info({errors});
                 console.warn(errors);
-                mdPanelRef.close();
                 $scope.showNotification(response.data.message, 'toast-error');
                 $scope.saveOrderBookLoader = false;
-
+                $scope.data.errors = errors.data.errors;
             })
         }
     };
@@ -155,6 +185,26 @@ function OrderBookController(
 
     $scope.isTypeWorkDuration = () => {
         return $scope.form.type == $scope.types.typeWorkDuration;
+    };
+
+    /**
+     * Check if form is valid
+     * 
+     * @param {array} fields 
+     * @param {boolean} isValid
+     */
+    $scope.setFormValidity = (fields, isValid) => {
+        console.info({fields});
+        
+        for (var field of fields) {
+            try {
+                if ($scope.excludeField.indexOf(field) < 0) {
+                    $scope.projectOrderBookForm[field].$setValidity('serverErrors', isValid);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
     };
 };
 
