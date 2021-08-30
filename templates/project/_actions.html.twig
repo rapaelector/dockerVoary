@@ -49,7 +49,7 @@
 
             {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::REMOVE_TO_PLANNING'), project) %}
                 <a class="dropdown-item remove-to-planning" data-id="{{ id }}" href="#" role="button">
-                    <i class="material-icons">calendar_today</i>
+                    <i class="material-icons">event_busy</i>
                     <span class="dropdown-text">{{ 'action.remove_to_planning'|trans }}</span>
                 </a>
             {% endif %}

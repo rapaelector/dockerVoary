@@ -348,6 +348,7 @@ class ProjectController extends BaseController
         if ($field == 'completion') {
             $completionValue = $request->request->get('completionValue');
             $project->setCompletion($completionValue);
+            $project->setVisibleInPlanning(false);
             $message = 'messages.completion_saved';
         } else if ($field == 'pc_deposit') {
             $pcDepositValue = $request->request->get('pcDepositValue');

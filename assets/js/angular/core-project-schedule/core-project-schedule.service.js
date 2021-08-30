@@ -68,7 +68,7 @@ angular.module('coreProjectScheduleModule').factory('coreProjectScheduleService'
                 clickOutsideToClose: true,
                 escapeToClose: true,
                 focusOnOpen: false,
-                zIndex: 1000,
+                // zIndex: 1038,
                 onCloseSuccess: (mdPanelRef, columns) => {},
             };
         });

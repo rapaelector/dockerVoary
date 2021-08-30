@@ -138,6 +138,7 @@ function SchedulerController(
     $scope.buildPlaceholderResource = function (index) {
         return {
             id: 1000000000 + Math.random() * 100000000,
+            placeHolder: true,
         };
     }
 

@@ -1,5 +1,5 @@
 angular.module('schedulerModule').constant('ROW_HEIGHT', 24);
-angular.module('schedulerModule').constant('EVENT_Z_INDEX', 100);
+angular.module('schedulerModule').constant('EVENT_Z_INDEX', 50);
 angular.module('schedulerModule').constant('DEFAULT_CELL_WIDTH', 24);
 angular.module('schedulerModule').constant('DEFAULT_DATE_FORMAT', 'YYYY-MM-DD');
 angular.module('schedulerModule').constant('SCHEDULER_COLUMN_CLASS', 'scheduler-column');

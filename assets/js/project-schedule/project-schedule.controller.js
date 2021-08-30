@@ -50,11 +50,11 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             },
             event: {
                 zIndex: {
-                    'payment': 100,
+                    payment: 50,
                     _default: 50,
                 },
                 bubbleHtml: {
-                    zIndex: 1000,
+                    zIndex: 90,
                     width: '300px',
                 },
                 titleFormatter:  function (title, event) {
@@ -144,7 +144,10 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
         // if (column.field === 'prospect.clientNumber') {
         //     window.open(projectSchedulerService.generateUrl(resource, column));
         // }
-        $scope.updateOrderBookDialog(resource, column, event);
+        
+        if (resource && !resource.placeHolder) {
+            $scope.updateOrderBookDialog(resource, column, event);
+        }
     }
 
     /**
@@ -229,7 +232,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: false,
-            zIndex: 99,
+            zIndex: 100,
             onCloseSuccess: (mdPanelRef, columns) => {
                 if (Array.isArray(columns)) {
                     $scope.data.columns = columns;

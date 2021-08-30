@@ -40,7 +40,7 @@ angular.module('projectListApp').controller('projectListController', [
     $scope.removeToPlanning = (projectId, ev) => {
         var confirm = $mdDialog.confirm()
             .title('Enlever le projet dans le planning')
-            .textContent('Souhaitez-vous enlever cet projet au planning?')
+            .textContent('Souhaitez-vous enlever ce projet au planning?')
             .ariaLabel('Lucky day')
             .targetEvent(ev)
             .ok('OK')
@@ -52,6 +52,11 @@ angular.module('projectListApp').controller('projectListController', [
             projectListService.removeToPlanning(projectId).then((response) => {
                 $scope.showNotification(response.data.messages, 'toast-success');
                 $scope.loading = false;
+                /**
+                 * Dispatch redraw-datatable when adding order book
+                 */
+                $('body').trigger('redraw-datatable');
+                
             }, errors => {
                 $scope.showNotification(errors.data.messages, 'toast-error');
                 console.warn(errors.data.messages);

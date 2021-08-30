@@ -1,2 +1,13 @@
 $sidebar-mini-width: _rem(50);
 $sidebar-nav-icon-width: _rem(22);
+
+$app-zindex-base: 60;
+$app-zindex-pace: 4;
+
+$zindex-dropdown:                   $app-zindex-base;
+$zindex-sticky:                     $app-zindex-base + $app-zindex-pace * 2;
+$zindex-fixed:                      $app-zindex-base + $app-zindex-pace * 3;
+$zindex-modal-backdrop:             $app-zindex-base + $app-zindex-pace * 4;
+$zindex-modal:                      $app-zindex-base + $app-zindex-pace * 5;
+$zindex-popover:                    $app-zindex-base + $app-zindex-pace * 6;
+$zindex-tooltip:                    $app-zindex-base + $app-zindex-pace * 7;

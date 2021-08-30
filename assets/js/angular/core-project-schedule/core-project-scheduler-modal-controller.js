@@ -54,7 +54,6 @@ function CoreProjectSchedulerModalController(
         $scope.oderBookModalTitle = options.modalTitle;
         $scope.data.marketTypes = options.marketTypes;
         $scope.data.types = options.types;
-        console.info('options : ', {options});
         $scope.projectCanceller = $q.defer();
         $scope.data.months = new Array(24).fill(0).map((e, i) => i + 1);
 
