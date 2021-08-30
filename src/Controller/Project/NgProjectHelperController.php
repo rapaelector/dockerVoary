@@ -61,7 +61,7 @@ class NgProjectHelperController extends BaseController
             $form->submit(json_decode($request->getContent(), true));
 
             if ($form->isSubmitted() && $form->isValid()) {
-                if ($project->getCompletion() >= 90) {
+                if ($project->getCompletion() >= ProjectConstants::PLANNING_COMPLETION) {
                     $project->setVisibleInPlanning(true);
                 }
                 $em->flush();
@@ -82,5 +82,18 @@ class NgProjectHelperController extends BaseController
     public function createProject(Request $request, Project $project, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         return $this->json(['message' => 'Créate project by ajax work in progress'], 200);
+    }
+
+    #[Route('/{id}/remove/to/planning', name: 'project.ng.remove_to_planning', options: ['expose' => true], requirements: ['id' => '\d+'])]
+    public function removeToPlanning(Project $project, Request $request, TranslatorInterface $translator, EntityManagerInterface $em)
+    {
+        if ($request->getMethod() == 'POST') {
+            $project->setVisibleInPlanning(false);
+            $em->flush();
+
+            return $this->json(['messages' => $translator->trans('messages.remove_project_from_planning_success', [], 'projects')]);
+        };
+
+        return $this->json(['messages' => $translator->trans('messages.remove_project_from_planning_failed', [], 'projects')]);
     }
 }

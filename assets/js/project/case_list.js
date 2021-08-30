@@ -65,7 +65,7 @@ window.initProjectCaseList = function({
         settings: settings,
         debug: false,
         enableFormatter: true,
-        redrawEvent: 'user.deleted',
+        redrawEvent: 'redraw-datatable',
         config: {
             "onAjaxSuccess": function (data) {
                 var formattedTotal = window.App.Utils.numberFormat(data.extras.total, 0, ',', ' ');

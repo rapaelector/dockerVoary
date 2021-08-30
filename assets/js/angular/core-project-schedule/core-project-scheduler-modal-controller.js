@@ -141,6 +141,10 @@ function CoreProjectSchedulerModalController(
                 $scope.saveOrderBookLoader = false;
                 $scope.showNotification(response.data.message, 'toast-success');
                 $scope.setFormValidity(fields, true);
+                /**
+                 * Dispatch redraw-datatable when adding order book
+                 */
+                $('body').trigger('redraw-datatable');
             }, errors => {
                 console.info({errors});
                 console.warn(errors.data.message);
@@ -205,7 +209,7 @@ function CoreProjectSchedulerModalController(
                     $scope.projectOrderBookForm[field].$setDirty();
                 }
             } catch (e) {
-                console.error(field, e);
+                console.warn(field, e);
                 console.warn($scope.projectOrderBookForm[field]);
             }
         }

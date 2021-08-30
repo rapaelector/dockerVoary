@@ -4,6 +4,7 @@ namespace App\Security\Voter;
 
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\Constants\Project as ProjectConstants;
 use App\Entity\Constants\Status;
 use App\Security\BaseVoter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -86,6 +87,16 @@ class ProjectVoter extends Voter
         return $this->security->isGranted('ROLE_PROJECT_VALIDATE') && ($project->getStatus() != Status::STATUS_LOST) && ($project->getStatus() != Status::STATUS_VALIDATED);
     }
 
+    public function canAddToPlanning(Project $project, User $user)
+    {
+        return $project->getCompletion() > ProjectConstants::PLANNING_COMPLETION && !$project->getVisibleInPlanning();
+    }
+
+    public function canRemoveToPlanning(Project $project, User $user)
+    {
+        return $project->getCompletion() > ProjectConstants::PLANNING_COMPLETION && $project->getVisibleInPlanning();
+    }
+
     public static function getSupportedAttributes()
     {
         return [
@@ -97,7 +108,9 @@ class ProjectVoter extends Voter
             Attributes::SUBMIT,
             Attributes::VALIDATE,
             Attributes::INVALIDATE,
-            Attributes::LOSE
+            Attributes::LOSE,
+            Attributes::ADD_TO_PLANNING,
+            Attributes::REMOVE_TO_PLANNING,
         ];
     }
 }

@@ -21,4 +21,6 @@ class Attributes
 	const VALIDATE = 'validate';
 	const INVALIDATE = 'invalidate';
 	const LOSE = 'lose';
+	const ADD_TO_PLANNING = 'addToPlanning';
+	const REMOVE_TO_PLANNING = 'removeToPlanning';
 }

@@ -16,3 +16,4 @@ import './../angular/shared/shared.module';
 import './app.module';
 import './app.config';
 import './project-list.controller';
+import './project-list.service';

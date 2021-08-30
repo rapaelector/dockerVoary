@@ -197,6 +197,8 @@ messages:
   reminder_error: 'Votre demande de rappel a échouer'
   save_order_book_successfull: 'Modification du carnet de commandes effectuée avec succès'
   save_order_book_failed: 'La modification du carnet de commandes à echoué'
+  remove_project_from_planning_success: 'Projet supprimer dans le planning avec success'
+  remove_project_from_planning_failed: 'La suppression du projet dans le planning à echoué'
 
 action:
   reminder: 'Rappel'

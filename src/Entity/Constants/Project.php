@@ -208,6 +208,8 @@ class Project
         self::TYPE_WORK_DURATION
     ];
 
+    const PLANNING_COMPLETION = 90;
+    
     public static function getTypeValues($values, $associative = false)
     {
         return $associative ? array_combine($values, $values) : $values;

@@ -46,6 +46,8 @@ action:
   add_date: 'Ajouter date'
   remove_date: 'Supprimer'
   ok: 'OK'
+  add_to_planning: 'Ajouter au planning'
+  remove_to_planning: 'Enlever dans planning'
 
 title:
   delete_user: "Supprimer l'utilisateur"
