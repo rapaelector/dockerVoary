@@ -19,14 +19,11 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
-    public function getSites()
+    public function getResources()
     {
         return $this->createQueryBuilder('p')
-            // ->select('p.siteCode siteCode, p.caseType caseType')
-            // ->leftJoin('p.prospect', 'prospect')
-            // ->leftJoin('prospect.projectDescription', 'projectDescription')
-            ->where('p.completion >= :completion')
-            ->setParameter('completion', 90)
+            ->where('p.visibleInPlanning = :visibleInPlanning')
+            ->setParameter('visibleInPlanning', true)
             ->getQuery()
             ->getResult()
         ;

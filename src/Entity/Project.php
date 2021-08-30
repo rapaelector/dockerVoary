@@ -189,7 +189,7 @@ class Project
      * Fr: mode de reglement acompte
      * 
      * @ORM\Column(nullable=true)
-     * @Groups({"data-project", "project:provisional-order-book"})
+     * @Groups({"data-project"})
      */
     private $paymentChoice;
 
@@ -325,7 +325,6 @@ class Project
      *  "project:scheduler-resource", 
      *  "loadPlan:create", 
      *  "loadPlan:list",
-     *  "project:provisional-order-book"
      * })
      */
     private $prospect;
@@ -489,7 +488,10 @@ class Project
      * 
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      * @Groups({"project:provisional-order-book"})
-     * @Assert\Type("integer")
+     * @Assert\Type(
+     *  "numeric",
+     *  groups={"project:scheduler"}
+     * )
      */
     private $provisionalAmount;
 
@@ -498,7 +500,6 @@ class Project
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"project:provisional-order-book"})
-     * @Assert\Date
      */
     private $deliveryDate;
 
@@ -506,7 +507,6 @@ class Project
      * Date de démarrage
      * 
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\Date
      * @Groups({"project:provisional-order-book"})
      */
     private $startingDate;
@@ -523,8 +523,11 @@ class Project
      * Choix entre workDuration (Durée du chantier) ou deliveryDate (Date de livraison)
      * 
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Type(
+     *  "string",
+     *  groups={"project:scheduler"}
+     * )
      * @Groups({"project:provisional-order-book"})
-     * @Assert\Type("string")
      */
     private $type;
 

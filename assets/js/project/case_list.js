@@ -97,6 +97,10 @@ window.initProjectCaseList = function({
                 var dataValue = $(this).data('value');
                 var id = $(this).data('id');
                 var $completionLoader = $(this).siblings('.spinner-border.completion-loader');
+                
+                if (inputValue > 90) {
+                    $('body').trigger('valueChange', {inputValue, id});
+                }
 
                 if (!isNaN(inputValue) && (dataValue != inputValue)) {
                     $(this).data('value', inputValue);
@@ -139,10 +143,6 @@ window.initProjectCaseList = function({
 
                 if (!isNaN(value) && (value == 1 || value == 0) && (currentValue != value)) {
                     $(this).data('value', value);
-
-                    if (value > 90) {
-                        $('body').trigger('valueChange', {value: value, id: id});
-                    }
 
                     updateFieldRequest({
                         spinnerElem: $pcDeposeLoader,

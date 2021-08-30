@@ -6,14 +6,17 @@
     </md-toolbar>
 
 	<md-dialog-content class="p-3">
-        <form name="{{ formName }}">
+        <form name="projectOrderBookForm">
             <div class="container-fluid">
                 <div class="row">
                     <!-- Projet -->
                     <div class="col-sm-12">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Projet</label>
-                            <input ng-model="form.name">
+                            <input 
+                                ng-model="form.name"
+                                name="name"
+                            >
                         </md-input-container>
                     </div>
                     
@@ -48,6 +51,14 @@
                                 md-hide-icons="calendar"
                             >
                             </md-datepicker>
+
+                            <div ng-messages="projectOrderBookForm.startingDate.$error">
+                                <div ng-message="serverErrors">
+                                    <div ng-repeat="error in data.errors.projectOrderBookForm.startingDate">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </div>
                         </md-input-container>
                     </div>
 
@@ -55,7 +66,18 @@
                     <div class="col-sm-6">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Montant prévisionnel</label>
-                            <input ng-model="form.provisionalAmount">
+                            <input 
+                                ng-model="form.provisionalAmount"
+                                name="provisionalAmount"
+                            >
+
+                            <div ng-messages="projectOrderBookForm.provisionalAmount.$error">
+                                <div ng-message="serverErrors">
+                                    <div ng-repeat="error in data.errors.projectOrderBookForm.provisionalAmount">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </div>
                         </md-input-container>
                     </div>
                     
@@ -63,11 +85,15 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <md-radio-group ng-model="form.type" class="d-flex flex-wrap mt-3">
+                                <md-radio-group
+                                    ng-model="form.type" 
+                                    class="mt-3"
+                                    name="type"
+                                >
                                     <md-radio-button
                                         ng-value="type.value"
                                         ng-repeat="type in data.types"
-                                        class="md-primary w-50 d-flex align-items-center mb-1"
+                                        class="md-primary w-100 d-flex align-items-center mb-1"
                                     >
                                         {{ type.label }}
                                     </md-radio-button>
@@ -87,6 +113,14 @@
                                         md-hide-icons="calendar"
                                     >
                                     </md-datepicker>
+
+                                    <div ng-messages="projectOrderBookForm.deliveryDate.$error">
+                                        <div ng-message="serverErrors">
+                                            <div ng-repeat="error in data.errors.projectOrderBookForm.deliveryDate">
+                                                {{ error }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </md-input-container>
                             </div>
                             
@@ -94,15 +128,17 @@
                             <div class="col-sm-6" ng-if="isTypeWorkDuration()">
                                 <md-input-container class="w-100 mb-0">
                                     <label id="week-number">Durée du chantier</label>
-                                    <md-datepicker 
-                                        class="w-100 hide-icons"
+                                    <md-select 
                                         ng-model="form.workDuration"
-                                        input-aria-labelledby="week-number"
-                                        md-open-on-focus
                                         name="workDuration"
-                                        md-hide-icons="calendar"
                                     >
-                                    </md-datepicker>
+                                        <md-option
+                                            ng-repeat="monthNumber in data.months" 
+                                            ng-value="monthNumber"
+                                        >
+                                            {{ monthNumber }}
+                                        </md-option>
+                                    </md-select>
                                 </md-input-container>
                             </div>
                         </div>
@@ -128,7 +164,10 @@
                     <div class="col-sm-6">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>% acompte</label>
-                            <input ng-model="form.paymentPercentage">
+                            <input 
+                                ng-model="form.paymentPercentage"
+                                name="paymentPercentage"
+                            >
                         </md-input-container>
                     </div>
                 </div>

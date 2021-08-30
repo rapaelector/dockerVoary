@@ -56,7 +56,8 @@ angular.module('coreProjectScheduleModule').factory('coreProjectScheduleService'
                 disableParentScroll: false,
                 locals: {
                     options: {
-                        modalTitle: (options && options.resource && options.resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
+                        // modalTitle: (options && options.resource && options.resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
+                        modalTitle: 'Ajouter ce projet au carnet de commande prévisionnel',
                         marketTypes: response.marketTypes,
                         types: response.projectTypes,
                     },
@@ -89,6 +90,9 @@ angular.module('coreProjectScheduleModule').factory('coreProjectScheduleService'
      * @return {promise}
      */
     _this.updateProject = (projectId, formData) => {
+        var formData = _this.formatFormData(formData);
+        console.info({formData});
+
         return $http.post(fosJsRouting.generate('project.ng.update_project', {id: projectId}), formData);
     };
     
@@ -127,6 +131,19 @@ angular.module('coreProjectScheduleModule').factory('coreProjectScheduleService'
                 projectTypes: response.data.projectTypes,
             };
         });
+    };
+
+    _this.formatFormData = (formData) => {
+        var data = {...formData};
+        if (data.provisionalAmount) {
+            data.provisionalAmount = parseInt(data.provisionalAmount);
+        };
+
+        if (data.startingDate) {
+            data.startingDate = moment(data.startingDate).format('YYYY-MM-DD');
+        }
+
+        return data;
     };
 
     return _this;

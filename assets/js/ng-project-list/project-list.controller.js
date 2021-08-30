@@ -1,8 +1,10 @@
 angular.module('projectListApp').controller('projectListController', [
     '$scope', 
-    'coreProjectScheduleService', 
+    '$mdDialog',
+    'coreProjectScheduleService',
     function (
-        $scope, 
+        $scope,
+        $mdDialog,
         coreProjectScheduleService
     ) {
     
@@ -10,10 +12,14 @@ angular.module('projectListApp').controller('projectListController', [
 
     this.$onInit = () => {
         $scope.helloProjectList = 'project list app run successfull';
+        $('body').on('valueChange', function (e, data) {
+            var resource = {id: data.id};
+
+            coreProjectScheduleService.showUpdateModal(resource, {}, e);
+        });
     };
 
     $scope.confianceChanged = (projectId, confianceValue) => {
         console.info({projectId, confianceValue});
     };
-
 }]);

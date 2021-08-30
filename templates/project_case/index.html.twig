@@ -2,10 +2,10 @@
 
 {% extends 'project_case/layout.html.twig' %}
 
-{% block name %}
+{% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('app_ng_project_list') }}
-{% endblock name %}
+{% endblock %}
 
 {% block body_attr %}
     class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse sidebar-expandable-on-hover" 

@@ -31,6 +31,7 @@ function CoreProjectSchedulerModalController(
         selectedProject: null,
         types: [],
         errors: [],
+        months: [],
     };
     $scope.form = {
         project: null,
@@ -48,15 +49,16 @@ function CoreProjectSchedulerModalController(
     $scope.formName = 'projectOrderBook';
     $scope.projectOrderBookForm = {};
     $scope.excludeField = [];
-
+    
     this.$onInit = () => {
         $scope.oderBookModalTitle = options.modalTitle;
         $scope.data.marketTypes = options.marketTypes;
         $scope.data.types = options.types;
         console.info('options : ', {options});
-
         $scope.projectCanceller = $q.defer();
-        if (resource && column && resource.id) {
+        $scope.data.months = new Array(24).fill(0).map((e, i) => i + 1);
+
+        if (resource && resource.id) {
             $scope.form.id = resource.id;
             coreProjectScheduleService.getProject(resource.id).then((response) => {
                 $scope.form = response.data;
@@ -144,8 +146,9 @@ function CoreProjectSchedulerModalController(
                 console.warn(errors.data.message);
                 $scope.showNotification(errors.data.message, 'toast-error');
                 $scope.saveOrderBookLoader = false;
-                $scope.data.errors[$scope.formName] = errors.data.errors;
+                $scope.data.errors['projectOrderBookForm'] = errors.data.errors;
                 $scope.setFormValidity(Object.keys(errors.data.errors), false);
+                console.info($scope);
             });
         } else {
             coreProjectScheduleService.createProject($scope.form).then((response) => {
@@ -198,10 +201,12 @@ function CoreProjectSchedulerModalController(
         for (var field of fields) {
             try {
                 if ($scope.excludeField.indexOf(field) < 0) {
-                    $scope.projectOrderBookForm[field].$setValidity('serverErrors', isValid);
+                    $scope.projectOrderBookForm[field].$setValidity('serverErrors', isValid, $scope.$ctrl);
+                    $scope.projectOrderBookForm[field].$setDirty();
                 }
             } catch (e) {
-                console.warn(e);
+                console.error(field, e);
+                console.warn($scope.projectOrderBookForm[field]);
             }
         }
     };

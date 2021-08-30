@@ -36,19 +36,19 @@ class ProjectScheduleController extends AbstractController
         TranslatorInterface $translator
     )
     {
-        $sites = $em->getRepository(Project::class)->getSites();
-        $normalizedSites = $serializer->normalize($sites, 'json', ['groups' => 'project:scheduler-resource']);
+        $resources = $em->getRepository(Project::class)->getResources();
+        $normalizedResources = $serializer->normalize($resources, 'json', ['groups' => 'project:scheduler-resource']);
         $shouldTranslatedFields = ['caseType'];
         
-        foreach ($normalizedSites as $key => $site) {
+        foreach ($normalizedResources as $key => $resource) {
             $res = [];
-            $normalizedSites[$key]['caseType'] = array_map(function ($val) use ($res, $translator) {
+            $normalizedResources[$key]['caseType'] = array_map(function ($val) use ($res, $translator) {
                 return $res[] = $translator->trans($val, [], 'project');
-            }, $normalizedSites[$key]['caseType']);
-            $normalizedSites[$key]['marketType'] = $translator->trans($normalizedSites[$key]['marketType'], [], 'project');
+            }, $normalizedResources[$key]['caseType']);
+            $normalizedResources[$key]['marketType'] = $translator->trans($normalizedResources[$key]['marketType'], [], 'project');
         }
 
-        return $this->json(['resources' => $normalizedSites]);
+        return $this->json(['resources' => $normalizedResources]);
     }
 
     #[Route('/events', name: 'project_schedule.get_events', options: ['expose' => true])]

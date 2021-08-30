@@ -54,12 +54,16 @@ class NgProjectHelperController extends BaseController
         $form = $this->createForm(ProjectOrderBookType::class, $project, [
             'csrf_protection' => false,
             'allow_extra_fields' => true,
+            'validation_groups' => ['project:scheduler'],
         ]);
 
         if ($request->getMethod() == 'POST') {
             $form->submit(json_decode($request->getContent(), true));
 
             if ($form->isSubmitted() && $form->isValid()) {
+                if ($project->getCompletion() >= 90) {
+                    $project->setVisibleInPlanning(true);
+                }
                 $em->flush();
                 
                 return $this->json(['message' => $translator->trans('messages.save_order_book_successfull', [], 'projects')], 200);
