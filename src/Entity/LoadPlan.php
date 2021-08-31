@@ -72,7 +72,7 @@ class LoadPlan
      */
     const TYPE_DEADLINE = 'type_deadline';
     const TYPE_STUDY_WEEK_SUBMISSION = 'type_study_week_submission';
-    
+
     const TYPES = [
         self::TYPE_DEADLINE,
         self::TYPE_STUDY_WEEK_SUBMISSION
@@ -182,7 +182,6 @@ class LoadPlan
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
-     * @Assert\NotBlank
      * @Assert\Choice(
      *      callback="getStudyTime",
      * )

@@ -5,6 +5,10 @@ angular.module('loadPlanApp').constant('DATE_FORMAT', 'DD/MM/YYYY');
 
 angular.module('loadPlanApp').constant('MESSAGES', window.MESSAGES);
 
+angular.module('loadPlanApp').constant('TYPE_DEADLINE', 'type_deadline');
+
+angular.module('loadPlanApp').constant('TYPE_STUDY_WEEK_SUBMISSION', 'type_study_week_submission');
+
 angular.module('loadPlanApp').config(['$mdDateLocaleProvider', 'DATE_FORMAT', function ($mdDateLocaleProvider, DATE_FORMAT) {
     /**
      * @param date {Date}

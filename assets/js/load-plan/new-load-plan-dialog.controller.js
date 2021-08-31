@@ -8,6 +8,8 @@ LoadPlanDialogController.$inject = [
     'resolverService',
     'options',
     'MESSAGES',
+    'TYPE_DEADLINE',
+    'TYPE_STUDY_WEEK_SUBMISSION',
     'moment',
 ];
 
@@ -21,6 +23,8 @@ function LoadPlanDialogController (
     resolverService,
     options,
     MESSAGES,
+    TYPE_DEADLINE,
+    TYPE_STUDY_WEEK_SUBMISSION,
     moment
 ) {
     $scope.data = {
@@ -100,10 +104,14 @@ function LoadPlanDialogController (
     $scope.saveLoadPlan = (event) => {
         $scope.loading = true;
         // start = N° semaine pour remise de l'etude
-        $scope.form.start = moment($scope.form.start).startOf('week').format('YYYY-MM-DD');
-        $scope.form.end = moment($scope.form.start).endOf('week').format('YYYY-MM-DD');
-        $scope.form.deadline = moment($scope.form.deadline).format('YYYY-MM-DD');
-        $scope.form.realizationQuotationDate = moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD');
+        $scope.form.start =  $scope.form.start ? moment($scope.form.start).startOf('week').format('YYYY-MM-DD') : null;
+        $scope.form.end = $scope.form.end ? moment($scope.form.start).endOf('week').format('YYYY-MM-DD') : null;
+        $scope.form.deadline = $scope.form.deadline ? moment($scope.form.deadline).format('YYYY-MM-DD') : null;
+        $scope.form.realizationQuotationDate = $scope.form.realizationQuotationDate ? moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD') : null;
+
+        if ($scope.form.type === TYPE_DEADLINE) {
+            $scope.form.start = $scope.form.deadline;
+        }
 
         loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
             var fields = ['deadline', 'effectiveStudyTime', 'estimatedStudyTime', 'natureOfTheCosting', 'realizationQuotationDate', 'start'];
