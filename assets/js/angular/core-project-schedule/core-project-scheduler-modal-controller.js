@@ -136,7 +136,6 @@ function CoreProjectSchedulerModalController(
                     'paymentPercentage',
                 ];
 
-                mdPanelRef.close();
                 $scope.saveOrderBookLoader = false;
                 $scope.showNotification(response.data.message, 'toast-success');
                 $scope.setFormValidity(fields, true);
@@ -144,6 +143,7 @@ function CoreProjectSchedulerModalController(
                  * Dispatch redraw-datatable when adding order book
                  */
                 $('body').trigger('redraw-datatable');
+                mdPanelRef.close();
             }, errors => {
                 console.info({errors});
                 console.warn(errors.data.message);
@@ -151,19 +151,20 @@ function CoreProjectSchedulerModalController(
                 $scope.saveOrderBookLoader = false;
                 $scope.data.errors['projectOrderBookForm'] = errors.data.errors;
                 $scope.setFormValidity(Object.keys(errors.data.errors), false);
-                console.info($scope);
+                mdPanelRef.close();
             });
         } else {
             coreProjectScheduleService.createProject($scope.form).then((response) => {
-                mdPanelRef.close();
                 $scope.saveOrderBookLoader = false;
                 $scope.showNotification(response.data.message, 'toast-success');
+                mdPanelRef.close();
             }, errors => {
                 console.info({errors});
                 console.warn(errors);
                 $scope.showNotification(response.data.message, 'toast-error');
                 $scope.saveOrderBookLoader = false;
                 $scope.data.errors = errors.data.errors;
+                mdPanelRef.close();
             })
         }
     };
