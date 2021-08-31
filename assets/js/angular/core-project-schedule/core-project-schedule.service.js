@@ -57,7 +57,7 @@ angular.module('coreProjectScheduleModule').factory('coreProjectScheduleService'
                 locals: {
                     options: {
                         // modalTitle: (options && options.resource && options.resource.id) ? MESSAGES.orderBookModalEditTitle : MESSAGES.orderBookModalAddTitle,
-                        modalTitle: 'Ajouter ce projet au carnet de commande prévisionnel',
+                        modalTitle: 'Ajouter ce projet au carnet de commandes prévisionnelles',
                         marketTypes: response.marketTypes,
                         types: response.projectTypes,
                     },

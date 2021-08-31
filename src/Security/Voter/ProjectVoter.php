@@ -89,12 +89,12 @@ class ProjectVoter extends Voter
 
     public function canAddToPlanning(Project $project, User $user)
     {
-        return $project->getCompletion() > ProjectConstants::PLANNING_COMPLETION && !$project->getVisibleInPlanning();
+        return $project->getCompletion() >= ProjectConstants::PLANNING_COMPLETION && !$project->getVisibleInPlanning();
     }
 
     public function canRemoveToPlanning(Project $project, User $user)
     {
-        return $project->getCompletion() > ProjectConstants::PLANNING_COMPLETION && $project->getVisibleInPlanning();
+        return $project->getCompletion() >= ProjectConstants::PLANNING_COMPLETION && $project->getVisibleInPlanning();
     }
 
     public static function getSupportedAttributes()
