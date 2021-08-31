@@ -261,6 +261,10 @@ load_plan:
     encryption: 'Chiffrage '
     budget: 'Budget'
 
+  type:
+    type_study_week_submission: "Semaine pour remise de l'étude"
+    type_deadline: "Date buttoir"
+
   messages:
     saving_successfull: 'Charge économiste enregistrée avec succès'
     saving_errors: "L'enregistrement de la charge économiste a échoué"

@@ -57,6 +57,7 @@ function LoadPlanDialogController (
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
             $scope.config.studyTime = response.data.studyTime;
+            $scope.config.types = response.data.types;
         });
         if (options && options.mode === 'edit' && options.id) {
             $scope.config.mode = options.mode;

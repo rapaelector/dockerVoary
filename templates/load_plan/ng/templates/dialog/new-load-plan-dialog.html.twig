@@ -43,6 +43,7 @@
                     </div>
     
                     {# Temps d'etude estime #}
+                    {# 
                     <div class="col-sm-6">
                         <md-input-container class="w-100">
                             <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
@@ -63,6 +64,7 @@
                             } %}
                         </md-input-container>
                     </div>
+                    #}
     
                     {# Temps d'etude effectif #}
                     <div class="col-sm-6">
@@ -85,50 +87,77 @@
                             } %}
                         </md-input-container>
                     </div>
-    
-                    {# N° semaine #}
-                    <div class="col-sm-6">
-                        <md-input-container class="w-100 mb-0">
-                            <label id="week-number">{{ 'load_plan.label.week_for_submission_of_the_study'|trans({}, 'projects') }}</label>
-                            <md-datepicker 
-                                class="w-100 hide-icons"
-                                ng-model="form.start"
-                                input-aria-labelledby="week-number"
-                                md-open-on-focus
-                                name="start"
-                                md-hide-icons="calendar"
-                            >
-                            </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'start',
-                            } %}
-                        </md-input-container>
-                    </div>
-                    
+
                     <div class="w-100"></div>
-    
-                    {# Date butoire #}
-                    <div class="col-sm-6">
-                        <md-input-container class="w-100 mb-0">
-                            <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
-                            <md-datepicker 
-                                class="w-100 hide-icons"
-                                ng-model="form.deadline"
-                                md-open-on-focus
-                                input-aria-labelledby="deadline-date"
-                                md-hide-icons="calendar"
-                                name="deadline"
-                            >
-                            </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'deadline',
-                            } %}
-                        </md-input-container>
+
+                    <div class="col-sm-12">
+                        <div class="row align-items-start">
+                            
+                            {# Type #}
+                            <div class="col-sm-6">
+                                <md-radio-group
+                                    ng-model="form.type" 
+                                    class="mt-3"
+                                    name="type"
+                                >
+                                    <md-radio-button
+                                        ng-value="type.value"
+                                        ng-repeat="type in config.types"
+                                        class="md-primary w-100 d-flex align-items-center mb-1"
+                                    >
+                                        {{ '{{ type.label }}' }}
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+
+                            {# 
+                                N° semaine
+                                week for submission of the study
+                                Semaine pour remise de l'étude
+                            #}
+                            <div class="col-sm-6" ng-if="form.type === 'type_study_week_submission'">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="week-number">{{ 'load_plan.label.week_for_submission_of_the_study'|trans({}, 'projects') }}</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.start"
+                                        input-aria-labelledby="week-number"
+                                        md-open-on-focus
+                                        name="start"
+                                        md-hide-icons="calendar"
+                                    >
+                                    </md-datepicker>
+                                    {% include "load_plan/ng/templates/errors.html.twig" with {
+                                        form: 'loadPlanForm',
+                                        field: 'start',
+                                    } %}
+                                </md-input-container>
+                            </div>
+            
+                            {# Date butoire #}
+                            <div class="col-sm-6" ng-if="form.type === 'type_deadline'">
+                                <md-input-container class="w-100 mb-0">
+                                    <label id="deadline-date">{{ 'load_plan.label.deadline'|trans({}, 'projects') }}</label>
+                                    <md-datepicker 
+                                        class="w-100 hide-icons"
+                                        ng-model="form.deadline"
+                                        md-open-on-focus
+                                        input-aria-labelledby="deadline-date"
+                                        md-hide-icons="calendar"
+                                        name="deadline"
+                                    >
+                                    </md-datepicker>
+                                    {% include "load_plan/ng/templates/errors.html.twig" with {
+                                        form: 'loadPlanForm',
+                                        field: 'deadline',
+                                    } %}
+                                </md-input-container>
+                            </div>
+                        </div>
                     </div>
     
                     {# Date realization devis #}
+                    {# 
                     <div class="col-sm-6 ml-n2">
                         <md-input-container class="w-100 mb-0">
                             <label id="realization-devis-date">{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}</label>
@@ -147,6 +176,7 @@
                             } %}
                         </md-input-container>
                     </div>
+                    #}
     
                     {# Nature du chiffrage #}
                     <div class="col-sm-12">

@@ -381,9 +381,15 @@ class LoadPlanController extends BaseController
             $studyTime[] = ['label' => $translator->trans('load_plan.study_time.' .$time, [], 'projects'), 'value' => $time];
         }
         
+        $types = [];
+        foreach (LoadPlan::TYPES as $type) {
+            $types[] =  ['label' => $translator->trans('load_plan.type.' .$type, [], 'projects'), 'value' => $type];
+        }
+
         return $this->json([
             'taskTypes' => $taskTypesTranslated,
             'studyTime' => $studyTime,
+            'types' => $types,
         ]);
     }
 

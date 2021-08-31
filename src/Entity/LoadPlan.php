@@ -68,6 +68,17 @@ class LoadPlan
     ];
 
     /**
+     * Type to use between study week submission (Semaine pour remise de l'étude) or deadline (Date buttoire)
+     */
+    const TYPE_DEADLINE = 'type_deadline';
+    const TYPE_STUDY_WEEK_SUBMISSION = 'type_study_week_submission';
+    
+    const TYPES = [
+        self::TYPE_DEADLINE,
+        self::TYPE_STUDY_WEEK_SUBMISSION
+    ];
+
+    /**
      * estimated_study_time, effective_study_time
      * Temps d'etude estime, temps d'etude effectif
      */
