@@ -15,8 +15,9 @@ menu:
     project_schedule: 'Carnet de commande'
     load_plan: 'Plan de charge économiste'
     load_plan_menu: 'Plan de charge'
-    load_plan_list: 'Liste des plans'
+    load_plan_list: 'Plan de charge'
     load_plan_scheduler: 'Planning'
+    load_plan_header: 'Economie'
 
 action:
   action: 'Action'

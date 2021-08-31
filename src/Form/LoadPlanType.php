@@ -31,6 +31,7 @@ class LoadPlanType extends AbstractType
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false,
             ])
             ->add('realizationQuotationDate', DateType::class, [
                 'widget' => 'single_text',

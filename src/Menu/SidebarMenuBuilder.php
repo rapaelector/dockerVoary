@@ -132,8 +132,7 @@ class SidebarMenuBuilder
          *      - the load plan planning link place should change but for now put it just here
          */
         if ($this->security->isGranted('ROLE_LOAD_PLAN_VIEW')) {
-
-            // $menu->addChild('menu.offers_header', [])->setAttribute('class', $subTitleClass);
+            $menu->addChild('menu.load_plan_header', [])->setAttribute('class', $subTitleClass);
 
             // $loadPlanMenu = $this->factory->createItem('menu.load_plan_menu', [
             //     'uri' => '#',
@@ -143,45 +142,12 @@ class SidebarMenuBuilder
             //     ],
             //     'extras' => [
             //         'icon' => $icon,
-            //         'icon_content' => 'content_paste',
+            //         'icon_content' => 'work',
             //         'label_wrapper' => 'p',
             //     ],
             // ])->setAttributes(['class' => $navItem]);
-
-            // $loadPlanMenu->addChild('menu.load_plan_list', [
-            //     'route' => 'load_plan.list',
-            //     'linkAttributes' => ['class' => $linkClassName],
-            //     'extras' => [
-            //         'icon' => $icon,
-            //         'icon_content' => 'circle',
-            //         'label_wrapper' => 'p',
-            //     ],
-            // ])->setAttributes(['class' => $navItem]);
-            
-            // $loadPlanMenu->addChild('menu.load_plan_scheduler', [
-            //     'route' => 'load_plan_planning.index',
-            //     'linkAttributes' => ['class' => $linkClassName],
-            //     'extras' => [
-            //         'icon' => $icon,
-            //         'icon_content' => 'circle',
-            //         'label_wrapper' => 'p',
-            //     ],
-            // ])->setAttributes(['class' => $navItem]);
-
-            $loadPlanMenu = $this->factory->createItem('menu.load_plan_menu', [
-                'uri' => '#',
-                'linkAttributes' => ['class' => $linkClassName],
-                'childrenAttributes' => [
-                    'class' => 'nav nav-treeview',
-                ],
-                'extras' => [
-                    'icon' => $icon,
-                    'icon_content' => 'work',
-                    'label_wrapper' => 'p',
-                ],
-            ])->setAttributes(['class' => $navItem]);
     
-            $loadPlanMenu->addChild('menu.load_plan_list', [
+            $menu->addChild('menu.load_plan_list', [
                 'linkAttributes' => ['class' => $linkClassName],
                 'route' => 'load_plan.list',
                 'extras' => [
@@ -191,7 +157,7 @@ class SidebarMenuBuilder
                 ],
             ])->setAttributes(['class' => $navItem]);
     
-            $loadPlanMenu->addChild('menu.load_plan_scheduler', [
+            $menu->addChild('menu.load_plan_scheduler', [
                 'linkAttributes' => ['class' => $linkClassName],
                 'route' => 'load_plan_planning.index',
                 'extras' => [
@@ -201,7 +167,7 @@ class SidebarMenuBuilder
                 ],
             ])->setAttributes(['class' => $navItem]);
     
-            $menu->addChild($loadPlanMenu);
+            // $menu->addChild($loadPlanMenu);
         }
 
         // offre nav link

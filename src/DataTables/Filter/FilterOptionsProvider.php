@@ -327,4 +327,26 @@ class FilterOptionsProvider
 
         return $res;
     }
+
+    public function getEconomist()
+    {
+        $economists = $this->em->getRepository(LoadPlan::class)
+            ->createQueryBuilder('l')
+            ->select('economist.firstName firstName, economist.lastName lastName')
+            ->leftJoin('l.project', 'project')
+            ->leftJoin('project.economist', 'economist')
+            ->getQuery()
+            ->getScalarResult()
+        ;
+        
+        $res1 = array_column($economists, 'firstName');
+        $res2 = array_column($economists, 'lastName');
+        $res = [];
+
+        foreach ($res1 as $key => $economist) {
+            $res[$res1[$key]] = $res1[$key] . ' ' .$res2[$key];
+        }
+
+        return $res;
+    }
 }

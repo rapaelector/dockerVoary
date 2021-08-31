@@ -31,35 +31,39 @@ class LoadPlan
     /**
      * TASK TYPES
      * TYPE DE TACHE
+     * Remplacer "esquisse" par "budget"
+     * Ticket: 5052
     */
     const METER_CONSULTATION = 'meter_consultation'; // Mètre Consultation 
     const PRE_STUDY = 'pre_study'; // Pré étude 
-    const SKETCH = 'sketch'; // Esquisse 
-    const ENCRYPTION = 'encryption'; // Chiffrage 
+    // const BUDGET = 'BUDGET'; // Esquisse 
+    const ENCRYPTION = 'encryption'; // Chiffrage
+    const BUDGET = 'budget'; 
 
     const TASK_TYPES = [
         self::METER_CONSULTATION => self::METER_CONSULTATION,
         self::PRE_STUDY => self::PRE_STUDY,
-        self::SKETCH => self::SKETCH,
+        // self::BUDGET => self::BUDGET,
         self::ENCRYPTION => self::ENCRYPTION,
+        self::BUDGET => self::BUDGET,
     ];
 
     const METER_CONSULTATION_SHORT = 'c'; // Mètre Consultation
     const PRE_STUDY_SHORT = 'e'; // pre etude
-    const SKETCH_SHORT = 'es'; // Esquise
+    const BUDGET_SHORT = 'b'; // Esquise
     const ENCRYPTION_SHORT = 'px'; // Chiffrage 
 
     const TASK_TYPES_PLANNING = [
         self::METER_CONSULTATION => self::METER_CONSULTATION_SHORT,
         self::PRE_STUDY => self::PRE_STUDY_SHORT,
-        self::SKETCH => self::SKETCH_SHORT,
+        self::BUDGET => self::BUDGET_SHORT,
         self::ENCRYPTION => self::ENCRYPTION_SHORT,
     ];
 
     const TASK_TYPES_PLANNING_COLORS = [
         self::METER_CONSULTATION => '#a9d08e', // 'rgb(169, 208, 142)' Métre consulation => vert claire
         self::PRE_STUDY => '#f4b084', // rgb(244, 176, 132)' Pré ètude => maron
-        self::SKETCH => '#ffc000', // rgb(255, 192, 0)' Esquise => orange
+        self::BUDGET => '#ffc000', // rgb(255, 192, 0)' Esquise => orange
         self::ENCRYPTION => '#548235', // rgb(84, 130, 53)' chiffrage => vert foncé
     ];
 
