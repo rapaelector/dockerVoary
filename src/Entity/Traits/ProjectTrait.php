@@ -4,6 +4,8 @@ namespace App\Entity\Traits;
 
 trait ProjectTrait
 {
+    public $contactSelect;
+
     public function getPdfName(): string
     {
         if ($this->getProspect()) {

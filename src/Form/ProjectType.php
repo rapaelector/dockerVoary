@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Project;
 use App\Form\User\ContactType;
 use Doctrine\ORM\EntityRepository;
+use App\Utils\Resolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -14,32 +15,37 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Constants\Project as Constants;
 
 class ProjectType extends AbstractType
 {
+
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
+
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    public function __construct(EntityManagerInterface $em, RequestStack $requestStack)
+    {
+        $this->em = $em;
+        $this->requestStack = $requestStack;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('roadmap', ChoiceType::class, [
-            //         "label" => 'columns.roadmap',
-            //         'choices' => [
-            //             'oui' => true,
-            //             'non' => false,
-            //         ],
-            //         'label_attr' => [
-            //             'class' => 'radio-custom radio-inline',
-            //         ],
-            //         "multiple" => false,
-            //         "expanded" => true
-            //     ])
-            // ->add('siteCode', TextType::class, [
-            //     'label' => "columns.siteCode"
-            // ])
             ->add('name', TextType::class, [
                 'label' => 'columns.project_name',
                 'required' => false,
@@ -63,7 +69,6 @@ class ProjectType extends AbstractType
                     'data-type' => 'select2'
                 ],
                 'empty_data' => '',
-                'mapped' => false
             ])
             ->add('businessCharge', null, [
                 'label'=>"columns.businessCharge"
@@ -99,123 +104,9 @@ class ProjectType extends AbstractType
                 'label'=>"columns.answerForThe",
                 'required' => false,
             ])
-            // ->add('projectOwner', null, [
-            //     'label' => 'columns.projectOwner'
-            // ])
-            // ->add('projectManager', null, [
-            //     'label' => 'columns.projectManager'
-            // ])
-            // ->add('marketType', ChoiceType::class, [
-            //     "choices" => Constants::getTypeValues(Constants::TYPE_DE_MARCHE, true),
-            //     'label' => 'columns.marketType',
-            //     "multiple" => false,
-            //     "expanded" => true,
-            //     'label_attr' => [
-            //         'class' => 'radio-custom radio-inline'
-            //     ],
-            // ])
-            // ->add('bonhomePercentage', ChoiceType::class, [
-            //     "choices" => Constants::getTypeBonhomme(true),
-            //     'label' => 'columns.is_bonhomme',
-            //     "multiple" => false,
-            //     "expanded" => false,
-
-            // ])
-            // ->add('disaSheetValidation', ChoiceType::class, [
-            //     "choices" => Constants::getTypeValues(Constants::TYPE_DISA_SHEET, true),
-            //     'label' => "columns.disaSheetValidation",
-            //     'label_attr' => [
-            //         'class' => 'checkbox-custom',
-            //     ],
-            //     "multiple" => true,
-            //     "expanded" => true,
-            // ])
-            // ->add('paymentChoice',ChoiceType::class, [
-            //     'label' => 'columns.paymentChoice',
-            //     'label_attr' => [
-            //         'class' => 'radio-custom radio-inline'
-            //     ],
-            //     'required' => true,
-            //     'choices' => [
-            //         'oui' => true,
-            //         'non' => false,
-            //     ],
-            //     "multiple" => false,
-            //     "expanded" => true,
-            // ])
-            // ->add('depositeDateEdit', DateType::class, [
-            //     // renders it as a single text box
-            //     'widget' => 'single_text',
-            // ])
-            // ->add('paymentPercentage', NumberType::class, [
-            //     'label' => 'columns.paymentPercentage',
-            //     'attr' => [
-            //         'placeholder' => '%'
-            //     ]
-            // ])
-            // ->add('clientCondition', TextareaType::class, [
-            //     'label' => 'columns.clientCondition'
-            // ])
-            // ->add('billingAddres', AddressType::class)
-            // ->add('siteAddress', AddressType::class)
-            // ->add('norm1090', ChoiceType::class, [
-            //     'label' => "columns.norm1090",
-            //     'choices' => [
-            //         '1' => 1,
-            //         '2' => 2,
-            //         '3' => 3,
-            //     ],
-            //     'label_attr' => [
-            //         'class' => 'radio-custom radio-inline'
-            //     ],
-            //     "multiple" => false,
-            //     "expanded" => true
-            // ])
-            // ->add('quoteValidatedMDE', null, [
-            //     'label' => 'columns.quoteValidatedMDE'
-            // ])
-            // ->add('quoteValidatedMDEDate', DateType::class, [
-            //     'label' => 'columns.quoteValidatedMDEDate',
-            //     'widget' => 'single_text',
-            // ])
-            // ->add('globalAmount', null, [
-            //     'label' => 'columns.globalAmount'
-            // ])
-            // ->add('amountSubcontractedWork', null, [
-            //     'label' => 'columns.amountSubcontractedWork'
-            // ])
-            // ->add('amountBBISpecificWork', null, [
-            //     'label' => 'columns.amountBBISpecificWork'
-            // ])
-            // ->add('recordAssistant', null,[
-            //     'label' => "columns.recordAssistant"
-            // ])
-            // ->add('ocbsDriver', null,[
-            //     'label' => "columns.ocbsDriver"
-            // ])
-            // ->add('tceDriver', null,[
-            //     'label' => "columns.tceDriver"
-            // ])
-            // ->add('encryptiontype', ChoiceType::class, [
-            //     'label'=>"columns.encryptiontype",
-            //     "choices" => Constants::getTypeValues(Constants::ENCRYPTION_TYPE, true),
-            //     "multiple" => false,
-            //     "expanded" => true,
-            //     'label_attr' => [
-            //         'class' => 'radio-custom radio-inline'
-            //     ]
-            // ])
-            // ->add('notApplicable', CheckboxType::class, [
-            //     'label'=>"columns.notApplicable",
-            //     'required' => false,
-            //     'label_attr' => [
-            //         'class' => 'checkbox-custom',
-            //     ]
-            // ])
-            // ->add('folderNameOnTheServer', null, [
-            //     'label'=>"columns.folderNameOnTheServer"
-            // ])
         ;
+
+        $builder->addEventListener(FormEvents::SUBMIT, [$this, 'onPreSetData']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -224,5 +115,29 @@ class ProjectType extends AbstractType
             'data_class' => Project::class,
             'translation_domain' => 'project',
         ]);
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        $contact = null;
+        $request = $this->requestStack->getCurrentRequest();
+        $contactSelect = Resolver::resolve([$request->request->all(), $this->getBlockPrefix(), 'contactSelect'], null);
+
+        if ($contactSelect) {
+            $contact = $this->em->getRepository(User::class)->find($contactSelect);
+        }
+
+        if ($contact) {
+            $form = $event->getForm();
+            $formContact = $event->getData()->getContact();
+            $contact->setLastName($formContact->getLastName());
+            $contact->setFirstName($formContact->getFirstName());
+            $contact->setEmail($formContact->getEmail());
+            $contact->setPhone($formContact->getPhone());
+            $contact->setJob($formContact->getJob());
+            $contact->setFax($formContact->getFax());
+
+            $event->getData()->setContact($contact);
+        }
     }
 }
