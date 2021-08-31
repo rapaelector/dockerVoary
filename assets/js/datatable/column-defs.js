@@ -15,7 +15,7 @@ export default [
     },
 
     /**
-     * LOGO, PROFILE IMAGE FIELS
+     * LOGO, PROFILE IMAGE FIELDS
      */
     {
         width: '50px',
@@ -26,6 +26,7 @@ export default [
             'project_pc_deposit',
             'architect',
             'project_architect',
+            'project_visible_in_planning',
         ],
         className: '',
     },

@@ -56,9 +56,10 @@ window.initProjectCaseList = function({
             'project_architect',
             'project_1090',
             'project_contact_name',
+            'project_visible_in_planning',
             'actions'
         ],
-        excludedColumns: [13],
+        excludedColumns: [14],
         containerSelector: containerSelector,
         filtersContainerSelector: filtersContainerSelector,
         columnsCount: columnsCount,

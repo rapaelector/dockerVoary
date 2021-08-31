@@ -177,6 +177,8 @@ columns:
   project_description_area_tooltip: '<span class="text-uppercase">Surface</span>'
   project_name: 'Nom du projet'
   business_charge_column: 'C affaire'
+  visible_in_planning_short: 'P'
+  visible_in_planning: 'Afficher dans planning'
 
 business_charge:
   success: Chargé(e) d'affaire mise à jour avec success

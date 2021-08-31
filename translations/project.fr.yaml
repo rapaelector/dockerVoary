@@ -116,7 +116,8 @@ columns:
   project_description: 'Description du projet'
   department: 'Département'
   market_type: 'Type de marche'
-  project_name: 'Nom du projet' 
+  project_name: 'Nom du projet'
+  visible_in_planning: 'Dans planning?'
   
 typeMarket:
   shadows : "Ombrières"

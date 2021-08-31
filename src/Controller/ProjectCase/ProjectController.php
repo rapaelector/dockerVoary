@@ -245,6 +245,14 @@ class ProjectController extends BaseController
                 ),
                 'searchable' => true,
             ])
+            ->add('visibleInPlanning', TwigColumn::class, [
+                'label' => $translator->trans('columns.visible_in_planning', [], 'projects'),
+                'template' => 'project_case/twig_columns/_visible_in_planning.html.twig',
+                'className' => 'text-center',
+                'meta' => $this->columnMeta([
+                    'abbr' => $translator->trans('columns.visible_in_planning_short', [], 'projects'),
+                ])
+            ])
             ->add('id', TextColumn::class, [
                 'label' => $translator->trans('label.action', [], 'project'),
                 'render' => $this->actionsRenderer('client.list', 'project/_actions.html.twig'),
