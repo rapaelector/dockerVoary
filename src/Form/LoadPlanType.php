@@ -46,6 +46,10 @@ class LoadPlanType extends AbstractType
             ->add('effectiveStudyTime', ChoiceType::class, [
                 'choices' => LoadPlan::STUDY_TIME,
             ])
+            ->add('type', ChoiceTYpe::class, [
+                'choices' => LoadPlan::TYPES,
+                'required' => false,
+            ])
         ;
     }
 

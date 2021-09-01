@@ -113,6 +113,10 @@ function LoadPlanDialogController (
             $scope.form.start = $scope.form.deadline;
         }
 
+        if ($scope.form.type === TYPE_STUDY_WEEK_SUBMISSION) {
+            $scope.form.deadline = null;
+        }
+
         loadPlanService.saveLoadPlan($scope.form, $scope.config.mode).then((response) => {
             var fields = ['deadline', 'effectiveStudyTime', 'estimatedStudyTime', 'natureOfTheCosting', 'realizationQuotationDate', 'start'];
             $mdDialog.hide();

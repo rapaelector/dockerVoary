@@ -1,0 +1,7 @@
+{% set className = 'w-100 h-100 d-flex align-items-center justify-content-center' %}
+
+{% if resolve([row, 'realizationQuotationDate'], null) %}
+    <div class="{{ className }}">{{ value|date('W') }}</div>
+{% elseif (value|date('W') < "now"|date('W')) %}
+    <div class="bg-danger {{ className }}">{{ value|date('W') }}</div>
+{% endif %}

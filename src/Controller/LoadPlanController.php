@@ -167,19 +167,12 @@ class LoadPlanController extends BaseController
                 'label' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 'className' => 'dynamic-nowrap',
                 'render' => function ($value, $row) use ($translator) {
-                    return $translator->trans('load_plan.study_time.' .$value, [], 'projects');
+                    return $value ? $translator->trans('load_plan.study_time.' .$value, [], 'projects') : '';
                 },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.estimated_study_time', [], 'projects'),
                 ], true),
                 'searchable' => true,
-                // 'filter' => $this->filterBuilder->buildFilter(
-                //     ChoiceFilter::class, 
-                //     array_merge(
-                //         $this->filterOptionsProvider->getOptions('estimated_study_time'),
-                //         ['choices' => $this->filterOptionsProvider->getEstimatedStudyTime()]
-                //     )
-                // ),
             ])
             // Date butoire
             ->add('deadline', DateTimeColumn::class, [
@@ -190,10 +183,18 @@ class LoadPlanController extends BaseController
                 ], true),
             ])
             // N° semaine pour remise de l'etude
-            ->add('start', DateTimeColumn::class, [
+            // ->add('start', DateTimeColumn::class, [
+            //     'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
+            //     'format' => 'W',
+            //     'className' => 'dynamic-nowrap text-center',
+            //     'meta' => $this->columnMeta([
+            //         'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
+            //     ], true)
+            // ])
+            ->add('start', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
-                'format' => 'W',
-                'className' => 'dynamic-nowrap text-center',
+                'template' => 'load_plan/twig_columns/_week_number.html.twig',
+                'className' => 'dynamic-nowrap text-center p-0',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
                 ], true)

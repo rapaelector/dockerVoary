@@ -158,7 +158,7 @@ class LoadPlan
     private $deadline;
 
     /**
-     * Date realisation devis
+     * Date realisation devis (Date de dévis)
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"loadPlan:list"})
@@ -187,6 +187,12 @@ class LoadPlan
      * )
      */
     private $estimatedStudyTime;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"loadPlan:list"})
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -297,6 +303,18 @@ class LoadPlan
     public function setEstimatedStudyTime(?int $estimatedStudyTime): self
     {
         $this->estimatedStudyTime = $estimatedStudyTime;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
