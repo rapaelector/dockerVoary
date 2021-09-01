@@ -1,6 +1,9 @@
 <div 
-    class="w-100 h-100 change-economist {{ 'charge-economist-' ~ row.id }}" 
-    data-project-id="{{ row.id }}" 
+    class="w-100 h-100 change-economist pt-2 {{ 'charge-economist-' ~ row.id }}" 
+    data-load-plan-id="{{ row.id }}"
+    data-project-id="{{ resolve([row, 'project', 'id'], null) }}"
+    data-economist-id="{{ resolve([row, 'project', 'economist', 'id']) }}"
+    data-economist-name="{{ resolve([row, 'project', 'economist', 'lastName'], null) }}"
     data-target-class="{{ 'charge-economist-' ~ row.id }}">
         {{ value }}
 </div>

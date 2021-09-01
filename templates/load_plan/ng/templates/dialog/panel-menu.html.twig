@@ -1,34 +1,21 @@
-<div class="row">
-    <div class="col-sm-12 bg-white border">
+<div class="row bg-white border panel-menu">
+    {# 
+    <div class="col-sm-12 ">
         <md-input-container class="w-100 my-0">
             <md-autocomplete
                 class="economist-autocomplete"
                 md-no-cache="noCache"
                 md-selected-item="data.selectedEconomist"
-                md-search-text="project"
+                md-search-text="economist"
                 md-selected-item-change="selectEconomistChange(item)"
-                md-items="item in queryEconomistSearch(project)"
+                md-items="item in queryEconomistSearch(economist)"
                 md-item-text="item.name"
                 md-min-length="0"
-                md-menu-class="project-dropdown"
+                md-menu-class="economist-dropdown"
                 md-floating-label="Economist"
                 md-clear-button="true"
                 input-aria-labelledby="favoriteStateLabel">
                 <md-item-template>
-                    {# 
-                    <div md-highlight-text="economistSearchText" md-highlight-flags="^i">
-                        <div class="media">
-                            <div class="media-left">
-                                <img class="media-object" src="{{ '{{ item.avatar }}' }}">
-                            </div>
-                            <div class="media-body">
-                                <div class="media-heading font-weight-bold">{{ '{{ item.name }}' }}</div>
-                                <div class="media-body-content">{{ '{{ item.email }}' }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    #}
-
                     <span class="item-title">
                         <img class="media-object" src="{{ '{{ item.avatar }}' }}">
                         <span> {{ '{{ item.email }}' }} </span>
@@ -43,6 +30,61 @@
                     Economist <b>{{ '{{ economistSearchText }}' }}</b> non trouvé.
                 </md-not-found>
             </md-autocomplete>
+        </md-input-container>
+    </div>
+    #}
+    
+    {# <div class="col-sm-12">
+        <md-input-container class="w-100">
+            <label for="">Rechercher</label>
+            <input
+                ng-model="economistSearchTerm"
+                type="search"
+                placeholder="Rechercher"
+                ng-keydown="$event.stopPropagation()"
+                class="demo-header-searchbox md-text"
+            >
+        </md-input-container>
+    </div> #}
+    
+    <div class="col-sm-12">
+        <md-input-container class="w-100">
+            <md-select 
+                class=""
+                ng-model="data.economist"
+                md-on-close="economistSearchTerm = ''"
+                data-md-container-class="selectHeader"
+                ng-change="economistChangeHandler()"
+                placeholder="Economist"
+            >
+                <md-select-header class="select-header-search">
+                    <input
+                        ng-model="economistSearchTerm"
+                        type="search"
+                        placeholder="Rechercher"
+                        ng-keydown="$event.stopPropagation()"
+                        class="demo-header-searchbox md-text"
+                    >
+                </md-select-header>
+                <md-optgroup label="user">
+                    <md-option
+                        ng-repeat="economist in data.economists" 
+                        ng-value="economist.id"
+                        class="px-2"
+                        ng-disabled="$index === 1"
+                    >
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object" src="{{ '{{ economist.avatar }}' }}">
+                            </div>
+                            <div class="media-body pl-2">
+                                <div class="media-heading font-weight-bold">{{ '{{ economist.name }}' }}</div>
+                                <div class="media-body-content">{{ '{{ economist.email }}' }}</div>
+                            </div>
+                        </div>
+                    </md-option>
+                </md-optgroup label="user">
+            </md-select>
         </md-input-container>
     </div>
 </div>

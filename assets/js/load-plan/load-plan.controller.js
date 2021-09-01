@@ -29,9 +29,11 @@ angular.module('loadPlanApp').controller('loadPlanController', [
 
             $('body').on('click', '.change-economist', function (ev) {
                 var targetClass = $(this).data('target-class');
-                var projectId = $(this).data('project-id');
+                var projectId = $(this).data('load-plan-id');
+                var economistName = $(this).data('economist-name');
+                var economistId = $(this).data('economist-id');
 
-                $scope.showEconomistPanel(ev, targetClass, projectId);
+                $scope.showEconomistPanel(ev, {targetClass, projectId, economistName, economistId});
             });
 
             $scope.economistCanceller = $q.defer();
@@ -71,9 +73,9 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             });
         }
 
-        $scope.showEconomistPanel = (ev, targetClass, projectId) => {
+        $scope.showEconomistPanel = (ev, args) => {
             var position = $mdPanel.newPanelPosition()
-                .relativeTo('.' + targetClass)
+                .relativeTo('.' + args.targetClass)
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
 
             var config = {
@@ -84,7 +86,9 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 panelClass: 'demo-menu-example',
                 position: position,
                 locals: {
-                    projectId: projectId,
+                    projectId: args.projectId,
+                    economistName: args.economistName,
+                    economistId: args.economistId
                 },
                 openFrom: ev,
                 clickOutsideToClose: true,

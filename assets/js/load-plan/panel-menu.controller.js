@@ -5,16 +5,36 @@ PanelMenuController.$inject = [
     '$mdToast',
     'projectId',
     'loadPlanService',
-    'mdPanelRef'
+    'mdPanelRef',
+    'economistName',
+    'economistId'
 ];
 
-function PanelMenuController($scope, $q, $element, $mdToast, projectId, loadPlanService, mdPanelRef) {
+function PanelMenuController($scope, $q, $element, $mdToast, projectId, loadPlanService, mdPanelRef, economistName, economistId) {
     $scope.economistCanceller = null;
+    $scope.data = {
+        economist: null,
+        economists: [],
+    };
+    $scope.economistSearchTerm = null;
     
     this.$onInit = () => {
         $scope.economistCanceller = $q.defer();
+        var query = economistName ? economistName : '';
+        $scope.economistSearchTerm = query;
+        loadPlanService.getEconomists(query, {}).then((response) => {
+            $scope.data.economists = response;
+            $scope.data.economist = response;
+        })
     };
     
+    $scope.$watch('economistSearchTerm', function () {
+        $scope.queryEconomistSearch($scope.economistSearchTerm).then((response) => {
+            $scope.data.economists = response;
+            $scope.data.economist = response;
+        });
+    }, true);
+
     $element.find('input').on('keydown', (ev) => {
         ev.stopPropagation();
     });
@@ -75,6 +95,21 @@ function PanelMenuController($scope, $q, $element, $mdToast, projectId, loadPlan
         }).catch(() => {
             console.info('failed to laod md toast');
         });
+    };
+
+    $scope.economistChangeHandler = () => {
+        if ($scope.data.economist) {
+            loadPlanService.saveProjectEconomist({id: $scope.data.economist}, projectId).then((response) => {
+                $scope.showNotification(response.data.message, 'toast-success');
+                mdPanelRef.close();
+                location.reload();
+            }, errors => {
+                console.warn(errors.data.message);
+                $scope.showNotification(errors.data.message, 'toast-error');
+                mdPanelRef.close();
+                location.reload();
+            });
+        }
     };
 };
 

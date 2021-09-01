@@ -1,8 +1,12 @@
 @mixin md_autocomplete {
-    .item-title .media-object {
+    .item-title .media-object, .media-left .media-object {
         width: 30px !important;
         height: 30px !important;
-        object-fit: fill;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .panel-menu {
+        width: 200px;
     }
 }
 

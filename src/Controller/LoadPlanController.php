@@ -425,9 +425,9 @@ class LoadPlanController extends BaseController
         $normalizedEconomists = $serializer->normalize($economists, 'json', ['groups' => 'loadPlan:economist']);
         $res = [];
 
-        foreach ($normalizedEconomists as $key => $economist) {
-            $economist['avatar'] = $userService->getUserAvatar(null);
-            $res[] = $economist;
+        foreach ($economists as $key => $economist) {
+            $normalizedEconomists[$key]['avatar'] = $userService->getUserAvatar($economist);
+            $res[] = $normalizedEconomists[$key];
         }
 
         return $this->json($res);
