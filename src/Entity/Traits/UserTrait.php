@@ -5,7 +5,14 @@ namespace App\Entity\Traits;
 trait UserTrait
 {
     /**
-     * @Groups({"project-form-data", "data-project", "exchange-history", "loadPlan:planning", "project:scheduler-resource"})
+     * @Groups({
+     *  "project-form-data", 
+     *  "data-project", 
+     *  "exchange-history", 
+     *  "loadPlan:planning", 
+     *  "project:scheduler-resource",
+     *  "loadPlan:economist"
+     * })
      */
     public function getName(): ?string
     {

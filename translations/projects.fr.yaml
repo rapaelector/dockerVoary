@@ -272,6 +272,8 @@ load_plan:
     delete_successfull: 'Charge économiste supprimée avec succès'
     edit_successfull: 'Modification de la charge économiste effectuée avec succès'
     edit_failed: 'La modification de la charge économiste a échoué'
+    project_economist_changed_successfull: 'Economist changer avec succès'
+    project_economist_changed_failed: "Impossible de changer l'economiste" 
 
   study_time:
     2: '1/4 journée'

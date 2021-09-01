@@ -58,6 +58,40 @@ angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting
             }, 500);
         });
 	};
+    
+    /**
+     * Economist autocomplete
+     * 
+     * @param {string} economistName 
+     * @param {object} config 
+     * @param {any} key 
+     * @returns promise
+     */
+    _this.getEconomists = function (economistName, config, key) {
+        var timers = [];
+
+		return new Promise(function (resolve, reject) {
+			timers[key] = setTimeout(function () {
+                $http.get(Routing.generate('load_plan.economists', {
+                    q: economistName
+                }), config).then(function (response) {
+                    resolve(response.data);
+                }).catch(function (error) {
+                    resolve([]);
+                });
+            }, 500);
+        });
+	};
+
+    /**
+     * 
+     * @param {object} item 
+     * @param {number} projectId 
+     */
+    _this.saveProjectEconomist = (item, projectId) => {
+        console.info({item});
+        return $http.post(fosJsRouting.generate('load_plan.change_project_economist', {id: projectId}), item);
+    };
 
     return _this;
 }]);

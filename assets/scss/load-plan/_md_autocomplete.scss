@@ -1,0 +1,9 @@
+@mixin md_autocomplete {
+    .item-title .media-object {
+        width: 30px !important;
+        height: 30px !important;
+        object-fit: fill;
+    }
+}
+
+@include md_autocomplete;

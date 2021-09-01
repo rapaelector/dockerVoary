@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\LoadPlan;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Controller\BaseController;
 use App\Form\LoadPlanType;
 use App\DataTables\Column\TextColumn;
@@ -15,6 +16,7 @@ use App\DataTables\DataTable;
 use App\DataTables\DataTableFactory;
 use App\Service\Form\FormService;
 use App\DataTables\Filter\ChoiceFilter;
+use App\Service\User\UserService;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,8 +71,9 @@ class LoadPlanController extends BaseController
                 ),
             ])
             // Economist
-            ->add('economist', TextColumn::class, [
+            ->add('economist', TwigColumn::class, [
                 'field' => 'economist.firstName',
+                'template' => 'load_plan/twig_columns/_economist.html.twig',
                 'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('columns.economist', [], 'project'),
                 'meta' => $this->columnMeta([
@@ -398,5 +401,35 @@ class LoadPlanController extends BaseController
     public function loadPlan(Request $request, LoadPlan $loadPlan, SerializerInterface $serializer)
     {
         return $this->json($serializer->normalize($loadPlan, 'json', ['groups' => 'loadPlan:list']));
+    }
+
+    #[Route('/economists', name: 'load_plan.economists', options: ['expose' => true])]
+    public function economists(
+        Request $request, 
+        SerializerInterface $serializer, 
+        EntityManagerInterface $em,
+        UserService $userService
+    )
+    {
+        $query = $request->query->get('q');
+        $economists = $em->getRepository(User::class)->createQueryBuilder('u')
+            ->where('u.firstName LIKE :firstName OR u.lastName LIKE :lastName')
+            ->setParameters([
+                'firstName' => '%' . $query . '%',
+                'lastName' => '%' .$query. '%',
+            ])
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ; 
+        $normalizedEconomists = $serializer->normalize($economists, 'json', ['groups' => 'loadPlan:economist']);
+        $res = [];
+
+        foreach ($normalizedEconomists as $key => $economist) {
+            $economist['avatar'] = $userService->getUserAvatar(null);
+            $res[] = $economist;
+        }
+
+        return $this->json($res);
     }
 }

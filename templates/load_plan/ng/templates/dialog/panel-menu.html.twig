@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-12 bg-white border">
+        <md-input-container class="w-100 my-0">
+            <md-autocomplete
+                class="economist-autocomplete"
+                md-no-cache="noCache"
+                md-selected-item="data.selectedEconomist"
+                md-search-text="project"
+                md-selected-item-change="selectEconomistChange(item)"
+                md-items="item in queryEconomistSearch(project)"
+                md-item-text="item.name"
+                md-min-length="0"
+                md-menu-class="project-dropdown"
+                md-floating-label="Economist"
+                md-clear-button="true"
+                input-aria-labelledby="favoriteStateLabel">
+                <md-item-template>
+                    {# 
+                    <div md-highlight-text="economistSearchText" md-highlight-flags="^i">
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object" src="{{ '{{ item.avatar }}' }}">
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading font-weight-bold">{{ '{{ item.name }}' }}</div>
+                                <div class="media-body-content">{{ '{{ item.email }}' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    #}
+
+                    <span class="item-title">
+                        <img class="media-object" src="{{ '{{ item.avatar }}' }}">
+                        <span> {{ '{{ item.email }}' }} </span>
+                    </span>
+                    <span class="item-metadata">
+                        <span>
+                            {{ '{{ item.name }}' }}
+                        </span>
+                    </span>
+                </md-item-template>
+                <md-not-found>
+                    Economist <b>{{ '{{ economistSearchText }}' }}</b> non trouvé.
+                </md-not-found>
+            </md-autocomplete>
+        </md-input-container>
+    </div>
+</div>
