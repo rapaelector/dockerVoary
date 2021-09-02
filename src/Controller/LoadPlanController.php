@@ -186,14 +186,6 @@ class LoadPlanController extends BaseController
                 ], true),
             ])
             // N° semaine pour remise de l'etude
-            // ->add('start', DateTimeColumn::class, [
-            //     'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
-            //     'format' => 'W',
-            //     'className' => 'dynamic-nowrap text-center',
-            //     'meta' => $this->columnMeta([
-            //         'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
-            //     ], true)
-            // ])
             ->add('start', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_week_number.html.twig',
@@ -211,10 +203,13 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.comment', [], 'projects'),
                 ], true),
             ])
-            // Date de realisation devis
-            ->add('realizationQuotationDate', DateTimeColumn::class, [
+            /**
+             * Date de devis
+             * Date de realisation devis
+             */
+            ->add('realizationQuotationDate', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.realization_quotation_date', [], 'projects'),
-                'format' => 'd/m/Y',
+                'template' => 'load_plan/twig_columns/_realization_quotation_date.html.twig',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.realization_quotation_date_abbr', [], 'projects'),
                 ], true),

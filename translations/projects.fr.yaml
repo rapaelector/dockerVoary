@@ -274,6 +274,8 @@ load_plan:
     edit_failed: 'La modification de la charge économiste a échoué'
     project_economist_changed_successfull: 'Economist changer avec succès'
     project_economist_changed_failed: "Impossible de changer l'economiste" 
+    realization_date_updated: 'Date de devis mis à jour avec succès'
+    failed_to_update_realization_date: 'La mis à jour de la date de devis à echouer'
 
   study_time:
     2: '1/4 journée'

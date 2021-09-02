@@ -158,7 +158,7 @@ class LoadPlan
     private $deadline;
 
     /**
-     * Date realisation devis (Date de dévis)
+     * Date realisation devis (DATE DE DÉVIS)
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"loadPlan:list"})

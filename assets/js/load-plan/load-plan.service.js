@@ -1,4 +1,11 @@
-angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting', 'resolverService', 'DATE_FORMAT', function ($http, fosJsRouting, resolverService, DATE_FORMAT) {
+angular.module('loadPlanApp').factory('loadPlanService', [
+    '$http', 
+    '$mdToast', 
+    'fosJsRouting', 
+    'resolverService', 
+    'DATE_FORMAT', 
+    function ($http, $mdToast, fosJsRouting, resolverService, DATE_FORMAT) {
+
     var _this = this;
 
     _this.saveLoadPlan = (formData, mode) => {
@@ -89,8 +96,47 @@ angular.module('loadPlanApp').factory('loadPlanService', ['$http', 'fosJsRouting
      * @param {number} projectId 
      */
     _this.saveProjectEconomist = (item, projectId) => {
-        console.info({item});
         return $http.post(fosJsRouting.generate('load_plan.change_project_economist', {id: projectId}), item);
+    };
+        
+    /**
+     * 
+     * @param {number} loadPlanId 
+     * @param {object} formData 
+     * @returns {promise}
+     */
+    _this.updateRealizationDate = (loadPlanId, formData) => {
+        if (formData && formData.realizationDate) {
+            formData.realizationDate = moment(formData.realizationDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+        }
+        
+        return $http.post(fosJsRouting.generate('load_plan.update_realization_quotation_date', {id: loadPlanId}), formData);
+    };
+
+    /**
+     * Show notification with given message and options
+     * 
+     * @param {string} message 
+     * @param {object} options 
+     */
+    _this.showNotification = (message, toastClass) => {
+        if (options == undefined || options == {}) {
+            var options = {
+                toastClass: 'toast-success',
+            };
+        }
+
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(message)
+            .position('top right')
+            .hideDelay(5000)
+            .toastClass(toastClass)
+        ).then(() => {
+            console.info('Toast dismissed');
+        }).catch(() => {
+            console.info('failed to laod md toast');
+        });
     };
 
     return _this;

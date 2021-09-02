@@ -1,0 +1,8 @@
+<div 
+    class="realization-date pt-2 {{ 'realization-date-' ~ resolve([row, 'id'], null)  }}" 
+    data-project-id="{{ resolve([row, 'id'], null) }}"
+    data-target-class="{{ 'realization-date-' ~ resolve([row, 'id']) }}"
+    data-realization-date="{{ value|date('Y-m-d') }}"
+>
+    {{ value|date('d/m/Y') }}
+</div>

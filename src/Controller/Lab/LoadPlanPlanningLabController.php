@@ -75,7 +75,6 @@ class LoadPlanPlanningLabController extends BaseController
         ]);
 
         $res = [];
-        dump($normalizedEvents);
         
         foreach ($normalizedEvents as $key => $event) {
             $res[$key]['id'] = $event['id'];
@@ -87,7 +86,6 @@ class LoadPlanPlanningLabController extends BaseController
             $res[$key]['start'] = $event['start'];
             $res[$key]['end'] = $event['end'];
         }
-        dump($res);
         
         return new Response('<body> lorem </body>');
     }

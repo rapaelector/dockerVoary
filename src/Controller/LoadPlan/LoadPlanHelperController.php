@@ -33,4 +33,19 @@ class LoadPlanHelperController extends BaseController
 
         return $this->json(['message' => $translator->trans('load_plan.messages.project_economist_changed_failed', [], 'projects')], 400);
     }
+
+    #[Route('/{id}/update/realization/date', name: 'load_plan.update_realization_quotation_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
+    public function updateRealizationDate(Request $request, LoadPlan $loadPlan, TranslatorInterface $translator, EntityManagerInterface $em)
+    {
+        if ($request->getMethod() == 'POST') {
+            $content = $request->toArray();
+            $newRealizationDate = \DateTime::createFromFormat('Y-m-d', $content['realizationDate']);
+            $loadPlan->setRealizationQuotationDate($newRealizationDate);
+            $em->flush();
+
+            return $this->json(['message' => $translator->trans('load_plan.messages.realization_date_updated', [], 'projects')], 200);
+        }
+
+        return $this->json(['message' => $translator->trans('load_plan.messages.failed_to_update_realization_date', [], 'projects'), 400]);
+    }
 }
