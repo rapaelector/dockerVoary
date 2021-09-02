@@ -8,14 +8,16 @@ angular.module('loadPlanApp').controller('loadPlanController', [
     '$mdPanel',
     '$q',
     '$element',
-    'loadPlanService', 
+    'loadPlanService',
+    'dateHelperService',
     function (
         $scope, 
         $mdDialog, 
         $mdPanel,
         $q,
         $element,
-        loadPlanService
+        loadPlanService,
+        dateHelperService
     ) {
         
         $scope.data = {
@@ -30,7 +32,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
 
             $('body').on('click', '.change-economist', function (ev) {
                 var targetClass = $(this).data('target-class');
-                var projectId = $(this).data('load-plan-id');
+                var loadPlanId = $(this).data('load-plan-id');
                 var economistName = $(this).data('economist-name');
                 var economistId = $(this).data('economist-id');
 
@@ -38,14 +40,14 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                     type: 'economist',
                     templateUrl: 'economist.html',
                     targetClass, 
-                    projectId, 
+                    loadPlanId, 
                     economistName, 
                     economistId,
                 });
             });
             
             $('body').on('click', '.realization-date', function (ev) {
-                var projectId = $(this).data('project-id');
+                var loadPlanId = $(this).data('load-plan-id');
                 var targetClass = $(this).data('target-class');
                 var realizationDate = $(this).data('realization-date');
 
@@ -53,8 +55,37 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                     type: 'realizationDate',
                     templateURL: 'realization-date.html',
                     targetClass,
-                    projectId,
+                    loadPlanId,
                     realizationDate,
+                });
+            });
+            
+            $('body').on('click', '.update-deadline', function (ev) {
+                var loadPlanId = $(this).data('load-plan-id');
+                var targetClass = $(this).data('target-class');
+                var deadline = $(this).data('deadline');
+                var currentDate = $(this).data('current-date');
+
+                dateHelperService.updateDate(ev, {
+                    targetClass,
+                    loadPlanId,
+                    deadline,
+                    currentDate,
+                    pageTitle: 'Changer la date butoir',
+                    saveDate: (newDate) => {
+                        var date = newDate;
+                        if (newDate) {
+                            date = moment(newDate).format('YYYY-MM-DD');
+                        }
+
+                        loadPlanService.updateDeadlineDate(loadPlanId, {newDeadlineDate: date}).then((response) => {
+                            loadPlanService.showNotification(response.data.message, 'toast-success');
+                            $('body').trigger('load_plan.redraw-dt');
+                        }, errors => {
+                            loadPlanService.showNotification(errors.data.message, 'toast-error');
+                            $('body').trigger('load_plan.redraw-dt');
+                        });
+                    },
                 });
             });
             

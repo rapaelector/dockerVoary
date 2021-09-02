@@ -12,7 +12,7 @@ function RealizationPanelController($scope, options, mdPanelRef, loadPlanService
 
     $scope.saveRealizationDate = (ev) => {
         $scope.loading = true;
-        loadPlanService.updateRealizationDate(options.projectId, {realizationDate: $scope.data.realizationDate}).then((response) => {
+        loadPlanService.updateRealizationDate(options.loadPlanId, {realizationDate: $scope.data.realizationDate}).then((response) => {
             loadPlanService.showNotification(response.data.message, 'toast-success');
             $scope.loading = false;
             $('body').trigger('load_plan.redraw-dt');

@@ -277,6 +277,8 @@ load_plan:
     project_economist_changed_failed: "Impossible de changer l'economiste" 
     realization_date_updated: 'Date de devis mis à jour avec succès'
     failed_to_update_realization_date: 'La mis à jour de la date de devis à echouer'
+    deadline_date_updated_successfull: 'Date butoire mis à jour avec succès'
+    deadline_date_updated_failed: 'La mis à jour de la date butoir à echouer'
 
   study_time:
     2: '1/4 journée'

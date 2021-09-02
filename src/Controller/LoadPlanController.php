@@ -178,9 +178,9 @@ class LoadPlanController extends BaseController
                 'searchable' => true,
             ])
             // Date butoire
-            ->add('deadline', DateTimeColumn::class, [
+            ->add('deadline', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.deadline', [], 'projects'),
-                'format' => 'd/m/Y',
+                'template' => 'load_plan/twig_columns/_deadline.html.twig',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.deadline', [], 'projects'),
                 ], true),

@@ -5,4 +5,5 @@ angular.module('loadPlanApp', [
     'angularMoment',
     'daterangepicker',
     'loadPlanPlanningModule',
+    'dateHelperModule',
 ]);
