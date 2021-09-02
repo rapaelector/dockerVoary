@@ -1,7 +1,16 @@
-{% set className = 'w-100 h-100 d-flex align-items-center justify-content-center' %}
+{% from app_macro import render_attr %}
+{% set className = 'w-100 h-100 d-flex align-items-center justify-content-center update-week-number' %}
+
+{% set targetClass = 'week-number-target-' ~ resolve([row, 'id'], null) %}
+{% set attrs = {
+    "data-current-value": value ? value|date('W'),
+    "data-target-class": targetClass,
+    "data-load-plan-id": resolve([row, 'id'], null),
+    "data-project-name": resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], null)),
+} %}
 
 {% if resolve([row, 'realizationQuotationDate'], null) %}
-    <div class="{{ className }}">{{ value|date('W') }}</div>
+    <div class="{{ className ~ ' ' ~ targetClass}}" {{ render_attr(attrs) }}>{{ value|date('W') }}</div>
 {% elseif (value|date('W') < "now"|date('W')) %}
-    <div class="bg-danger {{ className }}">{{ value|date('W') }}</div>
+    <div class="bg-danger {{ className ~ ' ' ~ targetClass }}">{{ value|date('W') }}</div>
 {% endif %}

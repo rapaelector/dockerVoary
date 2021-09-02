@@ -149,5 +149,9 @@ angular.module('loadPlanApp').factory('loadPlanService', [
         });
     };
 
+    _this.saveWeekNumber = (loadPlanId, formData) => {
+        return $http.post(fosJsRouting.generate('load_plan.update_start_date', {id: loadPlanId}), formData);
+    };
+
     return _this;
 }]);

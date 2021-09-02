@@ -49,7 +49,7 @@ class LoadPlanHelperController extends BaseController
         return $this->json(['message' => $translator->trans('load_plan.messages.failed_to_update_realization_date', [], 'projects'), 400]);
     }
 
-    #[Route('/{id}/update/deadline/date', name: 'load_plan.update_deadline_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
+    #[Route('/{id}/update/deadline', name: 'load_plan.update_deadline_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
     public function updateDeadlineDate(Request $request, LoadPlan $loadPlan, TranslatorInterface $translator, EntityManagerInterface $em)
     {
         if ($request->getMethod() == 'POST') {
@@ -62,5 +62,20 @@ class LoadPlanHelperController extends BaseController
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.deadline_date_updated_failed', [], 'projects'), 400]);
+    }
+
+    #[Route('/{id}/update/field', name: 'load_plan.update_start_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
+    public function updateStartDate(Request $request, LoadPlan $loadPlan, TranslatorInterface $translator, EntityManagerInterface $em)
+    {
+        if ($request->getMethod() == 'POST') {
+            $content = $request->toArray();
+            $newStartDate = \DateTime::createFromFormat('Y-m-d', $content['weekDate']);
+            $loadPlan->setStart($newStartDate);
+            $em->flush();
+
+            return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_success', [], 'projects')], 200);
+        }
+
+        return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_failed', [], 'projects')], 400);
     }
 }

@@ -185,7 +185,9 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.deadline', [], 'projects'),
                 ], true),
             ])
-            // N° semaine pour remise de l'etude
+            /* 
+             * N° semaine pour remise de l'etude
+             */
             ->add('start', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_week_number.html.twig',

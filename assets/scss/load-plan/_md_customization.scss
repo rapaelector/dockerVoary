@@ -1,0 +1,46 @@
+@mixin md_autocomplete {
+    .item-title .media-object, .media-left .media-object {
+        width: 30px !important;
+        height: 30px !important;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .panel-menu {
+        width: 200px;
+    }
+    .realization-date-menu {
+        width: 310px;
+    }
+}
+
+@mixin md_select {
+    .week-number-menu {
+        width: 250px;
+    }
+}
+
+@mixin custom_loader {
+    .date-helper-panel, 
+    .week-number-menu {
+        position: relative;
+        .date-helper-loader, 
+        .week-number-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #00000047;
+            z-index: 1040;
+            md-progress-circular {
+                position: relative;
+                left: 44%;
+                top: 40%;
+            };
+        }
+    }
+}
+
+@include md_autocomplete;
+@include md_select;
+@include custom_loader;

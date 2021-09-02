@@ -1,5 +1,6 @@
 import LoadPlanDialogController from './new-load-plan-dialog.controller';
 import PanelMenuController from './panel-menu.controller';
+import WeekNumberController from './week-number.controller';
 
 angular.module('loadPlanApp').controller('loadPlanController', [
     '$scope', 
@@ -45,6 +46,10 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 });
             });
             
+            /**
+             * Update realization date(DATE DE DEVIS)
+             * Show calendar panel
+             */
             $('body').on('click', '.realization-date', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
                 var targetClass = $(this).data('target-class');
@@ -78,6 +83,10 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 });
             });
             
+            /**
+             * Update deadline date in the table
+             * Show calendar Panel
+             */
             $('body').on('click', '.update-deadline', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
                 var targetClass = $(this).data('target-class');
@@ -110,6 +119,25 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 });
             });
             
+            /**
+             * Update weekNumber
+             * Show week number panel
+             * Get date from week number
+             */
+            $('body').on('click', '.update-week-number', function(ev) {
+                var currentValue = $(this).data('current-value');
+                var loadPlanId = $(this).data('load-plan-id');
+                var targetClass = $(this).data('target-class');
+                var projectName = $(this).data('project-name');
+                
+                $scope.showWeekNumberPanel(ev, {
+                    currentValue,
+                    loadPlanId,
+                    targetClass,
+                    projectName,
+                });
+            });
+
             $scope.economistCanceller = $q.defer();
         };
 
@@ -130,6 +158,10 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             $scope.showLoadPlanDialogModal(options);
         };
 
+        /**
+         * 
+         * @param {object} options 
+         */
         $scope.showLoadPlanDialogModal = (options) => {
             $mdDialog.show({
                 controller: LoadPlanDialogController,
@@ -147,11 +179,15 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             });
         }
 
+        /**
+         * 
+         * @param {jsEvent} ev 
+         * @param {object} args 
+         */
         $scope.showPanel = (ev, args) => {
             var position = $mdPanel.newPanelPosition()
                 .relativeTo('.' + args.targetClass)
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
-            var options = {};
 
             var config = {
                 attachTo: angular.element(document.body),
@@ -171,5 +207,42 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             };
 
             $mdPanel.open(config);
+        };
+
+        /**
+         * 
+         * @param {jsEvent} ev 
+         * @param {object} args 
+         */
+        $scope.showWeekNumberPanel = (ev, args) => {
+            args.templateUrl = 'week-number.html';
+            var config = $scope.createDynamicPanelConfig(ev, args, WeekNumberController);
+
+            $mdPanel.open(config);
+        };
+
+        $scope.createDynamicPanelConfig = (ev, args, controller) => {
+            var position = $mdPanel.newPanelPosition()
+                .relativeTo('.' + args.targetClass)
+                .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+
+            var config = {
+                attachTo: angular.element(document.body),
+                controller: controller,
+                controllerAs: 'ctrl',
+                templateUrl: args.templateUrl,
+                panelClass: 'demo-menu-example',
+                position: position,
+                locals: {
+                    options: args,
+                },
+                openFrom: ev,
+                clickOutsideToClose: true,
+                escapeToClose: true,
+                focusOnOpen: false,
+                zIndex: 2
+            };
+
+            return config;
         };
 }]);

@@ -1,5 +1,5 @@
 <div 
-    class="w-100 h-100 change-economist pt-2 {{ 'charge-economist-' ~ row.id }}" 
+    class="change-economist {{ 'charge-economist-' ~ row.id }}" 
     data-load-plan-id="{{ row.id }}"
     data-project-id="{{ resolve([row, 'project', 'id'], null) }}"
     data-economist-id="{{ resolve([row, 'project', 'economist', 'id']) }}"

@@ -1,7 +1,7 @@
 {% set projectName = resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], '')) %}
 
 <div 
-    class="realization-date pt-2 {{ 'realization-date-' ~ resolve([row, 'id'], null)  }}" 
+    class="realization-date {{ 'realization-date-' ~ resolve([row, 'id'], null)  }}" 
     data-load-plan-id="{{ resolve([row, 'id'], null) }}"
     data-target-class="{{ 'realization-date-' ~ resolve([row, 'id']) }}"
     data-realization-date="{{ value|date('Y-m-d') }}"

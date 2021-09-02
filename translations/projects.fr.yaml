@@ -248,6 +248,8 @@ load_plan:
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
     change_realization_date: 'Changer la date de devis'
+    change_week_number: 'Changer n° semaine'
+    week_number_short: 'N° de semaine'
   
   action:
     change_to_planning_view: 'Affichage planning'
@@ -279,6 +281,8 @@ load_plan:
     failed_to_update_realization_date: 'La mis à jour de la date de devis à echouer'
     deadline_date_updated_successfull: 'Date butoire mis à jour avec succès'
     deadline_date_updated_failed: 'La mis à jour de la date butoir à echouer'
+    start_date_updated_success: "Remise de l'étude modifier avec succès"
+    start_date_updated_failed: "La modification de la remise de l'étude a échoué"
 
   study_time:
     2: '1/4 journée'

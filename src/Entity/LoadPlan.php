@@ -144,6 +144,8 @@ class LoadPlan
     private $start;
 
     /**
+     * Numero de semaine
+     * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"loadPlan:list", "loadPlan:planning-event"})
      */
