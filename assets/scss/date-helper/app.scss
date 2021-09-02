@@ -1,0 +1,17 @@
+.date-helper-panel {
+    position: relative;
+    .date-helper-loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #00000047;
+        z-index: 1040;
+        md-progress-circular {
+            position: relative;
+            left: 44%;
+            top: 40%;
+        };
+    }
+}
