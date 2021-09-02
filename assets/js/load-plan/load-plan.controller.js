@@ -49,41 +49,63 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             $('body').on('click', '.realization-date', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
                 var targetClass = $(this).data('target-class');
-                var realizationDate = $(this).data('realization-date');
+                var currentDate = $(this).data('realization-date');
+                var additionalTitle = $(this).data('project-name');
 
-                $scope.showRealizationPanel(ev, {
-                    type: 'realizationDate',
-                    templateURL: 'realization-date.html',
+                dateHelperService.updateDate(ev, {
                     targetClass,
-                    loadPlanId,
-                    realizationDate,
+                    pageTitle: 'Changer la date de devis',
+                    additionalTitle,
+                    currentDate,
+                    onSave: (newDate, mdPanelRef) => {
+                        if (newDate) {
+                            newDate = moment(newDate).format('YYYY-MM-DD');
+                        }
+
+                        return loadPlanService.updateRealizationDate(loadPlanId, {realizationDate: newDate}).then((response) => {
+                            loadPlanService.showNotification(response.data.message, 'toast-success');
+                            mdPanelRef.close();
+                            $('body').trigger('load_plan.redraw-dt');
+
+                            return response;
+                        }, errors => {
+                            loadPlanService.showNotification(errors.data.message, 'toast-error');
+                            mdPanelRef.close();
+                            $('body').trigger('load_plan.redraw-dt');
+
+                            return response;
+                        });
+                    },
                 });
             });
             
             $('body').on('click', '.update-deadline', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
                 var targetClass = $(this).data('target-class');
-                var deadline = $(this).data('deadline');
                 var currentDate = $(this).data('current-date');
+                var additionalTitle = $(this).data('project-name');
 
                 dateHelperService.updateDate(ev, {
                     targetClass,
-                    loadPlanId,
-                    deadline,
                     currentDate,
                     pageTitle: 'Changer la date butoir',
-                    saveDate: (newDate) => {
-                        var date = newDate;
+                    additionalTitle,
+                    onSave: (newDate, mdPanelRef) => {
                         if (newDate) {
-                            date = moment(newDate).format('YYYY-MM-DD');
+                            newDate = moment(newDate).format('YYYY-MM-DD');
                         }
-
-                        loadPlanService.updateDeadlineDate(loadPlanId, {newDeadlineDate: date}).then((response) => {
+                        
+                        return loadPlanService.updateDeadlineDate(loadPlanId, {newDeadlineDate: newDate}).then((response) => {
                             loadPlanService.showNotification(response.data.message, 'toast-success');
+                            mdPanelRef.close();
                             $('body').trigger('load_plan.redraw-dt');
+
+                            return response;
                         }, errors => {
                             loadPlanService.showNotification(errors.data.message, 'toast-error');
+                            mdPanelRef.close();
                             $('body').trigger('load_plan.redraw-dt');
+                            return errors;
                         });
                     },
                 });

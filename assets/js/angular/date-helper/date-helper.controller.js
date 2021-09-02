@@ -4,6 +4,7 @@ function DateHelperController($scope, mdPanelRef, options) {
     $scope.data = {
         date: null,
         pageTitle: '',
+        additionalTitle: '',
     };
     $scope.loading = false;
 
@@ -16,12 +17,21 @@ function DateHelperController($scope, mdPanelRef, options) {
             if (options.currentDate) {
                 $scope.data.date = new Date(options.currentDate);
             }
+
+            if (options.additionalTitle) {
+                $scope.data.additionalTitle = options.additionalTitle;
+            }
         }
     };
 
-    $scope.saveDate = (ev) => {
-        if (options && options.saveDate) {
-            options.saveDate($scope.data.date);
+    $scope.onSave = (ev) => {
+        if (options && options.onSave) {
+            $scope.loading = true;
+            options.onSave($scope.data.date, mdPanelRef).then(() => {
+                $scope.loading = false;
+            }, () => {
+                $scope.loading = false;
+            });
         };
     };
 
