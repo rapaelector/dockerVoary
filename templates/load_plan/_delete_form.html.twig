@@ -6,6 +6,6 @@
         deleteAction: path(deleteRoute, {'id': id}),
         token: csrf_token('delete' ~ id),
         ajax: true,
-        successEvent: 'load_plan.delete',
+        successEvent: 'load_plan.redraw-dt',
     } %}
 {% endembed %}

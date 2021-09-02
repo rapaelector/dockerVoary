@@ -247,6 +247,7 @@ load_plan:
     effective_study_time: "Temps d'étude effectif"
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
+    change_realization_date: 'Changer la date de devis'
   
   action:
     change_to_planning_view: 'Affichage planning'

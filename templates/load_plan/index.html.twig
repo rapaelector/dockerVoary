@@ -105,7 +105,7 @@
                 settings: {{ datatable_settings(datatable)|raw }},
                 debug: false,
                 enableFormatter: true,
-                redrawEvent: 'load_plan.delete',
+                redrawEvent: 'load_plan.redraw-dt',
             });
             
             dtPromise.then(function (dtInstance) {

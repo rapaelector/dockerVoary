@@ -14,12 +14,14 @@ function RealizationPanelController($scope, options, mdPanelRef, loadPlanService
         $scope.loading = true;
         loadPlanService.updateRealizationDate(options.projectId, {realizationDate: $scope.data.realizationDate}).then((response) => {
             loadPlanService.showNotification(response.data.message, 'toast-success');
-            location.reload();
             $scope.loading = false;
+            $('body').trigger('load_plan.redraw-dt');
+            $scope.closePanel();
         }, errors => {
-            loadPlanService.showNotification(errors.data.message, 'toast-error');
-            location.reload();
             $scope.loading = false;
+            loadPlanService.showNotification(errors.data.message, 'toast-error');
+            $('body').trigger('load_plan.redraw-dt');
+            $scope.closePanel();
         });
     };
 

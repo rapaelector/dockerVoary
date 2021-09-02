@@ -73,12 +73,12 @@ function PanelMenuController(
             loadPlanService.saveProjectEconomist(item, options.projectId).then((response) => {
                 loadPlanService.showNotification(response.data.message, 'toast-success');
                 mdPanelRef.close();
-                location.reload();
+                $('body').trigger('load_plan.redraw-dt');
             }, errors => {
                 console.warn(errors.data.message);
                 loadPlanService.showNotification(errors.data.message, 'toast-error');
                 mdPanelRef.close();
-                location.reload();
+                $('body').trigger('load_plan.redraw-dt');
             });
         }
     };
@@ -88,12 +88,12 @@ function PanelMenuController(
             loadPlanService.saveProjectEconomist({id: $scope.data.economist}, projectId).then((response) => {
                 $scope.showNotification(response.data.message, 'toast-success');
                 mdPanelRef.close();
-                location.reload();
+                $('body').trigger('load_plan.redraw-dt');
             }, errors => {
                 console.warn(errors.data.message);
                 $scope.showNotification(errors.data.message, 'toast-error');
                 mdPanelRef.close();
-                location.reload();
+                $('body').trigger('load_plan.redraw-dt');
             });
         }
     };

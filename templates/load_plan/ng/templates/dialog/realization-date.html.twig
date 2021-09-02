@@ -1,4 +1,8 @@
 <div class="bg-white border realization-date-menu">
+    <div class="p-2 bg-app-primary text-uppercase">
+        {{ 'load_plan.label.change_realization_date'|trans({}, 'projects') }}
+    </div>
+    
     <div>
         <md-calendar ng-model="data.realizationDate"></md-calendar>
     </div>
