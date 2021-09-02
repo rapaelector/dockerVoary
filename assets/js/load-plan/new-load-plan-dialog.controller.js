@@ -121,7 +121,7 @@ function LoadPlanDialogController (
             $scope.loading = false;
             $scope.showNotification(response.data.message);
             $scope.setFormValidity(fields, true);
-            window.location.reload();
+            $('body').trigger('load_plan.redraw-dt');
         }, errors => {
             $scope.loading = false;
             $scope.data.errors[$scope.formName] = errors.data.errors;

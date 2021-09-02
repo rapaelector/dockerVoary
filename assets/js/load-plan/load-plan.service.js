@@ -120,8 +120,6 @@ angular.module('loadPlanApp').factory('loadPlanService', [
      * @returns {promise}
      */
     _this.updateDeadlineDate = (loadPlanId, formData) => {
-        console.info({formData});
-        
         return $http.post(fosJsRouting.generate('load_plan.update_deadline_date', {id: loadPlanId}), formData);
     };
 

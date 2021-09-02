@@ -1,6 +1,5 @@
 import LoadPlanDialogController from './new-load-plan-dialog.controller';
 import PanelMenuController from './panel-menu.controller';
-import RealizationPanelController from './realization-panel.controller';
 
 angular.module('loadPlanApp').controller('loadPlanController', [
     '$scope', 
@@ -149,21 +148,10 @@ angular.module('loadPlanApp').controller('loadPlanController', [
         }
 
         $scope.showPanel = (ev, args) => {
-            console.info({ev, args, type: args.type});
-
             var position = $mdPanel.newPanelPosition()
                 .relativeTo('.' + args.targetClass)
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
             var options = {};
-
-            if (args.type === 'economist') {
-                options = {
-                    type: args.type,
-                    projectId: args.projectId,
-                    economistName: args.economistName,
-                    economistId: args.economistId
-                }
-            };
 
             var config = {
                 attachTo: angular.element(document.body),
@@ -173,38 +161,13 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 panelClass: 'demo-menu-example',
                 position: position,
                 locals: {
-                    options: options,
-                },
-                openFrom: ev,
-                clickOutsideToClose: true,
-                escapeToClose: true,
-                focusOnOpen: false,
-                zIndex: 2
-            };
-
-            $mdPanel.open(config);
-        };
-        
-        $scope.showRealizationPanel = (ev, args) => {
-            var position = $mdPanel.newPanelPosition()
-                .relativeTo('.' + args.targetClass)
-                .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
-
-            var config = {
-                attachTo: angular.element(document.body),
-                controller: RealizationPanelController,
-                controllerAs: 'ctrl',
-                templateUrl: 'realization-date.html',
-                panelClass: 'demo-menu-example',
-                position: position,
-                locals: {
                     options: args,
                 },
                 openFrom: ev,
                 clickOutsideToClose: true,
                 escapeToClose: true,
                 focusOnOpen: false,
-                zIndex: 10
+                zIndex: 2
             };
 
             $mdPanel.open(config);
