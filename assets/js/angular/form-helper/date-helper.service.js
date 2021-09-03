@@ -1,7 +1,7 @@
 import DateHelperController from './date-helper.controller';
-import dateHelperTemplate from './template.html';
+import dateHelperTemplate from './date-helper-template.html';
 
-angular.module('dateHelperModule').factory('dateHelperService', ['$mdPanel', function ($mdPanel) {
+angular.module('formHelperModule').factory('dateHelperService', ['$mdPanel', function ($mdPanel) {
     var _this = this;
 
     /**

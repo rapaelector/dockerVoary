@@ -10,6 +10,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
     '$element',
     'loadPlanService',
     'dateHelperService',
+    'userHelperService',
     function (
         $scope, 
         $mdDialog, 
@@ -17,7 +18,8 @@ angular.module('loadPlanApp').controller('loadPlanController', [
         $q,
         $element,
         loadPlanService,
-        dateHelperService
+        dateHelperService,
+        userHelperService
     ) {
         
         $scope.data = {
@@ -36,14 +38,34 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 var economistName = $(this).data('economist-name');
                 var economistId = $(this).data('economist-id');
 
-                $scope.showPanel(ev, {
-                    type: 'economist',
-                    templateUrl: 'economist.html',
-                    targetClass, 
-                    loadPlanId, 
-                    economistName, 
-                    economistId,
-                });
+                // $scope.showPanel(ev, {
+                //     type: 'economist',
+                //     templateUrl: 'economist.html',
+                //     targetClass, 
+                //     loadPlanId, 
+                //     economistName, 
+                //     economistId,
+                // });
+
+                userHelperService.selectUser(ev, {
+                    targetClass,
+                    pageTitle: 'Changer economiste',
+                    inputSearchLabel: 'Recherche',
+                    onUserSave: (selectedUser, mdPanelRef) => {
+                        return loadPlanService.saveProjectEconomist(loadPlanId, selectedUser).then((response) => {
+                            loadPlanService.showNotification(response.data.message, 'toast-success');
+                            mdPanelRef.close();
+                            $('body').trigger('load_plan.redraw-dt');
+                            return response;
+                        }, errors => {
+                            console.warn(errors.data.message);
+                            loadPlanService.showNotification(errors.data.message, 'toast-error');
+                            mdPanelRef.close();
+                            $('body').trigger('load_plan.redraw-dt');
+                            return errors;
+                        });
+                    }
+                })
             });
             
             /**

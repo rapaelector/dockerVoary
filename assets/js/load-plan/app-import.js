@@ -13,7 +13,7 @@ import 'angular-daterangepicker/js/angular-daterangepicker';
 
 import './../angular/shared/shared.module';
 import './../angular/load-plan-planning/load-plan-planning';
-import './../angular/date-helper/date-helper';
+import './../angular/form-helper/form-helper';
 import './app.module';
 import './app.config';
 import './load-plan.controller';

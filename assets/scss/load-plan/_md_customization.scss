@@ -43,6 +43,67 @@
     }
 }
 
+@mixin user_helper_panel {
+    .user-helper-panel {
+        height: 70vh;
+        min-height: 50vh;
+        width: 280px;
+        max-width: 280px;
+        position: relative;
+        md-toolbar {
+            position: sticky;
+            top: 0;
+            height: 40px;
+            max-height: 40px;
+            min-height: 40px;
+            .md-toolbar-tools {
+                height: 40px;
+                max-height: 40px;
+                font-size: 14px;
+                min-height: 40px;
+            }
+        }
+        md-content {
+            max-height: 100%;
+            min-height: 100%;
+            md-list-item {
+                .md-avatar {
+                    object-fit: cover;
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+        }
+        md-list .md-subheader {
+            height: 40px;
+        }
+        md-list-item.md-no-proxy.md-button, md-list-item .md-no-style.md-button {
+            height: 50px;
+        }
+        .md-subheader-inner {
+            padding: 4px 8px;
+        }
+        .md-dense > .md-button:not(.md-dense-disabled), .md-dense :not(.md-dense-disabled) .md-button:not(.md-dense-disabled) {
+            line-height: 20px !important;
+        }
+        .user-helper-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #00000047;
+            z-index: 1040;
+            md-progress-circular {
+                position: relative;
+                left: 44%;
+                top: 40%;
+            };
+        }
+    }
+}
+
 @include md_autocomplete;
 @include md_select;
 @include custom_loader;
+@include user_helper_panel;

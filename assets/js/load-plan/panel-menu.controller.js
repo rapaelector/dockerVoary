@@ -45,6 +45,9 @@ function PanelMenuController(
         });
     }, true);
 
+    /**
+     * Stop propagation while writting
+     */
     $element.find('input').on('keydown', (ev) => {
         ev.stopPropagation();
     });

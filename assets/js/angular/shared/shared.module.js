@@ -1,4 +1,5 @@
-angular.module('sharedModule', []);
+angular.module('sharedModule', ['ngMaterial']);
+import angular from 'angular';
 import jQuery from 'jquery';
 
 angular.module('sharedModule').filter('number_format', ['$filter', function($filter) {
@@ -171,3 +172,30 @@ angular.module('sharedModule').factory('resolverService', function () {
 
     return _this;
 });
+
+angular.module('sharedModule').factory('notificationService', ['$mdToast', function ($mdToast) {
+    var _this = {};
+
+    _this.showToast = (message, options) => {
+        var defaultOptions = {
+            toastClass: 'toast-success',
+            toastDirection: 'top right',
+        };
+
+        var options = {...defaultOptions, ...options};
+
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(message)
+            .position(options.toastDirection)
+            .hideDelay(5000)
+            .toastClass(options.toastClass)
+        ).then(() => {
+            console.info('Toast dismissed');
+        }).catch(() => {
+            console.info('failed to laod md toast');
+        });
+    };
+
+    return _this;
+}])
