@@ -2,6 +2,8 @@
 {% set className = 'w-100 h-100 d-flex align-items-center justify-content-center update-week-number' %}
 
 {% set targetClass = 'week-number-target-' ~ resolve([row, 'id'], null) %}
+{% set tooltip = 'load_plan.label.edit_week_number'|trans({}, 'projects') %}
+
 {% set attrs = {
     "data-current-value": value ? value|date('W'),
     "data-target-class": targetClass,
@@ -9,7 +11,7 @@
     "data-project-name": resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], null)),
     "data-toggle": "tooltip",
     "data-placement": "top",
-    "title": "{{ 'load_plan.label.edit_week_number'|trans({}, 'projects') }}",
+    "title": tooltip,
 } %}
 
 {% if resolve([row, 'realizationQuotationDate'], null) %}

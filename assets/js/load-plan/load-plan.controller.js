@@ -33,24 +33,16 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             });
 
             $('body').on('click', '.change-economist', function (ev) {
-                var targetClass = $(this).data('target-class');
+                var target = $(this).data('target');
                 var loadPlanId = $(this).data('load-plan-id');
                 var economistName = $(this).data('economist-name');
-                var economistId = $(this).data('economist-id');
-
-                // $scope.showPanel(ev, {
-                //     type: 'economist',
-                //     templateUrl: 'economist.html',
-                //     targetClass, 
-                //     loadPlanId, 
-                //     economistName, 
-                //     economistId,
-                // });
+                var userId = $(this).data('economist-id');
 
                 userHelperService.selectUser(ev, {
-                    targetClass,
-                    pageTitle: 'Changer economiste',
+                    target,
+                    pageTitle: 'Changer economist',
                     inputSearchLabel: 'Recherche',
+                    userId,
                     onUserSave: (selectedUser, mdPanelRef) => {
                         return loadPlanService.saveProjectEconomist(loadPlanId, selectedUser).then((response) => {
                             loadPlanService.showNotification(response.data.message, 'toast-success');
@@ -74,12 +66,12 @@ angular.module('loadPlanApp').controller('loadPlanController', [
              */
             $('body').on('click', '.realization-date', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
-                var targetClass = $(this).data('target-class');
+                var target = $(this).data('target');
                 var currentDate = $(this).data('realization-date');
                 var additionalTitle = $(this).data('project-name');
 
                 dateHelperService.updateDate(ev, {
-                    targetClass,
+                    target,
                     pageTitle: 'Changer la date de devis',
                     additionalTitle,
                     currentDate,
@@ -111,12 +103,12 @@ angular.module('loadPlanApp').controller('loadPlanController', [
              */
             $('body').on('click', '.update-deadline', function (ev) {
                 var loadPlanId = $(this).data('load-plan-id');
-                var targetClass = $(this).data('target-class');
+                var target = $(this).data('target');
                 var currentDate = $(this).data('current-date');
                 var additionalTitle = $(this).data('project-name');
 
                 dateHelperService.updateDate(ev, {
-                    targetClass,
+                    target,
                     currentDate,
                     pageTitle: 'Changer la date butoir',
                     additionalTitle,

@@ -319,4 +319,10 @@ class UserController extends BaseController
 
         return $this->json(['message' => 'no XMLHttpRequest request'], 400);
     }
+
+    #[Route('/api/{id}', name: 'user.api_user', requirements: ['id' => '\d+'], options: ['expose' => true])]
+    public function apiUser(User $user, SerializerInterface $serializer)
+    {
+        return $this->json($serializer->normalize($user, 'json', ['groups' => 'project.user']));
+    }
 }

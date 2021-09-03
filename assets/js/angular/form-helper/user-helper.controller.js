@@ -7,12 +7,14 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
         user: null,
         pageTitle: '',
         inputSearchLabel: '',
+        selectedUser: null,
     };
+    $scope.userId = null;
     $scope.userSearchTerm = '';
 
     this.$onInit = () => {
         $scope.userCanceller = $q.defer();
-
+        $scope.loading = true;
         var query = '';
         if (options) {
             if (options.userName) {
@@ -28,18 +30,40 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
             if (options.inputSearchLabel) {
                 $scope.data.inputSearchLabel = options.inputSearchLabel;
             }
+
+            if (options.userId) {
+                $scope.userId = options.userId;
+            }
         }
 
         userHelperService.getUsers(query, {}).then((response) => {
             $scope.data.users = response;
-        })
+            const currentUser = $scope.data.users.find((u, i) => u.id === $scope.userId);
+            if (currentUser) {
+                return Promise.resolve(currentUser);
+            } else {
+                return userHelperService.getUser($scope.userId);
+            };
+        }).then(user => {
+            const currentUser = $scope.data.users.find((u, i) => u.id === $scope.userId);
+            if (!currentUser) {
+                $scope.data.users.unshift(currentUser);
+            }
+            $scope.selectedUser = user;
+            $scope.loading = false;
+        }, errors => {
+            $scope.loading = false;
+        });
     };
 
     $scope.$watch('data.user', function () {
+        $scope.loading = true;
         $scope.queryUserSearch($scope.data.user).then((response) => {
             $scope.data.users = response;
+            $scope.loading = false;
         }, errors => {
             console.warn({errors});
+            $scope.loading = false;
         });
     })
     /**
@@ -78,13 +102,35 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
 
     $scope.onUserClicked = (user) => {
         $scope.loading = true;
+        $scope.data.selectedUser = user;
+        // if (options.onUserSave) {
+        //     options.onUserSave(user, mdPanelRef).then((response) => {
+        //         $scope.loading = false;
+        //     }, errors => {
+        //         $scope.loading = false;
+        //     })
+        // }
+        $scope.save()
+    };
+
+    $scope.saveUser = (user) => {
+        $scope.loading = true;
         if (options.onUserSave) {
-            options.onUserSave(user, mdPanelRef).then((response) => {
+            options.onUserSave($scope.data.selectedUser, mdPanelRef).then((response) => {
                 $scope.loading = false;
             }, errors => {
                 $scope.loading = false;
             })
         }
+    };
+
+    $scope.save = () => {
+        $scope.loading = true;
+        $scope.saveUser();
+    };
+
+    $scope.closePanel = () => {
+        mdPanelRef.close();
     };
 };
 

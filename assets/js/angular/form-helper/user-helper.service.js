@@ -6,15 +6,15 @@ angular.module('formHelperModule').factory('userHelperService', ['$http', '$mdPa
 
     _this.selectUser = (ev, options) => {
         var position = $mdPanel.newPanelPosition()
-            .relativeTo('.' + options.targetClass)
-            .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+            .relativeTo(options.target)
+            .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ABOVE);
 
         var config = {
             attachTo: angular.element(document.body),
             controller: UserHelperController,
             controllerAs: 'ctrl',
             template: userHelperTemplate,
-            panelClass: 'date-helper-panel',
+            panelClass: 'user-helper-container-panel',
             position: position,
             locals: {
                 options,
@@ -23,7 +23,7 @@ angular.module('formHelperModule').factory('userHelperService', ['$http', '$mdPa
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: false,
-            zIndex: 10
+            zIndex: 84
         };
 
         $mdPanel.open(config);
@@ -43,6 +43,10 @@ angular.module('formHelperModule').factory('userHelperService', ['$http', '$mdPa
                 });
             }, 500);
         });
+    };
+
+    _this.getUser = (UserId) => {
+        return $htt.get(Routing.generate('user.api_user', {id: userId}));
     };
 
     return _this;

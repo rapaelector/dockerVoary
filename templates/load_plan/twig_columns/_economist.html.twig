@@ -1,10 +1,13 @@
 {% set emptyValueClass = not value ? 'w-100 h-100' : '' %}
+{% set dynamicId = 'charge-economist-' ~ row.id %}
+
 <div 
-    class="change-economist {{ 'charge-economist-' ~ row.id ~ ' ' ~ emptyValueClass }} dynamic-nowrap" 
+    id="{{ dynamicId }}"
+    class="change-economist {{ emptyValueClass }} dynamic-nowrap" 
     data-load-plan-id="{{ row.id }}"
     data-project-id="{{ resolve([row, 'project', 'id'], null) }}"
     data-economist-id="{{ resolve([row, 'project', 'economist', 'id']) }}"
     data-economist-name="{{ resolve([row, 'project', 'economist', 'lastName'], null) }}"
-    data-target-class="{{ 'charge-economist-' ~ row.id }}">
+    data-target="{{ '#' ~ dynamicId }}">
         {{ resolve([row, 'project', 'economist', 'name'], null) }}
 </div>

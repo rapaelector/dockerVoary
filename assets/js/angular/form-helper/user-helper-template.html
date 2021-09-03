@@ -4,16 +4,17 @@
             <span>{{ data.pageTitle }}</span>
         </div>
     </md-toolbar>
-
+    <div class="form-group p-2 user-search bg-white border-bottom">    
+        <input type="text" class="form-control" placeholder="{{ data.inputSearchLabel }}" ng-model="data.user">
+    </div>
     <md-content>
         <md-list class="md-dense md-default-theme" flex>
-            <md-subheader>
-                <md-input-container class="m-0 w-100">
-                    <input aria-label="{{ data.inputSearchLabel }}" ng-model="data.user">
-                </md-input-container>
-            </md-subheader>
-            
-            <md-list-item class="md-2-line" ng-repeat="user in data.users" ng-click="onUserClicked(user)">
+            <md-list-item 
+                class="md-2-line" 
+                ng-repeat="user in data.users" 
+                ng-click="onUserClicked(user)" 
+                ng-class="selectedUser.id == user.id ? 'current-user' : ''"
+            >
                 <img ng-src="{{ user.avatar }}" class="md-avatar"/>
                 <div class="md-list-item-text" layout="column">
                     <h4>{{ user.name }}</h4>
@@ -22,8 +23,12 @@
             </md-list-item>
         </md-list>
     </md-content>
-
-    <div class="user-helper-loader" ng-if="loading">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <div class="d-flex justify-content-around user-panel-footer bg-white border-top">
+        <md-button class="md-app-primary" ng-click="save()">Enregistrer</md-button>
+        <md-button class="md-app-secondary" ng-click="closePanel()">Annuler</md-button>
     </div>
+</div>
+
+<div class="user-helper-loader" ng-if="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>

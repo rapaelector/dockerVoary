@@ -9,9 +9,10 @@ angular.module('formHelperModule').factory('dateHelperService', ['$mdPanel', fun
      * @param {object} options 
      */
     _this.updateDate = (ev, options) => {
+        console.info(options.target);
         var position = $mdPanel.newPanelPosition()
-                .relativeTo('.' + options.targetClass)
-                .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+                .relativeTo(options.target)
+                .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ABOVE);
 
         var config = {
             attachTo: angular.element(document.body),

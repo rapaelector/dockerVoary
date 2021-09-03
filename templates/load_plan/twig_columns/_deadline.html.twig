@@ -1,9 +1,10 @@
-{% set dynamicClass = 'update-dealine-target-' ~ resolve([row, 'id'], null) %}
 {% set projectName = resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], '')) %}
+{% set dynamicId = 'deadline-' ~ resolve([row, 'id'], null) %}
 
 <div 
-    class="update-deadline {{ dynamicClass }}" 
-    data-target-class="{{ dynamicClass }}" 
+    id="{{ dynamicId }}"
+    class="update-deadline" 
+    data-target="{{ '#' ~ dynamicId }}" 
     data-load-plan-id="{{ resolve([row, 'id'], null) }}"
     data-current-date="{{ value ? value|date('Y-m-d') }}"
     data-project-name="{{ projectName }}"
