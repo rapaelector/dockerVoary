@@ -23,19 +23,17 @@ function PanelMenuController(
         economists: [],
     };
     $scope.economistSearchTerm = null;
-    
+    $scope.loading = false;
     this.$onInit = () => {
-
-        if (options.type === 'economist') {
+        var query = '';
+        if (options && options.economistName) {
             var query = options.economistName ? options.economistName : '';
             $scope.economistSearchTerm = query;
-            loadPlanService.getEconomists(query, {}).then((response) => {
-                $scope.data.economists = response;
-                $scope.data.economist = response;
-            })
         }
-
-        if (options.type === 'realizationDate') {};
+        loadPlanService.getEconomists(query, {}).then((response) => {
+            $scope.data.economists = response;
+            $scope.data.economist = response;
+        })
         
         $scope.economistCanceller = $q.defer();
     };
@@ -70,7 +68,7 @@ function PanelMenuController(
 
     $scope.selectEconomistChange = (item) => {
         if (item) {
-            loadPlanService.saveProjectEconomist(item, options.projectId).then((response) => {
+            loadPlanService.saveProjectEconomist(item, options.loadPlanId).then((response) => {
                 loadPlanService.showNotification(response.data.message, 'toast-success');
                 mdPanelRef.close();
                 $('body').trigger('load_plan.redraw-dt');
@@ -85,15 +83,18 @@ function PanelMenuController(
 
     $scope.economistChangeHandler = () => {
         if ($scope.data.economist) {
-            loadPlanService.saveProjectEconomist({id: $scope.data.economist}, projectId).then((response) => {
-                $scope.showNotification(response.data.message, 'toast-success');
+            $scope.loading = true;
+            loadPlanService.saveProjectEconomist(options.loadPlanId, {id: $scope.data.economist}).then((response) => {
+                loadPlanService.showNotification(response.data.message, 'toast-success');
                 mdPanelRef.close();
                 $('body').trigger('load_plan.redraw-dt');
+                $scope.loading = false;
             }, errors => {
                 console.warn(errors.data.message);
-                $scope.showNotification(errors.data.message, 'toast-error');
+                loadPlanService.showNotification(errors.data.message, 'toast-error');
                 mdPanelRef.close();
                 $('body').trigger('load_plan.redraw-dt');
+                $scope.loading = false;
             });
         }
     };

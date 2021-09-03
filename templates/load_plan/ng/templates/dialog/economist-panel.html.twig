@@ -1,6 +1,6 @@
-<div class="row bg-white border panel-menu">
-    <div class="col-sm-12">
-        <md-input-container class="w-100">
+<div class="bg-white border panel-menu panel-loader-container">
+    <div>
+        <md-input-container class="w-100 px-2">
             <md-select 
                 class=""
                 ng-model="data.economist"
@@ -38,5 +38,9 @@
                 </md-optgroup label="user">
             </md-select>
         </md-input-container>
+    </div>
+
+    <div class="panel-loader" ng-if="loading">
+        <md-progress-circular md-mode="indeterminate" md-diameter="40"></md-progress-circular>
     </div>
 </div>

@@ -70,11 +70,14 @@ class LoadPlanController extends BaseController
                     )
                 ),
             ])
-            // Economist
+            /**
+             * Economist
+             * Editable field
+             */
             ->add('economist', TwigColumn::class, [
                 'field' => 'economist.firstName',
                 'template' => 'load_plan/twig_columns/_economist.html.twig',
-                'className' => 'dynamic-nowrap',
+                'className' => 'dynamic-nowrap editable-field',
                 'label' => $translator->trans('columns.economist', [], 'project'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('columns.economist', [], 'project'),
@@ -177,23 +180,31 @@ class LoadPlanController extends BaseController
                 ], true),
                 'searchable' => true,
             ])
-            // Date butoire
+            /**
+             * Date butoire
+             * Editable field
+             */
             ->add('deadline', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.deadline', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_deadline.html.twig',
+                'className' => 'editable-field',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.deadline', [], 'projects'),
                 ], true),
             ])
             /* 
              * N° semaine pour remise de l'etude
+             * Editable field
              */
             ->add('start', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_week_number.html.twig',
-                'className' => 'dynamic-nowrap text-center p-0',
+                'className' => 'text-center p-0 editable-field',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
+                    'label_attr' => [
+                        'class' => 'dynamic-nowrap',
+                    ],
                 ], true)
             ])
             // Commentaires
@@ -208,10 +219,12 @@ class LoadPlanController extends BaseController
             /**
              * Date de devis
              * Date de realisation devis
+             * Editable field
              */
             ->add('realizationQuotationDate', TwigColumn::class, [
                 'label' => $translator->trans('load_plan.label.realization_quotation_date', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_realization_quotation_date.html.twig',
+                'className' => 'editable-field',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.realization_quotation_date_abbr', [], 'projects'),
                 ], true),

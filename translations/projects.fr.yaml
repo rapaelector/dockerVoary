@@ -250,6 +250,7 @@ load_plan:
     change_realization_date: 'Changer la date de devis'
     change_week_number: 'Changer n° semaine'
     week_number_short: 'N° de semaine'
+    edit_week_number: "Modifier la numero de semaine"
   
   action:
     change_to_planning_view: 'Affichage planning'

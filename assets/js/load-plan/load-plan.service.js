@@ -93,10 +93,10 @@ angular.module('loadPlanApp').factory('loadPlanService', [
     /**
      * 
      * @param {object} item 
-     * @param {number} projectId 
+     * @param {number} loadPlanId 
      */
-    _this.saveProjectEconomist = (item, projectId) => {
-        return $http.post(fosJsRouting.generate('load_plan.change_project_economist', {id: projectId}), item);
+    _this.saveProjectEconomist = (loadPlanId, item) => {
+        return $http.post(fosJsRouting.generate('load_plan.change_project_economist', {id: loadPlanId}), item);
     };
         
     /**

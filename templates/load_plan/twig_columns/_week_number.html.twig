@@ -7,6 +7,9 @@
     "data-target-class": targetClass,
     "data-load-plan-id": resolve([row, 'id'], null),
     "data-project-name": resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], null)),
+    "data-toggle": "tooltip",
+    "data-placement": "top",
+    "title": "{{ 'load_plan.label.edit_week_number'|trans({}, 'projects') }}",
 } %}
 
 {% if resolve([row, 'realizationQuotationDate'], null) %}

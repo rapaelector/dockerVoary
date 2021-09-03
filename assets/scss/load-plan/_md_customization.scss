@@ -21,10 +21,12 @@
 
 @mixin custom_loader {
     .date-helper-panel, 
-    .week-number-menu {
+    .week-number-menu,
+    .panel-loader-container {
         position: relative;
         .date-helper-loader, 
-        .week-number-loader {
+        .week-number-loader,
+        .panel-loader {
             position: absolute;
             top: 0;
             left: 0;
