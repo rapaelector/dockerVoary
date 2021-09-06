@@ -8,6 +8,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
     '$mdPanel',
     '$q',
     '$element',
+    'moment',
     'loadPlanService',
     'dateHelperService',
     'userHelperService',
@@ -18,6 +19,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
         $mdPanel,
         $q,
         $element,
+        moment,
         loadPlanService,
         dateHelperService,
         userHelperService,
@@ -155,6 +157,27 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                     additionalTitle,
                     label: 'N° de semaine',
                     pageTitle: 'Changer n° semaine',
+                    onWeekNumberSave: (weekDate, mdPanelRef) => {
+                        if (weekDate) {
+                            var startDate = moment(weekDate);
+
+                            return loadPlanService.saveWeekNumber(id, {
+                                startDate: startDate.format('YYYY-MM-DD'),
+                            }).then((response) => {
+                                mdPanelRef.close();
+                                loadPlanService.showNotification(response.data.message, 'toast-success');
+                                $('body').trigger('load_plan.redraw-dt');
+
+                                return response;
+                            }, errors => {
+                                mdPanelRef.close();
+                                loadPlanService.showNotification(errors.data.message, 'toast-error');
+                                $('body').trigger('load_plan.redraw-dt');
+                                
+                                return errors;
+                            });
+                        }
+                    }
                 });
             });
 

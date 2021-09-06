@@ -69,8 +69,10 @@ class LoadPlanHelperController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $content = $request->toArray();
-            $newStartDate = \DateTime::createFromFormat('Y-m-d', $content['weekDate']);
+            $newStartDate = \DateTime::createFromFormat('Y-m-d', $content['startDate']);
+            $newEndDate = (\DateTime::createFromFormat('Y-m-d', $content['startDate']))->modify('Next sunday');
             $loadPlan->setStart($newStartDate);
+            $loadPlan->setEnd($newEndDate);
             $em->flush();
 
             return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_success', [], 'projects')], 200);

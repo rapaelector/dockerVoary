@@ -1,6 +1,6 @@
-WeekNumberHelperController.$inject = ['$scope', 'mdPanelRef', 'options', 'loadPlanService', 'PANEL_ELEVATION_CLASS'];
+WeekNumberHelperController.$inject = ['$scope', 'mdPanelRef', 'moment', 'options', 'PANEL_ELEVATION_CLASS'];
 
-function WeekNumberHelperController($scope, mdPanelRef, options, loadPlanService, PANEL_ELEVATION_CLASS) {
+function WeekNumberHelperController($scope, mdPanelRef, moment, options, PANEL_ELEVATION_CLASS) {
     $scope.data = {
         weeks: {},
         week: null,
@@ -40,19 +40,17 @@ function WeekNumberHelperController($scope, mdPanelRef, options, loadPlanService
 
     $scope.saveWeek = () => {
         if ($scope.data.week) {
-            var weekDate = moment($scope.data.week).format('YYYY-MM-DD');
-            $scope.loading = true;
-            loadPlanService.saveWeekNumber($scope.data.id, {weekDate}).then((response) => {
-                mdPanelRef.close();
-                $('body').trigger('load_plan.redraw-dt');
-                $scope.loading = false;
-                loadPlanService.showNotification(response.data.message, 'toast-success');
-            }, errors => {
-                mdPanelRef.close();
-                $('body').trigger('load_plan.redraw-dt');
-                $scope.loading = false;
-                loadPlanService.showNotification(errors.data.message, 'toast-error');
-            });
+            if (options && options.onWeekNumberSave) {
+                $scope.loading = true;
+                options.onWeekNumberSave($scope.data.week, mdPanelRef).then((response) => {
+                    $scope.loading = false;
+                    mdPanelRef.close();
+                    $('body').trigger('load_plan.redraw-dt');
+                }, errors => {
+                    mdPanelRef.close();
+                    $scope.loading = false;
+                })
+            }
         }
     }
 };

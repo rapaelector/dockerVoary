@@ -16,6 +16,7 @@ use App\DataTables\DataTable;
 use App\DataTables\DataTableFactory;
 use App\Service\Form\FormService;
 use App\DataTables\Filter\ChoiceFilter;
+use App\DataTables\Filter\ChoiceRangeFilter;
 use App\Service\User\UserService;
 
 use Doctrine\ORM\QueryBuilder;
@@ -200,12 +201,20 @@ class LoadPlanController extends BaseController
                 'label' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study', [], 'projects'),
                 'template' => 'load_plan/twig_columns/_week_number.html.twig',
                 'className' => 'text-center p-0 editable-field',
+                'searchable' => true,
+                'filter' => $this->filterBuilder->buildFilter(
+                    ChoiceRangeFilter::class,
+                    array_merge(
+                        $this->filterOptionsProvider->getOptions('load_plan_start'),
+                        ['choices' => $this->filterOptionsProvider->getLoadPlanStart()],
+                    ),
+                ),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
                     'label_attr' => [
                         'class' => 'dynamic-nowrap',
                     ],
-                ], true)
+                ], true),
             ])
             // Commentaires
             ->add('comment', TextColumn::class, [

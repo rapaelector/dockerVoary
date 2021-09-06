@@ -103,7 +103,7 @@ function LoadPlanDialogController (
         $scope.loading = true;
         // start = N° semaine pour remise de l'etude
         $scope.form.start =  $scope.form.start ? moment($scope.form.start).startOf('week').format('YYYY-MM-DD') : null;
-        $scope.form.end = $scope.form.end ? moment($scope.form.start).endOf('week').format('YYYY-MM-DD') : null;
+        $scope.form.end = $scope.form.start ? moment($scope.form.start).endOf('week').format('YYYY-MM-DD') : null;
         $scope.form.deadline = $scope.form.deadline ? moment($scope.form.deadline).format('YYYY-MM-DD') : null;
         $scope.form.realizationQuotationDate = $scope.form.realizationQuotationDate ? moment($scope.form.realizationQuotationDate).format('YYYY-MM-DD') : null;
 

@@ -51,7 +51,7 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
             if (!currentUser) {
                 $scope.data.users.unshift(currentUser);
             }
-            $scope.selectedUser = user;
+            $scope.data.selectedUser = user;
             $scope.loading = false;
         }, errors => {
             $scope.loading = false;
@@ -61,26 +61,23 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
     $scope.$watch('data.user', function () {
         $scope.loading = true;
         $scope.queryUserSearch($scope.data.user).then((response) => {
-            $scope.data.users = response;
-            $scope.loading = false;
+            if (Array.isArray(response)) {
+                $scope.data.users = response;
+                $scope.loading = false;
+            }
         }, errors => {
             console.warn({errors});
             $scope.loading = false;
         });
     })
-    /**
-     * Stop propagation while writting
-     */
-    $element.find('input').on('keydown', (ev) => {
-        ev.stopPropagation();
-    });
+
     
     /**
      * search for economist
      * remote dataservice call.
      */
     $scope.queryUserSearch = (query) => {
-        $scope.userCanceller.resolve();
+        $scope.userCanceller.resolve(null);
         $scope.userCanceller = $q.defer();
         var config = {
             timeout: $scope.userCanceller.promise,
@@ -92,23 +89,12 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
         return userHelperService.getUsers(query, config);
     }
 
-    $scope.userChanged = (item) => {
-        if (item) {
-        }
-    };
-
-    $scope.userChangedHandler = () => {
-        if ($scope.data.user) {
-        }
-    };
-
     $scope.onUserClicked = (user) => {
-        $scope.loading = true;
         $scope.data.selectedUser = user;
-        $scope.save()
     };
 
-    $scope.saveUser = (user) => {
+    $scope.save = () => {
+        $scope.loading = true;
         $scope.loading = true;
         if (options.onUserSave) {
             options.onUserSave($scope.data.selectedUser, mdPanelRef).then((response) => {
@@ -117,11 +103,6 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
                 $scope.loading = false;
             })
         }
-    };
-
-    $scope.save = () => {
-        $scope.loading = true;
-        $scope.saveUser();
     };
 
     $scope.closePanel = () => {

@@ -3,12 +3,14 @@ import userHelperTemplate from './user-helper-template.html';
 
 angular.module('formHelperModule').factory('userHelperService', [
     '$http', 
-    '$mdPanel', 
+    '$mdPanel',
+    '$timeout',
     'PANEL_ELEVATION_CLASS', 
     'PANEL_CLASS', 
     function (
         $http, 
-        $mdPanel, 
+        $mdPanel,
+        $timeout,
         PANEL_ELEVATION_CLASS,
         PANEL_CLASS,
     ) {
@@ -43,16 +45,12 @@ angular.module('formHelperModule').factory('userHelperService', [
     _this.getUsers = (userName, config, key) => {
         var timers = [];
 
-		return new Promise(function (resolve, reject) {
-			timers[key] = setTimeout(function () {
-                $http.get(Routing.generate('load_plan.economists', {
-                    q: userName
-                }), config).then(function (response) {
-                    resolve(response.data);
-                }).catch(function (error) {
-                    resolve([]);
-                });
-            }, 500);
+        return $http.get(Routing.generate('load_plan.economists', {
+            q: userName
+        }), config).then(function (response) {
+            return response.data;
+        }).catch(function (error) {
+            return null;
         });
     };
 

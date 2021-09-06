@@ -85,6 +85,8 @@ $app-primary: #2e3192;
         }
         md-content {
             height: calc(100% - 40px);
+            display: flex;
+            flex-direction: column;
             md-list-item {
                 .md-avatar {
                     object-fit: cover;
@@ -117,10 +119,10 @@ $app-primary: #2e3192;
         }
         .user-helper-loader {
             position: absolute;
-            top: 0;
+            top: 85px;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: 48px;
             background: #00000047;
             z-index: 1040;
             md-progress-circular {

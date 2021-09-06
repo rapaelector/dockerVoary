@@ -76,7 +76,7 @@
 
 									{% if fieldType == constant('TYPE_CHOICE', filter) %}
 										<span class="filter-label">{{ resolve([column, 'meta', 'abbr'], column.label)|trans|raw }}</span>
-										<select {{ render_attr(filter_attr) }}>
+										<select {{ render_attr(filter_attr) }} data-test="my-choice-field">
 											<option></option>
 											{% for key, value in resolve([filter, 'choices'], []) %}
 												<option value="{{ key }}">

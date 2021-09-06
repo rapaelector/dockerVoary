@@ -146,6 +146,15 @@ class FilterOptionsProvider
                 'style' => 'text-transform: capitalize;'
             ]
         ],
+        'load_plan_start' => [
+            'type' => 'choice',
+            'choices' => [],
+            'width' => '100px',
+            'attr' => [
+                'style' => 'text-transform: capitalize;',
+                'class' => 'form-control',
+            ]
+        ]
     ];
 
     public function getOptions($name)
@@ -345,6 +354,24 @@ class FilterOptionsProvider
 
         foreach ($res1 as $key => $economist) {
             $res[$res1[$key]] = $res1[$key] . ' ' .$res2[$key];
+        }
+
+        return $res;
+    }
+
+    public function getLoadPlanStart()
+    {
+        $currentYear = (new \DateTime())->format('Y');
+        $startOfYear = \DateTime::createFromFormat('Y-m-d', $currentYear . '-01-01');
+        $endOfYear = \DateTime::createFromFormat('Y-m-d', $currentYear . '-12-31');
+        $weeksInYearCount = floor($startOfYear->diff($endOfYear)->days / 7);
+        $res = [];
+        $weekStart = (clone $startOfYear)->modify('Next monday');
+        $weekEnd = (clone $weekStart)->modify('+6 day');
+        $res[implode(';', [$weekStart->format('Y-m-d'), $weekEnd->format('Y-m-d')])] = 1;
+        
+        for ($i=2; $i < $weeksInYearCount; $i++) { 
+            $res[implode(';', [$weekEnd->modify('+1 day')->format('Y-m-d'), $weekEnd->modify('+6 day')->format('Y-m-d')])] = $i;
         }
 
         return $res;

@@ -12,7 +12,7 @@
             class="md-2-line" 
             ng-repeat="user in data.users" 
             ng-click="onUserClicked(user)" 
-            ng-class="selectedUser.id == user.id ? 'current-user' : ''"
+            ng-class="data.selectedUser.id == user.id ? 'current-user' : ''"
         >
             <img ng-src="{{ user.avatar }}" class="md-avatar"/>
             <div class="md-list-item-text" layout="column">
@@ -22,8 +22,8 @@
         </md-list-item>
     </md-list>
     <div class="d-flex justify-content-around user-panel-footer bg-white border-top">
-        <md-button class="md-app-primary" ng-click="save()">Enregistrer</md-button>
-        <md-button class="md-app-secondary" ng-click="closePanel()">Annuler</md-button>
+        <md-button ng-disabled="loading || !data.selectedUser" class="md-app-primary" ng-click="save()">Enregistrer</md-button>
+        <md-button ng-disabled="loading || !data.selectedUser" class="md-app-secondary" ng-click="closePanel()">Annuler</md-button>
     </div>
 </md-content>
 

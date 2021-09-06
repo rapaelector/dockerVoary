@@ -19,4 +19,6 @@
     <div class="{{ className }}" {{ render_attr(attrs) }}>{{ value|date('W') }}</div>
 {% elseif (value|date('W') < "now"|date('W')) %}
     <div class="bg-danger {{ className }}" {{ render_attr(attrs) }} >{{ value|date('W') }}</div>
+{% else %}
+    <div class="{{ className }}" {{ render_attr(attrs) }} >{{ value ? value|date('W') : '' }}</div>
 {% endif %}
