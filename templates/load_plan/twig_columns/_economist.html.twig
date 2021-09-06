@@ -1,13 +1,17 @@
+{% from app_macro import render_attr %}
+
 {% set emptyValueClass = not value ? 'w-100 h-100' : '' %}
 {% set dynamicId = 'charge-economist-' ~ row.id %}
 
-<div 
-    id="{{ dynamicId }}"
-    class="change-economist {{ emptyValueClass }} dynamic-nowrap" 
-    data-load-plan-id="{{ row.id }}"
-    data-project-id="{{ resolve([row, 'project', 'id'], null) }}"
-    data-economist-id="{{ resolve([row, 'project', 'economist', 'id']) }}"
-    data-economist-name="{{ resolve([row, 'project', 'economist', 'lastName'], null) }}"
-    data-target="{{ '#' ~ dynamicId }}">
-        {{ resolve([row, 'project', 'economist', 'name'], null) }}
-</div>
+{% set attrs = {
+    "id": dynamicId,
+    "class": "change-economist " ~ emptyValueClass ~ " dynamic-nowrap",
+    "data-load-plan-id": row.id,
+    "data-project-id": resolve([row, 'project', 'id'], null),
+    "data-project-name": resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], null)),
+    "data-economist-id": resolve([row, 'project', 'economist', 'id'], null),
+    "data-economist-name": resolve([row, 'project', 'economist', 'lastName'], null),
+    "data-target": '#' ~ dynamicId,
+} %}
+
+<div {{ render_attr(attrs) }}>{{ resolve([row, 'project', 'economist', 'name'], null) }}</div>

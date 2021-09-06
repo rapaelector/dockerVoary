@@ -1,0 +1,29 @@
+<div class="bg-white week-number-menu">
+    <div class="d-flex align-items-center pl-3 bg-app-primary page-title">
+        <div>{{ data.pageTitle }} — {{ data.additionalTitle }}</div>
+    </div>
+    
+    <div class="px-3">
+        <md-input-container class="w-100">
+            <label>{{ data.label }}</label>
+            <md-select ng-model="data.week" ng-change="onWeekChange()">
+                <md-option ng-repeat="week in data.weeks" ng-value="week.weekDate" data-value="{{ week.weekDate }}">
+                        {{ week.weekNumber }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div class="d-flex justify-content-around border-top">
+        <md-button md-autofocus flex class="md-primary" ng-click="saveWeekNumber()">
+            Enregistrer
+        </md-button>
+        <md-button md-autofocus flex class="md-primary" ng-click="closePanel()">
+            Annuler
+        </md-button>
+    </div>
+
+    <div class="week-number-loader" ng-if="loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+</div>

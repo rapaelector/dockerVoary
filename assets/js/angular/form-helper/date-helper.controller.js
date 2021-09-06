@@ -1,6 +1,6 @@
-DateHelperController.$inject = ['$scope', 'mdPanelRef', 'options'];
+DateHelperController.$inject = ['$scope', 'mdPanelRef', 'options', 'PANEL_ELEVATION_CLASS'];
 
-function DateHelperController($scope, mdPanelRef, options) {
+function DateHelperController($scope, mdPanelRef, options, PANEL_ELEVATION_CLASS) {
     $scope.data = {
         date: null,
         pageTitle: '',

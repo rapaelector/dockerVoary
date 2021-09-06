@@ -1,33 +1,31 @@
-<div class="user-helper-panel border bg-white ">
-    <md-toolbar layout="row" class="bg-app-primary">
-        <div class="md-toolbar-tools">
-            <span>{{ data.pageTitle }}</span>
-        </div>
-    </md-toolbar>
-    <div class="form-group p-2 user-search bg-white border-bottom">    
-        <input type="text" class="form-control" placeholder="{{ data.inputSearchLabel }}" ng-model="data.user">
+<md-toolbar layout="row" class="bg-app-primary page-title">
+    <div class="md-toolbar-tools">
+        <span>{{ data.pageTitle }} — {{ data.additionalTitle }}</span>
     </div>
-    <md-content>
-        <md-list class="md-dense md-default-theme" flex>
-            <md-list-item 
-                class="md-2-line" 
-                ng-repeat="user in data.users" 
-                ng-click="onUserClicked(user)" 
-                ng-class="selectedUser.id == user.id ? 'current-user' : ''"
-            >
-                <img ng-src="{{ user.avatar }}" class="md-avatar"/>
-                <div class="md-list-item-text" layout="column">
-                    <h4>{{ user.name }}</h4>
-                    <p>{{ user.email }}</p>
-                </div>
-            </md-list-item>
-        </md-list>
-    </md-content>
+</md-toolbar>
+<md-content>
+    <div class="p-2 user-search bg-white border-bottom">    
+        <input type="text" class="form-control form-control-sm" placeholder="{{ data.inputSearchLabel }}" ng-model="data.user">
+    </div>
+    <md-list class="md-dense md-default-theme" flex>
+        <md-list-item 
+            class="md-2-line" 
+            ng-repeat="user in data.users" 
+            ng-click="onUserClicked(user)" 
+            ng-class="selectedUser.id == user.id ? 'current-user' : ''"
+        >
+            <img ng-src="{{ user.avatar }}" class="md-avatar"/>
+            <div class="md-list-item-text" layout="column">
+                <h4>{{ user.name }}</h4>
+                <p>{{ user.email }}</p>
+            </div>
+        </md-list-item>
+    </md-list>
     <div class="d-flex justify-content-around user-panel-footer bg-white border-top">
         <md-button class="md-app-primary" ng-click="save()">Enregistrer</md-button>
         <md-button class="md-app-secondary" ng-click="closePanel()">Annuler</md-button>
     </div>
-</div>
+</md-content>
 
 <div class="user-helper-loader" ng-if="loading">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>

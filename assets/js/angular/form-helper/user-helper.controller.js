@@ -1,6 +1,6 @@
-UserHelperController.$inject = ['$scope', '$element', '$q', 'mdPanelRef', 'options', 'userHelperService'];
+UserHelperController.$inject = ['$scope', '$element', '$q', 'mdPanelRef', 'options', 'userHelperService', 'PANEL_ELEVATION_CLASS'];
 
-function UserHelperController($scope, $element, $q, mdPanelRef, options, userHelperService) {
+function UserHelperController($scope, $element, $q, mdPanelRef, options, userHelperService, PANEL_ELEVATION_CLASS) {
     $scope.userCanceller = null;
     $scope.data = {
         users: {},
@@ -8,6 +8,7 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
         pageTitle: '',
         inputSearchLabel: '',
         selectedUser: null,
+        additionalTitle: '',
     };
     $scope.userId = null;
     $scope.userSearchTerm = '';
@@ -15,6 +16,7 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
     this.$onInit = () => {
         $scope.userCanceller = $q.defer();
         $scope.loading = true;
+        $scope.data.additionalTitle = options.additionalTitle;
         var query = '';
         if (options) {
             if (options.userName) {
@@ -103,13 +105,6 @@ function UserHelperController($scope, $element, $q, mdPanelRef, options, userHel
     $scope.onUserClicked = (user) => {
         $scope.loading = true;
         $scope.data.selectedUser = user;
-        // if (options.onUserSave) {
-        //     options.onUserSave(user, mdPanelRef).then((response) => {
-        //         $scope.loading = false;
-        //     }, errors => {
-        //         $scope.loading = false;
-        //     })
-        // }
         $scope.save()
     };
 

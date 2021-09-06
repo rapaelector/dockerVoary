@@ -1,0 +1,142 @@
+$app-primary: #2e3192;
+
+.form-panel {
+    border-radius: 8px !important;
+    overflow: hidden;
+    .page-title {
+        font-size: 12px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 40px;
+        max-height: 40px;
+        min-height: 40px;
+    }
+}
+
+@mixin md_autocomplete {
+    .item-title .media-object, .media-left .media-object {
+        width: 30px !important;
+        height: 30px !important;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .panel-menu {
+        width: 200px;
+    }
+    .realization-date-menu {
+        width: 310px;
+    }
+}
+
+@mixin md_select {
+    .week-number-menu {
+        width: 250px;
+    }
+}
+
+@mixin custom_loader {
+    .date-helper-panel, 
+    .week-number-menu,
+    .panel-loader-container {
+        position: relative;
+        .date-helper-loader, 
+        .week-number-loader,
+        .panel-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #00000047;
+            z-index: 1040;
+            md-progress-circular {
+                position: relative;
+                left: 44%;
+                top: 40%;
+            };
+        }
+    }
+}
+
+@mixin user_helper_panel {
+    .user-helper-container-panel {
+        height: 50vh;
+        min-height: 50vh;
+        position: relative;
+        background: #fff;
+        overflow: auto;
+        width: 240px;
+        max-width: 240px;
+        md-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 80;
+            .md-toolbar-tools {
+                height: 40px;
+                max-height: 40px;
+                font-size: 14px;
+                min-height: 40px;
+                font-size: 12px !important;
+            }
+        }
+        .md-toolbar-tools {
+            font-size: 12px !important;
+        }
+        md-content {
+            height: calc(100% - 40px);
+            md-list-item {
+                .md-avatar {
+                    object-fit: cover;
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+            .current-user {
+                background: rgba(158,158,158,0.2);
+                box-shadow: inset 2px 0px $app-primary;
+            }
+        }
+        md-list .md-subheader {
+            height: 50px;
+            // overflow: hidden;
+        }
+        md-list-item.md-no-proxy.md-button, md-list-item .md-no-style.md-button {
+            height: 50px;
+        }
+        .md-subheader-inner {
+            padding: 4px 8px;
+        }
+        .md-dense > .md-button:not(.md-dense-disabled), .md-dense :not(.md-dense-disabled) .md-button:not(.md-dense-disabled) {
+            line-height: 20px !important;
+        }
+        .user-search {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+        }
+        .user-helper-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #00000047;
+            z-index: 1040;
+            md-progress-circular {
+                position: relative;
+                left: 44%;
+                top: 40%;
+            };
+        }
+        .user-panel-footer {
+            position: sticky;
+            bottom: 0;
+        }
+    }
+}
+
+@include md_autocomplete;
+@include md_select;
+@include custom_loader;
+@include user_helper_panel;

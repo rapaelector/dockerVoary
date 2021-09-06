@@ -11,6 +11,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
     'loadPlanService',
     'dateHelperService',
     'userHelperService',
+    'weekNumberHelperService',
     function (
         $scope, 
         $mdDialog, 
@@ -19,7 +20,8 @@ angular.module('loadPlanApp').controller('loadPlanController', [
         $element,
         loadPlanService,
         dateHelperService,
-        userHelperService
+        userHelperService,
+        weekNumberHelperService
     ) {
         
         $scope.data = {
@@ -37,12 +39,14 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 var loadPlanId = $(this).data('load-plan-id');
                 var economistName = $(this).data('economist-name');
                 var userId = $(this).data('economist-id');
+                var additionalTitle = $(this).data('project-name');
 
                 userHelperService.selectUser(ev, {
                     target,
                     pageTitle: 'Changer economist',
                     inputSearchLabel: 'Recherche',
                     userId,
+                    additionalTitle,
                     onUserSave: (selectedUser, mdPanelRef) => {
                         return loadPlanService.saveProjectEconomist(loadPlanId, selectedUser).then((response) => {
                             loadPlanService.showNotification(response.data.message, 'toast-success');
@@ -140,15 +144,17 @@ angular.module('loadPlanApp').controller('loadPlanController', [
              */
             $('body').on('click', '.update-week-number', function(ev) {
                 var currentValue = $(this).data('current-value');
-                var loadPlanId = $(this).data('load-plan-id');
-                var targetClass = $(this).data('target-class');
-                var projectName = $(this).data('project-name');
+                var id = $(this).data('load-plan-id');
+                var target = $(this).data('target');
+                var additionalTitle = $(this).data('project-name');
                 
-                $scope.showWeekNumberPanel(ev, {
+                weekNumberHelperService.selectWeek(ev, {
                     currentValue,
-                    loadPlanId,
-                    targetClass,
-                    projectName,
+                    id,
+                    target,
+                    additionalTitle,
+                    label: 'N° de semaine',
+                    pageTitle: 'Changer n° semaine',
                 });
             });
 

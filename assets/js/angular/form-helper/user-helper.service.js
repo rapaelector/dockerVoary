@@ -1,20 +1,31 @@
 import UserHelperController from './user-helper.controller';
 import userHelperTemplate from './user-helper-template.html';
 
-angular.module('formHelperModule').factory('userHelperService', ['$http', '$mdPanel', function ($http, $mdPanel) {
+angular.module('formHelperModule').factory('userHelperService', [
+    '$http', 
+    '$mdPanel', 
+    'PANEL_ELEVATION_CLASS', 
+    'PANEL_CLASS', 
+    function (
+        $http, 
+        $mdPanel, 
+        PANEL_ELEVATION_CLASS,
+        PANEL_CLASS,
+    ) {
     var _this = {};
 
     _this.selectUser = (ev, options) => {
         var position = $mdPanel.newPanelPosition()
             .relativeTo(options.target)
-            .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ABOVE);
+            .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ALIGN_BOTTOMS);
+        var panelClass = 'user-helper-container-panel ' + PANEL_ELEVATION_CLASS + ' ' + PANEL_CLASS;
 
         var config = {
             attachTo: angular.element(document.body),
             controller: UserHelperController,
             controllerAs: 'ctrl',
             template: userHelperTemplate,
-            panelClass: 'user-helper-container-panel',
+            panelClass: panelClass,
             position: position,
             locals: {
                 options,

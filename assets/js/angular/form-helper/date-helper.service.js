@@ -1,7 +1,15 @@
 import DateHelperController from './date-helper.controller';
 import dateHelperTemplate from './date-helper-template.html';
 
-angular.module('formHelperModule').factory('dateHelperService', ['$mdPanel', function ($mdPanel) {
+angular.module('formHelperModule').factory('dateHelperService', [
+    '$mdPanel', 
+    'PANEL_ELEVATION_CLASS', 
+    'PANEL_CLASS', 
+    function (
+        $mdPanel, 
+        PANEL_ELEVATION_CLASS, 
+        PANEL_CLASS
+    ) {
     var _this = this;
 
     /**
@@ -9,17 +17,17 @@ angular.module('formHelperModule').factory('dateHelperService', ['$mdPanel', fun
      * @param {object} options 
      */
     _this.updateDate = (ev, options) => {
-        console.info(options.target);
         var position = $mdPanel.newPanelPosition()
                 .relativeTo(options.target)
-                .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ABOVE);
-
+                .addPanelPosition($mdPanel.xPosition.OFFSET_END, $mdPanel.yPosition.ALIGN_BOTTOMS);
+        var panelClass = 'date-helper-panel ' + PANEL_ELEVATION_CLASS + ' ' + PANEL_CLASS;
+        
         var config = {
             attachTo: angular.element(document.body),
             controller: DateHelperController,
             controllerAs: 'ctrl',
             template: dateHelperTemplate,
-            panelClass: 'date-helper-panel',
+            panelClass: panelClass,
             position: position,
             locals: {
                 options,
@@ -28,7 +36,7 @@ angular.module('formHelperModule').factory('dateHelperService', ['$mdPanel', fun
             clickOutsideToClose: true,
             escapeToClose: true,
             focusOnOpen: false,
-            zIndex: 10
+            zIndex: 84
         };
 
         $mdPanel.open(config);
