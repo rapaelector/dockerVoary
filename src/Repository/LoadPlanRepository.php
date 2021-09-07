@@ -48,6 +48,23 @@ class LoadPlanRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getWeeklyStudyTimeCountPerEconomist(\DateTime $start, \DateTime $end)
+    {
+        return $this->createQueryBuilder('l')
+            ->select('SUM(l.effectiveStudyTime) effectiveStudyTime, economist.id economistId')
+            ->leftJoin('l.project', 'project')
+            ->leftJoin('project.economist', 'economist')
+            ->where('l.deadline BETWEEN :start AND :end')
+            ->setParameters([
+                'start' => $start,
+                'end' => $end,
+            ])
+            ->groupBy('economist')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return LoadPlan[] Returns an array of LoadPlan objects
     //  */

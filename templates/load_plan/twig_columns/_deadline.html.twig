@@ -3,7 +3,7 @@
 
 <div 
     id="{{ dynamicId }}"
-    class="update-deadline" 
+    class="update-deadline {{ not value ? 'w-100 h-100' : '' }}" 
     data-target="{{ '#' ~ dynamicId }}" 
     data-load-plan-id="{{ resolve([row, 'id'], null) }}"
     data-current-date="{{ value ? value|date('Y-m-d') }}"

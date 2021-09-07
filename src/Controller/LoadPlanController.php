@@ -349,7 +349,7 @@ class LoadPlanController extends BaseController
                 return $this->json(['message' => $translator->trans('load_plan.messages.edit_successfull', [], 'projects')]);
             }
 
-            return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')]);
+            return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')], 400);
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.edit_failed', [], 'projects')], 400);

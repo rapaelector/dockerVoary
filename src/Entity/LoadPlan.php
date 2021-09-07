@@ -122,7 +122,6 @@ class LoadPlan
     private $natureOfTheCosting;
 
     /**
-     * N° Semaine pour remise de l'etude
      * 
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("integer")
@@ -138,6 +137,8 @@ class LoadPlan
     private $project;
 
     /**
+     * N° Semaine pour remise de l'etude
+     * 
      * @ORM\Column(type="date", nullable=true)
      * @Groups({"loadPlan:list", "loadPlan:planning", "loadPlan:planning-event"})
      */
@@ -168,7 +169,7 @@ class LoadPlan
     private $realizationQuotationDate;
 
     /**
-     * Temps d'etude estimé
+     * Temps d'etude effectif
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
@@ -180,7 +181,7 @@ class LoadPlan
     private $effectiveStudyTime;
 
     /**
-     * Temps d'etude effectif
+     * Temps d'etude estimé
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})

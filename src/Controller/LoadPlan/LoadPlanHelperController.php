@@ -6,11 +6,14 @@ use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\LoadPlan;
 use App\Controller\BaseController;
+use App\Utils\DateHelper;
+use App\Service\LoadPlan\LoadPlanService;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/load/plan/helper')]
@@ -79,5 +82,65 @@ class LoadPlanHelperController extends BaseController
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_failed', [], 'projects')], 400);
+    }
+
+    /**
+     * Comptage de charge pour la semaine
+     */
+    #[Route('/{date}/week/load/metering', name: 'load_plan.week_load_metering', options: ['expose' => true])]
+    public function weekLoadMetering(
+        Request $request, 
+        $date, 
+        DateHelper $dateHelper, 
+        LoadPlanService $loadPlanService,
+        EntityManagerInterface $em,
+        SerializerInterface $serializer
+    )
+    {
+        if (!$date) {
+            $date = new \DateTime();
+        } else {
+            $date = \DateTime::createFromFormat('Y-m-d', $date);
+        }
+
+        $economistIds = [];
+        $economistsWeeklyStudyTime = [];
+        $firstWeekStart = $dateHelper->getStartOfWeek($date);
+        $firstWeekEnd = $dateHelper->getEndOfWeek($firstWeekStart);
+        $nextWeekStart = $dateHelper->getStartOfWeek((clone $firstWeekEnd)->modify('+1 day'));
+        $nextWeekEnd = $dateHelper->getEndOfWeek($nextWeekStart);
+        
+        $res = [
+            [
+                'start' => $firstWeekStart, 
+                'end' => $firstWeekEnd
+            ], 
+            [
+                'start' => $nextWeekStart, 
+                'end' => $nextWeekEnd
+            ]
+        ];
+        
+        foreach ($res as $date) {
+            $economistsWeeklyStudyTime[] = $loadPlanService->getEconomistWeeklyStudyTime($date['start'], $date['end']);
+        }
+        foreach ($economistsWeeklyStudyTime as $key => $res) {
+            foreach ($res as $key => $economistStudyTime) {
+                $economistIds[] = $economistStudyTime['economistId'];
+            }
+        }
+        $economists = $em->getRepository(User::class)->getEconomistByIds(array_unique($economistIds));
+        $economistMap = [];
+        foreach ($economists as $economist) {
+            $economistMap[$economist->getId()] = $serializer->normalize($economist, 'json', ['groups' => 'load_plan:economist']);
+        }
+
+        foreach ($economistsWeeklyStudyTime as $k => $economistWeekStudyTime) {
+            foreach ($economistWeekStudyTime as $j => $economistStudyTime) {
+                $economistsWeeklyStudyTime[$k][$j]['economist'] = $economistMap[$economistStudyTime['economistId']];
+            }
+        }
+
+        return $this->json($economistsWeeklyStudyTime);
     }
 }

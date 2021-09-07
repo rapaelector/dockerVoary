@@ -11,7 +11,8 @@ trait UserTrait
      *  "exchange-history", 
      *  "loadPlan:planning", 
      *  "project:scheduler-resource",
-     *  "loadPlan:economist"
+     *  "loadPlan:economist",
+     *  "load_plan:economist"
      * })
      */
     public function getName(): ?string

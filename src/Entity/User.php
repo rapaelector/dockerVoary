@@ -54,6 +54,7 @@ class User implements UserInterface, \Serializable
      *  "data-project", 
      *  "exchange-history",
      *  "loadPlan:economist",
+     *  "load_plan:economist"
      * })
      */
     private $id;
@@ -66,7 +67,8 @@ class User implements UserInterface, \Serializable
      *  self::GROUP_USER_PROJECT, 
      *  "project-form-data", 
      *  "exchange-history",
-     *  "loadPlan:economist"
+     *  "loadPlan:economist",
+     *  "load_plan:economist"
      * })
      */
     private $email;
@@ -96,7 +98,8 @@ class User implements UserInterface, \Serializable
      *  self::GROUP_USER_PROJECT, 
      *  "project-form-data", 
      *  "exchange-history",
-     *  "loadPlan:economist"
+     *  "loadPlan:economist",
+     *  "load_plan:economist"
      * })
      */
     private $firstName;
@@ -111,7 +114,8 @@ class User implements UserInterface, \Serializable
      *  self::GROUP_USER_PROJECT, 
      *  "project-form-data", 
      *  "exchange-history",
-     *  "loadPlan:economist"
+     *  "loadPlan:economist",
+     *  "load_plan:economist"
      * })
      */
     private $lastName;
@@ -124,8 +128,11 @@ class User implements UserInterface, \Serializable
     private $phone;
 
     /**
-     * @Groups({self::GROUP_USER_PROJECT})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({
+     *  self::GROUP_USER_PROJECT,
+     *  "load_plan:economist",
+     * })
      */
     private $job;
 
