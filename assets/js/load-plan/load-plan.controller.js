@@ -1,6 +1,5 @@
 import LoadPlanDialogController from './new-load-plan-dialog.controller';
 import PanelMenuController from './panel-menu.controller';
-import WeekNumberController from './week-number.controller';
 
 angular.module('loadPlanApp').controller('loadPlanController', [
     '$scope', 
@@ -254,7 +253,6 @@ angular.module('loadPlanApp').controller('loadPlanController', [
          * @param {object} args 
          */
         $scope.showPanel = (ev, args) => {
-            console.info('lorem ipsum ');
             var position = $mdPanel.newPanelPosition()
                 .relativeTo('.' + args.targetClass)
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
@@ -279,42 +277,5 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             };
 
             $mdPanel.open(config);
-        };
-
-        /**
-         * 
-         * @param {jsEvent} ev 
-         * @param {object} args 
-         */
-        $scope.showWeekNumberPanel = (ev, args) => {
-            args.templateUrl = 'week-number.html';
-            var config = $scope.createDynamicPanelConfig(ev, args, WeekNumberController);
-
-            $mdPanel.open(config);
-        };
-
-        $scope.createDynamicPanelConfig = (ev, args, controller) => {
-            var position = $mdPanel.newPanelPosition()
-                .relativeTo('.' + args.targetClass)
-                .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
-
-            var config = {
-                attachTo: angular.element(document.body),
-                controller: controller,
-                controllerAs: 'ctrl',
-                templateUrl: args.templateUrl,
-                panelClass: 'demo-menu-example',
-                position: position,
-                locals: {
-                    options: args,
-                },
-                openFrom: ev,
-                clickOutsideToClose: true,
-                escapeToClose: true,
-                focusOnOpen: false,
-                zIndex: 2
-            };
-
-            return config;
         };
 }]);
