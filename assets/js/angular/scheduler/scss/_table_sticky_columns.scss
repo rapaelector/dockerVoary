@@ -1,12 +1,3 @@
-$boxShadow: inset -1px 0px 0px $borderColor;
-$stickyBoxShadow: inset 1px 0px #555, inset -1px 0px #555, inset 0px 1px #555 !important;
-$weekSize: 8px;
-$borderColor: #555;
-$borderColorDark: $borderColor;
-$borderEdgeWidth: 2px;
-$cellBorder: $borderEdgeWidth solid $borderColorDark;
-$cellHeight: 24px;
-
 @mixin scheduler-table-sticky-columns {
     .app-scheduler {
         table.scheduler-table.sticky-columns {
@@ -20,30 +11,30 @@ $cellHeight: 24px;
             }
             .scheduler-resource-header {
                 // Box shadow left and right only top and
-                box-shadow: inset 1px 0px $borderColor !important;
-                border-top: $cellBorder;
-                border-bottom: $cellBorder;
+                box-shadow: inset 1px 0px $scheduler_borderColor !important;
+                border-top: $scheduler_cellBorder;
+                border-bottom: $scheduler_cellBorder;
             }
             .scheduler-column-header-top-cell {
-                border-bottom: $cellBorder;
+                border-bottom: $scheduler_cellBorder;
             }
             .scheduler-column {
-                box-shadow: inset 1px 0px $borderColor, inset 0px 1px $borderColor !important;
+                box-shadow: inset 1px 0px $scheduler_borderColor, inset 0px 1px $scheduler_borderColor !important;
                 &.sticky-column {
-                    box-shadow: $stickyBoxShadow;
+                    box-shadow: $scheduler_stickyBoxShadow;
                 }
             }
             thead, tbody {
                 tr {
                     th, td {
                         &.sticky-column {
-                            box-shadow: $boxShadow;
+                            box-shadow: $scheduler_boxShadow;
                         }
                         &.scheduler-column-vertical-divider {
                             position: sticky;
                             width: 1px;
                             padding: 0;
-                            background: $borderColor;
+                            background: $scheduler_borderColor;
                         }
                     }
                 }
@@ -53,7 +44,7 @@ $cellHeight: 24px;
                     &:last-child {
                         th, td {
                             &:first-child {
-                                box-shadow: inset -1px 0px 0px $borderColor, inset 1px 0px 0px $borderColor;
+                                box-shadow: inset -1px 0px 0px $scheduler_borderColor, inset 1px 0px 0px $scheduler_borderColor;
                                 border-left-width: 1px;
                             }
                         }
@@ -62,16 +53,16 @@ $cellHeight: 24px;
                         // Resource column sticky box shadow
                         &.scheduler-resource-header {
                             &.sticky-column {
-                                box-shadow: inset 1px 0px $borderColor, inset -1px 0px $borderColor !important;
+                                box-shadow: inset 1px 0px $scheduler_borderColor, inset -1px 0px $scheduler_borderColor !important;
                             }
                         }
                         &.scheduler-year {
                             border: none;
                             padding: 0;
                             position: relative;
-                            height: $cellHeight;
+                            height: $scheduler_cellHeight;
                             > div {
-                                border: $cellBorder;
+                                border: $scheduler_cellBorder;
                                 border-bottom: none;
                                 position: absolute;
                                 height: 24px;
@@ -79,11 +70,11 @@ $cellHeight: 24px;
                                 left: 0;
                                 right: 0;
                                 margin: 0 -1px;
-                                line-height: $cellHeight - 2px;
+                                line-height: $scheduler_cellHeight - 2px;
                             }
                         }
                         &.scheduler-column-header-top-cell.scheduler-last-column {
-                            box-shadow: inset -1px 0px $borderColor !important;
+                            box-shadow: inset -1px 0px $scheduler_borderColor !important;
                         }
                     }
                 }
@@ -92,22 +83,22 @@ $cellHeight: 24px;
                 tr {
                     td {
                         &:first-child {
-                            box-shadow: inset -1px 0px 0px $borderColor, inset 1px 0px 0px $borderColor;
+                            box-shadow: inset -1px 0px 0px $scheduler_borderColor, inset 1px 0px 0px $scheduler_borderColor;
                             border-left-width: 1px;
                         }
                     }
                     &:first-child {
                         &.scheduler-column {
-                            box-shadow: inset 1px 0px 0px $borderColor !important;
+                            box-shadow: inset 1px 0px 0px $scheduler_borderColor !important;
                             &.sticky-column {
-                                box-shadow: inset 1px 0px #555, inset -1px 0px #555 !important;
+                                box-shadow: inset 1px 0px $scheduler_borderColor, inset -1px 0px $scheduler_borderColor !important;
                             }
                         }
                     }
                     &:last-child {
                         th, td {
                             &.scheduler-column {
-                                border-bottom: $cellBorder;
+                                border-bottom: $scheduler_cellBorder;
                             }
                         }
                     }

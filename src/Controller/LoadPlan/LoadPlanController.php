@@ -73,9 +73,8 @@ class LoadPlanController extends BaseController
         if ($request->getMethod() == 'POST') {
             $content = $request->toArray();
             $newStartDate = \DateTime::createFromFormat('Y-m-d', $content['startDate']);
-            $newEndDate = (\DateTime::createFromFormat('Y-m-d', $content['startDate']))->modify('Next sunday');
             $loadPlan->setStart($newStartDate);
-            $loadPlan->setEnd($newEndDate);
+            $loadPlan->setEnd((clone $loadPlan->getStart())->modify('Next sunday'));
             $em->flush();
 
             return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_success', [], 'projects')], 200);
@@ -95,7 +94,8 @@ class LoadPlanController extends BaseController
         LoadPlanService $loadPlanService,
         EntityManagerInterface $em,
         SerializerInterface $serializer,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        \App\Repository\LoadPlanRepository $repo
     )
     {
         if (!$date) {
@@ -129,7 +129,6 @@ class LoadPlanController extends BaseController
                 'end' => $nextWeekEnd
             ]
         ];
-        
         /**
          * Get economist weekly study time for the week and the next week 
          */
@@ -144,6 +143,7 @@ class LoadPlanController extends BaseController
                 $economistIds[] = $economistStudyTime['economistId'];
             }
         }
+        $economistIds = array_unique(array_merge($economistIds, $repo->getEconomistIds()));
         /**
          * Get economist in economistsIds array
          */
@@ -151,16 +151,15 @@ class LoadPlanController extends BaseController
         $economistMap = [];
         foreach ($economists as $economist) {
             $economistMap[$economist->getId()] = $serializer->normalize($economist, 'json', ['groups' => 'load_plan:economist']);
+            $id = $economist->getId();
+            $results[$id] = array_combine($keys, array_fill(0, count($keys), 0));
+            $results[$id]['economist'] = $economistMap[$id];
+            $results[$id]['unit'] = $translator->trans('load_plan.label.days', [], 'projects');
         }
 
         foreach ($economistsWeeklyStudyTime as $key => $row) {
             foreach ($row as $item) {
                 $id = $item['economistId'];
-                if (!array_key_exists($id, $results)) {
-                    $results[$id] = array_combine($keys, array_fill(0, count($keys), 0));
-                    $results[$id]['economist'] = $economistMap[$id];
-                    $results[$id]['unit'] = $translator->trans('load_plan.label.days', [], 'projects');
-                }
                 $estimatedStudyTimeToDay = $dateHelper->hoursToDay($item['estimatedStudyTime']);
                 $results[$id][$key] = $estimatedStudyTimeToDay;
                 

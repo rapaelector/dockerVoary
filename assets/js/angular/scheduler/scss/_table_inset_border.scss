@@ -8,7 +8,7 @@
             .scheduler-date-cell,
             .scheduler-resource-header {
                 border: none;
-                box-shadow: inset 1px 0px #555, inset 0px 1px #555 !important;
+                box-shadow: inset 1px 0px $scheduler_borderColor, inset 0px 1px $scheduler_borderColor !important;
             }
         }
     }

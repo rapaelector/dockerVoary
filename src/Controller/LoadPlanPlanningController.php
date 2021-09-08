@@ -29,7 +29,9 @@ class LoadPlanPlanningController extends BaseController
     #[Route('/resources', name: 'load_plan_planning.resources', options: ['expose' => true])]
     public function resources(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
-        $projects = $em->getRepository(Project::class)->findAll();
+        $projectIds = $em->getRepository(LoadPlan::class)->getProjectIds();
+        $projects = $em->getRepository(Project::class)->getProjectsByIds($projectIds);
+
         $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:planning']);
         $res = [];
         foreach ($normalizedProjects as $key => $project) {

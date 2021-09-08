@@ -1,0 +1,9 @@
+/**
+ * Scheduler default design
+ * Column visiblility dialog style are here because only scheduler use it now
+ */
+@import './variables';
+@import './table_inset_border';
+@import './_schedule.scss';
+@import './table_sticky_columns';
+@import './columns_visibility_dialog';

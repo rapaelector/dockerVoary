@@ -24,10 +24,6 @@ class LoadPlanType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            ->add('end', DateType::class, [
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-            ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',

@@ -48,6 +48,31 @@ class LoadPlanRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getEconomistIds(): array
+    {
+        $res = $this->createQueryBuilder('l')
+            ->select('DISTINCT(economist) economistId')
+            ->leftJoin('l.project', 'project')
+            ->leftJoin('project.economist', 'economist')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return array_map(fn($id) => (int) $id, array_column($res, 'economistId'));
+    }
+    
+    public function getProjectIds(): array
+    {
+        $res = $this->createQueryBuilder('l')
+            ->select('DISTINCT(project) projectId')
+            ->leftJoin('l.project', 'project')
+            ->getQuery()
+            ->getResult()
+        ;
+        
+        return array_map(fn($id) => (int) $id, array_column($res, 'projectId'));
+    }
+
     public function getWeeklyStudyTimeCountPerEconomist(\DateTime $start, \DateTime $end)
     {
         return $this->createQueryBuilder('l')
@@ -56,8 +81,8 @@ class LoadPlanRepository extends ServiceEntityRepository
             ->leftJoin('project.economist', 'economist')
             ->where('l.deadline BETWEEN :start AND :end')
             ->setParameters([
-                'start' => $start,
-                'end' => $end,
+                'start' => $start->format('Y-m-d 00:00:00'),
+                'end' => $end->format('Y-m-d 23:59:59'),
             ])
             ->groupBy('economist')
             ->getQuery()

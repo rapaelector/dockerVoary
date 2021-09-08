@@ -1,6 +1,3 @@
-
-import './../../../scss/schedule/app.scss';
-
 import './scheduler.module';
 import './scheduler.constants';
 import './calendar.service';

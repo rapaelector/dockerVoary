@@ -1,24 +1,21 @@
 @use 'sass:math';
 
-$weekSize: 8px;
-$borderColor: #555;
-
-@function monthFs($weekSize) {
-    @return math.div(8, 5) * $weekSize;
+@function monthFs($scheduler_weekSize) {
+    @return math.div(8, 5) * $scheduler_weekSize;
 }
 
-@function yearFs($weekSize) {
-    @return math.div(10, 5) * $weekSize;
+@function yearFs($scheduler_weekSize) {
+    @return math.div(10, 5) * $scheduler_weekSize;
 }
 
-@function scheduleColumnFs($weekSize) {
-    @return math.div(8, 5) * $weekSize;
+@function scheduleColumnFs($scheduler_weekSize) {
+    @return math.div(8, 5) * $scheduler_weekSize;
 }
 
 @mixin _schedule {
     .app-scheduler {
         .scheduler-table-container {
-            box-shadow: 1px 0px 0px $borderColor;
+            box-shadow: 1px 0px 0px $scheduler_borderColor;
         }
         table.scheduler-table {
             .scheduler-year, 
@@ -27,25 +24,25 @@ $borderColor: #555;
             .scheduler-column,
             .scheduler-date-cell,
             .scheduler-resource-header {
-                background: #fff;
+                background: $scheduler_colorWhite;
             }
         }
     }
     .scheduler-column {
-        font-size: scheduleColumnFs($weekSize);
+        font-size: scheduleColumnFs($scheduler_weekSize);
         font-weight: normal;
     }
     .scheduler-year {
-        font-size: yearFs($weekSize);
+        font-size: yearFs($scheduler_weekSize);
         font-weight: bold;
     }
     .scheduler-month {
-        font-size: monthFs($weekSize);
+        font-size: monthFs($scheduler_weekSize);
         font-weight: 600;
         text-transform: uppercase;
     }
     .scheduler-weeks {
-        font-size: $weekSize;
+        font-size: $scheduler_weekSize;
     }
     .scheduler-event {
         white-space: nowrap;
@@ -63,10 +60,10 @@ $borderColor: #555;
         thead, tbody {
             tr {
                 th, td {
-                    border: 1px solid $borderColor;
+                    border: 1px solid $scheduler_borderColor;
                     &.scheduler-week {
                         font-weight: normal;
-                        border-bottom: $borderEdgeWidth solid $borderColor;
+                        border-bottom: $scheduler_borderEdgeWidth solid $scheduler_borderColor;
                         font-size: 10px;
                     }
                 }
@@ -78,22 +75,22 @@ $borderColor: #555;
                     th, td {
                         &.scheduler-week {
                             &:last-child {
-                                border-right: $cellBorder;
+                                border-right: $scheduler_cellBorder;
                             }
                         }
                     }
                 }
                 th, td {
-                    border-top: $cellBorder;
-                    border-bottom: $cellBorder;
+                    border-top: $scheduler_cellBorder;
+                    border-bottom: $scheduler_cellBorder;
                     &.scheduler-resource-header-prospect-clientNumber {
-                        border-left: 4px solid $borderColor;
+                        border-left: 4px solid $scheduler_borderColor;
                     }
                     &.scheduler-header-firstweek {
-                        border-left-width: $borderEdgeWidth;
+                        border-left-width: $scheduler_borderEdgeWidth;
                     }
                     &.scheduler-header-lastweek {
-                        border-right-width: $borderEdgeWidth;
+                        border-right-width: $scheduler_borderEdgeWidth;
                     }
                 }
             }
@@ -106,9 +103,9 @@ $borderColor: #555;
             tr {
                 &:last-child {
                     th, td {
-                    border-bottom: $cellBorder;
+                    border-bottom: $scheduler_cellBorder;
                     &:first-child {
-                        border-left: ($borderEdgeWidth + 2px) solid $borderColor;
+                        border-left: ($scheduler_borderEdgeWidth + 2px) solid $scheduler_borderColor;
                     }
                     }
                 }
@@ -116,7 +113,7 @@ $borderColor: #555;
                     font-weight: normal;
                     &:last-child {
                     &.scheduler-date-cell {
-                        border-right: $cellBorder;
+                        border-right: $scheduler_cellBorder;
                     }
                     }
                     &.scheduler-date-cell-firstweek,
@@ -124,30 +121,22 @@ $borderColor: #555;
                         font-weight: bold;
                     }
                     &.scheduler-date-cell-firstweek {
-                        border-left-width: $borderEdgeWidth !important;
+                        border-left-width: $scheduler_borderEdgeWidth !important;
                     }
                     &.scheduler-date-cell-lastweek {
-                        border-right-width: $borderEdgeWidth !important;
+                        border-right-width: $scheduler_borderEdgeWidth !important;
                     }
                     &.scheduler-column:first-child {
-                        border-left: $borderEdgeWidth solid $borderColor;
+                        border-left: $scheduler_borderEdgeWidth solid $scheduler_borderColor;
                     }
                     &.scheduler-column-siteCode {
-                        background: rgb(255, 255, 0);
+                        background: $scheduler_yellow;
                     }
                     &.scheduler-column-prospect-clientNumber {
-                        color: $cyan;
+                        color: $scheduler_cyan;
                     }
                     &.scheduler-date-cell {
-                        // position: relative;
                         padding: 0;
-                        // .event-target-container {
-                        //     position: absolute;
-                        //     left: 0;
-                        //     top: 0;
-                        //     right: 0;
-                        //     bottom: 0;
-                        // }
                     }
                     &.scheduler-column {
                         padding: 0 !important;
@@ -165,16 +154,16 @@ $borderColor: #555;
 
         tfoot {
             tr td {
-                border: 1px solid $borderColor;
+                border: 1px solid $scheduler_borderColor;
                 height: 24px;
                 &.td-divider {
                     border: none;
                 }
                 &.scheduler-date-cell-firstweek {
-                    border-left-width: $borderEdgeWidth !important;
+                    border-left-width: $scheduler_borderEdgeWidth !important;
                 }
                 &.scheduler-date-cell-lastweek {
-                    border-right-width: $borderEdgeWidth !important;
+                    border-right-width: $scheduler_borderEdgeWidth !important;
                 }
             }
         }
@@ -186,23 +175,23 @@ $borderColor: #555;
             white-space: nowrap;
         }
         .scheduler-column-constructionSite {
-            background: $yellow;
+            background: $scheduler_yellow;
         }
         .scheduler-column-cdtTrx {
-            color: $info;
+            color: $scheduler_info;
         }
         .scheduler-resource-header, .scheduler-column {
             overflow: hidden;
         }
         .scheduler-weeks {
-            border-bottom: $cellBorder;
-            border-top: $cellBorder;
+            border-bottom: $scheduler_cellBorder;
+            border-top: $scheduler_cellBorder;
         }
         .scheduler-year, .scheduler-month {
-            border: $cellBorder;
+            border: $scheduler_cellBorder;
         }
         .scheduler-header-week-current {
-            background: $app-secondary;
+            background: $scheduler_appSecondary;
         }
         }
     }
@@ -281,3 +270,4 @@ $borderColor: #555;
 @include _schedule;
 @include scheduler-events;
 @include scheduler-table;
+@include scheduler-table-inset-border;

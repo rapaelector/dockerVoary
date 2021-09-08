@@ -3,6 +3,7 @@
 @import 'bootstrap/scss/_functions';
 @import 'bootstrap/scss/_mixins';
 @import 'bootstrap/scss/_variables';
-// @import './../project-schedule/table_sticky_columns';
-@import './../common/columns_visibility_dialog';
+
+$scheduler_borderColor: #ddd;
+@import './../../js//angular/scheduler/scss/scheduler.scss';
 @import './load_plan_planning';

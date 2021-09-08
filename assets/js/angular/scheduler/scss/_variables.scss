@@ -1,0 +1,14 @@
+$scheduler_cyan:    #17a2b8 !default;
+$scheduler_yellow:  #ffc107 !default;
+$scheduler_info: $scheduler_cyan !default;
+$scheduler_appPrimary: #2e3192 !default;
+$scheduler_appSecondary: #f69c4a !default;
+$scheduler_colorWhite: #fff !default;
+$scheduler_weekSize: 8px !default;
+$scheduler_borderColor: #555 !default;
+$scheduler_borderColorDark: $scheduler_borderColor !default;
+$scheduler_borderEdgeWidth: 2px !default;
+$scheduler_cellBorder: 2px solid $scheduler_borderColorDark !default;
+$scheduler_cellHeight: 24px !default;
+$scheduler_boxShadow: inset -1px 0px 0px $scheduler_borderColor;
+$scheduler_stickyBoxShadow: inset 1px 0px $scheduler_borderColor, inset -1px 0px $scheduler_borderColor, inset 0px 1px $scheduler_borderColor !important;

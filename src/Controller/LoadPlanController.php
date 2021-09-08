@@ -214,6 +214,7 @@ class LoadPlanController extends BaseController
                     'abbr' => $translator->trans('load_plan.label.week_number_for_submission_of_the_study_abbr', [], 'projects'),
                     'label_attr' => [
                         'class' => 'dynamic-nowrap',
+                        'style' => 'text-transform: uppercase',
                     ],
                 ], true),
             ])
@@ -314,6 +315,7 @@ class LoadPlanController extends BaseController
         $form->submit(json_decode($request->getContent(), true));
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $loadPlan->setEnd((clone $loadPlan->getStart())->modify('Next sunday'));
             $em->persist($loadPlan);
             $em->flush();
 
@@ -345,6 +347,7 @@ class LoadPlanController extends BaseController
             $form->submit(json_decode($request->getContent(), true));
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $loadPlan->setEnd((clone $loadPlan->getStart())->modify('Next sunday'));
                 $em->flush();
     
                 return $this->json(['message' => $translator->trans('load_plan.messages.edit_successfull', [], 'projects')]);

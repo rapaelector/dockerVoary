@@ -28,6 +28,17 @@ class ProjectRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function getProjectsByIds(array $ids = [])
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

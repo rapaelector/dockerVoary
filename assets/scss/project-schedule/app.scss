@@ -6,10 +6,10 @@
 @import './../_colors';
 @import './../_variables';
 @import './../_bootstrap_variables';
-@import './variables';
-// @import './table_sticky_columns';
-@import './table_inset_border';
-@import './schedule';
+// @import './../../js/angular/scheduler/scss/schedule.scss';
+$scheduler_borderColor: #ddd;
+@import './../../js//angular/scheduler/scss/scheduler.scss';
+
 @import './md_panel';
 @import './popover';
 @import './dialog';

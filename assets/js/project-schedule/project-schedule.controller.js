@@ -233,6 +233,7 @@ angular.module('projectScheduleApp').controller('projectScheduleController', [
             escapeToClose: true,
             focusOnOpen: false,
             zIndex: 100,
+            disableParentScroll: true,
             onCloseSuccess: (mdPanelRef, columns) => {
                 if (Array.isArray(columns)) {
                     $scope.data.columns = columns;
