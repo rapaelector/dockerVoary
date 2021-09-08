@@ -27,7 +27,7 @@
     {# Include angular part here #}
     {% include 'load_plan/ng/index.html.twig' %}
 
-    <row>
+    <div class="row">
         <div class="col-12">
             <div class="card card-outline card-app-primary">
                 <div class="card-header py-2">
@@ -61,11 +61,18 @@
                     } %}
                 </div>
                 <div class="card-body">
-                    <div id="{{ datatable.tableId }}">{{ 'label.loading'|trans({}, 'messages') }}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="{{ datatable.tableId }}" class="mb-3">{{ 'label.loading'|trans({}, 'messages') }}</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <app-week-load-metering load-metering-date="data.loadMeteringDate"></app-week-load-metering>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </row>
+    </div>
 {% endblock %}
 
 

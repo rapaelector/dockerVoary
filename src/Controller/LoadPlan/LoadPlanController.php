@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/load/plan/helper')]
-class LoadPlanHelperController extends BaseController
+class LoadPlanController extends BaseController
 {
     #[Route('/{id}/change/project/economist', name: 'load_plan.change_project_economist', options: ['expose' => true], requirements: ['id' => '\d+'])]
     public function changeProjectEconomist(Request $request, LoadPlan $loadPlan, EntityManagerInterface $em, TranslatorInterface $translator)
@@ -94,7 +94,8 @@ class LoadPlanHelperController extends BaseController
         DateHelper $dateHelper, 
         LoadPlanService $loadPlanService,
         EntityManagerInterface $em,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        TranslatorInterface $translator
     )
     {
         if (!$date) {
@@ -103,8 +104,16 @@ class LoadPlanHelperController extends BaseController
             $date = \DateTime::createFromFormat('Y-m-d', $date);
         }
 
+        $results = [];
         $economistIds = [];
+        $keys = ['current', 'next'];
         $economistsWeeklyStudyTime = [];
+        /** 
+         * Get the week and the next week of given date
+         * Start of the week is the monday of the current date
+         * End of the week is the sunday of the current date
+         * 
+        */
         $firstWeekStart = $dateHelper->getStartOfWeek($date);
         $firstWeekEnd = $dateHelper->getEndOfWeek($firstWeekStart);
         $nextWeekStart = $dateHelper->getStartOfWeek((clone $firstWeekEnd)->modify('+1 day'));
@@ -121,26 +130,60 @@ class LoadPlanHelperController extends BaseController
             ]
         ];
         
-        foreach ($res as $date) {
-            $economistsWeeklyStudyTime[] = $loadPlanService->getEconomistWeeklyStudyTime($date['start'], $date['end']);
+        /**
+         * Get economist weekly study time for the week and the next week 
+         */
+        foreach ($res as $key => $date) {
+            $economistsWeeklyStudyTime[$keys[$key]] = $loadPlanService->getEconomistWeeklyStudyTime($date['start'], $date['end']);
         }
+        /**
+         * Collect economist id
+         */
         foreach ($economistsWeeklyStudyTime as $key => $res) {
             foreach ($res as $key => $economistStudyTime) {
                 $economistIds[] = $economistStudyTime['economistId'];
             }
         }
+        /**
+         * Get economist in economistsIds array
+         */
         $economists = $em->getRepository(User::class)->getEconomistByIds(array_unique($economistIds));
         $economistMap = [];
         foreach ($economists as $economist) {
             $economistMap[$economist->getId()] = $serializer->normalize($economist, 'json', ['groups' => 'load_plan:economist']);
         }
 
-        foreach ($economistsWeeklyStudyTime as $k => $economistWeekStudyTime) {
-            foreach ($economistWeekStudyTime as $j => $economistStudyTime) {
-                $economistsWeeklyStudyTime[$k][$j]['economist'] = $economistMap[$economistStudyTime['economistId']];
+        foreach ($economistsWeeklyStudyTime as $key => $row) {
+            foreach ($row as $item) {
+                $id = $item['economistId'];
+                if (!array_key_exists($id, $results)) {
+                    $results[$id] = array_combine($keys, array_fill(0, count($keys), 0));
+                    $results[$id]['economist'] = $economistMap[$id];
+                    $results[$id]['unit'] = $translator->trans('load_plan.label.days', [], 'projects');
+                }
+                $estimatedStudyTimeToDay = $dateHelper->hoursToDay($item['estimatedStudyTime']);
+                $results[$id][$key] = $estimatedStudyTimeToDay;
+                
+                if ($key == 'current') {
+                    $results[$id]['meta'] = [
+                        'weekLoadMeteringClass' => $this->getWeekLoadPlanClass($estimatedStudyTimeToDay),
+                    ];
+                }
             }
         }
 
-        return $this->json($economistsWeeklyStudyTime);
+        return $this->json($results);
+    }
+
+    private function getWeekLoadPlanClass($estimatedStudyTime)
+    {
+        $weekLoadMeteringClass = '';
+        if ($estimatedStudyTime >= 5 && $estimatedStudyTime < 6) {
+            $weekLoadMeteringClass = 'week-load-warning';
+        } else if ($estimatedStudyTime >= 6) {
+            $weekLoadMeteringClass = 'week-load-danger';
+        }
+
+        return $weekLoadMeteringClass;
     }
 }

@@ -250,7 +250,7 @@ class LoadPlanController extends BaseController
             ->add('effectiveStudyTime', TextColumn::class, [
                 'label' => $translator->trans('load_plan.label.effective_study_time', [], 'projects'),
                 'render' => function ($value, $row) use ($translator) {
-                    return $translator->trans('load_plan.study_time.' .$value, [], 'projects');
+                    return $value ? $translator->trans('load_plan.study_time.' .$value, [], 'projects') : '';
                 },
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.effective_study_time_abbr', [], 'projects'),

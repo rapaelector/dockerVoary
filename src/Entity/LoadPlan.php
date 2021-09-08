@@ -173,7 +173,6 @@ class LoadPlan
      * 
      * @ORM\Column(type="smallint", nullable=true)
      * @Groups({"loadPlan:list"})
-     * @Assert\NotBlank
      * @Assert\Choice(
      *      callback="getStudyTime",
      * )

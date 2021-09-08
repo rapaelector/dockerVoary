@@ -1,0 +1,22 @@
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Economiste</th>
+            <th>Charge de cette semaine</th>
+            <th>Charge de la semaine prochaine</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="loadMetering in data.loadMetering">
+            <td>{{ loadMetering.economist.name }}</td>
+            <td>
+                {{ loadMetering.current }} 
+                <span ng-if="loadMetering.current">{{ loadMetering.prefix }}</span>
+            </td>
+            <td>
+                {{ loadMetering.next }} 
+                <span ng-if="loadMetering.next">{{ loadMetering.prefix }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

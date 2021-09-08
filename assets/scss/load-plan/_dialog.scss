@@ -33,6 +33,13 @@
     md-input-container:not(.md-input-has-value):not(.md-input-has-placeholder) input:not(:focus) {
         color: rgba(0,0,0,0.87) !important;
     }
+    .md-dialog-is-showing {
+        overflow: hidden;
+        .md-dialog-container {
+            height: 100vh !important;
+            position: fixed;
+        }
+    }
 }
 
 @include dialog;

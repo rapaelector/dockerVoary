@@ -43,7 +43,6 @@
                     </div>
     
                     {# Temps d'etude estime #}
-                    {# 
                     <div class="col-sm-6">
                         <md-input-container class="w-100">
                             <label>{{ 'load_plan.label.estimated_study_time'|trans }}</label>
@@ -61,29 +60,6 @@
                             {% include "load_plan/ng/templates/errors.html.twig" with {
                                 form: 'loadPlanForm',
                                 field: 'estimatedStudyTime',
-                            } %}
-                        </md-input-container>
-                    </div>
-                    #}
-    
-                    {# Temps d'etude effectif #}
-                    <div class="col-sm-6">
-                        <md-input-container class="w-100">
-                            <label>{{ 'load_plan.label.effective_study_time'|trans }}</label>
-                            <md-select 
-                                ng-model="form.effectiveStudyTime"
-                                name="effectiveStudyTime"
-                            >
-                                <md-option
-                                    ng-repeat="time in config.studyTime" 
-                                    ng-value="time.value"
-                                >
-                                    {{ '{{ time.label }}' }}
-                                </md-option>
-                            </md-select>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'effectiveStudyTime',
                             } %}
                         </md-input-container>
                     </div>

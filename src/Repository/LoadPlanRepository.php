@@ -51,7 +51,7 @@ class LoadPlanRepository extends ServiceEntityRepository
     public function getWeeklyStudyTimeCountPerEconomist(\DateTime $start, \DateTime $end)
     {
         return $this->createQueryBuilder('l')
-            ->select('SUM(l.effectiveStudyTime) effectiveStudyTime, economist.id economistId')
+            ->select('SUM(l.estimatedStudyTime) estimatedStudyTime, economist.id economistId')
             ->leftJoin('l.project', 'project')
             ->leftJoin('project.economist', 'economist')
             ->where('l.deadline BETWEEN :start AND :end')

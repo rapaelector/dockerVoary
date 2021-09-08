@@ -76,6 +76,7 @@ Along with Symfony required env var, these are the env vars used by the app
 |-----------------------|---------------------------------------------------|----------------|
 |MAILER_FROM            | Used as mailer default sender                     |                |
 |MAILER_TO              | Used as mailer default recipient                  |                |
+|DAY_HOURS_DURATION     | The number of hours to work in a day              | 8              |
 
 ## Tips and helps 💡
 

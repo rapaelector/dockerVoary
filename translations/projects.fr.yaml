@@ -251,6 +251,7 @@ load_plan:
     change_week_number: 'Changer n° semaine'
     week_number_short: 'N° de semaine'
     edit_week_number: "Modifier la numero de semaine"
+    days: 'Jours'
   
   action:
     change_to_planning_view: 'Affichage planning'

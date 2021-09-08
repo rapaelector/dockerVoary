@@ -1,0 +1,39 @@
+@mixin table {
+    // primary color
+    $app-primary: #2e3192;
+
+    // secondary color
+    $app-secondary: #f69c4a;
+
+    $app-danger: #ff0000;
+
+    table.week-load-metering {
+        tbody tr td {
+            position: relative;
+            &.week-load-current {
+                &.week-load-warning {
+                    color: darken($app-secondary, 20);
+                }
+                &.week-load-danger {
+                    color: darken($app-danger, 20);
+                }
+            }
+            .color-chip {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                margin-top: -5px;
+                &.week-load-warning {
+                    background-color: $app-secondary;
+                }
+                &.week-load-danger {
+                    background-color: $app-danger;
+                }
+            }
+        }
+    }
+}
+
+@include table;

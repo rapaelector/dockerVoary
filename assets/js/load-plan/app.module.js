@@ -6,4 +6,5 @@ angular.module('loadPlanApp', [
     'daterangepicker',
     'loadPlanPlanningModule',
     'formHelperModule',
+    'weekLoadMeteringModule',
 ]);

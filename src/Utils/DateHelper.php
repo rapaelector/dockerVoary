@@ -4,6 +4,13 @@ namespace App\Utils;
 
 final class DateHelper
 {
+    private $dayHoursDuration;
+
+    public function __construct(int $dayHoursDuration)
+    {
+        $this->dayHoursDuration = $dayHoursDuration;
+    }
+
     public function getStartOfWeek(\DateTime $date): \DateTime
     {
         /** @var \DateTime */
@@ -27,5 +34,14 @@ final class DateHelper
         }
 
         return $tmp;
+    }
+
+    public function hoursToDay(float $hours = null): float
+    {
+        if (is_null($hours)) {
+            return 0;
+        }
+
+        return $hours / $this->dayHoursDuration;
     }
 }
