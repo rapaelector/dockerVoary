@@ -153,19 +153,6 @@ function CoreProjectSchedulerModalController(
                 $scope.setFormValidity(Object.keys(errors.data.errors), false);
                 mdPanelRef.close();
             });
-        } else {
-            coreProjectScheduleService.createProject($scope.form).then((response) => {
-                $scope.saveOrderBookLoader = false;
-                $scope.showNotification(response.data.message, 'toast-success');
-                mdPanelRef.close();
-            }, errors => {
-                console.info({errors});
-                console.warn(errors);
-                $scope.showNotification(response.data.message, 'toast-error');
-                $scope.saveOrderBookLoader = false;
-                $scope.data.errors = errors.data.errors;
-                mdPanelRef.close();
-            })
         }
     };
 

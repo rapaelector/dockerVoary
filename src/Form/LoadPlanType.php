@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints as Constraints;
 
 class LoadPlanType extends AbstractType
 {
@@ -23,6 +24,9 @@ class LoadPlanType extends AbstractType
             ->add('start', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'constraints' => [
+                    new Constraints\NotNull(),
+                ]
             ])
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',

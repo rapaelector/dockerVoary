@@ -78,12 +78,6 @@ class NgProjectHelperController extends BaseController
         return $this->json(['message' => $translator->trans('messages.save_order_book_failed', [], 'projects')], 400);
     }
 
-    #[Route('/create/project', name: 'project.ng.create_project', options: ['expose' => true])]
-    public function createProject(Request $request, Project $project, EntityManagerInterface $em, TranslatorInterface $translator)
-    {
-        return $this->json(['message' => 'Créate project by ajax work in progress'], 200);
-    }
-
     #[Route('/{id}/remove/to/planning', name: 'project.ng.remove_to_planning', options: ['expose' => true], requirements: ['id' => '\d+'])]
     public function removeToPlanning(Project $project, Request $request, TranslatorInterface $translator, EntityManagerInterface $em)
     {

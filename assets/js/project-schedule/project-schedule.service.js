@@ -281,11 +281,6 @@ angular.module('projectScheduleApp').factory('projectSchedulerService', [
     _this.updateProject = (projectId, formData) => {
         return $http.post(fosJsRouting.generate('project.ng.update_project', {id: projectId}), formData);
     };
-    
-
-    _this.createProject = (formData) => {
-        return $http.post(fosJsRouting.generate('project.ng.create_project'), formData)
-    };
 
     return _this;    
 }])

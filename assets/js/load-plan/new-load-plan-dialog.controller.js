@@ -6,6 +6,7 @@ LoadPlanDialogController.$inject = [
     '$q',
     'loadPlanService',
     'resolverService',
+    'notificationService',
     'options',
     'MESSAGES',
     'TYPE_DEADLINE',
@@ -21,6 +22,7 @@ function LoadPlanDialogController (
     $q, 
     loadPlanService, 
     resolverService,
+    notificationService,
     options,
     MESSAGES,
     TYPE_DEADLINE,
@@ -33,6 +35,7 @@ function LoadPlanDialogController (
         selectedProject: null,
     };
     $scope.loading = false;
+    $scope.onProjectLoding = false;
     $scope.form = {
         project: null,
         natureOfTheCosting: null,
@@ -51,8 +54,9 @@ function LoadPlanDialogController (
         mode: '',
     };
     $scope.projectCanceller = null; 
+    $scope.project = '';
     $scope.formName = '';
-    $scope.excludeField = ['project', 'end'];
+    $scope.excludeField = [];
 
     this.$onInit = () => {
         $scope.formName = 'loadPlanForm';
@@ -75,7 +79,14 @@ function LoadPlanDialogController (
             }, error => console.warn(error));
         }
 
-        $scope.projectCanceller = $q.defer();
+        $scope.loading = true;
+        loadPlanService.getProjects().then((response) => {
+            $scope.loading = false;
+            $scope.data.projects = response.data;
+        }, errors => {
+            $scope.loading = false;
+            notificationService.showToast('Erreur', {toastClass: 'toast-error'});
+        });
     };
 
     $scope.$watch('form', function (newValue, oldValue) {
@@ -97,7 +108,7 @@ function LoadPlanDialogController (
      * Save load plan
      * If form end dat is before form start date then force the end date to the start date
      * 
-     * @param {jsEvent} event 
+     * @param {jsEvent} event lo
      */
     $scope.saveLoadPlan = (event) => {
         $scope.loading = true;
@@ -119,13 +130,14 @@ function LoadPlanDialogController (
             var fields = ['deadline', 'effectiveStudyTime', 'estimatedStudyTime', 'natureOfTheCosting', 'realizationQuotationDate', 'start'];
             $mdDialog.hide();
             $scope.loading = false;
-            $scope.showNotification(response.data.message);
+            notificationService.showToast(response.data.message);
             $scope.setFormValidity(fields, true);
             $('body').trigger('load_plan.redraw-dt');
         }, errors => {
             $scope.loading = false;
             $scope.data.errors[$scope.formName] = errors.data.errors;
-            $scope.showNotification(errors.data.message, {toastClass: 'toast-error'});
+            console.info({merdeeeeeeeeeeeeeeeeeee: $scope.data.errors});
+            notificationService.showToast(errors.data.message, {toastClass: 'toast-error'});
             $scope.setFormValidity(Object.keys(errors.data.errors), false);
         });
     };
@@ -143,63 +155,13 @@ function LoadPlanDialogController (
         }
     };
 
+    /**
+     * 
+     * @param {jsEvent} event 
+     */
     $scope.cancel = (event) => {
         $mdDialog.hide();
     }
-
-    /**
-     * Show notification with given message and options
-     * 
-     * @param {string} message 
-     * @param {object} options 
-     */
-    $scope.showNotification = (message, options) => {
-        if (options == undefined || options == {}) {
-            var options = {
-                toastClass: 'toast-success',
-            };
-        }
-
-        $mdToast.show(
-            $mdToast.simple()
-            .textContent(message)
-            .position('top right')
-            .hideDelay(5000)
-            .toastClass(options.toastClass)
-        ).then(() => {
-            console.info('Toast dismissed');
-        }).catch(() => {
-            console.info('failed to laod md toast');
-        });
-    };
-
-    $element.find('input').on('keydown', (ev) => {
-        ev.stopPropagation();
-    });
-	
-	/**
-     * search for project
-     * remote dataservice call.
-     */
-    $scope.queryProjectSearch = (query) => {
-        $scope.projectCanceller.resolve();
-        $scope.projectCanceller = $q.defer();
-        var config = {
-            timeout: $scope.projectCanceller.promise
-        };
-		if (query == undefined) {
-			query = '';
-		}
-
-        return loadPlanService.getProjects(query, config);
-    }
-
-	$scope.selectedProjectChange = (item) => {
-        if (item) {
-			$scope.form.project = item.id;
-			// $scope.data.selectedProject = item.name + ' ' + resolverService.resolve([item, 'prospect', 'clientNumber'], null);
-		}
-    };
 };
 
 export default LoadPlanDialogController;

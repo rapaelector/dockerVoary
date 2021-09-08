@@ -34,6 +34,12 @@ import 'angular-sanitize';
 import 'angular-moment/angular-moment';
 import './../angular/shared/shared.module';
 ```
+
+## Scheduler style
+import scheduler file style in your app
+```Sass
+    @import './path/to/the/scheduler-style/scheduler/scss/scheduler.scss';
+```
 ## Use with controller
 
 ```JavaScript

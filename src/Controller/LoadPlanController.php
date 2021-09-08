@@ -333,6 +333,7 @@ class LoadPlanController extends BaseController
     }
 
     /**
+     * Edition of end date when update start date (semaine pur remise de l'étude)
      * @Security("is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), loadPlan)")
      */
     #[Route('/{id}/edit', name: 'load_plan.edit', options: ['expose' => true], requirements: ["id" => "\d+"])]
@@ -380,16 +381,17 @@ class LoadPlanController extends BaseController
     #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
     public function projects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
-        $query = $request->query->get('q');
-        $projects = $em->getRepository(Project::class)->createQueryBuilder('p')
-            ->where('p.name LIKE :name')
-            ->setParameters([
-                'name' => '%' . $query . '%',
-            ])
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ; 
+        // $query = $request->query->get('q');
+        // $projects = $em->getRepository(Project::class)->createQueryBuilder('p')
+        //     ->where('p.name LIKE :name')
+        //     ->setParameters([
+        //         'name' => '%' . $query . '%',
+        //     ])
+        //     ->setMaxResults(10)
+        //     ->getQuery()
+        //     ->getResult()
+        // ;
+        $projects = $em->getRepository(Project::class)->findAll();
         $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:create']);
         
         return $this->json($normalizedProjects);

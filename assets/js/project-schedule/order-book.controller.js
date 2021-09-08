@@ -146,18 +146,6 @@ function OrderBookController(
                 $scope.data.errors[$scope.formName] = errors.data.errors;
                 $scope.setFormValidity(Object.keys(errors.data.errors), false);
             });
-        } else {
-            projectSchedulerService.createProject($scope.form).then((response) => {
-                mdPanelRef.close();
-                $scope.saveOrderBookLoader = false;
-                $scope.showNotification(response.data.message, 'toast-success');
-            }, errors => {
-                console.info({errors});
-                console.warn(errors);
-                $scope.showNotification(response.data.message, 'toast-error');
-                $scope.saveOrderBookLoader = false;
-                $scope.data.errors = errors.data.errors;
-            })
         }
     };
 

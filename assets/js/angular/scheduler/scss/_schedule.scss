@@ -159,6 +159,10 @@
                 &.td-divider {
                     border: none;
                 }
+                &.footer-title, &.footer-total {
+                    border: $scheduler_cellBorder;
+                    background: $scheduler_colorWhite;
+                }
                 &.scheduler-date-cell-firstweek {
                     border-left-width: $scheduler_borderEdgeWidth !important;
                 }

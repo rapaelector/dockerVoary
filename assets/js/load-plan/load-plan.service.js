@@ -51,19 +51,7 @@ angular.module('loadPlanApp').factory('loadPlanService', [
      * @returns promise
      */
     _this.getProjects = function (projectName, config, key) {
-        var timers = [];
-
-		return new Promise(function (resolve, reject) {
-			timers[key] = setTimeout(function () {
-                $http.get(Routing.generate('load_plan.projects', {
-                    q: projectName
-                }), config).then(function (response) {
-                    resolve(response.data);
-                }).catch(function (error) {
-                    resolve([]);
-                });
-            }, 500);
-        });
+        return $http.get(Routing.generate('load_plan.projects'));
 	};
     
     /**

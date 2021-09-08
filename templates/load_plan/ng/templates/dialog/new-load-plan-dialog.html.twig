@@ -3,45 +3,60 @@
 <md-dialog aria-label="Event Detail Dialog" class="new-load-plan-dialog p-0">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2 class="text-white">{{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}</h2>
+            <h2 class="text-white">
+                {{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}
+            </h2>
         </div>
     </md-toolbar>
 	<md-dialog-content class="p-3">
         <form name="{{ '{{ formName }}' }}">
             <div class="container-fluid">
                 <div class="row">
-                    {# Project select #}
+                    {# Project select simple select #}
                     <div class="col-sm-12">
-                        <md-input-container class="w-100 my-0">
-                            <md-autocomplete
-                                class="project-autocomplete"
-                                md-no-cache="noCache"
-                                md-selected-item="data.selectedProject"
-                                md-search-text="project"
-                                md-selected-item-change="selectedProjectChange(item)"
-                                md-items="item in queryProjectSearch(project)"
-                                md-item-text="item.name"
-                                md-min-length="0"
-                                md-menu-class="project-dropdown"
-                                md-floating-label="Projet"
-                                md-clear-button="true"
-                                input-aria-labelledby="favoriteStateLabel">
-                                <md-item-template>
-                                    <span md-highlight-text="projectSearchText" md-highlight-flags="^i">
-                                        {{ '{{ item.name }}' }} — {{ '{{ item.prospect.clientNumber }}' }}
-                                    </span>
-                                </md-item-template>
-                                <md-not-found>
-                                    Projet <b>{{ '{{ projectSearchText }}' }}</b> non trouvé.
-                                </md-not-found>
-                            </md-autocomplete>
-                            {% include 'project/ng/templates/form/_errors.html.twig' with {
+                        <md-input-container class="w-100">
+                            <label>Projects</label>
+                            <md-select 
+                                ng-model="form.project"
+                                md-on-close="clearSearchTerm()"
+                                md-container-class="selectdemoSelectHeader"
+                                name="project"
+                            >
+                                <md-select-header class="demo-select-header">
+                                    <input 
+                                        ng-model="projectSearchTerm" 
+                                        aria-label="Vegetable filter"
+                                        type="search" 
+                                        placeholder="Recherche"
+                                        class="demo-header-searchbox md-text"
+                                    >
+                                </md-select-header>
+                                <md-optgroup label="projects">
+                                    <md-option 
+                                        ng-value="project.id" 
+                                        ng-repeat="project in data.projects | filter:projectSearchTerm"
+                                        class="px-3"
+                                    >
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="media-heading font-weight-bold">{{ '{{ project.name }}' }}</div>
+                                                <div class="media-body-content text-sm">{{ '{{ project.prospect.clientNumber }}' }}</div>
+                                            </div>
+                                        </div>
+                                    </md-option>
+                                </md-optgroup>
+                            </md-select>
+                            {# {% include 'project/ng/templates/form/_errors.html.twig' with {
                                 errorPath: 'data.errors.loadPlanForm.project',
                                 errorClass: 'text-sm mt-n3 mb-2',
+                            } %} #}
+                            {% include "load_plan/ng/templates/errors.html.twig" with {
+                                form: 'loadPlanForm',
+                                field: 'project',
                             } %}
                         </md-input-container>
                     </div>
-    
+                    
                     {# Temps d'etude estime #}
                     <div class="col-sm-6">
                         <md-input-container class="w-100">
@@ -123,6 +138,13 @@
                                         name="deadline"
                                     >
                                     </md-datepicker>
+                                    <span
+                                        class="text-danger text-sm" 
+                                        ng-if="data.errors.loadPlanForm.start" 
+                                        ng-repeat="error in data.errors.loadPlanForm.start"
+                                    >
+                                        {{ '{{ error }}' }}
+                                    </span>
                                     {% include "load_plan/ng/templates/errors.html.twig" with {
                                         form: 'loadPlanForm',
                                         field: 'deadline',
@@ -131,28 +153,6 @@
                             </div>
                         </div>
                     </div>
-    
-                    {# Date realization devis #}
-                    {# 
-                    <div class="col-sm-6 ml-n2">
-                        <md-input-container class="w-100 mb-0">
-                            <label id="realization-devis-date">{{ 'load_plan.label.realization_quotation_date'|trans({}, 'projects') }}</label>
-                            <md-datepicker 
-                                class="w-100 hide-icons"
-                                ng-model="form.realizationQuotationDate"
-                                md-open-on-focus
-                                input-aria-labelledby="realization-devis-date"
-                                name="realizationQuotationDate"
-                                md-hide-icons="calendar"
-                            >
-                            </md-datepicker>
-                            {% include "load_plan/ng/templates/errors.html.twig" with {
-                                form: 'loadPlanForm',
-                                field: 'realizationQuotationDate',
-                            } %}
-                        </md-input-container>
-                    </div>
-                    #}
     
                     {# Nature du chiffrage #}
                     <div class="col-sm-12">
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-        </form> 
+        </form>
 	</md-dialog-content>
 
     <md-dialog-actions layout="row">
