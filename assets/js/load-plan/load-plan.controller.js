@@ -239,6 +239,8 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                     options,
                 },
                 clickOutsideToClose: true,
+                disableParentScroll: true,
+                parentScroll: false,
             }).then(function (answer) {
                 $scope.status = 'You said the information was "' + answer + '".';
             }, function () {
@@ -252,6 +254,7 @@ angular.module('loadPlanApp').controller('loadPlanController', [
          * @param {object} args 
          */
         $scope.showPanel = (ev, args) => {
+            console.info('lorem ipsum ');
             var position = $mdPanel.newPanelPosition()
                 .relativeTo('.' + args.targetClass)
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
@@ -270,7 +273,9 @@ angular.module('loadPlanApp').controller('loadPlanController', [
                 clickOutsideToClose: true,
                 escapeToClose: true,
                 focusOnOpen: false,
-                zIndex: 2
+                zIndex: 2,
+                disableParentScroll: true,
+                parentScroll: false,
             };
 
             $mdPanel.open(config);

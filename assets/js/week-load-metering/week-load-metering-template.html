@@ -1,4 +1,4 @@
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped week-load-metering">
     <thead>
         <tr>
             <th>Economiste</th>
@@ -9,14 +9,23 @@
     <tbody>
         <tr ng-repeat="loadMetering in data.loadMetering">
             <td>{{ loadMetering.economist.name }}</td>
-            <td>
-                {{ loadMetering.current }} 
-                <span ng-if="loadMetering.current">{{ loadMetering.prefix }}</span>
+            <td ng-class="loadMetering.meta.weekLoadMeteringClass" class="week-load-current">
+                <span 
+                    ng-if="loadMetering.meta.weekLoadMeteringClass" 
+                    ng-class="loadMetering.meta.weekLoadMeteringClass" 
+                    class="color-chip"
+                ></span>
+                <span ng-class="loadMetering.meta.weekLoadMeteringClass ? 'pl-3' : ''">{{ loadMetering.current }}</span>
+                <span ng-if="loadMetering.current">{{ loadMetering.unit }}</span>
             </td>
             <td>
-                {{ loadMetering.next }} 
-                <span ng-if="loadMetering.next">{{ loadMetering.prefix }}</span>
+                <span>{{ loadMetering.next }}</span>
+                <span ng-if="loadMetering.next">{{ loadMetering.unit }}</span>
             </td>
         </tr>
     </tbody>
 </table>
+
+<div class="week-load-metering-loader" ng-if="loading">
+    <md-progress-circular md-mode="indeterminate" md-diameter="40"></md-progress-circular>
+</div>

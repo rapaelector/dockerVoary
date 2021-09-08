@@ -2,9 +2,9 @@ angular.module('weekLoadMeteringModule').factory('weekLoadMeteringService', ['$h
     var _this = {};
 
     _this.getWeekLoadMetering = (date) => {
-        var formattedDate = moment(date).format('YYYY-MM-DD');
+        var selectedDate = date ? moment(date).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD');
         
-        return $http.get(fosJsRouting.generate('load_plan.week_load_metering', {date: formattedDate}));
+        return $http.get(fosJsRouting.generate('load_plan.week_load_metering', {date: selectedDate}));
     };
 
     return _this;

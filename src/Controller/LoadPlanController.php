@@ -97,6 +97,7 @@ class LoadPlanController extends BaseController
             // Nom projet
             ->add('name', TextColumn::class, [
                 'field' => 'project.name',
+                'className' => 'dynamic-nowrap',
                 'label' => $translator->trans('load_plan.label.project_name', [], 'projects'),
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.project_name', [], 'projects'),
