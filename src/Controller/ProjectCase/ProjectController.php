@@ -123,7 +123,10 @@ class ProjectController extends BaseController
                     $this->filterOptionsProvider->getOptions('project_site_address')
                 ),
             ])
-            // MONTANT H.T
+            /*
+             * MONTANT H.T
+             * Fr: MONTANT GLOBAL DU MARCHE
+             */
             ->add('globalAmount', TextColumn::class, [
                 'label' => $translator->trans('columns.global_amount', [], 'projects'),
                 'render' => $this->numberFormatFactory(0, ',', '.'),
