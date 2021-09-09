@@ -56,7 +56,11 @@ angular.module('loadPlanApp').controller('loadPlanController', [
             };
 
             $('body').on('click', '.edit-load-plan', function (ev) {
-                $scope.editLoadPlan({mode: $(this).data('action'), id: $(this).data('id')});
+                $scope.editLoadPlan({
+                    mode: $(this).data('action'), 
+                    id: $(this).data('id'),
+                    projectId: $(this).data('project-id'),
+                });
             });
 
             $('body').on('click', '.change-economist', function (ev) {

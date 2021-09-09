@@ -63,11 +63,19 @@ function LoadPlanDialogController (
         $scope.formName = 'loadPlanForm';
         $scope.config.modalTitle = MESSAGES ? MESSAGES.modalTitle.new : 'Ajouter un plan de charge';
         $scope.config.mode = 'create';
+        /**
+         * Get configuration
+         * Ex: nature du chiffrage, type, temps d'étude estimé
+         */
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
             $scope.config.studyTime = response.data.studyTime;
             $scope.config.types = response.data.types;
         });
+
+        /**
+         * Si mode edit 
+         */
         if (options && options.mode === 'edit' && options.id) {
             $scope.config.mode = options.mode;
             $scope.config.modalTitle = MESSAGES.modalTitle.edit;
@@ -75,16 +83,26 @@ function LoadPlanDialogController (
             loadPlanService.getLoadPlan(options.id).then((response) => {
                 $scope.loading = false;
                 $scope.form = response.data;
-                // Restore the project when edit the load plan
+                /**
+                 * Restore project if load plan have one
+                 */
+                if (response.data && response.data.project && response.data.project.id) {
+                    $scope.form.project = resolverService.resolve([response, 'data', 'project', 'id'], null);
+                }
+                /**
+                 * Restore the project when edit the load plan
+                 */ 
                 $scope.data.selectedProject = $scope.form.project;
             }, error => console.warn(error));
         }
 
         $scope.loading = true;
+        /**
+         * Get project to display in project select
+         */
         loadPlanService.getProjects().then((response) => {
             $scope.loading = false;
             $scope.data.projects = response.data;
-            $scope.form.project = options.id ? $scope.data.projects.find(item => item.id === 3).id : null;
         }, errors => {
             $scope.loading = false;
             notificationService.showToast('Erreur', {toastClass: 'toast-error'});

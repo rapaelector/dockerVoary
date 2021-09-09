@@ -17,7 +17,12 @@
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="position: fixed;">
         
         {% if is_granted(constant('\\App\\Security\\Voter\\Attributes::EDIT'), loadPlan) %}    
-            <button class="dropdown-item btn btn-link edit-load-plan" data-action="edit" data-id="{{ id }}">
+            <button 
+                class="dropdown-item btn btn-link edit-load-plan" 
+                data-action="edit" 
+                data-id="{{ id }}" 
+                data-project-id="{{ resolve([context, 'project', 'id'], null) }}"
+            >
                 <i class="material-icons">edit</i>
                 <span class="dropdown-text">{{ 'action.edit'|trans }}</span>
             </button>

@@ -111,6 +111,7 @@ class LoadPlanController extends BaseController
             ->add('area', TextColumn::class, [
                 'field' => 'projectDescription.area',
                 'label' => $translator->trans('load_plan.label.area', [], 'projects'),
+                'className' => 'dynamic-nowrap',
                 'meta' => $this->columnMeta([
                     'abbr' => $translator->trans('load_plan.label.area', [], 'projects'),
                 ], true),
@@ -381,16 +382,6 @@ class LoadPlanController extends BaseController
     #[Route('/projects', name: 'load_plan.projects', options: ['expose' => true])]
     public function projects(Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
-        // $query = $request->query->get('q');
-        // $projects = $em->getRepository(Project::class)->createQueryBuilder('p')
-        //     ->where('p.name LIKE :name')
-        //     ->setParameters([
-        //         'name' => '%' . $query . '%',
-        //     ])
-        //     ->setMaxResults(10)
-        //     ->getQuery()
-        //     ->getResult()
-        // ;
         $projects = $em->getRepository(Project::class)->findAll();
         $normalizedProjects = $serializer->normalize($projects, 'json', ['groups' => 'loadPlan:create']);
         
