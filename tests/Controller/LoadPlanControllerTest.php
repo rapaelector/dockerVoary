@@ -82,7 +82,7 @@ class LoadPlanControllerTest extends WebTestCase
         $this->assertStringContainsString('message', $client->getResponse()->getContent());
 
         $client->request('POST', $this->generateUrl('/load/plan/', '/edit'), [], [], [], json_encode($this->generateLoadPlanData(true)));
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Edit load plan with bad request');
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode(), 'Edit load plan with bad request');
         $this->assertStringContainsString('message', $client->getResponse()->getContent());
         
         $this->login($client, 'user_role_load_plan_delete@app.locale');
@@ -180,7 +180,7 @@ class LoadPlanControllerTest extends WebTestCase
         $taskTypes = [
             LoadPlan::METER_CONSULTATION,
             LoadPlan::PRE_STUDY,
-            LoadPlan::SKETCH,
+            LoadPlan::BUDGET,
             LoadPlan::ENCRYPTION,
         ];
 
