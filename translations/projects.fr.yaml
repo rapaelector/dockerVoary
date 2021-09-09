@@ -197,7 +197,7 @@ messages:
   comment_saved: 'Commentaire enregistré avec succès'
   reminder_success: 'Rappel envoyer avec succès'
   reminder_error: 'Votre demande de rappel a échouer'
-  save_order_book_successfull: 'Modification du carnet de commandes effectuée avec succès'
+  save_order_book_successfull: 'Modification du carnet effectuée avec succès'
   save_order_book_failed: 'La modification du carnet de commandes à echoué'
   remove_project_from_planning_success: 'Projet supprimer dans le planning avec success'
   remove_project_from_planning_failed: 'La suppression du projet dans le planning à echoué'
@@ -221,14 +221,14 @@ load_plan:
   title: 'Plan de charge économiste'
   
   label:
-    add_load_plan: 'Ajouter un plan de charge economiste'
-    add_load_plan_long: "Ajouter un plan de charge économiste"
+    add_load_plan: 'Ajouter un plan de charge'
+    add_load_plan_long: "Modifier plan de charge"
     new_load_plan: 'Créer une plan de charge économiste'
     edit_load_plan: "Modification du plan de charge économiste"
     nature_of_the_costing: 'Nature du chiffrage'
     week_number: "N° semaine pour remise de d'etude"
     project: 'Projet'
-    delete_load_plan: 'Supprimer cete charge économiste'
+    delete_load_plan: 'Supprimer ce plan de charge'
     project_folder_name_on_the_server: 'Nom dossier'
     location: 'Localisation'
     activity: 'Activité'
@@ -248,7 +248,7 @@ load_plan:
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
     change_realization_date: 'Changer la date de devis'
-    change_week_number: 'Changer la n° semaine'
+    change_week_number: 'Changer le N° semaine'
     week_number_short: 'N° de semaine'
     edit_week_number: "Modifier la numero de semaine"
     days: 'Jours'
@@ -273,8 +273,8 @@ load_plan:
   messages:
     saving_successfull: 'Plan de charge enregistré avec succès'
     saving_errors: "L'enregistrement de la charge économiste a échoué"
-    delete_load_plan: 'Souhaitez-vous supprimer cete charge économiste?'
-    delete_successfull: 'Charge économiste supprimée avec succès'
+    delete_load_plan: 'Souhaitez-vous supprimer ce plan de charge ?'
+    delete_successfull: 'Plan de charge supprimé avec succès'
     edit_successfull: 'Plan de charge modifié avec succès'
     edit_failed: 'La modification du plan de charge a échoué'
     project_economist_changed_successfull: 'Changement economiste effectué avec succès'
