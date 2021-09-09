@@ -1,13 +1,14 @@
 {% set projectName = resolve([row, 'project', 'name'], resolve([row, 'project', 'businessCharge', 'name'], '')) %}
 {% set dynamicId = 'realization-date-' ~ resolve([row, 'id'], null) %}
+{% set emptyClass = not value ? 'w-100 h-100' : '' %}
 
 <div 
     id="{{ dynamicId }}"
-    class="realization-date" 
+    class="realization-date {{ emptyClass }}" 
     data-load-plan-id="{{ resolve([row, 'id'], null) }}"
     data-target="{{ '#' ~ dynamicId }}"
     data-realization-date="{{ value|date('Y-m-d') }}"
     data-project-name="{{ projectName }}"
 >
-    {{ value|date('d/m/Y') }}
+    {{ value ? value|date('d/m/Y') : '' }}
 </div>

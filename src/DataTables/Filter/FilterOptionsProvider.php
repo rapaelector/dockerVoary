@@ -322,19 +322,26 @@ class FilterOptionsProvider
     {
         $economists = $this->em->getRepository(LoadPlan::class)
             ->createQueryBuilder('l')
-            ->select('economist.firstName firstName, economist.lastName lastName')
+            ->select('economist.firstName firstName, economist.lastName lastName, economist.email email')
             ->leftJoin('l.project', 'project')
             ->leftJoin('project.economist', 'economist')
+            ->where('economist.id IS NOT NULL')
             ->getQuery()
             ->getScalarResult()
         ;
         
         $res1 = array_column($economists, 'firstName');
         $res2 = array_column($economists, 'lastName');
+        $res3 = array_column($economists, 'email');
         $res = [];
 
         foreach ($res1 as $key => $economist) {
-            $res[$res1[$key]] = $res1[$key] . ' ' .$res2[$key];
+            $name = $res1[$key] . ' ' .$res2[$key];
+            if (!$res1[$key] || !$res2[$key]) {
+                $name = $res3[$key];
+            }
+
+            $res[$res1[$key]] = $name;
         }
 
         return $res;
