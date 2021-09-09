@@ -221,7 +221,7 @@ load_plan:
   title: 'Plan de charge économiste'
   
   label:
-    add_load_plan: 'Ajouter un plan de charge'
+    add_load_plan: 'Ajouter un plan de charge economiste'
     add_load_plan_long: "Ajouter un plan de charge économiste"
     new_load_plan: 'Créer une plan de charge économiste'
     edit_load_plan: "Modification du plan de charge économiste"
@@ -248,7 +248,7 @@ load_plan:
     effective_study_time_raw: "Temps d'étude<br />effectif"
     effective_study_time_abbr: "Temps d'étude"
     change_realization_date: 'Changer la date de devis'
-    change_week_number: 'Changer n° semaine'
+    change_week_number: 'Changer la n° semaine'
     week_number_short: 'N° de semaine'
     edit_week_number: "Modifier la numero de semaine"
     days: 'Jours'
@@ -271,19 +271,19 @@ load_plan:
     type_deadline: "Date buttoir"
 
   messages:
-    saving_successfull: 'Charge économiste enregistrée avec succès'
+    saving_successfull: 'Plan de charge enregistré avec succès'
     saving_errors: "L'enregistrement de la charge économiste a échoué"
     delete_load_plan: 'Souhaitez-vous supprimer cete charge économiste?'
     delete_successfull: 'Charge économiste supprimée avec succès'
-    edit_successfull: 'Modification de la charge économiste effectuée avec succès'
-    edit_failed: 'La modification de la charge économiste a échoué'
-    project_economist_changed_successfull: 'Economiste changé avec succès'
+    edit_successfull: 'Plan de charge modifié avec succès'
+    edit_failed: 'La modification du plan de charge a échoué'
+    project_economist_changed_successfull: 'Changement economiste effectué avec succès'
     project_economist_changed_failed: "Impossible de changé l'economiste" 
-    realization_date_updated: 'Date de devis mis à jour avec succès'
+    realization_date_updated: 'Date de devis modifiée avec succès'
     failed_to_update_realization_date: 'La mis à jour de la date de devis à echouer'
-    deadline_date_updated_successfull: 'Date butoire mis à jour avec succès'
+    deadline_date_updated_successfull: 'Date butoire modifiée avec succès'
     deadline_date_updated_failed: 'La mis à jour de la date butoir à echouer'
-    start_date_updated_success: "Remise de l'étude modifier avec succès"
+    start_date_updated_success: 'Date de remise modifiée avec succès'
     start_date_updated_failed: "La modification de la remise de l'étude a échoué"
 
   study_time:

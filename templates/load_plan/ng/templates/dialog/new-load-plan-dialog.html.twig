@@ -4,7 +4,7 @@
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h2 class="text-white">
-                {{ 'load_plan.label.add_load_plan'|trans({}, 'projects') }}
+                {{ '{{ config.modalTitle }}' }}
             </h2>
         </div>
     </md-toolbar>
@@ -15,7 +15,7 @@
                     {# Project select simple select #}
                     <div class="col-sm-12">
                         <md-input-container class="w-100">
-                            <label>Projects</label>
+                            <label>Project</label>
                             <md-select 
                                 ng-model="form.project"
                                 md-on-close="clearSearchTerm()"

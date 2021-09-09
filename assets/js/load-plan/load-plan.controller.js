@@ -68,8 +68,8 @@ angular.module('loadPlanApp').controller('loadPlanController', [
 
                 userHelperService.selectUser(ev, {
                     target,
-                    pageTitle: 'Changer economist',
-                    inputSearchLabel: 'Recherche',
+                    pageTitle: 'Changer economiste',
+                    inputSearchLabel: 'Rechercher',
                     userId,
                     additionalTitle,
                     onUserSave: (selectedUser, mdPanelRef) => {

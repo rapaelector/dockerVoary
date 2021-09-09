@@ -61,7 +61,7 @@ function LoadPlanDialogController (
 
     this.$onInit = () => {
         $scope.formName = 'loadPlanForm';
-        $scope.config.modalTitle = MESSAGES ? MESSAGES.modalTitle.new : 'Créer une plan de charge économiste';
+        $scope.config.modalTitle = MESSAGES ? MESSAGES.modalTitle.new : 'Ajouter un plan de charge';
         $scope.config.mode = 'create';
         loadPlanService.getConfig().then((response) => {
             $scope.config.taskTypes = response.data.taskTypes;
