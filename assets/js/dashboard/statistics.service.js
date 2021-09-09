@@ -77,4 +77,4 @@ angular.module('dashboardApp').factory('statisticsService', ['$http', 'fosJsRout
 	};
 
     return _this;
-}])
+}]);

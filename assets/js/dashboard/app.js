@@ -4,8 +4,9 @@ import 'angular';
 
 import Chart from 'chart.js';
 import 'angular-chart.js/dist/angular-chart.min.js';
-import './app.module';
+import 'angular-material';
 import './../angular/shared/shared.module';
+import './app.module';
 import './dashboard.controller';
 import './box-statistics.component';
 import './dashboard.service';

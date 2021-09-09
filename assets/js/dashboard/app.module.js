@@ -1,1 +1,5 @@
-angular.module('dashboardApp', ['sharedModule', 'chart.js']);
+angular.module('dashboardApp', [
+    'sharedModule', 
+    'chart.js',
+    'ngMaterial'
+]);

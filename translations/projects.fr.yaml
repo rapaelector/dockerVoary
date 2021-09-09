@@ -277,7 +277,7 @@ load_plan:
     delete_successfull: 'Charge économiste supprimée avec succès'
     edit_successfull: 'Modification de la charge économiste effectuée avec succès'
     edit_failed: 'La modification de la charge économiste a échoué'
-    project_economist_changed_successfull: 'Economist changé avec succès'
+    project_economist_changed_successfull: 'Economiste changé avec succès'
     project_economist_changed_failed: "Impossible de changé l'economiste" 
     realization_date_updated: 'Date de devis mis à jour avec succès'
     failed_to_update_realization_date: 'La mis à jour de la date de devis à echouer'
