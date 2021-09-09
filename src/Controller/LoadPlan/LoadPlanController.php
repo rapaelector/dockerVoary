@@ -27,11 +27,12 @@ class LoadPlanController extends BaseController
             $content = $request->toArray();
             $userId  = $content['id'];
 
-            $economist = $em->getRepository(User::class)->find($userId);
-            $loadPlanProject->setEconomist($economist);
-            $em->flush();
-
-            return $this->json(['message' => $translator->trans('load_plan.messages.project_economist_changed_successfull', [], 'projects')], 200);
+            if ($economist = $em->getRepository(User::class)->find($userId)) {
+                $loadPlanProject->setEconomist($economist);
+                $em->flush();
+    
+                return $this->json(['message' => $translator->trans('load_plan.messages.project_economist_changed_successfull', [], 'projects')], 200);
+            }
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.project_economist_changed_failed', [], 'projects')], 400);
@@ -42,11 +43,12 @@ class LoadPlanController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $content = $request->toArray();
-            $newRealizationDate = \DateTime::createFromFormat('Y-m-d', $content['realizationDate']);
-            $loadPlan->setRealizationQuotationDate($newRealizationDate);
-            $em->flush();
-
-            return $this->json(['message' => $translator->trans('load_plan.messages.realization_date_updated', [], 'projects')], 200);
+            if ($newRealizationDate = \DateTime::createFromFormat('Y-m-d', $content['realizationDate'])) {
+                $loadPlan->setRealizationQuotationDate($newRealizationDate);
+                $em->flush();
+    
+                return $this->json(['message' => $translator->trans('load_plan.messages.realization_date_updated', [], 'projects')], 200);
+            }
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.failed_to_update_realization_date', [], 'projects'), 400]);
@@ -67,17 +69,19 @@ class LoadPlanController extends BaseController
         return $this->json(['message' => $translator->trans('load_plan.messages.deadline_date_updated_failed', [], 'projects'), 400]);
     }
 
-    #[Route('/{id}/update/field', name: 'load_plan.update_start_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
+    #[Route('/{id}/update/start/date', name: 'load_plan.update_start_date', options: ['expose' => true], requirements: ['id' => '\d+'])]
     public function updateStartDate(Request $request, LoadPlan $loadPlan, TranslatorInterface $translator, EntityManagerInterface $em)
     {
         if ($request->getMethod() == 'POST') {
             $content = $request->toArray();
-            $newStartDate = \DateTime::createFromFormat('Y-m-d', $content['startDate']);
-            $loadPlan->setStart($newStartDate);
-            $loadPlan->setEnd((clone $loadPlan->getStart())->modify('Next sunday'));
-            $em->flush();
-
-            return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_success', [], 'projects')], 200);
+            if ($newStartDate = \DateTime::createFromFormat('Y-m-d', $content['startDate'])) {
+                $loadPlan->setStart($newStartDate);
+                $loadPlan->setEnd((clone $loadPlan->getStart())->modify('Next sunday'));
+                $em->flush();
+    
+                return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_success', [], 'projects')], 200);
+            }
+            
         }
 
         return $this->json(['message' => $translator->trans('load_plan.messages.start_date_updated_failed', [], 'projects')], 400);
@@ -171,7 +175,7 @@ class LoadPlanController extends BaseController
             }
         }
 
-        return $this->json($results);
+        return $this->json($results, 200);
     }
 
     private function getWeekLoadPlanClass($estimatedStudyTime)

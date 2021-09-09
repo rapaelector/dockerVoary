@@ -44,7 +44,7 @@ class UserFixture extends Fixture
 
         /**
          * - User for the test
-         * - user mail test@gmail.com Test123
+         * - user mail test@gmail.com
          * - password Test123
          */
         $user = new User();

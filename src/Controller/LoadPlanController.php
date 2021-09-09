@@ -446,6 +446,6 @@ class LoadPlanController extends BaseController
             $res[] = $normalizedEconomists[$key];
         }
 
-        return $this->json($res);
+        return $this->json($res, 200);
     }
 }

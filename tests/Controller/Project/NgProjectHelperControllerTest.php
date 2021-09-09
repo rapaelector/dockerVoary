@@ -34,7 +34,7 @@ class NgProjectHelperControllerTest extends WebTestCase
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Cant get project config');
     }
 
-    public function testUupdateProject()
+    public function testUpdateProject()
     {
         $client = static::createClient();
         $this->login($client, 'test@gmail.com');

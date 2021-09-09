@@ -169,6 +169,20 @@ class LoadPlanControllerTest extends WebTestCase
         $crawler = $client->request('GET', $this->generateUrl('/load/plan/'));
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode(), 'Get load plan failed');
     }
+
+    /**
+     * Test find economist
+     * Expected response code 200
+     */
+    public function testEconomists()
+    {
+        $client = static::createClient();
+        $this->login($client, 'test@gmail.com');
+
+        $client->request('GET', '/load/plan/economists');
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode(), 'Find economist not working');
+    }
+
     /**
      * Create load plan data
      * 
