@@ -25,9 +25,9 @@
                                 <md-select-header class="demo-select-header">
                                     <input 
                                         ng-model="projectSearchTerm" 
-                                        aria-label="Vegetable filter"
+                                        aria-label="projects"
                                         type="search" 
-                                        placeholder="Recherche"
+                                        placeholder="Rechercher"
                                         class="demo-header-searchbox md-text"
                                     >
                                 </md-select-header>
@@ -42,14 +42,10 @@
                                                 <div class="media-heading font-weight-bold">{{ '{{ project.name }}' }}</div>
                                                 <div class="media-body-content text-sm">{{ '{{ project.prospect.clientNumber }}' }}</div>
                                             </div>
-                                        </div>
+                                        </div> 
                                     </md-option>
                                 </md-optgroup>
                             </md-select>
-                            {# {% include 'project/ng/templates/form/_errors.html.twig' with {
-                                errorPath: 'data.errors.loadPlanForm.project',
-                                errorClass: 'text-sm mt-n3 mb-2',
-                            } %} #}
                             {% include "load_plan/ng/templates/errors.html.twig" with {
                                 form: 'loadPlanForm',
                                 field: 'project',

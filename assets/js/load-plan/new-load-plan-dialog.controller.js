@@ -57,6 +57,7 @@ function LoadPlanDialogController (
     $scope.project = '';
     $scope.formName = '';
     $scope.excludeField = [];
+    $scope.projectSearchTerm = '';
 
     this.$onInit = () => {
         $scope.formName = 'loadPlanForm';
@@ -83,6 +84,7 @@ function LoadPlanDialogController (
         loadPlanService.getProjects().then((response) => {
             $scope.loading = false;
             $scope.data.projects = response.data;
+            $scope.form.project = options.id ? $scope.data.projects.find(item => item.id === 3).id : null;
         }, errors => {
             $scope.loading = false;
             notificationService.showToast('Erreur', {toastClass: 'toast-error'});
@@ -103,6 +105,16 @@ function LoadPlanDialogController (
         $scope.setFormValidity(changedFields, true);
 
     }, true);
+
+    $scope.clearSearchTerm = function () {
+        $scope.projectSearchTerm = '';
+    };
+    
+    // The md-select directive eats keydown events for some quick select
+    // logic. Since we have a search input here, we don't need that logic.
+    $element.find('input').on('keydown', function (ev) {
+        ev.stopPropagation();
+    });
 
     /**
      * Save load plan
