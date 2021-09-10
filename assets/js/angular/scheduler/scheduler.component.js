@@ -1354,20 +1354,24 @@ function SchedulerController(
         return column.visible === undefined || column.visible;
     }
 
+    $scope.showTotal = function () {
+        return $scope.$ctrl.showTotal === true || $scope.$ctrl.showTotal === 'true';
+    }
+
     $scope.getTotalBlankColspan = function () {
         const visibleCount = $scope.columns.filter(visibleColumnFilter).length;
 
-        return  Math.max(0, visibleCount - 3);
+        return  $scope.showTotal() ? Math.max(0, visibleCount - 3) : visibleCount;
     };
     
     $scope.getTotalTitleColspan = function () {
         var visibleCount = $scope.columns.filter(visibleColumnFilter).length;
 
-        return visibleCount < 2 ? 0 : (visibleCount === 2 ? 1 : 2);
+        return $scope.showTotal() ? (visibleCount < 2 ? 0 : (visibleCount === 2 ? 1 : 2)) : 0;
     };
 
     $scope.getTotalColspan = function () {
-        return $scope.columns.filter(visibleColumnFilter).length < 1 ? 0 : 1;
+        return $scope.showTotal() ? ($scope.columns.filter(visibleColumnFilter).length < 1 ? 0 : 1) : 0;
     };
 
     /**
@@ -1751,6 +1755,15 @@ angular.module('schedulerModule').component('appScheduler', {
          * 
          */
         forceSticky: '=',
+        /**
+         * Create empty row in scheduler to fill page
+         * Number
+         */
         minRowCount: '=',
+        /**
+         * If the page resource columns have total or not
+         * Boolean
+         */
+        showTotal: '='
     }
 });
